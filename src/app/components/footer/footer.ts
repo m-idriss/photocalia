@@ -33,13 +33,13 @@ export class Footer implements OnInit {
   authorProfile = 'https://github.com/m-idriss';
 
   footerLinks: FooterLink[] = [
-    { label: 'Repository', url: this.githubRepo },
-    { label: 'Issues', url: `${this.githubRepo}/issues` },
-    { label: 'Docs', url: `${this.githubRepo}/blob/main/README.md` },
+  //  { label: 'Repository', url: this.githubRepo },
+  //  { label: 'Issues', url: `${this.githubRepo}/issues` },
+  //  { label: 'Docs', url: `${this.githubRepo}/blob/main/README.md` },
     { label: 'License', url: `${this.githubRepo}/blob/main/LICENSE` },
-    { label: 'Security', url: `${this.githubRepo}/blob/main/SECURITY.md` },
-    { label: 'Community', url: `${this.githubRepo}/blob/main/CONTRIBUTING.md` },
-    { label: 'Discussions', url: `${this.githubRepo}/discussions` },
+  //  { label: 'Security', url: `${this.githubRepo}/blob/main/SECURITY.md` },
+  //  { label: 'Community', url: `${this.githubRepo}/blob/main/CONTRIBUTING.md` },
+  //  { label: 'Discussions', url: `${this.githubRepo}/discussions` },
     { label: 'About Me', url: '/me', isInternal: true },
   ];
 
