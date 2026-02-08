@@ -1,8 +1,8 @@
 # 📐 System Architecture Documentation
 
-> **Comprehensive technical and architectural overview of the 3dime-angular portfolio application**
+> **Comprehensive technical and architectural overview of the Photocalia calendar converter SaaS application**
 
-This document provides a complete system architecture for the 3dime-angular portfolio, including frontend Angular application, backend Firebase Functions, data flow, caching strategies, authentication, and deployment architecture.
+This document provides a complete system architecture for Photocalia, including frontend Angular application, backend Firebase Functions, data flow, caching strategies, authentication, and deployment architecture.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ This document provides a complete system architecture for the 3dime-angular port
 
 # 🌟 1. System Overview
 
-The 3dime-angular portfolio is a modern, high-performance personal portfolio application built with Angular 20.3+. It features an AI-powered Calendar Converter alongside traditional portfolio sections, all presented with a stunning space-themed design.
+Photocalia is a modern, high-performance SaaS application built with Angular 20.3+. It features an AI-powered Calendar Converter that transforms images and PDFs containing calendar information into downloadable ICS files using GPT-4 Vision.
 
 ## High-Level Architecture
 
@@ -430,7 +430,7 @@ Request → Check Firestore → Not Found → Fetch from API (2-5s)
 │  Build Application                  │
 │  - npm run build --configuration    │
 │    production                       │
-│  - Output: dist/3dime-angular/      │
+│  - Output: dist/photocalia/         │
 └──────┬──────────────────────────────┘
        │
        ▼
@@ -446,11 +446,11 @@ Request → Check Firestore → Not Found → Fetch from API (2-5s)
 
 ### Deployment Targets
 
-#### Production (3dime.com)
+#### Production (photocalia.com)
 
 | Component | Deployment Method | Hosting |
 |-----------|------------------|---------|
-| **Frontend** | GitHub Actions → FTP or Firebase Hosting | CDN-backed |
+| **Frontend** | GitHub Actions → Firebase Hosting | CDN-backed |
 | **Functions** | `firebase deploy --only functions` | Firebase Cloud Functions |
 | **Firestore** | Automatic (managed service) | Firebase Firestore |
 | **Auth** | Automatic (managed service) | Firebase Authentication |
@@ -502,7 +502,7 @@ const apiKey = functions.config().openai.api_key;
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        DNS (3dime.com)                       │
+│                     DNS (photocalia.com)                     │
 │                              │                               │
 │                              ▼                               │
 │  ┌───────────────────────────────────────────────────────┐  │
@@ -691,8 +691,7 @@ sequenceDiagram
 | Service | Purpose |
 |---------|---------|
 | **Firebase Hosting** | Static file hosting with CDN |
-| **Custom Domain** | 3dime.com with SSL/TLS |
-| **FTP Deployment** | Alternative deployment via GitHub Actions |
+| **Custom Domain** | photocalia.com with SSL/TLS |
 
 ---
 
