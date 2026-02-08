@@ -54,7 +54,7 @@ Fixes #
 - [Project README](../README.md)
 
 <!-- 
-This PR template is designed for the 3dime static website project.
+This PR template is designed for the Photocalia SaaS project.
 Remember: This is a static site with NO build process, NO automated tests, and NO linting tools.
 Focus on manual validation and testing as outlined above.
 -->

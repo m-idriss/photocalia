@@ -156,7 +156,7 @@ npm test
 CHROME_BIN=/usr/bin/google-chrome-stable npx ng test --browsers=ChromeHeadless --watch=false
 
 # Run API tests with Bruno
-bru run bruno-collections/3dime-api
+bru run bruno-collections/photocalia-api
 ```
 
 **[📖 Complete Testing Guide →](docs/TESTING.md)**

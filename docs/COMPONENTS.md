@@ -1,6 +1,6 @@
 # Component Documentation
 
-> Comprehensive documentation for all components in the 3dime-angular portfolio application.
+> Comprehensive documentation for all components in the Photocalia calendar converter SaaS.
 
 ## Table of Contents
 

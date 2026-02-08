@@ -1,6 +1,6 @@
-# 3dime API Bruno Collection
+# Photocalia API Bruno Collection
 
-This directory contains Bruno API collection for testing the 3dime-angular API endpoints.
+This directory contains Bruno API collection for testing the Photocalia API endpoints.
 
 ## What is Bruno?
 
@@ -16,7 +16,7 @@ Bruno is a fast and Git-friendly opensource API client. It stores collections di
 1. Download Bruno from https://www.usebruno.com/downloads
 2. Install the application for your operating system
 3. Open Bruno and select "Open Collection"
-4. Navigate to `bruno-collections/3dime-api` in this repository
+4. Navigate to `bruno-collections/photocalia-api` in this repository
 
 ### CLI (Optional)
 
@@ -28,7 +28,7 @@ npm install -g @usebruno/cli
 
 ```
 bruno-collections/
-└── 3dime-api/
+└── photocalia-api/
     ├── bruno.json                                        # Collection configuration
     ├── environments/
     │   ├── local.bru                                     # Local environment variables
@@ -128,15 +128,15 @@ Tests the GitHub API endpoint to retrieve user profile information.
 
 ```bash
 # Run all tests in the collection
-bru run bruno-collections/3dime-api
+bru run bruno-collections/photocalia-api
 
 # Run specific request
-bru run bruno-collections/3dime-api --filename "GitHub User Profile.bru"
+bru run bruno-collections/photocalia-api --filename "GitHub User Profile.bru"
 ```
 
 ## Adding New Requests
 
-1. Create a new `.bru` file in the `3dime-api` directory
+1. Create a new `.bru` file in the `photocalia-api` directory
 2. Use the following template:
 
 ```

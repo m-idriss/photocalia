@@ -1,6 +1,6 @@
 # 🏷️ Release Guide
 
-This guide explains how to create tags and releases for the 3dime-angular project using the automated GitHub Actions workflow.
+This guide explains how to create tags and releases for the Photocalia project using the automated GitHub Actions workflow.
 
 ## 🎯 Quick Start
 

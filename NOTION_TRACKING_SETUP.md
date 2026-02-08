@@ -1,6 +1,6 @@
 # Notion Usage Tracking Setup Guide
 
-This guide explains how to set up a Notion database for tracking converter usage in the 3dime-angular application.
+This guide explains how to set up a Notion database for tracking converter usage in the Photocalia application.
 
 ## Overview
 
@@ -24,7 +24,7 @@ The usage tracking system logs conversion events to a Notion database, allowing 
 1. Go to [Notion Integrations](https://www.notion.so/my-integrations)
 2. Click **"+ New integration"**
 3. Fill in the details:
-   - **Name**: `3dime Usage Tracker` (or any name you prefer)
+   - **Name**: `Photocalia Usage Tracker` (or any name you prefer)
    - **Logo**: Optional
    - **Associated workspace**: Select your workspace
 4. Click **"Submit"**
@@ -59,7 +59,7 @@ The usage tracking system logs conversion events to a Notion database, allowing 
 1. Open your **Converter Usage Tracking** database
 2. Click **Share** (top right corner)
 3. Click **"Add connections"** or **"Add integration"**
-4. Select your integration (`3dime Usage Tracker`)
+4. Select your integration (`Photocalia Usage Tracker`)
 5. Click **"Confirm"**
 
 ## Step 4: Get the Database ID
@@ -204,7 +204,7 @@ You can create Notion views to analyze your data:
 3. **Usage by Date**: Timeline view grouped by Timestamp
 4. **Usage by Domain**: Group by Domain to see local vs production traffic
    - "local" = localhost (127.x.x.x), 10.x.x.x, 192.168.x.x, and 172.16-31.x.x addresses
-   - "production" = 3dime.com and www.3dime.com
+   - "production" = photocalia.com and www.photocalia.com
    - Other values = actual hostname for other sources
 5. **Average Processing Time**: Average of Duration (ms) property
 6. **Total Files Processed**: Sum of File Count property

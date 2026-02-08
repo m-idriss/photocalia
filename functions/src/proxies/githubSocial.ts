@@ -8,8 +8,8 @@ initializeFirebaseAdmin();
 
 // Whitelist of allowed origins for CORS
 const allowedOrigins = [
-  'https://3dime.com',
-  'https://www.3dime.com',
+  'https://photocalia.com',
+  'https://www.photocalia.com',
   'https://photocalia.com',
   'https://www.photocalia.com',
   'http://localhost:4200',

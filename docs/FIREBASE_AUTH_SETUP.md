@@ -30,7 +30,7 @@ This guide explains how to set up Firebase Authentication with Google provider f
 1. In Authentication → Settings → **Authorized domains**
 2. Add your domains:
    - `localhost` (for development)
-   - `3dime.com` (for production)
+   - `photocalia.com` (for production)
    - Any other domains you'll deploy to
 
 ### 4. Get Firebase Configuration
@@ -38,7 +38,7 @@ This guide explains how to set up Firebase Authentication with Google provider f
 1. Go to **Project Settings** (gear icon)
 2. Scroll to "Your apps" section
 3. Click the **Web** icon `</>`
-4. Register your app (e.g., "3dime-angular")
+4. Register your app (e.g., "Photocalia")
 5. Copy the `firebaseConfig` object
 
 Example config:
@@ -65,7 +65,7 @@ Update your environment configuration files with the Firebase config:
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'https://api.3dime.com',
+  apiUrl: 'https://api.photocalia.com',
   firebase: {
     apiKey: 'YOUR_API_KEY',
     authDomain: 'your-project-id.firebaseapp.com',
@@ -82,7 +82,7 @@ export const environment = {
 ```typescript
 export const environment = {
   production: true,
-  apiUrl: 'https://api.3dime.com',
+  apiUrl: 'https://api.photocalia.com',
   firebase: {
     apiKey: 'YOUR_PRODUCTION_API_KEY',
     authDomain: 'your-project-id.firebaseapp.com',
@@ -108,7 +108,7 @@ export const environment = {
    - Find your API key
    - Click "Edit API key"
    - Under "Application restrictions", select "HTTP referrers"
-   - Add your domains (e.g., `3dime.com`, `*.3dime.com`, `localhost:4200`)
+   - Add your domains (e.g., `photocalia.com`, `*.photocalia.com`, `localhost:4200`)
    - Under "API restrictions", select "Restrict key" and enable only required APIs:
      - Identity Toolkit API
      - Token Service API

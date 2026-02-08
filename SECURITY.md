@@ -78,7 +78,7 @@ For GitHub Actions and CI/CD:
 
 - Always use HTTPS in production
 - Set appropriate CORS policies - Firebase Functions use an allowlist of trusted origins:
-  - Production: `https://3dime.com`, `https://www.3dime.com`
+  - Production: `https://photocalia.com`, `https://www.photocalia.com`
   - Development: `http://localhost:4200`, `http://localhost:5000`
   - **Never use** `cors({ origin: true })` which allows all origins
 - Use Content Security Policy (CSP) headers

@@ -16,7 +16,7 @@ describe('Footer', () => {
     // Create a mock GithubService to avoid external HTTP calls
     mockGithubService = jasmine.createSpyObj('GithubService', ['getLatestRelease']);
     mockGithubService.getLatestRelease.and.returnValue(
-      of({ tag_name: 'v1.0.0', html_url: 'https://github.com/m-idriss/3dime-angular/releases/tag/v1.0.0' })
+      of({ tag_name: 'v1.0.0', html_url: 'https://github.com/m-idriss/photocalia/releases/tag/v1.0.0' })
     );
 
     await TestBed.configureTestingModule({

@@ -1,13 +1,13 @@
-# 3dime-angular Portfolio - Copilot Instructions
+# Photocalia - Copilot Instructions
 
 **ALWAYS follow these instructions first and fallback to additional search and context gathering only if the information here is incomplete or found to be in error.**
 
 ## Project Overview
 
-This is an Angular 20+ personal portfolio website showcasing professional experience, technical skills, and personal interests with a beautiful space-themed design. The application displays sections for profile, about, tech stack, experience, education, stuff recommendations, hobbies, and contact information.
+This is Photocalia, an Angular 20+ SaaS application featuring an AI-powered calendar converter that transforms images and PDFs into ICS calendar files using GPT-4 Vision. The application provides a modern, high-performance interface for converting visual calendar information into downloadable calendar events.
 
 **Project Goals:**
-- Showcase professional portfolio with modern, engaging design
+- Provide a robust AI-powered calendar conversion SaaS product
 - Maintain high performance and accessibility standards
 - Use latest Angular features (standalone components, signals)
 - Serve as a reference implementation for Angular best practices
@@ -87,16 +87,17 @@ Always run these steps after making changes:
    npm run build
    ```
    - Should complete in ~14 seconds with warnings (normal)
-   - Check `dist/3dime-angular/` directory is created
+   - Check `dist/photocalia/` directory is created
 
 2. **Application Functionality:**
    ```bash
    npm start
    ```
    - Navigate to `http://localhost:4200/`
-   - Verify clean UI with portfolio sections displayed
-   - Check profile card with social links
-   - Verify all sections render correctly (Profile, About, Tech Stack, GitHub Activity, Experience, Education, Stuff, Hobbies, Contact)
+   - Verify calendar converter UI displays correctly
+   - Test file upload (drag & drop or click to upload)
+   - Check authentication flow (sign in button)
+   - Verify all sections render correctly (Converter, How It Works, Features, Stats, Footer)
 
 3. **Test Validation:**
    ```bash
@@ -126,23 +127,21 @@ npx prettier --write src/
 src/
 ├── app/
 │   ├── components/
-│   │   ├── profile-card/      # Personal profile and social links
-│   │   ├── about/             # About me section
-│   │   ├── tech-stack/        # Technologies and skills
-│   │   ├── github-activity/   # GitHub contribution activity
-│   │   ├── experience/        # Work experience and projects
-│   │   ├── education/         # Education and training
-│   │   ├── stuff/             # Recommended products and tools
-│   │   ├── hobbies/           # Personal interests
-│   │   └── contact/           # Contact information
+│   │   ├── converter/         # Main AI calendar converter component
+│   │   ├── calendar-view/     # Calendar event preview and editing
+│   │   ├── header/           # App header with navigation
+│   │   ├── footer/           # App footer with links
+│   │   └── settings/         # Settings modal
 │   ├── services/
-│   │   ├── github.service.ts # GitHub profile and activity data
-│   │   ├── notion.service.ts  # Notion API integration
-│   │   └── theme.service.ts   # Theme management service
-│   ├── app.ts                 # Main standalone app component
-│   └── app.config.ts          # Application configuration
-├── environments/              # Environment-specific configs (unused)
-└── styles.scss               # Global SCSS styles with space theme
+│   │   ├── auth.service.ts    # Firebase authentication
+│   │   ├── converter.service.ts # AI conversion logic
+│   │   ├── calendar-state.service.ts # Calendar state management
+│   │   └── github.service.ts  # GitHub release info for footer
+│   ├── models/               # TypeScript interfaces
+│   ├── app.ts                # Main standalone app component
+│   └── app.config.ts         # Application configuration
+├── environments/             # Environment-specific configs
+└── styles.scss              # Global SCSS styles with modern design
 ```
 
 ### Key Files to Know
@@ -164,7 +163,7 @@ src/
 - **CSS Custom Properties** for theming
 - **Modern CSS** with grid, flexbox, and backdrop-filter
 - **Responsive Design** with mobile-first approach
-- **Space-themed UI** with particle effects and gradient backgrounds
+- **Glassmorphism UI** with modern gradient backgrounds
 - **Accessibility** features and semantic HTML
 
 ### Development Tools
@@ -190,9 +189,10 @@ ng generate component components/my-component --style=scss
 
 ### Working with Services
 Current services:
-- `GithubService` - Fetch GitHub profile data and commit activity
-- `NotionService` - Integrate with Notion API for stuff/recommendations
-- `ThemeService` - Manage theme switching and preferences
+- `AuthService` - Firebase authentication and user management
+- `ConverterService` - AI-powered image/PDF to calendar conversion
+- `CalendarStateService` - Manage calendar events state
+- `GithubService` - Fetch latest release info for footer version display
 
 ### Content Updates
 Most content is currently hardcoded in component templates. Future improvements will include:
@@ -221,21 +221,20 @@ Most content is currently hardcoded in component templates. Future improvements 
    npm run build -- --configuration=production
    ```
 
-### Portfolio Content Flow
-The application displays:
-1. **Profile section** with photo, name, and social links
-2. **About section** with personal description
-3. **Tech Stack** showing technologies and skills
-5. **Experience & Projects** listing work history
-6. **Education & Training** showing academic background
-7. **Stuff** section with recommended products/tools
-8. **Hobbies & Interests** displaying personal interests
-9. **Contact** information and links
+### Calendar Converter Flow
+The application workflow:
+1. **File Upload** - User uploads images or PDFs via drag-and-drop or file picker
+2. **Authentication** - User signs in with Google (Firebase Auth) for API access
+3. **AI Processing** - Files sent to Firebase Functions → GPT-4 Vision API for event extraction
+4. **Event Display** - Extracted events shown in calendar view
+5. **Event Editing** - User can edit or delete events before download
+6. **ICS Export** - User downloads ICS file compatible with all major calendar apps
 
 ### Known Limitations
-- Content is currently hardcoded in component templates
+- GPT-4 Vision API requires Firebase authentication
 - Some external CDN resources may be blocked in restricted environments
 - Firebase Functions prefer Node 22 but work with Node 20 (build warnings expected)
+- PDF processing has size limits based on conversion to images
 
 ## Important Guidelines
 
@@ -293,21 +292,17 @@ Ask the user for guidance when:
 ### Automated Workflows
 The repository has several GitHub Actions workflows in `.github/workflows/`:
 
-1. **deploy.yml** - Automatic deployment on push to main
-   - Triggers on changes to src/, public/, package.json, angular.json, functions/, etc.
-   - Runs on Node.js 20
-   - Steps: npm ci → generate environment.prod.ts → build → FTP deploy
-   - Requires secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD, FTP_PATH, FIREBASE_*
-
-2. **qodana_code_quality.yml** - Code quality analysis
+1. **qodana_code_quality.yml** - Code quality analysis
    - Runs on PR and push to main
    - Uses JetBrains Qodana for static code analysis
    - Posts PR comments with findings
 
-3. **update-screenshot.yml** - Automated screenshot updates
-   - Updates portfolio screenshots automatically
+2. **update-screenshot.yml** - Automated screenshot updates
+   - Updates application screenshots automatically
 
-4. **Other workflows** - release.yml, labeler.yml, summary.yml, check-dead-links.yml
+3. **release.yml** - Release workflow for tagging and versioning
+
+4. **Other workflows** - labeler.yml, summary.yml, check-dead-links.yml
 
 ### Pre-Deployment Checklist
 Before merging to main (which triggers deployment):
@@ -319,8 +314,8 @@ Before merging to main (which triggers deployment):
 ## Deployment
 
 ### Static Site Hosting
-The `dist/3dime-angular/browser/` directory contains static files ready for deployment to:
-- **GitHub Pages** (recommended for portfolio sites)
+The `dist/photocalia/browser/` directory contains static files ready for deployment to:
+- **Firebase Hosting** (recommended - already configured)
 - **Netlify** with automatic builds
 - **Vercel** with optimized performance
 - **Any static hosting service**
@@ -330,7 +325,7 @@ The `dist/3dime-angular/browser/` directory contains static files ready for depl
 # Build for production
 npm run build -- --configuration=production
 
-# The dist/3dime-angular/browser/ folder contains deployable files
+# The dist/photocalia/browser/ folder contains deployable files
 ```
 
 ### Firebase Functions Deployment

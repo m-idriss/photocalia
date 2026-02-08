@@ -1,12 +1,12 @@
 # Firebase Functions
 
-This directory contains the Firebase Cloud Functions for the 3dime-angular application, providing backend API endpoints and proxy services.
+This directory contains the Firebase Cloud Functions for the Photocalia application, providing backend API endpoints and proxy services.
 
 ## Overview
 
 The Firebase Functions serve as a backend layer for:
 - **GitHub API Proxying**: Fetch user profile, social links, and commit activity
-- **Notion API Integration**: Retrieve portfolio data (experience, education, stuff, hobbies, tech stack)
+- **Notion API Integration**: Retrieve application data (experience, education, stuff, hobbies, tech stack)
 - **Calendar Converter**: AI-powered image/PDF to ICS calendar conversion
 - **Backend Caching**: Firestore-based caching for improved performance (see [CACHING.md](./CACHING.md))
 - **CORS Handling**: Secure cross-origin requests with whitelisted domains
@@ -92,7 +92,7 @@ Retrieves GitHub profile information and social links.
 
 ### 4. Notion Function (`notionFunction`)
 
-Fetches portfolio data from Notion database.
+Fetches application data from Notion database.
 
 **Endpoint**: `/notionFunction`  
 **Method**: GET
@@ -139,7 +139,7 @@ Converts images/PDFs to ICS calendar files using Google Gemini AI with quota man
     "used": 3,
     "resetsAt": "start of next month"
   },
-  "contact": "contact@3dime.com"
+  "contact": "contact@photocalia.com"
 }
 ```
 
@@ -330,8 +330,8 @@ Allowed origins are configured in `src/index.ts`:
 
 ```typescript
 const allowedOrigins = [
-  'https://3dime.com',
-  'https://www.3dime.com',
+  'https://photocalia.com',
+  'https://www.photocalia.com',
   'http://localhost:4200',
   'http://localhost:5000'
 ];
@@ -356,8 +356,8 @@ setGlobalOptions({
 The project includes a Bruno API collection for testing:
 
 ```bash
-# See bruno-collections/3dime-api/README.md
-cd ../bruno-collections/3dime-api
+# See bruno-collections/photocalia-api/README.md
+cd ../bruno-collections/photocalia-api
 bru run .
 ```
 
@@ -442,7 +442,7 @@ All API endpoints now include Firestore-based backend caching for improved perfo
 Add `?force=true` to any endpoint to force a cache refresh (respects cooldown):
 
 ```bash
-curl "https://api.3dime.com?target=profile&force=true"
+curl "https://api.photocalia.com?target=profile&force=true"
 ```
 
 ### Architecture

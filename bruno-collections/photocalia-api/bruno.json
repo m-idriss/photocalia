@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "3dime API Collection",
+  "name": "Photocalia API Collection",
   "type": "collection",
   "scripts": {
     "filesystemAccess": {

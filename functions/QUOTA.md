@@ -125,7 +125,7 @@ POST /converterFunction
     "used": 3,
     "resetsAt": "start of next month"
   },
-  "contact": "contact@3dime.com"
+  "contact": "contact@photocalia.com"
 }
 ```
 

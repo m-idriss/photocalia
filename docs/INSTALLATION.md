@@ -1,6 +1,6 @@
 # Installation & Setup Guide
 
-> Complete guide to setting up 3dime-angular for development
+> Complete guide to setting up Photocalia for development
 
 ## Prerequisites
 
@@ -19,8 +19,8 @@
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/m-idriss/3dime-angular.git
-cd 3dime-angular
+git clone https://github.com/m-idriss/Photocalia.git
+cd Photocalia
 ```
 
 ### 2. Install Dependencies
@@ -43,7 +43,7 @@ npm run build
 Expected output:
 - Build completes in ~14 seconds
 - Warnings about bundle size are normal
-- Output in `dist/3dime-angular/` directory
+- Output in `dist/Photocalia/` directory
 
 ## Development Server
 
@@ -235,7 +235,7 @@ The application includes full PWA support with service workers.
 npm run build -- --configuration=production
 
 # Serve the production build
-npx http-server dist/3dime-angular/browser -p 8080
+npx http-server dist/Photocalia/browser -p 8080
 
 # Open http://localhost:8080 and test PWA features
 ```

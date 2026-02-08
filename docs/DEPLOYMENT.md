@@ -1,14 +1,14 @@
 # Deployment Guide
 
-> Complete guide to deploying 3dime-angular to production
+> Complete guide to deploying Photocalia to production
 
 ## Deployment Options
 
-3dime-angular supports multiple deployment options to fit different hosting environments:
+Photocalia supports multiple deployment options to fit different hosting environments:
 
 ### Static Hosting (Recommended)
 - **Platforms**: Netlify, Vercel, GitHub Pages, Firebase Hosting, AWS S3, Azure Static Web Apps
-- **Process**: Build and upload the `dist/3dime-angular/browser/` directory
+- **Process**: Build and upload the `dist/Photocalia/browser/` directory
 - **Requirements**: Static file hosting, no server-side processing needed
 - **Benefits**: Fast, scalable, cost-effective
 
@@ -27,7 +27,7 @@ npm run build -- --configuration=production
 ```
 
 **Build Output:**
-- Location: `dist/3dime-angular/browser/`
+- Location: `dist/Photocalia/browser/`
 - Build time: ~14 seconds
 - Bundle size: ~2.06 MB raw / 478 kB transferred
 - Includes: Minification, tree-shaking, optimization
@@ -102,7 +102,7 @@ npm install -g netlify-cli
 npm run build -- --configuration=production
 
 # Deploy
-netlify deploy --prod --dir=dist/3dime-angular/browser
+netlify deploy --prod --dir=dist/Photocalia/browser
 ```
 
 #### Via Netlify Dashboard
@@ -112,11 +112,11 @@ netlify deploy --prod --dir=dist/3dime-angular/browser
    npm run build -- --configuration=production
    ```
 
-2. Drag and drop `dist/3dime-angular/browser/` to Netlify dashboard
+2. Drag and drop `dist/Photocalia/browser/` to Netlify dashboard
 
 3. Configure build settings (optional):
    - **Build command**: `npm run build -- --configuration=production`
-   - **Publish directory**: `dist/3dime-angular/browser`
+   - **Publish directory**: `dist/Photocalia/browser`
 
 **Routing**: The `_redirects` file is automatically included in the build.
 
@@ -138,7 +138,7 @@ vercel --prod
 2. Configure project:
    - **Framework**: Angular
    - **Build command**: `npm run build -- --configuration=production`
-   - **Output directory**: `dist/3dime-angular/browser`
+   - **Output directory**: `dist/Photocalia/browser`
 3. Deploy
 
 ### Firebase Hosting
@@ -160,10 +160,10 @@ firebase deploy
 
 ```bash
 # Build with base href for GitHub Pages
-npm run build -- --configuration=production --base-href=/3dime-angular/
+npm run build -- --configuration=production --base-href=/Photocalia/
 
 # Deploy using gh-pages package
-npx angular-cli-ghpages --dir=dist/3dime-angular/browser
+npx angular-cli-ghpages --dir=dist/Photocalia/browser
 ```
 
 **Note**: Update `--base-href` to match your repository name.
@@ -179,7 +179,7 @@ npm run build -- --configuration=production --base-href=/
 
 #### Upload
 
-Upload the contents of `dist/3dime-angular/browser/` to your web server using:
+Upload the contents of `dist/Photocalia/browser/` to your web server using:
 - FTP/SFTP client (FileZilla, Cyberduck)
 - SSH/SCP
 - Hosting panel file manager
@@ -187,7 +187,7 @@ Upload the contents of `dist/3dime-angular/browser/` to your web server using:
 
 ```bash
 # Example: Deploy via rsync
-rsync -avz dist/3dime-angular/browser/ user@server:/var/www/html/
+rsync -avz dist/Photocalia/browser/ user@server:/var/www/html/
 ```
 
 ## Server Configuration

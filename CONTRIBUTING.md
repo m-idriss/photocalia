@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-> Thank you for your interest in contributing to the 3dime-angular portfolio project!
+> Thank you for your interest in contributing to the Photocalia project!
 
 ## Table of Contents
 
@@ -147,13 +147,13 @@ Ensure you have:
 
 2. **Clone your fork**:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/3dime-angular.git
-   cd 3dime-angular
+   git clone https://github.com/YOUR_USERNAME/photocalia.git
+   cd photocalia
    ```
 
 3. **Add upstream remote**:
    ```bash
-   git remote add upstream https://github.com/m-idriss/3dime-angular.git
+   git remote add upstream https://github.com/m-idriss/photocalia.git
    ```
 
 4. **Install dependencies**:

@@ -1,6 +1,6 @@
 # Services Documentation
 
-> Documentation for all services in the 3dime-angular portfolio application.
+> Documentation for all services in the Photocalia calendar converter SaaS.
 
 ## Table of Contents
 

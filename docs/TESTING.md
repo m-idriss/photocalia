@@ -1,10 +1,10 @@
 # Testing Guide
 
-> Complete guide to testing 3dime-angular
+> Complete guide to testing Photocalia
 
 ## Testing Overview
 
-3dime-angular uses a comprehensive testing strategy:
+Photocalia uses a comprehensive testing strategy:
 - **Unit Tests**: Jasmine + Karma for component and service testing
 - **API Tests**: Bruno for API endpoint testing
 - **Manual Testing**: For UI/UX and integration workflows
@@ -245,7 +245,7 @@ npm install -g @usebruno/cli
 
 ```
 bruno-collections/
-└── 3dime-api/
+└── photocalia-api/
     ├── README.md
     ├── GitHub User Profile.bru
     └── test-resources/
@@ -258,19 +258,19 @@ bruno-collections/
 
 ```bash
 # Run all tests in collection
-bru run bruno-collections/3dime-api
+bru run bruno-collections/photocalia-api
 
 # Run specific test
-bru run bruno-collections/3dime-api --filename "GitHub User Profile.bru"
+bru run bruno-collections/photocalia-api --filename "GitHub User Profile.bru"
 
 # Run with environment
-bru run bruno-collections/3dime-api --env production
+bru run bruno-collections/photocalia-api --env production
 ```
 
 #### Using Bruno Desktop App
 
 1. Open Bruno app
-2. Open collection: `bruno-collections/3dime-api`
+2. Open collection: `bruno-collections/photocalia-api`
 3. Select test to run
 4. Click "Send" button
 5. View response and test results
@@ -307,7 +307,7 @@ test("should have data", function() {
 });
 ```
 
-See [Bruno Collection Documentation](../bruno-collections/3dime-api/README.md) for more details.
+See [Bruno Collection Documentation](../bruno-collections/photocalia-api/README.md) for more details.
 
 ## Manual Testing
 
@@ -420,7 +420,7 @@ npm start
 #### Production Build
 ```bash
 npm run build -- --configuration=production
-npx http-server dist/3dime-angular/browser -p 8080
+npx http-server dist/Photocalia/browser -p 8080
 # Test at http://localhost:8080/
 ```
 
@@ -472,7 +472,7 @@ export const MOCK_USER = {
 ### Test Resources
 
 API test resources:
-- `bruno-collections/3dime-api/test-resources/`
+- `bruno-collections/photocalia-api/test-resources/`
 
 ## Troubleshooting Tests
 
@@ -519,7 +519,7 @@ Tests that sometimes pass, sometimes fail:
 ```bash
 # Analyze bundle size
 npm run build -- --configuration=production --stats-json
-npx webpack-bundle-analyzer dist/3dime-angular/browser/stats.json
+npx webpack-bundle-analyzer dist/Photocalia/browser/stats.json
 ```
 
 ### Load Testing
