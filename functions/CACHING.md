@@ -1,6 +1,6 @@
 # Backend Caching Implementation
 
-This document explains the backend caching system implemented for the 3dime-angular portfolio application.
+This document explains the backend caching system implemented for the Photocalia SaaS application.
 
 ## Overview
 
@@ -85,7 +85,7 @@ interface CacheOptions {
 
 Add `?force=true` to any endpoint to force a refresh:
 ```
-https://api.3dime.com?target=profile&force=true
+https://api.photocalia.com?target=profile&force=true
 ```
 
 **Note:** Force refresh respects cooldown period to prevent abuse.

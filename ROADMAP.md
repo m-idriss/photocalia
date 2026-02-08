@@ -2,7 +2,7 @@
 
 > **AI-Powered Calendar Converter SaaS** - A modern Angular 20.3+ application that transforms images and PDFs into calendar events using GPT-4 Vision.
 
-![Current Portfolio](https://github.com/user-attachments/assets/3a35c572-1e43-4b25-9bf6-12a5a804eaac)
+![Photocalia Application](https://github.com/user-attachments/assets/3a35c572-1e43-4b25-9bf6-12a5a804eaac)
 
 ## 🎉 Recent Achievements (2025)
 
@@ -244,10 +244,10 @@
 
 #### AI & Machine Learning Integration
 - [ ] **AI-powered features**
-  - [ ] AI chatbot for portfolio Q&A (LangChain + OpenAI)
-  - [ ] Personalized content recommendations
-  - [ ] Intelligent search with semantic understanding
-  - [ ] Resume analyzer with suggestions
+  - [ ] AI chatbot for converter Q&A (LangChain + OpenAI)
+  - [ ] Intelligent event suggestions based on context
+  - [ ] Smart event categorization and tagging
+  - [ ] Auto-suggest event locations and durations
   - [ ] Skills gap analysis tool
   - [ ] Project recommendation based on visitor interests
 - [ ] **Computer Vision enhancements**
@@ -308,31 +308,32 @@
   - [ ] Create Storybook documentation
   - [ ] Component playground and demo site
   - [ ] Community contributions and plugins
-- [ ] **Portfolio template marketplace**
-  - [ ] Multiple portfolio themes
+- [ ] **Customization & Theming**
+  - [ ] Multiple UI themes (light/dark modes)
   - [ ] Theme builder tool
-  - [ ] One-click deployment solutions
-  - [ ] Template customization wizard
-- [ ] **Developer tools & CLI**
-  - [ ] 3dime CLI for scaffolding portfolios
-  - [ ] Migration tools for portfolio updates
-  - [ ] Portfolio generator with AI assistance
+  - [ ] Custom branding for enterprise
+  - [ ] Customizable event templates
+- [ ] **Developer tools & API**
+  - [ ] Public REST API for calendar conversion
+  - [ ] Webhooks for conversion events
+  - [ ] SDK for major programming languages
 
 #### Advanced Integrations
-- [ ] **Blockchain & Web3**
-  - [ ] Wallet connection (MetaMask, WalletConnect)
-  - [ ] NFT portfolio showcase
-  - [ ] Decentralized identity verification
-  - [ ] Smart contract integration for portfolio credentials
-- [ ] **AR/VR experiments**
-  - [ ] 3D portfolio experience with Three.js
-  - [ ] WebXR for immersive portfolio viewing
-  - [ ] Virtual office/showroom
-- [ ] **Voice & Audio**
+- [ ] **Calendar Integrations**
+  - [ ] Direct sync to Google Calendar
+  - [ ] Outlook Calendar integration
+  - [ ] Apple Calendar sync
+  - [ ] CalDAV support
+- [ ] **Enterprise Features**
+  - [ ] Batch processing API
+  - [ ] White-label options
+  - [ ] Advanced analytics dashboard
+  - [ ] Custom AI model training
+- [ ] **Accessibility & Internationalization**
   - [ ] Voice navigation and control
-  - [ ] Audio portfolio tour
-  - [ ] Podcast integration
-  - [ ] Text-to-speech for accessibility
+  - [ ] Multi-language support (i18n)
+  - [ ] Text-to-speech for event details
+  - [ ] Screen reader optimization
 
 ---
 
@@ -520,8 +521,8 @@
 
 ## 🤝 Contributing
 
-This is a personal portfolio project, but the roadmap serves as a guide for:
-- **Personal development planning**
+This project roadmap serves as a guide for:
+- **Feature development planning**
 - **Feature prioritization**
 - **Technical decision making**
 - **Progress tracking and accountability**
@@ -612,7 +613,7 @@ This is a personal portfolio project, but the roadmap serves as a guide for:
 - **v2.2.0** (October 2025): SEO, accessibility, ESLint setup
 - **v2.1.0** (October 2025): Batch processing for converter
 - **v2.0.0** (2025): PWA implementation, Calendar Converter, Angular 20.3
-- **v1.0.0** (2024): Initial portfolio launch
+- **v1.0.0** (2024): Initial launch
 
 ### Review Schedule
 - **Monthly**: Progress tracking and quick wins
@@ -632,9 +633,9 @@ This roadmap is a strategic planning document that welcomes community input:
 4. **Update progress**: Submit PRs to mark completed items
 
 ### Prioritization Criteria
-- **User value**: Impact on portfolio visitors
+- **User value**: Impact on users
 - **Technical feasibility**: Effort vs. benefit analysis  
-- **Strategic alignment**: Career goals and skill development
+- **Strategic alignment**: Product goals and vision
 - **Innovation factor**: Showcase of cutting-edge technology
 - **Maintenance burden**: Long-term sustainability
 

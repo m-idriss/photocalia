@@ -1,6 +1,6 @@
 # Documentation Overview
 
-> Quick reference guide to all documentation in the 3dime-angular portfolio project.
+> Quick reference guide to all documentation in the Photocalia project.
 
 ## 📖 Documentation Index
 

@@ -245,7 +245,7 @@ npm install -g @usebruno/cli
 
 ```
 bruno-collections/
-└── 3dime-api/
+└── photocalia-api/
     ├── README.md
     ├── GitHub User Profile.bru
     └── test-resources/
@@ -258,19 +258,19 @@ bruno-collections/
 
 ```bash
 # Run all tests in collection
-bru run bruno-collections/3dime-api
+bru run bruno-collections/photocalia-api
 
 # Run specific test
-bru run bruno-collections/3dime-api --filename "GitHub User Profile.bru"
+bru run bruno-collections/photocalia-api --filename "GitHub User Profile.bru"
 
 # Run with environment
-bru run bruno-collections/3dime-api --env production
+bru run bruno-collections/photocalia-api --env production
 ```
 
 #### Using Bruno Desktop App
 
 1. Open Bruno app
-2. Open collection: `bruno-collections/3dime-api`
+2. Open collection: `bruno-collections/photocalia-api`
 3. Select test to run
 4. Click "Send" button
 5. View response and test results
@@ -307,7 +307,7 @@ test("should have data", function() {
 });
 ```
 
-See [Bruno Collection Documentation](../bruno-collections/3dime-api/README.md) for more details.
+See [Bruno Collection Documentation](../bruno-collections/photocalia-api/README.md) for more details.
 
 ## Manual Testing
 
@@ -472,7 +472,7 @@ export const MOCK_USER = {
 ### Test Resources
 
 API test resources:
-- `bruno-collections/3dime-api/test-resources/`
+- `bruno-collections/photocalia-api/test-resources/`
 
 ## Troubleshooting Tests
 

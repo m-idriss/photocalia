@@ -1,6 +1,6 @@
 # API Documentation
 
-> Documentation for the 3dime-angular API endpoints and Firebase Functions.
+> Documentation for the Photocalia API endpoints and Firebase Functions.
 
 ## Table of Contents
 
@@ -339,8 +339,8 @@ All functions use a strict CORS allowlist for security:
 
 ```typescript
 const allowedOrigins = [
-  'https://3dime.com',
-  'https://www.3dime.com',
+  'https://photocalia.com',
+  'https://www.photocalia.com',
   'http://localhost:4200',
   'http://localhost:5000',
 ];
@@ -365,8 +365,8 @@ const corsHandler = cors({
 
 ### Allowed Origins
 
-- `https://3dime.com` - Production website
-- `https://www.3dime.com` - Production website (www subdomain)
+- `https://photocalia.com` - Production website
+- `https://www.photocalia.com` - Production website (www subdomain)
 - `http://localhost:4200` - Local development (Angular dev server)
 - `http://localhost:5000` - Local development (Firebase emulator)
 

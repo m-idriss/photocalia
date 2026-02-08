@@ -1,6 +1,6 @@
 # Progressive Web App (PWA) Documentation
 
-This document provides comprehensive information about the PWA implementation in 3dime-angular.
+This document provides comprehensive information about the PWA implementation in Photocalia.
 
 ## Table of Contents
 
@@ -14,7 +14,7 @@ This document provides comprehensive information about the PWA implementation in
 
 ## Overview
 
-3dime-angular is a fully functional Progressive Web App that provides an app-like experience on mobile and desktop devices. Users can install it on their home screen and use it like a native application, with offline support and the ability to share files directly from other apps.
+Photocalia is a fully functional Progressive Web App that provides an app-like experience on mobile and desktop devices. Users can install it on their home screen and use it like a native application, with offline support and the ability to share files directly from other apps.
 
 ## Features
 
@@ -42,7 +42,7 @@ The app can be installed on any device:
 
 ### ✅ Share Target
 
-Users can share images and PDFs from other apps directly to 3dime:
+Users can share images and PDFs from other apps directly to Photocalia:
 
 ```json
 "share_target": {
@@ -100,7 +100,7 @@ The app works offline for previously cached content:
 1. Open the website in Safari (not Chrome or Firefox)
 2. Tap the **Share** button (square with an arrow pointing up)
 3. Scroll down and tap **"Add to Home Screen"**
-4. Customize the name if desired (default: "3dime")
+4. Customize the name if desired (default: "Photocalia")
 5. Tap **"Add"** in the top right
 
 The app icon will appear on your home screen and launch in standalone mode.
@@ -209,8 +209,8 @@ Key properties:
 
 ```json
 {
-  "name": "3dime - Personal Social Hub",
-  "short_name": "3dime",
+  "name": "Photocalia - AI Calendar Converter",
+  "short_name": "Photocalia",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#000000",
@@ -255,7 +255,7 @@ File: `ngsw-config.json`
   "dataGroups": [
     {
       "name": "api-performance",
-      "urls": ["https://*.3dime.com/**", "https://*.a.run.app/**"],
+      "urls": ["https://*.photocalia.com/**", "https://*.a.run.app/**"],
       "cacheConfig": {
         "maxSize": 50,
         "maxAge": "1h",
@@ -304,7 +304,7 @@ All icons located in `public/assets/icons/`
 
    ```bash
    # Note: Your build output directory may vary. Check the build output for the actual path.
-   npx http-server dist/3dime-angular/browser -p 8080
+   npx http-server dist/Photocalia/browser -p 8080
    ```
 
 3. **Open in browser**: <http://localhost:8080>
@@ -349,14 +349,14 @@ All icons located in `public/assets/icons/`
 
 1. Install the app locally
 2. Find an image file
-3. Right-click → Share → Select 3dime
+3. Right-click → Share → Select Photocalia
 
 **Android:**
 
 1. Deploy to a real domain with HTTPS
 2. Install the app from Chrome
 3. Open Gallery/Photos app
-4. Select an image → Share → Select 3dime
+4. Select an image → Share → Select Photocalia
 5. App should open with the file ready for conversion
 
 **Note**: Share target requires **HTTPS protocol** (either a real domain with SSL or localhost with proper certificates). Standard HTTP or localhost without SSL won't work.

@@ -597,8 +597,8 @@ The **Portfolio module** retrieves both GitHub and Notion data through the Proxy
 
 ## 🔎 High-Level Flow
 
-1. Frontend requests portfolio data from the **Proxy**.
-2. Proxy fetches content categories from **Notion (3Dime DB)**.
+1. Frontend requests data from the **Proxy**.
+2. Proxy fetches content categories from **Notion**.
 3. Proxy fetches:
 
   * GitHub activity heatmap
@@ -610,22 +610,22 @@ The **Portfolio module** retrieves both GitHub and Notion data through the Proxy
 
 ### 🔄 Firestore Cache
 
-The proxy uses **Firestore** to cache all portfolio-related data.
+The proxy uses **Firestore** to cache all data.
 This reduces the number of calls to GitHub and Notion APIs, prevents hitting rate limits, and improves load times.
 Cached entries follow a TTL-based invalidation strategy.
 
 ---
 
-## 🧩 Portfolio — Sequence Diagram
+## 🧩 Data Flow — Sequence Diagram
 
 ```mermaid
 sequenceDiagram
     participant FE as 🌐 Frontend
     participant P as 🪞 Proxy
-    participant N as 🧠 Notion (3Dime DB)
+    participant N as 🧠 Notion
     participant G as 🐙 GitHub API
 
-    FE->>P: Request portfolio data
+    FE->>P: Request data
 
     P->>N: Fetch Notion categories
     N-->>P: Notion data
@@ -633,8 +633,8 @@ sequenceDiagram
     P->>G: Fetch GitHub data (profile, activity, etc.)
     G-->>P: GitHub data
 
-    P-->>FE: Combined portfolio data
-    FE-->>FE: Render cards + GitHub widgets
+    P-->>FE: Combined data
+    FE-->>FE: Render components
 ```
 
 ---
@@ -967,7 +967,7 @@ GET https://api.github.com/users/{username}/social_accounts
 
 ### Notion API
 
-**DataSource API** for portfolio content:
+**DataSource API** for content:
 ```typescript
 const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const response = await notion.databases.query({

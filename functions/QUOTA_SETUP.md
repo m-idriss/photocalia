@@ -75,7 +75,7 @@ This guide walks you through setting up the quota system for the converterFuncti
 
 ```bash
 # Navigate to your project directory
-cd /path/to/3dime-angular/functions
+cd /path/to/Photocalia/functions
 
 # Set Notion quota token
 firebase functions:secrets:set NOTION_TRACKING_TOKEN
@@ -134,7 +134,7 @@ curl -X POST https://converterfunction-xxx.run.app \
     "used": 3,
     "resetsAt": "start of next month"
   },
-  "contact": "contact@3dime.com"
+  "contact": "contact@photocalia.com"
 }
 ```
 

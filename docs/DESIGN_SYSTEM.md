@@ -16,9 +16,9 @@
 
 ---
 
-## Overview
+## 🎨 Design Principles
 
-The Photocalia portfolio uses a **space-themed design** with **glassmorphism** effects to create a modern, immersive experience. The design system is built with CSS custom properties for easy theming and maintainability.
+The Photocalia application uses a **modern design** with **glassmorphism** effects to create a clean, immersive experience. The design system is built with CSS custom properties for easy theming and maintainability.
 
 ### Key Features
 
