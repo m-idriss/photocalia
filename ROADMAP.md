@@ -1,6 +1,6 @@
-# 3dime-angular Portfolio - Project Roadmap
+# Photocalia - Project Roadmap
 
-> **Personal Portfolio Website for Idriss** - A modern Angular 20.3+ application showcasing professional experience, technical skills, and personal interests with a beautiful space-themed design.
+> **AI-Powered Calendar Converter SaaS** - A modern Angular 20.3+ application that transforms images and PDFs into calendar events using GPT-4 Vision.
 
 ![Current Portfolio](https://github.com/user-attachments/assets/3a35c572-1e43-4b25-9bf6-12a5a804eaac)
 
@@ -32,14 +32,14 @@
 ### ✅ What's Working Well
 - **Modern Angular 20.3.10** architecture with standalone components
 - **Progressive Web App** with full PWA support and installability
-- **Beautiful space-themed UI** with glassmorphism effects
+- **Beautiful modern UI** with glassmorphism effects
 - **Responsive design** with mobile-first approach
-- **Comprehensive sections**: Profile, About, Tech Stack, GitHub Activity, Experience, Education, Calendar Converter, Stuff, Hobbies, Contact, Footer
+- **Core Features**: Calendar Converter (AI-powered), Calendar View, File Upload, Authentication, Statistics Dashboard
 - **Clean component structure** with proper separation of concerns and reusable components
 - **SCSS styling** with CSS custom properties and modern features
 - **Build system** working efficiently (~14s build time)
 - **Firebase integration** for Authentication and Functions
-- **Advanced UI components**: Skeleton loaders, expandable cards, calendar view, back-to-top button
+- **Advanced UI components**: Skeleton loaders, calendar view, file upload with drag-and-drop, settings modal
 
 ### 🔧 Technical Stack
 - **Frontend**: Angular 20.3.10, TypeScript 5.9.3, SCSS

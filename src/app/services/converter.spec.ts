@@ -35,14 +35,14 @@ describe('ConverterService', () => {
     expect(userId).toContain('anon_');
 
     // Check localStorage was updated with correct key
-    const storedId = localStorage.getItem('3dime_anonymous_id');
+    const storedId = localStorage.getItem('photocalia_anonymous_id');
     expect(storedId).toBe(userId);
   });
 
   it('should reuse existing userId from localStorage', () => {
     // Clear existing service and set a userId in localStorage with correct key
     const existingId = 'anon_test_12345';
-    localStorage.setItem('3dime_anonymous_id', existingId);
+    localStorage.setItem('photocalia_anonymous_id', existingId);
 
     // Create new TestBed configuration with fresh service
     TestBed.resetTestingModule();
