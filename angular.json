@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "3dime-angular": {
+    "photocalia": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -85,13 +85,13 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "3dime-angular:build:production"
+              "buildTarget": "photocalia:build:production"
             },
             "development": {
-              "buildTarget": "3dime-angular:build:development"
+              "buildTarget": "photocalia:build:development"
             },
             "local": {
-              "buildTarget": "3dime-angular:build:local"
+              "buildTarget": "photocalia:build:local"
             }
           },
           "defaultConfiguration": "development"

@@ -34,7 +34,7 @@ jobs:
 
       - name: Start server in background
         run: |
-          cd dist/3dime-angular/browser
+          cd dist/photocalia/browser
           serve -s . -l 4200 &
           echo "Waiting for server to start..."
           sleep 15
@@ -70,9 +70,9 @@ jobs:
           # This ensures all external resources (Font Awesome, d3.js, etc.) are loaded
           # Note: API timeouts added to services (10s) to prevent indefinite waiting
           waitUntil: networkidle0
-          # app-contact is the last component in the layout, ensuring full page render
+          # Wait for footer to ensure full page render
           # Components now have timeout handling to render even when APIs fail
-          waitForSelector: 'app-contact'
+          waitForSelector: 'app-footer'
           # Extended timeout to allow for Angular bootstrap, API calls (with timeouts), and fallback rendering
           # Increased from 90s to 120s to account for slower CI environments
           waitForSelectorTimeout: 120000
