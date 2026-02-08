@@ -8,7 +8,7 @@
 
 *A sophisticated Angular 20+ application featuring an AI-powered image/PDF to calendar conversion tool, alongside professional portfolio sections with a beautiful space-themed design*
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-3dime.com-00D4AA?style=for-the-badge)](https://3dime.com)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-3dime.com-00D4AA?style=for-the-badge)](https://photocalia.com)
 [![Angular](https://img.shields.io/badge/Angular-20.3-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
@@ -267,7 +267,7 @@ Contributions are welcome!
 
 **Idriss Mohamady**
 
-🌐 [3dime.com](https://3dime.com) • 💼 [LinkedIn](https://www.linkedin.com/in/i-mohamady/) • 🐙 [GitHub](https://github.com/m-idriss)
+🌐 [photocalia.com](https://photocalia.com) • 💼 [LinkedIn](https://www.linkedin.com/in/i-mohamady/) • 🐙 [GitHub](https://github.com/m-idriss)
 
 ## 📄 License
 
