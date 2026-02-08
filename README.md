@@ -2,11 +2,11 @@
 
 # 🌟 Photocalia
 
-<img src="public/assets/logo.png" alt="3dime Logo" width="120" height="120"/>
+<img src="public/assets/logo.png" alt="Photocalia Logo" width="120" height="120"/>
 
-### ✨ Modern Personal Portfolio with AI-Powered Calendar Converter ✨
+### ✨ AI-Powered Calendar Converter ✨
 
-*A sophisticated Angular 20+ application featuring an AI-powered image/PDF to calendar conversion tool, alongside professional portfolio sections with a beautiful space-themed design*
+*A sophisticated Angular 20+ SaaS application featuring an AI-powered image/PDF to calendar conversion tool*
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-photocalia.com-00D4AA?style=for-the-badge)](https://photocalia.com)
 [![Angular](https://img.shields.io/badge/Angular-20.3-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev)
@@ -20,15 +20,13 @@
 
 ## 🎯 Overview
 
-3dime-angular is a modern, high-performance personal portfolio application built with Angular 20.3+. The standout feature is an **AI-powered Calendar Converter** that transforms images and PDFs containing calendar information into downloadable ICS files using GPT-4 Vision.
-
-Beyond the converter, it showcases professional experience, technical skills, and personal interests with a stunning space-themed design featuring glassmorphism effects.
+Photocalia is a modern, high-performance calendar conversion SaaS built with Angular 20.3+. The application features an **AI-powered Calendar Converter** that transforms images and PDFs containing calendar information into downloadable ICS files using GPT-4 Vision.
 
 **Key Technologies**: Angular 20.3+ standalone components, TypeScript 5.9+, OpenAI GPT-4 Vision, Firebase Functions, Progressive Web App capabilities.
 
 ## ✨ Key Features
 
-### 📅 **AI Calendar Converter** (Spotlight Feature)
+### 📅 **AI Calendar Converter**
 
 Transform images and PDFs into calendar events instantly!
 
@@ -43,20 +41,11 @@ Transform images and PDFs into calendar events instantly!
 
 **[📖 Full Converter Documentation →](docs/CONVERTER.md)**
 
-### 🎨 **Modern Portfolio Design**
-- **Glassmorphism UI** - Stunning frosted glass effects with space-themed aesthetics
+### 🎨 **Modern SaaS Design**
+- **Glassmorphism UI** - Stunning frosted glass effects with modern aesthetics
 - **Responsive Layout** - Flawless experience across all devices
 - **Smooth Animations** - Subtle micro-interactions and fluid transitions
 - **PWA Ready** - Installable, works offline, app-like experience
-
-### 🔗 **Portfolio Sections**
-- **Profile Card** - Personal branding with social links
-- **About** - Professional introduction
-- **Tech Stack** - Skills and technologies showcase
-- **GitHub Activity** - Live contribution visualization  
-- **Experience & Education** - Work history and academic background
-- **Stuff & Hobbies** - Recommendations and personal interests
-- **Contact** - Professional contact information
 
 ## 🛠️ Technology Stack
 
@@ -68,14 +57,14 @@ Transform images and PDFs into calendar events instantly!
 | **PWA** | Service Worker, Web App Manifest, Offline Support |
 | **Build Tools** | Angular CLI 20.3, esbuild, Karma + Jasmine |
 | **Deployment** | Firebase Hosting, GitHub Actions CI/CD |
-| **APIs** | Notion API, GitHub API, Firebase |
+| **APIs** | GitHub API, Firebase |
 
 ## 🚀 Quick Start
 
 ```bash
 # Clone and install
-git clone https://github.com/m-idriss/3dime-angular.git
-cd 3dime-angular
+git clone https://github.com/m-idriss/photocalia.git
+cd photocalia
 npm install
 
 # Start development server
@@ -106,8 +95,6 @@ Customize the theme in `src/styles.scss` using CSS custom properties:
   --glass-bg: rgba(255, 255, 255, 0.1);
 }
 ```
-
-Update content in component files under `src/app/components/`.
 
 ### Firebase Setup (Required for Calendar Converter)
 
@@ -207,12 +194,12 @@ bru run bruno-collections/3dime-api
 
 ### 📅 AI Calendar Converter
 
-![3dime-angular Desktop Screenshot](public/assets/screenshots/desktopPage1920x1080.jpeg)
+![Photocalia Desktop Screenshot](public/assets/screenshots/desktopPage1920x1080.jpeg)
 *Transform images and PDFs into calendar events with AI-powered extraction*
 
 ### 📱 Mobile Experience
 
-<img src="public/assets/screenshots/iPhone_13_Pro_Max.jpeg" alt="3dime-angular Mobile Screenshot" width="375" />
+<img src="public/assets/screenshots/iPhone_13_Pro_Max.jpeg" alt="Photocalia Mobile Screenshot" width="375" />
 
 *Fully responsive design optimized for all devices*
 
@@ -234,8 +221,8 @@ bru run bruno-collections/3dime-api
 **Project Structure:**
 ```
 src/app/
-├── components/          # UI components (converter, profile, etc.)
-├── services/           # Data services (GitHub, Notion, converter)
+├── components/          # UI components (converter, calendar-view, etc.)
+├── services/           # Data services (auth, converter, calendar-state)
 ├── models/             # TypeScript interfaces
 └── app.ts              # Main application
 ```
@@ -247,7 +234,7 @@ src/app/
 
 - ⚡ **Build Time**: ~14 seconds
 - 📦 **Bundle Size**: 2.04 MB raw / 475 KB transferred
-- 🧪 **Tests**: 61 tests, all passing ✅
+- 🧪 **Tests**: All tests passing ✅
 - 🚀 **Load Time**: < 3 seconds on 3G
 - ♿ **Accessibility**: WCAG AA compliant
 - 🔍 **SEO**: Optimized meta tags
@@ -286,10 +273,9 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 **Made with ❤️ using Angular 20+ and TypeScript**
 
-*Modern architecture • Space-themed design • Progressive Web App*
+*Modern SaaS architecture • AI-powered conversion • Progressive Web App*
 
-[![Star this repo](https://img.shields.io/github/stars/m-idriss/3dime-angular?style=social)](https://github.com/m-idriss/3dime-angular)
+[![Star this repo](https://img.shields.io/github/stars/m-idriss/photocalia?style=social)](https://github.com/m-idriss/photocalia)
 [![Follow @m-idriss](https://img.shields.io/github/followers/m-idriss?label=Follow&style=social)](https://github.com/m-idriss)
 
 </div>
-

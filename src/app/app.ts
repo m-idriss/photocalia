@@ -25,7 +25,7 @@ export class App implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly seoService = inject(SeoService);
 
-  protected readonly title = signal('3dime-angular');
+  protected readonly title = signal('Photocalia');
   protected readonly currentRoute = signal<string>('');
   private deferredPrompt: BeforeInstallPromptEvent | null = null;
 

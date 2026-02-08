@@ -30,7 +30,7 @@ export class Footer implements OnInit {
   currentYear = new Date().getFullYear();
   appVersion = '0.0.0';
   releaseUrl = '';
-  githubRepo = 'https://github.com/m-idriss/3dime-angular';
+  githubRepo = 'https://github.com/m-idriss/photocalia';
   authorName = 'Idriss';
   authorProfile = 'https://github.com/m-idriss';
 
