@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌟 3dime-angular
+# 🌟 Photocalia
 
 <img src="public/assets/logo.png" alt="3dime Logo" width="120" height="120"/>
 
