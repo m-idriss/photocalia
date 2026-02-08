@@ -9,6 +9,7 @@ export { notionWebhook } from "./proxies/notionWebhook";
 export { converterFunction } from "./proxies/converter";
 export { statisticsFunction } from "./proxies/statistics";
 export { quotaStatusFunction } from "./proxies/quotaStatus";
+export { migrateQuotaFunction } from "./proxies/migrateQuota";
 
 setGlobalOptions({ maxInstances: 10 });
 

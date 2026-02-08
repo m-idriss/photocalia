@@ -11,7 +11,7 @@ on:
       - 'src/**'
       - 'public/**'
       - 'package.json'
-      - 'package-lock.json'
+      - 'yarn.lock'
       - 'angular.json'
       - 'tsconfig*.json'
       - 'functions/**'
@@ -37,10 +37,10 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Generate environment.prod.ts
         run: |
@@ -59,7 +59,7 @@ jobs:
           };" > src/environments/environment.prod.ts
 
       - name: Build Angular app
-        run: npm run build -- --configuration=production --base-href=/
+        run: yarn build --configuration=production --base-href=/
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6

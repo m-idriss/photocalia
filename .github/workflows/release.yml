@@ -46,10 +46,10 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Configure Git
         run: |
@@ -132,18 +132,18 @@ jobs:
       - name: Update package.json version
         run: |
           NEW_VERSION="${{ steps.new_version.outputs.version }}"
-          npm version "$NEW_VERSION" --no-git-tag-version --allow-same-version
+          yarn version --new-version "$NEW_VERSION" --no-git-tag-version
           echo "Updated package.json to version $NEW_VERSION"
 
       - name: Commit version bump
         run: |
           NEW_VERSION="${{ steps.new_version.outputs.version }}"
-          git add package.json package-lock.json
+          git add package.json yarn.lock
           git commit -m "chore: bump version to $NEW_VERSION" || echo "No changes to commit"
 
       - name: Build project (if requested)
         if: inputs.include_build_artifacts == true
-        run: npm run build -- --configuration=production
+        run: yarn build --configuration=production
 
       - name: Create Git tag
         run: |

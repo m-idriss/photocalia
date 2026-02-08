@@ -1,281 +1,47 @@
-import { Client } from "@notionhq/client";
 import { log } from "firebase-functions/logger";
+import { getFirestoreQuotaService } from "./firestore-quota";
+import { getNotionSyncService } from "./notion-sync";
+import { PlanType, QuotaCheckResult } from "../types/quota";
 
 /**
- * Plans with different quota limits
- */
-export type PlanType = "free" | "pro" | "premium";
-
-/**
- * Quota entry interface
- */
-export interface QuotaEntry {
-  userId: string;
-  usageCount: number;
-  lastReset: Date;
-  plan: PlanType;
-}
-
-/**
- * Quota limits by plan
- */
-const QUOTA_LIMITS: Record<PlanType, number> = {
-  free: 3,
-  pro: 100,
-  premium: 1000,
-};
-
-/**
- * Service for managing user quotas in Notion
+ * Unified Quota Service
+ * 
+ * Architecture:
+ * - Firestore is the PRIMARY source of truth for all quota operations
+ * - Notion is used ONLY for async background sync (CRM/reporting)
+ * - The API NEVER depends on Notion for authorization decisions
+ * - System continues to work perfectly even if Notion is completely down
  */
 export class QuotaService {
-  private notion?: Client;
-  private quotaDbId?: string;
-  private isEnabled: boolean;
-  private notionToken?: string;
-
-  constructor() {
-    this.quotaDbId = process.env.NOTION_QUOTA_DB_ID;
-    this.notionToken = process.env.NOTION_TRACKING_TOKEN;
-    this.isEnabled = !!(this.quotaDbId && this.notionToken);
-
-    if (this.isEnabled && this.notionToken) {
-      this.notion = new Client({ auth: this.notionToken });
-      log("Quota service ENABLED", { databaseId: this.quotaDbId });
-    } else {
-      log("Quota service DISABLED (missing token or database ID)");
-    }
-  }
-
-  /**
-   * Get the current quota limit for a user based on their plan
-   */
-  getQuotaLimit(plan: PlanType): number {
-    return QUOTA_LIMITS[plan];
-  }
-
-  /**
-   * Check if a date is in the same month
-   */
-  private isSameMonth(date: Date): boolean {
-    const today = new Date();
-    return (
-      date.getMonth() === today.getMonth() &&
-      date.getFullYear() === today.getFullYear()
-    );
-  }
-
-  /**
-   * Fetch quota entry for a user from Notion
-   */
-  private async fetchQuotaEntry(userId: string): Promise<QuotaEntry | null> {
-    if (!this.isEnabled || !this.quotaDbId || !this.notionToken) return null;
-
-    try {
-      const url = `https://api.notion.com/v1/databases/${this.quotaDbId}/query`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${this.notionToken}`,
-          "Notion-Version": "2022-02-22",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          filter: {
-            property: "User ID",
-            title: {
-              equals: userId,
-            },
-          },
-        }),
-      });
-
-      const data: any = await response.json();
-
-      if (!data.results || data.results.length === 0) {
-        return null;
-      }
-
-      const page: any = data.results[0];
-      const props = page.properties;
-
-      return {
-        userId,
-        usageCount: props["Usage Count"]?.number ?? 0,
-        lastReset: new Date(props["Last Reset"]?.date?.start ?? new Date()),
-        plan: (props["Plan"]?.select?.name ?? "free") as PlanType,
-      };
-    } catch (error: any) {
-      log("Failed to fetch quota entry", { error: error.message, userId });
-      return null;
-    }
-  }
-
-  /**
-   * Create or update quota entry in Notion
-   */
-  private async upsertQuotaEntry(
-    userId: string,
-    usageCount: number,
-    lastReset: Date,
-    plan: PlanType,
-    pageId?: string
-  ): Promise<void> {
-    if (!this.isEnabled || !this.notion || !this.quotaDbId) return;
-
-    try {
-      const properties: Record<string, any> = {
-        "User ID": { title: [{ text: { content: userId } }] },
-        "Usage Count": { number: usageCount },
-        "Last Reset": { date: { start: lastReset.toISOString() } },
-        "Plan": { select: { name: plan } },
-      };
-
-      if (pageId) {
-        // Update existing page
-        await this.notion.pages.update({
-          page_id: pageId,
-          properties,
-        });
-        log("Quota entry updated", { userId, usageCount, plan });
-      } else {
-        // Create new page
-        await this.notion.pages.create({
-          parent: { type: "database_id", database_id: this.quotaDbId },
-          properties,
-        });
-        log("Quota entry created", { userId, usageCount, plan });
-      }
-    } catch (error: any) {
-      log("Failed to upsert quota entry", { error: error.message, userId });
-      throw error;
-    }
-  }
-
-  /**
-   * Get page ID for a user's quota entry
-   */
-  private async getPageId(userId: string): Promise<string | null> {
-    if (!this.isEnabled || !this.quotaDbId || !this.notionToken) return null;
-
-    try {
-      const url = `https://api.notion.com/v1/databases/${this.quotaDbId}/query`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${this.notionToken}`,
-          "Notion-Version": "2022-02-22",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          filter: {
-            property: "User ID",
-            title: {
-              equals: userId,
-            },
-          },
-        }),
-      });
-
-      const data: any = await response.json();
-
-      return data.results && data.results.length > 0 ? data.results[0].id : null;
-    } catch (error: any) {
-      log("Failed to get page ID", { error: error.message, userId });
-      return null;
-    }
-  }
+  private firestoreService = getFirestoreQuotaService();
+  private notionSyncService = getNotionSyncService();
 
   /**
    * Check if user has quota available
-   * Returns { allowed: boolean, remaining: number, limit: number, plan: string }
+   * ONLY reads from Firestore (never Notion)
+   * Auto-resets if new month started
+   * Returns: { allowed: boolean, remaining: number, limit: number, plan }
    */
-  async checkQuota(
-    userId: string
-  ): Promise<{ allowed: boolean; remaining: number; limit: number; plan: PlanType }> {
-    // If quota service is disabled, allow all requests
-    if (!this.isEnabled) {
-      return { allowed: true, remaining: -1, limit: -1, plan: "free" };
-    }
-
-    try {
-      let quotaEntry = await this.fetchQuotaEntry(userId);
-
-      // If no entry exists, create one with default values
-      if (!quotaEntry) {
-        quotaEntry = {
-          userId,
-          usageCount: 0,
-          lastReset: new Date(),
-          plan: "free",
-        };
-        await this.upsertQuotaEntry(userId, 0, new Date(), "free");
-      }
-
-      // Reset count if it's a new month
-      if (!this.isSameMonth(quotaEntry.lastReset)) {
-        quotaEntry.usageCount = 0;
-        quotaEntry.lastReset = new Date();
-        const pageId = await this.getPageId(userId);
-        if (pageId) {
-          await this.upsertQuotaEntry(
-            userId,
-            0,
-            new Date(),
-            quotaEntry.plan,
-            pageId
-          );
-        }
-      }
-
-      const limit = this.getQuotaLimit(quotaEntry.plan);
-      const remaining = Math.max(0, limit - quotaEntry.usageCount);
-      const allowed = quotaEntry.usageCount < limit;
-
-      return { allowed, remaining, limit, plan: quotaEntry.plan };
-    } catch (error: any) {
-      log("Quota check error - allowing by default", { error: error.message, userId });
-      // On error, allow the request to avoid blocking legitimate users
-      return { allowed: true, remaining: -1, limit: -1, plan: "free" };
-    }
+  async checkQuota(userId: string): Promise<QuotaCheckResult> {
+    return this.firestoreService.checkQuota(userId);
   }
 
   /**
    * Increment usage count for a user
+   * Uses atomic Firestore increment
+   * Syncs to Notion in background (non-blocking)
    */
   async incrementUsage(userId: string): Promise<void> {
-    if (!this.isEnabled) return;
+    // Increment in Firestore (primary)
+    await this.firestoreService.incrementUsage(userId);
 
-    try {
-      let quotaEntry = await this.fetchQuotaEntry(userId);
-
-      if (!quotaEntry) {
-        // Create new entry with count 1
-        await this.upsertQuotaEntry(userId, 1, new Date(), "free");
-        return;
-      }
-
-      // Reset if it's a new month
-      if (!this.isSameMonth(quotaEntry.lastReset)) {
-        quotaEntry.usageCount = 1;
-        quotaEntry.lastReset = new Date();
-      } else {
-        quotaEntry.usageCount += 1;
-      }
-
-      const pageId = await this.getPageId(userId);
-      if (pageId) {
-        await this.upsertQuotaEntry(
-          userId,
-          quotaEntry.usageCount,
-          quotaEntry.lastReset,
-          quotaEntry.plan,
-          pageId
-        );
-      }
-    } catch (error: any) {
-      log("Failed to increment usage", { error: error.message, userId });
-    }
+    // Sync to Notion in background (non-blocking, fire-and-forget)
+    this.syncToNotionBackground(userId).catch((err) => {
+      log("Background Notion sync failed (non-critical)", {
+        error: err.message,
+        userId,
+      });
+    });
   }
 
   /**
@@ -284,36 +50,65 @@ export class QuotaService {
   async getQuotaStatus(
     userId: string
   ): Promise<{ usageCount: number; limit: number; remaining: number; plan: PlanType } | null> {
-    if (!this.isEnabled) return null;
+    return this.firestoreService.getQuotaStatus(userId);
+  }
 
+  /**
+   * Update user plan (for admin operations)
+   */
+  async updateUserPlan(userId: string, plan: PlanType): Promise<void> {
+    await this.firestoreService.updateUserPlan(userId, plan);
+
+    // Sync to Notion in background
+    this.syncToNotionBackground(userId).catch((err) => {
+      log("Background Notion sync failed (non-critical)", {
+        error: err.message,
+        userId,
+      });
+    });
+  }
+
+  /**
+   * Background sync to Notion (non-blocking)
+   * This is called asynchronously and never blocks the main flow
+   */
+  private async syncToNotionBackground(userId: string): Promise<void> {
     try {
-      const quotaEntry = await this.fetchQuotaEntry(userId);
-      if (!quotaEntry) return null;
-
-      // Reset if it's a new month
-      if (!this.isSameMonth(quotaEntry.lastReset)) {
-        quotaEntry.usageCount = 0;
+      // Get user document to retrieve periodStart
+      const userDocRef = this.firestoreService.getUserDocumentRef(userId);
+      const userDoc = await userDocRef.get();
+      
+      if (userDoc.exists) {
+        const userData = userDoc.data();
+        const status = await this.firestoreService.getQuotaStatus(userId);
+        
+        if (status && userData) {
+          const periodStart = userData.periodStart?.toDate() || new Date();
+          
+          await this.notionSyncService.syncToNotion(
+            userId,
+            status.usageCount,
+            status.plan,
+            periodStart
+          );
+        }
       }
-
-      const limit = this.getQuotaLimit(quotaEntry.plan);
-      const remaining = Math.max(0, limit - quotaEntry.usageCount);
-
-      return {
-        usageCount: quotaEntry.usageCount,
-        limit,
-        remaining,
-        plan: quotaEntry.plan,
-      };
     } catch (error: any) {
-      log("Failed to get quota status", { error: error.message, userId });
-      return null;
+      // Just log, don't throw - this is background sync
+      log("Notion sync error (non-blocking)", { error: error.message, userId });
     }
   }
 }
 
+// Singleton instance
 let quotaServiceInstance: QuotaService | null = null;
 
 export function getQuotaService(): QuotaService {
-  if (!quotaServiceInstance) quotaServiceInstance = new QuotaService();
+  if (!quotaServiceInstance) {
+    quotaServiceInstance = new QuotaService();
+  }
   return quotaServiceInstance;
 }
+
+// Re-export types for backward compatibility
+export type { PlanType } from "../types/quota";
