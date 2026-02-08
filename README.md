@@ -252,7 +252,7 @@ Contributions are welcome!
 
 ## 👨‍💻 Author
 
-**Idriss Mohamady**
+**Idriss**
 
 🌐 [photocalia.com](https://photocalia.com) • 💼 [LinkedIn](https://www.linkedin.com/in/i-mohamady/) • 🐙 [GitHub](https://github.com/m-idriss)
 
