@@ -252,7 +252,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: build-artifacts-${{ steps.new_version.outputs.version }}
-          path: dist/3dime-angular/
+          path: dist/photocalia/
           retention-days: 90
 
       - name: Summary
