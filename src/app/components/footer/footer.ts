@@ -62,10 +62,25 @@ export class Footer implements OnInit {
   /**
    * Builds footer links array based on environment configuration flags.
    * Only includes links that are enabled in the environment config.
+   * Provides safe defaults when environment.footer is missing (e.g., in production builds).
    */
   private buildFooterLinks(): FooterLink[] {
     const links: FooterLink[] = [];
-    const config = environment.footer;
+    
+    // Provide a safe default configuration when environment.footer is missing,
+    // e.g., in production builds where the env file is generated without it.
+    const defaultConfig = {
+      enableRepositoryLink: false,
+      enableIssuesLink: false,
+      enableDocsLink: false,
+      enableLicenseLink: true,
+      enableSecurityLink: false,
+      enableCommunityLink: false,
+      enableDiscussionsLink: false,
+      enableAboutMeLink: false,
+    };
+    
+    const config = environment.footer ?? defaultConfig;
 
     if (config.enableRepositoryLink) {
       links.push({ label: 'Repository', url: this.githubRepo });

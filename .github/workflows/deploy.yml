@@ -55,7 +55,17 @@ jobs:
               messagingSenderId: '${FIREBASE_MESSAGING_SENDER_ID}',
               appId: '${FIREBASE_APP_ID}',
               measurementId: 'G-${FIREBASE_MEASUREMENT_ID}'
-            }
+            },
+            footer: {
+              enableRepositoryLink: false,
+              enableIssuesLink: false,
+              enableDocsLink: false,
+              enableLicenseLink: true,
+              enableSecurityLink: false,
+              enableCommunityLink: false,
+              enableDiscussionsLink: false,
+              enableAboutMeLink: false,
+            },
           };" > src/environments/environment.prod.ts
 
       - name: Build Angular app

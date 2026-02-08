@@ -26,6 +26,16 @@ const envConfigFile = `export const environment = {
     appId: '${appId}',
     measurementId: '${measurementId}',
   },
+  footer: {
+    enableRepositoryLink: false,
+    enableIssuesLink: false,
+    enableDocsLink: false,
+    enableLicenseLink: true,
+    enableSecurityLink: false,
+    enableCommunityLink: false,
+    enableDiscussionsLink: false,
+    enableAboutMeLink: false,
+  },
 };
 `;
 

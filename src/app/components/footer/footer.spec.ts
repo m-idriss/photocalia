@@ -1,18 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 
 import { Footer } from './footer';
+import { GithubService } from '../../services/github.service';
 import { environment } from '../../../environments/environment';
 
 describe('Footer', () => {
   let component: Footer;
   let fixture: ComponentFixture<Footer>;
+  let mockGithubService: jasmine.SpyObj<GithubService>;
 
   beforeEach(async () => {
+    // Create a mock GithubService to avoid external HTTP calls
+    mockGithubService = jasmine.createSpyObj('GithubService', ['getLatestRelease']);
+    mockGithubService.getLatestRelease.and.returnValue(
+      of({ tag_name: 'v1.0.0', html_url: 'https://github.com/m-idriss/3dime-angular/releases/tag/v1.0.0' })
+    );
+
     await TestBed.configureTestingModule({
       imports: [Footer],
-      providers: [provideRouter([]), provideHttpClient()],
+      providers: [
+        provideRouter([]),
+        provideHttpClient(),
+        { provide: GithubService, useValue: mockGithubService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Footer);
