@@ -743,7 +743,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
     // Generate ICS content manually
     let icsContent = 'BEGIN:VCALENDAR\r\n';
     icsContent += 'VERSION:2.0\r\n';
-    icsContent += 'PRODID:-//3dime Calendar Converter//EN\r\n';
+    icsContent += 'PRODID:-//Photocalia Calendar Converter//EN\r\n';
     icsContent += 'CALSCALE:GREGORIAN\r\n';
 
     events.forEach((event) => {
@@ -829,7 +829,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
     if (!/PRODID:/.test(ics)) {
       ics = ics.replace(
         /VERSION:2\.0\r\n/,
-        'VERSION:2.0\r\nPRODID:-//3dime Calendar Converter//EN\r\n',
+        'VERSION:2.0\r\nPRODID:-//Photocalia Calendar Converter//EN\r\n',
       );
     }
 

@@ -2,7 +2,7 @@
 
 ## 🎯 What Was Built
 
-This visual guide shows the Progressive Web App implementation for 3dime-angular.
+This visual guide shows the Progressive Web App implementation for photocalia.
 
 ## 📱 Mobile Installation Flow
 
@@ -12,7 +12,7 @@ This visual guide shows the Progressive Web App implementation for 3dime-angular
 │         📱 iOS Installation             │
 │                                         │
 │  1. Open Safari                         │
-│  2. Visit https://3dime.com             │
+│  2. Visit https://photocalia.com             │
 │  3. Tap Share button (⬆️ icon)          │
 │  4. Select "Add to Home Screen"         │
 │  5. Customize name (optional)           │
@@ -27,7 +27,7 @@ This visual guide shows the Progressive Web App implementation for 3dime-angular
 │      🤖 Android Installation            │
 │                                         │
 │  1. Open Chrome                         │
-│  2. Visit https://3dime.com             │
+│  2. Visit https://photocalia.com             │
 │  3. Tap menu (⋮)                        │
 │  4. Select "Install app"                │
 │  5. Confirm installation                │
@@ -42,9 +42,9 @@ This visual guide shows the Progressive Web App implementation for 3dime-angular
 │      💻 Desktop Installation            │
 │                                         │
 │  1. Open Chrome or Edge                 │
-│  2. Visit https://3dime.com             │
+│  2. Visit https://photocalia.com             │
 │  3. Click install icon (⊕) in URL bar   │
-│  4. Or: Menu → "Install 3dime"          │
+│  4. Or: Menu → "Install Photocalia"     │
 │  5. Confirm installation                │
 │                                         │
 │  Result: ✅ Standalone app window       │
@@ -57,7 +57,7 @@ This visual guide shows the Progressive Web App implementation for 3dime-angular
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    3dime PWA Architecture                    │
+│                    Photocalia PWA Architecture                    │
 └─────────────────────────────────────────────────────────────┘
                               │
                               │
@@ -120,7 +120,7 @@ Layer 2: Assets (LAZY - Cached on First Access)
         ▼
 Layer 3: API Responses (PERFORMANCE - 1 Hour Cache)
 ┌────────────────────────────────────────────────────┐
-│  🌐 https://*.3dime.com/**                         │
+│  🌐 https://*.photocalia.com/**                         │
 │  🌐 https://*.a.run.app/**                         │
 │                                                    │
 │  Max: 50 responses                                 │
@@ -135,7 +135,7 @@ Layer 3: API Responses (PERFORMANCE - 1 Hour Cache)
 ### Flow 1: First-Time Installation
 
 ```
-User visits https://3dime.com
+User visits https://photocalia.com
         │
         ▼
 Service Worker registers (after 30s)
@@ -168,10 +168,10 @@ User selects an image/PDF
 User taps "Share" button
         │
         ▼
-User selects "3dime" from share menu
+User selects "Photocalia" from share menu
         │
         ▼
-3dime app launches (installed PWA)
+Photocalia app launches (installed PWA)
         │
         ▼
 App navigates to Calendar Converter (#converter)
@@ -253,7 +253,7 @@ App reloads with new version
 ## 📊 File Structure
 
 ```
-3dime-angular/
+photocalia/
 │
 ├── ngsw-config.json                    ← Service Worker Config
 │   ├── assetGroups
@@ -291,7 +291,7 @@ App reloads with new version
 ├── docs/
 │   └── PWA.md                          ← Comprehensive Guide
 │
-└── dist/3dime-angular/browser/         ← Production Build
+└── dist/photocalia/browser/         ← Production Build
     ├── ngsw-worker.js                  ← 83KB Service Worker
     ├── ngsw.json                       ← 3.3KB SW Config
     ├── safety-worker.js                ← 785B Fallback

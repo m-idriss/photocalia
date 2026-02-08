@@ -11,7 +11,7 @@ This document outlines the comprehensive SEO improvements implemented for the Ph
 #### Title Tag
 **Before:**
 ```html
-<title>AI Calendar Converter by 3dime</title>
+<title>AI Calendar Converter by Photocalia</title>
 ```
 
 **After:**
@@ -28,7 +28,7 @@ This document outlines the comprehensive SEO improvements implemented for the Ph
 #### Meta Description
 **Before:**
 ```
-3dime - AI-powered Calendar Converter. Transform images and PDFs into ICS calendar files instantly. Personal portfolio of Idriss...
+Photocalia - AI-powered Calendar Converter. Transform images and PDFs into ICS calendar files instantly using GPT-4 Vision. Free online tool for converting visual calendars to digital events.
 ```
 
 **After:**

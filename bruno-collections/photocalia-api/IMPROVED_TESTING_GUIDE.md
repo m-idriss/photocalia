@@ -35,7 +35,7 @@ This version automatically fetches an image from a URL and converts it to base64
 #### Usage
 ```javascript
 // Environment variable (already set in local.bru and prod.bru)
-test_image_url: https://raw.githubusercontent.com/m-idriss/3dime-angular/main/bruno-collections/3dime-api/test-resources/edt-test.pdf
+test_image_url: https://raw.githubusercontent.com/m-idriss/Photocalia/main/bruno-collections/photocalia-api/test-resources/edt-test.pdf
 
 // The pre-request script handles everything automatically!
 // Just click "Send" and the image will be fetched and converted

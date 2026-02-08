@@ -132,7 +132,7 @@ export class ConverterService {
    * Only used when user is not authenticated
    */
   private getOrCreateAnonymousId(): string {
-    const STORAGE_KEY = '3dime_anonymous_id';
+    const STORAGE_KEY = 'photocalia_anonymous_id';
 
     // Try to get existing ID from localStorage
     try {

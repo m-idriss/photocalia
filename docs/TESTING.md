@@ -1,10 +1,10 @@
 # Testing Guide
 
-> Complete guide to testing 3dime-angular
+> Complete guide to testing Photocalia
 
 ## Testing Overview
 
-3dime-angular uses a comprehensive testing strategy:
+Photocalia uses a comprehensive testing strategy:
 - **Unit Tests**: Jasmine + Karma for component and service testing
 - **API Tests**: Bruno for API endpoint testing
 - **Manual Testing**: For UI/UX and integration workflows
@@ -420,7 +420,7 @@ npm start
 #### Production Build
 ```bash
 npm run build -- --configuration=production
-npx http-server dist/3dime-angular/browser -p 8080
+npx http-server dist/Photocalia/browser -p 8080
 # Test at http://localhost:8080/
 ```
 
@@ -519,7 +519,7 @@ Tests that sometimes pass, sometimes fail:
 ```bash
 # Analyze bundle size
 npm run build -- --configuration=production --stats-json
-npx webpack-bundle-analyzer dist/3dime-angular/browser/stats.json
+npx webpack-bundle-analyzer dist/Photocalia/browser/stats.json
 ```
 
 ### Load Testing

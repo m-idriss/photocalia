@@ -1,6 +1,6 @@
 # Design System
 
-> Design system documentation for the 3dime-angular portfolio application.
+> Design system documentation for the Photocalia calendar converter SaaS.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@
 
 ## Overview
 
-The 3dime-angular portfolio uses a **space-themed design** with **glassmorphism** effects to create a modern, immersive experience. The design system is built with CSS custom properties for easy theming and maintainability.
+The Photocalia portfolio uses a **space-themed design** with **glassmorphism** effects to create a modern, immersive experience. The design system is built with CSS custom properties for easy theming and maintainability.
 
 ### Key Features
 

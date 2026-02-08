@@ -1,6 +1,6 @@
 # Development Guidelines
 
-> Best practices and guidelines for developing the 3dime-angular portfolio application.
+> Best practices and guidelines for developing the Photocalia calendar converter SaaS.
 
 ## Table of Contents
 
@@ -27,8 +27,8 @@
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/m-idriss/3dime-angular.git
-   cd 3dime-angular
+   git clone https://github.com/m-idriss/Photocalia.git
+   cd Photocalia
    ```
 
 2. **Install dependencies**:
@@ -119,7 +119,7 @@ npm run build
 ```
 
 - Takes ~14 seconds, set timeout to 30+ seconds
-- Outputs to `dist/3dime-angular/`
+- Outputs to `dist/Photocalia/`
 - Includes source maps for debugging
 
 #### Production Build
