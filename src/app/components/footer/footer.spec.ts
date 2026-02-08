@@ -1,17 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
 
 import { Footer } from './footer';
+import { GithubService } from '../../services/github.service';
+import { environment } from '../../../environments/environment';
 
 describe('Footer', () => {
   let component: Footer;
   let fixture: ComponentFixture<Footer>;
+  let mockGithubService: jasmine.SpyObj<GithubService>;
 
   beforeEach(async () => {
+    // Create a mock GithubService to avoid external HTTP calls
+    mockGithubService = jasmine.createSpyObj('GithubService', ['getLatestRelease']);
+    mockGithubService.getLatestRelease.and.returnValue(
+      of({ tag_name: 'v1.0.0', html_url: 'https://github.com/m-idriss/3dime-angular/releases/tag/v1.0.0' })
+    );
+
     await TestBed.configureTestingModule({
       imports: [Footer],
-      providers: [provideRouter([]), provideHttpClient()],
+      providers: [
+        provideRouter([]),
+        provideHttpClient(),
+        { provide: GithubService, useValue: mockGithubService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Footer);
@@ -23,24 +37,64 @@ describe('Footer', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render footer links', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const footerLinks = compiled.querySelectorAll('.footer-link');
-    expect(footerLinks.length).toBeGreaterThan(0);
+  it('should build footer links based on environment configuration', () => {
+    expect(component.footerLinks).toBeDefined();
+    expect(Array.isArray(component.footerLinks)).toBe(true);
   });
 
-  it('should include About Me link', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const aboutMeLink = Array.from(compiled.querySelectorAll('.footer-link')).find(
-      (link) => link.textContent?.trim() === 'About Me',
-    );
-    expect(aboutMeLink).toBeTruthy();
+  it('should include License link when enabled in config', () => {
+    const licenseLink = component.footerLinks.find((link) => link.label === 'License');
+    // License is enabled in the default environment config
+    if (environment.footer.enableLicenseLink) {
+      expect(licenseLink).toBeTruthy();
+      expect(licenseLink?.url).toContain('/LICENSE');
+    } else {
+      expect(licenseLink).toBeUndefined();
+    }
   });
 
-  it('should have About Me as internal link', () => {
+  it('should only include links enabled in environment config', () => {
+    const config = environment.footer;
+    
+    // Check each link type matches config
+    const hasRepository = component.footerLinks.some((link) => link.label === 'Repository');
+    expect(hasRepository).toBe(config.enableRepositoryLink);
+
+    const hasIssues = component.footerLinks.some((link) => link.label === 'Issues');
+    expect(hasIssues).toBe(config.enableIssuesLink);
+
+    const hasDocs = component.footerLinks.some((link) => link.label === 'Docs');
+    expect(hasDocs).toBe(config.enableDocsLink);
+
+    const hasLicense = component.footerLinks.some((link) => link.label === 'License');
+    expect(hasLicense).toBe(config.enableLicenseLink);
+
+    const hasSecurity = component.footerLinks.some((link) => link.label === 'Security');
+    expect(hasSecurity).toBe(config.enableSecurityLink);
+
+    const hasCommunity = component.footerLinks.some((link) => link.label === 'Community');
+    expect(hasCommunity).toBe(config.enableCommunityLink);
+
+    const hasDiscussions = component.footerLinks.some((link) => link.label === 'Discussions');
+    expect(hasDiscussions).toBe(config.enableDiscussionsLink);
+
+    const hasAboutMe = component.footerLinks.some((link) => link.label === 'About Me');
+    expect(hasAboutMe).toBe(config.enableAboutMeLink);
+  });
+
+  it('should mark About Me link as internal when enabled', () => {
     const aboutMeLink = component.footerLinks.find((link) => link.label === 'About Me');
-    expect(aboutMeLink).toBeTruthy();
-    expect(aboutMeLink?.isInternal).toBe(true);
-    expect(aboutMeLink?.url).toBe('/me');
+    if (aboutMeLink) {
+      expect(aboutMeLink.isInternal).toBe(true);
+      expect(aboutMeLink.url).toBe('/me');
+    }
+  });
+
+  it('should mark external links without isInternal flag', () => {
+    const externalLinks = component.footerLinks.filter((link) => !link.isInternal);
+    externalLinks.forEach((link) => {
+      // External links should have URLs starting with http or be full github repo URLs
+      expect(link.url).toMatch(/^https?:\/\//);
+    });
   });
 });

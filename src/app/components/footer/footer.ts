@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { GithubService } from '../../services/github.service';
+import { environment } from '../../../environments/environment';
 
 /**
  * Footer link interface for type safety
@@ -14,6 +15,7 @@ export interface FooterLink {
 /**
  * Global footer component displaying navigation links, project information, and credits.
  * Fetches version dynamically from GitHub releases API for maintainability.
+ * Links are conditionally rendered based on environment configuration.
  */
 @Component({
   selector: 'app-footer',
@@ -32,18 +34,12 @@ export class Footer implements OnInit {
   authorName = 'Idriss';
   authorProfile = 'https://github.com/m-idriss';
 
-  footerLinks: FooterLink[] = [
-  //  { label: 'Repository', url: this.githubRepo },
-  //  { label: 'Issues', url: `${this.githubRepo}/issues` },
-  //  { label: 'Docs', url: `${this.githubRepo}/blob/main/README.md` },
-    { label: 'License', url: `${this.githubRepo}/blob/main/LICENSE` },
-  //  { label: 'Security', url: `${this.githubRepo}/blob/main/SECURITY.md` },
-  //  { label: 'Community', url: `${this.githubRepo}/blob/main/CONTRIBUTING.md` },
-  //  { label: 'Discussions', url: `${this.githubRepo}/discussions` },
-    { label: 'About Me', url: '/me', isInternal: true },
-  ];
+  footerLinks: FooterLink[] = [];
 
   ngOnInit(): void {
+    // Build footer links based on environment configuration
+    this.footerLinks = this.buildFooterLinks();
+
     // Always set a fallback release URL
     this.releaseUrl = `${this.githubRepo}/releases/latest`;
 
@@ -61,5 +57,56 @@ export class Footer implements OnInit {
         console.warn('Failed to fetch release version:', err);
       },
     });
+  }
+
+  /**
+   * Builds footer links array based on environment configuration flags.
+   * Only includes links that are enabled in the environment config.
+   * Provides safe defaults when environment.footer is missing (e.g., in production builds).
+   */
+  private buildFooterLinks(): FooterLink[] {
+    const links: FooterLink[] = [];
+    
+    // Provide a safe default configuration when environment.footer is missing,
+    // e.g., in production builds where the env file is generated without it.
+    const defaultConfig = {
+      enableRepositoryLink: false,
+      enableIssuesLink: false,
+      enableDocsLink: false,
+      enableLicenseLink: true,
+      enableSecurityLink: false,
+      enableCommunityLink: false,
+      enableDiscussionsLink: false,
+      enableAboutMeLink: false,
+    };
+    
+    const config = environment.footer ?? defaultConfig;
+
+    if (config.enableRepositoryLink) {
+      links.push({ label: 'Repository', url: this.githubRepo });
+    }
+    if (config.enableIssuesLink) {
+      links.push({ label: 'Issues', url: `${this.githubRepo}/issues` });
+    }
+    if (config.enableDocsLink) {
+      links.push({ label: 'Docs', url: `${this.githubRepo}/blob/main/README.md` });
+    }
+    if (config.enableLicenseLink) {
+      links.push({ label: 'License', url: `${this.githubRepo}/blob/main/LICENSE` });
+    }
+    if (config.enableSecurityLink) {
+      links.push({ label: 'Security', url: `${this.githubRepo}/blob/main/SECURITY.md` });
+    }
+    if (config.enableCommunityLink) {
+      links.push({ label: 'Community', url: `${this.githubRepo}/blob/main/CONTRIBUTING.md` });
+    }
+    if (config.enableDiscussionsLink) {
+      links.push({ label: 'Discussions', url: `${this.githubRepo}/discussions` });
+    }
+    if (config.enableAboutMeLink) {
+      links.push({ label: 'About Me', url: '/me', isInternal: true });
+    }
+
+    return links;
   }
 }

@@ -9,4 +9,14 @@ export const environment = {
     messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
     appId: 'YOUR_APP_ID',
   },
+  footer: {
+    enableRepositoryLink: true,
+    enableIssuesLink: true,
+    enableDocsLink: true,
+    enableLicenseLink: true,
+    enableSecurityLink: true,
+    enableCommunityLink: true,
+    enableDiscussionsLink: true,
+    enableAboutMeLink: false,
+  },
 };
