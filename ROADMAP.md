@@ -304,7 +304,7 @@
 #### Open Source & Community
 - [ ] **Component library extraction**
   - [ ] Extract reusable components into standalone library
-  - [ ] Publish @3dime/angular-components to npm
+  - [ ] Publish @photocalia/angular-components to npm
   - [ ] Create Storybook documentation
   - [ ] Component playground and demo site
   - [ ] Community contributions and plugins
@@ -345,7 +345,7 @@
 - [x] **Deployment setup** - Active production environment
   - [x] Firebase Hosting for application
   - [x] Firebase Functions for backend APIs
-  - [x] Custom domain (3dime.com)
+  - [x] Custom domain (photocalia.com)
   - [x] SSL certificate with HTTPS
 - [x] **CI/CD pipeline** - GitHub Actions implemented
   - [x] Automated builds on push to main

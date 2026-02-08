@@ -748,7 +748,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
 
     events.forEach((event) => {
       icsContent += 'BEGIN:VEVENT\r\n';
-      icsContent += `UID:${Date.now()}-${Math.random().toString(36).substr(2, 9)}@3dime.com\r\n`;
+      icsContent += `UID:${Date.now()}-${Math.random().toString(36).substr(2, 9)}@photocalia.com\r\n`;
       icsContent += `DTSTAMP:${this.dateToIcsFormat(new Date())}\r\n`;
       icsContent += `DTSTART:${this.dateToIcsFormat(event.start)}\r\n`;
       icsContent += `DTEND:${this.dateToIcsFormat(event.end)}\r\n`;

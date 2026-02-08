@@ -122,7 +122,7 @@ export const converterFunction = onRequest(
             /^172\.(1[6-9]|2[0-9]|3[01])\./.test(hostname)
           ) {
             domain = "local";
-          } else if (hostname === "3dime.com" || hostname === "www.3dime.com") {
+          } else if (hostname === "photocalia.com" || hostname === "www.photocalia.com") {
             domain = "production";
           } else {
             domain = hostname;
@@ -168,7 +168,7 @@ export const converterFunction = onRequest(
               used: quotaCheck.limit - quotaCheck.remaining,
               resetsAt: "start of next month"
             },
-            contact: "contact@3dime.com"
+            contact: "contact@photocalia.com"
           });
         }
 

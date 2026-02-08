@@ -1,6 +1,6 @@
 {
-  "name": "3dime - Personal Social Hub",
-  "short_name": "3dime",
+  "name": "Photocalia - AI Calendar Converter",
+  "short_name": "Photocalia",
   "description": "Personal social hub to regroup and share profiles & links in one place. Convert images to calendar events.",
   "start_url": "/",
   "display": "standalone",
