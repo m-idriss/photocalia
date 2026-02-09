@@ -6,7 +6,7 @@ This guide explains how to properly configure your development environment to us
 
 ### Production
 In production, the application uses a `proxyApi` function as a single entry point that routes requests to various backend services:
-- Frontend → `https://api.photocalia.com` (proxyApi) → Individual Cloud Functions
+- Frontend → `https://api.3dime.com` (proxyApi) → Individual Cloud Functions
 
 ### Development (Emulator Mode)
 In development with the Firebase emulator, all functions are exposed directly at their own endpoints:
