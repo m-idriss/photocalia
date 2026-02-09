@@ -85,7 +85,7 @@ interface CacheOptions {
 
 Add `?force=true` to any endpoint to force a refresh:
 ```
-https://api.photocalia.com?target=profile&force=true
+https://api.3dime.com?target=profile&force=true
 ```
 
 **Note:** Force refresh respects cooldown period to prevent abuse.

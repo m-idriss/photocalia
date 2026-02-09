@@ -442,7 +442,7 @@ All API endpoints now include Firestore-based backend caching for improved perfo
 Add `?force=true` to any endpoint to force a cache refresh (respects cooldown):
 
 ```bash
-curl "https://api.photocalia.com?target=profile&force=true"
+curl "https://api.3dime.com?target=profile&force=true"
 ```
 
 ### Architecture
