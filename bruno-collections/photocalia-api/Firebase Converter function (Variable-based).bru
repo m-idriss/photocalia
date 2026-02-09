@@ -1,7 +1,7 @@
 meta {
   name: Firebase Converter function (Variable-based)
   type: http
-  seq: 9
+  seq: 4
 }
 
 post {
@@ -37,10 +37,10 @@ script:pre-request {
    * 🔧 Firebase Converter Pre-Request Script
    * Loads a local image, encodes it as Base64, and prepares environment vars.
    */
-
+  
   const fs = require("fs");
   const path = require("path");
-
+  
   // ----------------------------
   // 🧱 Config
   // ----------------------------
@@ -48,7 +48,7 @@ script:pre-request {
   const IMAGE_DIR = path.join(bru.cwd(), "test-resources");
   const IMAGE_PATH = path.join(IMAGE_DIR, IMAGE_NAME);
   const DEFAULT_TZ = "Europe/Paris";
-
+  
   // ----------------------------
   // 🧩 Helpers
   // ----------------------------
@@ -61,7 +61,7 @@ script:pre-request {
     ".svg": "image/svg+xml",
     ".pdf": "application/pdf"
   };
-
+  
   /**
    * Safe file read returning Base64 or throws a detailed error.
    */
@@ -75,14 +75,14 @@ script:pre-request {
     }
     return fs.readFileSync(filePath, { encoding: "base64" });
   }
-
+  
   /**
    * Format current date as YYYY-MM-DD
    */
   function getCurrentDate() {
     return new Date().toISOString().split("T")[0];
   }
-
+  
   /**
    * Detect system timezone (fallback to Europe/Paris)
    */
@@ -93,7 +93,7 @@ script:pre-request {
       return DEFAULT_TZ;
     }
   }
-
+  
   // ----------------------------
   // 🧮 Main logic
   // ----------------------------
@@ -104,7 +104,7 @@ script:pre-request {
     const dataUrl = `data:${mimeType};base64,${base64Data}`;
     const currentDate = getCurrentDate();
     const timeZone = detectTimeZone();
-
+  
     // ----------------------------
     // 🧩 Export to Bruno variables
     // ----------------------------
@@ -113,7 +113,7 @@ script:pre-request {
     bru.setVar("image_type_from_var", mimeType);
     bru.setVar("current_date_from_var", currentDate);
     bru.setVar("time_zone_from_var", timeZone);
-
+  
     console.log(`🖼️ Image Path: ${IMAGE_PATH}`);
     console.log(`✅ Image loaded: ${IMAGE_NAME}`);
     console.log(`📅 Date: ${currentDate}`);
@@ -122,23 +122,23 @@ script:pre-request {
     console.error("🚨 Pre-request script failed:", err.message);
     throw err;
   }
-
+  
 }
 
 tests {
   test("Status code is 200", function() {
     expect(res.getStatus()).to.equal(200);
   });
-
+  
   test("Response is valid JSON", function() {
     expect(res.getBody()).to.be.an("object");
   });
-
+  
   test("Response has required fields", function() {
     expect(res.getBody()).to.have.property("icsContent");
     expect(res.getBody()).to.have.property("success");
   });
-
+  
   test("ICS content is valid", function() {
     expect(res.getBody().icsContent).to.match(/^BEGIN:VCALENDAR[\s\S]*END:VCALENDAR$/);
     expect(res.getBody().success).to.equal(true);
@@ -152,14 +152,14 @@ settings {
 
 docs {
   # Firebase Converter Function Test (Variable-based)
-
+  
   This is the simplest version that uses environment variables for all test data.
   Perfect for when you want full control over the test data.
-
+  
   ## Required Environment Variables
-
+  
   Add these to your environment file (local.bru or prod.bru):
-
+  
   ```
   vars {
     api_url: http://127.0.0.1:5001/image-to-ics/us-central1/proxyApi
@@ -170,29 +170,29 @@ docs {
     test_date: 2025-10-06
   }
   ```
-
+  
   ## Benefits
-
+  
   - **Simple**: No scripts, just variables
   - **Fast**: No network requests during test execution
   - **Flexible**: Easy to change any parameter
   - **Portable**: Works offline if you have the base64 data
-
+  
   ## Usage
-
+  
   1. Set all required variables in your environment
   2. Run the request
-
+  
   ## Converting Images to Base64
-
+  
   You can convert images to base64 using:
-
+  
   - Online tools: https://base64.guru/converter/encode/image
   - Command line: `base64 -i image.png | pbcopy` (Mac) or `base64 image.png` (Linux)
   - Node.js: `const base64 = fs.readFileSync('image.png', 'base64');`
-
+  
   ## Expected Response
-
+  
   The API should return a JSON object containing:
   - `icsContent`: A string with iCalendar data (BEGIN:VCALENDAR ... END:VCALENDAR)
   - `success`: Boolean indicating conversion success
