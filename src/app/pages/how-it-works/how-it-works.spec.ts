@@ -49,10 +49,10 @@ describe('HowItWorks', () => {
     expect(compiled.querySelector('.faq-section')).toBeTruthy();
   });
 
-  it('should render 4 AI steps', () => {
+  it('should render 3 AI steps', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const steps = compiled.querySelectorAll('.ai-step-item');
-    expect(steps.length).toBe(4);
+    expect(steps.length).toBe(3);
   });
 
   it('should render 5 use cases', () => {
