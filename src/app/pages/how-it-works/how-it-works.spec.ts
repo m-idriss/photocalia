@@ -24,7 +24,7 @@ describe('HowItWorks', () => {
     expect(compiled.querySelector('#hero-title')?.textContent).toContain('How It Works');
   });
 
-  it('should render all 8 main sections', () => {
+  it('should render all 7 main sections', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     
     // 1. Hero
@@ -36,19 +36,16 @@ describe('HowItWorks', () => {
     // 3. AI Steps
     expect(compiled.querySelector('.ai-steps-section')).toBeTruthy();
     
-    // 4. ICS Import
-    expect(compiled.querySelector('.ics-import-section')).toBeTruthy();
-    
-    // 5. Use Cases
+    // 4. Use Cases
     expect(compiled.querySelector('.use-cases-section')).toBeTruthy();
     
-    // 6. Instant Capture
+    // 5. Instant Capture
     expect(compiled.querySelector('.instant-capture-section')).toBeTruthy();
     
-    // 7. Benefits
+    // 6. Benefits
     expect(compiled.querySelector('.benefits-section')).toBeTruthy();
     
-    // 8. FAQ
+    // 7. FAQ
     expect(compiled.querySelector('.faq-section')).toBeTruthy();
   });
 

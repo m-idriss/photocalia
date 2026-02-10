@@ -169,18 +169,6 @@
 }
 
 /* ========================
-   ICS Import Section
-   ======================== */
-.ics-import-section {
-  margin-bottom: 5rem;
-  padding: 2.5rem;
-  background: rgba(102, 126, 234, 0.05);
-  border: 1px solid rgba(102, 126, 234, 0.2);
-  border-radius: 16px;
-  animation: fadeInUp 0.8s ease-out 0.3s backwards;
-}
-
-/* ========================
    Use Cases Section
    ======================== */
 .use-cases-section {
@@ -526,7 +514,6 @@
 
   .intro-section,
   .ai-steps-section,
-  .ics-import-section,
   .use-cases-section,
   .instant-capture-section,
   .benefits-section,
@@ -559,7 +546,6 @@
     font-size: 1rem;
   }
 
-  .ics-import-section,
   .instant-capture-section {
     padding: 1.75rem 1.5rem;
   }
