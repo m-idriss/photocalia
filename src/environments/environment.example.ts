@@ -9,6 +9,8 @@ export const environment = {
     messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
     appId: 'YOUR_APP_ID',
   },
+  // Footer configuration - these flags control which links appear in the footer
+  // Set to false to hide links you don't want to display
   footer: {
     enableRepositoryLink: true,
     enableIssuesLink: true,
