@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
+import { HowItWorks } from './pages/how-it-works/how-it-works';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,21 @@ export const routes: Routes = [
         keywords: 'calendar converter, image to calendar, PDF to calendar, ICS generator, AI calendar extraction, screenshot to calendar, appointment converter, event converter, calendar OCR',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/',
+        type: 'website'
+      }
+    }
+  },
+  {
+    path: 'how-it-works',
+    component: HowItWorks,
+    title: 'How It Works - AI Calendar Converter | Photocalia',
+    data: {
+      seo: {
+        title: 'How It Works - Photo to Calendar, Image to ICS Converter | Photocalia',
+        description: 'Learn how Photocalia converts photos, screenshots, and PDFs into calendar events using AI. Upload images of appointments, events, and schedules - our AI calendar assistant extracts dates, times, and locations automatically.',
+        keywords: 'photo to calendar, image to calendar, add events from picture, AI calendar assistant, ICS import, screenshot to calendar, how to convert image to calendar, calendar event extraction',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/how-it-works',
         type: 'website'
       }
     }

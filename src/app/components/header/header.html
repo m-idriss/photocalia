@@ -4,6 +4,9 @@
       <span class="logo-text">📅 Calendar Converter</span>
     </a>
     <nav class="nav-menu">
+      <a routerLink="/how-it-works" class="nav-link" routerLinkActive="active">
+        How It Works
+      </a>
       <!-- Sign In Button (when not authenticated) -->
       @if (!isAuthenticated && !isAuthLoading) {
         <button
