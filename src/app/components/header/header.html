@@ -4,9 +4,6 @@
       <span class="logo-text">📅 Calendar Converter</span>
     </a>
     <nav class="nav-menu">
-      <a routerLink="/how-it-works" class="nav-link" routerLinkActive="active">
-        How It Works
-      </a>
       <!-- Sign In Button (when not authenticated) -->
       @if (!isAuthenticated && !isAuthLoading) {
         <button
@@ -58,34 +55,31 @@
               <div class="dropdown-separator" role="separator"></div>
             }
 
-            <button
-              class="dropdown-item theme-toggle"
+            <a
+              routerLink="/"
+              class="dropdown-item"
               role="menuitem"
-              (click)="toggleTheme()"
-              [appTooltip]="'Toggle theme'"
+              (click)="closeMenu()"
+              [appTooltip]="'Go to home page'"
               appTooltipPlacement="left"
             >
-              <i
-                class="fas"
-                [class.fa-moon]="currentTheme === 'dark'"
-                [class.fa-sun]="currentTheme === 'light'"
-                aria-hidden="true"
-              ></i>
-              <span>{{ themeDisplayName }}</span>
-            </button>
+              <i class="fas fa-home" aria-hidden="true"></i>
+              <span>Home</span>
+            </a>
 
             <div class="dropdown-separator" role="separator"></div>
 
-            <button
-              class="dropdown-item font-size-toggle"
+            <a
+              routerLink="/how-it-works"
+              class="dropdown-item"
               role="menuitem"
-              (click)="changeFontSize()"
-              [appTooltip]="'Adjust font size'"
+              (click)="closeMenu()"
+              [appTooltip]="'Learn how it works'"
               appTooltipPlacement="left"
             >
-              <i class="fas fa-text-height" aria-hidden="true"></i>
-              <span>Font Size: {{ fontSizeDisplayName }}</span>
-            </button>
+              <i class="fas fa-info-circle" aria-hidden="true"></i>
+              <span>How It Works</span>
+            </a>
 
             @if (isAuthenticated) {
               <div class="dropdown-separator" role="separator"></div>
