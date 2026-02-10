@@ -5,7 +5,7 @@
 
 import Stripe from "stripe";
 import { log } from "firebase-functions/logger";
-import { getFirestore } from "firebase-admin/firestore";
+import { getFirestore, Timestamp } from "firebase-admin/firestore";
 import { initializeFirebaseAdmin } from "../utils/firebase-admin";
 import { getStripeInstance } from "../utils/stripe-config";
 import { getBillingService } from "./billing";
@@ -60,7 +60,7 @@ export class WebhookHandlerService {
       .set({
         eventId,
         eventType,
-        processedAt: new Date().toISOString(),
+        processedAt: Timestamp.now(),
       });
   }
 
@@ -154,11 +154,20 @@ export class WebhookHandlerService {
     log("Processing invoice.paid", { invoiceId: invoice.id });
 
     const customerId = invoice.customer as string;
-    // Type assertion needed as subscription can be string, Subscription object, or undefined at runtime
-    const sub = (invoice as any).subscription;
-    const subscriptionId = typeof sub === 'string' 
-      ? sub 
-      : sub?.id || null;
+    
+    // Extract subscription ID from the invoice
+    // The subscription field exists in webhook event payloads but may not be in the base type
+    // We safely access it using optional chaining and type checking
+    const invoiceData = invoice as Stripe.Invoice & { 
+      subscription?: string | Stripe.Subscription | null 
+    };
+    
+    let subscriptionId: string | null = null;
+    if (typeof invoiceData.subscription === 'string') {
+      subscriptionId = invoiceData.subscription;
+    } else if (invoiceData.subscription && typeof invoiceData.subscription === 'object') {
+      subscriptionId = invoiceData.subscription.id;
+    }
 
     if (!subscriptionId) {
       log("No subscription in invoice", { invoiceId: invoice.id });
