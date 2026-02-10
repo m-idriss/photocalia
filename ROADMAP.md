@@ -1,6 +1,6 @@
 # Photocalia - Project Roadmap
 
-> **AI-Powered Calendar Converter SaaS** - A modern Angular 20.3+ application that transforms images and PDFs into calendar events using GPT-4 Vision.
+> **AI-Powered Calendar Converter SaaS** - A modern Angular 21+ application that transforms images and PDFs into calendar events using GPT-4 Vision.
 
 ![Photocalia Application](https://github.com/user-attachments/assets/3a35c572-1e43-4b25-9bf6-12a5a804eaac)
 
@@ -27,30 +27,71 @@
   - Automated builds and FTP deployment
   - Screenshot automation workflow
 
+## 🚀 Recent Progress (Q1 2026)
+
+### Performance & Optimization Wins
+- ✅ **Angular 21.1 Upgrade** - Updated to Angular 21.1.3 with latest features
+  - Enhanced signals support and reactivity
+  - Improved build performance with esbuild optimizations
+  - Better TypeScript 5.9.3 integration
+- ✅ **Bundle Size Optimization** - Reduced from 2.04 MB to 1.03 MB initial bundle
+  - 50% reduction in raw bundle size through lazy loading
+  - 52% reduction in transferred size (475 KB → 229 KB)
+  - PDF.js properly lazy-loaded (402 KB) instead of initial bundle
+  - Achieved near-target performance goals
+- ✅ **Build Time Improvements** - Reduced from 14s to 9s (36% faster)
+  - esbuild optimizations and dependency updates
+  - Faster development iteration cycles
+- ✅ **Expanded Test Suite** - Grew from ~60 to 90 unit tests
+  - Improved test coverage from ~30% to ~40%
+  - All tests passing with comprehensive component coverage
+  - Added tooltip directive tests
+  - Enhanced service and guard testing
+
+### Documentation Enhancements
+- ✅ **Expanded Documentation Suite** - 20+ markdown documentation files
+  - Technical architecture documentation (ARCHITECTURE.md - 50+ KB)
+  - Comprehensive API reference
+  - Firebase setup guides (Auth, Emulator, Quota, Caching)
+  - SEO optimization and validation guides
+  - Testing and development guidelines
+  - Notion integration guides
+  - Security and contributing guidelines
+- ✅ **Code Quality Infrastructure**
+  - Qodana code quality analysis integration
+  - ESLint 10.0 with Angular ESLint 21.2
+  - Automated PR quality checks
+  - Prettier code formatting standards
+
 ## 📋 Current State Analysis
 
 ### ✅ What's Working Well
-- **Modern Angular 20.3.10** architecture with standalone components
+- **Modern Angular 21.1.3** architecture with standalone components
 - **Progressive Web App** with full PWA support and installability
-- **Beautiful modern UI** with glassmorphism effects
+- **Beautiful modern UI** with glassmorphism effects and space theme
 - **Responsive design** with mobile-first approach
-- **Core Features**: Calendar Converter (AI-powered), Calendar View, File Upload, Authentication, Statistics Dashboard
+- **Core Features**: Calendar Converter (AI-powered with GPT-4o), Calendar View with FullCalendar, File Upload, Authentication, Statistics Dashboard with cal-heatmap
 - **Clean component structure** with proper separation of concerns and reusable components
 - **SCSS styling** with CSS custom properties and modern features
-- **Build system** working efficiently (~14s build time)
+- **Build system** working efficiently (~9s build time, optimized from 14s)
 - **Firebase integration** for Authentication and Functions
-- **Advanced UI components**: Skeleton loaders, calendar view, file upload with drag-and-drop, settings modal
+- **Advanced UI components**: Skeleton loaders, calendar view, file upload with drag-and-drop, settings modal, tooltips
+- **Comprehensive testing** with 90 unit tests, all passing
+- **API testing** with Bruno CLI collections
+- **Code quality** tooling with ESLint, Angular ESLint, and Qodana
 
 ### 🔧 Technical Stack
-- **Frontend**: Angular 20.3.10, TypeScript 5.9.3, SCSS
-- **Build**: Angular CLI 20.3.9 with esbuild bundler
-- **Backend**: Firebase Functions, Firebase Authentication
-- **PWA**: Angular Service Worker with caching
-- **AI Integration**: OpenAI GPT-4 Vision API
-- **Styling**: Modern CSS with custom properties, glassmorphism effects
-- **Dependencies**: RxJS 7.8+, Firebase 12.5, PDF.js 5.4, cal-heatmap 4.2, ical.js 2.2
-- **Testing**: Jasmine + Karma, Bruno API collection
-- **UI Libraries**: Bootstrap 5.3.8, Angular CDK 20.2, FullCalendar 6.1
+- **Frontend**: Angular 21.1.3, TypeScript 5.9.3, SCSS
+- **Build**: Angular CLI 21.1.3 with esbuild bundler
+- **Backend**: Firebase Functions (Node 22), Firebase Authentication, Firebase Admin SDK 12.6
+- **PWA**: Angular Service Worker with caching strategies
+- **AI Integration**: OpenAI GPT-4 Vision API (gpt-4o model)
+- **Styling**: Modern CSS with custom properties, glassmorphism effects, space-themed gradients
+- **Dependencies**: RxJS 7.8.2, Firebase 12.9, PDF.js 5.4.624, cal-heatmap 4.2.4, ical.js 2.2.1
+- **Testing**: Jasmine 6.0 + Karma 6.4, Bruno API collection for Firebase Functions
+- **UI Libraries**: Bootstrap 5.3.8, ng-bootstrap 20.0, Angular CDK 21.1.3, FullCalendar 6.1.20
+- **Code Quality**: ESLint 10.0, Angular ESLint 21.2, Qodana, Prettier
+- **Deployment**: Firebase Hosting, GitHub Actions CI/CD
 
 ---
 
@@ -80,7 +121,7 @@
   - [x] Immutable state updates for better change detection
   - [x] Optimized template tracking with Angular 20 @for control flow
   - [x] Bundle optimized to 2.04 MB raw / 475.15 KB transferred
-- [x] **Angular 20.3 update** - Latest Angular version with modern features
+- [x] **Angular 21.1 update** - Latest Angular version with modern features and signals
 - [x] **PWA implementation** - Full Progressive Web App support
   - [x] Service worker with caching strategies
   - [x] Installability on iOS, Android, and desktop
@@ -437,11 +478,12 @@
 
 ## 📊 Success Metrics
 
-### Technical Metrics (Updated January 2026)
+### Technical Metrics (Updated February 2026)
 - **Performance**: 
-  - Current bundle size: 2.04 MB raw / 475.15 KB transferred ⚠️ (needs optimization)
-  - Target bundle size: <1.8 MB raw / <400 KB transferred
-  - Current build time: ~14 seconds ✅
+  - Current bundle size: 1.03 MB initial raw / 229.58 KB transferred ✅ (significantly improved!)
+  - Lazy chunks: 402 KB (PDF) + additional lazy-loaded features
+  - Target bundle size: <1.0 MB initial / <250 KB transferred (nearly achieved!)
+  - Current build time: ~9 seconds ✅ (improved from 14s)
   - Target Lighthouse score: >90 across all categories (to be measured)
   - First Contentful Paint target: <1.5s
   - Time to Interactive target: <3.5s
@@ -458,8 +500,10 @@
 - **Code Quality**: 
   - TypeScript strict mode: Enabled ✅
   - Prettier formatting: Configured ✅
-  - ESLint: Configured ✅
-  - Current test coverage: ~30% (estimated)
+  - ESLint 10.0 + Angular ESLint 21.2: Configured ✅
+  - Qodana code quality analysis: Integrated ✅
+  - Current test count: 90 unit tests, all passing ✅
+  - Current test coverage: ~40% (estimated based on test count)
   - Target test coverage: >80%
 - **SEO Metrics**:
   - Meta tags and Open Graph: Implemented ✅
@@ -502,14 +546,16 @@
   - First Input Delay (FID): <100ms (target)
   - Cumulative Layout Shift (CLS): <0.1 (target)
 - **Bundle Size Budget**:
-  - Current: 2.04 MB raw / 475.15 KB transferred ⚠️
-  - Target: <1.8 MB raw / <400 KB transferred
-  - Stretch goal: <1.5 MB raw / <350 KB transferred
+  - Current: 1.03 MB initial raw / 229.58 KB transferred ✅
+  - Lazy chunks: 402 KB (PDF.js) loaded on-demand ✅
+  - Target: <1.0 MB initial raw / <220 KB transferred (nearly achieved!)
+  - Stretch goal: <900 KB initial raw / <200 KB transferred
   - Component CSS budget: Individual files <15 KB
+  - Note: Significant improvement achieved through lazy loading and optimization
 - **Build Performance**:
-  - Current build time: ~14 seconds ✅
-  - Target: <15 seconds for production builds
-  - Development rebuild: <2 seconds (incremental)
+  - Current build time: ~9 seconds ✅ (improved with esbuild)
+  - Target: <10 seconds for production builds (achieved!)
+  - Development rebuild: <2 seconds (incremental with esbuild)
 - **Core Web Vitals**: All metrics in "Good" range per Google standards
 
 ### Browser Support
@@ -586,11 +632,22 @@ This project roadmap serves as a guide for:
 
 ## 📝 Roadmap Maintenance Notes
 
-- **Last Updated**: January 2026 (Major revision - v3.0.0)
+- **Last Updated**: February 10, 2026 (Performance & metrics update - v3.1.0)
 - **Next Review**: Quarterly (April 2026)
-- **Version**: 3.0.0
+- **Version**: 3.1.0
 - **Maintainer**: Idriss (@m-idriss)
-- **Repository Version**: 1.3.0
+- **Repository Version**: 4.1.0
+
+### Changelog for Roadmap v3.1.0 (February 2026)
+- 🎯 **Updated metrics** with latest bundle sizes (1.03 MB / 229 KB - 50%+ improvement!)
+- ⚡ **Build performance** update (9s builds, down from 14s - 36% faster)
+- 🧪 **Test suite expansion** noted (90 tests, up from ~60)
+- 📦 **Angular 21.1.3** version update throughout document
+- 🔧 **Updated tech stack** with latest dependency versions
+- 📚 **Documentation suite** acknowledgment (20+ files)
+- ✅ **Q1 2026 progress** section added with recent achievements
+- 🎨 **UI enhancements** noted (tooltips, space theme refinements)
+- 🏗️ **Code quality** infrastructure updates (ESLint 10.0, Qodana)
 
 ### Changelog for Roadmap v3.0.0 (January 2026)
 - ✨ **Complete roadmap restructure** with 5 phases extending to 2027+

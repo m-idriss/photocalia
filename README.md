@@ -6,10 +6,10 @@
 
 ### ✨ AI-Powered Calendar Converter ✨
 
-*A sophisticated Angular 20+ SaaS application featuring an AI-powered image/PDF to calendar conversion tool*
+*A sophisticated Angular 21+ SaaS application featuring an AI-powered image/PDF to calendar conversion tool*
 
 [![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-photocalia.com-00D4AA?style=for-the-badge)](https://photocalia.com)
-[![Angular](https://img.shields.io/badge/Angular-20.3-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev)
+[![Angular](https://img.shields.io/badge/Angular-21.1-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
 [![PWA Ready](https://img.shields.io/badge/PWA-Ready-9C27B0?style=for-the-badge)](public/assets/manifest.json)
@@ -20,9 +20,9 @@
 
 ## 🎯 Overview
 
-Photocalia is a modern, high-performance calendar conversion SaaS built with Angular 20.3+. The application features an **AI-powered Calendar Converter** that transforms images and PDFs containing calendar information into downloadable ICS files using GPT-4 Vision.
+Photocalia is a modern, high-performance calendar conversion SaaS built with Angular 21+. The application features an **AI-powered Calendar Converter** that transforms images and PDFs containing calendar information into downloadable ICS files using GPT-4 Vision.
 
-**Key Technologies**: Angular 20.3+ standalone components, TypeScript 5.9+, OpenAI GPT-4 Vision, Firebase Functions, Progressive Web App capabilities.
+**Key Technologies**: Angular 21.1+ standalone components, TypeScript 5.9+, OpenAI GPT-4 Vision, Firebase Functions, Progressive Web App capabilities.
 
 ## ✨ Key Features
 
@@ -51,11 +51,11 @@ Transform images and PDFs into calendar events instantly!
 
 | Category | Technologies |
 |----------|-------------|
-| **Frontend** | Angular 20.3, TypeScript 5.9, RxJS 7.8, SCSS |
+| **Frontend** | Angular 21.1, TypeScript 5.9, RxJS 7.8, SCSS |
 | **AI Integration** | OpenAI GPT-4 Vision (gpt-4o), PDF.js for PDF processing |
 | **Backend** | Firebase Functions (Node.js), Firebase Authentication |
 | **PWA** | Service Worker, Web App Manifest, Offline Support |
-| **Build Tools** | Angular CLI 20.3, esbuild, Karma + Jasmine |
+| **Build Tools** | Angular CLI 21.1, esbuild, Karma + Jasmine |
 | **Deployment** | Firebase Hosting, GitHub Actions CI/CD |
 | **APIs** | GitHub API, Firebase |
 
@@ -149,7 +149,7 @@ firebase deploy --only hosting
 ## 🧪 Testing
 
 ```bash
-# Run unit tests (61 tests)
+# Run unit tests (90 tests)
 npm test
 
 # Run in headless mode (CI)
@@ -232,9 +232,9 @@ src/app/
 
 ## 📊 Performance
 
-- ⚡ **Build Time**: ~14 seconds
-- 📦 **Bundle Size**: 2.04 MB raw / 475 KB transferred
-- 🧪 **Tests**: All tests passing ✅
+- ⚡ **Build Time**: ~9 seconds (optimized with esbuild)
+- 📦 **Bundle Size**: 1.03 MB raw / 229 KB transferred (50%+ improvement)
+- 🧪 **Tests**: 90 unit tests, all passing ✅
 - 🚀 **Load Time**: < 3 seconds on 3G
 - ♿ **Accessibility**: WCAG AA compliant
 - 🔍 **SEO**: Optimized meta tags
@@ -271,7 +271,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 <div align="center">
 
-**Made with ❤️ using Angular 20+ and TypeScript**
+**Made with ❤️ using Angular 21+ and TypeScript**
 
 *Modern SaaS architecture • AI-powered conversion • Progressive Web App*
 
