@@ -8,6 +8,7 @@ The Firebase Functions serve as a backend layer for:
 - **GitHub API Proxying**: Fetch user profile, social links, and commit activity
 - **Notion API Integration**: Retrieve application data (experience, education, stuff, hobbies, tech stack)
 - **Calendar Converter**: AI-powered image/PDF to ICS calendar conversion
+- **Stripe Billing**: Subscription management and payment processing
 - **Backend Caching**: Firestore-based caching for improved performance (see [CACHING.md](./CACHING.md))
 - **CORS Handling**: Secure cross-origin requests with whitelisted domains
 
@@ -39,19 +40,30 @@ functions/
 │   │   ├── githubSocial.ts   # GitHub profile and social links (cached)
 │   │   ├── notion.ts         # Notion API integration (cached)
 │   │   ├── statistics.ts     # Platform statistics (cached)
-│   │   └── converter.ts      # Calendar converter (AI-powered)
+│   │   ├── converter.ts      # Calendar converter (AI-powered)
+│   │   ├── createCheckoutSession.ts  # Stripe checkout session creation
+│   │   └── stripeWebhook.ts  # Stripe webhook handler
 │   ├── utils/
 │   │   ├── cache.ts          # Unified caching utility (CacheManager)
-│   │   └── firebase-admin.ts # Firebase Admin initialization
-│   └── services/
-│       ├── tracking.ts       # Statistics tracking service
-│       └── quota.ts          # User quota management service
+│   │   ├── firebase-admin.ts # Firebase Admin initialization
+│   │   └── stripe-config.ts  # Stripe SDK configuration
+│   ├── services/
+│   │   ├── tracking.ts       # Statistics tracking service
+│   │   ├── quota.ts          # User quota management service
+│   │   ├── billing.ts        # Stripe billing service
+│   │   └── webhook-handler.ts # Stripe webhook event handler
+│   └── types/
+│       ├── quota.ts          # Quota type definitions
+│       └── stripe.ts         # Stripe type definitions
 ├── package.json              # Dependencies and scripts
 ├── tsconfig.json             # TypeScript configuration
 ├── README.md                 # This file
 ├── CACHING.md                # Backend caching documentation
 ├── QUOTA.md                  # User quota system documentation
-└── ARCHITECTURE.md           # System architecture and flow diagrams
+├── ARCHITECTURE.md           # System architecture and flow diagrams
+├── STRIPE_INTEGRATION.md     # Comprehensive Stripe integration docs
+├── STRIPE_QUICK_START.md     # Quick setup guide for Stripe
+└── EXAMPLE_USAGE.md          # Frontend integration examples
 ```
 
 ## Available Functions
@@ -153,6 +165,62 @@ Converts images/PDFs to ICS calendar files using Google Gemini AI with quota man
 - **Quota System**: Limits conversions per user per day to prevent abuse. See [QUOTA.md](./QUOTA.md) for complete documentation.
 - If quota system is not configured, all requests are allowed by default.
 
+### 6. Create Checkout Session (`createCheckoutSession`)
+
+Creates a Stripe checkout session for subscription purchase.
+
+**Endpoint**: `/createCheckoutSession`  
+**Method**: POST  
+**Authentication**: Firebase ID token required
+
+**Headers**:
+```
+Authorization: Bearer <firebase-id-token>
+Content-Type: application/json
+```
+
+**Body**:
+```json
+{
+  "plan": "pro" | "premium",
+  "successUrl": "https://photocalia.com/success",
+  "cancelUrl": "https://photocalia.com/pricing"
+}
+```
+
+**Response (Success - 200 OK)**:
+```json
+{
+  "url": "https://checkout.stripe.com/c/pay/cs_test_..."
+}
+```
+
+**Response (Error - 401)**:
+```json
+{
+  "error": "Authentication failed",
+  "message": "Invalid or expired token"
+}
+```
+
+See [STRIPE_INTEGRATION.md](./STRIPE_INTEGRATION.md) for complete Stripe documentation.
+
+### 7. Stripe Webhook (`stripeWebhook`)
+
+Receives and processes Stripe webhook events (called by Stripe, not frontend).
+
+**Endpoint**: `/stripeWebhook`  
+**Method**: POST  
+**Authentication**: Stripe signature verification
+
+**Handled Events**:
+- `checkout.session.completed` - Subscription purchase completed
+- `invoice.paid` - Recurring invoice paid (renewal)
+- `customer.subscription.updated` - Subscription status changed
+- `customer.subscription.deleted` - Subscription canceled
+
+See [STRIPE_INTEGRATION.md](./STRIPE_INTEGRATION.md) for webhook setup and testing.
+
 ## Development
 
 ### Local Development
@@ -215,6 +283,30 @@ firebase functions:secrets:set NOTION_QUOTA_DB_ID
 
 # Google Cloud service account for Gemini API
 firebase functions:secrets:set SERVICE_ACCOUNT_JSON
+
+# Stripe API credentials
+firebase functions:secrets:set STRIPE_SECRET_KEY
+firebase functions:secrets:set STRIPE_WEBHOOK_SECRET
+```
+
+### Stripe Integration
+
+For complete Stripe setup and configuration, see:
+- **[STRIPE_QUICK_START.md](./STRIPE_QUICK_START.md)** - Quick setup guide
+- **[STRIPE_INTEGRATION.md](./STRIPE_INTEGRATION.md)** - Comprehensive documentation
+- **[EXAMPLE_USAGE.md](./EXAMPLE_USAGE.md)** - Frontend integration examples
+
+Quick setup:
+```bash
+# Set Stripe secret key (get from Stripe Dashboard)
+firebase functions:secrets:set STRIPE_SECRET_KEY
+
+# Set webhook secret (get after creating webhook endpoint)
+firebase functions:secrets:set STRIPE_WEBHOOK_SECRET
+
+# Update price IDs in src/types/stripe.ts
+# Deploy functions
+firebase deploy --only functions:createCheckoutSession,functions:stripeWebhook
 ```
 
 ### Gemini API Configuration
@@ -527,6 +619,9 @@ For more information, see:
 - **[CACHING.md](./CACHING.md)** - Backend caching system documentation
 - **[QUOTA.md](./QUOTA.md)** - User quota management system documentation
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** - System architecture and flow diagrams
+- **[STRIPE_INTEGRATION.md](./STRIPE_INTEGRATION.md)** - Comprehensive Stripe integration documentation
+- **[STRIPE_QUICK_START.md](./STRIPE_QUICK_START.md)** - Quick Stripe setup guide
+- **[EXAMPLE_USAGE.md](./EXAMPLE_USAGE.md)** - Frontend integration examples
 - **[API Documentation](../docs/API.md)** (from repository root: `docs/API.md`) - Detailed API endpoint documentation
 - **[Main README](../README.md)** (from repository root: `README.md`) - Project overview
 - **[Firebase Functions Docs](https://firebase.google.com/docs/functions)** - Official documentation
