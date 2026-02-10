@@ -10,6 +10,8 @@ export { converterFunction } from "./proxies/converter";
 export { statisticsFunction } from "./proxies/statistics";
 export { quotaStatusFunction } from "./proxies/quotaStatus";
 export { migrateQuotaFunction } from "./proxies/migrateQuota";
+export { createCheckoutSession } from "./proxies/createCheckoutSession";
+export { stripeWebhook } from "./proxies/stripeWebhook";
 
 setGlobalOptions({ maxInstances: 10 });
 

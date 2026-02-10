@@ -23,6 +23,8 @@ export interface UserQuotaDocument {
   periodStart: FirebaseFirestore.Timestamp;
   createdAt: FirebaseFirestore.Timestamp;
   updatedAt: FirebaseFirestore.Timestamp;
+  stripeCustomerId?: string;
+  subscriptionId?: string;
 }
 
 /**
