@@ -5,14 +5,14 @@ import {
   ChangeDetectorRef,
   inject,
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AppTooltipDirective } from '../../shared/directives';
 import { ThemeService } from '../../services/theme.service';
 import { AuthAwareComponent } from '../base/auth-aware.component';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, AppTooltipDirective],
+  imports: [RouterLink, RouterLinkActive, AppTooltipDirective],
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
