@@ -41,7 +41,6 @@
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  //box-shadow: var(--shadow-card-hover), 0 20px 60px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 
@@ -140,7 +139,6 @@
   font-size: 0.95rem;
   color: var(--text-primary);
   text-align: center;
-  //text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 
   /* Visual - Neutral theme for consistency */
   background: var(--glass-bg-hover);
@@ -148,7 +146,6 @@
   border-radius: var(--radius-md);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  //box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
   p {
     margin: 0;
@@ -167,7 +164,6 @@
   background: var(--glass-bg);
   border-radius: var(--radius-md);
   border: 1px solid var(--glass-border);
-  //box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
   overflow: auto;
 }
 
@@ -207,7 +203,6 @@
     font-weight: 800;
     font-size: 0.95rem;
     color: var(--text-primary);
-    //text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
     padding: 0.75rem 0.5rem;
 
     /* Visual - Neutral background matching theme */
@@ -220,7 +215,6 @@
     color: rgba(255, 255, 255, 1);
     font-size: 1rem;
     font-weight: 700;
-    //text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     padding: 0.25rem 0.5rem;
   }
 
@@ -246,7 +240,6 @@
     /* Typography - Enhanced readability */
     font-size: 0.8rem;
     font-weight: 600;
-    //text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 
     /* Hover */
     &:hover {
@@ -262,7 +255,6 @@
   .fc-timegrid-event {
     /* Visual */
     border-radius: var(--radius-sm);
-    //box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   }
 
   .fc-button {
@@ -271,20 +263,17 @@
     font-size: 0.9rem;
     text-transform: capitalize;
     color: var(--text-primary) !important;
-    //text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 
     /* Visual - Neutral theme matching converter */
     background: var(--glass-bg-hover) !important;
     border: 1px solid var(--glass-border) !important;
     border-radius: var(--radius-sm);
     transition: all var(--t-fast);
-    //box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     padding: 0.5rem 1rem;
 
     &:hover {
       background: var(--glass-bg) !important;
       border-color: var(--accent-color) !important;
-      //box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
 
       @media (prefers-reduced-motion: no-preference) {
         transform: translateY(-1px);
@@ -295,7 +284,6 @@
       background: var(--accent-color) !important;
       border-color: var(--accent-color) !important;
       color: white !important;
-      //box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
     }
 
     /* Make arrows visible with neutral styling */
@@ -326,8 +314,6 @@
     font-size: 1.5rem;
     font-weight: 800;
     color: var(--text-primary);
-    //text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8),
-    //             0 4px 8px rgba(0, 0, 0, 0.5);
     letter-spacing: 0.03em;
     background: var(--glass-bg-hover);
     padding: 0.5rem 1.5rem;
@@ -547,7 +533,6 @@
   /* Hover effect matching converter events list */
   &:hover {
     border-color: var(--accent-color);
-    //  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
   }
 }
 
@@ -569,7 +554,6 @@
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
-  //text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .calendar-inline-body {

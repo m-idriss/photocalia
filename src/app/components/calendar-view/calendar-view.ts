@@ -213,12 +213,15 @@ export class CalendarView implements OnInit, AfterViewInit {
 
   /**
    * Handle event click
-   * Currently unused but kept for future feature implementation
+   * Placeholder for future feature implementation (e.g., edit modal, event details)
+   * @param _info - Event click information (unused for now)
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private handleEventClick(info: EventClickArg): void {
-    // Optional: Could open an edit modal or show event details
-    // Currently no action on event click
+  private handleEventClick(_info: EventClickArg): void {
+    // TODO: Implement event editing or detail view
+    // Possible features:
+    // - Open edit modal with event details
+    // - Show event details popup
+    // - Enable quick event deletion
   }
 
   /**
