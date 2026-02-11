@@ -14,9 +14,10 @@ const allowedOrigins = [
 /**
  * Check if origin is a Vercel preview deployment
  * Matches patterns like: https://photocalia-*.vercel.app
+ * Uses restrictive pattern to match only valid Vercel URL naming (alphanumeric and hyphens)
  */
 function isVercelPreview(origin: string): boolean {
-  const vercelPattern = /^https:\/\/photocalia-[^.]+\.vercel\.app$/;
+  const vercelPattern = /^https:\/\/photocalia-[a-z0-9-]+\.vercel\.app$/;
   return vercelPattern.test(origin);
 }
 
