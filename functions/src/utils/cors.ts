@@ -5,6 +5,8 @@ import cors from "cors";
  * Includes production domains, localhost for development, and Vercel preview deployments
  */
 const allowedOrigins = [
+  'https://3dime.com',
+  'https://www.3dime.com',
   'https://photocalia.com',
   'https://www.photocalia.com',
   'http://localhost:4200',
