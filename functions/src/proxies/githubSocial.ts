@@ -1,37 +1,10 @@
 import { onRequest } from "firebase-functions/v2/https";
-import cors from "cors";
 import { CacheManager, simpleHash } from "../utils/cache";
 import { initializeFirebaseAdmin } from "../utils/firebase-admin";
+import { corsHandler } from "../utils/cors";
 
 // Initialize Firebase Admin SDK
 initializeFirebaseAdmin();
-
-// Whitelist of allowed origins for CORS
-const allowedOrigins = [
-  'https://photocalia.com',
-  'https://www.photocalia.com',
-  'https://photocalia.com',
-  'https://www.photocalia.com',
-  'http://localhost:4200',
-  'http://localhost:5000'
-];
-
-const corsHandler = cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl)
-    if (!origin) {
-      callback(null, true);
-      return;
-    }
-
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-});
 
 type GitHubError = { message?: string };
 

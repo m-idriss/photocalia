@@ -1,31 +1,12 @@
 import { onRequest } from "firebase-functions/v2/https";
-import cors from "cors";
 import { getTrackingService } from "../services/tracking";
 import { log } from "firebase-functions/logger";
 import { CacheManager, simpleHash } from "../utils/cache";
 import { initializeFirebaseAdmin } from "../utils/firebase-admin";
+import { corsHandler } from "../utils/cors";
 
 // Initialize Firebase Admin SDK
 initializeFirebaseAdmin();
-
-// Whitelist of allowed origins for CORS
-const allowedOrigins = [
-  'https://photocalia.com',
-  'https://www.photocalia.com',
-  'https://photocalia.com',
-  'https://www.photocalia.com',
-  'http://localhost:4200',
-  'http://localhost:5000'
-];
-
-const corsHandler = cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true); // allow non-browser clients like curl
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-    callback(new Error("Not allowed by CORS"));
-  },
-  credentials: true,
-});
 
 // Cache configuration: 5 minutes TTL, 1 minute force cooldown
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes (statistics change more frequently)
