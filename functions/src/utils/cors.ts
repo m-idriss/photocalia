@@ -9,7 +9,7 @@ const allowedOrigins = [
   'https://www.photocalia.com',
   'http://localhost:4200',
   'http://localhost:5000'
-];
+] as const;
 
 /**
  * Check if origin is a Vercel preview deployment
@@ -26,7 +26,7 @@ function isVercelPreview(origin: string): boolean {
  * Check if origin is allowed
  */
 function isOriginAllowed(origin: string): boolean {
-  return allowedOrigins.includes(origin) || isVercelPreview(origin);
+  return (allowedOrigins as readonly string[]).includes(origin) || isVercelPreview(origin);
 }
 
 /**
