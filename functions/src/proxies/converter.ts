@@ -1,27 +1,8 @@
 import { onRequest } from "firebase-functions/v2/https";
-import cors from "cors";
 import { GoogleAuth } from "google-auth-library";
 import { getTrackingService } from "../services/tracking";
 import { getQuotaService } from "../services/quota";
-
-// Whitelist of allowed origins for CORS
-const allowedOrigins = [
-  'https://photocalia.com',
-  'https://www.photocalia.com',
-  'https://photocalia.com',
-  'https://www.photocalia.com',
-  'http://localhost:4200',
-  'http://localhost:5000'
-];
-
-const corsHandler = cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true); // allow non-browser clients like curl
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-    callback(new Error("Not allowed by CORS"));
-  },
-  credentials: true,
-});
+import { corsHandler } from "../utils/cors";
 
 /**
  * Helper function to get OAuth 2.0 access token using service account

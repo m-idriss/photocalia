@@ -1,25 +1,6 @@
 import { onRequest } from "firebase-functions/v2/https";
-import cors from "cors";
 import { migrateUserFromNotion, batchMigrateUsersFromNotion } from "../services/migration";
-
-// Whitelist of allowed origins for CORS
-const allowedOrigins = [
-  'https://photocalia.com',
-  'https://www.photocalia.com',
-  'https://photocalia.com',
-  'https://www.photocalia.com',
-  'http://localhost:4200',
-  'http://localhost:5000'
-];
-
-const corsHandler = cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true); // allow non-browser clients
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-    callback(new Error("Not allowed by CORS"));
-  },
-  credentials: true,
-});
+import { corsHandler } from "../utils/cors";
 
 /**
  * Function to migrate users from Notion to Firestore

@@ -326,18 +326,36 @@ curl -X POST http://localhost:5001/YOUR_PROJECT_ID/us-central1/converterFunction
 
 ### CORS Configuration
 
-Allowed origins are configured in `src/index.ts`:
+CORS configuration is centralized in `src/utils/cors.ts` for all Firebase functions.
+
+**Allowed Origins:**
+- Production: `https://photocalia.com`, `https://www.photocalia.com`
+- Development: `http://localhost:4200`, `http://localhost:5000`
+- Vercel Previews: `https://photocalia-*.vercel.app`
+
+**Implementation:**
 
 ```typescript
-const allowedOrigins = [
-  'https://photocalia.com',
-  'https://www.photocalia.com',
-  'http://localhost:4200',
-  'http://localhost:5000'
-];
+// Shared CORS handler in src/utils/cors.ts
+import { corsHandler } from "./utils/cors";
+
+// Use in your function
+export const myFunction = onRequest((req, res) => {
+  return corsHandler(req, res, async () => {
+    // Your function logic here
+  });
+});
 ```
 
-Update this array to add more allowed origins.
+**Vercel Preview Support:**
+
+The CORS handler automatically validates Vercel preview deployment URLs using a strict regex pattern:
+- Format: `https://photocalia-[branch-name].vercel.app`
+- Supports alphanumeric characters (case-sensitive) and hyphens
+- Only allows HTTPS connections
+- Prevents malformed URLs (consecutive hyphens, etc.)
+
+To add more allowed origins, update the `allowedOrigins` array in `src/utils/cors.ts`.
 
 ### Function Options
 
@@ -507,8 +525,13 @@ npm install
 ```
 
 **Issue**: CORS errors
-- Verify origin is in `allowedOrigins` array
-- Check Firebase Hosting configuration
+- Verify origin is allowed in `src/utils/cors.ts`
+  - Production domains: `photocalia.com`
+  - Localhost: `localhost:4200`, `localhost:5000`
+  - Vercel previews: Must match pattern `https://photocalia-*.vercel.app`
+- Check that Vercel preview URL uses HTTPS (not HTTP)
+- Verify Vercel preview URL format: `photocalia-[branch-name]` prefix is required
+- Check browser console for exact origin being blocked
 - Ensure credentials are properly configured
 
 **Issue**: Function timeouts
