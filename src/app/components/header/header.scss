@@ -41,6 +41,13 @@
   animation: pulse 2s ease-in-out infinite;
 }
 
+.logo-icon-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  animation: pulse 2s ease-in-out infinite;
+}
+
 .logo-text {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
