@@ -37,8 +37,11 @@
 }
 
 .logo-icon {
-  font-size: 1.2rem;
-  animation: pulse 2s ease-in-out infinite;
+  width: 32px;
+  height: 32px;
+  color: var(--primary-color, #6366f1);
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.3));
 }
 
 .logo-text {
