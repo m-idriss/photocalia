@@ -33,6 +33,10 @@
   &:hover {
     transform: scale(1.05);
     color: var(--primary-color, #6366f1);
+
+    .logo-image {
+      transform: scale(1.05);
+    }
   }
 }
 
