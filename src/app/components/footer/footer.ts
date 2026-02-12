@@ -78,6 +78,9 @@ export class Footer implements OnInit {
       enableCommunityLink: false,
       enableDiscussionsLink: false,
       enableAboutMeLink: false,
+      enablePrivacyLink: true,
+      enableTermsLink: true,
+      enableLegalMentionsLink: true,
     };
     
     const config = environment.footer ?? defaultConfig;
@@ -105,6 +108,16 @@ export class Footer implements OnInit {
     }
     if (config.enableAboutMeLink) {
       links.push({ label: 'About Me', url: '/me', isInternal: true });
+    }
+    // Legal compliance links (enabled by default for GDPR compliance)
+    if (config.enablePrivacyLink) {
+      links.push({ label: 'Privacy', url: '/privacy', isInternal: true });
+    }
+    if (config.enableTermsLink) {
+      links.push({ label: 'Terms', url: '/terms', isInternal: true });
+    }
+    if (config.enableLegalMentionsLink) {
+      links.push({ label: 'Legal', url: '/legal-mentions', isInternal: true });
     }
 
     return links;

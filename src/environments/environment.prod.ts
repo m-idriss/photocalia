@@ -19,5 +19,8 @@ export const environment = {
     enableCommunityLink: false,
     enableDiscussionsLink: false,
     enableAboutMeLink: false,
+    enablePrivacyLink: true,
+    enableTermsLink: true,
+    enableLegalMentionsLink: true,
   },
 };

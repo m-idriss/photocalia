@@ -1,0 +1,10 @@
+// Terms of Use page styles
+@use '../privacy/privacy.scss';
+
+.terms-highlight {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(139, 92, 246, 0.1);
+  border-left: 4px solid #8b5cf6;
+  border-radius: 4px;
+}

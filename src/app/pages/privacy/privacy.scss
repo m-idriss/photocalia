@@ -1,0 +1,127 @@
+// Privacy policy page styles
+.legal-page {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #0a0a1f 0%, #1a1a2e 100%);
+  color: #e0e0e0;
+}
+
+.legal-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.legal-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid rgba(139, 92, 246, 0.3);
+}
+
+.legal-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.legal-icon {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 2.5rem;
+}
+
+.legal-subtitle {
+  font-size: 1rem;
+  color: #a0a0a0;
+  font-weight: 400;
+}
+
+.legal-content {
+  line-height: 1.8;
+}
+
+.legal-section {
+  margin-bottom: 2.5rem;
+}
+
+.legal-section h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #8b5cf6;
+}
+
+.legal-section h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 1.5rem 0 0.75rem;
+  color: #a78bfa;
+}
+
+.legal-section p {
+  margin-bottom: 1rem;
+  color: #d0d0d0;
+}
+
+.legal-section ul {
+  margin: 1rem 0 1rem 1.5rem;
+  list-style-type: disc;
+}
+
+.legal-section li {
+  margin-bottom: 0.5rem;
+  color: #d0d0d0;
+}
+
+.legal-section a {
+  color: #8b5cf6;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.legal-section a:hover {
+  color: #a78bfa;
+  border-bottom-color: #a78bfa;
+}
+
+.legal-section strong {
+  color: #f0f0f0;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .legal-page {
+    padding: 1rem 0.5rem;
+  }
+
+  .legal-container {
+    padding: 1.5rem;
+  }
+
+  .legal-title {
+    font-size: 2rem;
+  }
+
+  .legal-icon {
+    font-size: 2rem;
+  }
+
+  .legal-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .legal-section h3 {
+    font-size: 1.1rem;
+  }
+}
