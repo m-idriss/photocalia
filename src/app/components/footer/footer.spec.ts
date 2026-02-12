@@ -80,6 +80,15 @@ describe('Footer', () => {
 
     const hasAboutMe = component.footerLinks.some((link) => link.label === 'About Me');
     expect(hasAboutMe).toBe(config.enableAboutMeLink);
+
+    const hasPrivacy = component.footerLinks.some((link) => link.label === 'Privacy');
+    expect(hasPrivacy).toBe(config.enablePrivacyLink ?? true);
+
+    const hasTerms = component.footerLinks.some((link) => link.label === 'Terms');
+    expect(hasTerms).toBe(config.enableTermsLink ?? true);
+
+    const hasLegal = component.footerLinks.some((link) => link.label === 'Legal');
+    expect(hasLegal).toBe(config.enableLegalMentionsLink ?? true);
   });
 
   it('should mark About Me link as internal when enabled', () => {
@@ -87,6 +96,26 @@ describe('Footer', () => {
     if (aboutMeLink) {
       expect(aboutMeLink.isInternal).toBe(true);
       expect(aboutMeLink.url).toBe('/me');
+    }
+  });
+
+  it('should mark legal pages as internal links', () => {
+    const privacyLink = component.footerLinks.find((link) => link.label === 'Privacy');
+    if (privacyLink) {
+      expect(privacyLink.isInternal).toBe(true);
+      expect(privacyLink.url).toBe('/privacy');
+    }
+
+    const termsLink = component.footerLinks.find((link) => link.label === 'Terms');
+    if (termsLink) {
+      expect(termsLink.isInternal).toBe(true);
+      expect(termsLink.url).toBe('/terms');
+    }
+
+    const legalLink = component.footerLinks.find((link) => link.label === 'Legal');
+    if (legalLink) {
+      expect(legalLink.isInternal).toBe(true);
+      expect(legalLink.url).toBe('/legal-mentions');
     }
   });
 
