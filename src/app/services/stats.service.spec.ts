@@ -42,7 +42,7 @@ describe('StatsService', () => {
         error: () => fail('Should not error'),
       });
 
-      const req = httpMock.expectOne(`${environment.apiUrl}?target=statistics`);
+      const req = httpMock.expectOne(`${environment.apiUrl}/statistics`);
       expect(req.request.method).toBe('GET');
       req.flush(mockStats);
     });
@@ -58,7 +58,7 @@ describe('StatsService', () => {
         error: () => fail('Should not error'),
       });
 
-      const req = httpMock.expectOne(`${environment.apiUrl}?target=statistics`);
+      const req = httpMock.expectOne(`${environment.apiUrl}/statistics`);
       req.error(new ProgressEvent('error'));
     });
 
@@ -95,7 +95,7 @@ describe('StatsService', () => {
       });
 
       // Only one HTTP request should be made
-      const req = httpMock.expectOne(`${environment.apiUrl}?target=statistics`);
+      const req = httpMock.expectOne(`${environment.apiUrl}/statistics`);
       req.flush(mockStats);
     });
   });
@@ -113,7 +113,7 @@ describe('StatsService', () => {
           expect(stats).toEqual(mockStats);
         },
       });
-      let req = httpMock.expectOne(`${environment.apiUrl}?target=statistics`);
+      let req = httpMock.expectOne(`${environment.apiUrl}/statistics`);
       req.flush(mockStats);
 
       // Clear cache
@@ -126,7 +126,7 @@ describe('StatsService', () => {
           done();
         },
       });
-      req = httpMock.expectOne(`${environment.apiUrl}?target=statistics`);
+      req = httpMock.expectOne(`${environment.apiUrl}/statistics`);
       req.flush(mockStats);
     });
   });

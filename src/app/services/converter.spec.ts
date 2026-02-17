@@ -62,7 +62,7 @@ describe('ConverterService', () => {
 
     service.convertToIcs(testFiles).subscribe();
 
-    const req = httpMock.expectOne(`${environment.apiUrl}?target=converter`);
+    const req = httpMock.expectOne(`${environment.apiUrl}/converter`);
     expect(req.request.method).toBe('POST');
     expect(req.request.body.userId).toBeTruthy();
     expect(req.request.body.userId).toContain('anon_');

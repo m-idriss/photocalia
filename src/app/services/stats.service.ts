@@ -41,7 +41,7 @@ export interface Statistics {
 export class StatsService {
   private readonly http = inject(HttpClient);
 
-  private readonly endpoint = `${environment.apiUrl}?target=statistics`;
+  private readonly endpoint = `${environment.apiUrl}/statistics`;
   private statistics$?: Observable<Statistics>;
 
   /**
