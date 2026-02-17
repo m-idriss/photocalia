@@ -19,7 +19,7 @@
   - Firebase Authentication with Google provider
   - ICS file generation and download
   - PDF.js integration for PDF processing
-- ✅ **Angular 20.3 Upgrade** - Latest Angular with modern features
+- ✅ **Angular 21.1 Upgrade** - Latest Angular with modern features and enhanced signals
 - ✅ **Comprehensive Documentation** - 8+ detailed documentation files
   - PWA guide, Converter guide, Firebase Auth setup
   - Components, Services, API, Design System docs
@@ -632,11 +632,17 @@ This project roadmap serves as a guide for:
 
 ## 📝 Roadmap Maintenance Notes
 
-- **Last Updated**: February 10, 2026 (Performance & metrics update - v3.1.0)
+- **Last Updated**: February 17, 2026 (Documentation cleanup - v3.1.1)
 - **Next Review**: Quarterly (April 2026)
-- **Version**: 3.1.0
+- **Version**: 3.1.1
 - **Maintainer**: Idriss (@m-idriss)
-- **Repository Version**: 4.1.0
+- **Repository Version**: 4.2.0
+
+### Changelog for Roadmap v3.1.1 (February 2026)
+- 📝 **Documentation cleanup** - Updated outdated version references
+- ✨ **Angular reference correction** - Fixed Angular 20.3 references to 21.1
+- 📚 **Code documentation** - Improved JSDoc examples to remove console.log
+- 🔄 **Version alignment** - Updated to repository version 4.2.0
 
 ### Changelog for Roadmap v3.1.0 (February 2026)
 - 🎯 **Updated metrics** with latest bundle sizes (1.03 MB / 229 KB - 50%+ improvement!)

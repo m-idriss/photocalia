@@ -71,7 +71,10 @@ export interface QuotaStatusResponse {
  * async convert() {
  *   const dataUrl = await this.converterService.fileToDataUrl(file);
  *   this.converterService.convertToIcs([{ dataUrl, name: file.name, type: file.type }])
- *     .subscribe(response => console.log(response.icsContent));
+ *     .subscribe(response => {
+ *       // response.icsContent contains the generated ICS file content
+ *       this.downloadIcsFile(response.icsContent);
+ *     });
  * }
  * ```
  */

@@ -30,7 +30,8 @@ export interface Statistics {
  *
  * ngOnInit() {
  *   this.statsService.getStatistics().subscribe(stats => {
- *     console.log(`Files: ${stats.fileCount}, Events: ${stats.eventCount}`);
+ *     // stats contains fileCount, eventCount, and other metrics
+ *     this.displayStats(stats);
  *   });
  * }
  * ```
