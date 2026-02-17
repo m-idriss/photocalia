@@ -5,13 +5,9 @@ meta {
 }
 
 post {
-  url: {{api_url}}?target=converter
+  url: {{api_url}}/converter
   body: json
   auth: none
-}
-
-params:query {
-  target: converter
 }
 
 body:json {
