@@ -2,7 +2,7 @@
 
 > **Comprehensive technical and architectural overview of the Photocalia calendar converter SaaS application**
 
-This document provides a complete system architecture for Photocalia, including frontend Angular application, backend Firebase Functions, data flow, caching strategies, authentication, and deployment architecture.
+This document provides a complete system architecture for Photocalia, including frontend Angular application, external backend API (3dime-api), data flow, caching strategies, authentication, and deployment architecture.
 
 ## Table of Contents
 
@@ -53,9 +53,9 @@ Photocalia is a modern, high-performance SaaS application built with Angular 20.
                              │ HTTP/HTTPS API Calls
                              ▼
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                    Firebase Cloud Functions                              │
+│                    Backend API (3dime-api)                               │
 │  ┌──────────────────────────────────────────────────────────────────┐  │
-│  │  API Proxy Layer (proxyApi)                                      │  │
+│  │  API Endpoints                                                    │  │
 │  │  - GitHub Integration  - Notion Integration                      │  │
 │  │  - Converter (AI)      - Statistics                              │  │
 │  │  - Quota Management    - Social Links                            │  │
@@ -64,7 +64,7 @@ Photocalia is a modern, high-performance SaaS application built with Angular 20.
 │                             │ Cache Layer                                │
 │                             ▼                                             │
 │  ┌──────────────────────────────────────────────────────────────────┐  │
-│  │  Firestore Cache (TTL-based)                                     │  │
+│  │  Cache Storage (TTL-based)                                       │  │
 │  │  - github-cache     - notion-cache                               │  │
 │  │  - stats-cache      - Background refresh                         │  │
 │  └──────────────────────────────────────────────────────────────────┘  │
@@ -86,8 +86,8 @@ Photocalia is a modern, high-performance SaaS application built with Angular 20.
 
 - **Modern Angular Stack**: Standalone components, TypeScript strict mode, RxJS for reactive programming
 - **Progressive Web App**: Installable, offline-capable, share target integration
-- **Serverless Backend**: Firebase Functions for API proxy and AI processing
-- **Intelligent Caching**: Firestore-based caching with background refresh
+- **Quarkus Backend API**: 3dime-api for API proxy and AI processing (Java-based microservice)
+- **Intelligent Caching**: Cache-based storage with background refresh
 - **AI Integration**: OpenAI GPT-4 Vision for calendar event extraction
 - **Space-Themed UI**: Glassmorphism effects with modern CSS features
 
@@ -100,14 +100,14 @@ Photocalia is a modern, high-performance SaaS application built with Angular 20.
 ### Pattern 1: Standard API Request (with Cache)
 
 ```
-User Action → Component → Service → Firebase Function → Cache Check
-                                                              │
-                                                              ├─ Hit → Return Cached Data (< 100ms)
-                                                              │        └─ Background Refresh if Stale
-                                                              │
-                                                              └─ Miss → External API Call (2-5s)
-                                                                        └─ Store in Cache
-                                                                        └─ Return Fresh Data
+User Action → Component → Service → Backend API → Cache Check
+                                                      │
+                                                      ├─ Hit → Return Cached Data (< 100ms)
+                                                      │        └─ Background Refresh if Stale
+                                                      │
+                                                      └─ Miss → External API Call (2-5s)
+                                                                └─ Store in Cache
+                                                                └─ Return Fresh Data
 ```
 
 ### Pattern 2: Authenticated Request (Converter)
@@ -116,10 +116,10 @@ User Action → Component → Service → Firebase Function → Cache Check
 User Upload → Converter Component → Auth Service → Get ID Token
                                                          │
                                                          ▼
-                                            Firebase Function (with token)
+                                            Backend API (with token)
                                                          │
                                                          ├─ Verify Token
-                                                         ├─ Check Quota (Notion)
+                                                         ├─ Check Quota
                                                          ├─ Process with AI (OpenAI)
                                                          ├─ Update Quota
                                                          ├─ Log Usage
@@ -321,9 +321,9 @@ Prevents abuse of AI conversion feature:
 └────────────────────────────────────────────────────────────────┘
 ```
 
-## Firestore Cache Implementation
+## Backend Cache Implementation
 
-Detailed documentation: [`functions/CACHING.md`](functions/CACHING.md)
+The backend API (3dime-api) implements intelligent caching strategies to optimize performance and reduce external API calls.
 
 ### Cache Manager
 
@@ -862,17 +862,16 @@ export class ThemeService {
 
 # ⚙️ 4. Backend Architecture
 
-## Firebase Functions Structure
+## Backend API Structure (3dime-api)
 
-```
-functions/
-├── src/
-│   ├── index.ts              # Function exports
-│   ├── proxies/              # API endpoint handlers
-│   │   ├── converter.ts      # AI calendar conversion ⭐
-│   │   ├── githubCommits.ts  # GitHub activity data
-│   │   ├── githubSocial.ts   # GitHub profile/social
-│   │   ├── notion.ts         # Notion content
+The backend is powered by the external [3dime-api](https://github.com/m-idriss/3dime-api) service, a **Quarkus-based REST API** built for high performance and cloud-native deployment.
+
+**Technology:**
+- **Framework**: Quarkus (Supersonic Subatomic Java)
+- **Architecture**: RESTful microservice
+- **Key Features**: Fast startup, low memory footprint, reactive programming
+
+The backend provides the following endpoints:
 │   │   ├── statistics.ts     # Usage statistics
 │   │   └── quotaStatus.ts    # Quota checking
 │   ├── services/             # Business logic
@@ -1184,8 +1183,7 @@ Angular SPA → Firebase Functions → External APIs
 - **[API Reference](docs/API.md)** - Backend API endpoints
 - **[Calendar Converter](docs/CONVERTER.md)** - AI conversion feature details
 - **[PWA Guide](docs/PWA.md)** - Progressive Web App features
-- **[Caching Strategy](functions/CACHING.md)** - Backend caching implementation
-- **[Backend Architecture](functions/ARCHITECTURE.md)** - Functions architecture details
+- **[Backend API (3dime-api)](https://github.com/m-idriss/3dime-api)** - External backend service
 
 ## External References
 

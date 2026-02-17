@@ -1,11 +1,11 @@
 # API Documentation
 
-> Documentation for the Photocalia API endpoints and Firebase Functions.
+> Documentation for the Photocalia API endpoints provided by the external backend service.
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Firebase Functions](#firebase-functions)
+- [Backend API Structure](#backend-api-structure)
 - [API Endpoints](#api-endpoints)
 - [Error Handling](#error-handling)
 
@@ -13,283 +13,134 @@
 
 ## Overview
 
-The application uses Firebase Functions to proxy external API requests and provide backend functionality. All functions are deployed as Google Cloud Functions and accessed through a unified proxy endpoint.
+The application uses an external backend API ([3dime-api](https://github.com/m-idriss/3dime-api)) to provide backend functionality. The backend is built with **Quarkus**, a modern Java framework optimized for cloud-native applications, providing fast startup times and low memory footprint. All endpoints are accessed through a unified API service.
 
 ### Architecture
 
 ```
-Client → Firebase Functions → External APIs
-         └── Proxy API
+Client → Backend API (3dime-api) → External APIs
+         └── Proxy Layer
          ├── GitHub API
          ├── Notion API
-         └── Hello World (test)
+         ├── OpenAI API (Converter)
+         └── Statistics
 ```
 
 ### Base URL
 
 ```
-Production: https://us-central1-<project-id>.cloudfunctions.net/
+Production: https://api.photocalia.com
 ```
 
 ---
 
-## Firebase Functions
+## Backend API Structure
 
-### Function Structure
+The backend API is a **Quarkus-based microservice** that handles:
+- AI-powered calendar conversion
+- GitHub integration
+- Notion integration
+- Usage tracking and quotas
+- Caching and optimization
 
-```
-functions/
-├── src/
-│   ├── index.ts              # Main entry point and proxy
-│   └── proxies/
-│       ├── helloWorld.ts     # Test endpoint
-│       ├── githubCommits.ts  # GitHub commit data
-│       ├── githubSocial.ts   # GitHub profile & social links
-│       └── notion.ts         # Notion database integration
-```
+**Technology Stack:**
+- **Framework**: Quarkus (Supersonic Subatomic Java)
+- **Language**: Java
+- **Architecture**: RESTful microservice
+- **Deployment**: Cloud-native with fast startup and low memory usage
 
-### Deployment
-
-#### Prerequisites
-
-1. Install Firebase CLI:
-
-   ```bash
-   npm install -g firebase-tools
-   ```
-
-2. Login to Firebase:
-
-   ```bash
-   firebase login
-   ```
-
-3. Install function dependencies:
-   ```bash
-   cd functions
-   npm install
-   ```
-
-#### Build and Deploy
-
-```bash
-# Build functions
-cd functions
-npm run build
-
-# Deploy all functions
-firebase deploy --only functions
-
-# Deploy specific function
-firebase deploy --only functions:proxyApi
-```
+For detailed backend implementation, see the [3dime-api repository](https://github.com/m-idriss/3dime-api).
 
 ---
 
 ## API Endpoints
 
-### Proxy API
+### Converter API
 
-Unified proxy endpoint for all API requests.
+AI-powered calendar conversion endpoint.
 
-**Endpoint**: `/proxyApi`  
-**Method**: `GET`  
-**CORS**: Enabled for all origins
+**Endpoint**: `/converter`  
+**Method**: `POST`  
+**Authentication**: Required (Firebase ID token)
 
-#### Query Parameters
-
-| Parameter | Type   | Required | Description         |
-| --------- | ------ | -------- | ------------------- |
-| `target`  | string | Yes      | Target service name |
-
-#### Available Targets
-
-- `hello` - Test endpoint
-- `profile` - GitHub user profile
-- `social` - Social media links
-- `commit` - GitHub commit activity
-- `notion` - Notion database items
-
-#### Example Request
-
-```bash
-curl "https://us-central1-project.cloudfunctions.net/proxyApi?target=profile"
-```
-
----
-
-### Hello World (Test)
-
-Test endpoint to verify function deployment.
-
-**Target**: `hello`  
-**Method**: `GET`
-
-#### Response
+#### Request Body
 
 ```json
 {
-  "message": "Hello from Firebase!"
-}
-```
-
-#### Example
-
-```bash
-curl "https://us-central1-project.cloudfunctions.net/proxyApi?target=hello"
-```
-
----
-
-### GitHub Profile
-
-Fetch GitHub user profile information.
-
-**Target**: `profile`  
-**Method**: `GET`
-
-#### Response
-
-```json
-{
-  "login": "username",
-  "id": 12345,
-  "avatar_url": "https://avatars.githubusercontent.com/u/12345",
-  "html_url": "https://github.com/username",
-  "name": "Full Name",
-  "bio": "User bio",
-  "location": "City, Country",
-  "public_repos": 42,
-  "email": "user@example.com"
-}
-```
-
-#### Example
-
-```typescript
-this.http.get<GithubUser>(`${apiUrl}?target=profile`).subscribe((user) => {
-  console.log(user.name);
-});
-```
-
----
-
-### Social Links
-
-Fetch social media links for the user.
-
-**Target**: `social`  
-**Method**: `GET`
-
-#### Response
-
-```json
-[
-  {
-    "provider": "LinkedIn",
-    "url": "https://linkedin.com/in/username"
-  },
-  {
-    "provider": "Twitter",
-    "url": "https://twitter.com/username"
-  }
-]
-```
-
-#### Example
-
-```typescript
-this.http.get<SocialLink[]>(`${apiUrl}?target=social`).subscribe((links) => {
-  links.forEach((link) => console.log(link.provider, link.url));
-});
-```
-
----
-
-### GitHub Commits
-
-Fetch GitHub commit activity for the last year.
-
-**Target**: `commit`  
-**Method**: `GET`
-
-#### Response
-
-```json
-[
-  {
-    "date": 1704067200000,
-    "value": 5
-  },
-  {
-    "date": 1704153600000,
-    "value": 3
-  }
-]
-```
-
-**Fields:**
-
-- `date`: Unix timestamp (milliseconds)
-- `value`: Number of commits on that date
-
-#### Example
-
-```typescript
-this.http.get<CommitData[]>(`${apiUrl}?target=commit`).subscribe((commits) => {
-  commits.forEach((commit) => {
-    const date = new Date(commit.date);
-    console.log(`${date.toDateString()}: ${commit.value} commits`);
-  });
-});
-```
-
----
-
-### Notion Items
-
-Fetch recommended products and tools from Notion database.
-
-**Target**: `notion`  
-**Method**: `GET`
-
-#### Response
-
-```json
-{
-  "Software": [
+  "files": [
     {
-      "name": "VS Code",
-      "url": "https://code.visualstudio.com",
-      "description": "Code editor",
-      "rank": 1
+      "dataUrl": "data:image/png;base64,...",
+      "name": "calendar.png",
+      "type": "image/png"
     }
   ],
-  "Hardware": [
+  "timeZone": "America/New_York",
+  "currentDate": "2025-02-17",
+  "userId": "user123"
+}
+```
+
+#### Response
+
+```json
+{
+  "success": true,
+  "icsContent": "BEGIN:VCALENDAR\nVERSION:2.0\n...",
+  "events": [
     {
-      "name": "MacBook Pro",
-      "url": "https://apple.com/macbook-pro",
-      "description": "Laptop",
-      "rank": 1
+      "title": "Meeting",
+      "start": "2025-02-17T10:00:00",
+      "end": "2025-02-17T11:00:00",
+      "location": "Office",
+      "description": "Team meeting"
     }
   ]
 }
 ```
 
-**Structure:**
+---
 
-- Top-level keys are category names
-- Each category contains an array of items
-- Items are sorted by `rank` within each category
+### Quota Status
 
-#### Example
+Check user's conversion quota.
 
-```typescript
-this.http.get<Record<string, any[]>>(`${apiUrl}?target=notion`).subscribe((data) => {
-  Object.keys(data).forEach((category) => {
-    console.log(`${category}:`, data[category]);
-  });
-});
+**Endpoint**: `/converter/quotaStatus`  
+**Method**: `GET`  
+**Authentication**: Required
+
+#### Query Parameters
+
+| Parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| `userId`  | string | Yes      | User ID     |
+
+#### Response
+
+```json
+{
+  "remaining": 10,
+  "limit": 20,
+  "resetDate": "2025-03-01T00:00:00Z"
+}
+```
+
+---
+
+### Statistics
+
+Get application usage statistics.
+
+**Endpoint**: `/stats`  
+**Method**: `GET`
+
+#### Response
+
+```json
+{
+  "totalConversions": 1234,
+  "activeUsers": 567,
+  "successRate": 0.95
+}
 ```
 
 ---
@@ -302,185 +153,93 @@ All endpoints return errors in a consistent format:
 
 ```json
 {
-  "error": "Error message description"
+  "error": "Error message description",
+  "details": "Additional error information"
 }
 ```
 
 ### Common HTTP Status Codes
 
-| Code | Description           | Cause                                  |
-| ---- | --------------------- | -------------------------------------- |
-| 200  | OK                    | Request successful                     |
-| 400  | Bad Request           | Invalid target parameter               |
-| 500  | Internal Server Error | Function error or external API failure |
+| Code | Description           | Cause                            |
+| ---- | --------------------- | -------------------------------- |
+| 200  | OK                    | Request successful               |
+| 400  | Bad Request           | Invalid request parameters       |
+| 401  | Unauthorized          | Missing or invalid authentication|
+| 429  | Too Many Requests     | Quota exceeded                   |
+| 500  | Internal Server Error | Backend error or external API failure |
 
 ### Example Error Handling
 
 ```typescript
 this.http
-  .get(`${apiUrl}?target=profile`)
+  .post(`${apiUrl}/converter`, requestData)
   .pipe(
     catchError((error) => {
       console.error('API Error:', error.error);
-      // Return fallback data or empty observable
-      return of(null);
+      // Handle specific error codes
+      if (error.status === 429) {
+        this.toastService.show('Quota exceeded. Please try again later.');
+      }
+      return throwError(() => error);
     }),
   )
   .subscribe((data) => {
-    // Handle response
+    // Handle successful response
   });
 ```
 
 ---
 
-## CORS Configuration
+## Authentication
 
-All functions use a strict CORS allowlist for security:
+### Firebase Authentication
+
+The API requires Firebase Authentication tokens for protected endpoints.
+
+#### Getting an ID Token
 
 ```typescript
-const allowedOrigins = [
-  'https://photocalia.com',
-  'https://www.photocalia.com',
-  'http://localhost:4200',
-  'http://localhost:5000',
-];
+import { Auth, user } from '@angular/fire/auth';
 
-const corsHandler = cors({
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or curl)
-    if (!origin) {
-      callback(null, true);
-      return;
-    }
-
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-});
+// Get current user's ID token
+const currentUser = await this.auth.currentUser;
+if (currentUser) {
+  const idToken = await currentUser.getIdToken();
+  // Use idToken in Authorization header
+}
 ```
 
-### Allowed Origins
+#### Request Headers
 
-- `https://photocalia.com` - Production website
-- `https://www.photocalia.com` - Production website (www subdomain)
-- `http://localhost:4200` - Local development (Angular dev server)
-- `http://localhost:5000` - Local development (Firebase emulator)
-
-### Preflight Requests
-
-OPTIONS requests are handled automatically by the CORS middleware.
+```http
+POST /converter
+Authorization: Bearer <firebase-id-token>
+Content-Type: application/json
+```
 
 ---
 
 ## Rate Limiting
 
-### GitHub API
+The API implements rate limiting to ensure fair usage:
 
-GitHub API has rate limits:
+- **Anonymous users**: 5 conversions per day
+- **Authenticated users**: 20 conversions per day
+- **Premium users**: Unlimited conversions
 
-- **Unauthenticated**: 60 requests/hour
-- **Authenticated**: 5,000 requests/hour
+Rate limit information is included in response headers:
 
-The functions use authenticated requests when API tokens are configured.
-
-### Notion API
-
-Notion API rate limits:
-
-- **Standard**: 3 requests/second per integration
-
----
-
-## Environment Variables
-
-### Required Secrets
-
-Functions require the following secrets (set in Firebase):
-
-| Secret                 | Description                  | Used By          |
-| ---------------------- | ---------------------------- | ---------------- |
-| `GITHUB_TOKEN`         | GitHub personal access token | GitHub functions |
-| `NOTION_TOKEN`         | Notion integration token     | Notion function  |
-| `NOTION_DATASOURCE_ID` | Notion database ID           | Notion function  |
-
-### Setting Secrets
-
-```bash
-# Set GitHub token
-firebase functions:secrets:set GITHUB_TOKEN
-
-# Set Notion token
-firebase functions:secrets:set NOTION_TOKEN
-
-# Set Notion database ID
-firebase functions:secrets:set NOTION_DATASOURCE_ID
-```
-
----
-
-## Development
-
-### Local Testing
-
-Run functions locally with Firebase emulator:
-
-```bash
-# Install emulator
-firebase init emulators
-
-# Start emulator
-firebase emulators:start --only functions
-
-# Access at http://localhost:5001
-```
-
-### Function Logs
-
-View function logs:
-
-```bash
-# Recent logs
-firebase functions:log
-
-# Specific function
-firebase functions:log --only proxyApi
-
-# Follow logs in real-time
-firebase functions:log --follow
-```
-
----
-
-## Performance
-
-### Cold Starts
-
-Functions may experience cold starts (1-3 seconds) when:
-
-- Not called recently
-- Deployed or updated
-- Scaled down due to inactivity
-
-### Optimization Tips
-
-1. **Keep functions warm**: Use Cloud Scheduler to ping functions
-2. **Minimize dependencies**: Reduce function size
-3. **Use caching**: Cache API responses where appropriate
-4. **Set max instances**: Limit concurrent executions
-
-```typescript
-setGlobalOptions({ maxInstances: 10 });
+```http
+X-RateLimit-Limit: 20
+X-RateLimit-Remaining: 15
+X-RateLimit-Reset: 1709251200
 ```
 
 ---
 
 ## Additional Resources
 
-- [Firebase Functions Documentation](https://firebase.google.com/docs/functions)
-- [GitHub API Documentation](https://docs.github.com/en/rest)
-- [Notion API Documentation](https://developers.notion.com/)
-- [Google Cloud Functions](https://cloud.google.com/functions)
+- [3dime-api Repository](https://github.com/m-idriss/3dime-api) - Backend service source code
+- [Converter Documentation](CONVERTER.md) - Calendar converter feature details
+- [Authentication Setup](FIREBASE_AUTH_SETUP.md) - Firebase Auth configuration
+- [Development Guide](DEVELOPMENT.md) - Local development setup

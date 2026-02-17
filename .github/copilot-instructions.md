@@ -23,7 +23,7 @@ This is Photocalia, an Angular 20+ SaaS application featuring an AI-powered cale
 ## Working Effectively
 
 ### Prerequisites and Setup
-- Install Node.js 20+ (Functions require Node 22 but work with 20)
+- Install Node.js 20+
 - Chrome/Chromium browser for testing
 - **NEVER CANCEL any build or test commands** - builds take ~14 seconds, tests execute in < 1 second
 
@@ -31,10 +31,6 @@ This is Photocalia, an Angular 20+ SaaS application featuring an AI-powered cale
 ```bash
 # Install all dependencies - takes ~30 seconds, NEVER CANCEL
 npm install
-
-# Install Firebase Functions dependencies (if using Firebase features)
-cd functions && npm install
-cd ..
 ```
 
 ### Build Process
@@ -44,9 +40,6 @@ npm run build
 
 # Production build - takes ~14 seconds, NEVER CANCEL. Set timeout to 30+ seconds.
 npm run build -- --configuration=production
-
-# Build Firebase Functions - takes ~6 seconds, NEVER CANCEL. Set timeout to 20+ seconds.
-cd functions && npm run build
 ```
 
 **Expected Build Warnings (NORMAL):**
@@ -225,7 +218,7 @@ Most content is currently hardcoded in component templates. Future improvements 
 The application workflow:
 1. **File Upload** - User uploads images or PDFs via drag-and-drop or file picker
 2. **Authentication** - User signs in with Google (Firebase Auth) for API access
-3. **AI Processing** - Files sent to Firebase Functions → GPT-4 Vision API for event extraction
+3. **AI Processing** - Files sent to backend API (3dime-api) → GPT-4 Vision API for event extraction
 4. **Event Display** - Extracted events shown in calendar view
 5. **Event Editing** - User can edit or delete events before download
 6. **ICS Export** - User downloads ICS file compatible with all major calendar apps
@@ -233,7 +226,7 @@ The application workflow:
 ### Known Limitations
 - GPT-4 Vision API requires Firebase authentication
 - Some external CDN resources may be blocked in restricted environments
-- Firebase Functions prefer Node 22 but work with Node 20 (build warnings expected)
+- Backend API is hosted externally (see [3dime-api](https://github.com/m-idriss/3dime-api))
 - PDF processing has size limits based on conversion to images
 
 ## Important Guidelines
@@ -328,11 +321,10 @@ npm run build -- --configuration=production
 # The dist/photocalia/browser/ folder contains deployable files
 ```
 
-### Firebase Functions Deployment
+### Firebase Hosting Deployment
 ```bash
-# Deploy functions only
-firebase deploy --only functions
-
-# Deploy everything (hosting + functions)
-firebase deploy
+# Deploy hosting only
+firebase deploy --only hosting
 ```
+
+**Note**: The backend API is hosted separately at [3dime-api](https://github.com/m-idriss/3dime-api).

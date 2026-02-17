@@ -38,14 +38,14 @@ The Calendar Converter is a feature that allows users to upload images (JPG, PNG
 
 **Service**: `src/app/services/converter.ts`
 
-- HTTP communication with Firebase function
+- HTTP communication with backend API (3dime-api)
 - File-to-base64 conversion
 - PDF-to-image conversion using PDF.js
 - ICS file download helper
 
-### Backend (Firebase Function)
+### Backend API
 
-**Function**: `functions/src/proxies/converter.ts`
+**API Endpoint**: External service ([3dime-api](https://github.com/m-idriss/3dime-api))
 
 - Accepts POST requests with image/PDF data
 - Calls OpenAI GPT-4 Vision API for event extraction
@@ -162,7 +162,7 @@ The converter uses the following key dependencies:
 ### Endpoint
 
 ```
-POST /converterFunction
+POST /converter
 ```
 
 ### Request Body
