@@ -13,7 +13,7 @@
 
 ## Overview
 
-The application uses an external backend API ([3dime-api](https://github.com/m-idriss/3dime-api)) to provide backend functionality. All endpoints are accessed through a unified API service.
+The application uses an external backend API ([3dime-api](https://github.com/m-idriss/3dime-api)) to provide backend functionality. The backend is built with **Quarkus**, a modern Java framework optimized for cloud-native applications, providing fast startup times and low memory footprint. All endpoints are accessed through a unified API service.
 
 ### Architecture
 
@@ -36,12 +36,18 @@ Production: https://api.photocalia.com
 
 ## Backend API Structure
 
-The backend API is an external service that handles:
+The backend API is a **Quarkus-based microservice** that handles:
 - AI-powered calendar conversion
 - GitHub integration
 - Notion integration
 - Usage tracking and quotas
 - Caching and optimization
+
+**Technology Stack:**
+- **Framework**: Quarkus (Supersonic Subatomic Java)
+- **Language**: Java
+- **Architecture**: RESTful microservice
+- **Deployment**: Cloud-native with fast startup and low memory usage
 
 For detailed backend implementation, see the [3dime-api repository](https://github.com/m-idriss/3dime-api).
 

@@ -22,7 +22,7 @@
 
 Photocalia is a modern, high-performance calendar conversion SaaS built with Angular 21+. The application features an **AI-powered Calendar Converter** that transforms images and PDFs containing calendar information into downloadable ICS files using GPT-4 Vision.
 
-**Key Technologies**: Angular 21.1+ standalone components, TypeScript 5.9+, OpenAI GPT-4 Vision, External API Backend (3dime-api), Progressive Web App capabilities.
+**Key Technologies**: Angular 21.1+ standalone components, TypeScript 5.9+, OpenAI GPT-4 Vision, Quarkus REST API Backend ([3dime-api](https://github.com/m-idriss/3dime-api)), Progressive Web App capabilities.
 
 ## ✨ Key Features
 
@@ -53,7 +53,7 @@ Transform images and PDFs into calendar events instantly!
 |----------|-------------|
 | **Frontend** | Angular 21.1, TypeScript 5.9, RxJS 7.8, SCSS |
 | **AI Integration** | OpenAI GPT-4 Vision (gpt-4o), PDF.js for PDF processing |
-| **Backend** | External API ([3dime-api](https://github.com/m-idriss/3dime-api)), Firebase Authentication |
+| **Backend** | [3dime-api](https://github.com/m-idriss/3dime-api) (Quarkus REST API), Firebase Authentication |
 | **PWA** | Service Worker, Web App Manifest, Offline Support |
 | **Build Tools** | Angular CLI 21.1, esbuild, Karma + Jasmine |
 | **Deployment** | Firebase Hosting, GitHub Actions CI/CD |
@@ -214,7 +214,7 @@ bru run bruno-collections/photocalia-api
 - Standalone components with TypeScript strict mode
 - RxJS for reactive data streams
 - SCSS with CSS custom properties for theming
-- External backend API (3dime-api) for AI processing
+- Quarkus backend API (3dime-api) for AI processing
 - Service Worker for PWA capabilities
 
 **Project Structure:**

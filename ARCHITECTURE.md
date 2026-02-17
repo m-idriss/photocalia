@@ -86,7 +86,7 @@ Photocalia is a modern, high-performance SaaS application built with Angular 20.
 
 - **Modern Angular Stack**: Standalone components, TypeScript strict mode, RxJS for reactive programming
 - **Progressive Web App**: Installable, offline-capable, share target integration
-- **External Backend API**: 3dime-api for API proxy and AI processing
+- **Quarkus Backend API**: 3dime-api for API proxy and AI processing (Java-based microservice)
 - **Intelligent Caching**: Cache-based storage with background refresh
 - **AI Integration**: OpenAI GPT-4 Vision for calendar event extraction
 - **Space-Themed UI**: Glassmorphism effects with modern CSS features
@@ -864,7 +864,14 @@ export class ThemeService {
 
 ## Backend API Structure (3dime-api)
 
-The backend is powered by the external [3dime-api](https://github.com/m-idriss/3dime-api) service, which provides the following endpoints:
+The backend is powered by the external [3dime-api](https://github.com/m-idriss/3dime-api) service, a **Quarkus-based REST API** built for high performance and cloud-native deployment.
+
+**Technology:**
+- **Framework**: Quarkus (Supersonic Subatomic Java)
+- **Architecture**: RESTful microservice
+- **Key Features**: Fast startup, low memory footprint, reactive programming
+
+The backend provides the following endpoints:
 │   │   ├── statistics.ts     # Usage statistics
 │   │   └── quotaStatus.ts    # Quota checking
 │   ├── services/             # Business logic
