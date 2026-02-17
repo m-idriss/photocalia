@@ -74,7 +74,7 @@
 - **Clean component structure** with proper separation of concerns and reusable components
 - **SCSS styling** with CSS custom properties and modern features
 - **Build system** working efficiently (~9s build time, optimized from 14s)
-- **Firebase integration** for Authentication and Functions
+- **Firebase integration** for Authentication
 - **Advanced UI components**: Skeleton loaders, calendar view, file upload with drag-and-drop, settings modal, tooltips
 - **Comprehensive testing** with 90 unit tests, all passing
 - **API testing** with Bruno CLI collections
@@ -83,12 +83,12 @@
 ### 🔧 Technical Stack
 - **Frontend**: Angular 21.1.3, TypeScript 5.9.3, SCSS
 - **Build**: Angular CLI 21.1.3 with esbuild bundler
-- **Backend**: Firebase Functions (Node 22), Firebase Authentication, Firebase Admin SDK 12.6
+- **Backend**: External API (3dime-api), Firebase Authentication
 - **PWA**: Angular Service Worker with caching strategies
 - **AI Integration**: OpenAI GPT-4 Vision API (gpt-4o model)
 - **Styling**: Modern CSS with custom properties, glassmorphism effects, space-themed gradients
 - **Dependencies**: RxJS 7.8.2, Firebase 12.9, PDF.js 5.4.624, cal-heatmap 4.2.4, ical.js 2.2.1
-- **Testing**: Jasmine 6.0 + Karma 6.4, Bruno API collection for Firebase Functions
+- **Testing**: Jasmine 6.0 + Karma 6.4, Bruno API collection for backend API
 - **UI Libraries**: Bootstrap 5.3.8, ng-bootstrap 20.0, Angular CDK 21.1.3, FullCalendar 6.1.20
 - **Code Quality**: ESLint 10.0, Angular ESLint 21.2, Qodana, Prettier
 - **Deployment**: Firebase Hosting, GitHub Actions CI/CD
@@ -174,7 +174,7 @@
 #### Security Hardening
 - [ ] **Enhanced security measures**
   - [ ] Content Security Policy (CSP) headers implementation
-  - [ ] Rate limiting on Firebase Functions
+  - [ ] Rate limiting on backend API
   - [ ] HTTPS enforcement in production
   - [ ] Security headers (HSTS, X-Frame-Options)
   - [ ] Input validation and sanitization review
@@ -385,7 +385,7 @@
 #### Hosting & Infrastructure
 - [x] **Deployment setup** - Active production environment
   - [x] Firebase Hosting for application
-  - [x] Firebase Functions for backend APIs
+  - [x] External backend API (3dime-api)
   - [x] Custom domain (photocalia.com)
   - [x] SSL certificate with HTTPS
 - [x] **CI/CD pipeline** - GitHub Actions implemented

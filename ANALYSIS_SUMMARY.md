@@ -32,7 +32,7 @@ Photocalia is a **well-architected, production-ready Angular 21 SaaS application
 | **State Management** | RxJS | 7.8.2 | ✅ Modern reactive |
 | **Styling** | SCSS + Custom Props | - | ✅ Maintainable |
 | **Build Tool** | esbuild via Angular CLI | 21.1.3 | ✅ Fast builds |
-| **Backend** | Firebase Functions | Node 22 | ✅ Serverless |
+| **Backend** | External API (3dime-api) | - | ✅ Serverless |
 | **Authentication** | Firebase Auth | 12.9 | ✅ Secure |
 | **AI/ML** | OpenAI GPT-4 Vision | gpt-4o | ✅ Latest model |
 | **PWA** | Service Worker | Angular SW | ✅ Full support |
@@ -212,7 +212,7 @@ Pages: ~7 tests
 
 **Q1 2026 Priorities:**
 - [ ] Content Security Policy (CSP) headers
-- [ ] Rate limiting on Firebase Functions
+- [ ] Rate limiting on backend API
 - [ ] HTTPS enforcement in production
 - [ ] Security headers (HSTS, X-Frame-Options)
 - [ ] Input validation and sanitization review
@@ -247,12 +247,12 @@ Pages: ~7 tests
 
 **Platforms:**
 - ✅ Firebase Hosting (primary)
-- ✅ Firebase Functions (backend)
+- ✅ External backend API (3dime-api)
 - ✅ GitHub Actions (CI/CD)
 - ✅ FTP deployment option
 
 **Configuration Files:**
-- ✅ firebase.json - Firebase config
+- ✅ firebase.json - Firebase hosting config
 - ✅ .firebaserc - Firebase project reference
 - ✅ angular.json - Angular CLI config
 - ✅ ngsw-config.json - Service Worker config
@@ -298,7 +298,7 @@ Pages: ~7 tests
 
 **Priority 1: Security Hardening**
 - Implement CSP headers
-- Add rate limiting to Firebase Functions
+- Add rate limiting to backend API
 - Enable HSTS and security headers
 - Automated dependency vulnerability scanning
 
@@ -440,7 +440,7 @@ Photocalia is a **production-ready, well-architected Angular application** that 
 - **Source Code**: Components, Services, Guards, Directives in /src/app
 - **Tests**: 90 unit tests across all components and services
 - **CI/CD**: 6 GitHub Actions workflows
-- **Backend**: Firebase Functions code and documentation
+- **Backend**: External API (3dime-api) with separate repository
 
 ### Analysis Methodology
 

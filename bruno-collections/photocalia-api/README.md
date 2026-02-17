@@ -40,17 +40,16 @@ bruno-collections/
     ├── Firebase Converter function (URL-based).bru       # NEW: Uses URL variable
     ├── Firebase Converter function (Variable-based).bru  # NEW: Uses environment variables
     ├── Firebase Converter function bad image.bru         # Test with invalid image
-    ├── Firebase Commits function.bru                     # Firebase commits API
-    ├── Firebase Notion function.bru                      # Firebase Notion integration
-    ├── Firebase Social function.bru                      # Firebase social API
+    ├── Firebase Stats function.bru                       # Statistics API
+    ├── Firebase quota function.bru                       # Quota status API
     └── README.md                                         # This file
 ```
 
 ## Available Requests
 
-### Firebase Converter Function (Improved Versions)
+### API Converter Function (Improved Versions)
 
-We now provide two improved versions of the Firebase Converter function test that avoid embedding large base64 images directly in the .bru files:
+We now provide multiple versions of the Converter API test that avoid embedding large base64 images directly in the .bru files:
 
 #### Option 1: URL-based (Recommended)
 **File**: `Firebase Converter function (URL-based).bru`
@@ -210,7 +209,7 @@ with open('image.png', 'rb') as f:
 ## Future Additions
 
 Planned requests to add:
-- Firebase Functions proxy endpoints
+- Additional backend API endpoints
 - GitHub commits API
 - GitHub social accounts API
 - Notion API integration
@@ -220,6 +219,7 @@ Planned requests to add:
 For more information about the API endpoints being tested, see:
 - [API Documentation](../../docs/API.md)
 - [Services Documentation](../../docs/SERVICES.md)
+- [Backend API Repository](https://github.com/m-idriss/3dime-api)
 
 ## Contributing
 

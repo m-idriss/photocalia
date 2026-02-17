@@ -77,12 +77,14 @@ For GitHub Actions and CI/CD:
 ### Deployment Security
 
 - Always use HTTPS in production
-- Set appropriate CORS policies - Firebase Functions use an allowlist of trusted origins:
+- Set appropriate CORS policies - The backend API uses an allowlist of trusted origins:
   - Production: `https://photocalia.com`, `https://www.photocalia.com`
-  - Development: `http://localhost:4200`, `http://localhost:5000`
+  - Development: `http://localhost:4200`
   - **Never use** `cors({ origin: true })` which allows all origins
 - Use Content Security Policy (CSP) headers
 - Enable security headers (X-Frame-Options, X-Content-Type-Options, etc.)
+
+For backend security configuration, see the [3dime-api repository](https://github.com/m-idriss/3dime-api).
 
 ## Security Checklist for Contributors
 
