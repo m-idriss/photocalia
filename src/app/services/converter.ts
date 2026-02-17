@@ -182,7 +182,7 @@ export class ConverterService {
    * Get current quota status for the user
    */
   getQuotaStatus(): Observable<QuotaStatusResponse> {
-    return this.http.post<QuotaStatusResponse>(`${this.baseUrl}?target=quotaStatus`, {
+    return this.http.post<QuotaStatusResponse>(`${this.baseUrl}/converter/quotaStatus`, {
       userId: this.userId,
     });
   }
