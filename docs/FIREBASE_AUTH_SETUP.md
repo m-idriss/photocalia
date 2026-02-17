@@ -65,7 +65,7 @@ Update your environment configuration files with the Firebase config:
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'https://api.3dime.com',
+  apiUrl: 'https://api.photocalia.com',
   firebase: {
     apiKey: 'YOUR_API_KEY',
     authDomain: 'your-project-id.firebaseapp.com',
@@ -82,7 +82,7 @@ export const environment = {
 ```typescript
 export const environment = {
   production: true,
-  apiUrl: 'https://api.3dime.com',
+  apiUrl: 'https://api.photocalia.com',
   firebase: {
     apiKey: 'YOUR_PRODUCTION_API_KEY',
     authDomain: 'your-project-id.firebaseapp.com',

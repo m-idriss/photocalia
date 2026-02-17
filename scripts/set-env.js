@@ -16,7 +16,7 @@ const measurementId = process.env.FIREBASE_MEASUREMENT_ID || '';
 // Create the environment file content
 const envConfigFile = `export const environment = {
   production: true,
-  apiUrl: 'https://api.3dime.com',
+  apiUrl: 'https://api.photocalia.com',
   firebase: {
     apiKey: '${apiKey}',
     authDomain: '${authDomain}',

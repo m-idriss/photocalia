@@ -215,7 +215,7 @@ export class ConverterService {
       userId: this.userId,
     };
 
-    return this.http.post<ConversionResponse>(`${this.baseUrl}?target=converter`, request);
+    return this.http.post<ConversionResponse>(`${this.baseUrl}/converter`, request);
   }
 
   /**
