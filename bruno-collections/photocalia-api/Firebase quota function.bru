@@ -5,9 +5,13 @@ meta {
 }
 
 get {
-  url: {{api_url}}/statistics
+  url: {{api_url}}/converter/quotaStatus?userId=anonymous
   body: none
   auth: none
+}
+
+params:query {
+  userId: anonymous
 }
 
 tests {
@@ -26,20 +30,21 @@ tests {
   
   test("Response contains expected statistical fields", function() {
     const body = res.getBody();
-    expect(body).to.have.property("fileCount");
-    expect(body).to.have.property("eventCount");
+    expect(body).to.have.property("plan");
+    expect(body).to.have.property("quotaUsed");
   });
   
   test("Statistical fields are of correct data types", function() {
     const body = res.getBody();
-    expect(body.fileCount).to.be.a("number");
-    expect(body.eventCount).to.be.a("number");
+    expect(body.plan).to.be.a("string");
+    expect(body.quotaUsed).to.be.a("number");
+    expect(body.quotaLimit).to.be.a("number");
   });
   
   test("Statistical fields have non-negative values", function() {
     const body = res.getBody();
-    expect(body.fileCount).to.be.at.least(0);
-    expect(body.eventCount).to.be.at.least(0);
+    expect(body.quotaUsed).to.be.at.least(0);
+    expect(body.quotaLimit).to.be.at.least(0);
   });
 }
 
