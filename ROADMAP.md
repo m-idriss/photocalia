@@ -19,7 +19,7 @@
   - Firebase Authentication with Google provider
   - ICS file generation and download
   - PDF.js integration for PDF processing
-- ✅ **Angular 21.1 Upgrade** - Latest Angular with modern features and enhanced signals
+- ✅ **Angular 21.1.3 Upgrade** - Latest Angular with modern features and enhanced signals
 - ✅ **Comprehensive Documentation** - 8+ detailed documentation files
   - PWA guide, Converter guide, Firebase Auth setup
   - Components, Services, API, Design System docs
