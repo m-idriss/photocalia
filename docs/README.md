@@ -18,7 +18,7 @@
 
 - **[Component Documentation](./COMPONENTS.md)** - Component architecture, usage, and guidelines
 - **[Services Documentation](./SERVICES.md)** - Service APIs and data management
-- **[API Documentation](./API.md)** - Firebase Functions and API endpoints
+- **[API Documentation](./API.md)** - Backend API endpoints
 - **[Design System](./DESIGN_SYSTEM.md)** - Design principles, colors, and styling
 
 ### For Planning & Architecture
@@ -47,9 +47,8 @@
 | **[System Architecture](../ARCHITECTURE.md)**   | **Complete system design, tech stack, data flow, deployment, ADRs** |
 | [Component Documentation](./COMPONENTS.md)      | All components, component guidelines, best practices, accessibility |
 | [Services Documentation](./SERVICES.md)         | ThemeService, GithubService, NotionService, service patterns       |
-| [API Documentation](./API.md)                   | Firebase Functions, API endpoints, error handling, deployment       |
-| [Firebase Functions](../functions/README.md)    | Backend functions, deployment, configuration, testing             |
-| [Backend Caching](../functions/CACHING.md)      | Firestore caching strategy, performance optimization              |
+| [API Documentation](./API.md)                   | Backend API endpoints, error handling, authentication              |
+| [Backend API (3dime-api)](https://github.com/m-idriss/3dime-api) | External backend service implementation |
 
 ### Features & Functionality
 
@@ -96,10 +95,10 @@ Essential reading for frontend development:
 Essential reading for backend/API work:
 
 - [Installation Guide](./INSTALLATION.md) - Firebase setup
-- [Firebase Functions](../functions/README.md) - Backend implementation and deployment
-- [API Documentation](./API.md) - Firebase Functions and endpoints
+- [Backend API (3dime-api)](https://github.com/m-idriss/3dime-api) - External backend service
+- [API Documentation](./API.md) - API endpoints and usage
 - [Services Documentation](./SERVICES.md) - Data layer integration
-- [Deployment Guide](./DEPLOYMENT.md) - Deploy functions and hosting
+- [Deployment Guide](./DEPLOYMENT.md) - Deploy frontend and hosting
 
 ### Designer
 
@@ -341,8 +340,7 @@ Essential reading for first-time contributors:
 | Services              | [Services Documentation](./SERVICES.md)       | Core Services      |
 | Styling               | [Design System](./DESIGN_SYSTEM.md)           | All sections       |
 | API endpoints         | [API Documentation](./API.md)                 | API Endpoints      |
-| Backend functions     | [Firebase Functions](../functions/README.md)  | All sections       |
-| Caching strategy      | [Backend Caching](../functions/CACHING.md)    | Cache Manager      |
+| Backend API           | [3dime-api](https://github.com/m-idriss/3dime-api) | External service   |
 | PWA features          | [PWA Documentation](./PWA.md)                 | Features           |
 | Calendar converter    | [Calendar Converter](./CONVERTER.md)          | Overview           |
 | Git workflow          | [Contributing Guidelines](../CONTRIBUTING.md) | Submitting Changes |

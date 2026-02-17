@@ -68,9 +68,7 @@ The project includes automated deployment via GitHub Actions.
    - Source code (`src/**`, `public/**`)
    - Dependencies (`package.json`, `package-lock.json`)
    - Build configuration (`angular.json`, `tsconfig*.json`)
-   - Firebase Functions (`functions/**`)
    - Deployment workflow (`.github/workflows/deploy.yml`)
-   - Firebase configuration (`firebase.json`, `.firebaserc`)
 
    **Note**: Documentation changes won't trigger deployment.
 
@@ -321,14 +319,12 @@ firebase deploy --only functions --project production
 ### Verify Deployment
 
 ```bash
-# View function logs
-firebase functions:log
-
-# Test endpoints
-curl https://us-central1-your-project.cloudfunctions.net/converterFunction
+# Check deployment status in hosting dashboard
+# or test the live site
+curl https://photocalia.com
 ```
 
-See [Firebase Functions Documentation](../functions/README.md) for more details.
+The backend API is hosted separately at the [3dime-api](https://github.com/m-idriss/3dime-api) repository.
 
 ## Creating Releases
 

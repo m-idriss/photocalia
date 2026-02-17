@@ -136,7 +136,7 @@ See [Material Design theme transitions](https://material.io)
 ### Prerequisites
 
 Ensure you have:
-- **Node.js**: 20+ (Functions require Node 22 but work with 20)
+- **Node.js**: 20+
 - **npm**: 10+
 - **Git**: Latest version
 - **Chrome/Chromium**: For testing

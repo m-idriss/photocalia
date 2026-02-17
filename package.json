@@ -9,9 +9,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "serve:ng": "ng serve --configuration=local",
-    "serve:functions": "firebase emulators:start --only functions",
-    "build:functions": "npm run build --prefix functions -- --watch",
-    "dev": "concurrently -k -n \"ANGULAR,FIREBASE,BUILD\" -c \"cyan,green,yellow\" \"npm run serve:ng\" \"npm run serve:functions\" \"npm run build:functions\"",
     "vercel-build": "node scripts/set-env.js && ng build"
   },
   "prettier": {
