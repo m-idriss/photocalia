@@ -1,0 +1,73 @@
+meta {
+  name: Firebase quota function
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{api_url}}/converter/quotaStatus?userId=anonymous
+  body: none
+  auth: none
+}
+
+params:query {
+  userId: anonymous
+}
+
+tests {
+  test("Status code is 200", function() {
+    expect(res.getStatus()).to.equal(200);
+  });
+  
+  test("Response is valid JSON", function() {
+    try {
+      const body = res.getBody();
+      expect(body).to.be.an("object");
+    } catch (e) {
+      throw new Error("Response is not valid JSON");
+    }
+  });
+  
+  test("Response contains expected statistical fields", function() {
+    const body = res.getBody();
+    expect(body).to.have.property("plan");
+    expect(body).to.have.property("quotaUsed");
+  });
+  
+  test("Statistical fields are of correct data types", function() {
+    const body = res.getBody();
+    expect(body.plan).to.be.a("string");
+    expect(body.quotaUsed).to.be.a("number");
+    expect(body.quotaLimit).to.be.a("number");
+  });
+  
+  test("Statistical fields have non-negative values", function() {
+    const body = res.getBody();
+    expect(body.quotaUsed).to.be.at.least(0);
+    expect(body.quotaLimit).to.be.at.least(0);
+  });
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
+
+docs {
+  # Firebase Function Statistics API Test
+  
+   This request tests a Firebase function endpoint that retrieves statistical data.
+  
+  ## Expected Response
+  The API should return a JSON object containing statistical data, including:
+   - `fileCount`: The number of files.
+   - `eventCount`: The number of events.
+  
+  ## Tests Performed
+   1. Verify HTTP status code is 200
+   2. Verify response is valid JSON
+   3. Verify response contains expected statistical fields
+   4. Verify statistical fields are of correct data types
+   5. Verify statistical fields have non-negative values
+  
+}
