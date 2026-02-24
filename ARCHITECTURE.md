@@ -873,7 +873,7 @@ The backend is powered by the external [3dime-api](https://github.com/m-idriss/3
 
 The backend provides the following endpoints:
 │   │   ├── statistics.ts     # Usage statistics
-│   │   └── quotaStatus.ts    # Quota checking
+│   │   └── quota-status.ts    # Quota checking
 │   ├── services/             # Business logic
 │   │   ├── quota.ts          # Notion-based quota management
 │   │   └── tracking.ts       # Usage tracking
@@ -903,7 +903,7 @@ export const proxyApi = onRequest(async (req, res) => {
       return notionFunction(req, res);
     case 'statistics':
       return statisticsFunction(req, res);
-    case 'quotaStatus':
+    case 'quota-status':
       return quotaStatus(req, res);
     default:
       res.status(400).send('Invalid target');

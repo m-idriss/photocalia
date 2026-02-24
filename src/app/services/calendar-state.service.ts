@@ -1,5 +1,4 @@
 import { Injectable, signal } from '@angular/core';
-import { Subject } from 'rxjs';
 import { CalendarEvent } from '../models';
 
 /**
@@ -16,8 +15,8 @@ export class CalendarStateService {
   // Calendar events
   readonly events = signal<CalendarEvent[]>([]);
 
-  // Export request subject
-  readonly exportRequested$ = new Subject<void>();
+  // Export request counter — consumers use effect() to react to changes
+  readonly exportRequestCount = signal(0);
 
   /**
    * Show the calendar view with given events
@@ -45,6 +44,6 @@ export class CalendarStateService {
    * Request export of calendar events
    */
   requestExport(): void {
-    this.exportRequested$.next();
+    this.exportRequestCount.update((count) => count + 1);
   }
 }

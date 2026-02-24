@@ -8,6 +8,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { AppTooltipDirective } from '../../shared/directives';
 import { AuthAwareComponent } from '../base/auth-aware.component';
+import { ConverterService } from '../../services/converter';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ import { AuthAwareComponent } from '../base/auth-aware.component';
 })
 export class Header extends AuthAwareComponent {
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly converterService = inject(ConverterService);
 
   menuOpen = false;
 
@@ -48,6 +50,8 @@ export class Header extends AuthAwareComponent {
   async signOut(): Promise<void> {
     try {
       await this.authService.signOutUser();
+      // Clear quota cache immediately so UI doesn't show stale quota after logout
+      try { this.converterService.clearQuotaCache(); } catch (e) {}
       this.menuOpen = false;
       this.cdr.markForCheck();
     } catch (error) {

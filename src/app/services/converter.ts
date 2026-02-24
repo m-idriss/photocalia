@@ -1,10 +1,12 @@
 import { Injectable, inject, effect } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { PDF_CONVERSION_CONFIG, CALENDAR_CONFIG } from '../constants';
 import { AuthService } from './auth.service';
+import { Auth } from '@angular/fire/auth';
 
 /**
  * Request payload for ICS conversion
@@ -81,6 +83,7 @@ export interface QuotaStatusResponse {
 export class ConverterService {
   private readonly http = inject(HttpClient);
   private readonly authService = inject(AuthService);
+  private readonly auth = inject(Auth, { optional: true });
   private readonly baseUrl = environment.apiUrl;
   private userId: string;
 
@@ -179,11 +182,159 @@ export class ConverterService {
   }
 
   /**
+   * Map a raw response into QuotaStatusResponse with tolerant mapping for different backend shapes
+   */
+  private mapToQuotaResponse(raw: any): QuotaStatusResponse {
+    // If backend already returns expected shape
+    if (raw && raw.success && raw.quota) {
+      // Ensure numeric types
+      const q = raw.quota;
+      return {
+        success: !!raw.success,
+        enabled: !!raw.enabled,
+        quota: {
+          usageCount: typeof q.usageCount === 'number' ? q.usageCount : (typeof q.used === 'number' ? q.used : (typeof q.quotaUsed === 'number' ? q.quotaUsed : (typeof q.limit === 'number' && typeof q.remaining === 'number' ? q.limit - q.remaining : 0))),
+          limit: typeof q.limit === 'number' ? q.limit : (typeof raw.limit === 'number' ? raw.limit : 0),
+          remaining: typeof q.remaining === 'number' ? q.remaining : (typeof raw.remaining === 'number' ? raw.remaining : 0),
+          plan: typeof q.plan === 'string' ? q.plan : (typeof raw.plan === 'string' ? raw.plan : 'FREE'),
+        },
+      };
+    }
+
+    // Handle simple shapes like { remaining, limit, resetDate }
+    if (raw && (typeof raw.remaining === 'number' || typeof raw.limit === 'number')) {
+      const remaining = typeof raw.remaining === 'number' ? raw.remaining : (typeof raw.quotaRemaining === 'number' ? raw.quotaRemaining : 0);
+      const limit = typeof raw.limit === 'number' ? raw.limit : (typeof raw.quotaLimit === 'number' ? raw.quotaLimit : 0);
+      const used = typeof raw.used === 'number' ? raw.used : (limit && remaining ? limit - remaining : 0);
+      return {
+        success: true,
+        enabled: true,
+        quota: {
+          usageCount: used,
+          limit,
+          remaining,
+          plan: typeof raw.plan === 'string' ? raw.plan : 'FREE',
+        },
+      };
+    }
+
+    // Handle legacy names like quotaUsed, quotaLimit
+    if (raw && (typeof raw.quotaUsed === 'number' || typeof raw.quotaLimit === 'number')) {
+      const used = typeof raw.quotaUsed === 'number' ? raw.quotaUsed : 0;
+      const limit = typeof raw.quotaLimit === 'number' ? raw.quotaLimit : 0;
+      const remaining = limit - used;
+      return {
+        success: true,
+        enabled: true,
+        quota: {
+          usageCount: used,
+          limit,
+          remaining,
+          plan: typeof raw.plan === 'string' ? raw.plan : 'FREE',
+        },
+      };
+    }
+
+    // Fallback: return disabled response
+    return {
+      success: false,
+      enabled: false,
+      quota: {
+        usageCount: 0,
+        limit: 0,
+        remaining: 0,
+        plan: 'FREE',
+      },
+    };
+  }
+
+  /**
+   * Cache key and TTL for quota cache
+   */
+  private readonly QUOTA_CACHE_KEY = 'photocalia_quota_cache_v1';
+  private readonly QUOTA_CACHE_TTL_MS = 1000 * 60 * 60 * 24; // 24 hours
+
+  /**
+   * Save quota response to localStorage (best-effort)
+   */
+  private saveQuotaToCache(response: QuotaStatusResponse): void {
+    try {
+      const payload = {
+        ts: Date.now(),
+        data: response,
+      };
+      localStorage.setItem(this.QUOTA_CACHE_KEY, JSON.stringify(payload));
+    } catch (e) {
+      // ignore localStorage errors (SSR/private mode)
+      // console.debug('Failed to save quota cache', e);
+    }
+  }
+
+  /**
+   * Load quota response from localStorage if not expired
+   */
+  private loadQuotaFromCache(): QuotaStatusResponse | null {
+    try {
+      const raw = localStorage.getItem(this.QUOTA_CACHE_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed.ts !== 'number' || !parsed.data) return null;
+      if (Date.now() - parsed.ts > this.QUOTA_CACHE_TTL_MS) return null;
+      return parsed.data as QuotaStatusResponse;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /**
+   * Clear cached quota from localStorage
+   */
+  clearQuotaCache(): void {
+    try {
+      localStorage.removeItem(this.QUOTA_CACHE_KEY);
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  /**
    * Get current quota status for the user
    */
   getQuotaStatus(): Observable<QuotaStatusResponse> {
     const url = `${this.baseUrl}/converter/quota-status?userId=${encodeURIComponent(this.userId)}`;
-    return this.http.get<QuotaStatusResponse>(url);
+
+    // Attempt to include Firebase ID token when available to satisfy protected endpoints
+    const tokenPromise: Promise<string | null> = (this.auth && this.auth.currentUser && typeof this.auth.currentUser.getIdToken === 'function')
+      ? this.auth.currentUser.getIdToken()
+      : Promise.resolve(null);
+
+    return from(tokenPromise).pipe(
+      switchMap((token) => {
+        const headers: Record<string, string> = {};
+        if (token) {
+          headers['Authorization'] = `Bearer ${token}`;
+        }
+        return this.http.get<any>(url, { headers }).pipe(
+          map((raw) => this.mapToQuotaResponse(raw)),
+          // Save mapped response to cache for offline/fallback
+          map((mapped) => {
+            try {
+              if (mapped && mapped.success) this.saveQuotaToCache(mapped);
+            } catch {}
+            return mapped;
+          }),
+          catchError((err) => {
+            // On error, attempt to return cached quota response if available
+            const cached = this.loadQuotaFromCache();
+            if (cached) {
+              return of(cached);
+            }
+            // No cache -> propagate error so callers handle hiding UI
+            throw err;
+          }),
+        );
+      }),
+    );
   }
 
   /**
