@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "serve:ng": "ng serve --configuration=local",
-    "vercel-build": "node scripts/set-env.js && ng build"
+    "vercel-build": "node scripts/set-env.js && ng build",
+    "prepare": "husky"
   },
   "prettier": {
     "printWidth": 100,
@@ -21,6 +22,18 @@
           "parser": "angular"
         }
       }
+    ]
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.html": [
+      "prettier --write --parser angular"
+    ],
+    "*.scss": [
+      "prettier --write"
     ]
   },
   "private": true,
@@ -62,12 +75,14 @@
     "angular-eslint": "21.2.0",
     "concurrently": "^9.2.1",
     "eslint": "^10.0.0",
+    "husky": "^9.1.7",
     "jasmine-core": "~6.0.1",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.2.0",
+    "lint-staged": "^16.2.7",
     "typescript": "~5.9.3",
     "typescript-eslint": "8.54.0"
   }
