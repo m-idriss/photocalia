@@ -52,33 +52,7 @@ describe('App', () => {
     expect(compiled.querySelector('app-footer')).toBeTruthy();
   });
 
-  it('should show stats on home page for non-authenticated users', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-
-    // Simulate home page route
-    app['currentRoute'].set('/');
-    fixture.detectChanges();
-
-    // Stats should be visible
-    expect(app['shouldShowStats']()).toBe(true);
-  });
-
-  it('should hide stats on about page', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-
-    // Simulate about page route - set signal directly
-    app['currentRoute'].set('/me');
-
-    // Force computed signal to recalculate by accessing it
-    const result = app['shouldShowStats']();
-
-    // Stats should be hidden on /me route
-    expect(result).toBe(false);
-  });
-
-  it('should hide stats for authenticated users', () => {
+  it('should show stats on home page for authenticated users', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
 
@@ -89,7 +63,31 @@ describe('App', () => {
     app['authService'].isAuthenticated.set(true);
     fixture.detectChanges();
 
-    // Stats should be hidden for logged-in users
+    // Stats should be visible for logged-in users
+    expect(app['shouldShowStats']()).toBe(true);
+  });
+
+  it('should hide stats on about page', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+
+    // Simulate about page route
+    app['currentRoute'].set('/me');
+    app['authService'].isAuthenticated.set(true);
+
+    // Stats should be hidden on /me route
+    expect(app['shouldShowStats']()).toBe(false);
+  });
+
+  it('should hide stats for non-authenticated users', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+
+    // Simulate home page route
+    app['currentRoute'].set('/');
+    fixture.detectChanges();
+
+    // Stats should be hidden for non-logged-in users
     expect(app['shouldShowStats']()).toBe(false);
   });
 });
