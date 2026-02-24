@@ -28,12 +28,12 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Run npm audit
-        run: npm audit --omit=dev --audit-level=high
+      - name: Run security audit (yarn)
+        run: yarn audit --level=high
 
       - name: Summary
         if: always()
         run: |
           echo "## Security Audit Results" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          npm audit --omit=dev 2>&1 | tail -20 >> "$GITHUB_STEP_SUMMARY" || true
+          yarn audit --level=high 2>&1 | tail -20 >> "$GITHUB_STEP_SUMMARY" || true
