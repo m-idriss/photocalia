@@ -1,14 +1,9 @@
 import { Routes } from '@angular/router';
-import { Home } from './pages/home/home';
-import { HowItWorks } from './pages/how-it-works/how-it-works';
-import { Privacy } from './pages/privacy/privacy';
-import { Terms } from './pages/terms/terms';
-import { LegalMentions } from './pages/legal-mentions/legal-mentions';
 
 export const routes: Routes = [
   {
     path: '',
-    component: Home,
+    loadComponent: () => import('./pages/home/home').then((m) => m.Home),
     title: 'Calendar Converter | Photocalia',
     data: {
       seo: {
@@ -23,7 +18,7 @@ export const routes: Routes = [
   },
   {
     path: 'how-it-works',
-    component: HowItWorks,
+    loadComponent: () => import('./pages/how-it-works/how-it-works').then((m) => m.HowItWorks),
     title: 'How It Works - AI Calendar Converter | Photocalia',
     data: {
       seo: {
@@ -38,7 +33,7 @@ export const routes: Routes = [
   },
   {
     path: 'privacy',
-    component: Privacy,
+    loadComponent: () => import('./pages/privacy/privacy').then((m) => m.Privacy),
     title: 'Privacy Policy - GDPR & Data Protection | Photocalia',
     data: {
       seo: {
@@ -53,7 +48,7 @@ export const routes: Routes = [
   },
   {
     path: 'terms',
-    component: Terms,
+    loadComponent: () => import('./pages/terms/terms').then((m) => m.Terms),
     title: 'Terms of Use - Service Agreement | Photocalia',
     data: {
       seo: {
@@ -68,7 +63,7 @@ export const routes: Routes = [
   },
   {
     path: 'legal-mentions',
-    component: LegalMentions,
+    loadComponent: () => import('./pages/legal-mentions/legal-mentions').then((m) => m.LegalMentions),
     title: 'Legal Mentions - Company & Legal Information | Photocalia',
     data: {
       seo: {
