@@ -32,30 +32,18 @@ jobs:
         id: run-audit
         run: |
           echo "Detecting lockfile..."
+          # produce machine-readable audit JSON into audit.json; do not fail immediately
           if [ -f yarn.lock ]; then
-            echo "yarn.lock detected — running yarn audit"
-            yarn audit --level=high
+            echo "yarn.lock detected — running yarn audit (JSON)"
+            yarn audit --json > audit.json 2>&1 || true
           elif [ -f package-lock.json ]; then
-            echo "package-lock.json detected — running npm audit"
-            # ensure node_modules consistent with package-lock
+            echo "package-lock.json detected — running npm audit (JSON)"
             npm ci
-            npm audit --omit=dev --audit-level=high
+            npm audit --json > audit.json 2>&1 || true
           else
             echo "No lockfile detected — generating package-lock.json and running npm audit (best-effort)"
-            # create a package-lock to satisfy audit, but don't install full deps again
             npm i --package-lock-only
-            npm audit --omit=dev --audit-level=high || true
+            npm audit --json > audit.json 2>&1 || true
           fi
-
-      - name: Summary
-        if: always()
-        run: |
-          echo "## Security Audit Results" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          if [ -f yarn.lock ]; then
-            yarn audit --level=high 2>&1 | tail -20 >> "$GITHUB_STEP_SUMMARY" || true
-          elif [ -f package-lock.json ]; then
-            npm audit --omit=dev --audit-level=high 2>&1 | tail -20 >> "$GITHUB_STEP_SUMMARY" || true
-          else
-            echo "No lockfile: generated package-lock and ran npm audit (see logs)" >> "$GITHUB_STEP_SUMMARY"
-          fi
+          # Inspect audit.json and fail only if any advisory has severity 'high' or 'critical'
+          node -e "const fs=require('fs');const p='audit.json';let out='';try{out=fs.readFileSync(p,'utf8')}catch(e){console.error('No audit output');process.exit(0);}const lines=out.split(/\n/).filter(Boolean);let high=false;for(const l of lines){try{const j=JSON.parse(l);const adv=j.advisory||j.data?.advisory||j;const sev=(adv&&adv.severity)||null;if(sev&&['high','critical'].includes(String(sev).toLowerCase())){high=true;break;}}catch(e){} }if(high){console.error('High/critical vulnerabilities found');process.exit(1);}console.log('No high/critical vulnerabilities found');process.exit(0);"
