@@ -83,9 +83,12 @@ export class Converter extends AuthAwareComponent implements OnInit {
       }
     });
 
-    // Listen for export requests from calendar
-    this.calendarStateService.exportRequested$.subscribe(() => {
-      this.downloadIcs();
+    // Listen for export requests from calendar (signal-based)
+    effect(() => {
+      const count = this.calendarStateService.exportRequestCount();
+      if (count > 0) {
+        untracked(() => this.downloadIcs());
+      }
     });
   }
 
