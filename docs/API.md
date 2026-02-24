@@ -104,7 +104,7 @@ AI-powered calendar conversion endpoint.
 
 Check user's conversion quota.
 
-**Endpoint**: `/converter/quotaStatus`  
+tatu**Endpoint**: `/converter/quota-status`  
 **Method**: `GET`  
 **Authentication**: Required
 

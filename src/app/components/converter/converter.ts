@@ -78,8 +78,21 @@ export class Converter extends AuthAwareComponent implements OnInit {
       const isAuth = this.authService.isAuthenticated();
       // Only refresh quota when user becomes authenticated, on browser, and not already loading
       // Use untracked() to read isQuotaLoading without subscribing to its changes
-      if (isAuth && isPlatformBrowser(this.platformId) && !untracked(() => this.isQuotaLoading())) {
-        this.fetchQuotaStatus();
+      if (isPlatformBrowser(this.platformId)) {
+        if (isAuth && !untracked(() => this.isQuotaLoading())) {
+          // User signed in -> fetch fresh quota
+          this.fetchQuotaStatus();
+        }
+
+        if (!isAuth) {
+          // User signed out -> clear quota display immediately
+          this.quotaRemaining.set(null);
+          this.quotaLimit.set(null);
+          this.quotaEnabled.set(false);
+          this.planType.set(null);
+          // Ensure loading flag is cleared
+          this.isQuotaLoading.set(false);
+        }
       }
     });
 
