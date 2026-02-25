@@ -3,7 +3,7 @@ import {
   signal,
   input,
   output,
-  OnInit,
+  computed,
   ViewChild,
   PLATFORM_ID,
   inject,
@@ -12,19 +12,56 @@ import {
   ViewContainerRef,
   ComponentRef,
   AfterViewInit,
+  ElementRef,
 } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
-import { CalendarOptions, EventInput, EventDropArg, EventClickArg } from '@fullcalendar/core';
+import {
+  CalendarOptions,
+  EventInput,
+  EventDropArg,
+  EventClickArg,
+  EventMountArg,
+} from '@fullcalendar/core';
 import { EventResizeDoneArg } from '@fullcalendar/interaction';
 import { CalendarEvent } from '../../models';
+
+/** Harmonious color palette for events */
+const EVENT_COLORS = [
+  { bg: '#3b82f6', border: '#2563eb', text: '#ffffff' }, // Blue
+  { bg: '#8b5cf6', border: '#7c3aed', text: '#ffffff' }, // Violet
+  { bg: '#06b6d4', border: '#0891b2', text: '#ffffff' }, // Cyan
+  { bg: '#f59e0b', border: '#d97706', text: '#ffffff' }, // Amber
+  { bg: '#10b981', border: '#059669', text: '#ffffff' }, // Emerald
+  { bg: '#ec4899', border: '#db2777', text: '#ffffff' }, // Pink
+  { bg: '#f97316', border: '#ea580c', text: '#ffffff' }, // Orange
+  { bg: '#6366f1', border: '#4f46e5', text: '#ffffff' }, // Indigo
+  { bg: '#14b8a6', border: '#0d9488', text: '#ffffff' }, // Teal
+  { bg: '#ef4444', border: '#dc2626', text: '#ffffff' }, // Red
+];
+
+/** Selected event details for the popover */
+interface EventDetail {
+  title: string;
+  start: string;
+  end: string;
+  location?: string;
+  description?: string;
+  color: string;
+  x: number;
+  y: number;
+}
 
 /**
  * Interactive calendar view component for visualizing and editing events
  *
  * Features:
- * - Monthly and weekly grid views
+ * - Monthly, weekly, and daily grid views
  * - Drag & drop to move events
  * - Resize to adjust event duration
+ * - Color-coded events with harmonious palette
+ * - Click popover with event details
+ * - Hover tooltips for quick preview
+ * - Mini stats header with event count
  * - Export updated events to ICS
  */
 @Component({
@@ -33,20 +70,44 @@ import { CalendarEvent } from '../../models';
   templateUrl: './calendar-view.html',
   styleUrl: './calendar-view.scss',
 })
-export class CalendarView implements OnInit, AfterViewInit {
+export class CalendarView implements AfterViewInit {
   // Inputs
   readonly events = input.required<CalendarEvent[]>();
   readonly visible = input.required<boolean>();
-  readonly inline = input<boolean>(false); // New: inline mode for desktop side-by-side layout
+  readonly inline = input<boolean>(false);
 
   // Outputs
   readonly visibleChange = output<boolean>();
   readonly eventsChange = output<CalendarEvent[]>();
   readonly exportIcs = output<void>();
 
+  // Computed stats
+  protected readonly eventCount = computed(() => this.events().length);
+  protected readonly dateRange = computed(() => {
+    const events = this.events();
+    if (events.length === 0) return '';
+    const dates = events
+      .map((e) => new Date(e.start))
+      .filter((d) => !isNaN(d.getTime()))
+      .sort((a, b) => a.getTime() - b.getTime());
+    if (dates.length === 0) return '';
+    const first = dates[0];
+    const last = dates[dates.length - 1];
+    const opts: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' };
+    if (first.toDateString() === last.toDateString()) {
+      return first.toLocaleDateString('en-US', { ...opts, year: 'numeric' });
+    }
+    const yearOpts: Intl.DateTimeFormatOptions =
+      first.getFullYear() !== last.getFullYear() ? { year: 'numeric' } : {};
+    return `${first.toLocaleDateString('en-US', { ...opts, ...yearOpts })} – ${last.toLocaleDateString('en-US', { ...opts, year: 'numeric' })}`;
+  });
+
+  // Event detail popover
+  protected readonly selectedEvent = signal<EventDetail | null>(null);
+
   // Local state
   protected readonly calendarOptions = signal<CalendarOptions>({
-    plugins: [], // Will be populated after dynamic import
+    plugins: [],
     initialView: 'dayGridMonth',
     headerToolbar: {
       left: 'prev,next today',
@@ -71,10 +132,11 @@ export class CalendarView implements OnInit, AfterViewInit {
     eventDrop: this.handleEventDrop.bind(this),
     eventResize: this.handleEventResize.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    height: '80%',
+    eventDidMount: this.handleEventDidMount.bind(this),
+    height: '100%',
     contentHeight: 'auto',
     expandRows: true,
-    scrollTime: '06:00:00', // Start day view at 6am (daylight hours)
+    scrollTime: '06:00:00',
     eventTimeFormat: {
       hour: '2-digit',
       minute: '2-digit',
@@ -83,30 +145,36 @@ export class CalendarView implements OnInit, AfterViewInit {
   });
 
   @ViewChild('calendarContainer', { read: ViewContainerRef }) calendarContainer?: ViewContainerRef;
-  // Type will be FullCalendarComponent after dynamic import, but we can't reference it statically
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private calendarComponentRef?: ComponentRef<any>;
   private calendarLoaded = false;
   protected loadError = false;
 
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly elementRef = inject(ElementRef);
 
   constructor() {
-    // Watch for events changes and update calendar
     effect(() => {
       this.updateCalendarEvents();
     });
   }
 
-  ngOnInit(): void {
-    // Initial load will happen in ngAfterViewInit
-  }
-
   async ngAfterViewInit(): Promise<void> {
-    // Lazy load FullCalendar modules once, only in the browser platform when the container is available
     if (!this.calendarLoaded && isPlatformBrowser(this.platformId) && this.calendarContainer) {
       await this.loadCalendar();
     }
+  }
+
+  /**
+   * Generate a consistent color for an event based on its title
+   */
+  private getEventColor(title: string): (typeof EVENT_COLORS)[0] {
+    let hash = 0;
+    for (let i = 0; i < title.length; i++) {
+      hash = title.charCodeAt(i) + ((hash << 5) - hash);
+      hash = hash & hash;
+    }
+    return EVENT_COLORS[Math.abs(hash) % EVENT_COLORS.length];
   }
 
   /**
@@ -114,33 +182,23 @@ export class CalendarView implements OnInit, AfterViewInit {
    */
   private async loadCalendar(): Promise<void> {
     try {
-      // Dynamically import FullCalendar modules
-      const [
-        { FullCalendarComponent },
-        dayGridPlugin,
-        timeGridPlugin,
-        interactionPlugin,
-      ] = await Promise.all([
-        import('@fullcalendar/angular'),
-        import('@fullcalendar/daygrid').then((m) => m.default),
-        import('@fullcalendar/timegrid').then((m) => m.default),
-        import('@fullcalendar/interaction').then((m) => m.default),
-      ]);
+      const [{ FullCalendarComponent }, dayGridPlugin, timeGridPlugin, interactionPlugin] =
+        await Promise.all([
+          import('@fullcalendar/angular'),
+          import('@fullcalendar/daygrid').then((m) => m.default),
+          import('@fullcalendar/timegrid').then((m) => m.default),
+          import('@fullcalendar/interaction').then((m) => m.default),
+        ]);
 
-      // Update calendar options with the loaded plugins
       this.calendarOptions.update((options) => ({
         ...options,
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
       }));
 
-      // Create the FullCalendar component dynamically
       if (this.calendarContainer) {
         this.calendarComponentRef = this.calendarContainer.createComponent(FullCalendarComponent);
         this.calendarComponentRef.instance.options = this.calendarOptions();
-
         this.calendarLoaded = true;
-
-        // Update calendar events after loading
         this.updateCalendarEvents();
       }
     } catch (error) {
@@ -153,32 +211,66 @@ export class CalendarView implements OnInit, AfterViewInit {
    * Update calendar events when input changes
    */
   private updateCalendarEvents(): void {
-    const fullCalendarEvents: EventInput[] = this.events().map((event, index) => ({
-      id: index.toString(),
-      title: event.summary,
-      start: typeof event.start === 'string' ? event.start : event.start.toISOString(),
-      end: typeof event.end === 'string' ? event.end : event.end.toISOString(),
-      extendedProps: {
-        description: event.description,
-        location: event.location,
-      },
-    }));
+    const fullCalendarEvents: EventInput[] = this.events().map((event, index) => {
+      const color = this.getEventColor(event.summary);
+      return {
+        id: index.toString(),
+        title: event.summary,
+        start: typeof event.start === 'string' ? event.start : event.start.toISOString(),
+        end: typeof event.end === 'string' ? event.end : event.end.toISOString(),
+        backgroundColor: color.bg,
+        borderColor: color.border,
+        textColor: color.text,
+        extendedProps: {
+          description: event.description,
+          location: event.location,
+        },
+      };
+    });
 
     this.calendarOptions.update((options) => ({
       ...options,
       events: fullCalendarEvents,
     }));
 
-    // Update the component instance if it's already loaded
     if (this.calendarComponentRef) {
       this.calendarComponentRef.instance.options = this.calendarOptions();
     }
   }
 
   /**
+   * Add hover tooltip and enhanced styling to each event element
+   */
+  private handleEventDidMount(info: EventMountArg): void {
+    const { event, el } = info;
+    const location = event.extendedProps?.['location'];
+    const description = event.extendedProps?.['description'];
+
+    // Build tooltip text
+    const parts: string[] = [event.title];
+    if (event.start) {
+      const startStr = event.start.toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      });
+      parts.push(`🕐 ${startStr}`);
+    }
+    if (location) parts.push(`📍 ${location}`);
+    if (description) {
+      const shortDesc = description.length > 60 ? description.substring(0, 60) + '…' : description;
+      parts.push(`📝 ${shortDesc}`);
+    }
+    el.setAttribute('title', parts.join('\n'));
+  }
+
+  /**
    * Handle event drop (drag & drop)
    */
   private handleEventDrop(info: EventDropArg): void {
+    this.closePopover();
     const eventIndex = parseInt(info.event.id, 10);
     const updatedEvents = [...this.events()];
 
@@ -197,6 +289,7 @@ export class CalendarView implements OnInit, AfterViewInit {
    * Handle event resize
    */
   private handleEventResize(info: EventResizeDoneArg): void {
+    this.closePopover();
     const eventIndex = parseInt(info.event.id, 10);
     const updatedEvents = [...this.events()];
 
@@ -212,22 +305,53 @@ export class CalendarView implements OnInit, AfterViewInit {
   }
 
   /**
-   * Handle event click
-   * Placeholder for future feature implementation (e.g., edit modal, event details)
-   * @param _info - Event click information (unused for now)
+   * Handle event click — show detail popover (fixed position, viewport-relative)
    */
-  private handleEventClick(_info: EventClickArg): void {
-    // TODO: Implement event editing or detail view
-    // Possible features:
-    // - Open edit modal with event details
-    // - Show event details popup
-    // - Enable quick event deletion
+  private handleEventClick(info: EventClickArg): void {
+    info.jsEvent.preventDefault();
+    info.jsEvent.stopPropagation();
+
+    const rect = info.el.getBoundingClientRect();
+
+    const formatTime = (date: Date | null): string => {
+      if (!date) return '—';
+      return date.toLocaleString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      });
+    };
+
+    const color = this.getEventColor(info.event.title);
+
+    // Use viewport coordinates for fixed positioning
+    this.selectedEvent.set({
+      title: info.event.title,
+      start: formatTime(info.event.start),
+      end: formatTime(info.event.end),
+      location: info.event.extendedProps?.['location'],
+      description: info.event.extendedProps?.['description'],
+      color: color.bg,
+      x: rect.left + rect.width / 2,
+      y: rect.bottom + 8,
+    });
+  }
+
+  /**
+   * Close the event detail popover
+   */
+  protected closePopover(): void {
+    this.selectedEvent.set(null);
   }
 
   /**
    * Close the calendar view
    */
   protected close(): void {
+    this.closePopover();
     this.visibleChange.emit(false);
   }
 
@@ -236,9 +360,27 @@ export class CalendarView implements OnInit, AfterViewInit {
    */
   @HostListener('document:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
-    if (event.key === 'Escape' && !this.inline() && this.visible()) {
-      this.close();
-      event.preventDefault();
+    if (event.key === 'Escape') {
+      if (this.selectedEvent()) {
+        this.closePopover();
+        event.preventDefault();
+      } else if (!this.inline() && this.visible()) {
+        this.close();
+        event.preventDefault();
+      }
+    }
+  }
+
+  /**
+   * Close popover when clicking outside
+   */
+  @HostListener('document:click', ['$event'])
+  handleDocumentClick(event: MouseEvent): void {
+    if (this.selectedEvent()) {
+      const target = event.target as HTMLElement;
+      if (!target.closest('.event-popover') && !target.closest('.fc-event')) {
+        this.closePopover();
+      }
     }
   }
 
@@ -256,6 +398,16 @@ export class CalendarView implements OnInit, AfterViewInit {
     if (isPlatformBrowser(this.platformId) && this.calendarComponentRef) {
       const calendarApi = this.calendarComponentRef.instance.getApi();
       calendarApi.changeView(viewType);
+    }
+  }
+
+  /**
+   * Navigate to today
+   */
+  protected goToToday(): void {
+    if (isPlatformBrowser(this.platformId) && this.calendarComponentRef) {
+      const calendarApi = this.calendarComponentRef.instance.getApi();
+      calendarApi.today();
     }
   }
 }

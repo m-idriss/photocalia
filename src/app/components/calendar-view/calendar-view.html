@@ -18,19 +18,44 @@
         role="document"
       >
         <!-- Header -->
-        <div class="calendar-modal-header">
-          <h2 id="calendar-modal-title" class="calendar-modal-title">
-            📅 Interactive Calendar View
-          </h2>
-          <button class="close-button" (click)="close()" aria-label="Close calendar view">✕</button>
+        <div class="calendar-header">
+          <div class="calendar-header-left">
+            <h2 id="calendar-modal-title" class="calendar-title">Calendar Preview</h2>
+            @if (eventCount() > 0) {
+              <div class="calendar-stats">
+                <span class="stat-badge">
+                  <span class="stat-count">{{ eventCount() }}</span>
+                  <span class="stat-label">{{ eventCount() === 1 ? 'event' : 'events' }}</span>
+                </span>
+                @if (dateRange()) {
+                  <span class="stat-separator">·</span>
+                  <span class="stat-date-range">{{ dateRange() }}</span>
+                }
+              </div>
+            }
+          </div>
+          <button class="close-button" (click)="close()" aria-label="Close calendar view">
+            <span class="close-icon">✕</span>
+          </button>
+        </div>
+
+        <!-- Instructions -->
+        <div class="calendar-instructions">
+          <span class="instruction-item">
+            <span class="instruction-icon">✋</span> Drag to reschedule
+          </span>
+          <span class="instruction-divider">·</span>
+          <span class="instruction-item">
+            <span class="instruction-icon">↔</span> Resize to adjust
+          </span>
+          <span class="instruction-divider">·</span>
+          <span class="instruction-item">
+            <span class="instruction-icon">👆</span> Click for details
+          </span>
         </div>
 
         <!-- Calendar Body -->
-        <div class="calendar-modal-body">
-          <div class="calendar-instructions">
-            <p>✨ Drag events to reschedule • Resize to adjust duration • Click for details</p>
-          </div>
-
+        <div class="calendar-body" (click)="closePopover()">
           <div class="calendar-container">
             @if (loadError) {
               <div class="error-message">
@@ -42,13 +67,13 @@
         </div>
 
         <!-- Footer Actions -->
-        <div class="calendar-modal-footer">
+        <div class="calendar-footer">
           <button
             class="action-btn export-btn"
             (click)="handleExport()"
             aria-label="Export calendar events to ICS file"
           >
-            💾 Export Updated ICS
+            <span class="btn-icon">📥</span> Export ICS
           </button>
           <button class="action-btn close-btn" (click)="close()" aria-label="Close calendar view">
             Close
@@ -62,12 +87,35 @@
   @if (inline()) {
     <div class="calendar-inline-container" role="region" aria-labelledby="calendar-inline-title">
       <!-- Header -->
-      <div class="calendar-inline-header">
-        <h2 id="calendar-inline-title" class="calendar-inline-title">📅 Calendar View</h2>
+      <div class="calendar-header">
+        <div class="calendar-header-left">
+          <h2 id="calendar-inline-title" class="calendar-title">Calendar Preview</h2>
+          @if (eventCount() > 0) {
+            <div class="calendar-stats">
+              <span class="stat-badge">
+                <span class="stat-count">{{ eventCount() }}</span>
+                <span class="stat-label">{{ eventCount() === 1 ? 'event' : 'events' }}</span>
+              </span>
+              @if (dateRange()) {
+                <span class="stat-separator">·</span>
+                <span class="stat-date-range">{{ dateRange() }}</span>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Instructions -->
+      <div class="calendar-instructions">
+        <span class="instruction-item"> <span class="instruction-icon">✋</span> Drag </span>
+        <span class="instruction-divider">·</span>
+        <span class="instruction-item"> <span class="instruction-icon">↔</span> Resize </span>
+        <span class="instruction-divider">·</span>
+        <span class="instruction-item"> <span class="instruction-icon">👆</span> Click </span>
       </div>
 
       <!-- Calendar Body -->
-      <div class="calendar-inline-body">
+      <div class="calendar-body" (click)="closePopover()">
         <div class="calendar-container">
           @if (loadError) {
             <div class="error-message">
@@ -79,14 +127,59 @@
       </div>
 
       <!-- Footer Actions -->
-      <div class="calendar-inline-footer">
+      <div class="calendar-footer">
         <button
           class="action-btn export-btn"
           (click)="handleExport()"
           aria-label="Export calendar events to ICS file"
         >
-          💾 Export ICS
+          <span class="btn-icon">📥</span> Export ICS
         </button>
+      </div>
+    </div>
+  }
+
+  <!-- Event Detail Popover (fixed position, outside scroll container) -->
+  @if (selectedEvent(); as evt) {
+    <div
+      class="event-popover"
+      [style.left.px]="evt.x"
+      [style.top.px]="evt.y"
+      (click)="$event.stopPropagation()"
+      role="tooltip"
+    >
+      <div class="popover-accent" [style.background]="evt.color"></div>
+      <div class="popover-content">
+        <div class="popover-header">
+          <h4 class="popover-title">{{ evt.title }}</h4>
+          <button class="popover-close" (click)="closePopover()" aria-label="Close details">
+            ✕
+          </button>
+        </div>
+        <div class="popover-details">
+          <div class="popover-row">
+            <span class="popover-icon">🕐</span>
+            <div class="popover-time">
+              <span>{{ evt.start }}</span>
+              @if (evt.end) {
+                <span class="time-separator">→</span>
+                <span>{{ evt.end }}</span>
+              }
+            </div>
+          </div>
+          @if (evt.location) {
+            <div class="popover-row">
+              <span class="popover-icon">📍</span>
+              <span class="popover-text">{{ evt.location }}</span>
+            </div>
+          }
+          @if (evt.description) {
+            <div class="popover-row">
+              <span class="popover-icon">📝</span>
+              <span class="popover-text popover-description">{{ evt.description }}</span>
+            </div>
+          }
+        </div>
       </div>
     </div>
   }

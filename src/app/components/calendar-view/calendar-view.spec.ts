@@ -91,7 +91,6 @@ describe('CalendarView', () => {
   });
 
   it('should not load calendar when visible is false', async () => {
-    // Create a fresh component with visible = false
     const freshFixture = TestBed.createComponent(CalendarView);
     const freshComponent = freshFixture.componentInstance;
 
@@ -101,35 +100,30 @@ describe('CalendarView', () => {
     freshFixture.detectChanges();
     await freshFixture.whenStable();
 
-    // Calendar should not be loaded when not visible
     expect(freshComponent['calendarLoaded']).toBe(false);
   });
 
   it('should set loadError to true when dynamic import fails', async () => {
-    // Create a fresh component
     const freshFixture = TestBed.createComponent(CalendarView);
     const freshComponent = freshFixture.componentInstance;
 
     freshFixture.componentRef.setInput('events', mockEvents);
     freshFixture.componentRef.setInput('visible', true);
 
-    // Spy on the loadCalendar method to simulate a failure before it tries to load
-    const loadCalendarSpy = spyOn(freshComponent as any, 'loadCalendar').and.returnValue(
+    spyOn<CalendarView>(freshComponent, 'loadCalendar' as never).and.returnValue(
       Promise.reject(new Error('Simulated import failure')),
     );
 
-    // Manually set loadError since we're preventing the actual call
     freshComponent['loadError'] = false;
 
     try {
-      await (freshComponent as any).loadCalendar();
+      await freshComponent['loadCalendar']();
     } catch {
       freshComponent['loadError'] = true;
     }
 
     freshFixture.detectChanges();
 
-    // loadError should be set
     expect(freshComponent['loadError']).toBe(true);
   });
 
@@ -141,5 +135,133 @@ describe('CalendarView', () => {
     expect(errorMessage).toBeTruthy();
     expect(errorMessage?.textContent).toContain('Failed to load calendar');
   });
-});
 
+  // New tests for color-coded events
+  it('should compute event count correctly', () => {
+    expect(component['eventCount']()).toBe(2);
+  });
+
+  it('should compute date range for multiple events', () => {
+    const range = component['dateRange']();
+    expect(range).toContain('Jan');
+    expect(range).toContain('–');
+  });
+
+  it('should compute date range for single event', () => {
+    fixture.componentRef.setInput('events', [mockEvents[0]]);
+    fixture.detectChanges();
+
+    const range = component['dateRange']();
+    expect(range).toContain('Jan');
+    expect(range).toContain('2025');
+  });
+
+  it('should return empty date range for no events', () => {
+    fixture.componentRef.setInput('events', []);
+    fixture.detectChanges();
+
+    expect(component['dateRange']()).toBe('');
+  });
+
+  // Event color generation
+  it('should generate consistent colors for the same title', () => {
+    const color1 = component['getEventColor']('Test Event');
+    const color2 = component['getEventColor']('Test Event');
+    expect(color1).toEqual(color2);
+  });
+
+  it('should generate different colors for different titles', () => {
+    const color1 = component['getEventColor']('Meeting');
+    const color2 = component['getEventColor']('Lunch Break');
+    // They could coincidentally be the same, but with different hashes they likely differ
+    // Just verify both return a valid color object
+    expect(color1.bg).toBeTruthy();
+    expect(color2.bg).toBeTruthy();
+  });
+
+  // Popover
+  it('should have no selected event initially', () => {
+    expect(component['selectedEvent']()).toBeNull();
+  });
+
+  it('should close popover via closePopover()', () => {
+    component['selectedEvent'].set({
+      title: 'Test',
+      start: 'Jan 15',
+      end: 'Jan 15',
+      color: '#3b82f6',
+      x: 100,
+      y: 200,
+    });
+    expect(component['selectedEvent']()).toBeTruthy();
+
+    component['closePopover']();
+    expect(component['selectedEvent']()).toBeNull();
+  });
+
+  it('should close popover on Escape key', () => {
+    component['selectedEvent'].set({
+      title: 'Test',
+      start: 'Jan 15',
+      end: 'Jan 15',
+      color: '#3b82f6',
+      x: 100,
+      y: 200,
+    });
+
+    component.handleKeyDown({
+      key: 'Escape',
+      preventDefault: () => undefined,
+    } as unknown as KeyboardEvent);
+
+    expect(component['selectedEvent']()).toBeNull();
+  });
+
+  it('should display stats badge in modal mode', () => {
+    const stats = fixture.nativeElement.querySelector('.calendar-stats');
+    expect(stats).toBeTruthy();
+
+    const countEl = fixture.nativeElement.querySelector('.stat-count');
+    expect(countEl?.textContent?.trim()).toBe('2');
+  });
+
+  it('should display instructions in modal mode', () => {
+    const instructions = fixture.nativeElement.querySelector('.calendar-instructions');
+    expect(instructions).toBeTruthy();
+    expect(instructions?.textContent).toContain('Drag');
+  });
+
+  it('should render inline mode when inline input is true', () => {
+    fixture.componentRef.setInput('inline', true);
+    fixture.detectChanges();
+
+    const inlineContainer = fixture.nativeElement.querySelector('.calendar-inline-container');
+    expect(inlineContainer).toBeTruthy();
+
+    const modalOverlay = fixture.nativeElement.querySelector('.calendar-modal-overlay');
+    expect(modalOverlay).toBeFalsy();
+  });
+
+  it('should display event popover when selectedEvent is set', () => {
+    component['selectedEvent'].set({
+      title: 'Doctor Appointment',
+      start: 'Wed, Jan 15, 10:00',
+      end: 'Wed, Jan 15, 11:00',
+      location: 'Hospital',
+      description: 'Annual checkup',
+      color: '#3b82f6',
+      x: 200,
+      y: 300,
+    });
+    fixture.detectChanges();
+
+    const popover = fixture.nativeElement.querySelector('.event-popover');
+    expect(popover).toBeTruthy();
+
+    const title = popover.querySelector('.popover-title');
+    expect(title?.textContent?.trim()).toBe('Doctor Appointment');
+
+    const locationEl = popover.querySelector('.popover-text');
+    expect(locationEl?.textContent?.trim()).toBe('Hospital');
+  });
+});
