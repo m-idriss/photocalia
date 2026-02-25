@@ -29,9 +29,9 @@ export class App implements OnInit {
   protected readonly currentRoute = signal<string>('');
   private deferredPrompt: BeforeInstallPromptEvent | null = null;
 
-  // Show stats on home page for logged-in users
+  // Show stats only on home page for non-logged users
   protected readonly shouldShowStats = computed(
-    () => this.currentRoute() === '/' && this.authService.isAuthenticated(),
+    () => this.currentRoute() === '/' && !this.authService.isAuthenticated(),
   );
 
   ngOnInit(): void {
