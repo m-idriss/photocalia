@@ -946,6 +946,29 @@
 }
 
 /* ========================
+   Extraction verification note
+   ======================== */
+.extraction-note {
+  background: linear-gradient(90deg, rgba(255, 243, 224, 0.6), rgba(255, 249, 230, 0.4));
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+  margin: 0.75rem 0;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+
+  strong {
+    margin-right: 0.25rem;
+  }
+
+  a {
+    margin-left: 0.5rem;
+    color: var(--accent-color);
+    text-decoration: underline;
+  }
+}
+
+/* ========================
    Reduced Motion Support
    ======================== */
 @media (prefers-reduced-motion: reduce) {
@@ -954,3 +977,24 @@
     transition: none !important;
   }
 }
+
+/* ========================
+   Download confirmation checkbox
+   ======================== */
+.download-confirmation {
+  margin-bottom: var(--space-xs);
+
+  .checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+  }
+
+  input[type='checkbox'] {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+

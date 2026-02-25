@@ -59,6 +59,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
   public readonly quotaEnabled = signal<boolean>(false);
   public readonly isQuotaLoading = signal<boolean>(false);
   public readonly planType = signal<string | null>(null);
+  // Require user confirmation before allowing download
+  public readonly extractionConfirmed = signal<boolean>(false);
 
   constructor() {
     super();
@@ -617,7 +619,15 @@ export class Converter extends AuthAwareComponent implements OnInit {
   }
 
   protected downloadIcs(): void {
-    if (this.icsContent()) this.converterService.downloadIcsFile(this.icsContent()!);
+    // Prevent download unless the user confirmed the extracted events
+    if (!this.icsContent()) return;
+
+    if (!this.extractionConfirmed()) {
+      this.toastService.showError('Please confirm that you reviewed and verified the extracted events before downloading.');
+      return;
+    }
+
+    this.converterService.downloadIcsFile(this.icsContent()!);
   }
 
   protected resetState(): void {
@@ -629,6 +639,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
     this.toastService.clearAll();
     this.extractedEvents.set([]);
     this.icsContent.set(null);
+    // Reset download confirmation when state is reset
+    this.extractionConfirmed.set(false);
     // Reset calendar state service to prevent effect from restoring old events
     this.calendarStateService.hideCalendar();
     this.calendarStateService.updateEvents([]);
@@ -639,7 +651,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
    */
   protected async retryFile(index: number): Promise<void> {
     const batchFile = this.batchFiles()[index];
-    if (batchFile.status !== BatchFileStatus.ERROR) return;
+    if (!batchFile) return;
 
     // Reset file status
     this.batchFiles.update((files) =>

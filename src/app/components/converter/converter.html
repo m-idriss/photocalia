@@ -199,6 +199,13 @@
 
     <!-- Extracted Events - Apple Calendar Style with Editing -->
     @if (extractedEvents().length > 0) {
+
+      <!-- AI extraction verification note -->
+      <div class="extraction-note" role="note" aria-live="polite">
+        <strong>Note:</strong> Events are automatically extracted by AI and may contain mistakes (dates, times, locations).
+        Please verify each event before saving or exporting.
+      </div>
+
       <!-- Primary Action Button - Prominent Position (Mobile/Tablet only) -->
       <div class="primary-actions mobile-tablet-calendar-button">
         <button
@@ -404,9 +411,22 @@
 
       <!-- Action Buttons -->
       <nav class="actions" aria-label="Calendar actions">
+        <div class="download-confirmation">
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              [checked]="extractionConfirmed()"
+              (change)="extractionConfirmed.set($any($event.target).checked)"
+              aria-label="I have reviewed and verified the extracted events"
+            />
+            I have reviewed and verified the extracted events
+          </label>
+        </div>
         <button
           class="action-button download btn btn-success"
           (click)="downloadIcs()"
+          [attr.aria-disabled]="!extractionConfirmed()"
+          [disabled]="!extractionConfirmed()"
           aria-label="Download calendar file"
           appTooltip="Download your calendar as .ics file"
           appTooltipPlacement="top"
