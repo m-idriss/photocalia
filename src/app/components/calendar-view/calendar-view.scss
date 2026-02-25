@@ -269,11 +269,20 @@
 }
 
 /* ========================
+   Popover Backdrop (mobile only)
+   ======================== */
+.popover-backdrop {
+  display: none; /* Hidden on desktop */
+}
+
+/* ========================
    Event Detail Popover
    ======================== */
 .event-popover {
   position: fixed;
   z-index: 100000;
+  left: var(--popover-x);
+  top: var(--popover-y);
   transform: translateX(-50%);
   min-width: 260px;
   max-width: 340px;
@@ -717,27 +726,64 @@
   }
 }
 
+@keyframes mobileSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bottomSheetUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ========================
-   Responsive Styles
+   Responsive — Tablet (≤ 768px)
    ======================== */
 @media (max-width: 768px) {
+  /* Full-screen modal on mobile */
   .calendar-modal-overlay {
     padding: 0;
+    align-items: stretch;
+    justify-content: stretch;
   }
 
   .calendar-modal-content {
-    max-width: 100vw;
-    max-height: 100vh;
-    height: 100vh;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100dvh; /* dynamic viewport height for mobile browsers */
     border-radius: 0;
+    border: none;
+    animation: mobileSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* Compact header */
   .calendar-header {
-    padding: var(--space-sm) var(--space-md);
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .calendar-header-left {
+    gap: 0.5rem;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .calendar-title {
     font-size: 1rem;
+    line-height: 1.2;
   }
 
   .calendar-stats {
@@ -745,48 +791,374 @@
   }
 
   .stat-badge {
-    padding: 0.15rem 0.4rem;
+    padding: 0.15rem 0.45rem;
   }
 
+  .stat-count {
+    font-size: 0.78rem;
+  }
+
+  .stat-label {
+    font-size: 0.68rem;
+  }
+
+  .stat-date-range {
+    font-size: 0.7rem;
+  }
+
+  /* Larger close button for touch */
+  .close-button {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    border-radius: var(--radius-md);
+  }
+
+  /* Compact instructions — single line, abbreviated */
   .calendar-instructions {
-    padding: 0.3rem var(--space-md);
-    font-size: 0.65rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.68rem;
+    gap: 0.35rem;
   }
 
+  .instruction-icon {
+    font-size: 0.72rem;
+  }
+
+  /* Calendar body takes remaining space */
+  .calendar-body {
+    flex: 1;
+    min-height: 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Footer — stack buttons on mobile */
   .calendar-footer {
-    padding: var(--space-sm) var(--space-md);
+    padding: 0.5rem 0.75rem;
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
     flex-direction: column;
+    gap: 0.4rem;
   }
 
+  .action-btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    min-height: 44px; /* iOS minimum tap target */
+  }
+
+  /* ---- Popover backdrop on mobile ---- */
+  .popover-backdrop {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    background: rgba(0, 0, 0, 0.35);
+    animation: overlayFadeIn 0.2s ease-out;
+  }
+
+  /* ---- Bottom-sheet popover on mobile ---- */
   .event-popover {
-    min-width: 220px;
-    max-width: 280px;
+    /* Override desktop tooltip → mobile bottom sheet */
+    --popover-x: 0;
+    --popover-y: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    transform: none;
+    min-width: unset;
+    max-width: unset;
+    width: 100%;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+    animation: bottomSheetUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.4);
+
+    /* Remove the arrow on mobile */
+    &::before {
+      display: none;
+    }
+
+    /* Bottom sheet handle */
+    &::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--glass-border);
+    }
   }
 
+  .popover-accent {
+    height: 4px;
+    margin-top: 16px; /* Space for the handle */
+  }
+
+  .popover-content {
+    padding: 0.75rem 1rem 0.5rem;
+  }
+
+  .popover-title {
+    font-size: 1rem;
+  }
+
+  .popover-close {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+
+  .popover-row {
+    font-size: 0.85rem;
+    gap: 0.5rem;
+    padding: 0.15rem 0;
+  }
+
+  .popover-icon {
+    font-size: 0.9rem;
+  }
+
+  .popover-description {
+    max-height: 80px;
+    -webkit-line-clamp: 4;
+  }
+
+  .popover-time {
+    font-size: 0.85rem;
+  }
+
+  /* ---- FullCalendar mobile overrides ---- */
   ::ng-deep {
+    /* Reorganize toolbar: title top, nav + views below */
     .fc-header-toolbar {
-      flex-direction: column;
-      gap: 0.4rem;
+      flex-wrap: wrap;
+      gap: 0.35rem;
       padding: 0.4rem 0.5rem;
     }
 
+    /* Make chunks wrap nicely */
     .fc-toolbar-chunk {
       margin: 0 !important;
+
+      &:nth-child(2) {
+        order: -1;
+        width: 100%;
+        text-align: center;
+      }
     }
 
     .fc-toolbar-title {
       font-size: 0.95rem !important;
+      text-align: center;
+    }
+
+    /* Larger touch-friendly buttons */
+    .fc-button {
+      font-size: 0.72rem;
+      padding: 0.3rem 0.55rem;
+      min-height: 34px;
+      min-width: 34px;
+
+      &.fc-prev-button,
+      &.fc-next-button {
+        font-size: 0.95rem;
+        padding: 0.3rem 0.5rem;
+      }
+
+      &.fc-today-button {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+      }
+    }
+
+    /* Compact column headers */
+    .fc-col-header-cell {
+      font-size: 0.68rem;
+      padding: 0.35rem 0.15rem;
+      letter-spacing: 0.03em;
+    }
+
+    .fc-col-header-cell-cushion {
+      padding: 0.15rem;
+    }
+
+    /* Day numbers */
+    .fc-daygrid-day-number {
+      font-size: 0.78rem;
+      padding: 0.25rem 0.35rem;
+    }
+
+    /* Today marker — slightly smaller */
+    .fc-day-today .fc-daygrid-day-number {
+      width: 24px;
+      height: 24px;
+      font-size: 0.72rem;
+    }
+
+    /* Compact day cells */
+    .fc-daygrid-day-frame {
+      min-height: 52px;
+    }
+
+    /* Larger event touch targets */
+    .fc-event {
+      padding: 3px 5px;
+      font-size: 0.7rem;
+      min-height: 22px;
+      border-left-width: 3px;
+    }
+
+    .fc-event-time {
+      font-size: 0.62rem;
+    }
+
+    /* More link */
+    .fc-daygrid-more-link {
+      font-size: 0.65rem;
+    }
+
+    /* Time grid adjustments */
+    .fc-timegrid-slot {
+      height: 2.25rem;
+    }
+
+    .fc-timegrid-slot-label-cushion {
+      font-size: 0.62rem;
+      padding: 0 0.25rem;
+    }
+
+    /* Time grid events — wider touch area */
+    .fc-timegrid-event {
+      min-height: 20px;
+    }
+  }
+}
+
+/* ========================
+   Responsive — Small phone (≤ 480px)
+   ======================== */
+@media (max-width: 480px) {
+  .calendar-header {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .calendar-title {
+    font-size: 0.9rem;
+  }
+
+  .calendar-stats {
+    font-size: 0.65rem;
+    gap: 0.25rem;
+  }
+
+  .stat-badge {
+    padding: 0.1rem 0.35rem;
+  }
+
+  .stat-separator,
+  .stat-date-range {
+    display: none; /* Hide date range on very small screens */
+  }
+
+  .calendar-instructions {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.62rem;
+    gap: 0.25rem;
+  }
+
+  .instruction-divider {
+    display: none; /* Remove dividers, rely on spacing */
+  }
+
+  .instruction-item {
+    gap: 0.15rem;
+  }
+
+  .calendar-footer {
+    padding: 0.4rem 0.6rem;
+    padding-bottom: max(0.4rem, env(safe-area-inset-bottom));
+  }
+
+  .action-btn {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  ::ng-deep {
+    .fc-header-toolbar {
+      padding: 0.3rem 0.35rem;
+      gap: 0.25rem;
+    }
+
+    .fc-toolbar-title {
+      font-size: 0.85rem !important;
     }
 
     .fc-button {
-      font-size: 0.7rem;
-      padding: 0.25rem 0.5rem;
+      font-size: 0.65rem;
+      padding: 0.25rem 0.4rem;
+      min-height: 30px;
+      min-width: 30px;
 
       &.fc-prev-button,
       &.fc-next-button {
         font-size: 0.85rem;
-        padding: 0.25rem 0.5rem;
+        padding: 0.25rem 0.4rem;
       }
+
+      &.fc-today-button {
+        font-size: 0.65rem;
+      }
+    }
+
+    /* Ultra-compact column headers — show just 1-2 chars */
+    .fc-col-header-cell {
+      font-size: 0.6rem;
+      padding: 0.3rem 0.1rem;
+    }
+
+    .fc-daygrid-day-number {
+      font-size: 0.72rem;
+      padding: 0.2rem 0.25rem;
+    }
+
+    .fc-day-today .fc-daygrid-day-number {
+      width: 22px;
+      height: 22px;
+      font-size: 0.68rem;
+    }
+
+    .fc-daygrid-day-frame {
+      min-height: 42px;
+    }
+
+    .fc-event {
+      padding: 2px 4px;
+      font-size: 0.65rem;
+      min-height: 18px;
+    }
+
+    .fc-event-time {
+      display: none; /* Hide event time on very small screens to save space */
+    }
+
+    .fc-daygrid-more-link {
+      font-size: 0.58rem;
+    }
+
+    .fc-timegrid-slot {
+      height: 2rem;
+    }
+
+    .fc-timegrid-slot-label-cushion {
+      font-size: 0.55rem;
     }
   }
 }
