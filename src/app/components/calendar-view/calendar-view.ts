@@ -81,10 +81,21 @@ export class CalendarView implements AfterViewInit {
   readonly eventsChange = output<CalendarEvent[]>();
   readonly exportIcs = output<void>();
 
-  // Computed stats
-  protected readonly eventCount = computed(() => this.events().length);
+  // Computed stats (guard against required input not yet resolved)
+  protected readonly eventCount = computed(() => {
+    try {
+      return this.events().length;
+    } catch {
+      return 0;
+    }
+  });
   protected readonly dateRange = computed(() => {
-    const events = this.events();
+    let events: CalendarEvent[];
+    try {
+      events = this.events();
+    } catch {
+      return '';
+    }
     if (events.length === 0) return '';
     const dates = events
       .map((e) => new Date(e.start))
@@ -155,7 +166,17 @@ export class CalendarView implements AfterViewInit {
 
   constructor() {
     effect(() => {
-      this.updateCalendarEvents();
+      // Track the events signal explicitly so the effect re-runs on changes.
+      // Guard against required input not yet being available during initial CD.
+      let events: CalendarEvent[] | undefined;
+      try {
+        events = this.events();
+      } catch {
+        return;
+      }
+      if (events) {
+        this.updateCalendarEvents(events);
+      }
     });
   }
 
@@ -210,8 +231,9 @@ export class CalendarView implements AfterViewInit {
   /**
    * Update calendar events when input changes
    */
-  private updateCalendarEvents(): void {
-    const fullCalendarEvents: EventInput[] = this.events().map((event, index) => {
+  private updateCalendarEvents(events?: CalendarEvent[]): void {
+    const source = events ?? this.events();
+    const fullCalendarEvents: EventInput[] = source.map((event, index) => {
       const color = this.getEventColor(event.summary);
       return {
         id: index.toString(),

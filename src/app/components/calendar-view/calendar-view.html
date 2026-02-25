@@ -141,10 +141,12 @@
 
   <!-- Event Detail Popover (fixed position, outside scroll container) -->
   @if (selectedEvent(); as evt) {
+    <!-- Mobile backdrop scrim -->
+    <div class="popover-backdrop" (click)="closePopover()"></div>
     <div
       class="event-popover"
-      [style.left.px]="evt.x"
-      [style.top.px]="evt.y"
+      [style.--popover-x.px]="evt.x"
+      [style.--popover-y.px]="evt.y"
       (click)="$event.stopPropagation()"
       role="tooltip"
     >
