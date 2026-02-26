@@ -103,6 +103,10 @@ export class ConverterService {
             : this.getOrCreateAnonymousId();
 
       if (newUserId !== this.userId) {
+        // Clear quota cache when user changes (e.g. logout) to avoid stale UI
+        if (!user) {
+          this.clearQuotaCache();
+        }
         this.userId = newUserId;
       }
     });

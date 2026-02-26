@@ -39,11 +39,6 @@ const envConfigFile = `export const environment = {
 };
 `;
 
-// Write the file
-fs.writeFile(targetPath, envConfigFile, function (err) {
-    if (err) {
-        console.error(err);
-        throw err;
-    }
-    console.log(`Environment file generated at ${targetPath}`);
-});
+// Write the file synchronously so ng build sees it
+fs.writeFileSync(targetPath, envConfigFile);
+console.log(`Environment file generated at ${targetPath}`);
