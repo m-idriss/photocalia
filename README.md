@@ -105,7 +105,6 @@ Customize the theme in `src/styles.scss` using CSS custom properties:
 
 **[📖 Complete Setup Guide →](docs/FIREBASE_AUTH_SETUP.md)**
 
-**[📖 Firebase Emulator Setup →](EMULATOR_SETUP.md)** - Configure local development environment
 
 ### PWA Features
 

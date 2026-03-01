@@ -447,8 +447,8 @@ Browser Testing:
 - **Documentation**: `docs/PWA.md`
 - **Summary**: `PWA_IMPLEMENTATION_SUMMARY.md`
 - **Configuration**: `ngsw-config.json`, `manifest.json`
-- **Angular Guide**: https://angular.io/guide/service-worker-intro
-- **PWA Guide**: https://web.dev/progressive-web-apps/
+- **Angular Guide**: https://v17.angular.io/guide/service-worker-intro
+- **PWA Guide**: https://web.dev/explore/progressive-web-apps
 
 ---
 

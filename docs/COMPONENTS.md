@@ -461,5 +461,5 @@ describe('MyComponent', () => {
 
 - [Angular Component Documentation](https://angular.dev/guide/components)
 - [Angular Style Guide](https://angular.dev/style-guide)
-- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG22/quickref/?versions=2.1)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)

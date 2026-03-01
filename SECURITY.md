@@ -101,6 +101,6 @@ Before submitting a pull request:
 ## Resources
 
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
-- [Angular Security Guide](https://angular.io/guide/security)
+- [Angular Security Guide](https://v17.angular.io/guide/security)
 - [GitHub Security Best Practices](https://docs.github.com/en/code-security)
 

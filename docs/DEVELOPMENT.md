@@ -681,4 +681,4 @@ Monitor with Lighthouse:
 - [RxJS Documentation](https://rxjs.dev/)
 - [SCSS Documentation](https://sass-lang.com/documentation/)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-- [Lighthouse Performance](https://developers.google.com/web/tools/lighthouse)
+- [Lighthouse Performance](https://developer.chrome.com/docs/lighthouse/overview/)

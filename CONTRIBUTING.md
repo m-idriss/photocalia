@@ -529,7 +529,7 @@ prerequisite versions and troubleshooting tips.
 - [Angular Documentation](https://angular.dev)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Conventional Commits](https://www.conventionalcommits.org/)
-- [WCAG Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+- [WCAG Guidelines](https://www.w3.org/WAI/WCAG22/quickref/?versions=2.1)
 
 ---
 
