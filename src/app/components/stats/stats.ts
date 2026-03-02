@@ -1,6 +1,8 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatsService, Statistics } from '../../services/stats.service';
+import { LanguageService } from '../../services/language.service';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 /**
  * Stats component displaying platform statistics (file and event counts).
@@ -9,12 +11,13 @@ import { StatsService, Statistics } from '../../services/stats.service';
  */
 @Component({
   selector: 'app-stats',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './stats.html',
   styleUrl: './stats.scss',
 })
 export class Stats implements OnInit {
   private readonly statsService = inject(StatsService);
+  readonly lang = inject(LanguageService);
 
   // Signals for reactive state
   readonly loading = signal(true);
@@ -98,5 +101,15 @@ export class Stats implements OnInit {
    */
   formatNumber(num: number): string {
     return num.toLocaleString();
+  }
+
+  t(key: string, params?: Record<string, string | number>): string {
+    let text = this.lang.translate(key);
+    if (params) {
+      for (const [k, v] of Object.entries(params)) {
+        text = text.replace(`{${k}}`, String(v));
+      }
+    }
+    return text;
   }
 }
