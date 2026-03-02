@@ -11,9 +11,11 @@
   "header.aria.settings": "Settings menu",
   "header.aria.openSettings": "Open settings menu",
   "header.aria.language": "Change language",
+
   "home.hero.title": "Your Automated Calendar Converter",
   "home.hero.description": "Upload images of your appointments, and AI turns them into calendar-ready events.",
   "home.hero.subtitle": "No separate signup — sign in with Google. 3 free conversions/month, contact us to upgrade for higher limits.",
+
   "home.steps.title": "AI Calendar Conversion in 3 Simple Steps",
   "home.steps.1.title": "Upload Your Image",
   "home.steps.1.description": "Drop a photo, screenshot, PDF, or flyer",
@@ -21,6 +23,7 @@
   "home.steps.2.description": "Smart extraction of dates, times, and locations",
   "home.steps.3.title": "Review, Confirm & Save",
   "home.steps.3.description": "Preview, edit if needed, and download ICS for your calendar",
+
   "home.why.title": "Why PhotoCalia",
   "home.why.formats.title": "Multiple Formats",
   "home.why.formats.description": "Converts JPG, PNG & PDF files",
@@ -32,9 +35,11 @@
   "home.why.free.description": "3 free conversions/month, contact us for higher limits",
   "home.why.privacy.title": "Privacy First",
   "home.why.privacy.description": "Secure & privacy-focused",
+
   "home.quota.plan": "Plan",
   "home.quota.usage": "Usage",
   "home.quota.left": "left this month",
+
   "converter.title": "Calendar Converter App",
   "converter.loading": "Loading...",
   "converter.marketing.1": "Save time creating calendar events.",
@@ -47,11 +52,14 @@
   "converter.tooltip.convert": "Convert your files to calendar events",
   "converter.tooltip.remove": "Remove file",
   "converter.processing": "Processing...",
+
   "howitworks.hero.title": "How It Works",
   "howitworks.hero.subtitle": "Transform any photo, screenshot, PDF, or flyer into real calendar events with AI",
+
   "howitworks.intro.title": "Never Miss an Important Date",
   "howitworks.intro.p1": "You receive appointments by email, see event flyers on social media, or snap photos of schedules. Later, you forget to add them to your calendar — and you miss the event.",
   "howitworks.intro.p2": "Photocalia solves this. Upload or share an image of any calendar, schedule, or appointment reminder. Our AI instantly reads the date, time, and location, turning it into a real calendar event you can save immediately.",
+
   "howitworks.steps.title": "AI Calendar Conversion in 3 Simple Steps",
   "howitworks.steps.1.title": "Upload Your Image",
   "howitworks.steps.1.description": "Drag and drop a photo, screenshot, PDF, or flyer. Works with appointment reminders, concert tickets, school schedules, and more. Support for JPG, PNG, and PDF formats.",
@@ -59,6 +67,7 @@
   "howitworks.steps.2.description": "Our AI assistant analyzes your image using GPT-4 Vision. It automatically detects dates, times, locations, and event titles. No manual typing required.",
   "howitworks.steps.3.title": "Review, Confirm & Save",
   "howitworks.steps.3.description": "Preview the extracted events in a clean calendar view. Make quick edits if needed — you stay in control. Then save to your calendar or download as an ICS file for Google Calendar, Outlook, or Apple Calendar.",
+
   "howitworks.usecases.title": "Real-Life Use Cases",
   "howitworks.usecases.medical.title": "Medical Appointments",
   "howitworks.usecases.medical.description": "Convert doctor appointment cards and medical reminder emails into calendar events. Never miss a checkup again.",
@@ -70,10 +79,12 @@
   "howitworks.usecases.subscriptions.description": "Track renewal dates, payment deadlines, and important notices from bills and statements.",
   "howitworks.usecases.deliveries.title": "Deliveries & Returns",
   "howitworks.usecases.deliveries.description": "Add shipping notifications and return windows to your calendar from package tracking screenshots.",
+
   "howitworks.instant.title": "Why Instant Capture Matters",
   "howitworks.instant.p1": "Research shows that we're most likely to forget information within the first hour of receiving it. The moment you see an appointment reminder or event flyer is when you're most motivated to act.",
   "howitworks.instant.p2": "Photocalia lets you capture that moment. Simply snap a photo or upload the image right away. Within seconds, the event is extracted and ready to save. No more sticky notes, no more \"I'll add it later.\"",
   "howitworks.instant.p3": "By reducing the friction between seeing an event and saving it, you ensure nothing falls through the cracks.",
+
   "howitworks.benefits.title": "Key Benefits",
   "howitworks.benefits.time.label": "Save Time:",
   "howitworks.benefits.time.description": "No manual typing of dates, times, or locations",
@@ -91,6 +102,7 @@
   "howitworks.benefits.free.description": "3 free conversions per month, upgrade for higher limits",
   "howitworks.benefits.noapp.label": "No App Required:",
   "howitworks.benefits.noapp.description": "Works directly in your browser",
+
   "howitworks.faq.title": "Frequently Asked Questions",
   "howitworks.faq.formats.q": "What file formats are supported?",
   "howitworks.faq.formats.a": "Photocalia supports JPG, PNG, and PDF files. You can upload photos from your phone, screenshots, or scanned documents containing calendar information.",
@@ -104,14 +116,11 @@
   "howitworks.faq.edit.a": "Absolutely. After the AI extracts events, you can review them in a calendar view and make any necessary edits before downloading the ICS file.",
   "howitworks.faq.ics.q": "Which calendar apps work with the exported ICS files?",
   "howitworks.faq.ics.a": "ICS is a universal calendar format supported by Google Calendar, Outlook, Apple Calendar, and most other calendar applications. Simply import the downloaded file into your preferred calendar.",
+
   "howitworks.cta.title": "Ready to Never Miss an Event?",
   "howitworks.cta.description": "Start converting images to calendar events in seconds. No credit card required.",
   "howitworks.cta.button": "Start Free",
   "howitworks.cta.note": "3 free conversions per month • Upgrade for higher limits",
-  "pwa.update": "New version available. Load new version?",
-  "stats.title": "Powering Your Productivity",
-  "stats.tagline": "Over {events} events generated from {files} images\\!",
-  "stats.timeSaved": "That's ~{hours} hours saved",
-  "stats.workdays": "{workdays} full workdays of manual scheduling\\!",
-  "stats.error": "Statistics temporarily unavailable"
+
+  "pwa.update": "New version available. Load new version?"
 }
