@@ -1,4 +1,4 @@
-<app-card id="converter" title="Calendar Converter App">
+<app-card id="converter" [title]="'converter.title' | translate">
   <!-- Auth Required Message (when not authenticated) -->
   @if (!isAuthLoading && !isAuthenticated) {
     <section class="auth-required" aria-labelledby="auth-heading">
@@ -20,7 +20,7 @@
   @if (isAuthLoading) {
     <div class="auth-loading" role="status" aria-live="polite">
       <div class="spinner" aria-hidden="true"></div>
-      <p>Loading...</p>
+      <p>{{ 'converter.loading' | translate }}</p>
     </div>
   }
 
@@ -36,16 +36,16 @@
         (drop)="onDrop($event)"
         role="region"
         aria-labelledby="upload-heading"
-        appTooltip="Drag and drop your files or click to browse"
+        [appTooltip]="'converter.tooltip.dropzone' | translate"
         appTooltipPlacement="top"
       >
         <div class="marketing-text">
-          <h4>Save time creating calendar events.</h4>
-          <h4>AI will do the work for you!</h4>
+          <h4>{{ 'converter.marketing.1' | translate }}</h4>
+          <h4>{{ 'converter.marketing.2' | translate }}</h4>
         </div>
         <div class="upload-icon" aria-hidden="true">📤</div>
         <h3 id="upload-heading" class="sr-only">Upload Files</h3>
-        <p>Drop photos, images, or PDFs here or</p>
+        <p>{{ 'converter.upload.drop' | translate }}</p>
         <label class="upload-button">
           <input
             type="file"
@@ -54,9 +54,9 @@
             accept="image/jpeg,image/jpg,image/png,application/pdf"
             (change)="onFileSelect($event)"
             [disabled]="isProcessing()"
-            aria-label="Select files to upload"
+            [attr.aria-label]="'converter.upload.aria' | translate"
           />
-          <span>Browse</span>
+          <span>{{ 'converter.upload.browse' | translate }}</span>
         </label>
       </section>
 
@@ -71,7 +71,7 @@
                 (click)="removeFile($index)"
                 [disabled]="isProcessing()"
                 [attr.aria-label]="'Remove ' + file.name"
-                appTooltip="Remove file"
+                [appTooltip]="'converter.tooltip.remove' | translate"
                 appTooltipPlacement="top"
               >
                 ✕
@@ -87,10 +87,10 @@
           class="action-button btn btn-primary"
           (click)="convertToIcs()"
           aria-label="Convert files to calendar events"
-          appTooltip="Convert your files to calendar events"
+          [appTooltip]="'converter.tooltip.convert' | translate"
           appTooltipPlacement="top"
         >
-          Convert
+          {{ 'converter.convert' | translate }}
         </button>
       }
 
@@ -113,7 +113,7 @@
               ></ngb-progressbar>
             </div>
           } @else {
-            <span>Processing...</span>
+            <span>{{ 'converter.processing' | translate }}</span>
           }
         </div>
       }

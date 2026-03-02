@@ -9,10 +9,12 @@ import { RouterLink } from '@angular/router';
 import { AppTooltipDirective } from '../../shared/directives';
 import { AuthAwareComponent } from '../base/auth-aware.component';
 import { ConverterService } from '../../services/converter';
+import { LanguageService, SupportedLanguage } from '../../services/language.service';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, AppTooltipDirective],
+  imports: [RouterLink, AppTooltipDirective, TranslatePipe],
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,6 +22,7 @@ import { ConverterService } from '../../services/converter';
 export class Header extends AuthAwareComponent {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly converterService = inject(ConverterService);
+  readonly lang = inject(LanguageService);
 
   menuOpen = false;
 
@@ -66,5 +69,10 @@ export class Header extends AuthAwareComponent {
     } catch (error) {
       console.error('Sign in error:', error);
     }
+  }
+
+  setLanguage(lang: SupportedLanguage): void {
+    this.lang.setLanguage(lang);
+    this.cdr.markForCheck();
   }
 }

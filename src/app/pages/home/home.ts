@@ -9,10 +9,11 @@ import { CalendarView } from '../../components/calendar-view';
 import { ToastService } from '../../services/toast.service';
 import { CalendarStateService } from '../../services/calendar-state.service';
 import { CalendarEvent } from '../../models';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-home',
-  imports: [Converter, CalendarView, NgbToastModule, NgbProgressbarModule, NgbTooltipModule],
+  imports: [Converter, CalendarView, NgbToastModule, NgbProgressbarModule, NgbTooltipModule, TranslatePipe],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
