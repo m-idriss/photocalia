@@ -18,7 +18,7 @@ export class LanguageService {
   private readonly http = inject(HttpClient);
   private readonly document = inject(DOCUMENT);
 
-  private readonly translations = signal<Record<string, string>>({});
+  readonly translations = signal<Record<string, string>>({});
   readonly currentLang = signal<SupportedLanguage>(this.getInitialLanguage());
 
   readonly languages = SUPPORTED_LANGUAGES;
