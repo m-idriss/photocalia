@@ -4,19 +4,12 @@
     <div class="stats-content">
       <h2 class="stats-title">
         <span class="stats-icon" aria-hidden="true">📊</span>
-        Powering Your Productivity
+        {{ 'stats.title' | translate }}
       </h2>
       @if (!loading() && !hasError()) {
-        <p class="stats-tagline">
-          Over <strong>{{ formatNumber(displayEventCount()) }} events</strong> generated from
-          <strong>{{ formatNumber(displayFileCount()) }} images</strong>!
-        </p>
+        <p class="stats-tagline" [innerHTML]="t('stats.tagline', { events: '<strong>' + formatNumber(displayEventCount()) + '</strong>', files: '<strong>' + formatNumber(displayFileCount()) + '</strong>' })"></p>
 
-        <p class="stats-time-saved">
-          That's <strong>~{{ formatNumber(timeSavedHours()) }} hours saved</strong><br />
-          Or <strong>{{ formatNumber(timeSavedWorkdays()) }} full workdays</strong> of manual
-          scheduling!
-        </p>
+        <p class="stats-time-saved" [innerHTML]="t('stats.timeSaved', { hours: '<strong>~' + formatNumber(timeSavedHours()) + '</strong>' }) + '<br />' + t('stats.workdays', { workdays: '<strong>' + formatNumber(timeSavedWorkdays()) + '</strong>' })"></p>
       }
     </div>
 
@@ -24,7 +17,7 @@
     @if (!loading() && hasError()) {
       <div class="stats-error">
         <span class="error-icon" aria-hidden="true">⚠️</span>
-        <p>Statistics temporarily unavailable</p>
+        <p>{{ 'stats.error' | translate }}</p>
       </div>
     }
   </div>
