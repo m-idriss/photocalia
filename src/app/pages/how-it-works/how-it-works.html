@@ -4,60 +4,45 @@
     <section class="hero-section" aria-labelledby="hero-title">
       <h1 id="hero-title" class="hero-title">
         <span class="hero-icon" aria-hidden="true">📅</span>
-        How It Works
+        {{ 'howitworks.hero.title' | translate }}
       </h1>
-      <p class="hero-subtitle">Transform any photo, screenshot, PDF, or flyer into real calendar events with AI</p>
+      <p class="hero-subtitle">{{ 'howitworks.hero.subtitle' | translate }}</p>
     </section>
 
     <!-- 1. Intro - Problem → Solution -->
     <section class="intro-section" aria-labelledby="intro-title">
-      <h2 id="intro-title" class="section-title">Never Miss an Important Date</h2>
+      <h2 id="intro-title" class="section-title">{{ 'howitworks.intro.title' | translate }}</h2>
       <div class="section-content">
-        <p>
-          You receive appointments by email, see event flyers on social media, or snap photos of schedules. 
-          Later, you forget to add them to your calendar — and you miss the event.
-        </p>
-        <p>
-          Photocalia solves this. Upload or share an image of any calendar, schedule, or appointment reminder. 
-          Our AI instantly reads the date, time, and location, turning it into a real calendar event you can save immediately.
-        </p>
+        <p>{{ 'howitworks.intro.p1' | translate }}</p>
+        <p>{{ 'howitworks.intro.p2' | translate }}</p>
       </div>
     </section>
 
     <!-- 2. How It Works with AI - 3 Steps -->
     <section class="ai-steps-section" aria-labelledby="ai-steps-title">
-      <h2 id="ai-steps-title" class="section-title">AI Calendar Conversion in 3 Simple Steps</h2>
+      <h2 id="ai-steps-title" class="section-title">{{ 'howitworks.steps.title' | translate }}</h2>
       <div class="ai-steps-container">
         <div class="ai-step-item">
           <div class="step-number">1</div>
           <div class="step-content">
-            <h3 class="step-title">Upload Your Image</h3>
-            <p class="step-description">
-              Drag and drop a photo, screenshot, PDF, or flyer. Works with appointment reminders, concert tickets, 
-              school schedules, and more. Support for JPG, PNG, and PDF formats.
-            </p>
+            <h3 class="step-title">{{ 'howitworks.steps.1.title' | translate }}</h3>
+            <p class="step-description">{{ 'howitworks.steps.1.description' | translate }}</p>
           </div>
         </div>
 
         <div class="ai-step-item">
           <div class="step-number">2</div>
           <div class="step-content">
-            <h3 class="step-title">AI Detects Events</h3>
-            <p class="step-description">
-              Our AI assistant analyzes your image using GPT-4 Vision. It automatically detects dates, 
-              times, locations, and event titles. No manual typing required.
-            </p>
+            <h3 class="step-title">{{ 'howitworks.steps.2.title' | translate }}</h3>
+            <p class="step-description">{{ 'howitworks.steps.2.description' | translate }}</p>
           </div>
         </div>
 
         <div class="ai-step-item">
           <div class="step-number">3</div>
           <div class="step-content">
-            <h3 class="step-title">Review, Confirm & Save</h3>
-            <p class="step-description">
-              Preview the extracted events in a clean calendar view. Make quick edits if needed — you stay in control. 
-              Then save to your calendar or download as an ICS file for Google Calendar, Outlook, or Apple Calendar.
-            </p>
+            <h3 class="step-title">{{ 'howitworks.steps.3.title' | translate }}</h3>
+            <p class="step-description">{{ 'howitworks.steps.3.description' | translate }}</p>
           </div>
         </div>
       </div>
@@ -65,55 +50,45 @@
 
     <!-- 3. Common Real-Life Uses -->
     <section class="use-cases-section" aria-labelledby="use-cases-title">
-      <h2 id="use-cases-title" class="section-title">Real-Life Use Cases</h2>
+      <h2 id="use-cases-title" class="section-title">{{ 'howitworks.usecases.title' | translate }}</h2>
       <div class="use-cases-container">
         <div class="use-case-item">
           <div class="use-case-icon">🏥</div>
           <div class="use-case-content">
-            <h3 class="use-case-title">Medical Appointments</h3>
-            <p class="use-case-description">
-              Convert doctor appointment cards and medical reminder emails into calendar events. Never miss a checkup again.
-            </p>
+            <h3 class="use-case-title">{{ 'howitworks.usecases.medical.title' | translate }}</h3>
+            <p class="use-case-description">{{ 'howitworks.usecases.medical.description' | translate }}</p>
           </div>
         </div>
 
         <div class="use-case-item">
           <div class="use-case-icon">🎓</div>
           <div class="use-case-content">
-            <h3 class="use-case-title">School Activities</h3>
-            <p class="use-case-description">
-              Add events from picture day notices, parent-teacher conferences, and school calendars with one upload.
-            </p>
+            <h3 class="use-case-title">{{ 'howitworks.usecases.school.title' | translate }}</h3>
+            <p class="use-case-description">{{ 'howitworks.usecases.school.description' | translate }}</p>
           </div>
         </div>
 
         <div class="use-case-item">
           <div class="use-case-icon">🎵</div>
           <div class="use-case-content">
-            <h3 class="use-case-title">Concerts & Sports</h3>
-            <p class="use-case-description">
-              Turn concert tickets, game schedules, and event flyers into calendar entries instantly.
-            </p>
+            <h3 class="use-case-title">{{ 'howitworks.usecases.concerts.title' | translate }}</h3>
+            <p class="use-case-description">{{ 'howitworks.usecases.concerts.description' | translate }}</p>
           </div>
         </div>
 
         <div class="use-case-item">
           <div class="use-case-icon">💳</div>
           <div class="use-case-content">
-            <h3 class="use-case-title">Subscriptions & Deadlines</h3>
-            <p class="use-case-description">
-              Track renewal dates, payment deadlines, and important notices from bills and statements.
-            </p>
+            <h3 class="use-case-title">{{ 'howitworks.usecases.subscriptions.title' | translate }}</h3>
+            <p class="use-case-description">{{ 'howitworks.usecases.subscriptions.description' | translate }}</p>
           </div>
         </div>
 
         <div class="use-case-item">
           <div class="use-case-icon">📦</div>
           <div class="use-case-content">
-            <h3 class="use-case-title">Deliveries & Returns</h3>
-            <p class="use-case-description">
-              Add shipping notifications and return windows to your calendar from package tracking screenshots.
-            </p>
+            <h3 class="use-case-title">{{ 'howitworks.usecases.deliveries.title' | translate }}</h3>
+            <p class="use-case-description">{{ 'howitworks.usecases.deliveries.description' | translate }}</p>
           </div>
         </div>
       </div>
@@ -121,58 +96,50 @@
 
     <!-- 4. Why Instant Capture Prevents Forgetting -->
     <section class="instant-capture-section" aria-labelledby="instant-capture-title">
-      <h2 id="instant-capture-title" class="section-title">Why Instant Capture Matters</h2>
+      <h2 id="instant-capture-title" class="section-title">{{ 'howitworks.instant.title' | translate }}</h2>
       <div class="section-content">
-        <p>
-          Research shows that we're most likely to forget information within the first hour of receiving it. 
-          The moment you see an appointment reminder or event flyer is when you're most motivated to act.
-        </p>
-        <p>
-          Photocalia lets you capture that moment. Simply snap a photo or upload the image right away. 
-          Within seconds, the event is extracted and ready to save. No more sticky notes, no more "I'll add it later."
-        </p>
-        <p>
-          By reducing the friction between seeing an event and saving it, you ensure nothing falls through the cracks.
-        </p>
+        <p>{{ 'howitworks.instant.p1' | translate }}</p>
+        <p>{{ 'howitworks.instant.p2' | translate }}</p>
+        <p>{{ 'howitworks.instant.p3' | translate }}</p>
       </div>
     </section>
 
     <!-- 5. Benefits -->
     <section class="benefits-section" aria-labelledby="benefits-title">
-      <h2 id="benefits-title" class="section-title">Key Benefits</h2>
+      <h2 id="benefits-title" class="section-title">{{ 'howitworks.benefits.title' | translate }}</h2>
       <div class="benefits-list">
         <ul>
           <li>
             <span class="benefit-icon">✓</span>
-            <strong>Save Time:</strong> No manual typing of dates, times, or locations
+            <strong>{{ 'howitworks.benefits.time.label' | translate }}</strong> {{ 'howitworks.benefits.time.description' | translate }}
           </li>
           <li>
             <span class="benefit-icon">✓</span>
-            <strong>Never Forget:</strong> Capture events instantly from any image
+            <strong>{{ 'howitworks.benefits.forget.label' | translate }}</strong> {{ 'howitworks.benefits.forget.description' | translate }}
           </li>
           <li>
             <span class="benefit-icon">✓</span>
-            <strong>Batch Processing:</strong> Upload multiple images at once
+            <strong>{{ 'howitworks.benefits.batch.label' | translate }}</strong> {{ 'howitworks.benefits.batch.description' | translate }}
           </li>
           <li>
             <span class="benefit-icon">✓</span>
-            <strong>Universal Compatibility:</strong> Works with Google Calendar, Outlook, and Apple Calendar
+            <strong>{{ 'howitworks.benefits.compat.label' | translate }}</strong> {{ 'howitworks.benefits.compat.description' | translate }}
           </li>
           <li>
             <span class="benefit-icon">✓</span>
-            <strong>Smart AI:</strong> Powered by GPT-4 Vision for accurate event extraction
+            <strong>{{ 'howitworks.benefits.ai.label' | translate }}</strong> {{ 'howitworks.benefits.ai.description' | translate }}
           </li>
           <li>
             <span class="benefit-icon">✓</span>
-            <strong>Privacy First:</strong> Your images are processed securely and not stored
+            <strong>{{ 'howitworks.benefits.privacy.label' | translate }}</strong> {{ 'howitworks.benefits.privacy.description' | translate }}
           </li>
           <li>
             <span class="benefit-icon">✓</span>
-            <strong>Free to Start:</strong> 3 free conversions per month, upgrade for higher limits
+            <strong>{{ 'howitworks.benefits.free.label' | translate }}</strong> {{ 'howitworks.benefits.free.description' | translate }}
           </li>
           <li>
             <span class="benefit-icon">✓</span>
-            <strong>No App Required:</strong> Works directly in your browser
+            <strong>{{ 'howitworks.benefits.noapp.label' | translate }}</strong> {{ 'howitworks.benefits.noapp.description' | translate }}
           </li>
         </ul>
       </div>
@@ -180,54 +147,36 @@
 
     <!-- 6. FAQ -->
     <section class="faq-section" aria-labelledby="faq-title">
-      <h2 id="faq-title" class="section-title">Frequently Asked Questions</h2>
+      <h2 id="faq-title" class="section-title">{{ 'howitworks.faq.title' | translate }}</h2>
       <div class="faq-container">
         <div class="faq-item">
-          <h3 class="faq-question">What file formats are supported?</h3>
-          <p class="faq-answer">
-            Photocalia supports JPG, PNG, and PDF files. You can upload photos from your phone, screenshots, 
-            or scanned documents containing calendar information.
-          </p>
+          <h3 class="faq-question">{{ 'howitworks.faq.formats.q' | translate }}</h3>
+          <p class="faq-answer">{{ 'howitworks.faq.formats.a' | translate }}</p>
         </div>
 
         <div class="faq-item">
-          <h3 class="faq-question">How accurate is the AI event extraction?</h3>
-          <p class="faq-answer">
-            Our AI uses GPT-4 Vision technology, which is highly accurate at reading dates, times, and locations 
-            from images. You can always review and edit events before exporting to ensure everything is correct.
-          </p>
+          <h3 class="faq-question">{{ 'howitworks.faq.accuracy.q' | translate }}</h3>
+          <p class="faq-answer">{{ 'howitworks.faq.accuracy.a' | translate }}</p>
         </div>
 
         <div class="faq-item">
-          <h3 class="faq-question">Do I need to create an account?</h3>
-          <p class="faq-answer">
-            You can sign in with your Google account for full access. No separate account creation needed. 
-            This gives you 3 free conversions per month and the ability to upgrade for higher limits.
-          </p>
+          <h3 class="faq-question">{{ 'howitworks.faq.account.q' | translate }}</h3>
+          <p class="faq-answer">{{ 'howitworks.faq.account.a' | translate }}</p>
         </div>
 
         <div class="faq-item">
-          <h3 class="faq-question">Is my data private and secure?</h3>
-          <p class="faq-answer">
-            Yes. Your images are processed securely and are not permanently stored on our servers. 
-            We take privacy seriously and only process your images to extract calendar events.
-          </p>
+          <h3 class="faq-question">{{ 'howitworks.faq.privacy.q' | translate }}</h3>
+          <p class="faq-answer">{{ 'howitworks.faq.privacy.a' | translate }}</p>
         </div>
 
         <div class="faq-item">
-          <h3 class="faq-question">Can I edit events before exporting?</h3>
-          <p class="faq-answer">
-            Absolutely. After the AI extracts events, you can review them in a calendar view and make any 
-            necessary edits before downloading the ICS file.
-          </p>
+          <h3 class="faq-question">{{ 'howitworks.faq.edit.q' | translate }}</h3>
+          <p class="faq-answer">{{ 'howitworks.faq.edit.a' | translate }}</p>
         </div>
 
         <div class="faq-item">
-          <h3 class="faq-question">Which calendar apps work with the exported ICS files?</h3>
-          <p class="faq-answer">
-            ICS is a universal calendar format supported by Google Calendar, Outlook, Apple Calendar, 
-            and most other calendar applications. Simply import the downloaded file into your preferred calendar.
-          </p>
+          <h3 class="faq-question">{{ 'howitworks.faq.ics.q' | translate }}</h3>
+          <p class="faq-answer">{{ 'howitworks.faq.ics.a' | translate }}</p>
         </div>
       </div>
     </section>
@@ -235,15 +184,13 @@
     <!-- 7. Closing CTA -->
     <section class="cta-section" aria-labelledby="cta-title">
       <div class="cta-content">
-        <h2 id="cta-title" class="cta-title">Ready to Never Miss an Event?</h2>
-        <p class="cta-description">
-          Start converting images to calendar events in seconds. No credit card required.
-        </p>
-        <a href="/" class="cta-button" aria-label="Start converting for free">
-          Start Free
+        <h2 id="cta-title" class="cta-title">{{ 'howitworks.cta.title' | translate }}</h2>
+        <p class="cta-description">{{ 'howitworks.cta.description' | translate }}</p>
+        <a href="/" class="cta-button" [attr.aria-label]="'howitworks.cta.button' | translate">
+          {{ 'howitworks.cta.button' | translate }}
           <span class="cta-arrow" aria-hidden="true">→</span>
         </a>
-        <p class="cta-note">3 free conversions per month • Upgrade for higher limits</p>
+        <p class="cta-note">{{ 'howitworks.cta.note' | translate }}</p>
       </div>
     </section>
   </div>

@@ -5,30 +5,47 @@
       <span class="logo-text">PhotoCalia</span>
     </a>
     <nav class="nav-menu">
+      <!-- Language Switcher -->
+      <div class="language-switcher" [attr.aria-label]="'header.aria.language' | translate">
+        @for (language of lang.languages; track language.code) {
+          <button
+            class="lang-btn"
+            [class.active]="lang.currentLang() === language.code"
+            (click)="setLanguage(language.code)"
+            [attr.aria-label]="language.label"
+            [attr.aria-pressed]="lang.currentLang() === language.code"
+            [appTooltip]="language.label"
+            appTooltipPlacement="bottom"
+          >
+            {{ language.flag }}
+          </button>
+        }
+      </div>
+
       <!-- Sign In Button (when not authenticated) -->
       @if (!isAuthenticated && !isAuthLoading) {
         <button
           class="sign-in-button"
           (click)="signIn()"
-          aria-label="Sign in with Google"
-          appTooltip="Sign in with Google"
+          [attr.aria-label]="'header.tooltip.signIn' | translate"
+          [appTooltip]="'header.tooltip.signIn' | translate"
           appTooltipPlacement="bottom"
         >
           <i class="fab fa-google" aria-hidden="true"></i>
-          <span>Sign In</span>
+          <span>{{ 'header.signIn' | translate }}</span>
         </button>
       }
 
       <!-- Burger Menu -->
-      <div class="burger-menu" [class.active]="menuOpen" aria-label="Settings menu">
+      <div class="burger-menu" [class.active]="menuOpen" [attr.aria-label]="'header.aria.settings' | translate">
         <button
           class="burger-button"
           [class.active]="menuOpen"
           (click)="toggleMenu()"
-          aria-label="Open settings menu"
+          [attr.aria-label]="'header.aria.openSettings' | translate"
           [attr.aria-expanded]="menuOpen"
           aria-haspopup="true"
-          appTooltip="Settings"
+          [appTooltip]="'header.tooltip.settings' | translate"
           appTooltipPlacement="bottom"
         >
           @if (isAuthenticated && currentUser) {
@@ -44,7 +61,7 @@
 
         <!-- Dropdown menu -->
         @if (menuOpen) {
-          <div class="profile-dropdown" role="menu" aria-label="Settings">
+          <div class="profile-dropdown" role="menu" [attr.aria-label]="'header.aria.settings' | translate">
             @if (isAuthenticated && currentUser) {
               <div class="user-info">
                 <div class="user-details">
@@ -61,11 +78,11 @@
               class="dropdown-item"
               role="menuitem"
               (click)="closeMenu()"
-              [appTooltip]="'Go to home page'"
+              [appTooltip]="'header.tooltip.home' | translate"
               appTooltipPlacement="left"
             >
               <i class="fas fa-home" aria-hidden="true"></i>
-              <span>Home</span>
+              <span>{{ 'header.home' | translate }}</span>
             </a>
 
             <div class="dropdown-separator" role="separator"></div>
@@ -75,11 +92,11 @@
               class="dropdown-item"
               role="menuitem"
               (click)="closeMenu()"
-              [appTooltip]="'Learn how it works'"
+              [appTooltip]="'header.tooltip.howItWorks' | translate"
               appTooltipPlacement="left"
             >
               <i class="fas fa-info-circle" aria-hidden="true"></i>
-              <span>How It Works</span>
+              <span>{{ 'header.howItWorks' | translate }}</span>
             </a>
 
             @if (isAuthenticated) {
@@ -89,11 +106,11 @@
                 class="dropdown-item sign-out btn btn-danger"
                 role="menuitem"
                 (click)="signOut()"
-                [appTooltip]="'Sign out of your account'"
+                [appTooltip]="'header.tooltip.signOut' | translate"
                 appTooltipPlacement="left"
               >
                 <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
-                <span>Sign Out</span>
+                <span>{{ 'header.signOut' | translate }}</span>
               </button>
             }
           </div>
