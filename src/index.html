@@ -11,11 +11,11 @@
     <!-- SEO Meta Tags -->
     <meta
       name="description"
-      content="Free AI-powered calendar converter: Instantly transform screenshots, images, and PDF documents into ICS calendar files. Convert appointment reminders, event flyers, schedules, and meeting invitations to Google Calendar, Outlook, Apple Calendar. Smart OCR with GPT-4 Vision extracts dates, times, locations automatically. No signup required."
+      content="Convert images, screenshots &amp; PDFs to calendar events in seconds — free. Photocalia uses GPT-4 Vision AI to extract dates, times &amp; locations automatically and export ICS files for Google Calendar, Outlook &amp; Apple Calendar. No manual typing. No separate signup."
     />
     <meta
       name="keywords"
-      content="calendar converter, image to calendar, PDF to calendar, ICS generator, AI calendar extraction, screenshot to calendar, appointment converter, event converter, calendar OCR, meeting invitation parser, schedule converter, Google Calendar import, Outlook calendar, Apple Calendar, iCal converter, free calendar tool, calendar maker, event extractor, AI calendar tool, GPT calendar converter, smart calendar converter"
+      content="calendar converter, image to calendar, photo to calendar, PDF to calendar, ICS generator, AI calendar extraction, screenshot to calendar, appointment converter, event converter, calendar OCR, meeting invitation parser, schedule converter, Google Calendar import, Outlook calendar, Apple Calendar, iCal converter, free calendar tool, add events from picture, convert image to ICS, AI calendar tool, GPT-4 calendar converter, smart calendar converter, picture to calendar event"
     />
     <meta name="author" content="Idriss" />
     <meta
@@ -51,7 +51,7 @@
     />
     <meta
       property="og:description"
-      content="Instantly convert appointment screenshots, event flyers, and schedules into calendar files. AI-powered OCR extracts dates, times, and locations automatically. Works with Google Calendar, Outlook, Apple Calendar. Free & no signup required."
+      content="Upload any image or PDF with event info — Photocalia AI extracts dates, times &amp; locations and exports an ICS file in seconds. Works with Google Calendar, Outlook &amp; Apple Calendar. Free, no separate account needed."
     />
     <meta property="og:image" content="https://photocalia.com/assets/images/converter.png" />
     <meta property="og:image:width" content="1200" />
@@ -174,36 +174,39 @@
     <link rel="manifest" href="assets/manifest.json" />
 
     <!-- Structured Data (JSON-LD) for SEO -->
+
+    <!-- WebSite Schema with Sitelinks Search Box -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Idriss",
+        "@type": "WebSite",
+        "name": "Photocalia",
+        "alternateName": "Photocalia AI Calendar Converter",
         "url": "https://photocalia.com",
-        "image": "https://photocalia.com/assets/icons/icon-512.png",
-        "jobTitle": "Developer",
-        "description": "Developer specializing in modern web technologies",
-        "knowsAbout": [
-          "Angular",
-          "TypeScript",
-          "JavaScript",
-          "Firebase",
-          "Web Development",
-          "Cloud Computing",
-          "Progressive Web Apps",
-          "Software Engineering"
-        ],
-        "sameAs": ["https://github.com/m-idriss"]
+        "description": "Free AI-powered tool to convert images, screenshots, and PDFs into ICS calendar files compatible with Google Calendar, Outlook, and Apple Calendar.",
+        "inLanguage": ["en", "fr"],
+        "publisher": {
+          "@type": "Person",
+          "name": "Idriss",
+          "url": "https://3dime.com",
+          "sameAs": ["https://github.com/m-idriss"]
+        }
       }
     </script>
 
-    <!-- Structured Data for Calendar Converter Application -->
+    <!-- SoftwareApplication Schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "Photocalia AI Calendar Converter",
-        "alternateName": ["Calendar Converter", "Image to ICS Converter", "PDF to Calendar"],
+        "alternateName": [
+          "Calendar Converter",
+          "Image to ICS Converter",
+          "PDF to Calendar",
+          "Photo to Calendar",
+          "Screenshot to Calendar"
+        ],
         "url": "https://photocalia.com",
         "applicationCategory": [
           "ProductivityApplication",
@@ -211,9 +214,15 @@
           "UtilitiesApplication"
         ],
         "operatingSystem": ["Windows", "macOS", "Linux", "iOS", "Android", "Chrome OS"],
-        "description": "Free AI-powered calendar converter that transforms images, screenshots, and PDF documents into ICS calendar files. Using advanced GPT-4 Vision OCR technology, it automatically extracts event dates, times, locations, and descriptions from appointment reminders, meeting invitations, event flyers, and schedules. Converts to standard ICS format compatible with Google Calendar, Microsoft Outlook, Apple Calendar, and all major calendar applications. Features batch processing, drag-and-drop upload, event editing, and instant calendar file generation. No signup or registration required - completely free online tool for professionals, students, and event organizers.",
+        "description": "Free AI-powered calendar converter that transforms images, screenshots, and PDF documents into ICS calendar files. Using advanced GPT-4 Vision OCR technology, it automatically extracts event dates, times, locations, and descriptions from appointment reminders, meeting invitations, event flyers, and schedules. Converts to standard ICS format compatible with Google Calendar, Microsoft Outlook, Apple Calendar, and all major calendar applications. Features batch processing, drag-and-drop upload, event editing, and instant calendar file generation. No signup or registration required.",
         "image": "https://photocalia.com/assets/images/converter.png",
-        "screenshot": "https://photocalia.com/assets/images/converter.png",
+        "screenshot": [
+          {
+            "@type": "ImageObject",
+            "url": "https://photocalia.com/assets/images/converter.png",
+            "caption": "Photocalia AI Calendar Converter interface - upload images and get ICS files instantly"
+          }
+        ],
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -224,7 +233,8 @@
         "author": {
           "@type": "Person",
           "name": "Idriss",
-          "url": "https://3dime.com"
+          "url": "https://3dime.com",
+          "sameAs": ["https://github.com/m-idriss"]
         },
         "creator": {
           "@type": "Person",
@@ -241,28 +251,22 @@
           "ICS file generation for all calendar applications",
           "Google Calendar, Apple Calendar, Microsoft Outlook compatible",
           "No signup or registration required",
-          "3 free conversions per month, subscription available for more",
+          "3 free conversions per month",
           "Privacy-focused - files processed securely",
           "Mobile and desktop responsive design",
           "Progressive Web App (PWA) - installable",
           "Offline capability after installation"
         ],
-        "softwareVersion": "2.0",
+        "softwareVersion": "4.3.0",
         "datePublished": "2024-10-01",
-        "dateModified": "2025-11-11",
+        "dateModified": "2026-03-02",
         "browserRequirements": "Requires JavaScript. Modern web browser recommended (Chrome, Firefox, Safari, Edge).",
         "installUrl": "https://photocalia.com",
         "softwareHelp": {
           "@type": "CreativeWork",
-          "url": "https://photocalia.com"
+          "url": "https://photocalia.com/how-it-works"
         },
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "ratingCount": "127",
-          "bestRating": "5",
-          "worstRating": "1"
-        }
+        "releaseNotes": "https://photocalia.com/how-it-works"
       }
     </script>
 
@@ -277,7 +281,7 @@
             "name": "How do I convert an image to a calendar file?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Simply upload your image (screenshot, photo, or scanned document) containing calendar information to our AI converter. The tool uses GPT-4 Vision to automatically extract event details including dates, times, locations, and descriptions, then generates an ICS calendar file you can import into Google Calendar, Outlook, or Apple Calendar."
+              "text": "Simply upload your image (screenshot, photo, or scanned document) containing calendar information to Photocalia. The tool uses GPT-4 Vision AI to automatically extract event details including dates, times, locations, and descriptions, then generates an ICS calendar file you can import into Google Calendar, Outlook, or Apple Calendar."
             }
           },
           {
@@ -285,7 +289,7 @@
             "name": "What file formats are supported for calendar conversion?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The calendar converter supports common image formats (JPG, JPEG, PNG, HEIC) and PDF documents. You can upload appointment screenshots, event flyers, meeting invitations, schedules, or any document containing calendar information."
+              "text": "Photocalia supports common image formats (JPG, JPEG, PNG, HEIC) and PDF documents. You can upload appointment screenshots, event flyers, meeting invitations, school schedules, concert tickets, or any document containing calendar information."
             }
           },
           {
@@ -293,7 +297,7 @@
             "name": "Is the calendar converter free to use?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, the Photocalia calendar converter offers 3 free conversions per month (Google sign-in required). For users who need more conversions, contact us to upgrade your plan."
+              "text": "Yes, Photocalia offers 3 free conversions per month (Google sign-in required). For users who need more conversions, contact us to upgrade your plan."
             }
           },
           {
@@ -301,7 +305,7 @@
             "name": "Can I convert multiple images at once?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, the tool supports batch processing. You can upload multiple images or PDFs simultaneously, and the converter will process them with real-time progress tracking. All extracted events are combined into a single ICS calendar file."
+              "text": "Yes, Photocalia supports batch processing. You can upload multiple images or PDFs simultaneously, and the AI converter will process them all with real-time progress tracking. All extracted events are combined into a single downloadable ICS calendar file."
             }
           },
           {
@@ -309,7 +313,7 @@
             "name": "Which calendar apps work with the exported ICS files?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The generated ICS files are compatible with all major calendar applications including Google Calendar, Microsoft Outlook, Apple Calendar (iCal), Yahoo Calendar, and any other application that supports the standard ICS (iCalendar) format."
+              "text": "The ICS files generated by Photocalia are compatible with all major calendar applications including Google Calendar, Microsoft Outlook, Apple Calendar (iCal), Yahoo Calendar, and any application that supports the standard ICS (iCalendar) format."
             }
           },
           {
@@ -317,15 +321,15 @@
             "name": "Can I edit the events before downloading?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, after the AI extracts events from your images, you can review and edit all event details including title, date, time, location, and description before generating the final ICS calendar file."
+              "text": "Yes, after the AI extracts events from your images, you can review and edit all event details including title, date, time, location, and description before generating the final ICS calendar file. You stay in full control."
             }
           },
           {
             "@type": "Question",
-            "name": "Is my data secure when using the calendar converter?",
+            "name": "Is my data secure when using Photocalia?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, your privacy is protected. Files are processed securely and are not stored permanently on our servers. The conversion happens in real-time, and your data is handled with strict security protocols."
+              "text": "Yes, your privacy is protected. Files are processed securely and are not stored permanently on our servers. The AI conversion happens in real-time, and your data is handled with strict security protocols."
             }
           },
           {
@@ -333,7 +337,31 @@
             "name": "What types of events can the AI recognize?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The AI can recognize and extract various event types including appointments, meetings, conferences, webinars, classes, social gatherings, reminders, deadlines, and any scheduled activity with date and time information."
+              "text": "The AI can recognize and extract various event types including doctor appointments, meetings, conferences, webinars, classes, concerts, sports games, school activities, subscription renewals, delivery windows, and any scheduled activity with date and time information."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need to create an account to use Photocalia?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You simply sign in with your existing Google account — no separate registration needed. Your Google account gives you 3 free conversions per month immediately, with no forms to fill out."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use Photocalia on my phone?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, Photocalia works on all devices including smartphones and tablets. It is a Progressive Web App (PWA) that you can install directly to your home screen for quick access, and it works on iOS and Android browsers."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How accurate is the AI calendar extraction?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Photocalia uses GPT-4 Vision, one of the most advanced AI models available, for highly accurate event extraction. It reliably reads dates, times, locations, and event titles from clear images. You can always review and correct any detail before saving."
             }
           }
         ]
@@ -355,29 +383,10 @@
           {
             "@type": "ListItem",
             "position": 2,
-            "name": "Calendar Converter",
+            "name": "AI Calendar Converter",
             "item": "https://photocalia.com"
           }
         ]
-      }
-    </script>
-
-    <!-- WebApplication Schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Photocalia Calendar Converter",
-        "url": "https://photocalia.com",
-        "description": "Convert images and PDFs to calendar files",
-        "applicationCategory": "Productivity",
-        "operatingSystem": "All",
-        "browserRequirements": "Requires JavaScript",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        }
       }
     </script>
 
@@ -386,19 +395,31 @@
       {
         "@context": "https://schema.org",
         "@type": "HowTo",
-        "name": "How to Convert Images to Calendar Events",
-        "description": "Step-by-step guide to convert appointment screenshots and event images into ICS calendar files",
-        "image": "https://photocalia.com/assets/images/converter.png",
+        "name": "How to Convert Images and PDFs to Calendar Events",
+        "description": "Step-by-step guide to convert appointment screenshots, event flyers, and PDF schedules into ICS calendar files using AI",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://photocalia.com/assets/images/converter.png",
+          "width": "1200",
+          "height": "630"
+        },
         "totalTime": "PT2M",
         "estimatedCost": {
           "@type": "MonetaryAmount",
           "currency": "USD",
           "value": "0"
         },
+        "supply": [
+          {
+            "@type": "HowToSupply",
+            "name": "Image file (JPG, PNG, HEIC) or PDF document containing calendar information"
+          }
+        ],
         "tool": [
           {
             "@type": "HowToTool",
-            "name": "Photocalia Calendar Converter"
+            "name": "Photocalia AI Calendar Converter",
+            "url": "https://photocalia.com"
           }
         ],
         "step": [
@@ -406,29 +427,33 @@
             "@type": "HowToStep",
             "position": 1,
             "name": "Upload Your Image or PDF",
-            "text": "Drag and drop or click to upload images (JPG, PNG) or PDF files containing calendar information such as appointment screenshots, event flyers, or meeting invitations.",
-            "url": "https://photocalia.com#step1"
+            "text": "Drag and drop or click to upload images (JPG, PNG, HEIC) or PDF files containing calendar information such as appointment reminders, event flyers, concert tickets, school schedules, or meeting invitations.",
+            "url": "https://photocalia.com#step1",
+            "image": "https://photocalia.com/assets/images/converter.png"
           },
           {
             "@type": "HowToStep",
             "position": 2,
-            "name": "AI Extracts Event Details",
-            "text": "The AI-powered converter using GPT-4 Vision automatically reads and extracts event information including dates, times, locations, and descriptions from your uploaded files.",
-            "url": "https://photocalia.com#step2"
+            "name": "AI Extracts Event Details Automatically",
+            "text": "The AI-powered converter using GPT-4 Vision automatically reads and extracts all event information including dates, times, locations, event titles, and descriptions from your uploaded files. No manual typing required.",
+            "url": "https://photocalia.com#step2",
+            "image": "https://photocalia.com/assets/images/converter.png"
           },
           {
             "@type": "HowToStep",
             "position": 3,
             "name": "Review and Edit Events",
-            "text": "Review the extracted calendar events and edit any details if needed. You can modify event titles, dates, times, locations, and descriptions to ensure accuracy.",
-            "url": "https://photocalia.com#step3"
+            "text": "Review the extracted calendar events in a clean preview. Edit any details if needed — you can modify event titles, dates, times, locations, and descriptions to ensure everything is accurate.",
+            "url": "https://photocalia.com#step3",
+            "image": "https://photocalia.com/assets/images/converter.png"
           },
           {
             "@type": "HowToStep",
             "position": 4,
-            "name": "Download ICS Calendar File",
-            "text": "Click the download button to get your ICS calendar file. Import this file into Google Calendar, Outlook, Apple Calendar, or any other calendar application.",
-            "url": "https://photocalia.com#step4"
+            "name": "Download and Import ICS Calendar File",
+            "text": "Click the download button to get your ICS calendar file. Import this file into Google Calendar, Outlook, Apple Calendar, or any other calendar application that supports the ICS format.",
+            "url": "https://photocalia.com#step4",
+            "image": "https://photocalia.com/assets/images/converter.png"
           }
         ]
       }
