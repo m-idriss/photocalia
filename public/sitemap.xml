@@ -8,22 +8,51 @@
   <!-- Homepage / Calendar Converter -->
   <url>
     <loc>https://photocalia.com/</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://photocalia.com/assets/images/converter.png</image:loc>
-      <image:title>Photocalia AI Calendar Converter</image:title>
-      <image:caption>Convert images and PDFs to calendar events with AI</image:caption>
+      <image:title>Photocalia AI Calendar Converter - Convert Images &amp; PDFs to ICS Files</image:title>
+      <image:caption>Free AI-powered tool that converts photos, screenshots, and PDFs into calendar events compatible with Google Calendar, Outlook, and Apple Calendar</image:caption>
     </image:image>
   </url>
 
-  <!-- About Me Page -->
+  <!-- How It Works Page -->
   <url>
-    <loc>https://3dime.com</loc>
-    <lastmod>2026-02-09</lastmod>
+    <loc>https://photocalia.com/how-it-works</loc>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://photocalia.com/assets/images/converter.png</image:loc>
+      <image:title>How Photocalia AI Calendar Conversion Works</image:title>
+      <image:caption>Step-by-step guide: Upload image, AI extracts events, download ICS file</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Privacy Policy Page -->
+  <url>
+    <loc>https://photocalia.com/privacy</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Terms of Use Page -->
+  <url>
+    <loc>https://photocalia.com/terms</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- Legal Mentions Page -->
+  <url>
+    <loc>https://photocalia.com/legal-mentions</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 
 </urlset>

@@ -12,6 +12,7 @@ export interface SeoData {
     ogUrl?: string;
     author?: string;
     type?: string;
+    structuredData?: object[];
 }
 
 @Injectable({
@@ -23,6 +24,8 @@ export class SeoService {
     private router = inject(Router);
     private activatedRoute = inject(ActivatedRoute);
     private dom = inject(DOCUMENT);
+
+    private readonly PAGE_STRUCTURED_DATA_ATTR = 'data-page-structured-data';
 
     constructor() {
         this.setupRouting();
@@ -83,6 +86,9 @@ export class SeoService {
 
         // Update Canonical URL
         this.updateCanonicalUrl(seo.ogUrl || this.dom.location.href);
+
+        // Inject per-page structured data (replaces previous page's data)
+        this.updatePageStructuredData(seo.structuredData || []);
     }
 
     private updateCanonicalUrl(url: string) {
@@ -93,5 +99,20 @@ export class SeoService {
             this.dom.head.appendChild(link);
         }
         link.setAttribute('href', url);
+    }
+
+    private updatePageStructuredData(schemas: object[]) {
+        // Remove previously injected per-page structured data scripts
+        const existing = this.dom.querySelectorAll(`script[${this.PAGE_STRUCTURED_DATA_ATTR}]`);
+        existing.forEach(el => el.parentNode?.removeChild(el));
+
+        // Inject new per-page structured data
+        schemas.forEach(schema => {
+            const script = this.dom.createElement('script');
+            script.setAttribute('type', 'application/ld+json');
+            script.setAttribute(this.PAGE_STRUCTURED_DATA_ATTR, 'true');
+            script.textContent = JSON.stringify(schema, null, 2);
+            this.dom.head.appendChild(script);
+        });
     }
 }

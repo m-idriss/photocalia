@@ -4,15 +4,24 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/home/home').then((m) => m.Home),
-    title: 'Calendar Converter | Photocalia',
+    title: 'Free AI Calendar Converter - Convert Images & PDFs to ICS Calendar Files | Photocalia',
     data: {
       seo: {
         title: 'Free AI Calendar Converter - Convert Images & PDFs to ICS Calendar Files | Photocalia',
-        description: 'Free AI-powered calendar converter: Instantly transform screenshots, images, and PDF documents into ICS calendar files. Convert appointment reminders, event flyers, schedules, and meeting invitations to Google Calendar, Outlook, Apple Calendar.',
-        keywords: 'calendar converter, image to calendar, PDF to calendar, ICS generator, AI calendar extraction, screenshot to calendar, appointment converter, event converter, calendar OCR',
+        description: 'Convert images, screenshots & PDFs to calendar events in seconds — free. Photocalia uses GPT-4 Vision AI to extract dates, times & locations automatically and export ICS files for Google Calendar, Outlook & Apple Calendar. No manual typing. No separate signup.',
+        keywords: 'calendar converter, image to calendar, photo to calendar, PDF to calendar, ICS generator, AI calendar extraction, screenshot to calendar, appointment converter, event converter, calendar OCR, Google Calendar import, Outlook calendar, Apple Calendar, iCal converter, free calendar tool, add events from picture',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/',
-        type: 'website'
+        type: 'website',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+              { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://photocalia.com' }
+            ]
+          }
+        ]
       }
     }
   },
@@ -22,12 +31,76 @@ export const routes: Routes = [
     title: 'How It Works - AI Calendar Converter | Photocalia',
     data: {
       seo: {
-        title: 'How It Works - Photo to Calendar, Image to ICS Converter | Photocalia',
-        description: 'Learn how Photocalia converts photos, screenshots, and PDFs into calendar events using AI. Upload images of appointments, events, and schedules - our AI calendar assistant extracts dates, times, and locations automatically.',
-        keywords: 'photo to calendar, image to calendar, add events from picture, AI calendar assistant, ICS import, screenshot to calendar, how to convert image to calendar, calendar event extraction',
+        title: 'How It Works - Convert Photos & Images to Calendar Events | Photocalia',
+        description: 'Learn how Photocalia converts photos, screenshots, and PDFs into calendar events using AI. Upload any image of an appointment, event flyer, or schedule — GPT-4 Vision extracts the dates, times, and locations automatically.',
+        keywords: 'photo to calendar, image to calendar, add events from picture, AI calendar assistant, ICS import, screenshot to calendar, how to convert image to calendar, calendar event extraction, picture to calendar event',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/how-it-works',
-        type: 'website'
+        type: 'website',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+              { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://photocalia.com' },
+              { '@type': 'ListItem', 'position': 2, 'name': 'How It Works', 'item': 'https://photocalia.com/how-it-works' }
+            ]
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            'mainEntity': [
+              {
+                '@type': 'Question',
+                'name': 'What image formats are supported by Photocalia?',
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': 'Photocalia supports JPG, JPEG, PNG, HEIC image formats and PDF documents. You can upload appointment reminders, concert tickets, school schedules, event flyers, and any document containing calendar information.'
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': 'How accurate is the AI at reading calendar information from images?',
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': 'Photocalia uses GPT-4 Vision, one of the most accurate AI models for image understanding. It reliably extracts dates, times, locations, and event titles from clear images. You can always review and edit any extracted detail before saving to your calendar.'
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': 'Do I need an account to convert images to calendar files?',
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': 'You sign in with your existing Google account — no separate registration or form to fill out. Your Google account gives you 3 free conversions per month immediately.'
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': 'Is my image data kept private?',
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': 'Yes. Your files are processed securely and are not stored permanently on Photocalia servers. The AI conversion happens in real-time, and your images are handled according to strict privacy protocols.'
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': 'Can I edit events after the AI extracts them?',
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': 'Yes. After extraction, you can review every event detail — title, date, time, location, and description — and make any corrections before downloading the ICS file.'
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': 'What is an ICS file and how do I use it?',
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': 'An ICS (iCalendar) file is the universal calendar format supported by Google Calendar, Microsoft Outlook, Apple Calendar, Yahoo Calendar, and virtually every calendar application. After downloading your ICS file from Photocalia, simply open it or import it into your preferred calendar app to add all events at once.'
+                }
+              }
+            ]
+          }
+        ]
       }
     }
   },
@@ -42,7 +115,17 @@ export const routes: Routes = [
         keywords: 'privacy policy, data protection, GDPR, personal data, privacy rights',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/privacy',
-        type: 'website'
+        type: 'website',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+              { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://photocalia.com' },
+              { '@type': 'ListItem', 'position': 2, 'name': 'Privacy Policy', 'item': 'https://photocalia.com/privacy' }
+            ]
+          }
+        ]
       }
     }
   },
@@ -57,7 +140,17 @@ export const routes: Routes = [
         keywords: 'terms of use, terms of service, service agreement, user agreement',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/terms',
-        type: 'website'
+        type: 'website',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+              { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://photocalia.com' },
+              { '@type': 'ListItem', 'position': 2, 'name': 'Terms of Use', 'item': 'https://photocalia.com/terms' }
+            ]
+          }
+        ]
       }
     }
   },
@@ -72,7 +165,17 @@ export const routes: Routes = [
         keywords: 'legal mentions, company information, legal notice, hosting provider',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/legal-mentions',
-        type: 'website'
+        type: 'website',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+              { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://photocalia.com' },
+              { '@type': 'ListItem', 'position': 2, 'name': 'Legal Mentions', 'item': 'https://photocalia.com/legal-mentions' }
+            ]
+          }
+        ]
       }
     }
   },
