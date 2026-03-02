@@ -28,6 +28,7 @@ import { AuthAwareComponent } from '../base/auth-aware.component';
 import { CalendarEvent, BatchFile, BatchFileStatus } from '../../models';
 import { FILE_UPLOAD_CONSTRAINTS } from '../../constants';
 import { getMonthDay } from '../../utils';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-converter',
@@ -40,7 +41,8 @@ import { getMonthDay } from '../../utils';
     AppTooltipDirective,
     NgbPopoverModule,
     NgbProgressbarModule,
-    NgbTooltipModule
+    NgbTooltipModule,
+    TranslatePipe
   ],
   templateUrl: './converter.html',
   styleUrl: './converter.scss',

@@ -10,6 +10,7 @@ import { Stats } from './components/stats/stats';
 import { PWA_CONFIG } from './constants/pwa.constants';
 import { AuthService } from './services/auth.service';
 import { SeoService } from './services/seo.service';
+import { LanguageService } from './services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ export class App implements OnInit {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
   private readonly seoService = inject(SeoService);
+  private readonly languageService = inject(LanguageService);
 
   protected readonly title = signal('Photocalia');
   protected readonly currentRoute = signal<string>('');
@@ -48,7 +50,7 @@ export class App implements OnInit {
       this.swUpdate.versionUpdates
         .pipe(filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'))
         .subscribe(() => {
-          if (confirm(PWA_CONFIG.UPDATE_MESSAGE)) {
+          if (confirm(this.languageService.translate('pwa.update') || PWA_CONFIG.UPDATE_MESSAGE)) {
             window.location.reload();
           }
         });

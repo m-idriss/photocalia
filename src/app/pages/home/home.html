@@ -20,11 +20,11 @@
     <article class="hero-section" itemscope itemtype="https://schema.org/WebApplication">
       <h1 class="hero-title" itemprop="name">
         <span class="hero-icon" aria-hidden="true">📅</span>
-        Your Automated Calendar Converter
+        {{ 'home.hero.title' | translate }}
       </h1>
       <p class="hero-description" itemprop="description">
-        Upload images of your appointments, and AI turns them into calendar-ready events.<br />
-        No separate signup — sign in with Google. 3 free conversions/month, contact us to upgrade for higher limits.
+        {{ 'home.hero.description' | translate }}<br />
+        {{ 'home.hero.subtitle' | translate }}
       </p>
 
       <!-- Key Features for SEO -->
@@ -83,13 +83,13 @@
         <!-- Inline text showing subscription and quota remaining -->
         @if (quotaRemainingVal > 0) {
         <div class="quota-info mt-1 text-nowrap small text-muted align-self-center" role="note" aria-live="polite">
-          <span class="fw-semibold">Plan:</span>
+          <span class="fw-semibold">{{ 'home.quota.plan' | translate }}:</span>
           <span class="ms-1">{{ planTypeVal || 'FREE' }}</span>
           <span class="mx-2">•</span>
-          <span class="fw-semibold">Usage:</span>
+          <span class="fw-semibold">{{ 'home.quota.usage' | translate }}:</span>
           <span class="ms-1">{{ quotaLimitVal - quotaRemainingVal }} / {{ quotaLimitVal }}</span>
           <span class="mx-2">•</span>
-          <span>{{ quotaRemainingVal }} left this month</span>
+          <span>{{ quotaRemainingVal }} {{ 'home.quota.left' | translate }}</span>
           <span class="visually-hidden">{{ quotaRemainingVal }} remaining out of {{ quotaLimitVal }} total</span>
         </div>
         }
@@ -100,29 +100,29 @@
 
     <!-- How It Works Section -->
     <section class="how-it-works-section" aria-labelledby="how-it-works-title">
-      <h2 id="how-it-works-title" class="section-title">AI Calendar Conversion in 3 Simple Steps</h2>
+      <h2 id="how-it-works-title" class="section-title">{{ 'home.steps.title' | translate }}</h2>
       <div class="steps-container">
         <div class="step-item">
           <div class="step-badge">1</div>
           <div class="step-content">
-            <h3 class="step-title">Upload Your Image</h3>
-            <p class="step-description">Drop a photo, screenshot, PDF, or flyer</p>
+            <h3 class="step-title">{{ 'home.steps.1.title' | translate }}</h3>
+            <p class="step-description">{{ 'home.steps.1.description' | translate }}</p>
           </div>
         </div>
 
         <div class="step-item">
           <div class="step-badge">2</div>
           <div class="step-content">
-            <h3 class="step-title">AI Detects Events</h3>
-            <p class="step-description">Smart extraction of dates, times, and locations</p>
+            <h3 class="step-title">{{ 'home.steps.2.title' | translate }}</h3>
+            <p class="step-description">{{ 'home.steps.2.description' | translate }}</p>
           </div>
         </div>
 
         <div class="step-item">
           <div class="step-badge">3</div>
           <div class="step-content">
-            <h3 class="step-title">Review, Confirm & Save</h3>
-            <p class="step-description">Preview, edit if needed, and download ICS for your calendar</p>
+            <h3 class="step-title">{{ 'home.steps.3.title' | translate }}</h3>
+            <p class="step-description">{{ 'home.steps.3.description' | translate }}</p>
           </div>
         </div>
       </div>
@@ -130,45 +130,45 @@
 
     <!-- Why PhotoCalia Section -->
     <section class="why-photocalia-section" aria-labelledby="why-photocalia-title">
-      <h2 id="why-photocalia-title" class="section-title">Why PhotoCalia</h2>
+      <h2 id="why-photocalia-title" class="section-title">{{ 'home.why.title' | translate }}</h2>
       <div class="benefits-container">
         <div class="benefit-item">
           <div class="benefit-check">✓</div>
           <div class="benefit-content">
-            <h3 class="benefit-title">Multiple Formats</h3>
-            <p class="benefit-description">Converts JPG, PNG & PDF files</p>
+            <h3 class="benefit-title">{{ 'home.why.formats.title' | translate }}</h3>
+            <p class="benefit-description">{{ 'home.why.formats.description' | translate }}</p>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-check">✓</div>
           <div class="benefit-content">
-            <h3 class="benefit-title">Batch Processing</h3>
-            <p class="benefit-description">Upload multiple files at once</p>
+            <h3 class="benefit-title">{{ 'home.why.batch.title' | translate }}</h3>
+            <p class="benefit-description">{{ 'home.why.batch.description' | translate }}</p>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-check">✓</div>
           <div class="benefit-content">
-            <h3 class="benefit-title">Full Control</h3>
-            <p class="benefit-description">Edit events before exporting</p>
+            <h3 class="benefit-title">{{ 'home.why.control.title' | translate }}</h3>
+            <p class="benefit-description">{{ 'home.why.control.description' | translate }}</p>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-check">✓</div>
           <div class="benefit-content">
-            <h3 class="benefit-title">Free Tier Available</h3>
-            <p class="benefit-description">3 free conversions/month, contact us for higher limits</p>
+            <h3 class="benefit-title">{{ 'home.why.free.title' | translate }}</h3>
+            <p class="benefit-description">{{ 'home.why.free.description' | translate }}</p>
           </div>
         </div>
 
         <div class="benefit-item">
           <div class="benefit-check">✓</div>
           <div class="benefit-content">
-            <h3 class="benefit-title">Privacy First</h3>
-            <p class="benefit-description">Secure & privacy-focused</p>
+            <h3 class="benefit-title">{{ 'home.why.privacy.title' | translate }}</h3>
+            <p class="benefit-description">{{ 'home.why.privacy.description' | translate }}</p>
           </div>
         </div>
       </div>
