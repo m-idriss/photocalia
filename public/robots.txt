@@ -1,5 +1,5 @@
-# robots.txt for 3dime Calendar Converter
-# Optimized for search engine crawling
+# robots.txt for Photocalia - AI Calendar Converter
+# https://photocalia.com
 
 User-agent: *
 Allow: /
@@ -8,9 +8,6 @@ Disallow: /admin/
 
 # Sitemap location
 Sitemap: https://photocalia.com/sitemap.xml
-
-# Crawl-delay for polite bots
-Crawl-delay: 1
 
 # Special rules for specific bots
 User-agent: Googlebot
@@ -22,7 +19,7 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-# Block bad bots
+# Throttle aggressive crawlers to reduce server load
 User-agent: AhrefsBot
 Crawl-delay: 10
 

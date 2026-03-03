@@ -20,9 +20,8 @@ export class TranslatePipe implements PipeTransform {
   private readonly sub: Subscription;
 
   constructor() {
-    // Subscribe to translations loading so impure pipe re-evaluates after
-    // the async HTTP fetch completes (not just when currentLang changes).
-    this.sub = toObservable(this.languageService.translations).subscribe(() => {
+    // Subscribe to language changes so impure pipe gets re-evaluated
+    this.sub = toObservable(this.languageService.currentLang).subscribe(() => {
       this.cdr.markForCheck();
     });
   }

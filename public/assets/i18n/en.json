@@ -11,9 +11,11 @@
   "header.aria.settings": "Settings menu",
   "header.aria.openSettings": "Open settings menu",
   "header.aria.language": "Change language",
+
   "home.hero.title": "Your Automated Calendar Converter",
   "home.hero.description": "Upload images of your appointments, and AI turns them into calendar-ready events.",
   "home.hero.subtitle": "No separate signup — sign in with Google. 3 free conversions/month, contact us to upgrade for higher limits.",
+
   "home.steps.title": "AI Calendar Conversion in 3 Simple Steps",
   "home.steps.1.title": "Upload Your Image",
   "home.steps.1.description": "Drop a photo, screenshot, PDF, or flyer",
