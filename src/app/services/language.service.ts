@@ -1,4 +1,4 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { Injectable, signal, computed, inject, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
 
@@ -17,6 +17,7 @@ const STORAGE_KEY = 'photocalia-lang';
 export class LanguageService {
   private readonly http = inject(HttpClient);
   private readonly document = inject(DOCUMENT);
+  private readonly ngZone = inject(NgZone);
 
   readonly translations = signal<Record<string, string>>({});
   readonly currentLang = signal<SupportedLanguage>(this.getInitialLanguage());
@@ -41,8 +42,10 @@ export class LanguageService {
   private loadLanguage(lang: SupportedLanguage): void {
     this.http.get<Record<string, string>>(`/assets/i18n/${lang}.json`).subscribe({
       next: (data) => {
-        this.translations.set(data);
-        this.document.documentElement.lang = lang;
+        this.ngZone.run(() => {
+          this.translations.set(data);
+          this.document.documentElement.lang = lang;
+        });
       },
       error: (err) => {
         console.error(`[LanguageService] Failed to load language "${lang}":`, err);

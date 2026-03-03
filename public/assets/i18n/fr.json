@@ -110,8 +110,8 @@
   "howitworks.cta.note": "3 conversions gratuites par mois • Passez à un abonnement supérieur pour plus",
   "pwa.update": "Nouvelle version disponible. Charger la nouvelle version ?",
   "stats.title": "Boostez votre productivité",
-  "stats.tagline": "Plus de {events} événements générés depuis {files} images \\!",
+  "stats.tagline": "Plus de {events} événements générés depuis {files} images !",
   "stats.timeSaved": "C'est ~{hours} heures économisées",
-  "stats.workdays": "{workdays} journées entières de planification manuelle \\!",
+  "stats.workdays": "{workdays} journées entières de planification manuelle !",
   "stats.error": "Statistiques temporairement indisponibles"
 }
