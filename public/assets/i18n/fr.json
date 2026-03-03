@@ -11,11 +11,9 @@
   "header.aria.settings": "Menu paramètres",
   "header.aria.openSettings": "Ouvrir le menu paramètres",
   "header.aria.language": "Changer la langue",
-
   "home.hero.title": "Votre Convertisseur de Calendrier Automatisé",
   "home.hero.description": "Téléchargez des images de vos rendez-vous, et l'IA les transforme en événements prêts pour votre calendrier.",
   "home.hero.subtitle": "Pas d'inscription séparée — connectez-vous avec Google. 3 conversions gratuites/mois, contactez-nous pour augmenter vos limites.",
-
   "home.steps.title": "Conversion de Calendrier en 3 Étapes Simples",
   "home.steps.1.title": "Téléchargez votre image",
   "home.steps.1.description": "Déposez une photo, une capture d'écran, un PDF ou un flyer",
@@ -23,7 +21,6 @@
   "home.steps.2.description": "Extraction intelligente des dates, heures et lieux",
   "home.steps.3.title": "Vérifiez, confirmez & enregistrez",
   "home.steps.3.description": "Prévisualisez, modifiez si besoin, et téléchargez le fichier ICS pour votre calendrier",
-
   "home.why.title": "Pourquoi PhotoCalia",
   "home.why.formats.title": "Multiples Formats",
   "home.why.formats.description": "Convertit les fichiers JPG, PNG et PDF",
@@ -35,11 +32,9 @@
   "home.why.free.description": "3 conversions gratuites/mois, contactez-nous pour plus",
   "home.why.privacy.title": "Vie Privée en Premier",
   "home.why.privacy.description": "Traitement sécurisé & respectueux de la vie privée",
-
   "home.quota.plan": "Abonnement",
   "home.quota.usage": "Utilisation",
   "home.quota.left": "restant ce mois",
-
   "converter.title": "Application Convertisseur de Calendrier",
   "converter.loading": "Chargement...",
   "converter.marketing.1": "Gagnez du temps pour créer vos événements.",
@@ -52,14 +47,11 @@
   "converter.tooltip.convert": "Convertir vos fichiers en événements de calendrier",
   "converter.tooltip.remove": "Supprimer le fichier",
   "converter.processing": "Traitement en cours...",
-
   "howitworks.hero.title": "Comment ça marche",
   "howitworks.hero.subtitle": "Transformez n'importe quelle photo, capture d'écran, PDF ou flyer en vrais événements de calendrier grâce à l'IA",
-
   "howitworks.intro.title": "Ne ratez plus jamais une date importante",
   "howitworks.intro.p1": "Vous recevez des rendez-vous par e-mail, voyez des flyers d'événements sur les réseaux sociaux, ou prenez en photo des plannings. Plus tard, vous oubliez de les ajouter à votre calendrier — et vous ratez l'événement.",
   "howitworks.intro.p2": "Photocalia résout ce problème. Téléchargez ou partagez l'image de n'importe quel calendrier, planning ou rappel de rendez-vous. Notre IA lit instantanément la date, l'heure et le lieu, et les transforme en un vrai événement de calendrier que vous pouvez enregistrer immédiatement.",
-
   "howitworks.steps.title": "Conversion de Calendrier en 3 Étapes Simples",
   "howitworks.steps.1.title": "Téléchargez votre image",
   "howitworks.steps.1.description": "Glissez-déposez une photo, capture d'écran, PDF ou flyer. Fonctionne avec les rappels de rendez-vous, billets de concert, plannings scolaires et plus encore. Compatible JPG, PNG et PDF.",
@@ -67,7 +59,6 @@
   "howitworks.steps.2.description": "Notre assistant IA analyse votre image avec GPT-4 Vision. Il détecte automatiquement les dates, heures, lieux et titres d'événements. Aucune saisie manuelle requise.",
   "howitworks.steps.3.title": "Vérifiez, confirmez & enregistrez",
   "howitworks.steps.3.description": "Prévisualisez les événements extraits dans une vue calendrier claire. Faites des modifications rapides si nécessaire — vous gardez le contrôle. Enregistrez ensuite dans votre calendrier ou téléchargez le fichier ICS pour Google Agenda, Outlook ou Apple Calendrier.",
-
   "howitworks.usecases.title": "Cas d'Usage Concrets",
   "howitworks.usecases.medical.title": "Rendez-vous Médicaux",
   "howitworks.usecases.medical.description": "Convertissez les fiches de rendez-vous médecin et les e-mails de rappel en événements de calendrier. Ne ratez plus jamais une consultation.",
@@ -79,12 +70,10 @@
   "howitworks.usecases.subscriptions.description": "Suivez les dates de renouvellement, les échéances de paiement et les avis importants des factures et relevés.",
   "howitworks.usecases.deliveries.title": "Livraisons & Retours",
   "howitworks.usecases.deliveries.description": "Ajoutez les notifications d'expédition et les délais de retour à votre calendrier depuis les captures d'écran de suivi de colis.",
-
   "howitworks.instant.title": "Pourquoi la Capture Instantanée est Importante",
   "howitworks.instant.p1": "Des recherches montrent que nous oublions le plus souvent les informations dans la première heure après les avoir reçues. Le moment où vous voyez un rappel de rendez-vous ou un flyer d'événement est celui où vous êtes le plus motivé à agir.",
   "howitworks.instant.p2": "Photocalia vous permet de saisir ce moment. Prenez simplement une photo ou téléchargez l'image immédiatement. En quelques secondes, l'événement est extrait et prêt à être enregistré. Plus de post-it, plus de \"je l'ajouterai plus tard.\"",
   "howitworks.instant.p3": "En réduisant les frictions entre la découverte d'un événement et son enregistrement, vous vous assurez que rien ne passe à travers les mailles du filet.",
-
   "howitworks.benefits.title": "Avantages Clés",
   "howitworks.benefits.time.label": "Gain de Temps :",
   "howitworks.benefits.time.description": "Pas de saisie manuelle des dates, heures ou lieux",
@@ -102,7 +91,6 @@
   "howitworks.benefits.free.description": "3 conversions gratuites par mois, passez à un abonnement supérieur pour plus",
   "howitworks.benefits.noapp.label": "Pas d'Application :",
   "howitworks.benefits.noapp.description": "Fonctionne directement dans votre navigateur",
-
   "howitworks.faq.title": "Questions Fréquentes",
   "howitworks.faq.formats.q": "Quels formats de fichiers sont pris en charge ?",
   "howitworks.faq.formats.a": "Photocalia prend en charge les fichiers JPG, PNG et PDF. Vous pouvez télécharger des photos depuis votre téléphone, des captures d'écran ou des documents numérisés contenant des informations de calendrier.",
@@ -116,11 +104,14 @@
   "howitworks.faq.edit.a": "Absolument. Après l'extraction des événements par l'IA, vous pouvez les consulter dans une vue calendrier et effectuer toutes les modifications nécessaires avant de télécharger le fichier ICS.",
   "howitworks.faq.ics.q": "Quelles applications de calendrier fonctionnent avec les fichiers ICS exportés ?",
   "howitworks.faq.ics.a": "L'ICS est un format de calendrier universel pris en charge par Google Agenda, Outlook, Apple Calendrier et la plupart des autres applications de calendrier. Importez simplement le fichier téléchargé dans votre calendrier préféré.",
-
   "howitworks.cta.title": "Prêt à ne plus jamais rater un événement ?",
   "howitworks.cta.description": "Commencez à convertir des images en événements de calendrier en quelques secondes. Aucune carte bancaire requise.",
   "howitworks.cta.button": "Commencer Gratuitement",
   "howitworks.cta.note": "3 conversions gratuites par mois • Passez à un abonnement supérieur pour plus",
-
-  "pwa.update": "Nouvelle version disponible. Charger la nouvelle version ?"
+  "pwa.update": "Nouvelle version disponible. Charger la nouvelle version ?",
+  "stats.title": "Boostez votre productivité",
+  "stats.tagline": "Plus de {events} événements générés depuis {files} images !",
+  "stats.timeSaved": "C'est ~{hours} heures économisées",
+  "stats.workdays": "{workdays} journées entières de planification manuelle !",
+  "stats.error": "Statistiques temporairement indisponibles"
 }
