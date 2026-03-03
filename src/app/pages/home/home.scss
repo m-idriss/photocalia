@@ -52,8 +52,15 @@
   font-size: 1.25rem;
   color: var(--text-secondary, #b0b0b0);
   line-height: 1.6;
-  max-width: 100%;
-  margin: 1rem auto;
+  max-width: 800px;
+  margin: 1rem auto 0.5rem;
+}
+
+.hero-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary, #b0b0b0);
+  opacity: 0.8;
+  margin: 0 auto 1rem;
 }
 
 @keyframes fadeInDown {
@@ -90,6 +97,26 @@
   50% {
     transform: translateY(-10px);
   }
+}
+
+/* ========================
+   Shared Section Styles
+   ======================== */
+.section-description {
+  font-size: 1.1rem;
+  color: var(--text-secondary, #b0b0b0);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.section-reassurance {
+  font-size: 1rem;
+  color: var(--text-secondary, #b0b0b0);
+  text-align: center;
+  margin-top: 1.5rem;
+  font-style: italic;
+  opacity: 0.85;
 }
 
 /* ========================
@@ -194,13 +221,125 @@
 }
 
 /* ========================
+   What Can You Convert Section
+   ======================== */
+.convert-section {
+  text-align: center;
+  margin: 3rem auto;
+  max-width: 1200px;
+  animation: fadeInUp 0.8s ease-out 0.1s backwards;
+}
+
+.convert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  padding: 0 1rem;
+  text-align: left;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.convert-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  font-size: 1rem;
+  color: var(--text-primary, #e0e0e0);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(102, 126, 234, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+  }
+}
+
+.convert-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* ========================
+   Who Is It For Section
+   ======================== */
+.audience-section {
+  text-align: center;
+  margin: 3rem auto;
+  max-width: 1200px;
+  animation: fadeInUp 0.8s ease-out 0.15s backwards;
+}
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  padding: 0 1rem;
+  text-align: left;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.audience-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  font-size: 1rem;
+  color: var(--text-primary, #e0e0e0);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(102, 126, 234, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+  }
+}
+
+.audience-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* ========================
+   Pricing Section
+   ======================== */
+.pricing-section {
+  text-align: center;
+  margin: 3rem auto;
+  max-width: 1200px;
+  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+/* ========================
    Why PhotoCalia Section
    ======================== */
 .why-photocalia-section {
   text-align: center;
   margin: 3rem auto;
   max-width: 1200px;
-  animation: fadeInUp 0.8s ease-out 0.2s backwards;
+  animation: fadeInUp 0.8s ease-out 0.25s backwards;
 }
 
 .benefits-container {
@@ -270,6 +409,78 @@
   font-size: 0.95rem;
   color: var(--text-secondary, #b0b0b0);
   line-height: 1.5;
+  margin: 0;
+}
+
+/* ========================
+   FAQ Section
+   ======================== */
+.faq-section {
+  text-align: center;
+  margin: 3rem auto;
+  max-width: 800px;
+  animation: fadeInUp 0.8s ease-out 0.3s backwards;
+}
+
+.faq-list {
+  text-align: left;
+}
+
+.faq-item {
+  margin-bottom: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba(102, 126, 234, 0.2);
+  }
+
+  &[open] {
+    border-color: rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+  }
+}
+
+.faq-question {
+  padding: 1.25rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary, #e0e0e0);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &::after {
+    content: '+';
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--text-secondary, #b0b0b0);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
+
+  .faq-item[open] &::after {
+    content: '−';
+  }
+}
+
+.faq-answer {
+  padding: 0 1.5rem 1.25rem;
+  font-size: 1rem;
+  color: var(--text-secondary, #b0b0b0);
+  line-height: 1.6;
   margin: 0;
 }
 
@@ -368,6 +579,20 @@
     font-size: 1rem;
   }
 
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+
+  // Shared section styles - Mobile
+  .section-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-reassurance {
+    font-size: 0.9rem;
+  }
+
   // How It Works Section - Mobile
   .how-it-works-section {
     margin: 2rem auto;
@@ -400,6 +625,47 @@
     font-size: 0.875rem;
   }
 
+  // Convert Section - Mobile
+  .convert-section {
+    margin: 2rem auto;
+  }
+
+  .convert-grid {
+    gap: 0.75rem;
+  }
+
+  .convert-item {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .convert-icon {
+    font-size: 1.25rem;
+  }
+
+  // Audience Section - Mobile
+  .audience-section {
+    margin: 2rem auto;
+  }
+
+  .audience-grid {
+    gap: 0.75rem;
+  }
+
+  .audience-item {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .audience-icon {
+    font-size: 1.25rem;
+  }
+
+  // Pricing Section - Mobile
+  .pricing-section {
+    margin: 2rem auto;
+  }
+
   // Why PhotoCalia Section - Mobile
   .why-photocalia-section {
     margin: 2rem auto;
@@ -427,6 +693,20 @@
     font-size: 0.875rem;
   }
 
+  // FAQ Section - Mobile
+  .faq-section {
+    margin: 2rem auto;
+  }
+
+  .faq-question {
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .faq-answer {
+    padding: 0 1.25rem 1rem;
+    font-size: 0.9rem;
+  }
 }
 
 /* ========================
