@@ -23,7 +23,9 @@
         {{ 'home.hero.title' | translate }}
       </h1>
       <p class="hero-description" itemprop="description">
-        {{ 'home.hero.description' | translate }}<br />
+        {{ 'home.hero.description' | translate }}
+      </p>
+      <p class="hero-subtitle">
         {{ 'home.hero.subtitle' | translate }}
       </p>
 
@@ -126,6 +128,69 @@
           </div>
         </div>
       </div>
+      <p class="section-reassurance">{{ 'home.steps.reassurance' | translate }}</p>
+    </section>
+
+    <!-- What Can You Convert Section -->
+    <section class="convert-section" aria-labelledby="convert-title">
+      <h2 id="convert-title" class="section-title">{{ 'home.convert.title' | translate }}</h2>
+      <p class="section-description">{{ 'home.convert.description' | translate }}</p>
+      <div class="convert-grid">
+        <div class="convert-item">
+          <span class="convert-icon" aria-hidden="true">🎒</span>
+          <span>{{ 'home.convert.school' | translate }}</span>
+        </div>
+        <div class="convert-item">
+          <span class="convert-icon" aria-hidden="true">🎵</span>
+          <span>{{ 'home.convert.concerts' | translate }}</span>
+        </div>
+        <div class="convert-item">
+          <span class="convert-icon" aria-hidden="true">🏋️</span>
+          <span>{{ 'home.convert.gym' | translate }}</span>
+        </div>
+        <div class="convert-item">
+          <span class="convert-icon" aria-hidden="true">🎤</span>
+          <span>{{ 'home.convert.conference' | translate }}</span>
+        </div>
+        <div class="convert-item">
+          <span class="convert-icon" aria-hidden="true">✈️</span>
+          <span>{{ 'home.convert.travel' | translate }}</span>
+        </div>
+        <div class="convert-item">
+          <span class="convert-icon" aria-hidden="true">📱</span>
+          <span>{{ 'home.convert.screenshots' | translate }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who Is It For Section -->
+    <section class="audience-section" aria-labelledby="audience-title">
+      <h2 id="audience-title" class="section-title">{{ 'home.audience.title' | translate }}</h2>
+      <p class="section-description">{{ 'home.audience.description' | translate }}</p>
+      <div class="audience-grid">
+        <div class="audience-item">
+          <span class="audience-icon" aria-hidden="true">👨‍👩‍👧</span>
+          <span>{{ 'home.audience.parents' | translate }}</span>
+        </div>
+        <div class="audience-item">
+          <span class="audience-icon" aria-hidden="true">🎓</span>
+          <span>{{ 'home.audience.students' | translate }}</span>
+        </div>
+        <div class="audience-item">
+          <span class="audience-icon" aria-hidden="true">💼</span>
+          <span>{{ 'home.audience.professionals' | translate }}</span>
+        </div>
+        <div class="audience-item">
+          <span class="audience-icon" aria-hidden="true">🏪</span>
+          <span>{{ 'home.audience.businesses' | translate }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" aria-labelledby="pricing-title">
+      <h2 id="pricing-title" class="section-title">{{ 'home.pricing.title' | translate }}</h2>
+      <p class="section-description">{{ 'home.pricing.description' | translate }}</p>
     </section>
 
     <!-- Why PhotoCalia Section -->
@@ -171,6 +236,19 @@
             <p class="benefit-description">{{ 'home.why.privacy.description' | translate }}</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="section-title">{{ 'home.faq.title' | translate }}</h2>
+      <div class="faq-list">
+        @for (i of [1, 2, 3, 4, 5]; track i) {
+        <details class="faq-item">
+          <summary class="faq-question">{{ 'home.faq.q' + i + '.q' | translate }}</summary>
+          <p class="faq-answer">{{ 'home.faq.q' + i + '.a' | translate }}</p>
+        </details>
+        }
       </div>
     </section>
   </div>

@@ -4,12 +4,12 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./pages/home/home').then((m) => m.Home),
-    title: 'Free AI Calendar Converter - Convert Images & PDFs to ICS Calendar Files | Photocalia',
+    title: 'Photocalia – Convert Photos, Screenshots & Flyers to Calendar Events with AI',
     data: {
       seo: {
-        title: 'Free AI Calendar Converter - Convert Images & PDFs to ICS Calendar Files | Photocalia',
-        description: 'Convert images, screenshots & PDFs to calendar events in seconds — free. Photocalia uses GPT-4 Vision AI to extract dates, times & locations automatically and export ICS files for Google Calendar, Outlook & Apple Calendar. No manual typing. No separate signup.',
-        keywords: 'calendar converter, image to calendar, photo to calendar, PDF to calendar, ICS generator, AI calendar extraction, screenshot to calendar, appointment converter, event converter, calendar OCR, Google Calendar import, Outlook calendar, Apple Calendar, iCal converter, free calendar tool, add events from picture',
+        title: 'Photocalia – Convert Photos, Screenshots & Flyers to Calendar Events with AI',
+        description: 'Turn any photo, screenshot, flyer or PDF into calendar events with AI — no manual typing. Photocalia extracts dates, times & locations automatically and adds them to Google Calendar or exports ICS files. Free, no separate signup.',
+        keywords: 'photo to calendar events, image to calendar converter, picture to calendar app, convert screenshot to Google Calendar, AI calendar from photo, scan flyer to calendar, upload timetable photo, extract events from image, OCR calendar events, PDF to calendar, ICS generator, free calendar tool',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/',
         type: 'website',
