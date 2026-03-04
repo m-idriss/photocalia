@@ -55,6 +55,25 @@ src/app/
 | [Roadmap](docs/ROADMAP.md) | Planned features and timeline |
 | [Full Index](docs/README.md) | All documentation |
 
+## 📸 Screenshots
+
+<div align="center">
+
+### 📅 AI Calendar Converter
+
+![Photocalia Desktop Screenshot](public/assets/screenshots/desktopPage1920x1080.jpeg)
+*Transform images and PDFs into calendar events with AI-powered extraction*
+
+### 📱 Mobile Experience
+
+<img src="public/assets/screenshots/iPhone_13_Pro_Max.jpeg" alt="Photocalia Mobile Screenshot" width="375" />
+
+*Fully responsive design optimized for all devices*
+
+> 📝 **Note**: Screenshots are automatically updated daily via GitHub Actions.
+
+</div>
+
 ## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
