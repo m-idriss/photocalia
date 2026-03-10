@@ -32,13 +32,10 @@ jobs:
       - name: Build application
         run: yarn build
 
-      - name: Install serve
-        run: yarn global add serve
-
       - name: Start server in background
         run: |
           cd dist/photocalia/browser
-          serve -s . -l 4200 &
+          yarn dlx serve -s . -l 4200 &
           echo "Waiting for server to start..."
           sleep 15
           echo "Server should be ready now"
