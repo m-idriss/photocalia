@@ -1,6 +1,6 @@
 # Photocalia
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-photocalia.com-00D4AA?style=for-the-badge)](https://photocalia.com)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-photocalia.com-00D4AA?style=for-the-badge)](https://www.photocalia.com)
 [![Angular](https://img.shields.io/badge/Angular-21.1-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
@@ -80,4 +80,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Author
 
-**Idriss** — [photocalia.com](https://photocalia.com) | [@m-idriss](https://github.com/m-idriss)
+**Idriss** — [photocalia.com](https://www.photocalia.com) | [@m-idriss](https://github.com/m-idriss)
