@@ -1,6 +1,11 @@
-import { Routes } from '@angular/router';
+import { Routes, Route } from '@angular/router';
 
-export const routes: Routes = [
+/**
+ * Shared page route definitions used for both English (root) and French (/fr) paths.
+ * SEO data uses English as default; the SeoService dynamically updates
+ * canonical/hreflang based on the actual URL.
+ */
+const pageRoutes: Route[] = [
   {
     path: '',
     loadComponent: () => import('./pages/home/home').then((m) => m.Home),
@@ -231,8 +236,18 @@ export const routes: Routes = [
       },
     },
   },
+];
+
+export const routes: Routes = [
+  // English routes (default)
+  ...pageRoutes,
+
+  // French routes under /fr prefix
   {
-    path: '**',
-    redirectTo: '',
+    path: 'fr',
+    children: [...pageRoutes, { path: '**', redirectTo: '' }],
   },
+
+  // Catch-all redirect
+  { path: '**', redirectTo: '' },
 ];

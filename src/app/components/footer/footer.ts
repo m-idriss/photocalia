@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { GithubService } from '../../services/github.service';
+import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { environment } from '../../../environments/environment';
 
 /**
@@ -20,7 +21,7 @@ export interface FooterLink {
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, LocalizeRoutePipe],
   templateUrl: './footer.html',
   styleUrl: './footer.scss',
 })
@@ -66,7 +67,7 @@ export class Footer implements OnInit {
    */
   private buildFooterLinks(): FooterLink[] {
     const links: FooterLink[] = [];
-    
+
     // Provide a safe default configuration when environment.footer is missing,
     // e.g., in production builds where the env file is generated without it.
     const defaultConfig = {
@@ -82,7 +83,7 @@ export class Footer implements OnInit {
       enableTermsLink: true,
       enableLegalMentionsLink: true,
     };
-    
+
     const config = environment.footer ?? defaultConfig;
 
     if (config.enableRepositoryLink) {

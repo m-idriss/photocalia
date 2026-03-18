@@ -1,8 +1,11 @@
-import { Injectable, signal, computed, inject, NgZone } from '@angular/core';
+import { Injectable, signal, inject, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DOCUMENT } from '@angular/common';
+import { Router } from '@angular/router';
 
 export type SupportedLanguage = 'en' | 'fr';
+
+export const DEFAULT_LANGUAGE: SupportedLanguage = 'en';
 
 export const SUPPORTED_LANGUAGES: { code: SupportedLanguage; label: string; flag: string }[] = [
   { code: 'en', label: 'English', flag: '🇬🇧' },
@@ -10,6 +13,7 @@ export const SUPPORTED_LANGUAGES: { code: SupportedLanguage; label: string; flag
 ];
 
 const STORAGE_KEY = 'photocalia-lang';
+const FR_PREFIX = '/fr';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +22,7 @@ export class LanguageService {
   private readonly http = inject(HttpClient);
   private readonly document = inject(DOCUMENT);
   private readonly ngZone = inject(NgZone);
+  private readonly router = inject(Router);
 
   readonly translations = signal<Record<string, string>>({});
   readonly currentLang = signal<SupportedLanguage>(this.getInitialLanguage());
@@ -32,11 +37,57 @@ export class LanguageService {
     return this.translations()[key] ?? key;
   }
 
+  /**
+   * Switch language and navigate to the equivalent path in the new language.
+   */
   setLanguage(lang: SupportedLanguage): void {
     if (lang === this.currentLang()) return;
     this.currentLang.set(lang);
     localStorage.setItem(STORAGE_KEY, lang);
     this.loadLanguage(lang);
+
+    // Navigate to the equivalent route in the target language
+    const currentPath = this.router.url.split('?')[0].split('#')[0];
+    const strippedPath = this.stripLangPrefix(currentPath);
+    const newPath =
+      lang === DEFAULT_LANGUAGE ? strippedPath || '/' : `${FR_PREFIX}${strippedPath || '/'}`;
+
+    // Replace trailing slash for non-root paths
+    const finalPath = newPath === `${FR_PREFIX}/` ? FR_PREFIX : newPath;
+    this.router.navigateByUrl(finalPath);
+  }
+
+  /**
+   * Returns the localized version of a route path based on current language.
+   *
+   * @example
+   *   localizeRoute('/privacy') → '/privacy' (en) or '/fr/privacy' (fr)
+   *   localizeRoute('/') → '/' (en) or '/fr' (fr)
+   */
+  localizeRoute(path: string): string {
+    if (this.currentLang() === DEFAULT_LANGUAGE) {
+      return path;
+    }
+    // For root path
+    if (path === '/' || path === '') {
+      return FR_PREFIX;
+    }
+    // Ensure path starts with /
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+    return `${FR_PREFIX}${normalizedPath}`;
+  }
+
+  /**
+   * Get the route path without language prefix.
+   */
+  private stripLangPrefix(path: string): string {
+    if (path === FR_PREFIX || path === `${FR_PREFIX}/`) {
+      return '/';
+    }
+    if (path.startsWith(`${FR_PREFIX}/`)) {
+      return path.slice(FR_PREFIX.length);
+    }
+    return path;
   }
 
   private loadLanguage(lang: SupportedLanguage): void {
@@ -54,22 +105,34 @@ export class LanguageService {
   }
 
   private getInitialLanguage(): SupportedLanguage {
-    // 1. URL query param (?lang=fr)
-    const urlParam = new URLSearchParams(window.location.search).get('lang') as SupportedLanguage | null;
+    // 1. URL path prefix (/fr/...)
+    const path = window.location.pathname;
+    if (path === FR_PREFIX || path.startsWith(`${FR_PREFIX}/`)) {
+      localStorage.setItem(STORAGE_KEY, 'fr');
+      return 'fr';
+    }
+
+    // 2. URL query param (?lang=fr) — backward compatibility, will redirect
+    const urlParam = new URLSearchParams(window.location.search).get(
+      'lang',
+    ) as SupportedLanguage | null;
     if (urlParam && SUPPORTED_LANGUAGES.some((l) => l.code === urlParam)) {
       localStorage.setItem(STORAGE_KEY, urlParam);
       return urlParam;
     }
-    // 2. LocalStorage preference
+
+    // 3. LocalStorage preference
     const stored = localStorage.getItem(STORAGE_KEY) as SupportedLanguage | null;
     if (stored && SUPPORTED_LANGUAGES.some((l) => l.code === stored)) {
       return stored;
     }
-    // 3. Browser language
+
+    // 4. Browser language
     const browser = navigator.language?.slice(0, 2) as SupportedLanguage;
     if (SUPPORTED_LANGUAGES.some((l) => l.code === browser)) {
       return browser;
     }
-    return 'en';
+
+    return DEFAULT_LANGUAGE;
   }
 }

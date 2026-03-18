@@ -5,13 +5,21 @@
 ## About
 Photocalia uses GPT-4 Vision OCR to extract event details (dates, times, locations, descriptions) from images and documents, generating standard ICS files compatible with Google Calendar, Microsoft Outlook, and Apple Calendar. Built by Idriss at 3dime.com.
 
-## Key Pages
+## Key Pages (English)
 - [Home](https://photocalia.com/): Main AI calendar converter tool — upload images, get ICS files
 - [How It Works](https://photocalia.com/how-it-works): Step-by-step guide to converting photos to calendar events
 - [About](https://photocalia.com/about): Meet the creator, technology stack, and project mission
 - [Privacy Policy](https://photocalia.com/privacy): GDPR-compliant data handling practices
 - [Terms of Use](https://photocalia.com/terms): Service terms and conditions
 - [Legal Mentions](https://photocalia.com/legal-mentions): Company and legal information
+
+## Key Pages (French / Français)
+- [Accueil](https://photocalia.com/fr): Convertisseur IA de photos en événements calendrier
+- [Comment ça marche](https://photocalia.com/fr/how-it-works): Guide étape par étape
+- [À propos](https://photocalia.com/fr/about): Le créateur, la technologie et la mission
+- [Politique de confidentialité](https://photocalia.com/fr/privacy): Pratiques RGPD
+- [Conditions d'utilisation](https://photocalia.com/fr/terms): Conditions du service
+- [Mentions légales](https://photocalia.com/fr/legal-mentions): Informations légales
 
 ## Features
 - AI-powered calendar extraction using GPT-4 Vision OCR
