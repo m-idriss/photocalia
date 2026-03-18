@@ -200,6 +200,38 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'about',
+    loadComponent: () => import('./pages/about/about').then((m) => m.About),
+    title: 'About Photocalia - AI Calendar Converter by Idriss',
+    data: {
+      seo: {
+        title: 'About Photocalia - AI Calendar Converter Built by Idriss | Photocalia',
+        description:
+          'Learn about Photocalia, the AI-powered photo to calendar converter. Built by Idriss using Angular, Firebase, and GPT-4 Vision. Open source, privacy-focused, and free to use.',
+        keywords:
+          'about photocalia, AI calendar converter, photo to calendar app, Idriss, 3dime, open source calendar tool',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/about',
+        type: 'website',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'About',
+                item: 'https://photocalia.com/about',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
+  {
     path: '**',
     redirectTo: '',
   },

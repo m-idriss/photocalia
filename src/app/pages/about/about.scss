@@ -1,0 +1,85 @@
+// About page styles - reuses legal page styles
+@use '../privacy/privacy.scss';
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background: var(--card-bg, #f8f9fa);
+  border: 1px solid var(--border-color, #e9ecef);
+}
+
+.highlight-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.highlight-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  strong {
+    font-size: 0.95rem;
+  }
+
+  span {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  background: var(--card-bg, #f8f9fa);
+  border: 1px solid var(--border-color, #e9ecef);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1rem 0;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: var(--card-bg, #f8f9fa);
+    border: 1px solid var(--border-color, #e9ecef);
+    text-decoration: none;
+    color: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+
+    &:hover {
+      background: var(--primary-color, #0d6efd);
+      color: white;
+      border-color: var(--primary-color, #0d6efd);
+    }
+  }
+}

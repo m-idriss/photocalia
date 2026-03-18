@@ -31,6 +31,14 @@
     </image:image>
   </url>
 
+  <!-- About Page -->
+  <url>
+    <loc>https://photocalia.com/about</loc>
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Privacy Policy Page -->
   <url>
     <loc>https://photocalia.com/privacy</loc>
