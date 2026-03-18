@@ -1,6 +1,6 @@
-import { Injectable, signal, inject, NgZone } from '@angular/core';
+import { Injectable, signal, inject, NgZone, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 
 export type SupportedLanguage = 'en' | 'fr';
@@ -23,11 +23,16 @@ export class LanguageService {
   private readonly document = inject(DOCUMENT);
   private readonly ngZone = inject(NgZone);
   private readonly router = inject(Router);
+  private readonly platformId = inject(PLATFORM_ID);
 
   readonly translations = signal<Record<string, string>>({});
   readonly currentLang = signal<SupportedLanguage>(this.getInitialLanguage());
 
   readonly languages = SUPPORTED_LANGUAGES;
+
+  private get isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
 
   constructor() {
     this.loadLanguage(this.currentLang());
@@ -43,7 +48,9 @@ export class LanguageService {
   setLanguage(lang: SupportedLanguage): void {
     if (lang === this.currentLang()) return;
     this.currentLang.set(lang);
-    localStorage.setItem(STORAGE_KEY, lang);
+    if (this.isBrowser) {
+      localStorage.setItem(STORAGE_KEY, lang);
+    }
     this.loadLanguage(lang);
 
     // Navigate to the equivalent route in the target language
@@ -105,6 +112,16 @@ export class LanguageService {
   }
 
   private getInitialLanguage(): SupportedLanguage {
+    if (!this.isBrowser) {
+      // During SSR, detect language from the router URL or default to English.
+      // The URL path is available via the injected DOCUMENT or router initial URL.
+      const url = this.document.location?.pathname ?? '';
+      if (url === FR_PREFIX || url.startsWith(`${FR_PREFIX}/`)) {
+        return 'fr';
+      }
+      return DEFAULT_LANGUAGE;
+    }
+
     // 1. URL path prefix (/fr/...)
     const path = window.location.pathname;
     if (path === FR_PREFIX || path.startsWith(`${FR_PREFIX}/`)) {

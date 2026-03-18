@@ -50,6 +50,8 @@ export class OfflineBanner implements OnInit, OnDestroy {
   }
 
   retry(): void {
-    window.location.reload();
+    if (isPlatformBrowser(this.platformId)) {
+      window.location.reload();
+    }
   }
 }

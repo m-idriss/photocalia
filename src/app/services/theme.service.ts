@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 
 /**
  * Theme configuration interface defining all theme-related options
@@ -31,6 +32,9 @@ export interface ThemeConfig {
   providedIn: 'root',
 })
 export class ThemeService {
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly doc = inject(DOCUMENT);
+
   private readonly config: ThemeConfig = {
     THEME_MODES: ['light', 'dark'],
     DEFAULT_THEME: 'light',
@@ -50,10 +54,16 @@ export class ThemeService {
   private currentTheme: string;
   private currentFontSize: string;
 
+  private get isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
+
   constructor() {
     // Initialize from localStorage or use defaults
     // Migrate old theme values to new ones
-    let savedTheme = localStorage.getItem('theme') || this.config.DEFAULT_THEME;
+    let savedTheme = this.isBrowser
+      ? localStorage.getItem('theme') || this.config.DEFAULT_THEME
+      : this.config.DEFAULT_THEME;
 
     // Map old theme values to new ones
     if (savedTheme === 'white' || savedTheme === 'glass') {
@@ -61,11 +71,15 @@ export class ThemeService {
     }
 
     this.currentTheme = savedTheme;
-    this.currentFontSize = localStorage.getItem('fontSize') || this.config.DEFAULT_FONT_SIZE;
+    this.currentFontSize = this.isBrowser
+      ? localStorage.getItem('fontSize') || this.config.DEFAULT_FONT_SIZE
+      : this.config.DEFAULT_FONT_SIZE;
 
-    // Apply initial theme
-    this.applyTheme(this.currentTheme);
-    this.applyFontSize(this.currentFontSize);
+    // Apply initial theme (only in browser)
+    if (this.isBrowser) {
+      this.applyTheme(this.currentTheme);
+      this.applyFontSize(this.currentFontSize);
+    }
   }
 
   getCurrentTheme(): string {
@@ -96,19 +110,25 @@ export class ThemeService {
 
   private setTheme(theme: string): void {
     this.currentTheme = theme;
-    localStorage.setItem('theme', theme);
+    if (this.isBrowser) {
+      localStorage.setItem('theme', theme);
+    }
     this.applyTheme(theme);
   }
 
   private setFontSize(fontSize: string): void {
     this.currentFontSize = fontSize;
-    localStorage.setItem('fontSize', fontSize);
+    if (this.isBrowser) {
+      localStorage.setItem('fontSize', fontSize);
+    }
     this.applyFontSize(fontSize);
   }
 
   private applyTheme(theme: string): void {
-    const body = document.body;
-    const bgElement = document.querySelector('.bg') as HTMLElement;
+    if (!this.isBrowser) return;
+
+    const body = this.doc.body;
+    const bgElement = this.doc.querySelector('.bg') as HTMLElement;
 
     // Remove all existing theme and background classes
     body.classList.remove('light-theme', 'dark-theme', 'white-theme', 'glass-theme');
@@ -134,7 +154,9 @@ export class ThemeService {
   }
 
   private applyFontSize(fontSize: string): void {
-    const body = document.body;
+    if (!this.isBrowser) return;
+
+    const body = this.doc.body;
 
     // Remove existing font size classes
     this.config.FONT_SIZES.forEach((size) => {
@@ -146,16 +168,18 @@ export class ThemeService {
   }
 
   private updateThemeColor(color: string): void {
-    let themeColorMeta = document.querySelector('#theme-color-meta') as HTMLMetaElement;
+    if (!this.isBrowser) return;
+
+    let themeColorMeta = this.doc.querySelector('#theme-color-meta') as HTMLMetaElement;
     if (!themeColorMeta) {
       // Create the meta element if it doesn't exist
-      themeColorMeta = document.createElement('meta');
+      themeColorMeta = this.doc.createElement('meta');
       themeColorMeta.name = 'theme-color';
       themeColorMeta.id = 'theme-color-meta';
-      document.head.appendChild(themeColorMeta);
+      this.doc.head.appendChild(themeColorMeta);
     }
     themeColorMeta.content = color;
-    document.body.style.setProperty('--body-bg', color);
+    this.doc.body.style.setProperty('--body-bg', color);
   }
 
   getThemeDisplayName(theme: string): string {
