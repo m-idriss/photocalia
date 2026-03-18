@@ -390,21 +390,20 @@
 .cta-content {
   max-width: 700px;
   margin: 0 auto;
-  padding: 3rem 2rem;
 }
 
 .cta-title {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   line-height: 1.2;
 }
 
 .cta-description {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   line-height: 1.6;
 }
 
@@ -412,34 +411,27 @@
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1rem 2.5rem;
-  font-size: 1.25rem;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--ct-primary, #4f46e5);
   background: white;
   border: none;
-  border-radius: 50px;
+  border-radius: 8px;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.15);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2);
   }
 
   &:active {
     transform: translateY(0);
-  }
-}
-
-.cta-arrow {
-  font-size: 1.5rem;
-  transition: transform 0.3s ease;
-
-  .cta-button:hover & {
-    transform: translateX(4px);
   }
 }
 
@@ -610,22 +602,7 @@
     font-size: 1rem;
   }
 
-  .cta-content {
-    padding: 2rem 1.5rem;
-  }
-
-  .cta-title {
-    font-size: 1.75rem;
-  }
-
-  .cta-description {
-    font-size: 1.0625rem;
-  }
-
-  .cta-button {
-    padding: 0.875rem 2rem;
-    font-size: 1.125rem;
-  }
+  /* padding removed from cta-content */
 
   .cta-note {
     font-size: 0.9375rem;
