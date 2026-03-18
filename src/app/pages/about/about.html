@@ -1,17 +1,18 @@
-<main class="legal-page" aria-label="About Photocalia" id="main-content" role="main">
-  <div class="legal-container">
-    <section class="legal-header" aria-labelledby="about-title">
-      <h1 id="about-title" class="legal-title">
-        <span class="legal-icon" aria-hidden="true">&#x1F4C5;</span>
+<main class="about-page" aria-label="About Photocalia" id="main-content" role="main">
+  <div class="about-container">
+    <!-- Hero Section -->
+    <section class="hero-section" aria-labelledby="about-title">
+      <h1 id="about-title" class="hero-title">
+        <span class="hero-icon" aria-hidden="true">&#x1F4C5;</span>
         About Photocalia
       </h1>
-      <p class="legal-subtitle">AI-powered photo to calendar conversion, built by Idriss</p>
+      <p class="hero-subtitle">AI-powered photo to calendar conversion, built by Idriss</p>
     </section>
 
-    <section class="legal-content">
-      <!-- Mission -->
-      <div class="legal-section">
-        <h2>Our Mission</h2>
+    <!-- Mission -->
+    <section class="about-section" aria-labelledby="mission-title">
+      <h2 id="mission-title" class="section-title">Our Mission</h2>
+      <div class="section-content">
         <p>
           Photocalia was born from a simple frustration: you receive a flyer, a screenshot of a
           meeting invite, or a photo of a school schedule &mdash; and then you have to manually type
@@ -25,45 +26,52 @@
           in seconds.
         </p>
       </div>
+    </section>
 
-      <!-- Key Numbers -->
-      <div class="legal-section">
-        <h2>At a Glance</h2>
-        <div class="about-highlights">
-          <div class="highlight-item">
-            <span class="highlight-icon" aria-hidden="true">&#x1F680;</span>
-            <div class="highlight-text">
-              <strong>Launched October 2024</strong>
-              <span>Serving users worldwide</span>
-            </div>
+    <!-- At a Glance -->
+    <section class="about-section" aria-labelledby="glance-title">
+      <h2 id="glance-title" class="section-title">At a Glance</h2>
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <span class="highlight-icon" aria-hidden="true">&#x1F680;</span>
+          <div class="highlight-content">
+            <strong>Launched October 2024</strong>
+            <span>Serving users worldwide</span>
           </div>
-          <div class="highlight-item">
-            <span class="highlight-icon" aria-hidden="true">&#x1F310;</span>
-            <div class="highlight-text">
-              <strong>2 Languages</strong>
-              <span>English &amp; French</span>
-            </div>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-icon" aria-hidden="true">&#x1F310;</span>
+          <div class="highlight-content">
+            <strong>2 Languages</strong>
+            <span>English &amp; French</span>
           </div>
-          <div class="highlight-item">
-            <span class="highlight-icon" aria-hidden="true">&#x1F4F1;</span>
-            <div class="highlight-text">
-              <strong>PWA Ready</strong>
-              <span>Install on any device</span>
-            </div>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-icon" aria-hidden="true">&#x1F4F1;</span>
+          <div class="highlight-content">
+            <strong>PWA Ready</strong>
+            <span>Install on any device</span>
           </div>
-          <div class="highlight-item">
-            <span class="highlight-icon" aria-hidden="true">&#x1F513;</span>
-            <div class="highlight-text">
-              <strong>Open Source</strong>
-              <span>MIT License on GitHub</span>
-            </div>
+        </div>
+        <div class="highlight-card">
+          <span class="highlight-icon" aria-hidden="true">&#x1F513;</span>
+          <div class="highlight-content">
+            <strong>Open Source</strong>
+            <span>MIT License on GitHub</span>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- About the Creator -->
-      <div class="legal-section" itemscope itemtype="https://schema.org/Person">
-        <h2>Meet the Creator</h2>
+    <!-- Meet the Creator -->
+    <section
+      class="about-section"
+      aria-labelledby="creator-title"
+      itemscope
+      itemtype="https://schema.org/Person"
+    >
+      <h2 id="creator-title" class="section-title">Meet the Creator</h2>
+      <div class="section-content">
         <p>
           Photocalia is built by <strong itemprop="name">Idriss</strong>, a
           <span itemprop="jobTitle">software engineer</span> passionate about building tools that
@@ -78,139 +86,206 @@
           &mdash; a studio focused on practical, privacy-respecting AI tools.
         </p>
         <meta itemprop="url" content="https://3dime.com" />
-
-        <h3>Connect</h3>
-        <div class="social-links">
-          <a
-            href="https://github.com/m-idriss"
-            target="_blank"
-            rel="noopener noreferrer"
-            itemprop="sameAs"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://github.com/m-idriss/photocalia"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Source Code
-          </a>
-          <a href="mailto:support@photocalia.com"> Contact </a>
-        </div>
       </div>
+      <h3 class="subsection-title">Connect</h3>
+      <div class="social-links">
+        <a
+          href="https://github.com/m-idriss"
+          target="_blank"
+          rel="noopener noreferrer"
+          itemprop="sameAs"
+          class="social-link"
+        >
+          GitHub
+        </a>
+        <a
+          href="https://github.com/m-idriss/photocalia"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="social-link"
+        >
+          Source Code
+        </a>
+        <a href="mailto:support@photocalia.com" class="social-link"> Contact </a>
+      </div>
+    </section>
 
-      <!-- Technology -->
-      <div class="legal-section">
-        <h2>Technology Stack</h2>
+    <!-- Technology Stack -->
+    <section class="about-section" aria-labelledby="tech-title">
+      <h2 id="tech-title" class="section-title">Technology Stack</h2>
+      <div class="section-content">
         <p>
           Photocalia is built with modern, production-grade technologies chosen for performance,
           security, and reliability:
         </p>
-        <div class="tech-stack">
-          <span class="tech-badge">Angular</span>
-          <span class="tech-badge">TypeScript</span>
-          <span class="tech-badge">Firebase</span>
-          <span class="tech-badge">GPT-4 Vision</span>
-          <span class="tech-badge">Cloud Functions</span>
-          <span class="tech-badge">PWA</span>
-        </div>
-        <ul>
-          <li><strong>Frontend:</strong> Angular Progressive Web App with responsive design</li>
-          <li><strong>AI Engine:</strong> GPT-4 Vision for OCR and event extraction</li>
-          <li><strong>Hosting:</strong> Firebase Hosting with global CDN</li>
-          <li><strong>Backend:</strong> Firebase Cloud Functions on Google Cloud</li>
-          <li><strong>Authentication:</strong> Google Sign-In via Firebase Auth</li>
-          <li><strong>Output:</strong> Standard ICS (iCalendar) format</li>
-        </ul>
       </div>
+      <div class="tech-badges">
+        <span class="tech-badge">Angular</span>
+        <span class="tech-badge">TypeScript</span>
+        <span class="tech-badge">Firebase</span>
+        <span class="tech-badge">GPT-4 Vision</span>
+        <span class="tech-badge">Cloud Functions</span>
+        <span class="tech-badge">PWA</span>
+      </div>
+      <div class="tech-details">
+        <div class="tech-detail-item">
+          <span class="tech-detail-icon">✓</span>
+          <span><strong>Frontend:</strong> Angular Progressive Web App with responsive design</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="tech-detail-icon">✓</span>
+          <span><strong>AI Engine:</strong> GPT-4 Vision for OCR and event extraction</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="tech-detail-icon">✓</span>
+          <span><strong>Hosting:</strong> Firebase Hosting with global CDN</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="tech-detail-icon">✓</span>
+          <span><strong>Backend:</strong> Firebase Cloud Functions on Google Cloud</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="tech-detail-icon">✓</span>
+          <span><strong>Authentication:</strong> Google Sign-In via Firebase Auth</span>
+        </div>
+        <div class="tech-detail-item">
+          <span class="tech-detail-icon">✓</span>
+          <span><strong>Output:</strong> Standard ICS (iCalendar) format</span>
+        </div>
+      </div>
+    </section>
 
-      <!-- Privacy & Trust -->
-      <div class="legal-section">
-        <h2>Privacy &amp; Trust</h2>
+    <!-- Privacy & Trust -->
+    <section class="about-section" aria-labelledby="privacy-title">
+      <h2 id="privacy-title" class="section-title">Privacy &amp; Trust</h2>
+      <div class="section-content">
         <p>We take your privacy seriously. Here's what sets us apart:</p>
-        <ul>
-          <li>
-            <strong>No permanent storage:</strong> Your uploaded files are processed in real-time
-            and not stored permanently
-          </li>
-          <li>
-            <strong>No tracking ads:</strong> We don't sell your data or show personalized
-            advertising
-          </li>
-          <li>
-            <strong>Open source:</strong> Our code is publicly auditable on
-            <a
-              href="https://github.com/m-idriss/photocalia"
-              target="_blank"
-              rel="noopener noreferrer"
-              >GitHub</a
+      </div>
+      <div class="trust-grid">
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true">&#x1F512;</span>
+          <div class="trust-content">
+            <strong>No permanent storage</strong>
+            <span>Your uploaded files are processed in real-time and not stored permanently</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true">&#x1F6AB;</span>
+          <div class="trust-content">
+            <strong>No tracking ads</strong>
+            <span>We don't sell your data or show personalized advertising</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true">&#x1F4BB;</span>
+          <div class="trust-content">
+            <strong>Open source</strong>
+            <span
+              >Our code is publicly auditable on
+              <a
+                href="https://github.com/m-idriss/photocalia"
+                target="_blank"
+                rel="noopener noreferrer"
+                >GitHub</a
+              ></span
             >
-          </li>
-          <li>
-            <strong>GDPR compliant:</strong> Full compliance with European data protection
-            regulations
-          </li>
-          <li>
-            <strong>Minimal data:</strong> We only collect what's needed to provide the service
-          </li>
-        </ul>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true">&#x1F1EA;&#x1F1FA;</span>
+          <div class="trust-content">
+            <strong>GDPR compliant</strong>
+            <span>Full compliance with European data protection regulations</span>
+          </div>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon" aria-hidden="true">&#x1F4CA;</span>
+          <div class="trust-content">
+            <strong>Minimal data</strong>
+            <span>We only collect what's needed to provide the service</span>
+          </div>
+        </div>
+      </div>
+      <div class="section-content">
         <p>
           For full details, read our
           <a [routerLink]="'/privacy' | localizeRoute">Privacy Policy</a>.
         </p>
       </div>
+    </section>
 
-      <!-- How to Support -->
-      <div class="legal-section">
-        <h2>Support the Project</h2>
+    <!-- Support the Project -->
+    <section class="about-section" aria-labelledby="support-title">
+      <h2 id="support-title" class="section-title">Support the Project</h2>
+      <div class="section-content">
         <p>Photocalia is free to use and open source. Here's how you can help:</p>
-        <ul>
-          <li>
-            Star the project on
+      </div>
+      <div class="support-grid">
+        <div class="support-item">
+          <span class="support-icon" aria-hidden="true">&#x2B50;</span>
+          <span
+            >Star the project on
             <a
               href="https://github.com/m-idriss/photocalia"
               target="_blank"
               rel="noopener noreferrer"
               >GitHub</a
-            >
-          </li>
-          <li>
-            Report bugs or suggest features via
+            ></span
+          >
+        </div>
+        <div class="support-item">
+          <span class="support-icon" aria-hidden="true">&#x1F41B;</span>
+          <span
+            >Report bugs or suggest features via
             <a
               href="https://github.com/m-idriss/photocalia/issues"
               target="_blank"
               rel="noopener noreferrer"
               >GitHub Issues</a
-            >
-          </li>
-          <li>Share Photocalia with friends, colleagues, or on social media</li>
-          <li>Contribute code &mdash; pull requests are welcome!</li>
-        </ul>
+            ></span
+          >
+        </div>
+        <div class="support-item">
+          <span class="support-icon" aria-hidden="true">&#x1F4E2;</span>
+          <span>Share Photocalia with friends, colleagues, or on social media</span>
+        </div>
+        <div class="support-item">
+          <span class="support-icon" aria-hidden="true">&#x1F4BB;</span>
+          <span>Contribute code &mdash; pull requests are welcome!</span>
+        </div>
       </div>
+    </section>
 
-      <!-- Contact -->
-      <div class="legal-section">
-        <h2>Contact Us</h2>
-        <ul>
-          <li>
-            <strong>General Support:</strong>
-            <a href="mailto:support@photocalia.com">support@photocalia.com</a>
-          </li>
-          <li>
-            <strong>Privacy &amp; GDPR:</strong>
-            <a href="mailto:privacy@photocalia.com">privacy@photocalia.com</a>
-          </li>
-          <li>
-            <strong>Bug Reports:</strong>
+    <!-- Contact -->
+    <section class="about-section" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="section-title">Contact Us</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <span class="contact-icon" aria-hidden="true">&#x1F4E7;</span>
+          <div class="contact-content">
+            <strong>General Support</strong>
+            <a href="mailto:support@photocalia.com">support&#64;photocalia.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon" aria-hidden="true">&#x1F512;</span>
+          <div class="contact-content">
+            <strong>Privacy &amp; GDPR</strong>
+            <a href="mailto:privacy@photocalia.com">privacy&#64;photocalia.com</a>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon" aria-hidden="true">&#x1F41B;</span>
+          <div class="contact-content">
+            <strong>Bug Reports</strong>
             <a
               href="https://github.com/m-idriss/photocalia/issues"
               target="_blank"
               rel="noopener noreferrer"
               >GitHub Issues</a
             >
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </section>
   </div>
