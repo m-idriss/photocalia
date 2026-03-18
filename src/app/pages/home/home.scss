@@ -13,7 +13,6 @@
 
 .hero-section {
   text-align: center;
-  margin-bottom: 2rem;
   padding: 2rem 2rem 0;
   animation: fadeInDown 0.8s ease-out;
 }
@@ -488,7 +487,8 @@
    ======================== */
 .content-layout {
   display: grid;
-  padding: 2rem 1rem;
+  padding: 0rem 1rem;
+  padding-bottom: 2rem;
 
   // Default: Center converter (no calendar)
   @media (min-width: 1200px) {
