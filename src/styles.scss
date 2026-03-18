@@ -11,24 +11,40 @@
    CSS Variables
    ======================== */
 :root {
-  /* Light theme (default) */
-  --primary-bg: rgba(255, 255, 255, 0.5);
-  --primary-bg-hover: rgba(255, 255, 255, 0.65);
-  --glass-bg: rgba(0, 0, 0, 0.1);
-  --glass-bg-hover: rgba(0, 0, 0, 0.2);
-  --glass-border: rgba(0, 0, 0, 0.15);
-  --text-primary: #1a1a1a;
-  --text-secondary: rgba(26, 26, 26, 0.8);
-  --accent-color: #3b82f6;
+  /* === Corporate Trust Design System === */
+
+  /* Color Palette */
+  --ct-bg: #f8fafc;
+  --ct-surface: #ffffff;
+  --ct-primary: #4f46e5;
+  --ct-secondary: #7c3aed;
+  --ct-success: #10b981;
+  --ct-border: #e2e8f0;
+  --ct-text-main: #0f172a;
+  --ct-text-muted: #64748b;
+
+  /* Light theme (default) — mapped from Corporate Trust */
+  --primary-bg: #ffffff;
+  --primary-bg-hover: #f1f5f9;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: var(--ct-border);
+  --text-primary: var(--ct-text-main);
+  --text-secondary: var(--ct-text-muted);
+  --accent-color: var(--ct-primary);
   --badge-color: #ef4444;
 
-  /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  /* Typography — Plus Jakarta Sans */
+  --font-family:
+    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   --font-size-base: 1rem;
   --font-size-lg: 1.25rem;
   --font-size-xl: 1.5rem;
   --fw-normal: 400;
+  --fw-medium: 500;
   --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -38,26 +54,32 @@
   --space-xl: 2rem;
 
   /* Radius */
+  --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1.25rem;
+  --radius-xl: 1rem;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-card: 0 6px 18px rgba(0, 0, 0, 0.3);
-  --shadow-card-hover: 0 12px 28px rgba(0, 0, 0, 0.35);
-  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
-  --shadow-glow-strong: 0 0 30px rgba(59, 130, 246, 0.5);
+  /* Shadows — Colored (Indigo-tinted) */
+  --shadow-card: 0 4px 20px -2px rgba(79, 70, 229, 0.1);
+  --shadow-card-hover:
+    0 10px 25px -5px rgba(79, 70, 229, 0.15), 0 8px 10px -6px rgba(79, 70, 229, 0.1);
+  --shadow-button: 0 4px 14px 0 rgba(79, 70, 229, 0.3);
+  --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.3);
+  --shadow-glow-strong: 0 0 30px rgba(79, 70, 229, 0.5);
 
   /* Transitions */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
   --t-fast: 150ms var(--ease);
-  --t-medium: 300ms var(--ease);
+  --t-medium: 200ms var(--ease);
   --t-slow: 600ms var(--ease);
 
   /* Gradient Colors */
-  --gradient-blue: 59, 130, 246;
-  --gradient-indigo: 99, 102, 241;
+  --gradient-start: var(--ct-primary);
+  --gradient-end: var(--ct-secondary);
+  --gradient-blue: 79, 70, 229;
+  --gradient-indigo: 124, 58, 237;
 
   /* Gradient Color Shades */
   --color-blue-500: #3b82f6;
@@ -71,50 +93,57 @@
   --calendar-header-footer-height-mobile: 220px;
 }
 
-/* Light theme */
+/* Light theme — Corporate Trust */
 body.light-theme,
 body.white-theme {
-  --primary-bg: rgba(255, 255, 255, 0.95);
-  --primary-bg-hover: rgba(255, 255, 255, 1);
-  --glass-bg: rgba(0, 0, 0, 0.1);
-  --glass-bg-hover: rgba(0, 0, 0, 0.2);
-  --glass-border: rgba(0, 0, 0, 0.15);
-  --text-primary: #1a1a1a;
-  --text-secondary: rgba(26, 26, 26, 0.8);
-  --menu-bg: rgba(255, 255, 255, 0.95);
-  --text-menu: #1a1a1a;
-  --text-bg: #000000;
-  --text-bg-alt: #1a1a1a;
+  --primary-bg: #ffffff;
+  --primary-bg-hover: #f1f5f9;
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-border: var(--ct-border);
+  --text-primary: var(--ct-text-main);
+  --text-secondary: var(--ct-text-muted);
+  --menu-bg: rgba(255, 255, 255, 0.98);
+  --text-menu: var(--ct-text-main);
+  --text-bg: var(--ct-text-main);
+  --text-bg-alt: var(--ct-text-muted);
 }
 
-/* Dark theme */
+/* Dark theme — Corporate Trust Dark */
 body.dark-theme {
-  --primary-bg: rgba(0, 0, 0, 0.95);
-  --primary-bg-hover: rgba(0, 0, 0, 1);
-  --glass-bg: rgba(255, 255, 255, 0.08);
-  --glass-bg-hover: rgba(255, 255, 255, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --text-primary: #fff;
-  --text-secondary: rgba(255, 255, 255, 0.9);
-  --menu-bg: rgba(0, 0, 0, 0.95);
-  --text-menu: #fff;
-  --text-bg: #ffffff;
-  --text-bg-alt: #333333;
+  --ct-bg: #0f172a;
+  --ct-surface: #1e293b;
+  --ct-border: #334155;
+  --ct-text-main: #f1f5f9;
+  --ct-text-muted: #94a3b8;
 
-  /* Enhanced shadows for dark theme depth */
-  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.1);
-  --shadow-card-hover: 0 16px 48px rgba(0, 0, 0, 0.7), 0 0 2px rgba(59, 130, 246, 0.4);
+  --primary-bg: #1e293b;
+  --primary-bg-hover: #334155;
+  --glass-bg: rgba(30, 41, 59, 0.8);
+  --glass-bg-hover: rgba(30, 41, 59, 0.95);
+  --glass-border: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --menu-bg: rgba(15, 23, 42, 0.98);
+  --text-menu: #f1f5f9;
+  --text-bg: #f1f5f9;
+  --text-bg-alt: #94a3b8;
+
+  /* Colored shadows on dark */
+  --shadow-card: 0 4px 20px -2px rgba(79, 70, 229, 0.2);
+  --shadow-card-hover:
+    0 10px 25px -5px rgba(79, 70, 229, 0.3), 0 8px 10px -6px rgba(79, 70, 229, 0.15);
 }
 
 /* Background color variables (kept for compatibility) */
 body.bg-white {
-  --text-bg: #000000;
-  --text-bg-alt: #1a1a1a;
+  --text-bg: var(--ct-text-main);
+  --text-bg-alt: var(--ct-text-muted);
 }
 
 body.bg-black {
-  --text-bg: #ffffff;
-  --text-bg-alt: #333333;
+  --text-bg: #f1f5f9;
+  --text-bg-alt: #94a3b8;
 }
 
 /* Font size options */
@@ -186,22 +215,22 @@ body.loaded {
 }
 
 /* Comprehensive focus indicators for WCAG AA compliance */
-a:focus,
-button:focus,
-input:focus,
-select:focus,
-textarea:focus,
-[tabindex]:focus {
-  outline: 3px solid var(--accent-color);
-  outline-offset: 3px;
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--ct-primary);
+  outline-offset: 2px;
   border-radius: var(--radius-md);
   transition: outline var(--t-fast);
 }
 
 /* Re-apply focus for our custom implementation */
 *:focus-visible {
-  outline: 3px solid var(--accent-color);
-  outline-offset: 3px;
+  outline: 2px solid var(--ct-primary);
+  outline-offset: 2px;
 }
 
 /* ========================
@@ -289,7 +318,7 @@ textarea:focus,
 .bg {
   position: fixed;
   inset: 0;
-  background: #1a1a2e;
+  background: var(--ct-bg, #f8fafc);
   min-height: 100dvh;
   min-width: 100vw;
   z-index: -1;
@@ -298,13 +327,13 @@ textarea:focus,
 /* Fallback background colors for different modes */
 body.bg-black .bg,
 body.dark-theme .bg {
-  background: #000000 !important;
+  background: #0f172a !important;
 }
 
 body.bg-white .bg,
 body.light-theme .bg,
 body.white-theme .bg {
-  background: #ffffff !important;
+  background: #f8fafc !important;
 }
 
 /* ========================
@@ -324,7 +353,7 @@ body.white-theme .bg {
 /* ========================
    Links & Chips
    ======================== */
-/* Base link style with glassmorphism effect */
+/* Base link style — Corporate Trust elevated card */
 .link {
   /* Positioning */
   position: relative;
@@ -338,60 +367,37 @@ body.white-theme .bg {
   /* Typography */
   font-size: var(--font-size-base);
   font-weight: var(--fw-semibold);
-  letter-spacing: 0.3px;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
   text-decoration: none;
 
-  /* Visual */
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  /* Visual — White elevated card */
+  background: var(--ct-surface);
+  border: 1px solid var(--ct-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
 
   /* Misc */
   transition: all var(--t-medium);
 
-  /* Shimmer effect */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.15), transparent);
-    transition: left 0.5s var(--ease);
-  }
-
-  /* Hover state */
+  /* Hover state — lift with enhanced shadow */
   &:hover {
-    background: var(--glass-bg-hover);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(59, 130, 246, 0.4);
-    box-shadow: var(--shadow-card-hover);
     transform: translateY(-2px);
-
-    &::before {
-      left: 100%;
-    }
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(79, 70, 229, 0.2);
   }
 
   /* Focus state for accessibility */
   &:focus-visible {
-    outline: 3px solid var(--accent-color);
-    outline-offset: 3px;
+    outline: 2px solid var(--ct-primary);
+    outline-offset: 2px;
   }
 }
 
-/* Enhanced blur for dark theme links */
+/* Dark theme links */
 body.dark-theme .link {
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-
-  &:hover {
-    backdrop-filter: blur(24px);
-  }
+  background: var(--ct-surface);
+  border-color: var(--ct-border);
 }
 
 /* Small chip variant for inline tags */
@@ -813,11 +819,9 @@ body.dark-theme .link {
 
 /* Enhanced focus indicators */
 .link:focus-visible {
-  outline: 3px solid var(--accent-color);
-  outline-offset: 3px;
-  box-shadow:
-    0 0 0 6px rgba(59, 130, 246, 0.2),
-    var(--shadow-card-hover);
+  outline: 2px solid var(--ct-primary);
+  outline-offset: 2px;
+  box-shadow: var(--shadow-card-hover);
   transition: all var(--t-fast);
 }
 
@@ -826,7 +830,7 @@ body.dark-theme .link {
   position: absolute;
   top: -40px;
   left: 6px;
-  background: var(--accent-color);
+  background: linear-gradient(135deg, var(--ct-primary), var(--ct-secondary));
   color: white;
   padding: 8px 16px;
   text-decoration: none;
@@ -1056,7 +1060,7 @@ body.font-large h4 {
 .tooltip,
 ngb-tooltip-window,
 .ngb-tooltip,
-[class*="tooltip"] {
+[class*='tooltip'] {
   z-index: 11500 !important;
 }
 

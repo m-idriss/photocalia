@@ -11,8 +11,7 @@
   padding: var(--space-lg) 0;
 
   /* Visual - follows theme and background like containers */
-  backdrop-filter: blur(16px);
-  border-top: 1px solid var(--text-bg-alt);
+  border-top: 1px solid var(--ct-border, #e2e8f0);
 
   /* Typography */
   font-size: 0.75rem;
@@ -49,13 +48,13 @@
 
   /* Hover state */
   &:hover {
-    color: var(--text-bg);
+    color: var(--ct-primary, #4f46e5);
     text-decoration: underline;
   }
 
   /* Focus state for accessibility */
   &:focus-visible {
-    outline: 2px solid var(--accent-color);
+    outline: 2px solid var(--ct-primary);
     outline-offset: 2px;
     border-radius: 2px;
   }
@@ -75,15 +74,6 @@
   color: var(--text-bg);
   opacity: 0.5;
   user-select: none;
-}
-
-/* Enhanced styling for dark theme - matches container behavior */
-body.dark-theme .global-footer {
-  backdrop-filter: blur(20px);
-
-  &:hover {
-    backdrop-filter: blur(24px);
-  }
 }
 
 /* Responsive adjustments */

@@ -15,10 +15,9 @@
   /* Typography */
   text-align: center;
 
-  /* Visual */
-  background: var(--primary-bg);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
+  /* Visual — Corporate Trust elevated card */
+  background: var(--ct-surface, #ffffff);
+  border: 1px solid var(--ct-border, #e2e8f0);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
 
@@ -27,20 +26,9 @@
 
   /* Hover state */
   &:hover {
-    background: var(--primary-bg-hover);
-    backdrop-filter: blur(24px);
-    box-shadow: var(--shadow-card-hover), var(--shadow-glow);
-    transform: none;
-  }
-}
-
-/* Enhanced blur for dark theme */
-body.dark-theme .container {
-  backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
-
-  &:hover {
-    backdrop-filter: blur(24px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(79, 70, 229, 0.2);
+    transform: translateY(-2px);
   }
 }
 
@@ -64,11 +52,11 @@ body.dark-theme .container {
 
   /* Typography */
   font-size: var(--font-size-xl);
-  font-weight: var(--fw-semibold);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: var(--fw-bold, 700);
+  letter-spacing: -0.02em;
 
   /* Visual - Gradient text effect */
-  background: linear-gradient(135deg, var(--text-primary), rgba(59, 130, 246, 0.8));
+  background: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -82,7 +70,7 @@ body.dark-theme .container {
     transform: translateX(-50%);
     width: 60px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    background: linear-gradient(90deg, transparent, var(--ct-primary, #4f46e5), transparent);
     border-radius: 1px;
   }
 }
@@ -123,10 +111,9 @@ body.dark-theme .container {
     border-color: var(--accent-color);
   }
 
-  &:focus,
   &:focus-visible {
-    outline: 3px solid var(--accent-color);
-    outline-offset: 3px;
+    outline: 2px solid var(--ct-primary, #4f46e5);
+    outline-offset: 2px;
   }
 }
 

@@ -2,6 +2,7 @@
   max-width: 760px;
   margin: 0 auto;
   padding: 2rem 1.5rem 4rem;
+  padding-top: 100px;
 }
 
 .breadcrumb {
@@ -14,7 +15,7 @@
   flex-wrap: wrap;
 
   a {
-    color: var(--accent-color, #4a90d9);
+    color: var(--ct-primary, #4f46e5);
     text-decoration: none;
 
     &:hover {
@@ -26,7 +27,7 @@
 .article-header {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid var(--border-color, #e9ecef);
+  border-bottom: 1px solid var(--ct-border, #e2e8f0);
 }
 
 .article-title {
@@ -34,7 +35,8 @@
   font-weight: 700;
   line-height: 1.25;
   margin-bottom: 1rem;
-  color: var(--text-primary, #1a1a2e);
+  color: var(--text-primary, #0f172a);
+  letter-spacing: -0.02em;
 }
 
 .article-meta {
@@ -46,7 +48,7 @@
   flex-wrap: wrap;
 
   a {
-    color: var(--accent-color, #4a90d9);
+    color: var(--ct-primary, #4f46e5);
     text-decoration: none;
     font-weight: 500;
 
@@ -67,7 +69,7 @@
 
   .lead {
     font-size: 1.15rem;
-    color: var(--text-secondary, #555);
+    color: var(--text-secondary, #64748b);
     margin-bottom: 1.5rem;
     line-height: 1.7;
   }
@@ -105,7 +107,7 @@
 .article-footer {
   margin-top: 3rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--border-color, #e9ecef);
+  border-top: 1px solid var(--ct-border, #e2e8f0);
 }
 
 .article-tags {
@@ -119,8 +121,9 @@
   font-size: 0.75rem;
   padding: 0.2rem 0.6rem;
   border-radius: 20px;
-  background: var(--tag-bg, #f0f0f0);
-  color: var(--text-secondary, #666);
+  background: var(--ct-bg, #f8fafc);
+  color: var(--ct-primary, #4f46e5);
+  border: 1px solid rgba(79, 70, 229, 0.15);
 }
 
 .article-cta {
@@ -131,21 +134,25 @@
 .cta-button {
   display: inline-block;
   padding: 0.75rem 2rem;
-  background: var(--accent-color, #4a90d9);
+  background: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
+  box-shadow: var(--shadow-button);
   color: #fff;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
-  transition: opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 
   &:hover {
-    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.4);
   }
 }
 
 .back-link {
   a {
-    color: var(--accent-color, #4a90d9);
+    color: var(--ct-primary, #4f46e5);
     text-decoration: none;
     font-weight: 500;
 
