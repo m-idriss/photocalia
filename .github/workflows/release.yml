@@ -135,7 +135,7 @@ jobs:
       - name: Update package.json version
         run: |
           NEW_VERSION="${{ steps.new_version.outputs.version }}"
-          yarn version --new-version "$NEW_VERSION" --no-git-tag-version
+          yarn version "$NEW_VERSION" --no-git-tag-version
           echo "Updated package.json to version $NEW_VERSION"
 
       - name: Commit version bump
