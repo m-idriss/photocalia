@@ -1,6 +1,6 @@
 <header class="app-header">
   <div class="header-content">
-    <a routerLink="/" class="logo">
+    <a [routerLink]="'/' | localizeRoute" class="logo">
       <img src="assets/logo.png" alt="PhotoCalia logo" class="logo-icon-img" />
       <span class="logo-text">PhotoCalia</span>
     </a>
@@ -37,7 +37,11 @@
       }
 
       <!-- Burger Menu -->
-      <div class="burger-menu" [class.active]="menuOpen" [attr.aria-label]="'header.aria.settings' | translate">
+      <div
+        class="burger-menu"
+        [class.active]="menuOpen"
+        [attr.aria-label]="'header.aria.settings' | translate"
+      >
         <button
           class="burger-button"
           [class.active]="menuOpen"
@@ -61,7 +65,11 @@
 
         <!-- Dropdown menu -->
         @if (menuOpen) {
-          <div class="profile-dropdown" role="menu" [attr.aria-label]="'header.aria.settings' | translate">
+          <div
+            class="profile-dropdown"
+            role="menu"
+            [attr.aria-label]="'header.aria.settings' | translate"
+          >
             @if (isAuthenticated && currentUser) {
               <div class="user-info">
                 <div class="user-details">
@@ -74,7 +82,7 @@
             }
 
             <a
-              routerLink="/"
+              [routerLink]="'/' | localizeRoute"
               class="dropdown-item"
               role="menuitem"
               (click)="closeMenu()"
@@ -88,7 +96,7 @@
             <div class="dropdown-separator" role="separator"></div>
 
             <a
-              routerLink="/how-it-works"
+              [routerLink]="'/how-it-works' | localizeRoute"
               class="dropdown-item"
               role="menuitem"
               (click)="closeMenu()"

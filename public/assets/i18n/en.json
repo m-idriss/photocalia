@@ -148,5 +148,10 @@
   "stats.tagline": "Over {events} events generated from {files} images!",
   "stats.timeSaved": "That's ~{hours} hours saved",
   "stats.workdays": "{workdays} full workdays of manual scheduling!",
-  "stats.error": "Statistics temporarily unavailable"
+  "stats.error": "Statistics temporarily unavailable",
+  "offline.title": "You're offline",
+  "offline.message": "Photocalia needs an internet connection to convert your photos to calendar events.",
+  "offline.retry": "Try Again",
+  "offline.dismiss": "Dismiss offline notification",
+  "offline.tip": "Previously downloaded ICS files are saved on your device. The app will reconnect automatically."
 }

@@ -11,10 +11,11 @@ import { AuthAwareComponent } from '../base/auth-aware.component';
 import { ConverterService } from '../../services/converter';
 import { LanguageService, SupportedLanguage } from '../../services/language.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, AppTooltipDirective, TranslatePipe],
+  imports: [RouterLink, AppTooltipDirective, TranslatePipe, LocalizeRoutePipe],
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,7 +55,11 @@ export class Header extends AuthAwareComponent {
     try {
       await this.authService.signOutUser();
       // Clear quota cache immediately so UI doesn't show stale quota after logout
-      try { this.converterService.clearQuotaCache(); } catch (e) {}
+      try {
+        this.converterService.clearQuotaCache();
+      } catch {
+        /* ignore */
+      }
       this.menuOpen = false;
       this.cdr.markForCheck();
     } catch (error) {

@@ -3,9 +3,9 @@ import { RouterLink } from '@angular/router';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 
 @Component({
-  selector: 'app-legal-mentions',
+  selector: 'app-about',
   imports: [RouterLink, LocalizeRoutePipe],
-  templateUrl: './legal-mentions.html',
-  styleUrl: './legal-mentions.scss',
+  templateUrl: './about.html',
+  styleUrl: './about.scss',
 })
-export class LegalMentions {}
+export class About {}

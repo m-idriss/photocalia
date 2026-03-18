@@ -13,7 +13,11 @@
     <span class="footer-separator" aria-hidden="true">•</span>
     @for (link of footerLinks; track link.url; let isLast = $last) {
       @if (link.isInternal) {
-        <a [routerLink]="link.url" class="footer-link" [attr.aria-label]="link.label">
+        <a
+          [routerLink]="link.url | localizeRoute"
+          class="footer-link"
+          [attr.aria-label]="link.label"
+        >
           {{ link.label }}
         </a>
       } @else {

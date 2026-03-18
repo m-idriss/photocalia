@@ -1,0 +1,53 @@
+# Photocalia
+
+> Free AI-powered tool to convert photos, screenshots, flyers and PDFs into calendar events (ICS files)
+
+## About
+Photocalia uses GPT-4 Vision OCR to extract event details (dates, times, locations, descriptions) from images and documents, generating standard ICS files compatible with Google Calendar, Microsoft Outlook, and Apple Calendar. Built by Idriss at 3dime.com.
+
+## Key Pages (English)
+- [Home](https://photocalia.com/): Main AI calendar converter tool — upload images, get ICS files
+- [How It Works](https://photocalia.com/how-it-works): Step-by-step guide to converting photos to calendar events
+- [About](https://photocalia.com/about): Meet the creator, technology stack, and project mission
+- [Privacy Policy](https://photocalia.com/privacy): GDPR-compliant data handling practices
+- [Terms of Use](https://photocalia.com/terms): Service terms and conditions
+- [Legal Mentions](https://photocalia.com/legal-mentions): Company and legal information
+
+## Key Pages (French / Français)
+- [Accueil](https://photocalia.com/fr): Convertisseur IA de photos en événements calendrier
+- [Comment ça marche](https://photocalia.com/fr/how-it-works): Guide étape par étape
+- [À propos](https://photocalia.com/fr/about): Le créateur, la technologie et la mission
+- [Politique de confidentialité](https://photocalia.com/fr/privacy): Pratiques RGPD
+- [Conditions d'utilisation](https://photocalia.com/fr/terms): Conditions du service
+- [Mentions légales](https://photocalia.com/fr/legal-mentions): Informations légales
+
+## Features
+- AI-powered calendar extraction using GPT-4 Vision OCR
+- Batch processing with real-time progress tracking
+- Supports JPG, PNG, JPEG, HEIC images and PDF documents
+- Drag-and-drop file upload interface
+- Event editing and modification before export
+- ICS file generation compatible with all major calendar apps
+- 3 free conversions per month with Google sign-in
+- Progressive Web App (PWA) — installable on mobile and desktop
+- Offline capability after installation
+- Privacy-focused — files processed securely, not stored permanently
+- Mobile and desktop responsive design
+- Available in English and French
+
+## Use Cases
+- Convert appointment reminder screenshots to calendar events
+- Digitize event flyers, concert tickets, and meeting invitations
+- Import school schedules and timetable photos
+- Extract conference agendas from PDF programs
+- Turn business card event details into calendar entries
+
+## Technical Details
+- Version: 4.3.0
+- Published: October 2024
+- Technology: Angular PWA with Firebase hosting
+- AI Model: GPT-4 Vision for OCR and event extraction
+- Output Format: Standard ICS (iCalendar) format
+
+## Creator
+Built by Idriss ([3dime.com](https://3dime.com)) — [GitHub](https://github.com/m-idriss/photocalia)

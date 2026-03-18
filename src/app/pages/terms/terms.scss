@@ -1,10 +1,13 @@
-// Terms of Use page styles
+// Terms of Use page styles - reuses legal page styles
 @use '../privacy/privacy.scss';
 
 .terms-highlight {
   margin-top: 1.5rem;
-  padding: 1rem;
-  background: rgba(139, 92, 246, 0.1);
-  border-left: 4px solid #8b5cf6;
-  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+  border-left: 4px solid #667eea;
+  border-radius: 8px;
+  color: var(--text-secondary, #b0b0b0);
+  font-size: 1.0625rem;
+  line-height: 1.7;
 }

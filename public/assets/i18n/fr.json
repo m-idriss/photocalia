@@ -159,5 +159,10 @@
   "stats.tagline": "Plus de {events} événements générés depuis {files} images !",
   "stats.timeSaved": "C'est ~{hours} heures économisées",
   "stats.workdays": "{workdays} journées entières de planification manuelle !",
-  "stats.error": "Statistiques temporairement indisponibles"
+  "stats.error": "Statistiques temporairement indisponibles",
+  "offline.title": "Vous êtes hors ligne",
+  "offline.message": "Photocalia a besoin d'une connexion internet pour convertir vos photos en événements de calendrier.",
+  "offline.retry": "Réessayer",
+  "offline.dismiss": "Fermer la notification hors ligne",
+  "offline.tip": "Les fichiers ICS déjà téléchargés sont enregistrés sur votre appareil. L'application se reconnectera automatiquement."
 }

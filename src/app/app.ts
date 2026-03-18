@@ -7,6 +7,7 @@ import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
 import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { Stats } from './components/stats/stats';
+import { OfflineBanner } from './components/offline-banner/offline-banner';
 import { PWA_CONFIG } from './constants/pwa.constants';
 import { AuthService } from './services/auth.service';
 import { SeoService } from './services/seo.service';
@@ -15,7 +16,7 @@ import { LanguageService } from './services/language.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Header, Footer, Stats],
+  imports: [RouterOutlet, Header, Footer, Stats, OfflineBanner],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

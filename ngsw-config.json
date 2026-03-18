@@ -27,9 +27,15 @@
       }
     }
   ],
+  "navigationUrls": [
+    "/**",
+    "!/**/robots.txt",
+    "!/**/sitemap.xml",
+    "!/**/llms.txt"
+  ],
   "dataGroups": [
     {
-      "name": "api-performance",
+      "name": "api-freshness",
       "urls": [
         "https://*.photocalia.com/**",
         "https://*.a.run.app/**"
@@ -38,7 +44,7 @@
         "maxSize": 50,
         "maxAge": "1h",
         "timeout": "10s",
-        "strategy": "performance"
+        "strategy": "freshness"
       }
     }
   ]
