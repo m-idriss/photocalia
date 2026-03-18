@@ -226,5 +226,20 @@
   "blog.aiOcrCalendar.future.title": "The Future of AI Calendar Extraction",
   "blog.aiOcrCalendar.future.p1": "As AI models continue to improve, expect even better accuracy with handwritten text, complex multi-language documents, and low-quality images. Future developments may include real-time extraction from video, voice-to-calendar conversion, and proactive event suggestions based on your photo library.",
   "blog.aiOcrCalendar.conclusion.title": "Try AI-Powered Calendar Extraction",
-  "blog.aiOcrCalendar.conclusion.p1": "Photocalia uses GPT-4 Vision to deliver state-of-the-art calendar extraction. Upload any event flyer, appointment card, or schedule and see the AI in action — it's free to try with 3 conversions per month."
+  "blog.aiOcrCalendar.conclusion.p1": "Photocalia uses GPT-4 Vision to deliver state-of-the-art calendar extraction. Upload any event flyer, appointment card, or schedule and see the AI in action — it's free to try with 3 conversions per month.",
+
+  "cookie.title": "Cookie Settings",
+  "cookie.message": "We use cookies to ensure the best experience on our site. Essential cookies keep the app running, while optional cookies help us improve Photocalia.",
+  "cookie.learnMore": "Learn more",
+  "cookie.acceptAll": "Accept All",
+  "cookie.rejectAll": "Reject All",
+  "cookie.customize": "Customize",
+  "cookie.saveSelected": "Save Selection",
+  "cookie.alwaysOn": "Always on",
+  "cookie.essential.title": "Essential",
+  "cookie.essential.desc": "Required for login, security, and basic app functionality.",
+  "cookie.preferences.title": "Preferences",
+  "cookie.preferences.desc": "Remember your settings like theme and language.",
+  "cookie.analytics.title": "Analytics",
+  "cookie.analytics.desc": "Help us understand usage to improve the app."
 }

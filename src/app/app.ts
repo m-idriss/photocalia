@@ -8,6 +8,7 @@ import { Header } from './components/header/header';
 import { Footer } from './components/footer/footer';
 import { Stats } from './components/stats/stats';
 import { OfflineBanner } from './components/offline-banner/offline-banner';
+import { CookieConsent } from './components/cookie-consent/cookie-consent';
 import { PWA_CONFIG } from './constants/pwa.constants';
 import { AuthService } from './services/auth.service';
 import { SeoService } from './services/seo.service';
@@ -16,7 +17,7 @@ import { LanguageService } from './services/language.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Header, Footer, Stats, OfflineBanner],
+  imports: [RouterOutlet, Header, Footer, Stats, OfflineBanner, CookieConsent],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

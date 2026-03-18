@@ -1,0 +1,77 @@
+@if (visible()) {
+  <div class="cookie-banner" role="dialog" aria-label="Cookie consent" aria-live="polite">
+    <div class="cookie-content">
+      <div class="cookie-header">
+        <span class="cookie-icon" aria-hidden="true">🍪</span>
+        <strong>{{ 'cookie.title' | translate }}</strong>
+      </div>
+
+      <p class="cookie-message">
+        {{ 'cookie.message' | translate }}
+        <a [routerLink]="'/privacy' | localizeRoute">{{ 'cookie.learnMore' | translate }}</a>
+      </p>
+
+      @if (showDetails()) {
+        <div class="cookie-details">
+          <div class="cookie-option">
+            <div class="cookie-option-info">
+              <strong>{{ 'cookie.essential.title' | translate }}</strong>
+              <span class="cookie-option-desc">{{ 'cookie.essential.desc' | translate }}</span>
+            </div>
+            <span class="cookie-always-on">{{ 'cookie.alwaysOn' | translate }}</span>
+          </div>
+
+          <div class="cookie-option">
+            <div class="cookie-option-info">
+              <strong>{{ 'cookie.preferences.title' | translate }}</strong>
+              <span class="cookie-option-desc">{{ 'cookie.preferences.desc' | translate }}</span>
+            </div>
+            <button
+              class="cookie-toggle"
+              [class.active]="preferencesEnabled()"
+              (click)="togglePreferences()"
+              type="button"
+              [attr.aria-label]="'cookie.preferences.title' | translate"
+              [attr.aria-pressed]="preferencesEnabled()"
+            >
+              <span class="cookie-toggle-knob"></span>
+            </button>
+          </div>
+
+          <div class="cookie-option">
+            <div class="cookie-option-info">
+              <strong>{{ 'cookie.analytics.title' | translate }}</strong>
+              <span class="cookie-option-desc">{{ 'cookie.analytics.desc' | translate }}</span>
+            </div>
+            <button
+              class="cookie-toggle"
+              [class.active]="analyticsEnabled()"
+              (click)="toggleAnalytics()"
+              type="button"
+              [attr.aria-label]="'cookie.analytics.title' | translate"
+              [attr.aria-pressed]="analyticsEnabled()"
+            >
+              <span class="cookie-toggle-knob"></span>
+            </button>
+          </div>
+        </div>
+      }
+
+      <div class="cookie-actions">
+        <button class="cookie-btn cookie-btn-reject" (click)="rejectAll()" type="button">
+          {{ 'cookie.rejectAll' | translate }}
+        </button>
+        <button
+          class="cookie-btn cookie-btn-customize"
+          (click)="showDetails() ? acceptSelected() : toggleDetails()"
+          type="button"
+        >
+          {{ (showDetails() ? 'cookie.saveSelected' : 'cookie.customize') | translate }}
+        </button>
+        <button class="cookie-btn cookie-btn-accept" (click)="acceptAll()" type="button">
+          {{ 'cookie.acceptAll' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+}

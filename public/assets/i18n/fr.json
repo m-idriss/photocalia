@@ -237,5 +237,20 @@
   "blog.aiOcrCalendar.future.title": "L'avenir de l'extraction de calendrier par IA",
   "blog.aiOcrCalendar.future.p1": "À mesure que les modèles d'IA s'améliorent, attendez-vous à une meilleure précision avec le texte manuscrit, les documents multilingues complexes et les images de faible qualité. Les développements futurs pourraient inclure l'extraction en temps réel depuis la vidéo et la conversion voix-calendrier.",
   "blog.aiOcrCalendar.conclusion.title": "Essayez l'extraction de calendrier par IA",
-  "blog.aiOcrCalendar.conclusion.p1": "Photocalia utilise GPT-4 Vision pour offrir une extraction de calendrier de pointe. Téléchargez n'importe quel flyer, fiche de rendez-vous ou planning et voyez l'IA en action — c'est gratuit avec 3 conversions par mois."
+  "blog.aiOcrCalendar.conclusion.p1": "Photocalia utilise GPT-4 Vision pour offrir une extraction de calendrier de pointe. Téléchargez n'importe quel flyer, fiche de rendez-vous ou planning et voyez l'IA en action — c'est gratuit avec 3 conversions par mois.",
+
+  "cookie.title": "Paramètres des cookies",
+  "cookie.message": "Nous utilisons des cookies pour garantir la meilleure expérience sur notre site. Les cookies essentiels font fonctionner l'application, les cookies optionnels nous aident à améliorer Photocalia.",
+  "cookie.learnMore": "En savoir plus",
+  "cookie.acceptAll": "Tout accepter",
+  "cookie.rejectAll": "Tout refuser",
+  "cookie.customize": "Personnaliser",
+  "cookie.saveSelected": "Enregistrer la sélection",
+  "cookie.alwaysOn": "Toujours actif",
+  "cookie.essential.title": "Essentiels",
+  "cookie.essential.desc": "Nécessaires pour la connexion, la sécurité et le fonctionnement de l'application.",
+  "cookie.preferences.title": "Préférences",
+  "cookie.preferences.desc": "Mémorisent vos paramètres comme le thème et la langue.",
+  "cookie.analytics.title": "Analytiques",
+  "cookie.analytics.desc": "Nous aident à comprendre l'utilisation pour améliorer l'application."
 }
