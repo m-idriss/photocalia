@@ -1,7 +1,7 @@
 {
   "name": "Photocalia - AI Calendar Converter",
   "short_name": "Photocalia",
-  "description": "Personal social hub to regroup and share profiles & links in one place. Convert images to calendar events.",
+  "description": "Free AI-powered tool to convert photos, screenshots, flyers and PDFs into ICS calendar files. Uses GPT-4 Vision to extract event dates, times and locations automatically. Compatible with Google Calendar, Outlook and Apple Calendar.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
@@ -45,7 +45,7 @@
       "form_factor": "wide"
     }
   ],
-  "categories": ["social", "utilities", "productivity"],
+  "categories": ["productivity", "utilities", "business"],
   "shortcuts": [
     {
       "name": "Calendar Converter",

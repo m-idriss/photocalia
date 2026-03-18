@@ -2,9 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>
-      Photocalia – Convert Photos, Screenshots &amp; Flyers to Calendar Events with AI
-    </title>
+    <title>Photocalia – Convert Photos, Screenshots &amp; Flyers to Calendar Events with AI</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 
@@ -29,8 +27,9 @@
     <link rel="alternate" hreflang="fr" href="https://photocalia.com/?lang=fr" />
     <link rel="alternate" hreflang="x-default" href="https://photocalia.com/" />
 
-    <!-- Sitemap -->
+    <!-- Sitemap & AI Discoverability -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+    <link rel="author" href="/llms.txt" />
 
     <!-- Additional SEO Meta Tags -->
     <meta name="language" content="English" />
@@ -189,7 +188,11 @@
           "@type": "Person",
           "name": "Idriss",
           "url": "https://3dime.com",
-          "sameAs": ["https://github.com/m-idriss"]
+          "sameAs": ["https://github.com/m-idriss", "https://twitter.com/m_idriss"]
+        },
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "xpath": ["/html/head/meta[@name='description']/@content", "/html/head/title"]
         }
       }
     </script>
@@ -386,25 +389,22 @@
       }
     </script>
 
-    <!-- BreadcrumbList Schema -->
+    <!-- Organization Schema for AI Entity Recognition -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://photocalia.com"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "AI Calendar Converter",
-            "item": "https://photocalia.com"
-          }
-        ]
+        "@type": "Organization",
+        "name": "Photocalia",
+        "url": "https://photocalia.com",
+        "logo": "https://photocalia.com/assets/icons/android-icon-192x192.png",
+        "description": "AI-powered photo to calendar conversion tool that transforms images, screenshots, and PDFs into ICS calendar files.",
+        "founder": {
+          "@type": "Person",
+          "name": "Idriss",
+          "url": "https://3dime.com",
+          "sameAs": ["https://github.com/m-idriss", "https://twitter.com/m_idriss"]
+        },
+        "sameAs": ["https://github.com/m-idriss/photocalia", "https://twitter.com/photocalia_app"]
       }
     </script>
 
@@ -486,5 +486,89 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="bg" aria-hidden="true" style="background: #ffffff"></div>
     <app-root></app-root>
+    <noscript>
+      <div
+        style="
+          max-width: 800px;
+          margin: 40px auto;
+          padding: 20px;
+          font-family:
+            system-ui,
+            -apple-system,
+            sans-serif;
+          color: #333;
+        "
+      >
+        <h1>Photocalia – Convert Photos, Screenshots &amp; Flyers to Calendar Events with AI</h1>
+        <p>
+          Photocalia is a free AI-powered tool that converts photos, screenshots, flyers and PDFs
+          into ICS calendar files compatible with Google Calendar, Outlook, and Apple Calendar.
+          Using GPT-4 Vision OCR, it automatically extracts event dates, times, locations, and
+          descriptions — no manual typing required.
+        </p>
+
+        <h2>How It Works</h2>
+        <ol>
+          <li>
+            <strong>Upload</strong> your image (JPG, PNG, HEIC) or PDF containing event information
+          </li>
+          <li>
+            <strong>AI extracts</strong> dates, times, locations and event details using GPT-4
+            Vision OCR
+          </li>
+          <li><strong>Review &amp; edit</strong> the extracted events before saving</li>
+          <li><strong>Download</strong> your ICS file and import to any calendar app</li>
+        </ol>
+
+        <h2>Features</h2>
+        <ul>
+          <li>3 free conversions per month with Google sign-in</li>
+          <li>Batch processing — upload multiple files at once</li>
+          <li>Works on mobile and desktop (Progressive Web App)</li>
+          <li>Privacy-focused — files are not stored permanently</li>
+          <li>
+            Supports appointment reminders, event flyers, meeting invitations, school schedules,
+            concert tickets
+          </li>
+        </ul>
+
+        <h2>Supported Formats</h2>
+        <p>Images: JPG, JPEG, PNG, HEIC | Documents: PDF</p>
+
+        <h2>Compatible Calendar Apps</h2>
+        <p>
+          Google Calendar, Microsoft Outlook, Apple Calendar (iCal), Yahoo Calendar, and any app
+          supporting the ICS standard.
+        </p>
+
+        <h2>Frequently Asked Questions</h2>
+        <dl>
+          <dt><strong>Is Photocalia free?</strong></dt>
+          <dd>
+            Yes — 3 free conversions per month with Google sign-in. No separate registration needed.
+          </dd>
+          <dt><strong>Is my data secure?</strong></dt>
+          <dd>
+            Files are processed securely and not stored permanently. Your privacy is protected.
+          </dd>
+          <dt><strong>Can I edit events before downloading?</strong></dt>
+          <dd>
+            Yes — review and edit all event details (title, date, time, location) before generating
+            your ICS file.
+          </dd>
+        </dl>
+
+        <p>
+          <strong>JavaScript is required for the full experience.</strong> Please enable JavaScript
+          to use Photocalia.
+        </p>
+
+        <nav>
+          <a href="/how-it-works">How It Works</a> | <a href="/privacy">Privacy Policy</a> |
+          <a href="/terms">Terms of Use</a> |
+          <a href="/legal-mentions">Legal Mentions</a>
+        </nav>
+      </div>
+    </noscript>
   </body>
 </html>

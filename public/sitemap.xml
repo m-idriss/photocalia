@@ -8,7 +8,7 @@
   <!-- Homepage / Calendar Converter -->
   <url>
     <loc>https://photocalia.com/</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -21,7 +21,7 @@
   <!-- How It Works Page -->
   <url>
     <loc>https://photocalia.com/how-it-works</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -34,7 +34,7 @@
   <!-- Privacy Policy Page -->
   <url>
     <loc>https://photocalia.com/privacy</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -42,7 +42,7 @@
   <!-- Terms of Use Page -->
   <url>
     <loc>https://photocalia.com/terms</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -50,7 +50,7 @@
   <!-- Legal Mentions Page -->
   <url>
     <loc>https://photocalia.com/legal-mentions</loc>
-    <lastmod>2026-03-10</lastmod>
+    <lastmod>2026-03-18</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
