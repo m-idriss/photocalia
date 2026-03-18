@@ -23,6 +23,12 @@
   --ct-text-main: #0f172a;
   --ct-text-muted: #64748b;
 
+  /* Color Blocking — Section Backgrounds */
+  --cb-white: #ffffff;
+  --cb-slate: #f1f5f9;
+  --cb-indigo: #eef2ff;
+  --cb-gradient: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
+
   /* Light theme (default) — mapped from Corporate Trust */
   --primary-bg: #ffffff;
   --primary-bg-hover: #f1f5f9;
@@ -128,6 +134,11 @@ body.dark-theme {
   --text-menu: #f1f5f9;
   --text-bg: #f1f5f9;
   --text-bg-alt: #94a3b8;
+
+  /* Color Blocking — Dark */
+  --cb-white: #0f172a;
+  --cb-slate: #1e293b;
+  --cb-indigo: rgba(79, 70, 229, 0.08);
 
   /* Colored shadows on dark */
   --shadow-card: 0 4px 20px -2px rgba(79, 70, 229, 0.2);

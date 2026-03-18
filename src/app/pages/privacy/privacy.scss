@@ -3,8 +3,6 @@
 .legal-page {
   padding-top: 100px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
 }
 
@@ -61,6 +59,15 @@
   box-shadow: var(--shadow-card);
   border-radius: 16px;
   transition: all 0.3s ease;
+
+  &:nth-child(odd) {
+    background: var(--cb-white);
+  }
+
+  &:nth-child(even) {
+    background: var(--cb-slate);
+    border: none;
+  }
 
   &:hover {
     border-color: rgba(79, 70, 229, 0.15);

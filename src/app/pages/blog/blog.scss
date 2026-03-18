@@ -1,20 +1,19 @@
 .blog-page {
   padding-top: 100px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
 }
 
 .blog-container {
-  max-width: 1200px;
+  max-width: 100%;
   width: 100%;
-  padding: 2rem 1rem;
+  padding: 0;
 }
 
 .hero-section {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 0;
+  padding: 4rem 2rem;
   animation: fadeInDown 0.8s ease-out;
 }
 
@@ -43,9 +42,16 @@
   margin: 0 auto;
 }
 
+.articles-section {
+  padding: 4rem 2rem;
+  background: var(--cb-slate);
+}
+
 .articles-grid {
   display: grid;
   gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .article-card {
@@ -124,29 +130,29 @@
 
 .cta-section {
   text-align: center;
-  padding: 3rem 1rem;
-  margin-top: 2rem;
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));
-  border-radius: 16px;
+  padding: 4rem 2rem;
+  background: var(--cb-gradient);
+  border-radius: 0;
 }
 
 .cta-title {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  color: white;
 }
 
 .cta-description {
-  color: var(--text-secondary, #555);
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 1.5rem;
 }
 
 .cta-button {
   display: inline-block;
   padding: 0.75rem 2rem;
-  background: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
-  box-shadow: var(--shadow-button, 0 4px 14px 0 rgba(79, 70, 229, 0.3));
-  color: #fff;
+  background: white;
+  color: var(--ct-primary, #4f46e5);
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
@@ -156,7 +162,7 @@
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.4);
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -184,8 +190,21 @@
 }
 
 @media (max-width: 600px) {
+  .blog-container {
+    padding: 0;
+  }
+
   .hero-section {
-    margin-bottom: 3rem;
+    padding: 3rem 1rem;
+    margin-bottom: 0;
+  }
+
+  .articles-section {
+    padding: 3rem 1rem;
+  }
+
+  .cta-section {
+    padding: 3rem 1rem;
   }
 
   .hero-title {

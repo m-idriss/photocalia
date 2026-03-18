@@ -3,15 +3,14 @@
 .about-page {
   padding-top: 100px;
   display: flex;
-  align-items: center;
   justify-content: center;
   min-height: 100vh;
 }
 
 .about-container {
-  max-width: 1200px;
+  max-width: 100%;
   width: 100%;
-  padding: 2rem 1rem;
+  padding: 0;
 }
 
 /* ========================
@@ -19,7 +18,8 @@
    ======================== */
 .hero-section {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 0;
+  padding: 4rem 2rem;
   animation: fadeInDown 0.8s ease-out;
 }
 
@@ -52,8 +52,22 @@
    Common Section Styles
    ======================== */
 .about-section {
-  margin-bottom: 5rem;
+  margin-bottom: 0;
+  padding: 4rem 2rem;
   animation: fadeInUp 0.8s ease-out 0.1s backwards;
+
+  &:nth-of-type(odd) {
+    background: var(--cb-white);
+  }
+
+  &:nth-of-type(even) {
+    background: var(--cb-slate);
+  }
+
+  &:nth-of-type(2),
+  &:nth-of-type(6) {
+    background: var(--cb-indigo);
+  }
 }
 
 .section-title {
@@ -508,11 +522,12 @@
   }
 
   .about-container {
-    padding: 1.5rem 1rem;
+    padding: 0;
   }
 
   .hero-section {
-    margin-bottom: 3rem;
+    margin-bottom: 0;
+    padding: 3rem 1rem;
   }
 
   .hero-title {
@@ -547,7 +562,8 @@
   }
 
   .about-section {
-    margin-bottom: 3rem;
+    padding: 3rem 1rem;
+    margin-bottom: 0;
   }
 
   .highlights-grid {
