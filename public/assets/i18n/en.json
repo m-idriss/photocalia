@@ -11,6 +11,10 @@
   "header.aria.settings": "Settings menu",
   "header.aria.openSettings": "Open settings menu",
   "header.aria.language": "Change language",
+  "header.blog": "Blog",
+  "header.tooltip.blog": "Read our blog articles",
+  "header.about": "About",
+  "header.tooltip.about": "Learn about PhotoCalia",
 
   "home.hero.title": "Turn any photo into calendar events in seconds",
   "home.hero.description": "Photocalia is an AI tool that converts photos, screenshots, flyers and PDFs into calendar-ready events, so you can add them to Google Calendar without typing anything.",

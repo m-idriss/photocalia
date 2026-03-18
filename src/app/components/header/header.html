@@ -93,8 +93,6 @@
               <span>{{ 'header.home' | translate }}</span>
             </a>
 
-            <div class="dropdown-separator" role="separator"></div>
-
             <a
               [routerLink]="'/how-it-works' | localizeRoute"
               class="dropdown-item"
@@ -105,6 +103,30 @@
             >
               <i class="fas fa-info-circle" aria-hidden="true"></i>
               <span>{{ 'header.howItWorks' | translate }}</span>
+            </a>
+
+            <a
+              [routerLink]="'/blog' | localizeRoute"
+              class="dropdown-item"
+              role="menuitem"
+              (click)="closeMenu()"
+              [appTooltip]="'header.tooltip.blog' | translate"
+              appTooltipPlacement="left"
+            >
+              <i class="fas fa-newspaper" aria-hidden="true"></i>
+              <span>{{ 'header.blog' | translate }}</span>
+            </a>
+
+            <a
+              [routerLink]="'/about' | localizeRoute"
+              class="dropdown-item"
+              role="menuitem"
+              (click)="closeMenu()"
+              [appTooltip]="'header.tooltip.about' | translate"
+              appTooltipPlacement="left"
+            >
+              <i class="fas fa-users" aria-hidden="true"></i>
+              <span>{{ 'header.about' | translate }}</span>
             </a>
 
             @if (isAuthenticated) {

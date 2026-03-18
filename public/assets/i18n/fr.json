@@ -11,6 +11,10 @@
   "header.aria.settings": "Menu paramètres",
   "header.aria.openSettings": "Ouvrir le menu paramètres",
   "header.aria.language": "Changer la langue",
+  "header.blog": "Blog",
+  "header.tooltip.blog": "Lire nos articles de blog",
+  "header.about": "À propos",
+  "header.tooltip.about": "En savoir plus sur PhotoCalia",
 
   "home.hero.title": "Transformez vos photos en événements de calendrier en quelques secondes",
   "home.hero.description": "Photocalia est un outil d'IA qui transforme vos photos, captures d'écran, flyers et PDF en événements prêts à être ajoutés à votre calendrier Google, sans aucune saisie manuelle.",
