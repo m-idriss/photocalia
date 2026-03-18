@@ -1,0 +1,27 @@
+@if (isOffline() && !dismissed()) {
+  <div class="offline-banner" role="alert" aria-live="polite">
+    <div class="offline-content">
+      <span class="offline-icon" aria-hidden="true">&#x1F4F5;</span>
+      <div class="offline-text">
+        <strong>{{ 'offline.title' | translate }}</strong>
+        <p>{{ 'offline.message' | translate }}</p>
+      </div>
+      <div class="offline-actions">
+        <button class="offline-retry" (click)="retry()" type="button">
+          {{ 'offline.retry' | translate }}
+        </button>
+        <button
+          class="offline-dismiss"
+          (click)="dismiss()"
+          type="button"
+          [attr.aria-label]="'offline.dismiss' | translate"
+        >
+          &#x2715;
+        </button>
+      </div>
+    </div>
+    <div class="offline-tips">
+      <p>{{ 'offline.tip' | translate }}</p>
+    </div>
+  </div>
+}
