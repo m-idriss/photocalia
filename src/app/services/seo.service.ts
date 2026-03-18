@@ -49,8 +49,8 @@ export class SeoService {
         mergeMap((route) => route.data),
       )
       .subscribe((data: Record<string, unknown>) => {
-        if (data.seo) {
-          this.updateSeoTags(data.seo);
+        if (data['seo']) {
+          this.updateSeoTags(data['seo'] as SeoData);
         }
       });
   }
