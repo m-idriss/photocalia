@@ -720,8 +720,8 @@
   max-width: 1200px;
   border-radius: var(--radius-md);
   background: var(--ct-surface, #ffffff);
-  border: 1px solid var(--ct-border, #e2e8f0);
-  box-shadow: var(--shadow-card);
+  border: none;
+  box-shadow: none;
 
   // On desktop with calendar, match the converter column width
   @media (min-width: 1200px) {
