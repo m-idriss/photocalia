@@ -148,4 +148,88 @@
     <priority>0.2</priority>
   </url>
 
+  <!-- Blog Listing -->
+  <url>
+    <loc>https://photocalia.com/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog" />
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://photocalia.com/fr/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog" />
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Blog: Photo to Google Calendar -->
+  <url>
+    <loc>https://photocalia.com/blog/photo-to-google-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/photo-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/photo-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/photo-to-google-calendar" />
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://photocalia.com/fr/blog/photo-to-google-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/photo-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/photo-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/photo-to-google-calendar" />
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Blog: Digitize Paper Schedules -->
+  <url>
+    <loc>https://photocalia.com/blog/digitize-paper-schedules</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/digitize-paper-schedules" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/digitize-paper-schedules" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/digitize-paper-schedules" />
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://photocalia.com/fr/blog/digitize-paper-schedules</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/digitize-paper-schedules" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/digitize-paper-schedules" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/digitize-paper-schedules" />
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Blog: AI OCR Calendar Extraction -->
+  <url>
+    <loc>https://photocalia.com/blog/ai-ocr-calendar-extraction</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/ai-ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/ai-ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/ai-ocr-calendar-extraction" />
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://photocalia.com/fr/blog/ai-ocr-calendar-extraction</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/ai-ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/ai-ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/ai-ocr-calendar-extraction" />
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
 </urlset>

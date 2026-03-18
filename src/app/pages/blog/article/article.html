@@ -1,0 +1,145 @@
+@if (article(); as art) {
+  <main class="article-page" id="main-content" itemscope itemtype="https://schema.org/Article">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a [routerLink]="'/' | localizeRoute">{{ 'header.home' | translate }}</a>
+      <span aria-hidden="true">/</span>
+      <a [routerLink]="'/blog' | localizeRoute">{{ 'blog.title' | translate }}</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{{ art.title }}</span>
+    </nav>
+
+    <article>
+      <header class="article-header">
+        <h1 itemprop="headline" class="article-title">{{ art.title }}</h1>
+        <div class="article-meta">
+          <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            {{ 'blog.article.by' | translate }}
+            <a [href]="art.authorUrl" itemprop="url" rel="author" target="_blank">
+              <span itemprop="name">{{ art.author }}</span>
+            </a>
+          </span>
+          <span class="meta-separator" aria-hidden="true">&bull;</span>
+          <time itemprop="datePublished" [attr.datetime]="art.datePublished">
+            {{ art.datePublished }}
+          </time>
+          <span class="meta-separator" aria-hidden="true">&bull;</span>
+          <span>{{ art.readingTime }} {{ 'blog.article.read' | translate }}</span>
+        </div>
+        <meta itemprop="dateModified" [attr.content]="art.dateModified" />
+        <meta itemprop="image" [attr.content]="art.image" />
+      </header>
+
+      <div class="article-content" itemprop="articleBody">
+        <!-- Article 1: Photo to Google Calendar -->
+        @if (art.slug === 'photo-to-google-calendar') {
+          <p class="lead">{{ art.translationKey + '.intro' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.why.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.why.p1' | translate }}</p>
+          <p>{{ art.translationKey + '.why.p2' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.steps.title' | translate }}</h2>
+          <h3>{{ art.translationKey + '.steps.1.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.steps.1.description' | translate }}</p>
+          <h3>{{ art.translationKey + '.steps.2.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.steps.2.description' | translate }}</p>
+          <h3>{{ art.translationKey + '.steps.3.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.steps.3.description' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.tips.title' | translate }}</h2>
+          <ul>
+            <li>{{ art.translationKey + '.tips.1' | translate }}</li>
+            <li>{{ art.translationKey + '.tips.2' | translate }}</li>
+            <li>{{ art.translationKey + '.tips.3' | translate }}</li>
+            <li>{{ art.translationKey + '.tips.4' | translate }}</li>
+          </ul>
+
+          <h2>{{ art.translationKey + '.usecases.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.usecases.p1' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.conclusion.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.conclusion.p1' | translate }}</p>
+        }
+
+        <!-- Article 2: Digitize Paper Schedules -->
+        @if (art.slug === 'digitize-paper-schedules') {
+          <p class="lead">{{ art.translationKey + '.intro' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.problem.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.problem.p1' | translate }}</p>
+          <p>{{ art.translationKey + '.problem.p2' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.methods.title' | translate }}</h2>
+          <h3>{{ art.translationKey + '.methods.1.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.methods.1.description' | translate }}</p>
+          <h3>{{ art.translationKey + '.methods.2.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.methods.2.description' | translate }}</p>
+          <h3>{{ art.translationKey + '.methods.3.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.methods.3.description' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.who.title' | translate }}</h2>
+          <ul>
+            <li>{{ art.translationKey + '.who.1' | translate }}</li>
+            <li>{{ art.translationKey + '.who.2' | translate }}</li>
+            <li>{{ art.translationKey + '.who.3' | translate }}</li>
+            <li>{{ art.translationKey + '.who.4' | translate }}</li>
+          </ul>
+
+          <h2>{{ art.translationKey + '.conclusion.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.conclusion.p1' | translate }}</p>
+        }
+
+        <!-- Article 3: AI OCR Calendar Extraction -->
+        @if (art.slug === 'ai-ocr-calendar-extraction') {
+          <p class="lead">{{ art.translationKey + '.intro' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.whatIsOcr.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.whatIsOcr.p1' | translate }}</p>
+          <p>{{ art.translationKey + '.whatIsOcr.p2' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.howAiHelps.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.howAiHelps.p1' | translate }}</p>
+          <p>{{ art.translationKey + '.howAiHelps.p2' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.pipeline.title' | translate }}</h2>
+          <ol>
+            <li>{{ art.translationKey + '.pipeline.1' | translate }}</li>
+            <li>{{ art.translationKey + '.pipeline.2' | translate }}</li>
+            <li>{{ art.translationKey + '.pipeline.3' | translate }}</li>
+            <li>{{ art.translationKey + '.pipeline.4' | translate }}</li>
+          </ol>
+
+          <h2>{{ art.translationKey + '.challenges.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.challenges.p1' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.future.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.future.p1' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.conclusion.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.conclusion.p1' | translate }}</p>
+        }
+      </div>
+
+      <footer class="article-footer">
+        <div class="article-tags">
+          @for (tag of art.tags; track tag) {
+            <span class="tag">{{ tag }}</span>
+          }
+        </div>
+        <div class="article-cta">
+          <a [routerLink]="'/' | localizeRoute" class="cta-button">
+            {{ 'blog.cta.button' | translate }}
+          </a>
+        </div>
+        <nav class="back-link">
+          <a [routerLink]="'/blog' | localizeRoute">&larr; {{ 'blog.backToList' | translate }}</a>
+        </nav>
+      </footer>
+    </article>
+  </main>
+} @else {
+  <main class="article-page" id="main-content">
+    <p>Article not found.</p>
+    <a [routerLink]="'/blog' | localizeRoute">&larr; {{ 'blog.backToList' | translate }}</a>
+  </main>
+}

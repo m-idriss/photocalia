@@ -1,0 +1,43 @@
+<main class="blog-page" id="main-content">
+  <section class="hero-section" aria-labelledby="blog-title">
+    <h1 id="blog-title" class="hero-title">{{ 'blog.title' | translate }}</h1>
+    <p class="hero-subtitle">{{ 'blog.subtitle' | translate }}</p>
+  </section>
+
+  <section class="articles-section" aria-label="Blog articles">
+    <div class="articles-grid">
+      @for (article of articles; track article.slug) {
+        <article class="article-card">
+          <a
+            [routerLink]="'/blog/' + article.slug | localizeRoute"
+            class="article-link"
+            [attr.aria-label]="article.title"
+          >
+            <div class="article-meta">
+              <time [attr.datetime]="article.datePublished" class="article-date">
+                {{ article.datePublished }}
+              </time>
+              <span class="article-reading-time" aria-hidden="true">{{ article.readingTime }}</span>
+            </div>
+            <h2 class="article-title">{{ article.title }}</h2>
+            <p class="article-description">{{ article.description }}</p>
+            <div class="article-tags">
+              @for (tag of article.tags; track tag) {
+                <span class="tag">{{ tag }}</span>
+              }
+            </div>
+            <span class="read-more">{{ 'blog.readMore' | translate }} &rarr;</span>
+          </a>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="cta-section" aria-labelledby="blog-cta-title">
+    <h2 id="blog-cta-title" class="cta-title">{{ 'blog.cta.title' | translate }}</h2>
+    <p class="cta-description">{{ 'blog.cta.description' | translate }}</p>
+    <a [routerLink]="'/' | localizeRoute" class="cta-button">
+      {{ 'blog.cta.button' | translate }}
+    </a>
+  </section>
+</main>

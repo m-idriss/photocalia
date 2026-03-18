@@ -12,6 +12,10 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'terms', renderMode: RenderMode.Prerender },
   { path: 'legal-mentions', renderMode: RenderMode.Prerender },
   { path: 'about', renderMode: RenderMode.Prerender },
+  { path: 'blog', renderMode: RenderMode.Prerender },
+  { path: 'blog/photo-to-google-calendar', renderMode: RenderMode.Prerender },
+  { path: 'blog/digitize-paper-schedules', renderMode: RenderMode.Prerender },
+  { path: 'blog/ai-ocr-calendar-extraction', renderMode: RenderMode.Prerender },
 
   // French pages
   { path: 'fr', renderMode: RenderMode.Prerender },
@@ -20,6 +24,10 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'fr/terms', renderMode: RenderMode.Prerender },
   { path: 'fr/legal-mentions', renderMode: RenderMode.Prerender },
   { path: 'fr/about', renderMode: RenderMode.Prerender },
+  { path: 'fr/blog', renderMode: RenderMode.Prerender },
+  { path: 'fr/blog/photo-to-google-calendar', renderMode: RenderMode.Prerender },
+  { path: 'fr/blog/digitize-paper-schedules', renderMode: RenderMode.Prerender },
+  { path: 'fr/blog/ai-ocr-calendar-extraction', renderMode: RenderMode.Prerender },
 
   // Catch-all: client-side rendered (not prerendered)
   { path: '**', renderMode: RenderMode.Client },

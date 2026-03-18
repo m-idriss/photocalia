@@ -205,6 +205,197 @@ const pageRoutes: Route[] = [
     },
   },
   {
+    path: 'blog',
+    loadComponent: () => import('./pages/blog/blog').then((m) => m.Blog),
+    title: 'Blog - Guides & Tips for Photo to Calendar Conversion | Photocalia',
+    data: {
+      seo: {
+        title: 'Blog - Guides & Tips for Photo to Calendar Conversion | Photocalia',
+        description:
+          'Guides, tutorials, and tips on converting photos to calendar events with AI. Learn about OCR technology, digitizing schedules, and productivity hacks.',
+        keywords:
+          'photo to calendar guide, AI calendar tips, digitize schedule, OCR calendar, image to ICS tutorial',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/blog',
+        type: 'website',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: 'https://photocalia.com/blog',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
+  {
+    path: 'blog/photo-to-google-calendar',
+    loadComponent: () => import('./pages/blog/article/article').then((m) => m.Article),
+    title: 'How to Convert a Photo to Google Calendar Events in 30 Seconds | Photocalia',
+    data: {
+      seo: {
+        title: 'How to Convert a Photo to Google Calendar Events in 30 Seconds | Photocalia',
+        description:
+          'Learn how to turn any photo, screenshot, or flyer into Google Calendar events using AI. Step-by-step guide with tips for best results.',
+        keywords:
+          'photo to google calendar, convert image to calendar event, picture to calendar, screenshot to google calendar',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/blog/photo-to-google-calendar',
+        type: 'article',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: 'https://photocalia.com/blog',
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: 'Photo to Google Calendar',
+                item: 'https://photocalia.com/blog/photo-to-google-calendar',
+              },
+            ],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'How to Convert a Photo to Google Calendar Events in 30 Seconds',
+            author: { '@type': 'Person', name: 'Idriss', url: 'https://3dime.com' },
+            datePublished: '2026-03-18',
+            dateModified: '2026-03-18',
+            publisher: {
+              '@type': 'Organization',
+              name: 'Photocalia',
+              url: 'https://photocalia.com',
+            },
+            image: 'https://photocalia.com/assets/images/converter.png',
+            mainEntityOfPage: 'https://photocalia.com/blog/photo-to-google-calendar',
+          },
+        ],
+      },
+    },
+  },
+  {
+    path: 'blog/digitize-paper-schedules',
+    loadComponent: () => import('./pages/blog/article/article').then((m) => m.Article),
+    title: 'Best Ways to Digitize Paper Schedules and Appointment Cards | Photocalia',
+    data: {
+      seo: {
+        title: 'Best Ways to Digitize Paper Schedules and Appointment Cards | Photocalia',
+        description:
+          'Stop losing paper appointment cards and schedules. Discover how AI-powered tools can digitize them into calendar events automatically.',
+        keywords:
+          'digitize paper schedule, scan appointment card to calendar, paper to digital calendar, AI schedule digitizer',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/blog/digitize-paper-schedules',
+        type: 'article',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: 'https://photocalia.com/blog',
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: 'Digitize Paper Schedules',
+                item: 'https://photocalia.com/blog/digitize-paper-schedules',
+              },
+            ],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'Best Ways to Digitize Paper Schedules and Appointment Cards',
+            author: { '@type': 'Person', name: 'Idriss', url: 'https://3dime.com' },
+            datePublished: '2026-03-18',
+            dateModified: '2026-03-18',
+            publisher: {
+              '@type': 'Organization',
+              name: 'Photocalia',
+              url: 'https://photocalia.com',
+            },
+            image: 'https://photocalia.com/assets/images/converter.png',
+            mainEntityOfPage: 'https://photocalia.com/blog/digitize-paper-schedules',
+          },
+        ],
+      },
+    },
+  },
+  {
+    path: 'blog/ai-ocr-calendar-extraction',
+    loadComponent: () => import('./pages/blog/article/article').then((m) => m.Article),
+    title: 'How AI OCR Transforms Event Flyers into Calendar Entries | Photocalia',
+    data: {
+      seo: {
+        title: 'How AI OCR Transforms Event Flyers into Calendar Entries | Photocalia',
+        description:
+          'Understand how AI and OCR technology work together to extract event details from images and create structured calendar data.',
+        keywords:
+          'AI OCR calendar, event extraction from image, flyer to calendar AI, optical character recognition calendar',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/blog/ai-ocr-calendar-extraction',
+        type: 'article',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: 'https://photocalia.com/blog',
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: 'AI OCR Calendar Extraction',
+                item: 'https://photocalia.com/blog/ai-ocr-calendar-extraction',
+              },
+            ],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'How AI OCR Transforms Event Flyers into Calendar Entries',
+            author: { '@type': 'Person', name: 'Idriss', url: 'https://3dime.com' },
+            datePublished: '2026-03-18',
+            dateModified: '2026-03-18',
+            publisher: {
+              '@type': 'Organization',
+              name: 'Photocalia',
+              url: 'https://photocalia.com',
+            },
+            image: 'https://photocalia.com/assets/images/converter.png',
+            mainEntityOfPage: 'https://photocalia.com/blog/ai-ocr-calendar-extraction',
+          },
+        ],
+      },
+    },
+  },
+  {
     path: 'about',
     loadComponent: () => import('./pages/about/about').then((m) => m.About),
     title: 'About Photocalia - AI Calendar Converter by Idriss',

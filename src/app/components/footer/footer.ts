@@ -110,6 +110,9 @@ export class Footer implements OnInit {
     if (config.enableAboutMeLink) {
       links.push({ label: 'About Me', url: '/me', isInternal: true });
     }
+    // Content links
+    links.push({ label: 'Blog', url: '/blog', isInternal: true });
+
     // Legal compliance links (enabled by default for GDPR compliance)
     if (config.enablePrivacyLink) {
       links.push({ label: 'Privacy', url: '/privacy', isInternal: true });
