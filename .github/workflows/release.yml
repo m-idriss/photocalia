@@ -162,93 +162,17 @@ jobs:
           git push origin "$TAG"
           echo "Pushed changes and tag to repository"
 
-      - name: Generate changelog
-        id: changelog
-        shell: bash
-        run: |
-          set -e
-          TAG="${{ steps.new_version.outputs.tag }}"
-          PREV_TAG=$(git describe --tags --abbrev=0 "$TAG^" 2>/dev/null || echo "")
-
-          if [ -z "$PREV_TAG" ]; then
-            {
-              echo "## What's New in $TAG"
-              echo ""
-              echo "This is the first release! 🎉"
-              echo ""
-              echo "### All Commits"
-              echo ""
-              git log --pretty=format:"- %s ([%h](https://github.com/${{ github.repository }}/commit/%H))"
-            } > CHANGELOG.md
-          else
-            # Generate changelog with proper formatting
-            {
-              echo "## What's New in $TAG"
-              echo ""
-              echo "### Changes since $PREV_TAG"
-              echo ""
-
-              # Features
-              FEATURES=$(git log "$PREV_TAG..$TAG" --pretty=format:"- %s ([%h](https://github.com/${{ github.repository }}/commit/%H))" --grep="^feat" 2>/dev/null)
-              if [ -n "$FEATURES" ]; then
-              echo "#### 🚀 Features"
-                echo ""
-                echo "$FEATURES"
-              echo ""
-              fi
-
-              # Bug Fixes
-              FIXES=$(git log "$PREV_TAG..$TAG" --pretty=format:"- %s ([%h](https://github.com/${{ github.repository }}/commit/%H))" --grep="^fix" 2>/dev/null)
-              if [ -n "$FIXES" ]; then
-              echo "#### 🐛 Bug Fixes"
-                echo ""
-                echo "$FIXES"
-              echo ""
-              fi
-
-              # Documentation
-              DOCS=$(git log "$PREV_TAG..$TAG" --pretty=format:"- %s ([%h](https://github.com/${{ github.repository }}/commit/%H))" --grep="^docs" 2>/dev/null)
-              if [ -n "$DOCS" ]; then
-              echo "#### 📝 Documentation"
-                echo ""
-                echo "$DOCS"
-              echo ""
-              fi
-
-              # Chores & Other Changes
-              CHORES=$(git log "$PREV_TAG..$TAG" --pretty=format:"- %s ([%h](https://github.com/${{ github.repository }}/commit/%H))" --grep="^chore\|^refactor\|^style\|^test\|^perf" 2>/dev/null)
-              if [ -n "$CHORES" ]; then
-              echo "#### 🔧 Chores & Other Changes"
-              echo ""
-                echo "$CHORES"
-                echo ""
-              fi
-
-              # All Commits
-              echo "#### 📦 All Commits"
-              echo ""
-              git log "$PREV_TAG..$TAG" --pretty=format:"- %s ([%h](https://github.com/${{ github.repository }}/commit/%H))"
-            } > CHANGELOG.md
-          fi
-
-          echo "---- CHANGELOG.md ----"
-          cat CHANGELOG.md
-          echo "----------------------"
-
-          # ✅ Safely export multi-line changelog output (no delimiter issues)
-          CHANGELOG=$(awk '{printf "%s\\n", $0}' CHANGELOG.md)
-          echo "changelog=$CHANGELOG" >> "$GITHUB_OUTPUT"
-
       - name: Create GitHub Release
-        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.new_version.outputs.tag }}
-          release_name: Release ${{ steps.new_version.outputs.version }}
-          body: ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: ${{ inputs.prerelease }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ steps.new_version.outputs.tag }}"
+          PRERELEASE="${{ inputs.prerelease }}"
+          FLAGS="--generate-notes"
+          if [ "$PRERELEASE" = "true" ]; then
+            FLAGS="$FLAGS --prerelease"
+          fi
+          gh release create "$TAG" $FLAGS --title "Release ${{ steps.new_version.outputs.version }}"
 
       - name: Upload build artifacts (if requested)
         if: inputs.include_build_artifacts == true
