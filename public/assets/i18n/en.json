@@ -15,11 +15,10 @@
   "header.tooltip.blog": "Read our blog articles",
   "header.about": "About",
   "header.tooltip.about": "Learn about PhotoCalia",
-
   "home.hero.title": "Turn any photo into calendar events in seconds",
   "home.hero.description": "Photocalia is an AI tool that converts photos, screenshots, flyers and PDFs into calendar-ready events, so you can add them to Google Calendar without typing anything.",
   "home.hero.subtitle": "Sign in with Google · 3 free conversions per month",
-
+  "home.hero.cta": "Try it free ↓",
   "home.steps.title": "How Photocalia Works",
   "home.steps.1.title": "Upload your image",
   "home.steps.1.description": "Upload a photo, screenshot, flyer, timetable or PDF that contains dates and times.",
@@ -28,7 +27,6 @@
   "home.steps.3.title": "Add to your calendar",
   "home.steps.3.description": "Review the events, then add them directly to Google Calendar or download them as a calendar file.",
   "home.steps.reassurance": "No manual typing, no complex setup — just convert image to calendar in a few clicks.",
-
   "home.convert.title": "What kinds of images can you convert?",
   "home.convert.description": "Photocalia works with most everyday images that contain dates and times. Upload clear photos, screenshots or PDFs and turn them into calendar events automatically.",
   "home.convert.school": "School flyers and classroom schedules",
@@ -37,17 +35,14 @@
   "home.convert.conference": "Conference programs and event agendas",
   "home.convert.travel": "Travel itineraries and booking confirmations",
   "home.convert.screenshots": "Screenshots of WhatsApp, email or social media announcements",
-
   "home.audience.title": "Who is Photocalia for?",
   "home.audience.description": "Photocalia is perfect for anyone who receives event information as images and is tired of typing dates into a calendar. Save time every week by letting AI handle the boring part.",
   "home.audience.parents": "Busy parents adding school events and activities",
   "home.audience.students": "Students managing class schedules and exams",
   "home.audience.professionals": "Freelancers and professionals tracking meetings and conferences",
   "home.audience.businesses": "Small businesses organizing events, workshops and promotions",
-
   "home.pricing.title": "Free to try, simple limits",
   "home.pricing.description": "Start for free with 3 conversions per month using your Google account. If you need more, contact us and we can unlock higher limits for power users, families or teams.",
-
   "home.faq.title": "Frequently Asked Questions",
   "home.faq.q1.q": "What is Photocalia?",
   "home.faq.q1.a": "Photocalia is an AI tool that converts images (photos, screenshots, flyers, PDFs) into calendar-ready events that you can add to Google Calendar or other calendar apps.",
@@ -59,7 +54,6 @@
   "home.faq.q4.a": "You can use Photocalia for free up to 3 conversions per month. For higher limits, contact us and we will set up a custom plan.",
   "home.faq.q5.q": "Is my data private?",
   "home.faq.q5.a": "Your images and extracted events are processed securely. We only use them to create your calendar events and do not sell your data.",
-
   "home.why.title": "Why PhotoCalia",
   "home.why.formats.title": "Multiple Formats",
   "home.why.formats.description": "Converts JPG, PNG & PDF files",
@@ -158,7 +152,6 @@
   "offline.retry": "Try Again",
   "offline.dismiss": "Dismiss offline notification",
   "offline.tip": "Previously downloaded ICS files are saved on your device. The app will reconnect automatically.",
-
   "blog.title": "Blog",
   "blog.subtitle": "Guides, tutorials, and tips on converting photos to calendar events with AI",
   "blog.readMore": "Read more",
@@ -168,7 +161,6 @@
   "blog.cta.title": "Ready to try it yourself?",
   "blog.cta.description": "Convert your first photo to calendar events in seconds. Free, no signup required.",
   "blog.cta.button": "Try Photocalia Free",
-
   "blog.photoToCalendar.intro": "Ever snapped a photo of a flyer, appointment card, or school schedule and wished it would just appear in your Google Calendar? With Photocalia, it can — in about 30 seconds. Here's exactly how.",
   "blog.photoToCalendar.why.title": "Why Convert Photos to Calendar Events?",
   "blog.photoToCalendar.why.p1": "We encounter calendar-worthy information everywhere: doctor appointment cards, concert posters, school newsletters, gym schedules, conference agendas. But manually typing each event into Google Calendar is tedious and error-prone. You might get the date wrong, forget the location, or simply never get around to it.",
@@ -189,7 +181,6 @@
   "blog.photoToCalendar.usecases.p1": "Photocalia works with virtually any image containing date and time information: doctor appointment cards, school event flyers, concert and festival posters, gym and yoga timetables, conference agendas, travel itineraries, delivery notifications, subscription renewal reminders, and more. If it has a date, Photocalia can extract it.",
   "blog.photoToCalendar.conclusion.title": "Start Converting Today",
   "blog.photoToCalendar.conclusion.p1": "Stop letting events slip through the cracks. With Photocalia, converting a photo to Google Calendar takes less time than typing a single event manually. Try it free — 3 conversions per month, no credit card required.",
-
   "blog.digitizeSchedules.intro": "Paper appointment cards and printed schedules are still everywhere — from doctor's offices to school newsletters. The problem? They get lost, forgotten, or buried under a pile of papers. Here's how to digitize them into your calendar permanently.",
   "blog.digitizeSchedules.problem.title": "The Paper Schedule Problem",
   "blog.digitizeSchedules.problem.p1": "Studies show that 23% of people miss appointments because they forgot to add them to their digital calendar. Paper reminders work great in the moment, but they fail the moment you leave the office or lose the card. The information exists — it's just trapped in the wrong format.",
@@ -208,7 +199,6 @@
   "blog.digitizeSchedules.who.4": "Anyone who receives appointment cards from doctors, dentists, mechanics, or service providers",
   "blog.digitizeSchedules.conclusion.title": "Make Paper Schedules a Thing of the Past",
   "blog.digitizeSchedules.conclusion.p1": "The best time to digitize a paper schedule is the moment you receive it. With AI-powered tools like Photocalia, you can snap a photo and have calendar events ready in seconds. No more lost appointment cards, no more missed events.",
-
   "blog.aiOcrCalendar.intro": "When you photograph an event flyer, your phone sees millions of pixels. But how does AI turn those pixels into a structured calendar event with a title, date, time, and location? Let's look under the hood.",
   "blog.aiOcrCalendar.whatIsOcr.title": "What Is OCR?",
   "blog.aiOcrCalendar.whatIsOcr.p1": "OCR (Optical Character Recognition) is the technology that converts images of text into machine-readable text. It's been around for decades — your phone's camera app uses it to recognize text in photos. Traditional OCR extracts raw text, character by character.",
@@ -227,7 +217,6 @@
   "blog.aiOcrCalendar.future.p1": "As AI models continue to improve, expect even better accuracy with handwritten text, complex multi-language documents, and low-quality images. Future developments may include real-time extraction from video, voice-to-calendar conversion, and proactive event suggestions based on your photo library.",
   "blog.aiOcrCalendar.conclusion.title": "Try AI-Powered Calendar Extraction",
   "blog.aiOcrCalendar.conclusion.p1": "Photocalia uses GPT-4 Vision to deliver state-of-the-art calendar extraction. Upload any event flyer, appointment card, or schedule and see the AI in action — it's free to try with 3 conversions per month.",
-
   "cookie.title": "Cookie Settings",
   "cookie.message": "We use cookies to ensure the best experience on our site. Essential cookies keep the app running, while optional cookies help us improve Photocalia.",
   "cookie.learnMore": "Learn more",

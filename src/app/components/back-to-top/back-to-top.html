@@ -1,12 +1,27 @@
-<button
-  class="back-to-top-btn"
-  [class.visible]="isVisible()"
-  (click)="scrollToTop()"
-  (keydown)="handleKeyPress($event)"
-  aria-label="Scroll back to top"
-  appTooltip="Back to top"
-  appTooltipPlacement="left"
-  type="button"
->
-  <i class="fas fa-arrow-up" aria-hidden="true"></i>
-</button>
+<div class="scroll-nav-btns">
+  <button
+    class="scroll-nav-btn go-to-top"
+    [class.visible]="isTopVisible()"
+    (click)="scrollToTop()"
+    (keydown)="handleKeyPressTop($event)"
+    aria-label="Scroll back to top"
+    appTooltip="Back to top"
+    appTooltipPlacement="left"
+    type="button"
+  >
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <button
+    class="scroll-nav-btn go-to-bottom"
+    [class.visible]="isBottomVisible()"
+    (click)="scrollToBottom()"
+    (keydown)="handleKeyPressBottom($event)"
+    aria-label="Scroll to bottom"
+    appTooltip="Go to bottom"
+    appTooltipPlacement="left"
+    type="button"
+  >
+    <i class="fas fa-arrow-down" aria-hidden="true"></i>
+  </button>
+</div>

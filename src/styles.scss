@@ -923,12 +923,22 @@ body.dark-theme .link {
 }
 
 /* ========================
-   Back to Top Button
+   Scroll Navigation Buttons (Top & Bottom)
    ======================== */
-.back-to-top-btn {
+
+/* Container — stacks both buttons vertically, fixed to bottom-right */
+.scroll-nav-btns {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 1000;
+}
+
+/* Shared button style */
+.scroll-nav-btn {
   width: 3.5rem;
   height: 3.5rem;
   background: var(--primary-bg);
@@ -942,30 +952,31 @@ body.dark-theme .link {
   justify-content: center;
   font-size: 1.25rem;
   box-shadow: var(--shadow-card);
-  z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(20px) scale(0.8);
+  transform: translateX(20px) scale(0.8);
   transition: all var(--t-medium);
+  pointer-events: none;
 }
 
-.back-to-top-btn.visible {
+.scroll-nav-btn.visible {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) scale(1);
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
 }
 
-.back-to-top-btn:hover {
+.scroll-nav-btn:hover {
   background: var(--primary-bg-hover);
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px) scale(1.05);
+  transform: translateX(-2px) scale(1.05);
 }
 
-.back-to-top-btn:active {
-  transform: translateY(0) scale(0.95);
+.scroll-nav-btn:active {
+  transform: translateX(0) scale(0.95);
 }
 
-.back-to-top-btn:focus-visible {
+.scroll-nav-btn:focus-visible {
   outline: 3px solid var(--accent-color);
   outline-offset: 3px;
   box-shadow:
@@ -973,25 +984,31 @@ body.dark-theme .link {
     var(--shadow-card-hover);
 }
 
-.back-to-top-btn i {
+.scroll-nav-btn i {
   transition: transform var(--t-fast);
 }
 
-.back-to-top-btn:hover i {
-  transform: translateY(-2px);
+/* Arrow direction micro-animation on hover */
+.scroll-nav-btn.go-to-top:hover i {
+  transform: translateY(-3px);
+}
+
+.scroll-nav-btn.go-to-bottom:hover i {
+  transform: translateY(3px);
 }
 
 /* Mobile responsive */
 @media (max-width: 768px) {
-  .back-to-top-btn {
-    /* Use safe area insets for devices with notches */
+  .scroll-nav-btns {
     bottom: calc(1.5rem + env(safe-area-inset-bottom));
     right: calc(1.5rem + env(safe-area-inset-right));
+    z-index: 9999;
+  }
+
+  .scroll-nav-btn {
     width: 3rem;
     height: 3rem;
     font-size: 1.125rem;
-    /* Ensure button stays on top on mobile */
-    z-index: 9999;
   }
 
   .cards-container {
@@ -1002,19 +1019,20 @@ body.dark-theme .link {
 
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
-  .back-to-top-btn {
+  .scroll-nav-btn {
     transition:
       opacity var(--t-fast),
       visibility var(--t-fast);
     transform: none !important;
   }
 
-  .back-to-top-btn:hover,
-  .back-to-top-btn:active {
+  .scroll-nav-btn:hover,
+  .scroll-nav-btn:active {
     transform: none !important;
   }
 
-  .back-to-top-btn:hover i {
+  .scroll-nav-btn.go-to-top:hover i,
+  .scroll-nav-btn.go-to-bottom:hover i {
     transform: none !important;
   }
 }
