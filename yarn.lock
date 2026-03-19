@@ -515,22 +515,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/compiler@npm:^21.1.3":
-  version: 21.1.3
-  resolution: "@angular/compiler@npm:21.1.3"
+"@angular/compiler@npm:^21.2.5":
+  version: 21.2.5
+  resolution: "@angular/compiler@npm:21.2.5"
   dependencies:
     tslib: "npm:^2.3.0"
-  checksum: 10c0/cfde79d92b411e6cc3b35302993377d12bd6d4569d7047b72a2327de110dc13b8f55d4aab234f2f9c9c90c299f2d486fa31513b2d2cb352427ca0aa3c96b82c5
+  checksum: 10c0/6300dec4cc388bfcba8b68485d52f7117a1752f6496699d7adf0d30bc6cc9275da0d6f5ee15743cf68309717323f032de68fb2fbbaad4dfdcc676e5f218d071a
   languageName: node
   linkType: hard
 
-"@angular/core@npm:^21.1.6":
-  version: 21.2.0
-  resolution: "@angular/core@npm:21.2.0"
+"@angular/core@npm:^21.2.4":
+  version: 21.2.5
+  resolution: "@angular/core@npm:21.2.5"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/compiler": 21.2.0
+    "@angular/compiler": 21.2.5
     rxjs: ^6.5.3 || ^7.4.0
     zone.js: ~0.15.0 || ~0.16.0
   peerDependenciesMeta:
@@ -538,7 +538,7 @@ __metadata:
       optional: true
     zone.js:
       optional: true
-  checksum: 10c0/15f68aa027aa8087c959fd790753ed68a815d383408b4d871bf40bb076f98e244782199e3aefe6e69d55b2b55099ca020dc236eb95538892479914c852977b68
+  checksum: 10c0/9f7e8ab66fd2bca021d479dbf7c8d0f7cfc06e6cbf4db842766c99f2d5bbc180a5b5455e928f2e2840ece37a579e3d8fe6bdd3b4d662db1ba9dae0cc792f5e15
   languageName: node
   linkType: hard
 
@@ -662,9 +662,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/ssr@npm:^21.2.2":
-  version: 21.2.2
-  resolution: "@angular/ssr@npm:21.2.2"
+"@angular/ssr@npm:^21.2.3":
+  version: 21.2.3
+  resolution: "@angular/ssr@npm:21.2.3"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
@@ -675,7 +675,7 @@ __metadata:
   peerDependenciesMeta:
     "@angular/platform-server":
       optional: true
-  checksum: 10c0/3abe2f0c2043b0747b9a2a29702ea7e5a391dba4b709d55f2d6ac6754926a5ec391ac5d388bea8414cccaf199ad8ba17d6e6a60b747796af4c8c9f29e3e7f0f5
+  checksum: 10c0/9eb2c5c6fac827033654071a3f029ee5e42071c6f4426b3f449f4f73ac482535cad80a79549682c6e1bbc30bfbd5c711c84eb65de61a216e9ce8942db2abde89
   languageName: node
   linkType: hard
 
@@ -7710,9 +7710,9 @@ __metadata:
     "@angular/cdk": "npm:^21.1.3"
     "@angular/cli": "npm:^21.1.3"
     "@angular/common": "npm:^21.1.3"
-    "@angular/compiler": "npm:^21.1.3"
+    "@angular/compiler": "npm:^21.2.5"
     "@angular/compiler-cli": "npm:^21.1.3"
-    "@angular/core": "npm:^21.1.6"
+    "@angular/core": "npm:^21.2.4"
     "@angular/fire": "npm:^20.0.1"
     "@angular/forms": "npm:^21.1.3"
     "@angular/localize": "npm:^21.1.3"
@@ -7720,7 +7720,7 @@ __metadata:
     "@angular/platform-server": "npm:^21.2.4"
     "@angular/router": "npm:^21.1.3"
     "@angular/service-worker": "npm:^21.1.3"
-    "@angular/ssr": "npm:^21.2.2"
+    "@angular/ssr": "npm:^21.2.3"
     "@eslint/js": "npm:^10.0.1"
     "@fullcalendar/angular": "npm:^6.1.20"
     "@fullcalendar/core": "npm:^6.1.20"
