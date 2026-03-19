@@ -8,26 +8,24 @@
           <img src="assets/logo.png" alt="" class="logo-img" aria-hidden="true" />
           <span class="logo-text">PhotoCalia</span>
         </a>
-        <p class="footer-description">
-          The ultimate software to capture knowledge visually. Never forget important details again.
-        </p>
+        <p class="footer-description">{{ 'footer.description' | translate }}</p>
       </div>
 
       <!-- Links Sections (Remaining Columns) -->
       <div class="footer-links-grid">
         @for (section of footerSections; track section.title) {
           <div class="footer-section">
-            <h3 class="footer-heading">{{ section.title }}</h3>
+            <h3 class="footer-heading">{{ section.title | translate }}</h3>
             <ul class="footer-list">
               @for (link of section.links; track link.label) {
                 <li>
                   @if (link.action) {
                     <button type="button" class="footer-link footer-link-btn" (click)="handleLinkAction(link.action)">{{
-                      link.label
+                      link.label | translate
                     }}</button>
                   } @else if (link.isInternal) {
                     <a [routerLink]="link.url! | localizeRoute" class="footer-link">{{
-                      link.label
+                      link.label | translate
                     }}</a>
                   } @else {
                     <a
@@ -35,7 +33,7 @@
                       target="_blank"
                       rel="noopener noreferrer"
                       class="footer-link"
-                      >{{ link.label }}</a
+                      >{{ link.label | translate }}</a
                     >
                   }
                 </li>
@@ -49,7 +47,7 @@
     <!-- Bottom row: copyright, version, social -->
     <div class="footer-bottom">
       <div class="footer-legal">
-        <span class="copyright">© {{ currentYear }} PhotoCalia. All rights reserved.</span>
+        <span class="copyright">© {{ currentYear }} PhotoCalia. {{ 'footer.copyright' | translate }}</span>
         <a
           [href]="releaseUrl"
           target="_blank"

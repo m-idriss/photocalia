@@ -25,8 +25,8 @@
                   article.readingTime
                 }}</span>
               </div>
-              <h2 class="article-title">{{ article.title }}</h2>
-              <p class="article-description">{{ article.description }}</p>
+              <h2 class="article-title">{{ article.translationKey + '.title' | translate }}</h2>
+              <p class="article-description">{{ article.translationKey + '.description' | translate }}</p>
               <div class="article-tags">
                 @for (tag of article.tags; track tag) {
                   <span class="tag">{{ tag }}</span>
