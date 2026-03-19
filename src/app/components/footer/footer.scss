@@ -168,6 +168,26 @@
   }
 }
 
+.footer-cookie-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--ct-footer-text, #9ca3af);
+  transition: color 0.2s;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--ct-footer-link-hover, #ffffff);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ct-primary, #4f46e5);
+    outline-offset: 2px;
+  }
+}
+
 .footer-social {
   display: flex;
   align-items: center;
