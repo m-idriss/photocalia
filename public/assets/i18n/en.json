@@ -1,10 +1,10 @@
 {
   "header.signIn": "Sign In",
   "header.signOut": "Sign Out",
-  "header.home": "Home",
+  "header.home": "Convert",
   "header.howItWorks": "How It Works",
   "header.tooltip.signIn": "Sign in with Google",
-  "header.tooltip.home": "Go to home page",
+  "header.tooltip.home": "Go to convert page",
   "header.tooltip.howItWorks": "Learn how it works",
   "header.tooltip.settings": "Settings",
   "header.tooltip.signOut": "Sign out of your account",

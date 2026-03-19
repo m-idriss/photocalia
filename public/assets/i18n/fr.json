@@ -1,10 +1,10 @@
 {
   "header.signIn": "Connexion",
   "header.signOut": "Déconnexion",
-  "header.home": "Accueil",
+  "header.home": "Convertir",
   "header.howItWorks": "Comment ça marche",
   "header.tooltip.signIn": "Se connecter avec Google",
-  "header.tooltip.home": "Aller à la page d'accueil",
+  "header.tooltip.home": "Aller à la page de conversion",
   "header.tooltip.howItWorks": "Découvrir comment ça marche",
   "header.tooltip.settings": "Paramètres",
   "header.tooltip.signOut": "Se déconnecter",
