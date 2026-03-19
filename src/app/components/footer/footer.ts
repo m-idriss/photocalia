@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { GithubService } from '../../services/github.service';
+import { CookieConsentService } from '../../services/cookie-consent.service';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { environment } from '../../../environments/environment';
 
@@ -41,6 +42,7 @@ export interface SocialLink {
 })
 export class Footer implements OnInit {
   private readonly githubService = inject(GithubService);
+  private readonly cookieConsentService = inject(CookieConsentService);
 
   currentYear = new Date().getFullYear();
   appVersion = environment.appVersion ?? '0.0.0';
@@ -170,6 +172,10 @@ export class Footer implements OnInit {
     if (legalLinks.length > 0) sections.push({ title: 'Legal', links: legalLinks });
 
     return sections;
+  }
+
+  openCookiePreferences(): void {
+    this.cookieConsentService.open();
   }
 
   /**

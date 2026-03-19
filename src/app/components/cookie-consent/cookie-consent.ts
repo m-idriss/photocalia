@@ -2,6 +2,7 @@ import {
   Component,
   signal,
   OnInit,
+  effect,
   PLATFORM_ID,
   inject,
   ChangeDetectionStrategy,
@@ -10,6 +11,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
+import { CookieConsentService } from '../../services/cookie-consent.service';
 
 const CONSENT_KEY = 'photocalia_cookie_consent';
 
@@ -30,11 +32,26 @@ export interface CookieConsentData {
 })
 export class CookieConsent implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly cookieConsentService = inject(CookieConsentService);
 
   readonly visible = signal(false);
   readonly showDetails = signal(false);
   readonly analyticsEnabled = signal(true);
   readonly preferencesEnabled = signal(true);
+
+  constructor() {
+    effect(() => {
+      if (this.cookieConsentService.openRequested() > 0) {
+        const stored = this.getStoredConsent();
+        if (stored) {
+          this.analyticsEnabled.set(stored.analytics);
+          this.preferencesEnabled.set(stored.preferences);
+          this.showDetails.set(true);
+        }
+        this.visible.set(true);
+      }
+    });
+  }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
