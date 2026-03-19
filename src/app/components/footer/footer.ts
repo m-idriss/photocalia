@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { GithubService } from '../../services/github.service';
 import { CookieConsentService } from '../../services/cookie-consent.service';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { environment } from '../../../environments/environment';
 
 /**
@@ -37,7 +38,7 @@ export interface SocialLink {
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterLink, LocalizeRoutePipe],
+  imports: [RouterLink, LocalizeRoutePipe, TranslatePipe],
   templateUrl: './footer.html',
   styleUrl: './footer.scss',
 })
@@ -98,80 +99,80 @@ export class Footer implements OnInit {
     };
 
     const productLinks: FooterLink[] = [
-      { label: 'Home', url: '/', isInternal: true },
-      { label: 'About Us', url: '/about', isInternal: true },
-      { label: 'How It Works', url: '/how-it-works', isInternal: true },
-      { label: 'Blog', url: '/blog', isInternal: true },
+      { label: 'footer.link.home', url: '/', isInternal: true },
+      { label: 'footer.link.aboutUs', url: '/about', isInternal: true },
+      { label: 'footer.link.howItWorks', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.blog', url: '/blog', isInternal: true },
     ];
     if (config.enableAboutMeLink) {
-      productLinks.push({ label: 'About Me', url: '/me', isInternal: true });
+      productLinks.push({ label: 'footer.link.aboutMe', url: '/me', isInternal: true });
     }
 
     const featureLinks: FooterLink[] = [
-      { label: 'AI Text Extraction', url: '/how-it-works', isInternal: true },
-      { label: 'Instant ICS Generation', url: '/how-it-works', isInternal: true },
-      { label: 'Privacy-First Parsing', url: '/privacy', isInternal: true },
-      { label: 'Batch Processing', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.aiTextExtraction', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.instantIcsGeneration', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.privacyFirstParsing', url: '/privacy', isInternal: true },
+      { label: 'footer.link.batchProcessing', url: '/how-it-works', isInternal: true },
     ];
 
     const useCasesLinks: FooterLink[] = [
-      { label: 'Medical Appointments', url: '/how-it-works', isInternal: true },
-      { label: 'School Schedules', url: '/how-it-works', isInternal: true },
-      { label: 'Event Tickets', url: '/how-it-works', isInternal: true },
-      { label: 'Delivery Tracking', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.medicalAppointments', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.schoolSchedules', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.eventTickets', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.deliveryTracking', url: '/how-it-works', isInternal: true },
     ];
 
     const supportLinks: FooterLink[] = [
-      { label: 'FAQ', url: '/how-it-works', isInternal: true },
-      { label: 'Contact Us', url: '/about', isInternal: true },
-      { label: 'Help Center', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.faq', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.contactUs', url: '/about', isInternal: true },
+      { label: 'footer.link.helpCenter', url: '/how-it-works', isInternal: true },
     ];
 
     const resourceLinks: FooterLink[] = [];
     if (config.enableRepositoryLink) {
-      resourceLinks.push({ label: 'Repository', url: this.githubRepo });
+      resourceLinks.push({ label: 'footer.link.repository', url: this.githubRepo });
     }
     if (config.enableIssuesLink) {
-      resourceLinks.push({ label: 'Issues', url: `${this.githubRepo}/issues` });
+      resourceLinks.push({ label: 'footer.link.issues', url: `${this.githubRepo}/issues` });
     }
     if (config.enableDocsLink) {
-      resourceLinks.push({ label: 'Documentation', url: `${this.githubRepo}/blob/main/README.md` });
+      resourceLinks.push({ label: 'footer.link.documentation', url: `${this.githubRepo}/blob/main/README.md` });
     }
     if (config.enableCommunityLink) {
       resourceLinks.push({
-        label: 'Community',
+        label: 'footer.link.community',
         url: `${this.githubRepo}/blob/main/CONTRIBUTING.md`,
       });
     }
     if (config.enableDiscussionsLink) {
-      resourceLinks.push({ label: 'Discussions', url: `${this.githubRepo}/discussions` });
+      resourceLinks.push({ label: 'footer.link.discussions', url: `${this.githubRepo}/discussions` });
     }
 
     const legalLinks: FooterLink[] = [];
     if (config.enablePrivacyLink) {
-      legalLinks.push({ label: 'Privacy Policy', url: '/privacy', isInternal: true });
+      legalLinks.push({ label: 'footer.link.privacyPolicy', url: '/privacy', isInternal: true });
     }
     if (config.enableTermsLink) {
-      legalLinks.push({ label: 'Terms of Service', url: '/terms', isInternal: true });
+      legalLinks.push({ label: 'footer.link.termsOfService', url: '/terms', isInternal: true });
     }
     if (config.enableLegalMentionsLink) {
-      legalLinks.push({ label: 'Legal Mentions', url: '/legal-mentions', isInternal: true });
+      legalLinks.push({ label: 'footer.link.legalMentions', url: '/legal-mentions', isInternal: true });
     }
     if (config.enableLicenseLink) {
-      legalLinks.push({ label: 'License', url: `${this.githubRepo}/blob/main/LICENSE` });
+      legalLinks.push({ label: 'footer.link.license', url: `${this.githubRepo}/blob/main/LICENSE` });
     }
     if (config.enableSecurityLink) {
-      legalLinks.push({ label: 'Security', url: `${this.githubRepo}/blob/main/SECURITY.md` });
+      legalLinks.push({ label: 'footer.link.security', url: `${this.githubRepo}/blob/main/SECURITY.md` });
     }
-    legalLinks.push({ label: 'Cookie Preferences', action: 'cookie' });
+    legalLinks.push({ label: 'footer.link.cookiePreferences', action: 'cookie' });
 
     const sections: FooterSection[] = [];
-    if (productLinks.length > 0) sections.push({ title: 'Product', links: productLinks });
-    if (featureLinks.length > 0) sections.push({ title: 'Top Features', links: featureLinks });
-    if (useCasesLinks.length > 0) sections.push({ title: 'Use Cases', links: useCasesLinks });
-    if (supportLinks.length > 0) sections.push({ title: 'Support', links: supportLinks });
-    if (resourceLinks.length > 0) sections.push({ title: 'Resources', links: resourceLinks });
-    if (legalLinks.length > 0) sections.push({ title: 'Legal', links: legalLinks });
+    if (productLinks.length > 0) sections.push({ title: 'footer.section.product', links: productLinks });
+    if (featureLinks.length > 0) sections.push({ title: 'footer.section.features', links: featureLinks });
+    if (useCasesLinks.length > 0) sections.push({ title: 'footer.section.useCases', links: useCasesLinks });
+    if (supportLinks.length > 0) sections.push({ title: 'footer.section.support', links: supportLinks });
+    if (resourceLinks.length > 0) sections.push({ title: 'footer.section.resources', links: resourceLinks });
+    if (legalLinks.length > 0) sections.push({ title: 'footer.section.legal', links: legalLinks });
 
     return sections;
   }
