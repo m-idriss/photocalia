@@ -14,9 +14,13 @@ const appId = process.env.FIREBASE_APP_ID || '';
 const measurementId = process.env.FIREBASE_MEASUREMENT_ID || '';
 
 // Create the environment file content
+const packageJson = require('../package.json');
+const appVersion = packageJson.version || '0.0.0';
+
 const envConfigFile = `export const environment = {
   production: true,
   apiUrl: 'https://api.photocalia.com',
+  appVersion: '${appVersion}',
   firebase: {
     apiKey: '${apiKey}',
     authDomain: '${authDomain}',
