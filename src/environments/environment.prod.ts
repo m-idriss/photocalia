@@ -1,6 +1,7 @@
 export const environment = {
   production: true,
   apiUrl: 'https://api.photocalia.com',
+  appVersion: '4.4.0',
   firebase: {
     apiKey: 'AIzaSyDvQ4aCcWtSxGmTXefINTcsdb0O5zheYzE',
     authDomain: 'image-to-ics.firebaseapp.com',
