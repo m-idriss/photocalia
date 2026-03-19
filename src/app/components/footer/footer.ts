@@ -10,8 +10,9 @@ import { environment } from '../../../environments/environment';
  */
 export interface FooterLink {
   label: string;
-  url: string;
+  url?: string;
   isInternal?: boolean;
+  action?: string;
 }
 
 /**
@@ -162,6 +163,7 @@ export class Footer implements OnInit {
     if (config.enableSecurityLink) {
       legalLinks.push({ label: 'Security', url: `${this.githubRepo}/blob/main/SECURITY.md` });
     }
+    legalLinks.push({ label: 'Cookie Preferences', action: 'cookie' });
 
     const sections: FooterSection[] = [];
     if (productLinks.length > 0) sections.push({ title: 'Product', links: productLinks });
@@ -176,6 +178,12 @@ export class Footer implements OnInit {
 
   openCookiePreferences(): void {
     this.cookieConsentService.open();
+  }
+
+  handleLinkAction(action: string): void {
+    if (action === 'cookie') {
+      this.openCookiePreferences();
+    }
   }
 
   /**

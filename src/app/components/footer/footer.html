@@ -19,10 +19,14 @@
           <div class="footer-section">
             <h3 class="footer-heading">{{ section.title }}</h3>
             <ul class="footer-list">
-              @for (link of section.links; track link.url) {
+              @for (link of section.links; track link.label) {
                 <li>
-                  @if (link.isInternal) {
-                    <a [routerLink]="link.url | localizeRoute" class="footer-link">{{
+                  @if (link.action) {
+                    <button type="button" class="footer-link footer-link-btn" (click)="handleLinkAction(link.action)">{{
+                      link.label
+                    }}</button>
+                  } @else if (link.isInternal) {
+                    <a [routerLink]="link.url! | localizeRoute" class="footer-link">{{
                       link.label
                     }}</a>
                   } @else {
@@ -55,10 +59,7 @@
         >
           Version {{ appVersion }}
         </a>
-        <button class="footer-cookie-btn" type="button" (click)="openCookiePreferences()">
-          Cookie Preferences
-        </button>
-      </div>
+</div>
 
       <div class="footer-social">
         @for (social of socialLinks; track social.url) {
