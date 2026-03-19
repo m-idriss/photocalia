@@ -26,7 +26,7 @@
                       link.label
                     }}</button>
                   } @else if (link.isInternal) {
-                    <a [routerLink]="link.url | localizeRoute" class="footer-link">{{
+                    <a [routerLink]="link.url! | localizeRoute" class="footer-link">{{
                       link.label
                     }}</a>
                   } @else {
