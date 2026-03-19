@@ -106,12 +106,13 @@ describe('CalendarView', () => {
   it('should set loadError to true when dynamic import fails', async () => {
     const freshFixture = TestBed.createComponent(CalendarView);
     const freshComponent = freshFixture.componentInstance;
+    const calendarLoader = freshComponent as unknown as { loadCalendar: () => Promise<void> };
 
     freshFixture.componentRef.setInput('events', mockEvents);
     freshFixture.componentRef.setInput('visible', true);
 
-    spyOn<CalendarView>(freshComponent, 'loadCalendar' as never).and.returnValue(
-      Promise.reject(new Error('Simulated import failure')),
+    spyOn(calendarLoader, 'loadCalendar').and.returnValue(
+      Promise.reject<void>(new Error('Simulated import failure')),
     );
 
     freshComponent['loadError'] = false;
