@@ -32,6 +32,10 @@ jobs:
       - name: Build application
         run: yarn build
 
+      - name: Auto-accept cookies for screenshots
+        run: |
+          sed -i 's|</head>|<script>localStorage.setItem("photocalia_cookie_consent",JSON.stringify({essential:true,analytics:false,preferences:false,timestamp:Date.now()}))</script></head>|' dist/photocalia/browser/index.html
+
       - name: Start server in background
         run: |
           cd dist/photocalia/browser
