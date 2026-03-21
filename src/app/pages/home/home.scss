@@ -37,7 +37,7 @@
   font-size: 1.25rem;
   color: var(--text-secondary, #64748b);
   line-height: 1.6;
-  max-width: 800px;
+  max-width: 900px;
   margin: 1rem auto 0.5rem;
 }
 
@@ -487,8 +487,7 @@
    ======================== */
 .content-layout {
   display: grid;
-  padding: 0rem 1rem;
-  padding-bottom: 2rem;
+  padding: 1.5rem 1rem 2rem;
 
   // Default: Center converter (no calendar)
   @media (min-width: 1200px) {

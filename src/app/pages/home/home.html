@@ -38,9 +38,11 @@
       <p class="hero-description" itemprop="description">
         {{ 'home.hero.description' | translate }}
       </p>
-      <p class="hero-subtitle">
-        {{ 'home.hero.subtitle' | translate }}
-      </p>
+      @if (!authService.isAuthenticated()) {
+        <p class="hero-subtitle">
+          {{ 'home.hero.subtitle' | translate }}
+        </p>
+      }
 
       <!-- Key Features for SEO -->
       <div class="hero-features" style="display: none" itemprop="featureList">

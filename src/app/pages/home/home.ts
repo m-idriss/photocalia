@@ -17,6 +17,7 @@ import { Converter } from '../../components/converter/converter';
 import { CalendarView } from '../../components/calendar-view';
 import { ToastService } from '../../services/toast.service';
 import { CalendarStateService } from '../../services/calendar-state.service';
+import { AuthService } from '../../services/auth.service';
 import { CalendarEvent } from '../../models';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
@@ -36,6 +37,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 export class Home implements OnInit, AfterViewInit, OnDestroy {
   public readonly toastService = inject(ToastService);
   public readonly calendarStateService = inject(CalendarStateService);
+  protected readonly authService = inject(AuthService);
   private readonly platformId = inject(PLATFORM_ID);
 
   @ViewChild(Converter) converterComponent?: Converter;
