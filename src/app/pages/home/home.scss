@@ -28,11 +28,6 @@
   gap: 1rem;
 }
 
-.hero-icon {
-  font-size: 2.5rem;
-  animation: float 3s ease-in-out infinite;
-}
-
 .hero-description {
   font-size: 1.25rem;
   color: var(--text-secondary, #64748b);
@@ -69,17 +64,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
   }
 }
 
@@ -562,11 +546,6 @@
     font-size: 1.75rem;
     flex-direction: column;
     gap: 0.5rem;
-  }
-
-  .hero-icon {
-    font-size: 2rem;
-    display: none;
   }
 
   .hero-description {
