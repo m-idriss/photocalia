@@ -28,37 +28,61 @@
   @if (!isAuthLoading && isAuthenticated) {
     <!-- Upload Area - Only show if no events extracted -->
     @if (extractedEvents().length === 0) {
-      <section
+      <label
         class="upload-zone"
         [class.dragging]="isDragging()"
         (dragover)="onDragOver($event)"
         (dragleave)="onDragLeave($event)"
         (drop)="onDrop($event)"
-        role="region"
-        aria-labelledby="upload-heading"
         [appTooltip]="'converter.tooltip.dropzone' | translate"
         appTooltipPlacement="top"
       >
-        <div class="marketing-text">
-          <h4>{{ 'converter.marketing.1' | translate }}</h4>
-          <h4>{{ 'converter.marketing.2' | translate }}</h4>
+        <input
+          type="file"
+          class="file-input"
+          multiple
+          accept="image/jpeg,image/jpg,image/png,application/pdf"
+          (change)="onFileSelect($event)"
+          [disabled]="isProcessing()"
+          [attr.aria-label]="'converter.upload.aria' | translate"
+        />
+        <div class="dropzone-content">
+          <div class="dropzone-icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect
+                x="4"
+                y="8"
+                width="40"
+                height="32"
+                rx="4"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-dasharray="4 3"
+                opacity="0.4"
+              />
+              <path
+                d="M24 18v12M18 24l6-6 6 6"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <span id="upload-heading" class="dropzone-title">{{
+            'converter.upload.drop' | translate
+          }}</span>
+          <span class="upload-button" aria-hidden="true">{{
+            'converter.upload.browse' | translate
+          }}</span>
+          <div class="dropzone-formats" aria-hidden="true">
+            <span class="format-badge">JPG</span>
+            <span class="format-badge">PNG</span>
+            <span class="format-badge">PDF</span>
+          </div>
+          <p class="dropzone-hint">{{ 'converter.marketing.1' | translate }}</p>
         </div>
-        <div class="upload-icon" aria-hidden="true">📤</div>
-        <h3 id="upload-heading" class="sr-only">Upload Files</h3>
-        <p>{{ 'converter.upload.drop' | translate }}</p>
-        <label class="upload-button">
-          <input
-            type="file"
-            class="file-input"
-            multiple
-            accept="image/jpeg,image/jpg,image/png,application/pdf"
-            (change)="onFileSelect($event)"
-            [disabled]="isProcessing()"
-            [attr.aria-label]="'converter.upload.aria' | translate"
-          />
-          <span>{{ 'converter.upload.browse' | translate }}</span>
-        </label>
-      </section>
+      </label>
 
       <!-- Selected Files - Minimalist -->
       @if (files().length > 0) {
