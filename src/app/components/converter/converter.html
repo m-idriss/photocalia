@@ -1,7 +1,15 @@
 <app-card id="converter" [title]="'converter.title' | translate">
   <!-- Auth Required Message (when not authenticated) -->
   @if (!isAuthLoading && !isAuthenticated) {
-    <section class="auth-required" aria-labelledby="auth-heading">
+    <section
+      class="auth-required clickable"
+      aria-labelledby="auth-heading"
+      (click)="signIn()"
+      role="button"
+      tabindex="0"
+      (keydown.enter)="signIn()"
+      (keydown.space)="signIn()"
+    >
       <div class="auth-message">
         <h3 id="auth-heading" class="sr-only no-after">AI Calendar Converter</h3>
         <img
