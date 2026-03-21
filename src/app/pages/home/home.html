@@ -1,17 +1,30 @@
 <!-- Toast Container for Global Messages -->
-<div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 12000">
+<div
+  class="toast-container position-fixed top-0 start-50 translate-middle-x p-3"
+  style="z-index: 12000"
+>
   <!-- Success Toast -->
   @if (toastService.successMessage()) {
-  <ngb-toast [autohide]="true" [delay]="5000" (hidden)="toastService.clearSuccess()" class="bg-success text-white">
-    {{ toastService.successMessage() }}
-  </ngb-toast>
+    <ngb-toast
+      [autohide]="true"
+      [delay]="5000"
+      (hidden)="toastService.clearSuccess()"
+      class="bg-success text-white"
+    >
+      {{ toastService.successMessage() }}
+    </ngb-toast>
   }
 
   <!-- Error Toast -->
   @if (toastService.errorMessage()) {
-  <ngb-toast [autohide]="true" [delay]="5000" (hidden)="toastService.clearError()" class="bg-danger text-white">
-    {{ toastService.errorMessage() }}
-  </ngb-toast>
+    <ngb-toast
+      [autohide]="true"
+      [delay]="5000"
+      (hidden)="toastService.clearError()"
+      class="bg-danger text-white"
+    >
+      {{ toastService.errorMessage() }}
+    </ngb-toast>
   }
 </div>
 
@@ -44,61 +57,86 @@
     </article>
 
     <!-- Desktop: Side-by-side layout when events exist, centered when no events -->
-    <div class="content-layout" [class.has-calendar]="calendarStateService.isVisible() && isDesktop()">
+    <div
+      class="content-layout"
+      [class.has-calendar]="calendarStateService.isVisible() && isDesktop()"
+    >
       <div class="converter-card">
         <app-converter></app-converter>
+
+        <!-- Quota Status Bar -->
+        @if (converterReady() && converterComponent) {
+          @let quotaLimitVal = converterComponent.quotaLimit();
+          @let quotaRemainingVal = converterComponent.quotaRemaining();
+          @let planTypeVal = (converterComponent.planType() ?? '').toUpperCase();
+          @if (
+            !converterComponent.isQuotaLoading() &&
+            converterComponent.quotaEnabled() &&
+            quotaLimitVal !== null &&
+            quotaRemainingVal !== null &&
+            quotaLimitVal > 0
+          ) {
+            <div class="quota-status-bar" role="status" aria-live="polite">
+              <div class="d-flex flex-column gap-1">
+                <ngb-progressbar
+                  [value]="100 - (quotaRemainingVal / quotaLimitVal) * 100"
+                  [type]="
+                    quotaRemainingVal >= quotaLimitVal / 2
+                      ? 'success'
+                      : quotaRemainingVal >= quotaLimitVal / 3
+                        ? 'warning'
+                        : 'danger'
+                  "
+                  [showValue]="true"
+                  [striped]="true"
+                  [animated]="true"
+                  height="20px"
+                  ngbTooltip="{{ quotaLimitVal - quotaRemainingVal }} / {{
+                    quotaLimitVal
+                  }} used this month. [{{ planTypeVal }} account]"
+                ></ngb-progressbar>
+
+                <!-- Inline text showing subscription and quota remaining -->
+                @if (quotaRemainingVal > 0) {
+                  <div
+                    class="quota-info mt-1 text-nowrap small text-muted align-self-center"
+                    role="note"
+                    aria-live="polite"
+                  >
+                    <span class="fw-semibold">{{ 'home.quota.plan' | translate }}:</span>
+                    <span class="ms-1">{{ planTypeVal || 'FREE' }}</span>
+                    <span class="mx-2">•</span>
+                    <span class="fw-semibold">{{ 'home.quota.usage' | translate }}:</span>
+                    <span class="ms-1"
+                      >{{ quotaLimitVal - quotaRemainingVal }} / {{ quotaLimitVal }}</span
+                    >
+                    <span class="mx-2">•</span>
+                    <span>{{ quotaRemainingVal }} {{ 'home.quota.left' | translate }}</span>
+                    <span class="visually-hidden"
+                      >{{ quotaRemainingVal }} remaining out of {{ quotaLimitVal }} total</span
+                    >
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        }
       </div>
 
       <!-- Desktop inline calendar view (only when visible and desktop) -->
       @if (calendarStateService.isVisible() && isDesktop()) {
-      <div class="calendar-card">
-        <app-calendar-view [events]="calendarStateService.events()" [visible]="calendarStateService.isVisible()"
-          [inline]="true" (visibleChange)="handleCalendarVisibilityChange($event)"
-          (eventsChange)="handleCalendarEventsChange($event)" (exportIcs)="handleCalendarExport()" />
-      </div>
+        <div class="calendar-card">
+          <app-calendar-view
+            [events]="calendarStateService.events()"
+            [visible]="calendarStateService.isVisible()"
+            [inline]="true"
+            (visibleChange)="handleCalendarVisibilityChange($event)"
+            (eventsChange)="handleCalendarEventsChange($event)"
+            (exportIcs)="handleCalendarExport()"
+          />
+        </div>
       }
     </div>
-
-    <!-- Quota Status Bar - Outside converter container -->
-    @if (converterReady() && converterComponent) {
-    @let quotaLimitVal = converterComponent.quotaLimit();
-    @let quotaRemainingVal = converterComponent.quotaRemaining();
-    @let planTypeVal = (converterComponent.planType() ?? '').toUpperCase();
-    @if (
-    !converterComponent.isQuotaLoading() &&
-    converterComponent.quotaEnabled() &&
-    quotaLimitVal !== null &&
-    quotaRemainingVal !== null &&
-    quotaLimitVal > 0
-    ) {
-    <div class="quota-status-bar" role="status" aria-live="polite">
-      <div class="d-flex flex-column gap-1">
-        <ngb-progressbar [value]="100 - (quotaRemainingVal / quotaLimitVal) * 100" [type]="
-                quotaRemainingVal >= quotaLimitVal / 2
-                  ? 'success'
-                  : quotaRemainingVal >= quotaLimitVal / 3
-                    ? 'warning'
-                    : 'danger'
-              " [showValue]="true" [striped]="true" [animated]="true" height="20px"
-          ngbTooltip="{{ quotaLimitVal - quotaRemainingVal }} / {{ quotaLimitVal }} used this month. [{{ planTypeVal }} account]"></ngb-progressbar>
-
-        <!-- Inline text showing subscription and quota remaining -->
-        @if (quotaRemainingVal > 0) {
-        <div class="quota-info mt-1 text-nowrap small text-muted align-self-center" role="note" aria-live="polite">
-          <span class="fw-semibold">{{ 'home.quota.plan' | translate }}:</span>
-          <span class="ms-1">{{ planTypeVal || 'FREE' }}</span>
-          <span class="mx-2">•</span>
-          <span class="fw-semibold">{{ 'home.quota.usage' | translate }}:</span>
-          <span class="ms-1">{{ quotaLimitVal - quotaRemainingVal }} / {{ quotaLimitVal }}</span>
-          <span class="mx-2">•</span>
-          <span>{{ quotaRemainingVal }} {{ 'home.quota.left' | translate }}</span>
-          <span class="visually-hidden">{{ quotaRemainingVal }} remaining out of {{ quotaLimitVal }} total</span>
-        </div>
-        }
-      </div>
-    </div>
-    }
-    }
 
     <!-- How It Works Section -->
     <section class="how-it-works-section" aria-labelledby="how-it-works-title">
@@ -244,10 +282,10 @@
       <h2 id="faq-title" class="section-title">{{ 'home.faq.title' | translate }}</h2>
       <div class="faq-list">
         @for (i of [1, 2, 3, 4, 5]; track i) {
-        <details class="faq-item">
-          <summary class="faq-question">{{ 'home.faq.q' + i + '.q' | translate }}</summary>
-          <p class="faq-answer">{{ 'home.faq.q' + i + '.a' | translate }}</p>
-        </details>
+          <details class="faq-item">
+            <summary class="faq-question">{{ 'home.faq.q' + i + '.q' | translate }}</summary>
+            <p class="faq-answer">{{ 'home.faq.q' + i + '.a' | translate }}</p>
+          </details>
         }
       </div>
     </section>
@@ -256,7 +294,12 @@
 
 <!-- Single calendar instance with responsive inline mode -->
 @if (calendarStateService.isVisible() && !isDesktop()) {
-<app-calendar-view [events]="calendarStateService.events()" [visible]="calendarStateService.isVisible()"
-  [inline]="false" (visibleChange)="handleCalendarVisibilityChange($event)"
-  (eventsChange)="handleCalendarEventsChange($event)" (exportIcs)="handleCalendarExport()" />
+  <app-calendar-view
+    [events]="calendarStateService.events()"
+    [visible]="calendarStateService.isVisible()"
+    [inline]="false"
+    (visibleChange)="handleCalendarVisibilityChange($event)"
+    (eventsChange)="handleCalendarEventsChange($event)"
+    (exportIcs)="handleCalendarExport()"
+  />
 }

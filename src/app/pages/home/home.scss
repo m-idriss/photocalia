@@ -715,22 +715,12 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   margin: 0 auto;
-  max-width: 1200px;
-  border-radius: 0;
+  max-width: 400px;
   background: transparent;
   border: none;
   box-shadow: none;
-
-  // On desktop with calendar, match the converter column width
-  @media (min-width: 1200px) {
-    .content-layout.has-calendar ~ & {
-      max-width: none;
-      margin-left: 0;
-      margin-right: auto;
-    }
-  }
 
   .progress-bar {
     width: 100%;
