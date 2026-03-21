@@ -602,7 +602,12 @@
     font-size: 0.85rem;
     font-weight: 600;
     padding: 0.35rem 0.5rem;
+    text-decoration: none !important;
     transition: color var(--t-fast);
+
+    &:hover {
+      color: var(--ct-primary, #4f46e5);
+    }
   }
 
   .fc-day-other .fc-daygrid-day-number {
