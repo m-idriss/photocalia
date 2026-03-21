@@ -270,5 +270,22 @@
   "cookie.preferences.title": "Préférences",
   "cookie.preferences.desc": "Mémorisent vos paramètres comme le thème et la langue.",
   "cookie.analytics.title": "Analytiques",
-  "cookie.analytics.desc": "Nous aident à comprendre l'utilisation pour améliorer l'application."
+  "cookie.analytics.desc": "Nous aident à comprendre l'utilisation pour améliorer l'application.",
+
+  "calendar.title": "Aperçu du calendrier",
+  "calendar.event": "événement",
+  "calendar.events": "événements",
+  "calendar.drag": "Glisser pour déplacer",
+  "calendar.drag.short": "Glisser",
+  "calendar.resize": "Redimensionner pour ajuster",
+  "calendar.resize.short": "Redimensionner",
+  "calendar.click": "Cliquer pour les détails",
+  "calendar.click.short": "Cliquer",
+  "calendar.export": "Exporter ICS",
+  "calendar.close": "Fermer",
+  "calendar.error": "Impossible de charger le calendrier. Veuillez rafraîchir la page et réessayer.",
+  "calendar.today": "Aujourd'hui",
+  "calendar.month": "Mois",
+  "calendar.week": "Semaine",
+  "calendar.day": "Jour"
 }

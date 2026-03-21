@@ -228,7 +228,11 @@
               [style.border-left-color]="getEventColor(event.summary).bg"
             >
               <h2 ngbAccordionHeader>
-                <button ngbAccordionButton class="event-accordion-header">
+                <button
+                  ngbAccordionButton
+                  class="event-accordion-header"
+                  (click)="navigateToEventDate(event)"
+                >
                   <div class="event-accordion-header-content">
                     <div class="event-date" aria-hidden="true">
                       <div class="date-block" [style.background]="getEventColor(event.summary).bg">

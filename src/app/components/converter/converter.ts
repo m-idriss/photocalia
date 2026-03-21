@@ -708,6 +708,13 @@ export class Converter extends AuthAwareComponent implements OnInit {
 
   protected getEventColor = getEventColor;
 
+  protected navigateToEventDate(event: CalendarEvent): void {
+    const date = event.start instanceof Date ? event.start : new Date(event.start);
+    if (!isNaN(date.getTime())) {
+      this.calendarStateService.goToDate(date);
+    }
+  }
+
   protected getMonthDay(dateStr: string | Date): string {
     if (typeof dateStr === 'string') {
       return getMonthDay(dateStr);

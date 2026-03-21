@@ -34,6 +34,9 @@ export class CalendarStateService {
   // Export request counter — consumers use effect() to react to changes
   readonly exportRequestCount = signal(0);
 
+  // Navigate-to-date request — calendar view reacts to changes
+  readonly navigateToDate = signal<Date | null>(null);
+
   constructor() {
     this.restoreState();
   }
@@ -69,6 +72,13 @@ export class CalendarStateService {
   updateIcsContent(icsContent: string | null): void {
     this.icsContent.set(icsContent);
     this.persistState();
+  }
+
+  /**
+   * Request calendar to navigate to a specific date
+   */
+  goToDate(date: Date): void {
+    this.navigateToDate.set(date);
   }
 
   /**

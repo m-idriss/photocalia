@@ -20,13 +20,30 @@
         <!-- Header -->
         <div class="calendar-header">
           <div class="calendar-header-left">
-            <h2 id="calendar-modal-title" class="calendar-title">Calendar Preview</h2>
+            <h2 id="calendar-modal-title" class="calendar-title">
+              {{ 'calendar.title' | translate }}
+            </h2>
             @if (eventCount() > 0) {
               <div class="calendar-stats">
                 <span class="stat-badge">
                   <span class="stat-count">{{ eventCount() }}</span>
-                  <span class="stat-label">{{ eventCount() === 1 ? 'event' : 'events' }}</span>
+                  <span class="stat-label">{{
+                    (eventCount() === 1 ? 'calendar.event' : 'calendar.events') | translate
+                  }}</span>
                 </span>
+                @if (eventCount() > 1) {
+                  <span class="event-nav">
+                    <button class="event-nav-btn" (click)="prevEvent()" aria-label="Previous event">
+                      ◀
+                    </button>
+                    <span class="event-nav-index"
+                      >{{ currentEventIndex() + 1 }}/{{ eventCount() }}</span
+                    >
+                    <button class="event-nav-btn" (click)="nextEvent()" aria-label="Next event">
+                      ▶
+                    </button>
+                  </span>
+                }
                 @if (dateRange()) {
                   <span class="stat-separator">·</span>
                   <span class="stat-date-range">{{ dateRange() }}</span>
@@ -34,7 +51,11 @@
               </div>
             }
           </div>
-          <button class="close-button" (click)="close()" aria-label="Close calendar view">
+          <button
+            class="close-button"
+            (click)="close()"
+            [attr.aria-label]="'calendar.close' | translate"
+          >
             <span class="close-icon">✕</span>
           </button>
         </div>
@@ -42,15 +63,15 @@
         <!-- Instructions -->
         <div class="calendar-instructions">
           <span class="instruction-item">
-            <span class="instruction-icon">✋</span> Drag to reschedule
+            <span class="instruction-icon">✋</span> {{ 'calendar.drag' | translate }}
           </span>
           <span class="instruction-divider">·</span>
           <span class="instruction-item">
-            <span class="instruction-icon">↔</span> Resize to adjust
+            <span class="instruction-icon">↔</span> {{ 'calendar.resize' | translate }}
           </span>
           <span class="instruction-divider">·</span>
           <span class="instruction-item">
-            <span class="instruction-icon">👆</span> Click for details
+            <span class="instruction-icon">👆</span> {{ 'calendar.click' | translate }}
           </span>
         </div>
 
@@ -59,7 +80,7 @@
           <div class="calendar-container">
             @if (loadError) {
               <div class="error-message">
-                <p>⚠️ Failed to load calendar. Please refresh the page and try again.</p>
+                <p>⚠️ {{ 'calendar.error' | translate }}</p>
               </div>
             }
             <ng-container #calendarContainer></ng-container>
@@ -71,12 +92,16 @@
           <button
             class="action-btn export-btn"
             (click)="handleExport()"
-            aria-label="Export calendar events to ICS file"
+            [attr.aria-label]="'calendar.export' | translate"
           >
-            <span class="btn-icon">📥</span> Export ICS
+            <span class="btn-icon">📥</span> {{ 'calendar.export' | translate }}
           </button>
-          <button class="action-btn close-btn" (click)="close()" aria-label="Close calendar view">
-            Close
+          <button
+            class="action-btn close-btn"
+            (click)="close()"
+            [attr.aria-label]="'calendar.close' | translate"
+          >
+            {{ 'calendar.close' | translate }}
           </button>
         </div>
       </div>
@@ -89,13 +114,30 @@
       <!-- Header -->
       <div class="calendar-header">
         <div class="calendar-header-left">
-          <h2 id="calendar-inline-title" class="calendar-title">Calendar Preview</h2>
+          <h2 id="calendar-inline-title" class="calendar-title">
+            {{ 'calendar.title' | translate }}
+          </h2>
           @if (eventCount() > 0) {
             <div class="calendar-stats">
               <span class="stat-badge">
                 <span class="stat-count">{{ eventCount() }}</span>
-                <span class="stat-label">{{ eventCount() === 1 ? 'event' : 'events' }}</span>
+                <span class="stat-label">{{
+                  (eventCount() === 1 ? 'calendar.event' : 'calendar.events') | translate
+                }}</span>
               </span>
+              @if (eventCount() > 1) {
+                <span class="event-nav">
+                  <button class="event-nav-btn" (click)="prevEvent()" aria-label="Previous event">
+                    ◀
+                  </button>
+                  <span class="event-nav-index"
+                    >{{ currentEventIndex() + 1 }}/{{ eventCount() }}</span
+                  >
+                  <button class="event-nav-btn" (click)="nextEvent()" aria-label="Next event">
+                    ▶
+                  </button>
+                </span>
+              }
               @if (dateRange()) {
                 <span class="stat-separator">·</span>
                 <span class="stat-date-range">{{ dateRange() }}</span>
@@ -107,11 +149,17 @@
 
       <!-- Instructions -->
       <div class="calendar-instructions">
-        <span class="instruction-item"> <span class="instruction-icon">✋</span> Drag </span>
+        <span class="instruction-item">
+          <span class="instruction-icon">✋</span> {{ 'calendar.drag.short' | translate }}
+        </span>
         <span class="instruction-divider">·</span>
-        <span class="instruction-item"> <span class="instruction-icon">↔</span> Resize </span>
+        <span class="instruction-item">
+          <span class="instruction-icon">↔</span> {{ 'calendar.resize.short' | translate }}
+        </span>
         <span class="instruction-divider">·</span>
-        <span class="instruction-item"> <span class="instruction-icon">👆</span> Click </span>
+        <span class="instruction-item">
+          <span class="instruction-icon">👆</span> {{ 'calendar.click.short' | translate }}
+        </span>
       </div>
 
       <!-- Calendar Body -->
@@ -119,7 +167,7 @@
         <div class="calendar-container">
           @if (loadError) {
             <div class="error-message">
-              <p>⚠️ Failed to load calendar. Please refresh the page and try again.</p>
+              <p>⚠️ {{ 'calendar.error' | translate }}</p>
             </div>
           }
           <ng-container #calendarContainer></ng-container>
@@ -131,9 +179,9 @@
         <button
           class="action-btn export-btn"
           (click)="handleExport()"
-          aria-label="Export calendar events to ICS file"
+          [attr.aria-label]="'calendar.export' | translate"
         >
-          <span class="btn-icon">📥</span> Export ICS
+          <span class="btn-icon">📥</span> {{ 'calendar.export' | translate }}
         </button>
       </div>
     </div>
@@ -154,7 +202,11 @@
       <div class="popover-content">
         <div class="popover-header">
           <h4 class="popover-title">{{ evt.title }}</h4>
-          <button class="popover-close" (click)="closePopover()" aria-label="Close details">
+          <button
+            class="popover-close"
+            (click)="closePopover()"
+            [attr.aria-label]="'calendar.close' | translate"
+          >
             ✕
           </button>
         </div>

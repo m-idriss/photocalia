@@ -270,5 +270,22 @@
   "cookie.preferences.title": "Preferences",
   "cookie.preferences.desc": "Remember your settings like theme and language.",
   "cookie.analytics.title": "Analytics",
-  "cookie.analytics.desc": "Help us understand usage to improve the app."
+  "cookie.analytics.desc": "Help us understand usage to improve the app.",
+
+  "calendar.title": "Calendar Preview",
+  "calendar.event": "event",
+  "calendar.events": "events",
+  "calendar.drag": "Drag to reschedule",
+  "calendar.drag.short": "Drag",
+  "calendar.resize": "Resize to adjust",
+  "calendar.resize.short": "Resize",
+  "calendar.click": "Click for details",
+  "calendar.click.short": "Click",
+  "calendar.export": "Export ICS",
+  "calendar.close": "Close",
+  "calendar.error": "Failed to load calendar. Please refresh the page and try again.",
+  "calendar.today": "Today",
+  "calendar.month": "Month",
+  "calendar.week": "Week",
+  "calendar.day": "Day"
 }

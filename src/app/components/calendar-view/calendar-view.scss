@@ -70,6 +70,42 @@
   font-size: 0.75rem;
 }
 
+.event-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.25rem;
+}
+
+.event-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid rgba(var(--gradient-blue), 0.15);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--accent-color);
+  font-size: 0.55rem;
+  cursor: pointer;
+  transition: all var(--t-fast);
+
+  &:hover {
+    background: rgba(var(--gradient-blue), 0.1);
+    border-color: var(--accent-color);
+  }
+}
+
+.event-nav-index {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 24px;
+  text-align: center;
+}
+
 .stat-separator {
   color: var(--glass-border);
   font-weight: 300;
@@ -232,18 +268,16 @@
   width: 100%;
   max-width: min(92vw, 1200px);
   max-height: 90vh;
-  background: var(--glass-bg);
+  background: #ffffff;
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   animation: modalSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
+    0 25px 60px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
 }
 
 /* ========================
@@ -298,14 +332,12 @@
   transform: translateX(-50%);
   min-width: 260px;
   max-width: 340px;
-  background: var(--glass-bg);
+  background: #ffffff;
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.05);
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   animation: popoverIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 
@@ -318,7 +350,7 @@
     transform: translateX(-50%) rotate(45deg);
     width: 12px;
     height: 12px;
-    background: var(--glass-bg);
+    background: #ffffff;
     border-top: 1px solid var(--glass-border);
     border-left: 1px solid var(--glass-border);
   }
@@ -540,17 +572,28 @@
 
   .fc-col-header-cell {
     font-weight: 700;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--accent-color);
-    padding: 0.45rem 0.25rem;
+    padding: 0.5rem 0.25rem;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    background: rgba(var(--gradient-blue), 0.02);
-    border-bottom: 2px solid rgba(var(--gradient-blue), 0.12) !important;
+    letter-spacing: 0.08em;
+    background: linear-gradient(
+      180deg,
+      rgba(var(--gradient-blue), 0.06) 0%,
+      rgba(var(--gradient-blue), 0.02) 100%
+    );
+    border-bottom: 2px solid rgba(var(--gradient-blue), 0.15) !important;
+    border-top: none !important;
   }
 
   .fc-col-header-cell-cushion {
-    padding: 0.25rem;
+    padding: 0.3rem 0.4rem;
+    text-decoration: none !important;
+    transition: color var(--t-fast);
+
+    &:hover {
+      color: var(--ct-primary, #4f46e5);
+    }
   }
 
   /* Day numbers */

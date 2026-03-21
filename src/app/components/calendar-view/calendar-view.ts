@@ -24,6 +24,9 @@ import {
 } from '@fullcalendar/core';
 import { EventResizeDoneArg } from '@fullcalendar/interaction';
 import { CalendarEvent } from '../../models';
+import { CalendarStateService } from '../../services/calendar-state.service';
+import { LanguageService } from '../../services/language.service';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { getEventColor } from '../../utils';
 
 /** Selected event details for the popover */
@@ -53,7 +56,7 @@ interface EventDetail {
  */
 @Component({
   selector: 'app-calendar-view',
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './calendar-view.html',
   styleUrl: './calendar-view.scss',
 })
@@ -85,7 +88,7 @@ export class CalendarView implements AfterViewInit {
     }
     if (events.length === 0) return '';
     const dates = events
-      .map((e) => new Date(e.start))
+      .map((e) => (e.start instanceof Date ? e.start : new Date(e.start)))
       .filter((d) => !isNaN(d.getTime()))
       .sort((a, b) => a.getTime() - b.getTime());
     if (dates.length === 0) return '';
@@ -100,6 +103,22 @@ export class CalendarView implements AfterViewInit {
     return `${first.toLocaleDateString('en-US', { ...opts, ...yearOpts })} – ${last.toLocaleDateString('en-US', { ...opts, year: 'numeric' })}`;
   });
 
+  // Sorted events by date for navigation
+  protected readonly sortedEvents = computed(() => {
+    try {
+      return [...this.events()].sort(
+        (a, b) =>
+          (a.start instanceof Date ? a.start : new Date(a.start)).getTime() -
+          (b.start instanceof Date ? b.start : new Date(b.start)).getTime(),
+      );
+    } catch {
+      return [];
+    }
+  });
+
+  // Current event index for navigation
+  protected readonly currentEventIndex = signal(0);
+
   // Event detail popover
   protected readonly selectedEvent = signal<EventDetail | null>(null);
 
@@ -113,8 +132,8 @@ export class CalendarView implements AfterViewInit {
       right: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
     buttonText: {
-      prev: '◄',
-      next: '►',
+      prev: '◀',
+      next: '▶',
       today: 'Today',
       month: 'Month',
       week: 'Week',
@@ -126,6 +145,7 @@ export class CalendarView implements AfterViewInit {
     selectMirror: true,
     dayMaxEvents: true,
     weekends: true,
+    eventDisplay: 'block',
     events: [],
     eventDrop: this.handleEventDrop.bind(this),
     eventResize: this.handleEventResize.bind(this),
@@ -150,6 +170,8 @@ export class CalendarView implements AfterViewInit {
 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly elementRef = inject(ElementRef);
+  private readonly calendarStateService = inject(CalendarStateService);
+  private readonly languageService = inject(LanguageService);
 
   constructor() {
     effect(() => {
@@ -165,11 +187,58 @@ export class CalendarView implements AfterViewInit {
         this.updateCalendarEvents(events);
       }
     });
+
+    // React to navigate-to-date requests from the converter
+    effect(() => {
+      const date = this.calendarStateService.navigateToDate();
+      if (date && this.calendarComponentRef) {
+        const calendarApi = this.calendarComponentRef.instance.getApi();
+        calendarApi.gotoDate(date);
+      }
+    });
+
+    // Update FullCalendar locale and button text when language changes
+    effect(() => {
+      const lang = this.languageService.currentLang();
+      const translations = this.languageService.translations();
+      if (Object.keys(translations).length > 0) {
+        this.updateCalendarLocale(lang, translations);
+      }
+    });
   }
 
   async ngAfterViewInit(): Promise<void> {
     if (!this.calendarLoaded && isPlatformBrowser(this.platformId) && this.calendarContainer) {
       await this.loadCalendar();
+    }
+  }
+
+  private async updateCalendarLocale(
+    lang: string,
+    translations: Record<string, string>,
+  ): Promise<void> {
+    // Load FullCalendar locale if not English
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let fcLocale: any = 'en';
+    if (lang === 'fr') {
+      fcLocale = (await import('@fullcalendar/core/locales/fr')).default;
+    }
+
+    this.calendarOptions.update((options) => ({
+      ...options,
+      locale: fcLocale,
+      buttonText: {
+        ...options.buttonText,
+        prev: '◀',
+        next: '▶',
+        today: translations['calendar.today'] ?? 'Today',
+        month: translations['calendar.month'] ?? 'Month',
+        week: translations['calendar.week'] ?? 'Week',
+        day: translations['calendar.day'] ?? 'Day',
+      },
+    }));
+    if (this.calendarComponentRef) {
+      this.calendarComponentRef.instance.options = this.calendarOptions();
     }
   }
 
@@ -407,6 +476,39 @@ export class CalendarView implements AfterViewInit {
     if (isPlatformBrowser(this.platformId) && this.calendarComponentRef) {
       const calendarApi = this.calendarComponentRef.instance.getApi();
       calendarApi.today();
+    }
+  }
+
+  /**
+   * Navigate to the previous event
+   */
+  protected prevEvent(): void {
+    const events = this.sortedEvents();
+    if (events.length === 0) return;
+    const newIndex = (this.currentEventIndex() - 1 + events.length) % events.length;
+    this.currentEventIndex.set(newIndex);
+    this.navigateToEvent(newIndex);
+  }
+
+  /**
+   * Navigate to the next event
+   */
+  protected nextEvent(): void {
+    const events = this.sortedEvents();
+    if (events.length === 0) return;
+    const newIndex = (this.currentEventIndex() + 1) % events.length;
+    this.currentEventIndex.set(newIndex);
+    this.navigateToEvent(newIndex);
+  }
+
+  private navigateToEvent(index: number): void {
+    const events = this.sortedEvents();
+    if (index < 0 || index >= events.length) return;
+    const event = events[index];
+    const date = event.start instanceof Date ? event.start : new Date(event.start);
+    if (!isNaN(date.getTime()) && this.calendarComponentRef) {
+      const calendarApi = this.calendarComponentRef.instance.getApi();
+      calendarApi.gotoDate(date);
     }
   }
 }

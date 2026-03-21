@@ -1,4 +1,13 @@
-import { Component, inject, signal, PLATFORM_ID, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal,
+  PLATFORM_ID,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NgbToastModule, NgbProgressbarModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { fromEvent, Subscription } from 'rxjs';
@@ -13,7 +22,14 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-home',
-  imports: [Converter, CalendarView, NgbToastModule, NgbProgressbarModule, NgbTooltipModule, TranslatePipe],
+  imports: [
+    Converter,
+    CalendarView,
+    NgbToastModule,
+    NgbProgressbarModule,
+    NgbTooltipModule,
+    TranslatePipe,
+  ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -55,7 +71,14 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private updateDesktopStatus(): void {
-    this.isDesktop.set(window.innerWidth >= 1200);
+    const wasDesktop = this.isDesktop();
+    const nowDesktop = window.innerWidth >= 1200;
+    this.isDesktop.set(nowDesktop);
+
+    // Restore calendar when switching back to desktop if events exist
+    if (!wasDesktop && nowDesktop && this.calendarStateService.events().length > 0) {
+      this.calendarStateService.isVisible.set(true);
+    }
   }
 
   /**
