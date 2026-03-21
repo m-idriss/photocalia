@@ -16,7 +16,7 @@ import {
   NgbCollapseModule,
   NgbPopoverModule,
   NgbProgressbarModule,
-  NgbTooltipModule
+  NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { AppTooltipDirective } from '../../shared/directives';
 
@@ -42,7 +42,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
     NgbPopoverModule,
     NgbProgressbarModule,
     NgbTooltipModule,
-    TranslatePipe
+    TranslatePipe,
   ],
   templateUrl: './converter.html',
   styleUrl: './converter.scss',
@@ -144,11 +144,25 @@ export class Converter extends AuthAwareComponent implements OnInit {
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.handleSharedFiles();
+      // Restore persisted conversion results if any
+      this.restorePersistedState();
       // Only fetch quota if authenticated (auth effect will handle it)
       // This prevents duplicate calls when component initializes
       if (this.isAuthenticated) {
         this.fetchQuotaStatus();
       }
+    }
+  }
+
+  /**
+   * Restore conversion results from sessionStorage (via CalendarStateService)
+   */
+  private restorePersistedState(): void {
+    const events = this.calendarStateService.events();
+    const icsContent = this.calendarStateService.icsContent();
+    if (events.length > 0) {
+      this.extractedEvents.set(events);
+      this.icsContent.set(icsContent);
     }
   }
 
@@ -603,6 +617,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
       events.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
 
       this.extractedEvents.set(events);
+      // Persist ICS content for restore on refresh
+      this.calendarStateService.updateIcsContent(this.icsContent());
       this.toastService.showSuccess(
         `Successfully extracted ${events.length} event(s) from your file!`,
       );
@@ -625,7 +641,9 @@ export class Converter extends AuthAwareComponent implements OnInit {
     if (!this.icsContent()) return;
 
     if (!this.extractionConfirmed()) {
-      this.toastService.showError('Please confirm that you reviewed and verified the extracted events before downloading.');
+      this.toastService.showError(
+        'Please confirm that you reviewed and verified the extracted events before downloading.',
+      );
       return;
     }
 
@@ -643,9 +661,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
     this.icsContent.set(null);
     // Reset download confirmation when state is reset
     this.extractionConfirmed.set(false);
-    // Reset calendar state service to prevent effect from restoring old events
-    this.calendarStateService.hideCalendar();
-    this.calendarStateService.updateEvents([]);
+    // Clear all persisted state and calendar
+    this.calendarStateService.clearState();
   }
 
   /**
@@ -767,6 +784,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
     const events = this.extractedEvents();
     if (events.length === 0) {
       this.icsContent.set(null);
+      this.calendarStateService.updateIcsContent(null);
       return;
     }
 
@@ -794,6 +812,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
 
     icsContent += 'END:VCALENDAR\r\n';
     this.icsContent.set(icsContent);
+    this.calendarStateService.updateIcsContent(icsContent);
   }
 
   // ⚡ Convert Date object or string to ICS format (YYYYMMDDTHHMMSSZ)

@@ -8,7 +8,7 @@
 
 /* Header — shared across both modes */
 .calendar-header {
-  padding: var(--space-md) var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
   background: linear-gradient(
     135deg,
     rgba(var(--gradient-blue), 0.08),
@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
-  gap: var(--space-md);
+  gap: var(--space-sm);
 }
 
 .calendar-header-left {
@@ -31,7 +31,7 @@
 }
 
 .calendar-title {
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text-primary);
   margin: 0;
@@ -155,7 +155,7 @@
 
 /* Footer */
 .calendar-footer {
-  padding: var(--space-sm) var(--space-lg);
+  padding: var(--space-xs, 0.25rem) var(--space-md);
   border-top: 1px solid var(--glass-border);
   display: flex;
   gap: var(--space-sm);
@@ -253,18 +253,18 @@
    ======================== */
 .calendar-inline-container {
   height: 100%;
-  background: var(--primary-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
+  background: var(--ct-surface, #ffffff);
+  border: 1px solid var(--ct-border, #e2e8f0);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: border-color var(--t-fast);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  transition: all var(--t-medium);
 
   &:hover {
-    border-color: var(--accent-color);
+    box-shadow: var(--shadow-card-hover);
+    border-color: rgba(79, 70, 229, 0.2);
   }
 }
 
@@ -620,7 +620,7 @@
 
   /* Day grid cells */
   .fc-daygrid-day-frame {
-    min-height: 75px;
+    min-height: 60px;
     transition: background var(--t-fast);
 
     &:hover {
