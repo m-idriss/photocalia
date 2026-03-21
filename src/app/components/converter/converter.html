@@ -199,11 +199,10 @@
 
     <!-- Extracted Events - Apple Calendar Style with Editing -->
     @if (extractedEvents().length > 0) {
-
       <!-- AI extraction verification note -->
       <div class="extraction-note" role="note" aria-live="polite">
-        <strong>Note:</strong> Events are automatically extracted by AI and may contain mistakes (dates, times, locations).
-        Please verify each event before saving or exporting.
+        <strong>Note:</strong> Events are automatically extracted by AI and may contain mistakes
+        (dates, times, locations). Please verify each event before saving or exporting.
       </div>
 
       <!-- Primary Action Button - Prominent Position (Mobile/Tablet only) -->
@@ -223,12 +222,16 @@
         <h3 id="events-heading" class="sr-only">Extracted Calendar Events</h3>
         <div ngbAccordion class="events-accordion">
           @for (event of extractedEvents(); track $index) {
-            <div ngbAccordionItem class="event-accordion-item">
+            <div
+              ngbAccordionItem
+              class="event-accordion-item"
+              [style.border-left-color]="getEventColor(event.summary).bg"
+            >
               <h2 ngbAccordionHeader>
                 <button ngbAccordionButton class="event-accordion-header">
                   <div class="event-accordion-header-content">
                     <div class="event-date" aria-hidden="true">
-                      <div class="date-block">
+                      <div class="date-block" [style.background]="getEventColor(event.summary).bg">
                         <span [innerHTML]="getMonthDay(event.start)"></span>
                       </div>
                     </div>
@@ -445,5 +448,4 @@
       </nav>
     }
   }
-
 </app-card>

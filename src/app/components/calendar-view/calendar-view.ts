@@ -24,20 +24,7 @@ import {
 } from '@fullcalendar/core';
 import { EventResizeDoneArg } from '@fullcalendar/interaction';
 import { CalendarEvent } from '../../models';
-
-/** Harmonious color palette for events */
-const EVENT_COLORS = [
-  { bg: '#3b82f6', border: '#2563eb', text: '#ffffff' }, // Blue
-  { bg: '#8b5cf6', border: '#7c3aed', text: '#ffffff' }, // Violet
-  { bg: '#06b6d4', border: '#0891b2', text: '#ffffff' }, // Cyan
-  { bg: '#f59e0b', border: '#d97706', text: '#ffffff' }, // Amber
-  { bg: '#10b981', border: '#059669', text: '#ffffff' }, // Emerald
-  { bg: '#ec4899', border: '#db2777', text: '#ffffff' }, // Pink
-  { bg: '#f97316', border: '#ea580c', text: '#ffffff' }, // Orange
-  { bg: '#6366f1', border: '#4f46e5', text: '#ffffff' }, // Indigo
-  { bg: '#14b8a6', border: '#0d9488', text: '#ffffff' }, // Teal
-  { bg: '#ef4444', border: '#dc2626', text: '#ffffff' }, // Red
-];
+import { getEventColor } from '../../utils';
 
 /** Selected event details for the popover */
 interface EventDetail {
@@ -186,17 +173,7 @@ export class CalendarView implements AfterViewInit {
     }
   }
 
-  /**
-   * Generate a consistent color for an event based on its title
-   */
-  private getEventColor(title: string): (typeof EVENT_COLORS)[0] {
-    let hash = 0;
-    for (let i = 0; i < title.length; i++) {
-      hash = title.charCodeAt(i) + ((hash << 5) - hash);
-      hash = hash & hash;
-    }
-    return EVENT_COLORS[Math.abs(hash) % EVENT_COLORS.length];
-  }
+  private getEventColor = getEventColor;
 
   /**
    * Lazy load FullCalendar library and create the calendar component

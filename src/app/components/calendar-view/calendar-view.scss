@@ -9,11 +9,6 @@
 /* Header — shared across both modes */
 .calendar-header {
   padding: var(--space-sm) var(--space-md);
-  background: linear-gradient(
-    135deg,
-    rgba(var(--gradient-blue), 0.08),
-    rgba(var(--gradient-indigo), 0.04)
-  );
   border-bottom: 1px solid var(--glass-border);
   display: flex;
   align-items: center;
@@ -31,11 +26,18 @@
 }
 
 .calendar-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--text-primary);
+  position: relative;
+  font-size: var(--font-size-xl);
+  font-weight: var(--fw-bold, 700);
+  letter-spacing: -0.02em;
   margin: 0;
   white-space: nowrap;
+
+  /* Gradient text — matching card title */
+  background: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .calendar-stats {
@@ -51,8 +53,8 @@
   align-items: center;
   gap: 0.25rem;
   padding: 0.2rem 0.6rem;
-  background: rgba(var(--gradient-blue), 0.12);
-  border: 1px solid rgba(var(--gradient-blue), 0.2);
+  background: rgba(var(--gradient-blue), 0.08);
+  border: 1px solid rgba(var(--gradient-blue), 0.15);
   border-radius: var(--radius-full);
   font-weight: 600;
   color: var(--accent-color);
@@ -78,15 +80,15 @@
   font-size: 0.78rem;
 }
 
-/* Close button */
+/* Close button — matches card collapse button style */
 .close-button {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -97,12 +99,8 @@
 
   &:hover {
     background: var(--glass-bg-hover);
-    color: var(--badge-color);
-    border-color: var(--badge-color);
-
-    @media (prefers-reduced-motion: no-preference) {
-      transform: rotate(90deg);
-    }
+    color: var(--text-primary);
+    border-color: var(--accent-color);
   }
 }
 
@@ -112,14 +110,14 @@
 
 /* Instructions bar */
 .calendar-instructions {
-  padding: 0.4rem var(--space-lg);
+  padding: 0.35rem var(--space-md);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--text-secondary);
-  background: var(--glass-bg);
+  background: rgba(var(--gradient-blue), 0.03);
   border-bottom: 1px solid var(--glass-border);
   flex-shrink: 0;
 }
@@ -164,8 +162,8 @@
 
 .action-btn {
   flex: 1;
-  padding: 0.6rem 1rem;
-  font-size: 0.825rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: white;
   border: none;
@@ -181,21 +179,21 @@
     @media (prefers-reduced-motion: no-preference) {
       transform: translateY(-1px);
     }
-    box-shadow: var(--shadow-card);
+    box-shadow: var(--shadow-button);
   }
 }
 
 .btn-icon {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .export-btn {
-  background: linear-gradient(135deg, var(--accent-color), var(--color-indigo-500));
+  background: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
   box-shadow: 0 2px 8px rgba(var(--gradient-blue), 0.25);
 
   &:hover {
-    background: linear-gradient(135deg, var(--color-blue-600), var(--color-indigo-600));
-    box-shadow: 0 4px 16px rgba(var(--gradient-blue), 0.35);
+    background: linear-gradient(135deg, var(--color-indigo-600), var(--ct-secondary, #7c3aed));
+    box-shadow: var(--shadow-glow);
   }
 }
 
@@ -206,7 +204,7 @@
 
   &:hover {
     background: var(--glass-bg-hover);
-    border-color: var(--accent-color);
+    border-color: rgba(79, 70, 229, 0.2);
     transform: none;
   }
 }
@@ -252,6 +250,7 @@
    Inline Mode
    ======================== */
 .calendar-inline-container {
+  position: relative;
   height: 100%;
   background: var(--ct-surface, #ffffff);
   border: 1px solid var(--ct-border, #e2e8f0);
@@ -261,6 +260,19 @@
   display: flex;
   flex-direction: column;
   transition: all var(--t-medium);
+
+  /* Gradient accent line at top — matching card design language */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    z-index: 1;
+  }
 
   &:hover {
     box-shadow: var(--shadow-card-hover);
@@ -433,17 +445,17 @@
 
   /* Toolbar */
   .fc-header-toolbar {
-    padding: 0.6rem 0.75rem;
+    padding: 0.5rem 0.75rem;
     margin: 0 !important;
     gap: 0.5rem;
     background: transparent;
   }
 
   .fc-toolbar-title {
-    font-size: 1.15rem !important;
+    font-size: 1.05rem !important;
     font-weight: 700;
     color: var(--text-primary);
-    letter-spacing: 0.01em;
+    letter-spacing: -0.01em;
   }
 
   /* Toolbar buttons — pill style */
@@ -528,13 +540,13 @@
 
   .fc-col-header-cell {
     font-weight: 700;
-    font-size: 0.78rem;
-    color: var(--text-secondary);
-    padding: 0.5rem 0.25rem;
+    font-size: 0.75rem;
+    color: var(--accent-color);
+    padding: 0.45rem 0.25rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    background: transparent;
-    border-bottom: 2px solid var(--glass-border) !important;
+    letter-spacing: 0.06em;
+    background: rgba(var(--gradient-blue), 0.02);
+    border-bottom: 2px solid rgba(var(--gradient-blue), 0.12) !important;
   }
 
   .fc-col-header-cell-cushion {
