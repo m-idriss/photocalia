@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Photocalia App', () => {
+test.describe('PhotoCalia App', () => {
   test('should load the home page', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/Photocalia/);
+    await expect(page).toHaveTitle(/PhotoCalia/);
   });
 
   test('should display the header', async ({ page }) => {
@@ -38,14 +38,12 @@ test.describe('Photocalia App', () => {
 
   test('should redirect unknown routes to home', async ({ page }) => {
     await page.goto('/nonexistent-page');
-    await expect(page).toHaveTitle(/Photocalia/);
+    await expect(page).toHaveTitle(/PhotoCalia/);
   });
 });
 
 test.describe('Converter', () => {
-  test('should show error for invalid file type via drag and drop simulation', async ({
-    page,
-  }) => {
+  test('should show error for invalid file type via drag and drop simulation', async ({ page }) => {
     await page.goto('/');
     // The file input should exist
     const fileInput = page.locator('input[type="file"]');

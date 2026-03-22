@@ -9,12 +9,12 @@ const pageRoutes: Route[] = [
   {
     path: '',
     loadComponent: () => import('./pages/home/home').then((m) => m.Home),
-    title: 'Photocalia – Convert Photos, Screenshots & Flyers to Calendar Events with AI',
+    title: 'PhotoCalia – Convert Photos, Screenshots & Flyers to Calendar Events with AI',
     data: {
       seo: {
-        title: 'Photocalia – Convert Photos, Screenshots & Flyers to Calendar Events with AI',
+        title: 'PhotoCalia – Convert Photos, Screenshots & Flyers to Calendar Events with AI',
         description:
-          'Turn any photo, screenshot, flyer or PDF into calendar events with AI — no manual typing. Photocalia extracts dates, times & locations automatically and adds them to Google Calendar or exports ICS files. Free, no separate signup.',
+          'Turn any photo, screenshot, flyer or PDF into calendar events with AI — no manual typing. PhotoCalia extracts dates, times & locations automatically and adds them to Google Calendar or exports ICS files. Free, no separate signup.',
         keywords:
           'photo to calendar events, image to calendar converter, picture to calendar app, convert screenshot to Google Calendar, AI calendar from photo, scan flyer to calendar, upload timetable photo, extract events from image, OCR calendar events, PDF to calendar, ICS generator, free calendar tool',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
@@ -27,12 +27,12 @@ const pageRoutes: Route[] = [
   {
     path: 'how-it-works',
     loadComponent: () => import('./pages/how-it-works/how-it-works').then((m) => m.HowItWorks),
-    title: 'How It Works - AI Calendar Converter | Photocalia',
+    title: 'How It Works - AI Calendar Converter | PhotoCalia',
     data: {
       seo: {
-        title: 'How It Works - Convert Photos & Images to Calendar Events | Photocalia',
+        title: 'How It Works - Convert Photos & Images to Calendar Events | PhotoCalia',
         description:
-          'Learn how Photocalia converts photos, screenshots, and PDFs into calendar events using AI. Upload any image of an appointment, event flyer, or schedule — GPT-4 Vision extracts the dates, times, and locations automatically.',
+          'Learn how PhotoCalia converts photos, screenshots, and PDFs into calendar events using AI. Upload any image of an appointment, event flyer, or schedule — GPT-4 Vision extracts the dates, times, and locations automatically.',
         keywords:
           'photo to calendar, image to calendar, add events from picture, AI calendar assistant, ICS import, screenshot to calendar, how to convert image to calendar, calendar event extraction, picture to calendar event',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
@@ -58,10 +58,10 @@ const pageRoutes: Route[] = [
             mainEntity: [
               {
                 '@type': 'Question',
-                name: 'What image formats are supported by Photocalia?',
+                name: 'What image formats are supported by PhotoCalia?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'Photocalia supports JPG, JPEG, PNG, HEIC image formats and PDF documents. You can upload appointment reminders, concert tickets, school schedules, event flyers, and any document containing calendar information.',
+                  text: 'PhotoCalia supports JPG, JPEG, PNG, HEIC image formats and PDF documents. You can upload appointment reminders, concert tickets, school schedules, event flyers, and any document containing calendar information.',
                 },
               },
               {
@@ -69,7 +69,7 @@ const pageRoutes: Route[] = [
                 name: 'How accurate is the AI at reading calendar information from images?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'Photocalia uses GPT-4 Vision, one of the most accurate AI models for image understanding. It reliably extracts dates, times, locations, and event titles from clear images. You can always review and edit any extracted detail before saving to your calendar.',
+                  text: 'PhotoCalia uses GPT-4 Vision, one of the most accurate AI models for image understanding. It reliably extracts dates, times, locations, and event titles from clear images. You can always review and edit any extracted detail before saving to your calendar.',
                 },
               },
               {
@@ -85,7 +85,7 @@ const pageRoutes: Route[] = [
                 name: 'Is my image data kept private?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'Yes. Your files are processed securely and are not stored permanently on Photocalia servers. The AI conversion happens in real-time, and your images are handled according to strict privacy protocols.',
+                  text: 'Yes. Your files are processed securely and are not stored permanently on PhotoCalia servers. The AI conversion happens in real-time, and your images are handled according to strict privacy protocols.',
                 },
               },
               {
@@ -101,7 +101,7 @@ const pageRoutes: Route[] = [
                 name: 'What is an ICS file and how do I use it?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'An ICS (iCalendar) file is the universal calendar format supported by Google Calendar, Microsoft Outlook, Apple Calendar, Yahoo Calendar, and virtually every calendar application. After downloading your ICS file from Photocalia, simply open it or import it into your preferred calendar app to add all events at once.',
+                  text: 'An ICS (iCalendar) file is the universal calendar format supported by Google Calendar, Microsoft Outlook, Apple Calendar, Yahoo Calendar, and virtually every calendar application. After downloading your ICS file from PhotoCalia, simply open it or import it into your preferred calendar app to add all events at once.',
                 },
               },
             ],
@@ -113,12 +113,12 @@ const pageRoutes: Route[] = [
   {
     path: 'privacy',
     loadComponent: () => import('./pages/privacy/privacy').then((m) => m.Privacy),
-    title: 'Privacy Policy - GDPR & Data Protection | Photocalia',
+    title: 'Privacy Policy - GDPR & Data Protection | PhotoCalia',
     data: {
       seo: {
-        title: 'Privacy Policy - How We Protect Your Data | Photocalia',
+        title: 'Privacy Policy - How We Protect Your Data | PhotoCalia',
         description:
-          'Learn how Photocalia protects your privacy and personal data. GDPR-compliant privacy policy covering data collection, AI processing, third-party services, and your rights.',
+          'Learn how PhotoCalia protects your privacy and personal data. GDPR-compliant privacy policy covering data collection, AI processing, third-party services, and your rights.',
         keywords: 'privacy policy, data protection, GDPR, personal data, privacy rights',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/privacy',
@@ -144,12 +144,12 @@ const pageRoutes: Route[] = [
   {
     path: 'terms',
     loadComponent: () => import('./pages/terms/terms').then((m) => m.Terms),
-    title: 'Terms of Use - Service Agreement | Photocalia',
+    title: 'Terms of Use - Service Agreement | PhotoCalia',
     data: {
       seo: {
-        title: 'Terms of Use - Service Terms & Conditions | Photocalia',
+        title: 'Terms of Use - Service Terms & Conditions | PhotoCalia',
         description:
-          'Terms of Use for Photocalia AI calendar converter. Learn about usage limits, AI accuracy, liability, and service terms.',
+          'Terms of Use for PhotoCalia AI calendar converter. Learn about usage limits, AI accuracy, liability, and service terms.',
         keywords: 'terms of use, terms of service, service agreement, user agreement',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/terms',
@@ -176,12 +176,12 @@ const pageRoutes: Route[] = [
     path: 'legal-mentions',
     loadComponent: () =>
       import('./pages/legal-mentions/legal-mentions').then((m) => m.LegalMentions),
-    title: 'Legal Mentions - Company & Legal Information | Photocalia',
+    title: 'Legal Mentions - Company & Legal Information | PhotoCalia',
     data: {
       seo: {
-        title: 'Legal Mentions - Company Information & Legal Requirements | Photocalia',
+        title: 'Legal Mentions - Company Information & Legal Requirements | PhotoCalia',
         description:
-          'Legal mentions for Photocalia including company information, hosting provider, intellectual property, and GDPR compliance.',
+          'Legal mentions for PhotoCalia including company information, hosting provider, intellectual property, and GDPR compliance.',
         keywords: 'legal mentions, company information, legal notice, hosting provider',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/legal-mentions',
@@ -207,10 +207,10 @@ const pageRoutes: Route[] = [
   {
     path: 'blog',
     loadComponent: () => import('./pages/blog/blog').then((m) => m.Blog),
-    title: 'Blog - Guides & Tips for Photo to Calendar Conversion | Photocalia',
+    title: 'Blog - Guides & Tips for Photo to Calendar Conversion | PhotoCalia',
     data: {
       seo: {
-        title: 'Blog - Guides & Tips for Photo to Calendar Conversion | Photocalia',
+        title: 'Blog - Guides & Tips for Photo to Calendar Conversion | PhotoCalia',
         description:
           'Guides, tutorials, and tips on converting photos to calendar events with AI. Learn about OCR technology, digitizing schedules, and productivity hacks.',
         keywords:
@@ -239,10 +239,10 @@ const pageRoutes: Route[] = [
   {
     path: 'blog/photo-to-google-calendar',
     loadComponent: () => import('./pages/blog/article/article').then((m) => m.Article),
-    title: 'How to Convert a Photo to Google Calendar Events in 30 Seconds | Photocalia',
+    title: 'How to Convert a Photo to Google Calendar Events in 30 Seconds | PhotoCalia',
     data: {
       seo: {
-        title: 'How to Convert a Photo to Google Calendar Events in 30 Seconds | Photocalia',
+        title: 'How to Convert a Photo to Google Calendar Events in 30 Seconds | PhotoCalia',
         description:
           'Learn how to turn any photo, screenshot, or flyer into Google Calendar events using AI. Step-by-step guide with tips for best results.',
         keywords:
@@ -279,7 +279,7 @@ const pageRoutes: Route[] = [
             dateModified: '2026-03-18',
             publisher: {
               '@type': 'Organization',
-              name: 'Photocalia',
+              name: 'PhotoCalia',
               url: 'https://photocalia.com',
             },
             image: 'https://photocalia.com/assets/images/converter.png',
@@ -292,10 +292,10 @@ const pageRoutes: Route[] = [
   {
     path: 'blog/digitize-paper-schedules',
     loadComponent: () => import('./pages/blog/article/article').then((m) => m.Article),
-    title: 'Best Ways to Digitize Paper Schedules and Appointment Cards | Photocalia',
+    title: 'Best Ways to Digitize Paper Schedules and Appointment Cards | PhotoCalia',
     data: {
       seo: {
-        title: 'Best Ways to Digitize Paper Schedules and Appointment Cards | Photocalia',
+        title: 'Best Ways to Digitize Paper Schedules and Appointment Cards | PhotoCalia',
         description:
           'Stop losing paper appointment cards and schedules. Discover how AI-powered tools can digitize them into calendar events automatically.',
         keywords:
@@ -332,7 +332,7 @@ const pageRoutes: Route[] = [
             dateModified: '2026-03-18',
             publisher: {
               '@type': 'Organization',
-              name: 'Photocalia',
+              name: 'PhotoCalia',
               url: 'https://photocalia.com',
             },
             image: 'https://photocalia.com/assets/images/converter.png',
@@ -345,10 +345,10 @@ const pageRoutes: Route[] = [
   {
     path: 'blog/ai-ocr-calendar-extraction',
     loadComponent: () => import('./pages/blog/article/article').then((m) => m.Article),
-    title: 'How AI OCR Transforms Event Flyers into Calendar Entries | Photocalia',
+    title: 'How AI OCR Transforms Event Flyers into Calendar Entries | PhotoCalia',
     data: {
       seo: {
-        title: 'How AI OCR Transforms Event Flyers into Calendar Entries | Photocalia',
+        title: 'How AI OCR Transforms Event Flyers into Calendar Entries | PhotoCalia',
         description:
           'Understand how AI and OCR technology work together to extract event details from images and create structured calendar data.',
         keywords:
@@ -385,7 +385,7 @@ const pageRoutes: Route[] = [
             dateModified: '2026-03-18',
             publisher: {
               '@type': 'Organization',
-              name: 'Photocalia',
+              name: 'PhotoCalia',
               url: 'https://photocalia.com',
             },
             image: 'https://photocalia.com/assets/images/converter.png',
@@ -398,12 +398,12 @@ const pageRoutes: Route[] = [
   {
     path: 'about',
     loadComponent: () => import('./pages/about/about').then((m) => m.About),
-    title: 'About Photocalia - AI Calendar Converter by Idriss',
+    title: 'About PhotoCalia - AI Calendar Converter by Idriss',
     data: {
       seo: {
-        title: 'About Photocalia - AI Calendar Converter Built by Idriss | Photocalia',
+        title: 'About PhotoCalia - AI Calendar Converter Built by Idriss | PhotoCalia',
         description:
-          'Learn about Photocalia, the AI-powered photo to calendar converter. Built by Idriss using Angular, Firebase, and GPT-4 Vision. Open source, privacy-focused, and free to use.',
+          'Learn about PhotoCalia, the AI-powered photo to calendar converter. Built by Idriss using Angular, Firebase, and GPT-4 Vision. Open source, privacy-focused, and free to use.',
         keywords:
           'about photocalia, AI calendar converter, photo to calendar app, Idriss, 3dime, open source calendar tool',
         ogImage: 'https://photocalia.com/assets/images/converter.png',

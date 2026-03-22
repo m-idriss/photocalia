@@ -26,8 +26,9 @@
   gap: 0.5rem;
   text-decoration: none;
   color: var(--text-primary, #e0e0e0);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
+  letter-spacing: -0.025em;
   transition: all 0.3s ease;
 
   &:hover {

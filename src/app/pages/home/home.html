@@ -34,9 +34,11 @@
       <h1 class="hero-title" itemprop="name">
         {{ 'home.hero.title' | translate }}
       </h1>
-      <p class="hero-description" itemprop="description">
-        {{ 'home.hero.description' | translate }}
-      </p>
+      <p
+        class="hero-description"
+        itemprop="description"
+        [innerHTML]="'home.hero.description' | translate"
+      ></p>
       @if (!authService.isAuthenticated()) {
         <p class="hero-subtitle">
           {{ 'home.hero.subtitle' | translate }}
@@ -146,7 +148,11 @@
     >
       <!-- How It Works Section -->
       <section class="how-it-works-section" aria-labelledby="how-it-works-title">
-        <h2 id="how-it-works-title" class="section-title">{{ 'home.steps.title' | translate }}</h2>
+        <h2
+          id="how-it-works-title"
+          class="section-title"
+          [innerHTML]="'home.steps.title' | translate"
+        ></h2>
         <div class="steps-container">
           <div class="step-item">
             <div class="step-badge">1</div>
@@ -178,7 +184,7 @@
       <!-- What Can You Convert Section -->
       <section class="convert-section" aria-labelledby="convert-title">
         <h2 id="convert-title" class="section-title">{{ 'home.convert.title' | translate }}</h2>
-        <p class="section-description">{{ 'home.convert.description' | translate }}</p>
+        <p class="section-description" [innerHTML]="'home.convert.description' | translate"></p>
         <div class="convert-grid">
           <div class="convert-item">
             <span class="convert-icon" aria-hidden="true">🎒</span>
@@ -209,8 +215,12 @@
 
       <!-- Who Is It For Section -->
       <section class="audience-section" aria-labelledby="audience-title">
-        <h2 id="audience-title" class="section-title">{{ 'home.audience.title' | translate }}</h2>
-        <p class="section-description">{{ 'home.audience.description' | translate }}</p>
+        <h2
+          id="audience-title"
+          class="section-title"
+          [innerHTML]="'home.audience.title' | translate"
+        ></h2>
+        <p class="section-description" [innerHTML]="'home.audience.description' | translate"></p>
         <div class="audience-grid">
           <div class="audience-item">
             <span class="audience-icon" aria-hidden="true">👨‍👩‍👧</span>
@@ -239,7 +249,11 @@
 
       <!-- Why PhotoCalia Section -->
       <section class="why-photocalia-section" aria-labelledby="why-photocalia-title">
-        <h2 id="why-photocalia-title" class="section-title">{{ 'home.why.title' | translate }}</h2>
+        <h2
+          id="why-photocalia-title"
+          class="section-title"
+          [innerHTML]="'home.why.title' | translate"
+        ></h2>
         <div class="benefits-container">
           <div class="benefit-item">
             <div class="benefit-check">✓</div>
@@ -289,8 +303,11 @@
         <div class="faq-list">
           @for (i of [1, 2, 3, 4, 5]; track i) {
             <details class="faq-item">
-              <summary class="faq-question">{{ 'home.faq.q' + i + '.q' | translate }}</summary>
-              <p class="faq-answer">{{ 'home.faq.q' + i + '.a' | translate }}</p>
+              <summary
+                class="faq-question"
+                [innerHTML]="'home.faq.q' + i + '.q' | translate"
+              ></summary>
+              <p class="faq-answer" [innerHTML]="'home.faq.q' + i + '.a' | translate"></p>
             </details>
           }
         </div>

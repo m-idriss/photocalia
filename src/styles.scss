@@ -1,6 +1,12 @@
 /* Importing Bootstrap SCSS file. */
 @use 'bootstrap/scss/bootstrap';
 
+/* Brand name highlight */
+.brand {
+  font-weight: 700;
+  color: var(--ct-primary, #4f46e5);
+}
+
 /* ==============================================
    3DIME - MODERN BASE STYLES (Refined & Optimized)
    ============================================== */

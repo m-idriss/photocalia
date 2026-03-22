@@ -338,6 +338,34 @@
   }
 }
 
+/* Inline footer branding */
+.calendar-inline-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: var(--space-xs) var(--space-md);
+  opacity: 0.45;
+  transition: opacity var(--t-fast);
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.inline-footer-logo {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.inline-footer-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  letter-spacing: -0.025em;
+}
+
 /* ========================
    Popover Backdrop (mobile only)
    ======================== */

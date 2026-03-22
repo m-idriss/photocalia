@@ -29,7 +29,7 @@ export class App implements OnInit {
   private readonly seoService = inject(SeoService);
   private readonly languageService = inject(LanguageService);
 
-  protected readonly title = signal('Photocalia');
+  protected readonly title = signal('PhotoCalia');
   protected readonly currentRoute = signal<string>('');
   private deferredPrompt: BeforeInstallPromptEvent | null = null;
 

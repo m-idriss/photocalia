@@ -3,22 +3,52 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Photocalia — Converter Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css" integrity="sha512-4Oj3k3e7Kf2Zp3t5C9W0E6v1k4JcQ0ZQ+q0q9E3QnQ0X1e1IUq9r1Xg6Z2k1n9Q0c1A5Yw6Vw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>PhotoCalia — Converter Documentation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css"
+      integrity="sha512-4Oj3k3e7Kf2Zp3t5C9W0E6v1k4JcQ0ZQ+q0q9E3QnQ0X1e1IUq9r1Xg6Z2k1n9Q0c1A5Yw6Vw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
-      body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; padding: 1.5rem; background: var(--bg, #fff); }
-      .container { max-width: 900px; margin: 0 auto; }
-      .markdown-body { box-shadow: 0 2px 8px rgba(0,0,0,0.04); padding: 1.5rem; border-radius: 6px; background: #fff; }
-      .topbar { margin-bottom: 1rem; display:flex; justify-content:space-between; align-items:center; gap:1rem }
-      .topbar a { color: #0366d6; text-decoration: none; font-weight: 600 }
-      .loading { color: #666; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+        padding: 1.5rem;
+        background: var(--bg, #fff);
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .markdown-body {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        padding: 1.5rem;
+        border-radius: 6px;
+        background: #fff;
+      }
+      .topbar {
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+      .topbar a {
+        color: #0366d6;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .loading {
+        color: #666;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="topbar">
         <div>
-          <a href="/">← Back to Photocalia</a>
+          <a href="/">← Back to PhotoCalia</a>
         </div>
         <div>
           <a href="/docs/CONVERTER.md" target="_blank" rel="noopener">View raw markdown</a>
@@ -43,11 +73,11 @@
           const clean = DOMPurify.sanitize(rawHtml);
           document.getElementById('content').innerHTML = clean;
         } catch (err) {
-          document.getElementById('content').innerHTML = '<p>Unable to load documentation.</p>' + '<pre>' + (err && err.message) + '</pre>';
+          document.getElementById('content').innerHTML =
+            '<p>Unable to load documentation.</p>' + '<pre>' + (err && err.message) + '</pre>';
           console.error(err);
         }
       })();
     </script>
   </body>
 </html>
-
