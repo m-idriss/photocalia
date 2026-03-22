@@ -92,29 +92,8 @@ export class CalendarView implements AfterViewInit {
       return 0;
     }
   });
-  protected readonly dateRange = computed(() => {
-    let events: CalendarEvent[];
-    try {
-      events = this.events();
-    } catch {
-      return '';
-    }
-    if (events.length === 0) return '';
-    const dates = events
-      .map((e) => (e.start instanceof Date ? e.start : new Date(e.start)))
-      .filter((d) => !isNaN(d.getTime()))
-      .sort((a, b) => a.getTime() - b.getTime());
-    if (dates.length === 0) return '';
-    const first = dates[0];
-    const last = dates[dates.length - 1];
-    const opts: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric' };
-    if (first.toDateString() === last.toDateString()) {
-      return first.toLocaleDateString('en-US', { ...opts, year: 'numeric' });
-    }
-    const yearOpts: Intl.DateTimeFormatOptions =
-      first.getFullYear() !== last.getFullYear() ? { year: 'numeric' } : {};
-    return `${first.toLocaleDateString('en-US', { ...opts, ...yearOpts })} – ${last.toLocaleDateString('en-US', { ...opts, year: 'numeric' })}`;
-  });
+  // Current view date — updated when navigating the calendar
+  protected readonly currentViewDate = signal('');
 
   // Sorted events by date for navigation
   protected readonly sortedEvents = computed(() => {
@@ -164,6 +143,12 @@ export class CalendarView implements AfterViewInit {
     eventResize: this.handleEventResize.bind(this),
     eventClick: this.handleEventClick.bind(this),
     eventDidMount: this.handleEventDidMount.bind(this),
+    datesSet: (info) => {
+      const viewDate = info.view.currentStart;
+      this.currentViewDate.set(
+        viewDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      );
+    },
     height: '100%',
     contentHeight: 'auto',
     expandRows: true,

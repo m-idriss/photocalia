@@ -9,7 +9,6 @@
 /* Header — shared across both modes */
 .calendar-header {
   padding: var(--space-sm) var(--space-md);
-  border-bottom: 1px solid var(--glass-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,12 +16,16 @@
   gap: var(--space-sm);
 }
 
-.calendar-header-left {
+.header-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.calendar-header-right {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
-  flex-wrap: wrap;
-  min-width: 0;
+  gap: var(--space-sm);
 }
 
 .calendar-title {
@@ -180,6 +183,7 @@
   min-height: 0;
   overflow: auto;
   position: relative;
+  padding: 0 var(--space-sm);
 }
 
 /* Calendar container */
@@ -189,8 +193,7 @@
 
 /* Footer */
 .calendar-footer {
-  padding: var(--space-xs, 0.25rem) var(--space-md);
-  border-top: 1px solid var(--glass-border);
+  padding: var(--space-sm) var(--space-md);
   display: flex;
   gap: var(--space-sm);
   flex-shrink: 0;
@@ -198,8 +201,8 @@
 
 .action-btn {
   flex: 1;
-  padding: 0.55rem 1rem;
-  font-size: 0.8rem;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: white;
   border: none;
