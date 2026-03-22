@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, output } from '@angular/core';
 import { AppTooltipDirective } from '../../shared/directives';
 
 /**
@@ -26,6 +26,11 @@ export class Card {
   @Input() title?: string;
 
   /**
+   * Optional badge count to display next to the title
+   */
+  @Input() badge?: number;
+
+  /**
    * Whether to show a collapse button in the header
    */
   @Input() showCollapseButton = false;
@@ -33,7 +38,7 @@ export class Card {
   /**
    * Event emitted when collapse button is clicked
    */
-  @Output() collapseClicked = new EventEmitter<void>();
+  readonly collapseClicked = output<void>();
 
   /**
    * Handle collapse button click
