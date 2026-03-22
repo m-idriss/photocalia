@@ -183,6 +183,7 @@ export class CalendarView implements AfterViewInit {
       }
       if (events) {
         this.updateCalendarEvents(events);
+        this.navigateToFirstEvent();
       }
     });
 
@@ -265,6 +266,7 @@ export class CalendarView implements AfterViewInit {
         this.calendarComponentRef.instance.options = this.calendarOptions();
         this.calendarLoaded = true;
         this.updateCalendarEvents();
+        this.navigateToFirstEvent();
       }
     } catch (error) {
       console.error('Error loading FullCalendar:', error);
@@ -302,6 +304,30 @@ export class CalendarView implements AfterViewInit {
     if (this.calendarComponentRef) {
       this.calendarComponentRef.instance.options = this.calendarOptions();
     }
+  }
+
+  /**
+   * Navigate calendar to the first event's date
+   */
+  private navigateToFirstEvent(): void {
+    if (!this.calendarComponentRef) return;
+    // Delay to ensure FullCalendar API is ready after render
+    setTimeout(() => {
+      try {
+        const events = this.events();
+        if (events.length === 0) return;
+        const dates = events
+          .map((e) => (e.start instanceof Date ? e.start : new Date(e.start)))
+          .filter((d) => !isNaN(d.getTime()))
+          .sort((a, b) => a.getTime() - b.getTime());
+        if (dates.length > 0 && this.calendarComponentRef) {
+          const calendarApi = this.calendarComponentRef.instance.getApi();
+          calendarApi.gotoDate(dates[0]);
+        }
+      } catch {
+        // Ignore navigation errors
+      }
+    }, 100);
   }
 
   /**

@@ -516,13 +516,14 @@
   width: 100%;
   max-width: 600px;
   min-height: 500px;
+  padding-bottom: 0.5rem;
 
   @media (min-width: 1200px) {
     // Sticky positioning on desktop so calendar stays visible while scrolling
     position: sticky;
     top: 2rem;
     max-height: calc(100vh - 6rem);
-    overflow: auto;
+    overflow: visible;
   }
 }
 

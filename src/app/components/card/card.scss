@@ -20,17 +20,7 @@
   background: var(--ct-surface, #ffffff);
   border: 1px solid var(--ct-border, #e2e8f0);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
-
-  /* Misc */
-  transition: all var(--t-medium);
-
-  /* Hover state */
-  &:hover {
-    box-shadow: var(--shadow-card-hover);
-    border-color: rgba(79, 70, 229, 0.2);
-    transform: translateY(-2px);
-  }
+  box-shadow: var(--shadow-card-hover);
 }
 
 /* Card header with title and optional collapse button */

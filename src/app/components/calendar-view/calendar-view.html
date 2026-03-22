@@ -147,26 +147,6 @@
           <ng-container #calendarContainer></ng-container>
         </div>
       </div>
-
-      <!-- Footer Actions -->
-      <div class="calendar-footer">
-        @if (showExportConfirm() && !calendarStateService.extractionConfirmed()) {
-          <div class="export-confirm-banner" @slideDown>
-            <span class="confirm-warning">⚠️ AI-extracted events may contain errors</span>
-            <label class="export-confirm-label">
-              <input type="checkbox" (change)="confirmExtraction($any($event.target).checked)" />
-              I have verified the events — export now
-            </label>
-          </div>
-        }
-        <button
-          class="action-btn export-btn"
-          (click)="handleExport()"
-          [attr.aria-label]="'calendar.export' | translate"
-        >
-          {{ 'calendar.export' | translate }}
-        </button>
-      </div>
     </div>
   }
 
