@@ -450,25 +450,18 @@
 
       <!-- Action Buttons -->
       <nav class="actions" aria-label="Calendar actions">
-        <div class="download-confirmation">
-          <label class="checkbox-label">
-            <input
-              type="checkbox"
-              [checked]="extractionConfirmed()"
-              (change)="
-                extractionConfirmed.set($any($event.target).checked);
-                calendarStateService.extractionConfirmed.set($any($event.target).checked)
-              "
-              aria-label="I have reviewed and verified the extracted events"
-            />
-            I have reviewed and verified the extracted events
-          </label>
-        </div>
+        @if (showDownloadConfirm() && !extractionConfirmed()) {
+          <div class="download-confirm-banner">
+            <span class="confirm-warning">⚠️ AI-extracted events may contain errors</span>
+            <label class="confirm-label">
+              <input type="checkbox" (change)="confirmAndDownload($any($event.target).checked)" />
+              I have verified the events — download now
+            </label>
+          </div>
+        }
         <button
           class="action-button download btn btn-success"
           (click)="downloadIcs()"
-          [attr.aria-disabled]="!extractionConfirmed()"
-          [disabled]="!extractionConfirmed()"
           aria-label="Download calendar file"
           appTooltip="Download your calendar as .ics file"
           appTooltipPlacement="top"

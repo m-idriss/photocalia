@@ -89,12 +89,19 @@
 
         <!-- Footer Actions -->
         <div class="calendar-footer">
+          @if (showExportConfirm() && !calendarStateService.extractionConfirmed()) {
+            <div class="export-confirm-banner" @slideDown>
+              <span class="confirm-warning">⚠️ AI-extracted events may contain errors</span>
+              <label class="export-confirm-label">
+                <input type="checkbox" (change)="confirmExtraction($any($event.target).checked)" />
+                I have verified the events — export now
+              </label>
+            </div>
+          }
           <button
             class="action-btn export-btn"
             (click)="handleExport()"
             [attr.aria-label]="'calendar.export' | translate"
-            [disabled]="!calendarStateService.extractionConfirmed()"
-            [attr.aria-disabled]="!calendarStateService.extractionConfirmed()"
           >
             <span class="btn-icon">📥</span> {{ 'calendar.export' | translate }}
           </button>
@@ -178,12 +185,19 @@
 
       <!-- Footer Actions -->
       <div class="calendar-footer">
+        @if (showExportConfirm() && !calendarStateService.extractionConfirmed()) {
+          <div class="export-confirm-banner" @slideDown>
+            <span class="confirm-warning">⚠️ AI-extracted events may contain errors</span>
+            <label class="export-confirm-label">
+              <input type="checkbox" (change)="confirmExtraction($any($event.target).checked)" />
+              I have verified the events — export now
+            </label>
+          </div>
+        }
         <button
           class="action-btn export-btn"
           (click)="handleExport()"
           [attr.aria-label]="'calendar.export' | translate"
-          [disabled]="!calendarStateService.extractionConfirmed()"
-          [attr.aria-disabled]="!calendarStateService.extractionConfirmed()"
         >
           <span class="btn-icon">📥</span> {{ 'calendar.export' | translate }}
         </button>

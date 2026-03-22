@@ -227,17 +227,43 @@
   background: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
   box-shadow: 0 2px 8px rgba(var(--gradient-blue), 0.25);
 
-  &:hover:not(:disabled) {
+  &:hover {
     background: linear-gradient(135deg, var(--color-indigo-600), var(--ct-secondary, #7c3aed));
     box-shadow: var(--shadow-glow);
   }
+}
 
-  &:disabled {
-    background: var(--glass-bg) !important;
-    color: var(--text-secondary) !important;
-    opacity: 0.6;
-    box-shadow: none !important;
-    cursor: not-allowed;
+.export-confirm-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  background: rgba(255, 193, 7, 0.08);
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  border-radius: var(--radius-md);
+  width: 100%;
+}
+
+.confirm-warning {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.export-confirm-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    cursor: pointer;
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--ct-primary, #4f46e5);
   }
 }
 

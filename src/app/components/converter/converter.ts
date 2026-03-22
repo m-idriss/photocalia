@@ -63,6 +63,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
   public readonly planType = signal<string | null>(null);
   // Require user confirmation before allowing download
   public readonly extractionConfirmed = signal<boolean>(false);
+  protected readonly showDownloadConfirm = signal(false);
 
   constructor() {
     super();
@@ -637,17 +638,25 @@ export class Converter extends AuthAwareComponent implements OnInit {
   }
 
   protected downloadIcs(): void {
-    // Prevent download unless the user confirmed the extracted events
     if (!this.icsContent()) return;
 
     if (!this.extractionConfirmed()) {
-      this.toastService.showError(
-        'Please confirm that you reviewed and verified the extracted events before downloading.',
-      );
+      this.showDownloadConfirm.set(true);
       return;
     }
 
     this.converterService.downloadIcsFile(this.icsContent()!);
+  }
+
+  protected confirmAndDownload(checked: boolean): void {
+    this.extractionConfirmed.set(checked);
+    this.calendarStateService.extractionConfirmed.set(checked);
+    if (checked) {
+      this.showDownloadConfirm.set(false);
+      if (this.icsContent()) {
+        this.converterService.downloadIcsFile(this.icsContent()!);
+      }
+    }
   }
 
   protected resetState(): void {
@@ -661,6 +670,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
     this.icsContent.set(null);
     // Reset download confirmation when state is reset
     this.extractionConfirmed.set(false);
+    this.showDownloadConfirm.set(false);
     // Clear all persisted state and calendar
     this.calendarStateService.clearState();
   }
