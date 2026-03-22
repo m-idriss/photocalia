@@ -455,7 +455,10 @@
             <input
               type="checkbox"
               [checked]="extractionConfirmed()"
-              (change)="extractionConfirmed.set($any($event.target).checked)"
+              (change)="
+                extractionConfirmed.set($any($event.target).checked);
+                calendarStateService.extractionConfirmed.set($any($event.target).checked)
+              "
               aria-label="I have reviewed and verified the extracted events"
             />
             I have reviewed and verified the extracted events

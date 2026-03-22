@@ -227,9 +227,17 @@
   background: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
   box-shadow: 0 2px 8px rgba(var(--gradient-blue), 0.25);
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: linear-gradient(135deg, var(--color-indigo-600), var(--ct-secondary, #7c3aed));
     box-shadow: var(--shadow-glow);
+  }
+
+  &:disabled {
+    background: var(--glass-bg) !important;
+    color: var(--text-secondary) !important;
+    opacity: 0.6;
+    box-shadow: none !important;
+    cursor: not-allowed;
   }
 }
 
@@ -294,19 +302,6 @@
   display: flex;
   flex-direction: column;
   transition: all var(--t-medium);
-
-  /* Gradient accent line at top — matching card design language */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    z-index: 1;
-  }
 
   &:hover {
     box-shadow: var(--shadow-card-hover);

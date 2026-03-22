@@ -313,23 +313,12 @@
   /* Box Model */
   margin: var(--space-md) 0;
   padding: var(--space-sm);
-  padding-top: calc(var(--space-sm) + 3px);
+  padding-top: var(--space-sm);
 
   /* Visual */
   background: rgba(var(--gradient-blue), 0.03);
   border: 1px solid rgba(var(--gradient-blue), 0.12);
   border-radius: var(--radius-md);
-
-  /* Top accent bar */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
-  }
 
   .action-button {
     margin-top: 0;
@@ -1020,11 +1009,10 @@
    ======================== */
 .extraction-note {
   position: relative;
-  background: rgba(var(--gradient-blue), 0.04);
-  border: 1px solid rgba(var(--gradient-blue), 0.12);
-  border-left: 3px solid var(--ct-primary, #4f46e5);
+  background: rgba(255, 193, 7, 0.08);
+  border: 1px solid rgba(255, 193, 7, 0.2);
   padding: 0.5rem 0.75rem;
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  border-radius: var(--radius-md);
   margin: 0.75rem 0;
   font-size: 0.8rem;
   color: var(--text-secondary);

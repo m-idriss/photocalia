@@ -31,6 +31,9 @@ export class CalendarStateService {
   // ICS content
   readonly icsContent = signal<string | null>(null);
 
+  // Whether user has confirmed extraction accuracy
+  readonly extractionConfirmed = signal(false);
+
   // Export request counter — consumers use effect() to react to changes
   readonly exportRequestCount = signal(0);
 
@@ -95,6 +98,7 @@ export class CalendarStateService {
     this.events.set([]);
     this.icsContent.set(null);
     this.isVisible.set(false);
+    this.extractionConfirmed.set(false);
     if (isPlatformBrowser(this.platformId)) {
       try {
         sessionStorage.removeItem(STORAGE_KEY);

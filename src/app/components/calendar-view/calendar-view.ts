@@ -170,7 +170,7 @@ export class CalendarView implements AfterViewInit {
 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly elementRef = inject(ElementRef);
-  private readonly calendarStateService = inject(CalendarStateService);
+  protected readonly calendarStateService = inject(CalendarStateService);
   private readonly languageService = inject(LanguageService);
 
   constructor() {

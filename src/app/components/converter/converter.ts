@@ -135,7 +135,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
 
   private readonly converterService = inject(ConverterService);
   private readonly toastService = inject(ToastService);
-  private readonly calendarStateService = inject(CalendarStateService);
+  protected readonly calendarStateService = inject(CalendarStateService);
   private readonly platformId = inject(PLATFORM_ID);
 
   private readonly acceptedTypes = FILE_UPLOAD_CONSTRAINTS.ACCEPTED_TYPES;
