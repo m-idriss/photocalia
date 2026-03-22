@@ -90,13 +90,15 @@ export class Converter extends AuthAwareComponent implements OnInit {
         }
 
         if (!isAuth) {
-          // User signed out -> clear quota display immediately
+          // User signed out -> clear quota display and conversion state
           this.quotaRemaining.set(null);
           this.quotaLimit.set(null);
           this.quotaEnabled.set(false);
           this.planType.set(null);
-          // Ensure loading flag is cleared
           this.isQuotaLoading.set(false);
+          this.extractedEvents.set([]);
+          this.icsContent.set(null);
+          this.showDownloadConfirm.set(false);
         }
       }
     });

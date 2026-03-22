@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 import { AppTooltipDirective } from '../../shared/directives';
 import { AuthAwareComponent } from '../base/auth-aware.component';
 import { ConverterService } from '../../services/converter';
+import { CalendarStateService } from '../../services/calendar-state.service';
 import { LanguageService, SupportedLanguage } from '../../services/language.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
@@ -23,6 +24,7 @@ import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 export class Header extends AuthAwareComponent {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly converterService = inject(ConverterService);
+  private readonly calendarStateService = inject(CalendarStateService);
   readonly lang = inject(LanguageService);
 
   menuOpen = false;
@@ -54,7 +56,8 @@ export class Header extends AuthAwareComponent {
   async signOut(): Promise<void> {
     try {
       await this.authService.signOutUser();
-      // Clear quota cache immediately so UI doesn't show stale quota after logout
+      // Clear calendar state and quota cache on logout
+      this.calendarStateService.clearState();
       try {
         this.converterService.clearQuotaCache();
       } catch {

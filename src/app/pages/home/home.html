@@ -303,11 +303,8 @@
         <div class="faq-list">
           @for (i of [1, 2, 3, 4, 5]; track i) {
             <details class="faq-item">
-              <summary
-                class="faq-question"
-                [innerHTML]="'home.faq.q' + i + '.q' | translate"
-              ></summary>
-              <p class="faq-answer" [innerHTML]="'home.faq.q' + i + '.a' | translate"></p>
+              <summary class="faq-question">{{ 'home.faq.q' + i + '.q' | translate }}</summary>
+              <p class="faq-answer">{{ 'home.faq.q' + i + '.a' | translate }}</p>
             </details>
           }
         </div>
