@@ -39,12 +39,6 @@
         itemprop="description"
         [innerHTML]="'home.hero.description' | translate"
       ></p>
-      @if (!authService.isAuthenticated()) {
-        <p class="hero-subtitle">
-          {{ 'home.hero.subtitle' | translate }}
-        </p>
-      }
-
       <!-- Compatible calendars strip -->
       <div class="compatible-strip">
         <span class="compatible-label">{{ 'home.compatible.title' | translate }}</span>
@@ -219,6 +213,12 @@
         </svg>
         <span>{{ 'home.powered' | translate }}</span>
       </div>
+
+      @if (!authService.isAuthenticated()) {
+        <p class="hero-subtitle">
+          {{ 'home.hero.subtitle' | translate }}
+        </p>
+      }
 
       <!-- Desktop inline calendar view (only when visible and desktop) -->
       @if (calendarStateService.isVisible() && isDesktop()) {

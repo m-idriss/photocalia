@@ -40,7 +40,7 @@
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--text-primary, #0f172a);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,14 +52,14 @@
   color: var(--text-secondary, #64748b);
   line-height: 1.6;
   max-width: 900px;
-  margin: 1rem auto 0.5rem;
+  margin: 0 auto 1rem;
 }
 
 .hero-subtitle {
   font-size: 1rem;
   color: var(--text-secondary, #64748b);
   opacity: 0.8;
-  margin: 0 auto 1rem;
+  margin: 1rem auto 0;
 }
 
 /* Compatible calendars strip */
@@ -67,14 +67,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  margin: 1.5rem auto 0;
+  gap: 0.5rem;
+  margin: 0 auto 0;
   opacity: 0;
   animation: fadeInUp 0.6s ease-out 0.4s forwards;
 }
 
 .compatible-label {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: var(--text-secondary, #64748b);
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -84,7 +84,7 @@
 .compatible-logos {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -94,7 +94,7 @@
   align-items: center;
   gap: 0.4rem;
   color: var(--text-secondary, #64748b);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 500;
   transition: color var(--t-fast);
 
@@ -104,8 +104,8 @@
 }
 
 .compatible-icon {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
 }
 
 /* Powered by badge */
@@ -114,7 +114,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  margin: 0.75rem auto 0;
+  margin: 1rem auto 0;
   padding: 0.35rem 0.9rem;
   font-size: 0.75rem;
   font-weight: 600;
@@ -209,7 +209,7 @@
    ======================== */
 .how-it-works-section {
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 2.5rem 2rem;
   background: var(--cb-indigo);
   animation: fadeInUp 0.8s ease-out;
 }
@@ -597,7 +597,7 @@
    ======================== */
 .content-layout {
   display: grid;
-  padding: 1.5rem 1rem 2rem;
+  padding: 1.5rem 1rem 1rem;
 
   // Default: Center converter (no calendar)
   @media (min-width: 1200px) {
