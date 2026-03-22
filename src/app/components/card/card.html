@@ -1,4 +1,7 @@
 <article class="container" [attr.aria-labelledby]="title ? 'card-title-' + title : null">
+  @if (badge && badge > 0) {
+    <span class="card-badge" aria-label="{{ badge }} events">{{ badge }}</span>
+  }
   @if (title) {
     <div class="card-header">
       <h3 [id]="'card-title-' + title">{{ title }}</h3>

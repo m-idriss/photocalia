@@ -26,26 +26,18 @@
             {{ 'calendar.title' | translate }}
           </h2>
           <div class="calendar-header-right">
-            @if (eventCount() > 0) {
-              <span class="stat-badge">
-                <span class="stat-count">{{ eventCount() }}</span>
-                <span class="stat-label">{{
-                  (eventCount() === 1 ? 'calendar.event' : 'calendar.events') | translate
-                }}</span>
+            @if (eventCount() > 1) {
+              <span class="event-nav">
+                <button class="event-nav-btn" (click)="prevEvent()" aria-label="Previous event">
+                  ◀
+                </button>
+                <span class="event-nav-index"
+                  >{{ currentEventIndex() + 1 }}/{{ eventCount() }}</span
+                >
+                <button class="event-nav-btn" (click)="nextEvent()" aria-label="Next event">
+                  ▶
+                </button>
               </span>
-              @if (eventCount() > 1) {
-                <span class="event-nav">
-                  <button class="event-nav-btn" (click)="prevEvent()" aria-label="Previous event">
-                    ◀
-                  </button>
-                  <span class="event-nav-index"
-                    >{{ currentEventIndex() + 1 }}/{{ eventCount() }}</span
-                  >
-                  <button class="event-nav-btn" (click)="nextEvent()" aria-label="Next event">
-                    ▶
-                  </button>
-                </span>
-              }
             }
             <button
               class="close-button"
@@ -110,27 +102,15 @@
         <h2 id="calendar-inline-title" class="calendar-title">
           {{ 'calendar.title' | translate }}
         </h2>
-        @if (eventCount() > 0) {
+        @if (eventCount() > 1) {
           <div class="calendar-header-right">
-            <span class="stat-badge">
-              <span class="stat-count">{{ eventCount() }}</span>
-              <span class="stat-label">{{
-                (eventCount() === 1 ? 'calendar.event' : 'calendar.events') | translate
-              }}</span>
+            <span class="event-nav">
+              <button class="event-nav-btn" (click)="prevEvent()" aria-label="Previous event">
+                ◀
+              </button>
+              <span class="event-nav-index">{{ currentEventIndex() + 1 }}/{{ eventCount() }}</span>
+              <button class="event-nav-btn" (click)="nextEvent()" aria-label="Next event">▶</button>
             </span>
-            @if (eventCount() > 1) {
-              <span class="event-nav">
-                <button class="event-nav-btn" (click)="prevEvent()" aria-label="Previous event">
-                  ◀
-                </button>
-                <span class="event-nav-index"
-                  >{{ currentEventIndex() + 1 }}/{{ eventCount() }}</span
-                >
-                <button class="event-nav-btn" (click)="nextEvent()" aria-label="Next event">
-                  ▶
-                </button>
-              </span>
-            }
           </div>
         }
       </div>

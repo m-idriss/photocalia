@@ -1,4 +1,4 @@
-<app-card id="converter" [title]="'converter.title' | translate">
+<app-card id="converter" [title]="'converter.title' | translate" [badge]="extractedEvents().length">
   <!-- Auth Required Message (when not authenticated) -->
   @if (!isAuthLoading && !isAuthenticated) {
     <section
