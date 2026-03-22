@@ -744,6 +744,27 @@
     background: rgba(0, 0, 0, 0.03);
   }
 
+  /* Weekend days — subtle tint */
+  .fc-day-sat,
+  .fc-day-sun {
+    background: rgba(var(--gradient-blue), 0.03);
+
+    .fc-daygrid-day-number {
+      color: var(--accent-color);
+      opacity: 0.8;
+    }
+
+    .fc-col-header-cell-cushion {
+      color: var(--accent-color);
+    }
+
+    /* Ensure today circle remains visible on weekend days */
+    &.fc-day-today .fc-daygrid-day-number {
+      color: white;
+      opacity: 1;
+    }
+  }
+
   .fc-daygrid-day-events {
     margin-top: 0.15rem;
   }

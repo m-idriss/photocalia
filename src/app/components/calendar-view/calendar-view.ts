@@ -136,6 +136,7 @@ export class CalendarView implements AfterViewInit {
     selectable: true,
     selectMirror: true,
     dayMaxEvents: true,
+    firstDay: 1, // Monday
     weekends: true,
     eventDisplay: 'block',
     events: [],
