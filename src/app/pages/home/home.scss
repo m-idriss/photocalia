@@ -15,6 +15,25 @@
   text-align: center;
   padding: 2rem 2rem 0;
   animation: fadeInDown 0.8s ease-out;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: -100px;
+    background-image: url('/assets/images/hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    z-index: -1;
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    pointer-events: none;
+  }
 }
 
 .hero-title {
@@ -143,6 +162,37 @@
   line-height: 1.6;
   max-width: 700px;
   margin: 0 auto 2rem;
+}
+
+/* ========================
+   Illustrations & Images
+   ======================== */
+.floating-illustration {
+  max-width: 100%;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: floatIllustration 6s ease-in-out infinite;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.how-it-works-image-container,
+.why-photocalia-image-container {
+  max-width: 700px;
+  margin: 0 auto 3.5rem;
+  padding: 0 1rem;
+}
+
+@keyframes floatIllustration {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .section-reassurance {
@@ -620,7 +670,7 @@
   }
 
   .hero-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     flex-direction: column;
     gap: 0.5rem;
   }
