@@ -148,6 +148,7 @@ export class CalendarView implements AfterViewInit {
       this.currentViewDate.set(
         viewDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       );
+      this.updateEventIndexForView(info.view.activeStart, info.view.activeEnd);
     },
     height: '100%',
     contentHeight: 'auto',
@@ -546,6 +547,21 @@ export class CalendarView implements AfterViewInit {
     if (!isNaN(date.getTime()) && this.calendarComponentRef) {
       const calendarApi = this.calendarComponentRef.instance.getApi();
       calendarApi.gotoDate(date);
+    }
+  }
+
+  /**
+   * Update currentEventIndex to match the first visible event in the current view range
+   */
+  private updateEventIndexForView(activeStart: Date, activeEnd: Date): void {
+    const events = this.sortedEvents();
+    if (events.length === 0) return;
+    const index = events.findIndex((e) => {
+      const date = e.start instanceof Date ? e.start : new Date(e.start);
+      return date >= activeStart && date < activeEnd;
+    });
+    if (index !== -1) {
+      this.currentEventIndex.set(index);
     }
   }
 }
