@@ -16,7 +16,7 @@
   "header.about": "À propos",
   "header.tooltip.about": "En savoir plus sur PhotoCalia",
   "home.hero.title": "Transformez vos photos en événements de calendrier en quelques secondes",
-  "home.hero.description": "<strong class=\"brand\">PhotoCalia</strong> est un outil d'IA qui transforme vos photos, captures d'écran, flyers et PDF en événements prêts à être ajoutés à votre calendrier, sans aucune saisie manuelle.",
+  "home.hero.description": "<strong class=\"brand\">PhotoCalia</strong> est un outil d'IA qui transforme vos photos, captures d'écran, flyers et PDF en <strong>événements prêts à être ajoutés</strong> à votre calendrier, <strong>sans aucune saisie manuelle</strong>.",
   "home.hero.subtitle": "Connexion avec Google · 3 conversions gratuites par mois",
   "home.steps.title": "Comment fonctionne <strong class=\"brand\">PhotoCalia</strong>",
   "home.steps.1.title": "Importez votre image",
