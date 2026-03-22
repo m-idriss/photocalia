@@ -40,7 +40,7 @@
         [innerHTML]="'home.hero.description' | translate"
       ></p>
       <!-- Compatible calendars strip - hidden after conversion -->
-      @if (!calendarStateService.isVisible()) {
+      @if (calendarStateService.events().length === 0) {
         <div class="compatible-strip">
           <span class="compatible-label">{{ 'home.compatible.title' | translate }}</span>
           <div class="compatible-logos">
@@ -208,7 +208,7 @@
       </div>
 
       <!-- Trust badge - hidden after conversion -->
-      @if (!calendarStateService.isVisible()) {
+      @if (calendarStateService.events().length === 0) {
         <div class="powered-badge">
           <svg
             width="16"

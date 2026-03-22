@@ -561,8 +561,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
     // Refresh quota status after batch conversion completes
     this.fetchQuotaStatus();
 
-    // Automatically show calendar view when events are extracted (desktop only)
-    if (allEvents.length > 0 && isPlatformBrowser(this.platformId) && window.innerWidth >= 1200) {
+    // Automatically show calendar view when events are extracted
+    if (allEvents.length > 0 && isPlatformBrowser(this.platformId)) {
       this.openCalendarView();
     }
   }
@@ -627,8 +627,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
       );
       this.toastService.clearError();
 
-      // Automatically show calendar view when events are extracted (desktop only)
-      if (isPlatformBrowser(this.platformId) && window.innerWidth >= 1200) {
+      // Automatically show calendar view when events are extracted
+      if (isPlatformBrowser(this.platformId)) {
         this.openCalendarView();
       }
     } catch (error) {
