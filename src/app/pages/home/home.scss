@@ -667,13 +667,6 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-
-    app-calendar-view {
-      flex: 1;
-      min-height: 0;
-      display: flex;
-      flex-direction: column;
-    }
   }
 }
 
