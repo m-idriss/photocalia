@@ -335,7 +335,8 @@
    ======================== */
 .calendar-inline-container {
   position: relative;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   background: var(--ct-surface, #ffffff);
   border: 1px solid var(--ct-border, #e2e8f0);
   border-radius: var(--radius-lg);

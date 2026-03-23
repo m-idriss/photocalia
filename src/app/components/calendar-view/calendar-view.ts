@@ -139,6 +139,7 @@ export class CalendarView implements AfterViewInit {
       this.updateEventIndexForView(info.view.activeStart, info.view.activeEnd);
     },
     height: '100%',
+    contentHeight: 'auto',
     expandRows: true,
     scrollTime: '06:00:00',
     eventTimeFormat: {
