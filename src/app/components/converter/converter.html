@@ -88,19 +88,63 @@
             <span class="format-badge">PNG</span>
             <span class="format-badge">PDF</span>
           </div>
-          <p class="dropzone-hint">{{ 'converter.marketing.1' | translate }}</p>
         </div>
       </label>
 
-      <!-- Selected Files - Minimalist -->
+      <!-- Selected Files - Thumbnail Grid -->
       @if (files().length > 0) {
-        <div class="selected-files" role="list" aria-label="Selected files">
+        <div class="selected-files-grid" role="list" aria-label="Selected files">
           @for (file of files(); track $index) {
-            <div class="file-chip" role="listitem">
-              <span>{{ file.name }}</span>
+            <div class="file-thumbnail" role="listitem">
+              @if (isImageFile(file)) {
+                <button
+                  class="thumbnail-image-btn"
+                  (click)="openPreview(file)"
+                  [attr.aria-label]="'Preview ' + file.name"
+                >
+                  <img
+                    [src]="getThumbnailUrl(file)"
+                    [alt]="file.name"
+                    class="thumbnail-img"
+                    loading="lazy"
+                  />
+                </button>
+              } @else {
+                <div class="thumbnail-pdf-icon" aria-hidden="true">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect
+                      x="4"
+                      y="2"
+                      width="24"
+                      height="28"
+                      rx="3"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      fill="none"
+                    />
+                    <path
+                      d="M10 14h12M10 18h12M10 22h8"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                    <text
+                      x="16"
+                      y="10"
+                      text-anchor="middle"
+                      font-size="6"
+                      font-weight="700"
+                      fill="currentColor"
+                    >
+                      PDF
+                    </text>
+                  </svg>
+                </div>
+              }
+              <span class="thumbnail-name">{{ file.name }}</span>
               <button
-                class="chip-remove"
-                (click)="removeFile($index)"
+                class="thumbnail-remove"
+                (click)="removeFile($index); $event.stopPropagation()"
                 [disabled]="isProcessing()"
                 [attr.aria-label]="'Remove ' + file.name"
                 [appTooltip]="'converter.tooltip.remove' | translate"
@@ -110,6 +154,31 @@
               </button>
             </div>
           }
+        </div>
+      }
+
+      <!-- Image Preview Overlay -->
+      @if (previewFile()) {
+        <div
+          class="preview-overlay"
+          (click)="closePreview()"
+          role="dialog"
+          aria-modal="true"
+          [attr.aria-label]="'Preview: ' + previewFile()!.file.name"
+        >
+          <div class="preview-content" (click)="$event.stopPropagation()">
+            <img
+              [src]="previewFile()!.url"
+              [alt]="previewFile()!.file.name"
+              class="preview-image"
+            />
+            <div class="preview-info">
+              <span class="preview-name">{{ previewFile()!.file.name }}</span>
+              <button class="preview-close" (click)="closePreview()" aria-label="Close preview">
+                ✕
+              </button>
+            </div>
+          </div>
         </div>
       }
 

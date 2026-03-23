@@ -7,6 +7,8 @@ import {
   inject,
   effect,
   untracked,
+  DestroyRef,
+  HostListener,
 } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -136,10 +138,15 @@ export class Converter extends AuthAwareComponent implements OnInit {
   // Expose BatchFileStatus enum to template
   protected readonly BatchFileStatus = BatchFileStatus;
 
+  // Thumbnail preview state
+  protected readonly thumbnailUrls = signal<Map<File, string>>(new Map());
+  protected readonly previewFile = signal<{ file: File; url: string } | null>(null);
+
   private readonly converterService = inject(ConverterService);
   private readonly toastService = inject(ToastService);
   protected readonly calendarStateService = inject(CalendarStateService);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly destroyRef = inject(DestroyRef);
 
   private readonly acceptedTypes = FILE_UPLOAD_CONSTRAINTS.ACCEPTED_TYPES;
   private readonly maxFileSize = FILE_UPLOAD_CONSTRAINTS.MAX_FILE_SIZE;
@@ -154,6 +161,16 @@ export class Converter extends AuthAwareComponent implements OnInit {
       if (this.isAuthenticated) {
         this.fetchQuotaStatus();
       }
+    }
+
+    // Cleanup thumbnail URLs on destroy
+    this.destroyRef.onDestroy(() => this.revokeAllThumbnailUrls());
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
+    if (this.previewFile()) {
+      this.closePreview();
     }
   }
 
@@ -286,7 +303,58 @@ export class Converter extends AuthAwareComponent implements OnInit {
       return true;
     });
 
-    if (validFiles.length) this.files.update((current) => [...current, ...validFiles]);
+    if (validFiles.length) {
+      this.files.update((current) => [...current, ...validFiles]);
+      this.generateThumbnailUrls(validFiles);
+    }
+  }
+
+  private generateThumbnailUrls(newFiles: File[]): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    const entries = Array.from(this.thumbnailUrls().entries());
+    for (const file of newFiles) {
+      if (file.type.startsWith('image/')) {
+        entries.push([file, URL.createObjectURL(file)]);
+      }
+    }
+
+    this.thumbnailUrls.set(new Map(entries));
+  }
+
+  private revokeThumbnailUrl(file: File): void {
+    const url = this.thumbnailUrls().get(file);
+    if (url) {
+      URL.revokeObjectURL(url);
+      const entries = Array.from(this.thumbnailUrls().entries()).filter(([f]) => f !== file);
+
+      this.thumbnailUrls.set(new Map(entries));
+    }
+  }
+
+  private revokeAllThumbnailUrls(): void {
+    for (const url of this.thumbnailUrls().values()) {
+      URL.revokeObjectURL(url);
+    }
+    this.thumbnailUrls.set(new Map());
+  }
+
+  protected getThumbnailUrl(file: File): string | undefined {
+    return this.thumbnailUrls().get(file);
+  }
+
+  protected isImageFile(file: File): boolean {
+    return file.type.startsWith('image/');
+  }
+
+  protected openPreview(file: File): void {
+    const url = this.thumbnailUrls().get(file);
+    if (url) {
+      this.previewFile.set({ file, url });
+    }
+  }
+
+  protected closePreview(): void {
+    this.previewFile.set(null);
   }
 
   protected async convertToIcs(): Promise<void> {
@@ -662,6 +730,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
   }
 
   protected resetState(): void {
+    this.revokeAllThumbnailUrls();
     this.files.set([]);
     this.batchFiles.set([]);
     this.isDragging.set(false);
@@ -712,6 +781,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
   }
 
   protected removeFile(index: number): void {
+    const file = this.files()[index];
+    if (file) this.revokeThumbnailUrl(file);
     this.files.update((current) => current.filter((_, i) => i !== index));
     this.toastService.clearError();
     this.extractedEvents.set([]);
