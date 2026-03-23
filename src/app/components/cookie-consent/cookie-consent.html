@@ -1,5 +1,5 @@
 @if (visible()) {
-  <div class="cookie-overlay" (click)="$event.stopPropagation()">
+  <div class="cookie-overlay" (mousedown)="$event.stopPropagation()">
     <div class="cookie-popup" role="dialog" aria-label="Cookie consent" aria-live="polite">
       <div class="cookie-header">
         <span class="cookie-icon" aria-hidden="true">🍪</span>

@@ -126,10 +126,12 @@ describe('Stats', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement;
-    const timeSavedElement = compiled.querySelector('.stats-time-saved');
+    const timeSavedElement = compiled.querySelector('.stats-time-saved') as HTMLElement;
     expect(timeSavedElement).toBeTruthy();
-    expect(timeSavedElement.textContent).toContain('hours saved');
-    expect(timeSavedElement.textContent).toContain('full workdays');
+    expect(timeSavedElement.innerHTML).toContain('stats.timeSaved');
+    expect(timeSavedElement.innerHTML).toContain('stats.workdays');
+    expect(component.timeSavedHours()).toBe(195);
+    expect(component.timeSavedWorkdays()).toBe(24);
   });
 
   it('should handle zero events correctly', () => {

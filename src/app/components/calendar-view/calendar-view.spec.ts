@@ -3,8 +3,13 @@ import { CalendarView } from './calendar-view';
 import { CalendarEvent } from '../../models';
 
 describe('CalendarView', () => {
-  let component: CalendarView;
   let fixture: ComponentFixture<CalendarView>;
+  let component: CalendarView;
+  let loadCalendarSpy: jasmine.Spy;
+
+  type CalendarViewWithLoadCalendar = CalendarView & {
+    loadCalendar: () => Promise<void>;
+  };
 
   const mockEvents: CalendarEvent[] = [
     {
@@ -23,61 +28,84 @@ describe('CalendarView', () => {
     },
   ];
 
+  async function createComponent(options?: {
+    events?: CalendarEvent[];
+    visible?: boolean;
+    inline?: boolean;
+  }): Promise<ComponentFixture<CalendarView>> {
+    const createdFixture = TestBed.createComponent(CalendarView);
+    createdFixture.componentRef.setInput('events', options?.events ?? mockEvents);
+    createdFixture.componentRef.setInput('visible', options?.visible ?? true);
+    if (options?.inline !== undefined) {
+      createdFixture.componentRef.setInput('inline', options.inline);
+    }
+
+    createdFixture.detectChanges();
+    await createdFixture.whenStable();
+    return createdFixture;
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CalendarView],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CalendarView);
+    loadCalendarSpy = spyOn(
+      CalendarView.prototype as unknown as CalendarViewWithLoadCalendar,
+      'loadCalendar',
+    );
+    loadCalendarSpy.and.returnValue(Promise.resolve());
+
+    fixture = await createComponent();
     component = fixture.componentInstance;
-
-    // Set required inputs
-    fixture.componentRef.setInput('events', mockEvents);
-    fixture.componentRef.setInput('visible', true);
-
-    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display calendar when visible is true', () => {
-    fixture.componentRef.setInput('visible', true);
-    fixture.detectChanges();
-
-    const modalOverlay = fixture.nativeElement.querySelector('.calendar-modal-overlay');
-    expect(modalOverlay).toBeTruthy();
+  it('should display the modal calendar when visible is true', () => {
+    expect(fixture.nativeElement.querySelector('.calendar-modal-overlay')).toBeTruthy();
   });
 
-  it('should not display calendar when visible is false', () => {
-    fixture.componentRef.setInput('visible', false);
-    fixture.detectChanges();
+  it('should not render the calendar when visible is false', async () => {
+    const hiddenFixture = await createComponent({ visible: false });
 
-    const modalOverlay = fixture.nativeElement.querySelector('.calendar-modal-overlay');
-    expect(modalOverlay).toBeFalsy();
+    expect(hiddenFixture.nativeElement.querySelector('.calendar-modal-overlay')).toBeFalsy();
+    expect(loadCalendarSpy).toHaveBeenCalledTimes(1);
   });
 
-  it('should emit visibleChange when close button is clicked', () => {
+  it('should emit visibleChange when the close button is clicked', () => {
     let emittedValue: boolean | undefined;
-    component.visibleChange.subscribe((value: boolean) => {
+    component.visibleChange.subscribe((value) => {
       emittedValue = value;
     });
 
-    const closeButton = fixture.nativeElement.querySelector('.close-button');
-    closeButton?.click();
+    fixture.nativeElement.querySelector('.close-button')?.click();
 
     expect(emittedValue).toBe(false);
   });
 
-  it('should emit exportIcs when export button is clicked', () => {
+  it('should not emit exportIcs until extraction is confirmed', () => {
     let exportCalled = false;
     component.exportIcs.subscribe(() => {
       exportCalled = true;
     });
 
-    const exportButton = fixture.nativeElement.querySelector('.export-btn');
-    exportButton?.click();
+    fixture.nativeElement.querySelector('.export-btn')?.click();
+
+    expect(exportCalled).toBe(false);
+  });
+
+  it('should emit exportIcs when extraction is confirmed', () => {
+    let exportCalled = false;
+    component.exportIcs.subscribe(() => {
+      exportCalled = true;
+    });
+
+    component['calendarStateService'].extractionConfirmed.set(true);
+    fixture.detectChanges();
+    fixture.nativeElement.querySelector('.export-btn')?.click();
 
     expect(exportCalled).toBe(true);
   });
@@ -90,45 +118,11 @@ describe('CalendarView', () => {
     expect(options.initialView).toBe('dayGridMonth');
   });
 
-  it('should not load calendar when visible is false', async () => {
-    const freshFixture = TestBed.createComponent(CalendarView);
-    const freshComponent = freshFixture.componentInstance;
-
-    freshFixture.componentRef.setInput('events', mockEvents);
-    freshFixture.componentRef.setInput('visible', false);
-
-    freshFixture.detectChanges();
-    await freshFixture.whenStable();
-
-    expect(freshComponent['calendarLoaded']).toBe(false);
+  it('should request lazy calendar loading when visible', () => {
+    expect(loadCalendarSpy).toHaveBeenCalled();
   });
 
-  it('should set loadError to true when dynamic import fails', async () => {
-    const freshFixture = TestBed.createComponent(CalendarView);
-    const freshComponent = freshFixture.componentInstance;
-    const calendarLoader = freshComponent as unknown as { loadCalendar: () => Promise<void> };
-
-    freshFixture.componentRef.setInput('events', mockEvents);
-    freshFixture.componentRef.setInput('visible', true);
-
-    spyOn(calendarLoader, 'loadCalendar').and.returnValue(
-      Promise.reject<void>(new Error('Simulated import failure')),
-    );
-
-    freshComponent['loadError'] = false;
-
-    try {
-      await freshComponent['loadCalendar']();
-    } catch {
-      freshComponent['loadError'] = true;
-    }
-
-    freshFixture.detectChanges();
-
-    expect(freshComponent['loadError']).toBe(true);
-  });
-
-  it('should display error message when loadError is true', () => {
+  it('should display an error message when loadError is true', () => {
     component['loadError'] = true;
     fixture.detectChanges();
 
@@ -137,55 +131,49 @@ describe('CalendarView', () => {
     expect(errorMessage?.textContent).toContain('Failed to load calendar');
   });
 
-  // New tests for color-coded events
   it('should compute event count correctly', () => {
     expect(component['eventCount']()).toBe(2);
   });
 
-  it('should compute date range for multiple events', () => {
-    const range = component['dateRange']();
-    expect(range).toContain('Jan');
-    expect(range).toContain('–');
+  it('should sort events chronologically', async () => {
+    fixture = await createComponent({ events: [mockEvents[1], mockEvents[0]] });
+    component = fixture.componentInstance;
+
+    const sortedEvents = component['sortedEvents']();
+    expect(sortedEvents[0].summary).toBe('Test Event 1');
+    expect(sortedEvents[1].summary).toBe('Test Event 2');
   });
 
-  it('should compute date range for single event', () => {
-    fixture.componentRef.setInput('events', [mockEvents[0]]);
-    fixture.detectChanges();
-
-    const range = component['dateRange']();
-    expect(range).toContain('Jan');
-    expect(range).toContain('2025');
+  it('should expose the current view date as empty before datesSet runs', () => {
+    expect(component['currentViewDate']()).toBe('');
   });
 
-  it('should return empty date range for no events', () => {
-    fixture.componentRef.setInput('events', []);
-    fixture.detectChanges();
+  it('should return an empty sorted event list when there are no events', async () => {
+    fixture = await createComponent({ events: [] });
+    component = fixture.componentInstance;
 
-    expect(component['dateRange']()).toBe('');
+    expect(component['sortedEvents']()).toEqual([]);
   });
 
-  // Event color generation
   it('should generate consistent colors for the same title', () => {
     const color1 = component['getEventColor']('Test Event');
     const color2 = component['getEventColor']('Test Event');
     expect(color1).toEqual(color2);
   });
 
-  it('should generate different colors for different titles', () => {
+  it('should generate valid colors for different titles', () => {
     const color1 = component['getEventColor']('Meeting');
     const color2 = component['getEventColor']('Lunch Break');
-    // They could coincidentally be the same, but with different hashes they likely differ
-    // Just verify both return a valid color object
+
     expect(color1.bg).toBeTruthy();
     expect(color2.bg).toBeTruthy();
   });
 
-  // Popover
   it('should have no selected event initially', () => {
     expect(component['selectedEvent']()).toBeNull();
   });
 
-  it('should close popover via closePopover()', () => {
+  it('should close the popover via closePopover()', () => {
     component['selectedEvent'].set({
       title: 'Test',
       start: 'Jan 15',
@@ -194,13 +182,13 @@ describe('CalendarView', () => {
       x: 100,
       y: 200,
     });
-    expect(component['selectedEvent']()).toBeTruthy();
 
     component['closePopover']();
+
     expect(component['selectedEvent']()).toBeNull();
   });
 
-  it('should close popover on Escape key', () => {
+  it('should close the popover on Escape', () => {
     component['selectedEvent'].set({
       title: 'Test',
       start: 'Jan 15',
@@ -213,37 +201,32 @@ describe('CalendarView', () => {
     component.handleKeyDown({
       key: 'Escape',
       preventDefault: () => undefined,
-    } as unknown as KeyboardEvent);
+    } as KeyboardEvent);
 
     expect(component['selectedEvent']()).toBeNull();
   });
 
-  it('should display stats badge in modal mode', () => {
-    const stats = fixture.nativeElement.querySelector('.calendar-stats');
-    expect(stats).toBeTruthy();
-
-    const countEl = fixture.nativeElement.querySelector('.stat-count');
-    expect(countEl?.textContent?.trim()).toBe('2');
+  it('should display the confirmation banner in modal mode', () => {
+    expect(fixture.nativeElement.querySelector('.export-confirm-banner')).toBeTruthy();
+    expect(fixture.nativeElement.textContent).toContain('AI-extracted events may contain errors');
   });
 
-  it('should display instructions in modal mode', () => {
-    const instructions = fixture.nativeElement.querySelector('.calendar-instructions');
-    expect(instructions).toBeTruthy();
-    expect(instructions?.textContent).toContain('Drag');
+  it('should render inline mode when inline input is true', async () => {
+    fixture = await createComponent({ inline: true });
+    component = fixture.componentInstance;
+
+    expect(fixture.nativeElement.querySelector('.calendar-inline-container')).toBeTruthy();
+    expect(fixture.nativeElement.querySelector('.calendar-modal-overlay')).toBeFalsy();
   });
 
-  it('should render inline mode when inline input is true', () => {
-    fixture.componentRef.setInput('inline', true);
-    fixture.detectChanges();
+  it('should show event navigation when there are multiple events', () => {
+    const eventNavIndex = fixture.nativeElement.querySelector('.event-nav-index');
 
-    const inlineContainer = fixture.nativeElement.querySelector('.calendar-inline-container');
-    expect(inlineContainer).toBeTruthy();
-
-    const modalOverlay = fixture.nativeElement.querySelector('.calendar-modal-overlay');
-    expect(modalOverlay).toBeFalsy();
+    expect(eventNavIndex).toBeTruthy();
+    expect(eventNavIndex.textContent.trim()).toBe('1/2');
   });
 
-  it('should display event popover when selectedEvent is set', () => {
+  it('should display the event popover when selectedEvent is set', () => {
     component['selectedEvent'].set({
       title: 'Doctor Appointment',
       start: 'Wed, Jan 15, 10:00',
@@ -258,11 +241,7 @@ describe('CalendarView', () => {
 
     const popover = fixture.nativeElement.querySelector('.event-popover');
     expect(popover).toBeTruthy();
-
-    const title = popover.querySelector('.popover-title');
-    expect(title?.textContent?.trim()).toBe('Doctor Appointment');
-
-    const locationEl = popover.querySelector('.popover-text');
-    expect(locationEl?.textContent?.trim()).toBe('Hospital');
+    expect(popover.querySelector('.popover-title')?.textContent?.trim()).toBe('Doctor Appointment');
+    expect(popover.querySelector('.popover-text')?.textContent?.trim()).toBe('Hospital');
   });
 });

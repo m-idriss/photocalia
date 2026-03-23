@@ -5,12 +5,14 @@ import { of } from 'rxjs';
 
 import { Footer, FooterLink } from './footer';
 import { GithubService } from '../../services/github.service';
+import { CookieConsentService } from '../../services/cookie-consent.service';
 import { environment } from '../../../environments/environment';
 
 describe('Footer', () => {
   let component: Footer;
   let fixture: ComponentFixture<Footer>;
   let mockGithubService: jasmine.SpyObj<GithubService>;
+  let mockCookieConsentService: jasmine.SpyObj<CookieConsentService>;
 
   beforeEach(async () => {
     // Create a mock GithubService to avoid external HTTP calls
@@ -21,6 +23,7 @@ describe('Footer', () => {
         html_url: 'https://github.com/m-idriss/photocalia/releases/tag/v1.0.0',
       }),
     );
+    mockCookieConsentService = jasmine.createSpyObj('CookieConsentService', ['open']);
 
     await TestBed.configureTestingModule({
       imports: [Footer],
@@ -28,6 +31,7 @@ describe('Footer', () => {
         provideRouter([]),
         provideHttpClient(),
         { provide: GithubService, useValue: mockGithubService },
+        { provide: CookieConsentService, useValue: mockCookieConsentService },
       ],
     }).compileComponents();
 
@@ -43,6 +47,10 @@ describe('Footer', () => {
     );
   }
 
+  function findLink(label: string): FooterLink | undefined {
+    return getAllLinks().find((link) => link.label === label);
+  }
+
   it('should create', () => {
     expect(component).toBeTruthy();
   });
@@ -53,12 +61,11 @@ describe('Footer', () => {
   });
 
   it('should include License link when enabled in config', () => {
-    const allLinks = getAllLinks();
-    const licenseLink = allLinks.find((link) => link.label === 'License');
-    // License is enabled in the default environment config
+    const licenseLink = findLink('footer.link.license');
+
     if (environment.footer.enableLicenseLink) {
       expect(licenseLink).toBeTruthy();
-      expect(licenseLink?.url).toContain('/LICENSE');
+      expect(licenseLink?.url).toContain('/blob/main/LICENSE');
     } else {
       expect(licenseLink).toBeUndefined();
     }
@@ -66,67 +73,65 @@ describe('Footer', () => {
 
   it('should only include links enabled in environment config', () => {
     const config = environment.footer;
-    const allLinks = getAllLinks();
 
-    // Check each link type matches config
-    const hasRepository = allLinks.some((link) => link.label === 'Repository');
+    const hasRepository = !!findLink('footer.link.repository');
     expect(hasRepository).toBe(config.enableRepositoryLink);
 
-    const hasIssues = allLinks.some((link) => link.label === 'Issues');
+    const hasIssues = !!findLink('footer.link.issues');
     expect(hasIssues).toBe(config.enableIssuesLink);
 
-    const hasDocs = allLinks.some((link) => link.label === 'Documentation');
+    const hasDocs = !!findLink('footer.link.documentation');
     expect(hasDocs).toBe(config.enableDocsLink);
 
-    const hasLicense = allLinks.some((link) => link.label === 'License');
+    const hasLicense = !!findLink('footer.link.license');
     expect(hasLicense).toBe(config.enableLicenseLink);
 
-    const hasSecurity = allLinks.some((link) => link.label === 'Security');
+    const hasSecurity = !!findLink('footer.link.security');
     expect(hasSecurity).toBe(config.enableSecurityLink);
 
-    const hasCommunity = allLinks.some((link) => link.label === 'Community');
+    const hasCommunity = !!findLink('footer.link.community');
     expect(hasCommunity).toBe(config.enableCommunityLink);
 
-    const hasDiscussions = allLinks.some((link) => link.label === 'Discussions');
+    const hasDiscussions = !!findLink('footer.link.discussions');
     expect(hasDiscussions).toBe(config.enableDiscussionsLink);
 
-    const hasAboutMe = allLinks.some((link) => link.label === 'About Me');
+    const hasAboutMe = !!findLink('footer.link.aboutMe');
     expect(hasAboutMe).toBe(config.enableAboutMeLink);
 
-    const hasPrivacy = allLinks.some((link) => link.label === 'Privacy Policy');
+    const hasPrivacy = !!findLink('footer.link.privacyPolicy');
     expect(hasPrivacy).toBe(config.enablePrivacyLink ?? true);
 
-    const hasTerms = allLinks.some((link) => link.label === 'Terms of Service');
+    const hasTerms = !!findLink('footer.link.termsOfService');
     expect(hasTerms).toBe(config.enableTermsLink ?? true);
 
-    const hasLegal = allLinks.some((link) => link.label === 'Legal Mentions');
+    const hasLegal = !!findLink('footer.link.legalMentions');
     expect(hasLegal).toBe(config.enableLegalMentionsLink ?? true);
   });
 
   it('should mark About Me link as internal when enabled', () => {
-    const allLinks = getAllLinks();
-    const aboutMeLink = allLinks.find((link) => link.label === 'About Me');
+    const aboutMeLink = findLink('footer.link.aboutMe');
     if (aboutMeLink) {
       expect(aboutMeLink.isInternal).toBe(true);
       expect(aboutMeLink.url).toBe('/me');
+    } else {
+      expect(environment.footer.enableAboutMeLink).toBe(false);
     }
   });
 
   it('should mark legal pages as internal links', () => {
-    const allLinks = getAllLinks();
-    const privacyLink = allLinks.find((link) => link.label === 'Privacy Policy');
+    const privacyLink = findLink('footer.link.privacyPolicy');
     if (privacyLink) {
       expect(privacyLink.isInternal).toBe(true);
       expect(privacyLink.url).toBe('/privacy');
     }
 
-    const termsLink = allLinks.find((link) => link.label === 'Terms of Service');
+    const termsLink = findLink('footer.link.termsOfService');
     if (termsLink) {
       expect(termsLink.isInternal).toBe(true);
       expect(termsLink.url).toBe('/terms');
     }
 
-    const legalLink = allLinks.find((link) => link.label === 'Legal Mentions');
+    const legalLink = findLink('footer.link.legalMentions');
     if (legalLink) {
       expect(legalLink.isInternal).toBe(true);
       expect(legalLink.url).toBe('/legal-mentions');
@@ -134,14 +139,31 @@ describe('Footer', () => {
   });
 
   it('should mark external links without isInternal flag', () => {
-    const allLinks = getAllLinks();
-    const externalLinks = allLinks.filter((link) => !link.isInternal);
+    const externalLinks = getAllLinks().filter(
+      (link) => !link.isInternal && !link.action && !!link.url,
+    );
+
     externalLinks.forEach((link) => {
-      if (link.url !== '/') {
-        // External links might be full github repo URLs
-        expect(link.url).toMatch(/^https?:\/\//);
-      }
+      expect(link.url).toMatch(/^https?:\/\//);
     });
+  });
+
+  it('should include cookie preferences as an action link', () => {
+    const cookieLink = findLink('footer.link.cookiePreferences');
+
+    expect(cookieLink).toEqual(
+      jasmine.objectContaining({
+        label: 'footer.link.cookiePreferences',
+        action: 'cookie',
+      }),
+    );
+    expect(cookieLink?.url).toBeUndefined();
+  });
+
+  it('should open cookie preferences when the cookie action is handled', () => {
+    component.handleLinkAction('cookie');
+
+    expect(mockCookieConsentService.open).toHaveBeenCalled();
   });
 
   it('should build social links correctly', () => {

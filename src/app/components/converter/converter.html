@@ -161,12 +161,12 @@
       @if (previewFile()) {
         <div
           class="preview-overlay"
-          (click)="closePreview()"
+          (mousedown)="closePreview()"
           role="dialog"
           aria-modal="true"
           [attr.aria-label]="'Preview: ' + previewFile()!.file.name"
         >
-          <div class="preview-content" (click)="$event.stopPropagation()">
+          <div class="preview-content" (mousedown)="$event.stopPropagation()">
             <img
               [src]="previewFile()!.url"
               [alt]="previewFile()!.file.name"

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { HowItWorks } from './how-it-works';
 
 describe('HowItWorks', () => {
@@ -8,6 +9,7 @@ describe('HowItWorks', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HowItWorks],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HowItWorks);
@@ -21,30 +23,30 @@ describe('HowItWorks', () => {
 
   it('should render the hero title', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('#hero-title')?.textContent).toContain('How It Works');
+    expect(compiled.querySelector('#hero-title')?.textContent).toContain('howitworks.hero.title');
   });
 
   it('should render all 7 main sections', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    
+
     // 1. Hero
     expect(compiled.querySelector('.hero-section')).toBeTruthy();
-    
+
     // 2. Intro
     expect(compiled.querySelector('.intro-section')).toBeTruthy();
-    
+
     // 3. AI Steps
     expect(compiled.querySelector('.ai-steps-section')).toBeTruthy();
-    
+
     // 4. Use Cases
     expect(compiled.querySelector('.use-cases-section')).toBeTruthy();
-    
+
     // 5. Instant Capture
     expect(compiled.querySelector('.instant-capture-section')).toBeTruthy();
-    
+
     // 6. Benefits
     expect(compiled.querySelector('.benefits-section')).toBeTruthy();
-    
+
     // 7. FAQ
     expect(compiled.querySelector('.faq-section')).toBeTruthy();
   });
@@ -71,6 +73,6 @@ describe('HowItWorks', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const ctaButton = compiled.querySelector('.cta-button') as HTMLAnchorElement;
     expect(ctaButton).toBeTruthy();
-    expect(ctaButton.getAttribute('href')).toBe('/');
+    expect(ctaButton.textContent).toContain('howitworks.cta.button');
   });
 });

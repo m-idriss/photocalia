@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, inject, ChangeDetectorRef } from '@angular/core';
+import { Pipe, PipeTransform, inject, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
@@ -14,7 +14,7 @@ import { LanguageService } from '../../services/language.service';
   standalone: true,
   pure: false,
 })
-export class TranslatePipe implements PipeTransform {
+export class TranslatePipe implements PipeTransform, OnDestroy {
   private readonly languageService = inject(LanguageService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly sub: Subscription;
