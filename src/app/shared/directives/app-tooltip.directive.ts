@@ -20,7 +20,7 @@ import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
   hostDirectives: [
     {
       directive: NgbTooltip,
-      inputs: ['ngbTooltip: appTooltip', 'placement: appTooltipPlacement'],
+      inputs: ['ngbTooltip: appTooltip'],
     },
   ],
 })
@@ -37,5 +37,6 @@ export class AppTooltipDirective implements OnInit {
     // Apply default configuration
     this.ngbTooltip.container = 'body';
     this.ngbTooltip.triggers = 'hover focus';
+    this.ngbTooltip.placement = this.appTooltipPlacement;
   }
 }
