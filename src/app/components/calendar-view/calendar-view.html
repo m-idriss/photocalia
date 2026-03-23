@@ -50,7 +50,7 @@
         </div>
 
         <!-- Calendar Body -->
-        <div class="calendar-body" (click)="closePopover()">
+        <div class="calendar-body" (mousedown)="closePopover()">
           <div class="calendar-container">
             @if (loadError) {
               <div class="error-message">
@@ -122,7 +122,7 @@
 
       <!-- Instructions -->
       <!-- Calendar Body -->
-      <div class="calendar-body" (click)="closePopover()">
+      <div class="calendar-body" (mousedown)="closePopover()">
         <div class="calendar-container">
           @if (loadError) {
             <div class="error-message">
@@ -144,12 +144,12 @@
   <!-- Event Detail Popover (fixed position, outside scroll container) -->
   @if (selectedEvent(); as evt) {
     <!-- Mobile backdrop scrim -->
-    <div class="popover-backdrop" (click)="closePopover()"></div>
+    <div class="popover-backdrop" (mousedown)="closePopover()"></div>
     <div
       class="event-popover"
       [style.--popover-x.px]="evt.x"
       [style.--popover-y.px]="evt.y"
-      (click)="$event.stopPropagation()"
+      (mousedown)="$event.stopPropagation()"
       role="tooltip"
     >
       <div class="popover-accent" [style.background]="evt.color"></div>

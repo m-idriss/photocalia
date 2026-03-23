@@ -62,6 +62,12 @@ export interface QuotaStatusResponse {
   enabled: boolean;
 }
 
+type QuotaResponseRecord = Record<string, unknown>;
+
+function isQuotaResponseRecord(value: unknown): value is QuotaResponseRecord {
+  return typeof value === 'object' && value !== null;
+}
+
 /**
  * Service for converting images and PDFs to ICS calendar format.
  * Handles file processing, PDF to image conversion, and ICS file downloads.
@@ -188,28 +194,66 @@ export class ConverterService {
   /**
    * Map a raw response into QuotaStatusResponse with tolerant mapping for different backend shapes
    */
-  private mapToQuotaResponse(raw: any): QuotaStatusResponse {
+  private mapToQuotaResponse(raw: unknown): QuotaStatusResponse {
+    const response = isQuotaResponseRecord(raw) ? raw : null;
+    const quota = isQuotaResponseRecord(response?.['quota']) ? response['quota'] : null;
+
     // If backend already returns expected shape
-    if (raw && raw.success && raw.quota) {
-      // Ensure numeric types
-      const q = raw.quota;
+    if (response?.['success'] && quota) {
       return {
-        success: !!raw.success,
-        enabled: !!raw.enabled,
+        success: !!response['success'],
+        enabled: !!response['enabled'],
         quota: {
-          usageCount: typeof q.usageCount === 'number' ? q.usageCount : (typeof q.used === 'number' ? q.used : (typeof q.quotaUsed === 'number' ? q.quotaUsed : (typeof q.limit === 'number' && typeof q.remaining === 'number' ? q.limit - q.remaining : 0))),
-          limit: typeof q.limit === 'number' ? q.limit : (typeof raw.limit === 'number' ? raw.limit : 0),
-          remaining: typeof q.remaining === 'number' ? q.remaining : (typeof raw.remaining === 'number' ? raw.remaining : 0),
-          plan: typeof q.plan === 'string' ? q.plan : (typeof raw.plan === 'string' ? raw.plan : 'FREE'),
+          usageCount:
+            typeof quota['usageCount'] === 'number'
+              ? quota['usageCount']
+              : typeof quota['used'] === 'number'
+                ? quota['used']
+                : typeof quota['quotaUsed'] === 'number'
+                  ? quota['quotaUsed']
+                  : typeof quota['limit'] === 'number' && typeof quota['remaining'] === 'number'
+                    ? quota['limit'] - quota['remaining']
+                    : 0,
+          limit:
+            typeof quota['limit'] === 'number'
+              ? quota['limit']
+              : typeof response['limit'] === 'number'
+                ? response['limit']
+                : 0,
+          remaining:
+            typeof quota['remaining'] === 'number'
+              ? quota['remaining']
+              : typeof response['remaining'] === 'number'
+                ? response['remaining']
+                : 0,
+          plan:
+            typeof quota['plan'] === 'string'
+              ? quota['plan']
+              : typeof response['plan'] === 'string'
+                ? response['plan']
+                : 'FREE',
         },
       };
     }
 
     // Handle simple shapes like { remaining, limit, resetDate }
-    if (raw && (typeof raw.remaining === 'number' || typeof raw.limit === 'number')) {
-      const remaining = typeof raw.remaining === 'number' ? raw.remaining : (typeof raw.quotaRemaining === 'number' ? raw.quotaRemaining : 0);
-      const limit = typeof raw.limit === 'number' ? raw.limit : (typeof raw.quotaLimit === 'number' ? raw.quotaLimit : 0);
-      const used = typeof raw.used === 'number' ? raw.used : (limit && remaining ? limit - remaining : 0);
+    if (
+      response &&
+      (typeof response['remaining'] === 'number' || typeof response['limit'] === 'number')
+    ) {
+      const remaining =
+        typeof response['remaining'] === 'number'
+          ? response['remaining']
+          : typeof response['quotaRemaining'] === 'number'
+            ? response['quotaRemaining']
+            : 0;
+      const limit =
+        typeof response['limit'] === 'number'
+          ? response['limit']
+          : typeof response['quotaLimit'] === 'number'
+            ? response['quotaLimit']
+            : 0;
+      const used = typeof response['used'] === 'number' ? response['used'] : limit - remaining;
       return {
         success: true,
         enabled: true,
@@ -217,15 +261,18 @@ export class ConverterService {
           usageCount: used,
           limit,
           remaining,
-          plan: typeof raw.plan === 'string' ? raw.plan : 'FREE',
+          plan: typeof response['plan'] === 'string' ? response['plan'] : 'FREE',
         },
       };
     }
 
     // Handle legacy names like quotaUsed, quotaLimit
-    if (raw && (typeof raw.quotaUsed === 'number' || typeof raw.quotaLimit === 'number')) {
-      const used = typeof raw.quotaUsed === 'number' ? raw.quotaUsed : 0;
-      const limit = typeof raw.quotaLimit === 'number' ? raw.quotaLimit : 0;
+    if (
+      response &&
+      (typeof response['quotaUsed'] === 'number' || typeof response['quotaLimit'] === 'number')
+    ) {
+      const used = typeof response['quotaUsed'] === 'number' ? response['quotaUsed'] : 0;
+      const limit = typeof response['quotaLimit'] === 'number' ? response['quotaLimit'] : 0;
       const remaining = limit - used;
       return {
         success: true,
@@ -234,7 +281,7 @@ export class ConverterService {
           usageCount: used,
           limit,
           remaining,
-          plan: typeof raw.plan === 'string' ? raw.plan : 'FREE',
+          plan: typeof response['plan'] === 'string' ? response['plan'] : 'FREE',
         },
       };
     }
@@ -268,9 +315,8 @@ export class ConverterService {
         data: response,
       };
       localStorage.setItem(this.QUOTA_CACHE_KEY, JSON.stringify(payload));
-    } catch (e) {
+    } catch {
       // ignore localStorage errors (SSR/private mode)
-      // console.debug('Failed to save quota cache', e);
     }
   }
 
@@ -285,7 +331,7 @@ export class ConverterService {
       if (!parsed || typeof parsed.ts !== 'number' || !parsed.data) return null;
       if (Date.now() - parsed.ts > this.QUOTA_CACHE_TTL_MS) return null;
       return parsed.data as QuotaStatusResponse;
-    } catch (e) {
+    } catch {
       return null;
     }
   }
@@ -296,7 +342,7 @@ export class ConverterService {
   clearQuotaCache(): void {
     try {
       localStorage.removeItem(this.QUOTA_CACHE_KEY);
-    } catch (e) {
+    } catch {
       // ignore
     }
   }
@@ -308,9 +354,10 @@ export class ConverterService {
     const url = `${this.baseUrl}/converter/quota-status?userId=${encodeURIComponent(this.userId)}`;
 
     // Attempt to include Firebase ID token when available to satisfy protected endpoints
-    const tokenPromise: Promise<string | null> = (this.auth && this.auth.currentUser && typeof this.auth.currentUser.getIdToken === 'function')
-      ? this.auth.currentUser.getIdToken()
-      : Promise.resolve(null);
+    const tokenPromise: Promise<string | null> =
+      this.auth && this.auth.currentUser && typeof this.auth.currentUser.getIdToken === 'function'
+        ? this.auth.currentUser.getIdToken()
+        : Promise.resolve(null);
 
     return from(tokenPromise).pipe(
       switchMap((token) => {
@@ -318,13 +365,13 @@ export class ConverterService {
         if (token) {
           headers['Authorization'] = `Bearer ${token}`;
         }
-        return this.http.get<any>(url, { headers }).pipe(
+        return this.http.get<unknown>(url, { headers }).pipe(
           map((raw) => this.mapToQuotaResponse(raw)),
           // Save mapped response to cache for offline/fallback
           map((mapped) => {
-            try {
-              if (mapped && mapped.success) this.saveQuotaToCache(mapped);
-            } catch {}
+            if (mapped.success) {
+              this.saveQuotaToCache(mapped);
+            }
             return mapped;
           }),
           catchError((err) => {

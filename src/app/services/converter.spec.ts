@@ -1,27 +1,43 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync, flushMicrotasks } from '@angular/core/testing';
+import { signal } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
+import { Auth } from '@angular/fire/auth';
 
-import { ConverterService, FileData } from './converter';
+import { ConverterService, FileData, QuotaStatusResponse } from './converter';
+import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
 
 describe('ConverterService', () => {
   let service: ConverterService;
   let httpMock: HttpTestingController;
+  let mockAuthService: { currentUser: ReturnType<typeof signal> };
 
-  beforeEach(() => {
-    // Clear localStorage before each test
-    localStorage.clear();
+  function configure(authValue?: Partial<Auth>): void {
+    mockAuthService = { currentUser: signal(null) };
 
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: AuthService, useValue: mockAuthService },
+        ...(authValue ? [{ provide: Auth, useValue: authValue }] : []),
+      ],
     });
+
     service = TestBed.inject(ConverterService);
     httpMock = TestBed.inject(HttpTestingController);
+  }
+
+  beforeEach(() => {
+    localStorage.clear();
+    configure();
   });
 
   afterEach(() => {
     httpMock.verify();
+    localStorage.clear();
+    TestBed.resetTestingModule();
   });
 
   it('should be created', () => {
@@ -40,15 +56,11 @@ describe('ConverterService', () => {
   });
 
   it('should reuse existing userId from localStorage', () => {
-    // Clear existing service and set a userId in localStorage with correct key
     const existingId = 'anon_test_12345';
     localStorage.setItem('photocalia_anonymous_id', existingId);
 
-    // Create new TestBed configuration with fresh service
     TestBed.resetTestingModule();
-    TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
-    });
+    configure();
     const newService = TestBed.inject(ConverterService);
     const userId = (newService as unknown as { userId: string }).userId;
 
@@ -69,47 +81,61 @@ describe('ConverterService', () => {
     expect(req.request.body.files).toEqual(testFiles);
   });
 
-  it('maps simple remaining/limit shape to normalized response', (done) => {
+  it('maps simple remaining/limit shape to normalized response', fakeAsync(() => {
     const mock = { remaining: 5, limit: 20 };
+    let response: QuotaStatusResponse | undefined;
 
-    service.getQuotaStatus().subscribe((res: any) => {
-      expect(res.success).toBeTrue();
-      expect(res.quota.remaining).toBe(5);
-      expect(res.quota.limit).toBe(20);
-      done();
+    service.getQuotaStatus().subscribe((res) => {
+      response = res;
     });
 
+    flushMicrotasks();
     const req = httpMock.expectOne((r) => r.url.includes('/converter/quota-status'));
     expect(req.request.method).toBe('GET');
     req.flush(mock);
-  });
+    flushMicrotasks();
 
-  it('includes Authorization header when token available', (done) => {
-    // Provide a fake auth object on the service with currentUser.getIdToken
-    (service as any).auth = { currentUser: { getIdToken: () => Promise.resolve('fake-token') } };
+    expect(response?.success).toBeTrue();
+    expect(response?.quota.remaining).toBe(5);
+    expect(response?.quota.limit).toBe(20);
+  }));
 
-    service.getQuotaStatus().subscribe(() => done());
+  it('includes Authorization header when token available', fakeAsync(() => {
+    TestBed.resetTestingModule();
+    configure({
+      currentUser: { getIdToken: () => Promise.resolve('fake-token') } as Auth['currentUser'],
+    });
 
+    service.getQuotaStatus().subscribe();
+
+    flushMicrotasks();
     const req = httpMock.expectOne((r) => r.url.includes('/converter/quota-status'));
     expect(req.request.headers.get('Authorization')).toBe('Bearer fake-token');
     req.flush({ remaining: 1, limit: 10 });
-  });
+    flushMicrotasks();
+  }));
 
-  it('returns cached value on HTTP error', (done) => {
-    // Prime cache
+  it('returns cached value on HTTP error', fakeAsync(() => {
     const cached = {
       success: true,
       enabled: true,
       quota: { usageCount: 2, limit: 10, remaining: 8, plan: 'FREE' },
     };
-    localStorage.setItem('photocalia_quota_cache_v1', JSON.stringify({ ts: Date.now(), data: cached }));
+    localStorage.setItem(
+      'photocalia_quota_cache_v1',
+      JSON.stringify({ ts: Date.now(), data: cached }),
+    );
+    let response: QuotaStatusResponse | undefined;
 
     service.getQuotaStatus().subscribe((res) => {
-      expect(res).toEqual(cached);
-      done();
+      response = res;
     });
 
+    flushMicrotasks();
     const req = httpMock.expectOne((r) => r.url.includes('/converter/quota-status'));
     req.flush('Server error', { status: 500, statusText: 'Server Error' });
-  });
+    flushMicrotasks();
+
+    expect(response).toEqual(cached);
+  }));
 });
