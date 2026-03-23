@@ -200,6 +200,20 @@
                       >{{ quotaRemainingVal }} remaining out of {{ quotaLimitVal }} total</span
                     >
                   </div>
+                } @else {
+                  <div
+                    class="quota-info mt-1 small text-danger align-self-center text-center"
+                    role="alert"
+                    aria-live="assertive"
+                  >
+                    <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                    <span class="fw-semibold">{{ 'home.quota.exhausted' | translate }}</span>
+                    <a
+                      href="mailto:support@photocalia.com"
+                      class="ms-1 text-danger text-decoration-underline"
+                      >{{ 'home.quota.upgrade' | translate }}</a
+                    >
+                  </div>
                 }
               </div>
             </div>

@@ -73,6 +73,8 @@
   "home.quota.plan": "Plan",
   "home.quota.usage": "Usage",
   "home.quota.left": "left this month",
+  "home.quota.exhausted": "Monthly limit reached.",
+  "home.quota.upgrade": "Contact us to upgrade your plan.",
   "converter.title": "Calendar Converter",
   "converter.loading": "Loading...",
   "converter.upload.drop": "Drop photos, images, or PDFs here or",

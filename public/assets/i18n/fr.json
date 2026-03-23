@@ -73,6 +73,8 @@
   "home.quota.plan": "Abonnement",
   "home.quota.usage": "Utilisation",
   "home.quota.left": "restant ce mois",
+  "home.quota.exhausted": "Limite mensuelle atteinte.",
+  "home.quota.upgrade": "Contactez-nous pour passer à un forfait supérieur.",
   "converter.title": "Convertisseur de Calendrier",
   "converter.loading": "Chargement...",
   "converter.upload.drop": "Déposez des photos, images ou PDF ici ou",
