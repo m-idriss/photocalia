@@ -540,7 +540,6 @@
 
   .ai-step-item {
     padding: 1.5rem;
-    flex-direction: column;
     align-items: flex-start;
   }
 
@@ -585,7 +584,7 @@
   .benefits-list li {
     padding: 1rem 1.25rem;
     font-size: 1rem;
-    flex-direction: column;
+    flex-wrap: wrap;
     text-align: left;
   }
 
