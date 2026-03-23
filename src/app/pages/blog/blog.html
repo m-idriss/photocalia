@@ -8,7 +8,12 @@
       <p class="hero-subtitle">{{ 'blog.subtitle' | translate }}</p>
     </section>
 
-    <section class="articles-section" aria-label="Blog articles">
+    <section
+      class="articles-section"
+      appScrollReveal
+      appScrollRevealDirection="left"
+      aria-label="Blog articles"
+    >
       <div class="articles-grid">
         @for (article of articles; track article.slug) {
           <article class="article-card">
@@ -26,7 +31,9 @@
                 }}</span>
               </div>
               <h2 class="article-title">{{ article.translationKey + '.title' | translate }}</h2>
-              <p class="article-description">{{ article.translationKey + '.description' | translate }}</p>
+              <p class="article-description">
+                {{ article.translationKey + '.description' | translate }}
+              </p>
               <div class="article-tags">
                 @for (tag of article.tags; track tag) {
                   <span class="tag">{{ tag }}</span>
@@ -39,7 +46,13 @@
       </div>
     </section>
 
-    <section class="cta-section" aria-labelledby="blog-cta-title">
+    <section
+      class="cta-section"
+      appScrollReveal
+      appScrollRevealDirection="right"
+      [appScrollRevealDelay]="100"
+      aria-labelledby="blog-cta-title"
+    >
       <h2 id="blog-cta-title" class="cta-title">{{ 'blog.cta.title' | translate }}</h2>
       <p class="cta-description">{{ 'blog.cta.description' | translate }}</p>
       <a [routerLink]="'/' | localizeRoute" class="cta-button">

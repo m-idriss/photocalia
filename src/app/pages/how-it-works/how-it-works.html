@@ -10,7 +10,12 @@
     </section>
 
     <!-- 1. Intro - Problem → Solution -->
-    <section class="intro-section" aria-labelledby="intro-title">
+    <section
+      class="intro-section"
+      appScrollReveal
+      appScrollRevealDirection="left"
+      aria-labelledby="intro-title"
+    >
       <h2 id="intro-title" class="section-title">{{ 'howitworks.intro.title' | translate }}</h2>
       <div class="section-content">
         <p>{{ 'howitworks.intro.p1' | translate }}</p>
@@ -19,7 +24,13 @@
     </section>
 
     <!-- 2. How It Works with AI - 3 Steps -->
-    <section class="ai-steps-section" aria-labelledby="ai-steps-title">
+    <section
+      class="ai-steps-section"
+      appScrollReveal
+      appScrollRevealDirection="right"
+      [appScrollRevealDelay]="100"
+      aria-labelledby="ai-steps-title"
+    >
       <h2 id="ai-steps-title" class="section-title">{{ 'howitworks.steps.title' | translate }}</h2>
       <div class="ai-steps-container">
         <div class="ai-step-item">
@@ -49,7 +60,13 @@
     </section>
 
     <!-- 3. Common Real-Life Uses -->
-    <section class="use-cases-section" aria-labelledby="use-cases-title">
+    <section
+      class="use-cases-section"
+      appScrollReveal
+      appScrollRevealDirection="left"
+      [appScrollRevealDelay]="100"
+      aria-labelledby="use-cases-title"
+    >
       <h2 id="use-cases-title" class="section-title">
         {{ 'howitworks.usecases.title' | translate }}
       </h2>
@@ -109,7 +126,13 @@
     </section>
 
     <!-- 4. Why Instant Capture Prevents Forgetting -->
-    <section class="instant-capture-section" aria-labelledby="instant-capture-title">
+    <section
+      class="instant-capture-section"
+      appScrollReveal
+      appScrollRevealDirection="right"
+      [appScrollRevealDelay]="100"
+      aria-labelledby="instant-capture-title"
+    >
       <h2 id="instant-capture-title" class="section-title">
         {{ 'howitworks.instant.title' | translate }}
       </h2>
@@ -121,7 +144,13 @@
     </section>
 
     <!-- 5. Benefits -->
-    <section class="benefits-section" aria-labelledby="benefits-title">
+    <section
+      class="benefits-section"
+      appScrollReveal
+      appScrollRevealDirection="left"
+      [appScrollRevealDelay]="100"
+      aria-labelledby="benefits-title"
+    >
       <h2 id="benefits-title" class="section-title">
         {{ 'howitworks.benefits.title' | translate }}
       </h2>
@@ -172,7 +201,13 @@
     </section>
 
     <!-- 6. FAQ -->
-    <section class="faq-section" aria-labelledby="faq-title">
+    <section
+      class="faq-section"
+      appScrollReveal
+      appScrollRevealDirection="right"
+      [appScrollRevealDelay]="100"
+      aria-labelledby="faq-title"
+    >
       <h2 id="faq-title" class="section-title">{{ 'howitworks.faq.title' | translate }}</h2>
       <div class="faq-container">
         <div class="faq-item">
@@ -208,7 +243,13 @@
     </section>
 
     <!-- 7. Closing CTA -->
-    <section class="cta-section" aria-labelledby="cta-title">
+    <section
+      class="cta-section"
+      appScrollReveal
+      appScrollRevealDirection="left"
+      [appScrollRevealDelay]="100"
+      aria-labelledby="cta-title"
+    >
       <div class="cta-content">
         <h2 id="cta-title" class="cta-title">{{ 'howitworks.cta.title' | translate }}</h2>
         <p class="cta-description">{{ 'howitworks.cta.description' | translate }}</p>

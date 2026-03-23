@@ -256,7 +256,12 @@
       [class.hidden-when-calendar]="calendarStateService.isVisible() && isDesktop()"
     >
       <!-- How It Works Section -->
-      <section class="how-it-works-section" aria-labelledby="how-it-works-title">
+      <section
+        class="how-it-works-section"
+        appScrollReveal
+        appScrollRevealDirection="left"
+        aria-labelledby="how-it-works-title"
+      >
         <h2
           id="how-it-works-title"
           class="section-title"
@@ -315,7 +320,13 @@
       </section>
 
       <!-- What Can You Convert Section -->
-      <section class="convert-section" aria-labelledby="convert-title">
+      <section
+        class="convert-section"
+        appScrollReveal
+        appScrollRevealDirection="right"
+        [appScrollRevealDelay]="100"
+        aria-labelledby="convert-title"
+      >
         <h2 id="convert-title" class="section-title">{{ 'home.convert.title' | translate }}</h2>
         <p class="section-description" [innerHTML]="'home.convert.description' | translate"></p>
         <div class="convert-grid">
@@ -347,7 +358,13 @@
       </section>
 
       <!-- Who Is It For Section -->
-      <section class="audience-section" aria-labelledby="audience-title">
+      <section
+        class="audience-section"
+        appScrollReveal
+        appScrollRevealDirection="left"
+        [appScrollRevealDelay]="100"
+        aria-labelledby="audience-title"
+      >
         <h2
           id="audience-title"
           class="section-title"
@@ -375,13 +392,25 @@
       </section>
 
       <!-- Pricing Section -->
-      <section class="pricing-section" aria-labelledby="pricing-title">
+      <section
+        class="pricing-section"
+        appScrollReveal
+        appScrollRevealDirection="right"
+        [appScrollRevealDelay]="100"
+        aria-labelledby="pricing-title"
+      >
         <h2 id="pricing-title" class="section-title">{{ 'home.pricing.title' | translate }}</h2>
         <p class="section-description">{{ 'home.pricing.description' | translate }}</p>
       </section>
 
       <!-- Why PhotoCalia Section -->
-      <section class="why-photocalia-section" aria-labelledby="why-photocalia-title">
+      <section
+        class="why-photocalia-section"
+        appScrollReveal
+        appScrollRevealDirection="left"
+        [appScrollRevealDelay]="100"
+        aria-labelledby="why-photocalia-title"
+      >
         <h2
           id="why-photocalia-title"
           class="section-title"
@@ -431,7 +460,13 @@
       </section>
 
       <!-- FAQ Section -->
-      <section class="faq-section" aria-labelledby="faq-title">
+      <section
+        class="faq-section"
+        appScrollReveal
+        appScrollRevealDirection="right"
+        [appScrollRevealDelay]="100"
+        aria-labelledby="faq-title"
+      >
         <h2 id="faq-title" class="section-title">{{ 'home.faq.title' | translate }}</h2>
         <div class="faq-list">
           @for (i of [1, 2, 3, 4, 5]; track i) {

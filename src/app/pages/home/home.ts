@@ -20,6 +20,7 @@ import { CalendarStateService } from '../../services/calendar-state.service';
 import { AuthService } from '../../services/auth.service';
 import { CalendarEvent } from '../../models';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { ScrollRevealDirective } from '../../shared/directives';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
     NgbProgressbarModule,
     NgbTooltipModule,
     TranslatePipe,
+    ScrollRevealDirective,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',

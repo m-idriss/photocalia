@@ -1086,3 +1086,52 @@ body > .tooltip,
 body > ngb-tooltip-window {
   z-index: 11500 !important;
 }
+
+/* ========================
+   Scroll Reveal Animations
+   ======================== */
+.scroll-reveal-container,
+.marketing-sections,
+.how-it-works-container,
+.about-container,
+.blog-container {
+  overflow-x: clip;
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.6s var(--ease);
+  transition-delay: var(--scroll-reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal--up {
+  transform: translateY(30px);
+}
+
+.scroll-reveal--down {
+  transform: translateY(-30px);
+}
+
+.scroll-reveal--left {
+  transform: translateX(-30px);
+}
+
+.scroll-reveal--right {
+  transform: translateX(30px);
+}
+
+.scroll-reveal--visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
