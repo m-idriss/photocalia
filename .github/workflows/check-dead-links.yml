@@ -42,14 +42,15 @@ jobs:
             --exclude-link-local
             --exclude "^http://localhost"
             --exclude "^file://"
+            --exclude "^data:"
             --user-agent "Mozilla/5.0 (compatible; converter-link-checker/1.0)"
             --cache
             --max-cache-age 86400sec
             README.md
-            CONTRIBUTING.md
-            ROADMAP.md
-            SECURITY.md
-            PWA_VISUAL_GUIDE.md
+            docs/CONTRIBUTING.md
+            docs/ROADMAP.md
+            .github/SECURITY.md
+            docs/PWA_VISUAL_GUIDE.md
             docs/API.md
             docs/COMPONENTS.md
             docs/CONVERTER.md
@@ -78,10 +79,10 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Checked files:**" >> $GITHUB_STEP_SUMMARY
           echo "- README.md (main documentation)" >> $GITHUB_STEP_SUMMARY
-          echo "- CONTRIBUTING.md (contribution guidelines)" >> $GITHUB_STEP_SUMMARY
-          echo "- ROADMAP.md (project roadmap)" >> $GITHUB_STEP_SUMMARY
-          echo "- SECURITY.md (security policies)" >> $GITHUB_STEP_SUMMARY
-          echo "- PWA_VISUAL_GUIDE.md (PWA visual guide)" >> $GITHUB_STEP_SUMMARY
+          echo "- docs/CONTRIBUTING.md (contribution guidelines)" >> $GITHUB_STEP_SUMMARY
+          echo "- docs/ROADMAP.md (project roadmap)" >> $GITHUB_STEP_SUMMARY
+          echo "- .github/SECURITY.md (security policies)" >> $GITHUB_STEP_SUMMARY
+          echo "- docs/PWA_VISUAL_GUIDE.md (PWA visual guide)" >> $GITHUB_STEP_SUMMARY
           echo "- docs/API.md (API documentation)" >> $GITHUB_STEP_SUMMARY
           echo "- docs/COMPONENTS.md (component documentation)" >> $GITHUB_STEP_SUMMARY
           echo "- docs/CONVERTER.md (converter documentation)" >> $GITHUB_STEP_SUMMARY
@@ -126,10 +127,10 @@ jobs:
               '### Files to Check',
               '',
               '- `README.md` - Main documentation',
-              '- `CONTRIBUTING.md` - Contribution guidelines',
-              '- `ROADMAP.md` - Project roadmap',
-              '- `SECURITY.md` - Security policies',
-              '- `PWA_VISUAL_GUIDE.md` - PWA visual guide',
+              '- `docs/CONTRIBUTING.md` - Contribution guidelines',
+              '- `docs/ROADMAP.md` - Project roadmap',
+              '- `.github/SECURITY.md` - Security policies',
+              '- `docs/PWA_VISUAL_GUIDE.md` - PWA visual guide',
               '- `docs/API.md` - API documentation',
               '- `docs/COMPONENTS.md` - Component documentation',
               '- `docs/CONVERTER.md` - Converter documentation',
