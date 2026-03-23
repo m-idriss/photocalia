@@ -663,7 +663,9 @@
     position: sticky;
     top: 2rem;
     max-height: calc(100vh - 6rem);
-    overflow: visible;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 }
 
