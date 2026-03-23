@@ -195,12 +195,14 @@
 .calendar-footer {
   padding: var(--space-sm) var(--space-md);
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-sm);
   flex-shrink: 0;
 }
 
 .action-btn {
   flex: 1;
+  min-width: 0;
   padding: 0.65rem 1.25rem;
   font-size: 0.875rem;
   font-weight: 600;
@@ -213,6 +215,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     @media (prefers-reduced-motion: no-preference) {
@@ -230,43 +235,51 @@
   background: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
   box-shadow: 0 2px 8px rgba(var(--gradient-blue), 0.25);
 
-  &:hover {
+  &:hover:not(:disabled) {
     background: linear-gradient(135deg, var(--color-indigo-600), var(--ct-secondary, #7c3aed));
     box-shadow: var(--shadow-glow);
+  }
+
+  &:disabled {
+    background: transparent;
+    border: 1.5px solid var(--glass-border);
+    color: var(--text-secondary);
+    box-shadow: none;
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 }
 
 .export-confirm-banner {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
   padding: 0.6rem 0.75rem;
   background: rgba(255, 193, 7, 0.08);
   border: 1px solid rgba(255, 193, 7, 0.2);
   border-radius: var(--radius-md);
   width: 100%;
-}
-
-.confirm-warning {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--text-secondary);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .export-confirm-label {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-primary);
   cursor: pointer;
 
   input[type='checkbox'] {
     cursor: pointer;
     width: 1rem;
     height: 1rem;
+    margin-top: 0.15rem;
+    flex-shrink: 0;
     accent-color: var(--ct-primary, #4f46e5);
+  }
+
+  strong {
+    color: var(--accent-color);
+    font-weight: 600;
   }
 }
 

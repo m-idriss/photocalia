@@ -63,17 +63,22 @@
 
         <!-- Footer Actions -->
         <div class="calendar-footer">
-          @if (showExportConfirm() && !calendarStateService.extractionConfirmed()) {
-            <div class="export-confirm-banner" @slideDown>
-              <span class="confirm-warning">⚠️ AI-extracted events may contain errors</span>
-              <label class="export-confirm-label">
-                <input type="checkbox" (change)="confirmExtraction($any($event.target).checked)" />
-                I have verified the events — export now
-              </label>
-            </div>
-          }
+          <div class="export-confirm-banner">
+            <label class="export-confirm-label">
+              <input
+                type="checkbox"
+                [checked]="calendarStateService.extractionConfirmed()"
+                (change)="confirmExtraction($any($event.target).checked)"
+              />
+              <span>
+                <strong>⚠️ AI-extracted events may contain errors</strong> (dates, times,
+                locations). I have verified the events and confirm they are correct.
+              </span>
+            </label>
+          </div>
           <button
             class="action-btn export-btn"
+            [disabled]="!calendarStateService.extractionConfirmed()"
             (click)="handleExport()"
             [attr.aria-label]="'calendar.export' | translate"
           >

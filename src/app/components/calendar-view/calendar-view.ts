@@ -14,7 +14,6 @@ import {
   AfterViewInit,
   ElementRef,
 } from '@angular/core';
-import { trigger, transition, style, animate } from '@angular/animations';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import {
   CalendarOptions,
@@ -60,15 +59,6 @@ interface EventDetail {
   imports: [CommonModule, TranslatePipe],
   templateUrl: './calendar-view.html',
   styleUrl: './calendar-view.scss',
-  animations: [
-    trigger('slideDown', [
-      transition(':enter', [
-        style({ opacity: 0, height: 0, overflow: 'hidden' }),
-        animate('200ms ease-out', style({ opacity: 1, height: '*' })),
-      ]),
-      transition(':leave', [animate('150ms ease-in', style({ opacity: 0, height: 0 }))]),
-    ]),
-  ],
 })
 export class CalendarView implements AfterViewInit {
   // Inputs
@@ -80,9 +70,6 @@ export class CalendarView implements AfterViewInit {
   readonly visibleChange = output<boolean>();
   readonly eventsChange = output<CalendarEvent[]>();
   readonly exportIcs = output<void>();
-
-  // Show inline confirmation checkbox
-  protected readonly showExportConfirm = signal(false);
 
   // Computed stats (guard against required input not yet resolved)
   protected readonly eventCount = computed(() => {
@@ -482,20 +469,12 @@ export class CalendarView implements AfterViewInit {
    * Export events to ICS
    */
   protected handleExport(): void {
-    if (!this.calendarStateService.extractionConfirmed()) {
-      this.showExportConfirm.set(true);
-      return;
-    }
+    if (!this.calendarStateService.extractionConfirmed()) return;
     this.exportIcs.emit();
   }
 
   protected confirmExtraction(checked: boolean): void {
     this.calendarStateService.extractionConfirmed.set(checked);
-    if (checked) {
-      this.showExportConfirm.set(false);
-      // Auto-export once confirmed
-      this.exportIcs.emit();
-    }
   }
 
   /**

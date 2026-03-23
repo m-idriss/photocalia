@@ -300,12 +300,6 @@
 
     <!-- Extracted Events - Apple Calendar Style with Editing -->
     @if (extractedEvents().length > 0) {
-      <!-- AI extraction verification note -->
-      <div class="extraction-note" role="note" aria-live="polite">
-        <strong>Note:</strong> Events are automatically extracted by AI and may contain mistakes
-        (dates, times, locations). Please verify each event before saving or exporting.
-      </div>
-
       <!-- Primary Action Button - Prominent Position (Mobile/Tablet only) -->
       <div class="primary-actions mobile-tablet-calendar-button">
         <button
@@ -517,19 +511,26 @@
         </div>
       </section>
 
+      <!-- AI extraction verification checkbox -->
+      <div class="extraction-note" role="note" aria-live="polite">
+        <label class="confirm-label">
+          <input
+            type="checkbox"
+            [checked]="extractionConfirmed()"
+            (change)="onExtractionConfirmed($any($event.target).checked)"
+          />
+          <span>
+            <strong>⚠️ AI-extracted events may contain errors</strong> (dates, times, locations). I
+            have verified the events and confirm they are correct.
+          </span>
+        </label>
+      </div>
+
       <!-- Action Buttons -->
       <nav class="actions" aria-label="Calendar actions">
-        @if (showDownloadConfirm() && !extractionConfirmed()) {
-          <div class="download-confirm-banner">
-            <span class="confirm-warning">⚠️ AI-extracted events may contain errors</span>
-            <label class="confirm-label">
-              <input type="checkbox" (change)="confirmAndDownload($any($event.target).checked)" />
-              I have verified the events — download now
-            </label>
-          </div>
-        }
         <button
           class="action-button download btn btn-success"
+          [disabled]="!extractionConfirmed()"
           (click)="downloadIcs()"
           aria-label="Download calendar file"
           appTooltip="Download your calendar as .ics file"
