@@ -5,7 +5,6 @@
 :host {
   display: flex;
   flex-direction: column;
-  flex: 1;
   min-height: 0;
 }
 
@@ -186,7 +185,6 @@
 
 /* Calendar body — holds calendar + popover */
 .calendar-body {
-  flex: 1;
   min-height: 0;
   overflow: auto;
   position: relative;
@@ -342,7 +340,6 @@
    ======================== */
 .calendar-inline-container {
   position: relative;
-  flex: 1;
   min-height: 0;
   background: var(--ct-surface, #ffffff);
   border: 1px solid var(--ct-border, #e2e8f0);

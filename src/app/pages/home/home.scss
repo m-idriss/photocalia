@@ -662,7 +662,6 @@
     // Sticky positioning on desktop so calendar stays visible while scrolling
     position: sticky;
     top: 2rem;
-    height: calc(100vh - 6rem);
     max-height: calc(100vh - 6rem);
     overflow: hidden;
     display: flex;
