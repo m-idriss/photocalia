@@ -17,20 +17,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Enable Corepack
-        run: corepack enable
-
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm ci
 
       - name: Build application
-        run: yarn build
+        run: npm run build
 
       - name: Auto-accept cookies for screenshots
         run: |
@@ -39,7 +36,7 @@ jobs:
       - name: Start server in background
         run: |
           cd dist/photocalia/browser
-          yarn dlx serve -s . -l 4200 &
+          npx serve -s . -l 4200 &
           echo "Waiting for server to start..."
           sleep 15
           echo "Server should be ready now"

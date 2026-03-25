@@ -10,6 +10,10 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+yarn.lock
+.pnp.*
+.yarn/
+.yarnrc.yml
 
 # IDEs and editors
 .idea/
@@ -50,8 +54,6 @@ src/environments/environment.local.ts
 firebase-debug.log
 .vercel
 .env*.local
-package-lock.json
-
 # Playwright
 /test-results/
 /playwright-report/

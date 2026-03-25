@@ -19,34 +19,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Enable Corepack
-        run: corepack enable
-
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'npm'
 
-      - name: Install dependencies (yarn)
-        run: yarn install --immutable
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Run security audit (auto-detect lockfile)
+      - name: Run security audit
         id: run-audit
         run: |
-          echo "Detecting lockfile..."
-          # produce machine-readable audit JSON into audit.json; do not fail immediately
-          if [ -f yarn.lock ]; then
-            echo "yarn.lock detected — running yarn audit (JSON)"
-            yarn audit --json > audit.json 2>&1 || true
-          elif [ -f package-lock.json ]; then
-            echo "package-lock.json detected — running npm audit (JSON)"
-            npm ci
-            npm audit --json > audit.json 2>&1 || true
-          else
-            echo "No lockfile detected — generating package-lock.json and running npm audit (best-effort)"
-            npm i --package-lock-only
-            npm audit --json > audit.json 2>&1 || true
-          fi
+          npm audit --json > audit.json 2>&1 || true
           # Inspect audit.json and fail only if any advisory has severity 'high' or 'critical'
           node -e "const fs=require('fs');const p='audit.json';let out='';try{out=fs.readFileSync(p,'utf8')}catch(e){console.error('No audit output');process.exit(0);}const lines=out.split(/\n/).filter(Boolean);let high=false;for(const l of lines){try{const j=JSON.parse(l);const adv=j.advisory||j.data?.advisory||j;const sev=(adv&&adv.severity)||null;if(sev&&['high','critical'].includes(String(sev).toLowerCase())){high=true;break;}}catch(e){} }if(high){console.error('High/critical vulnerabilities found');process.exit(1);}console.log('No high/critical vulnerabilities found');process.exit(0);"

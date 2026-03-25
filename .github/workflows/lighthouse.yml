@@ -17,20 +17,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Enable Corepack
-        run: corepack enable
-
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm ci
 
       - name: Build production
-        run: yarn build --configuration=production
+        run: npm run build -- --configuration=production
         env:
           FIREBASE_API_KEY: 'placeholder'
           FIREBASE_PROJECT_ID: 'placeholder'
