@@ -501,7 +501,9 @@ export class ConverterService {
       return images;
     } catch (error) {
       console.error('Error converting PDF to images:', error);
-      throw new Error('Failed to convert PDF to images. Please ensure the PDF is valid.');
+      throw new Error('Failed to convert PDF to images. Please ensure the PDF is valid.', {
+        cause: error,
+      });
     }
   }
 
