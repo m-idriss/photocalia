@@ -81,14 +81,14 @@
     "@angular/cli": "21.2.3",
     "@angular/compiler-cli": "21.2.5",
     "@angular/localize": "21.2.5",
-    "@eslint/js": "9.39.4",
+    "@eslint/js": "10.0.1",
     "@playwright/test": "^1.58.2",
     "@types/jasmine": "~6.0.0",
     "@types/node": "^25.2.1",
-    "angular-eslint": "21.2.0",
-    "eslint": "9.39.4",
+    "angular-eslint": "21.3.1",
+    "eslint": "10.1.0",
     "husky": "^9.1.7",
-    "jasmine-core": "~6.0.1",
+    "jasmine-core": "~6.1.0",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
@@ -96,7 +96,7 @@
     "karma-jasmine-html-reporter": "~2.2.0",
     "lint-staged": "^16.2.7",
     "prettier": "^3.8.1",
-    "typescript": "~5.9.3",
+    "typescript": "~6.0.2",
     "typescript-eslint": "8.57.2"
   }
 }
