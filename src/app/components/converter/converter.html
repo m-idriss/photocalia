@@ -300,16 +300,16 @@
 
     <!-- Extracted Events - Apple Calendar Style with Editing -->
     @if (extractedEvents().length > 0) {
-      <!-- Primary Action Button - Prominent Position (Mobile/Tablet only) -->
+      <!-- Preview Button - Prominent Position (Mobile/Tablet only) -->
       <div class="primary-actions mobile-tablet-calendar-button">
         <button
           class="action-button calendar-view btn btn-primary"
           (click)="openCalendarView()"
-          aria-label="Open interactive calendar view"
-          appTooltip="View and edit events in an interactive calendar"
+          aria-label="Preview calendar"
+          appTooltip="Preview events in calendar view"
           appTooltipPlacement="top"
         >
-          📅 View Calendar
+          📅 Preview Calendar
         </button>
       </div>
 
