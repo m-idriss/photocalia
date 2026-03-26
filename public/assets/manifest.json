@@ -37,12 +37,6 @@
       "sizes": "1170x2532",
       "type": "image/jpeg",
       "form_factor": "narrow"
-    },
-    {
-      "src": "screenshots/desktopPage1920x1080.jpeg",
-      "sizes": "1920x1080",
-      "type": "image/jpeg",
-      "form_factor": "wide"
     }
   ],
   "categories": ["productivity", "utilities", "business"],

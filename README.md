@@ -59,11 +59,6 @@ src/app/
 
 <div align="center">
 
-### 📅 AI Calendar Converter
-
-![Photocalia Desktop Screenshot](public/assets/screenshots/desktopPage1920x1080.jpeg)
-*Transform images and PDFs into calendar events with AI-powered extraction*
-
 ### 📱 Mobile Experience
 
 <img src="public/assets/screenshots/iPhone_13_Pro_Max.jpeg" alt="Photocalia Mobile Screenshot" width="375" />

@@ -86,23 +86,13 @@ jobs:
 
       - name: Verify screenshots have content
         run: |
-          echo "Checking desktop screenshot..."
-          identify -verbose screenshots/desktopPage1920x1080.jpeg | grep -E "Geometry|Format"
-
           echo "Checking mobile screenshot..."
           identify -verbose screenshots/iPhone_13_Pro_Max.jpeg | grep -E "Geometry|Format"
 
           # Check file sizes to ensure they're not just empty/background images
-          DESKTOP_SIZE=$(stat -f%z screenshots/desktopPage1920x1080.jpeg 2>/dev/null || stat -c%s screenshots/desktopPage1920x1080.jpeg)
           MOBILE_SIZE=$(stat -f%z screenshots/iPhone_13_Pro_Max.jpeg 2>/dev/null || stat -c%s screenshots/iPhone_13_Pro_Max.jpeg)
 
-          echo "Desktop screenshot size: $DESKTOP_SIZE bytes"
           echo "Mobile screenshot size: $MOBILE_SIZE bytes"
-
-          # Minimum expected size (screenshots with content should be > 50KB)
-          if [ $DESKTOP_SIZE -lt 51200 ]; then
-            echo "WARNING: Desktop screenshot seems too small (< 50KB), might be empty"
-          fi
 
           if [ $MOBILE_SIZE -lt 51200 ]; then
             echo "WARNING: Mobile screenshot seems too small (< 50KB), might be empty"
@@ -113,7 +103,6 @@ jobs:
       - name: Move screenshots into public/assets/screenshots
         run: |
           mkdir -p public/assets/screenshots
-          mv screenshots/desktopPage1920x1080.jpeg public/assets/screenshots/
           mv screenshots/iPhone_13_Pro_Max.jpeg public/assets/screenshots/
 
       - name: Create Pull Request to main
