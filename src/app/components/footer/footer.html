@@ -5,7 +5,14 @@
       <!-- Brand & Description (Left Column) -->
       <div class="footer-brand">
         <a [routerLink]="'/' | localizeRoute" class="footer-logo">
-          <img src="assets/logo.png" alt="" class="logo-img" aria-hidden="true" />
+          <img
+            src="assets/logo.png"
+            alt=""
+            class="logo-img"
+            aria-hidden="true"
+            width="180"
+            height="180"
+          />
           <span class="logo-text">PhotoCalia</span>
         </a>
         <p class="footer-description">{{ 'footer.description' | translate }}</p>
@@ -20,9 +27,13 @@
               @for (link of section.links; track link.label) {
                 <li>
                   @if (link.action) {
-                    <button type="button" class="footer-link footer-link-btn" (click)="handleLinkAction(link.action)">{{
-                      link.label | translate
-                    }}</button>
+                    <button
+                      type="button"
+                      class="footer-link footer-link-btn"
+                      (click)="handleLinkAction(link.action)"
+                    >
+                      {{ link.label | translate }}
+                    </button>
                   } @else if (link.isInternal) {
                     <a [routerLink]="link.url! | localizeRoute" class="footer-link">{{
                       link.label | translate
@@ -47,7 +58,9 @@
     <!-- Bottom row: copyright, version, social -->
     <div class="footer-bottom">
       <div class="footer-legal">
-        <span class="copyright">© {{ currentYear }} PhotoCalia. {{ 'footer.copyright' | translate }}</span>
+        <span class="copyright"
+          >© {{ currentYear }} PhotoCalia. {{ 'footer.copyright' | translate }}</span
+        >
         <a
           [href]="releaseUrl"
           target="_blank"
@@ -57,7 +70,7 @@
         >
           Version {{ appVersion }}
         </a>
-</div>
+      </div>
 
       <div class="footer-social">
         @for (social of socialLinks; track social.url) {
