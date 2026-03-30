@@ -407,6 +407,6 @@ SCSS variables used:
 ## References
 
 - [RFC 5545 - iCalendar Specification](https://datatracker.ietf.org/doc/html/rfc5545)
-- [OpenAI Vision API](https://platform.openai.com/docs/guides/images-vision)
+- [OpenAI Vision API](https://developers.openai.com/api/docs/guides/images-vision)
 - [Firebase Functions](https://firebase.google.com/docs/functions)
 - [ICS Format Guide](https://icalendar.org/)
