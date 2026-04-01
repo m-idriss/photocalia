@@ -2,6 +2,7 @@ import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StatsService, Statistics } from '../../services/stats.service';
 import { LanguageService } from '../../services/language.service';
+import { LoggerService } from '../../services/logger.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 /**
@@ -17,6 +18,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 })
 export class Stats implements OnInit {
   private readonly statsService = inject(StatsService);
+  private readonly logger = inject(LoggerService);
   readonly lang = inject(LanguageService);
 
   // Signals for reactive state
@@ -55,7 +57,7 @@ export class Stats implements OnInit {
         this.animateCounter(this.timeSavedWorkdays(), this.timeSavedWorkdays);
       },
       error: (err) => {
-        console.error('Failed to load statistics:', err);
+        this.logger.error('Failed to load statistics', 'Stats', err);
         this.hasError.set(true);
         this.loading.set(false);
       },

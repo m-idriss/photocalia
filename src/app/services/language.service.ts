@@ -2,6 +2,7 @@ import { Injectable, signal, inject, NgZone, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoggerService } from './logger.service';
 
 export type SupportedLanguage = 'en' | 'fr';
 
@@ -24,6 +25,7 @@ export class LanguageService {
   private readonly ngZone = inject(NgZone);
   private readonly router = inject(Router);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly logger = inject(LoggerService);
 
   readonly translations = signal<Record<string, string>>({});
   readonly currentLang = signal<SupportedLanguage>(this.getInitialLanguage());
@@ -106,7 +108,7 @@ export class LanguageService {
         });
       },
       error: (err) => {
-        console.error(`[LanguageService] Failed to load language "${lang}":`, err);
+        this.logger.error(`Failed to load language "${lang}"`, 'LanguageService', err);
       },
     });
   }

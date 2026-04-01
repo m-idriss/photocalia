@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { PDF_CONVERSION_CONFIG, CALENDAR_CONFIG } from '../constants';
 import { AuthService } from './auth.service';
 import { Auth } from '@angular/fire/auth';
+import { LoggerService } from './logger.service';
 
 /**
  * Request payload for ICS conversion
@@ -90,6 +91,7 @@ export class ConverterService {
   private readonly http = inject(HttpClient);
   private readonly authService = inject(AuthService);
   private readonly auth = inject(Auth, { optional: true });
+  private readonly logger = inject(LoggerService);
   private readonly baseUrl = environment.apiUrl;
   private userId: string;
 
@@ -500,7 +502,7 @@ export class ConverterService {
 
       return images;
     } catch (error) {
-      console.error('Error converting PDF to images:', error);
+      this.logger.error('Error converting PDF to images', 'ConverterService', error);
       throw new Error('Failed to convert PDF to images. Please ensure the PDF is valid.', {
         cause: error,
       });

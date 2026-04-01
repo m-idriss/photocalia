@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { shareReplay, catchError, timeout } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
+import { LoggerService } from './logger.service';
 
 /**
  * Timeout for API calls in milliseconds.
@@ -40,6 +41,7 @@ export interface Statistics {
 })
 export class StatsService {
   private readonly http = inject(HttpClient);
+  private readonly logger = inject(LoggerService);
 
   private readonly endpoint = `${environment.apiUrl}/converter/statistics`;
   private statistics$?: Observable<Statistics>;
@@ -55,7 +57,7 @@ export class StatsService {
     this.statistics$ ??= this.http.get<Statistics>(this.endpoint).pipe(
       timeout(API_TIMEOUT_MS),
       catchError((err) => {
-        console.warn('Statistics API call failed or timed out:', err.message || err);
+        this.logger.warn('Statistics API call failed or timed out', 'StatsService', err.message || err);
         return of({ fileCount: 0, eventCount: 0, message: 'Statistics unavailable' });
       }),
       shareReplay(1),

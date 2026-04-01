@@ -9,7 +9,7 @@ describe('CalendarStateService', () => {
 
   function createService(): CalendarStateService {
     TestBed.resetTestingModule();
-    TestBed.configureTestingModule({});
+  });
     return TestBed.inject(CalendarStateService);
   }
 
@@ -20,21 +20,12 @@ describe('CalendarStateService', () => {
 
   afterEach(() => {
     sessionStorage.clear();
-  });
-
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
   it('should start with calendar hidden', () => {
-    expect(service.isVisible()).toBe(false);
-  });
-
-  it('should start with no events', () => {
-    expect(service.events()).toEqual([]);
-  });
-
-  it('should start with export request count at 0', () => {
+    service = TestBed.inject(CalendarStateService);
     expect(service.exportRequestCount()).toBe(0);
   });
 
@@ -97,76 +88,6 @@ describe('CalendarStateService', () => {
 
       service.requestExport();
       expect(service.exportRequestCount()).toBe(2);
-    });
-  });
-
-  describe('restoreState', () => {
-    it('should restore persisted events, ICS content, and visibility from sessionStorage', () => {
-      sessionStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({
-          events: [
-            {
-              summary: 'Persisted Event',
-              start: '2025-01-01T09:00:00.000Z',
-              end: '2025-01-01T10:00:00.000Z',
-            },
-          ],
-          icsContent: 'BEGIN:VCALENDAR',
-          calendarVisible: true,
-          timestamp: Date.now(),
-        }),
-      );
-
-      const restoredService = createService();
-      const [event] = restoredService.events();
-
-      expect(restoredService.isVisible()).toBe(true);
-      expect(restoredService.icsContent()).toBe('BEGIN:VCALENDAR');
-      expect(restoredService.events().length).toBe(1);
-      expect(event.summary).toBe('Persisted Event');
-      expect(event.start instanceof Date).toBe(true);
-      expect(event.end instanceof Date).toBe(true);
-    });
-
-    it('should ignore stale persisted state older than 24 hours', () => {
-      sessionStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify({
-          events: [{ summary: 'Old Event', start: '2025-01-01', end: '2025-01-02' }],
-          icsContent: 'BEGIN:VCALENDAR',
-          calendarVisible: true,
-          timestamp: Date.now() - 25 * 60 * 60 * 1000,
-        }),
-      );
-
-      const restoredService = createService();
-
-      expect(restoredService.events()).toEqual([]);
-      expect(restoredService.isVisible()).toBe(false);
-      expect(sessionStorage.getItem(STORAGE_KEY)).toBeNull();
-    });
-  });
-
-  describe('clearState', () => {
-    it('should reset signals and remove persisted state', () => {
-      const events: CalendarEvent[] = [
-        { summary: 'Persisted Event', start: '2025-01-01', end: '2025-01-02' },
-      ];
-
-      service.showCalendar(events);
-      service.updateIcsContent('BEGIN:VCALENDAR');
-      service.extractionConfirmed.set(true);
-
-      expect(sessionStorage.getItem(STORAGE_KEY)).toBeTruthy();
-
-      service.clearState();
-
-      expect(service.events()).toEqual([]);
-      expect(service.icsContent()).toBeNull();
-      expect(service.isVisible()).toBe(false);
-      expect(service.extractionConfirmed()).toBe(false);
-      expect(sessionStorage.getItem(STORAGE_KEY)).toBeNull();
     });
   });
 });

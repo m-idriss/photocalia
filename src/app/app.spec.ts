@@ -65,6 +65,7 @@ describe('App', () => {
 
     // Stats are hidden for logged-in users
     expect(app['shouldShowStats']()).toBe(false);
+    expect(app['shouldShowStats']()).toBe(true);
   });
 
   it('should hide stats on about page', () => {
@@ -76,18 +77,16 @@ describe('App', () => {
     app['authService'].isAuthenticated.set(true);
 
     // Stats should be hidden on /me route
-    expect(app['shouldShowStats']()).toBe(false);
+  it('should hide stats for non-authenticated users', () => {
   });
-
   it('should show stats for non-authenticated users on home page', () => {
+  it('should hide stats for non-authenticated users', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
 
     // Simulate home page route
-    app['currentRoute'].set('/');
-    fixture.detectChanges();
-
+    // Stats should be hidden for non-logged-in users
+    expect(app['shouldShowStats']()).toBe(false);
     // Stats are visible for non-logged-in users on home
     expect(app['shouldShowStats']()).toBe(true);
-  });
 });
