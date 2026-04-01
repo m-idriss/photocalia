@@ -43,6 +43,7 @@ jobs:
             --exclude "^http://localhost"
             --exclude "^file://"
             --exclude "^data:"
+            --exclude "conventionalcommits.org"
             --user-agent "Mozilla/5.0 (compatible; converter-link-checker/1.0)"
             --cache
             --max-cache-age 86400sec
