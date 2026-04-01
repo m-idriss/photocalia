@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { shareReplay, catchError, timeout } from 'rxjs/operators';
+import { LoggerService } from './logger.service';
 
 /**
  * Timeout for API calls in milliseconds.
@@ -28,6 +29,7 @@ export interface GithubRelease {
 })
 export class GithubService {
   private readonly http = inject(HttpClient);
+  private readonly logger = inject(LoggerService);
 
   /**
    * Get latest release from GitHub repository.
@@ -41,7 +43,7 @@ export class GithubService {
     return this.http.get<GithubRelease>(url).pipe(
       timeout(API_TIMEOUT_MS),
       catchError((err) => {
-        console.warn('Release API call failed or timed out:', err.message || err);
+        this.logger.warn('Release API call failed or timed out', 'GitHubService', err.message || err);
         return of({} as GithubRelease);
       }),
       shareReplay(1),

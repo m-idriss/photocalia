@@ -1,11 +1,12 @@
 import {
   ApplicationConfig,
+  ErrorHandler,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
   isDevMode,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideServiceWorker } from '@angular/service-worker';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -13,6 +14,8 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 
 import { routes } from './app.routes';
 import { environment } from '../environments/environment';
+import { loggingInterceptor } from './interceptors/logging.interceptor';
+import { GlobalErrorHandler } from './services/global-error-handler';
 
 /**
  * Check if Firebase configuration is valid.
@@ -55,7 +58,8 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptors([loggingInterceptor])),
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
     provideAnimations(),
     ...getFirebaseProviders(),
     provideServiceWorker('ngsw-worker.js', {

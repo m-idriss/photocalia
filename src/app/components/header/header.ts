@@ -11,6 +11,7 @@ import { AuthAwareComponent } from '../base/auth-aware.component';
 import { ConverterService } from '../../services/converter';
 import { CalendarStateService } from '../../services/calendar-state.service';
 import { LanguageService, SupportedLanguage } from '../../services/language.service';
+import { LoggerService } from '../../services/logger.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 
@@ -25,6 +26,7 @@ export class Header extends AuthAwareComponent {
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly converterService = inject(ConverterService);
   private readonly calendarStateService = inject(CalendarStateService);
+  private readonly logger = inject(LoggerService);
   readonly lang = inject(LanguageService);
 
   menuOpen = false;
@@ -66,7 +68,7 @@ export class Header extends AuthAwareComponent {
       this.menuOpen = false;
       this.cdr.markForCheck();
     } catch (error) {
-      console.error('Sign out error:', error);
+      this.logger.error('Sign out error', 'Header', error);
     }
   }
 
@@ -75,7 +77,7 @@ export class Header extends AuthAwareComponent {
       await this.authService.signInWithGoogle();
       this.cdr.markForCheck();
     } catch (error) {
-      console.error('Sign in error:', error);
+      this.logger.error('Sign in error', 'Header', error);
     }
   }
 

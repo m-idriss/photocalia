@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+    expect(ctaButton.getAttribute('href')).toBe('/');
 import { provideRouter } from '@angular/router';
-import { HowItWorks } from './how-it-works';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('HowItWorks', () => {
   let component: HowItWorks;
@@ -13,7 +13,6 @@ describe('HowItWorks', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(HowItWorks);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
@@ -23,11 +22,11 @@ describe('HowItWorks', () => {
 
   it('should render the hero title', () => {
     const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('#hero-title')?.textContent).toContain('How It Works');
     expect(compiled.querySelector('#hero-title')?.textContent).toContain('howitworks.hero.title');
-  });
 
   it('should render all 7 main sections', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('#hero-title')?.textContent).toContain('How It Works');
 
     // 1. Hero
     expect(compiled.querySelector('.hero-section')).toBeTruthy();
@@ -73,6 +72,6 @@ describe('HowItWorks', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const ctaButton = compiled.querySelector('.cta-button') as HTMLAnchorElement;
     expect(ctaButton).toBeTruthy();
+    expect(ctaButton.getAttribute('href')).toBe('/');
     expect(ctaButton.textContent).toContain('howitworks.cta.button');
-  });
 });

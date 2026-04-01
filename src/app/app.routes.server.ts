@@ -30,5 +30,5 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'fr/blog/ai-ocr-calendar-extraction', renderMode: RenderMode.Prerender },
 
   // Catch-all: client-side rendered (not prerendered)
-  { path: '**', renderMode: RenderMode.Client },
+  { path: '**', renderMode: RenderMode.Server },
 ];

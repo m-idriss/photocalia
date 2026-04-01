@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { LoggerService } from '../services/logger.service';
 
 /**
  * Authentication guard to protect routes that require user authentication.
@@ -26,6 +27,7 @@ export const authGuard: CanActivateFn = () => {
   }
 
   // Redirect to home page if not authenticated
-  console.info('Access denied: User not authenticated. Redirecting to home.');
+  const logger = inject(LoggerService);
+  logger.info('Access denied: User not authenticated. Redirecting to home.', 'AuthGuard');
   return router.createUrlTree(['/']);
 };

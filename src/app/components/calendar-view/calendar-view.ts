@@ -26,6 +26,7 @@ import { EventResizeDoneArg } from '@fullcalendar/interaction';
 import { CalendarEvent } from '../../models';
 import { CalendarStateService } from '../../services/calendar-state.service';
 import { LanguageService } from '../../services/language.service';
+import { LoggerService } from '../../services/logger.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { getEventColor } from '../../utils';
 
@@ -159,6 +160,7 @@ export class CalendarView implements AfterViewInit {
   private readonly elementRef = inject(ElementRef);
   protected readonly calendarStateService = inject(CalendarStateService);
   private readonly languageService = inject(LanguageService);
+  private readonly logger = inject(LoggerService);
 
   constructor() {
     effect(() => {
@@ -258,7 +260,7 @@ export class CalendarView implements AfterViewInit {
         this.navigateToFirstEvent();
       }
     } catch (error) {
-      console.error('Error loading FullCalendar:', error);
+      this.logger.error('Error loading FullCalendar', 'CalendarView', error);
       this.loadError = true;
     }
   }

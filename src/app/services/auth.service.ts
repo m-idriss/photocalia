@@ -7,6 +7,7 @@ import {
   onAuthStateChanged,
   User,
 } from '@angular/fire/auth';
+import { LoggerService } from './logger.service';
 
 /**
  * Authenticated user information
@@ -28,6 +29,7 @@ export interface AuthUser {
 export class AuthService {
   private readonly auth: Auth | null = inject(Auth, { optional: true });
   private readonly googleProvider = this.auth ? new GoogleAuthProvider() : null;
+  private readonly logger = inject(LoggerService);
 
   // Signal for current user state
   public readonly currentUser = signal<AuthUser | null>(null);
@@ -37,7 +39,7 @@ export class AuthService {
   constructor() {
     // Only initialize auth listener if Firebase is available
     if (!this.auth) {
-      console.info('Auth service running without Firebase - authentication features disabled');
+      this.logger.info('Auth service running without Firebase - authentication features disabled', 'AuthService');
       return;
     }
 
@@ -66,13 +68,13 @@ export class AuthService {
    */
   async signInWithGoogle(): Promise<void> {
     if (!this.auth || !this.googleProvider) {
-      console.warn('Firebase not configured - sign in unavailable');
+      this.logger.warn('Firebase not configured - sign in unavailable', 'AuthService');
       return;
     }
     try {
       await signInWithPopup(this.auth, this.googleProvider);
     } catch {
-      console.error('Error signing in with Google:');
+      this.logger.error('Error signing in with Google', 'AuthService');
       throw new Error('Sign-in failed');
     }
   }
@@ -83,13 +85,13 @@ export class AuthService {
    */
   async signOutUser(): Promise<void> {
     if (!this.auth) {
-      console.warn('Firebase not configured - sign out unavailable');
+      this.logger.warn('Firebase not configured - sign out unavailable', 'AuthService');
       return;
     }
     try {
       await signOut(this.auth);
     } catch {
-      console.error('Error signing out:');
+      this.logger.error('Error signing out', 'AuthService');
       throw new Error('Sign-out failed');
     }
   }

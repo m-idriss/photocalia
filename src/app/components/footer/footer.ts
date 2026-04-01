@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { GithubService } from '../../services/github.service';
 import { CookieConsentService } from '../../services/cookie-consent.service';
+import { LoggerService } from '../../services/logger.service';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { environment } from '../../../environments/environment';
@@ -45,6 +46,7 @@ export interface SocialLink {
 export class Footer implements OnInit {
   private readonly githubService = inject(GithubService);
   private readonly cookieConsentService = inject(CookieConsentService);
+  private readonly logger = inject(LoggerService);
 
   currentYear = new Date().getFullYear();
   appVersion = environment.appVersion ?? '0.0.0';
@@ -75,7 +77,7 @@ export class Footer implements OnInit {
         }
       },
       error: (err) => {
-        console.warn('Failed to fetch release version, keeping environment version:', err);
+        this.logger.warn('Failed to fetch release version, keeping environment version', 'Footer', err);
       },
     });
   }

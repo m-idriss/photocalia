@@ -28,6 +28,7 @@ import { CalendarStateService } from '../../services/calendar-state.service';
 import { Card } from '../card/card';
 import { AuthAwareComponent } from '../base/auth-aware.component';
 import { CalendarEvent, BatchFile, BatchFileStatus } from '../../models';
+import { LoggerService } from '../../services/logger.service';
 import { FILE_UPLOAD_CONSTRAINTS } from '../../constants';
 import { getMonthDay, getEventColor } from '../../utils';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
@@ -145,6 +146,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
   protected readonly calendarStateService = inject(CalendarStateService);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly logger = inject(LoggerService);
 
   private readonly acceptedTypes = FILE_UPLOAD_CONSTRAINTS.ACCEPTED_TYPES;
   private readonly maxFileSize = FILE_UPLOAD_CONSTRAINTS.MAX_FILE_SIZE;
@@ -209,7 +211,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
         this.isQuotaLoading.set(false);
       },
       error: (error) => {
-        console.error('Failed to fetch quota status:', error);
+        this.logger.error('Failed to fetch quota status', 'Converter', error);
         // Hide quota bar on error instead of showing partial/incorrect data
         this.quotaEnabled.set(false);
         this.isQuotaLoading.set(false);
@@ -236,7 +238,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
             this.scrollToConverter();
           }
         } catch (error) {
-          console.error('Error handling shared files:', error);
+          this.logger.error('Error handling shared files', 'Converter', error);
           this.toastService.showError('Failed to load shared files. Please try again.');
         }
       });
@@ -657,7 +659,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
         };
       });
     } catch (error) {
-      console.error('Failed to parse ICS:', error);
+      this.logger.error('Failed to parse ICS', 'Converter', error);
       return [];
     }
   }
@@ -698,7 +700,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
         this.openCalendarView();
       }
     } catch (error) {
-      console.error('Failed to parse repaired ICS:', error);
+      this.logger.error('Failed to parse repaired ICS', 'Converter', error);
       this.toastService.showError('Failed to parse generated ICS file (even after repair).');
       this.toastService.clearSuccess();
       this.extractedEvents.set([]);
@@ -761,7 +763,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
       let message = 'Failed to sign in. Please try again.';
       if (error?.message) message += ` (${error.message})`;
       this.toastService.showError(message);
-      console.error('Sign in error:', error);
+      this.logger.error('Sign in error', 'Converter', error);
     }
   }
 
