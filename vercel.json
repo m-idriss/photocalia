@@ -105,7 +105,7 @@
   ],
   "rewrites": [
     {
-      "source": "/((?!assets|.*\\.js$|.*\\.css$|.*\\.ico$|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.svg$|.*\\.webp$|.*\\.woff2?$|.*\\.txt$|.*\\.xml$|.*\\.json$|.*\\.webmanifest$|ngsw\\.json$|ngsw-worker\\.js$).*)",
+      "source": "/((?!api/|assets|.*\\.js$|.*\\.css$|.*\\.ico$|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.svg$|.*\\.webp$|.*\\.woff2?$|.*\\.txt$|.*\\.xml$|.*\\.json$|.*\\.webmanifest$|ngsw\\.json$|ngsw-worker\\.js$).*)",
       "destination": "/index.html"
     }
   ]
