@@ -17,11 +17,6 @@ export class LoggerService {
         }),
       );
     } else {
-      console.log(
-        `[Photocalia]${context ? `[${context}]` : ''}`,
-        message,
-        ...(data !== undefined ? [data] : []),
-      );
       this.sendToServer('info', message, context, data);
     }
   }
@@ -38,11 +33,6 @@ export class LoggerService {
         }),
       );
     } else {
-      console.warn(
-        `[Photocalia]${context ? `[${context}]` : ''}`,
-        message,
-        ...(data !== undefined ? [data] : []),
-      );
       this.sendToServer('warn', message, context, data);
     }
   }
@@ -59,11 +49,6 @@ export class LoggerService {
         }),
       );
     } else {
-      console.error(
-        `[Photocalia]${context ? `[${context}]` : ''}`,
-        message,
-        ...(data !== undefined ? [data] : []),
-      );
       this.sendToServer('error', message, context, data);
     }
   }
