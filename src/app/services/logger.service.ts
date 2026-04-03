@@ -1,9 +1,14 @@
 import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformServer } from '@angular/common';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class LoggerService {
   private readonly isServer = isPlatformServer(inject(PLATFORM_ID));
+  private readonly isVercel =
+    environment.production &&
+    typeof window !== 'undefined' &&
+    window.location.hostname.includes('photocalia');
 
   info(message: string, context?: string, data?: unknown): void {
     if (this.isServer) {
@@ -59,6 +64,7 @@ export class LoggerService {
     context?: string,
     data?: unknown,
   ): void {
+    if (!this.isVercel) return;
     try {
       fetch('/api/log', {
         method: 'POST',
