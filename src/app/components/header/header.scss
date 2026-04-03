@@ -181,15 +181,16 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     transform: scale(1.05);
 
-    i {
+    svg {
       color: var(--primary-color, #6366f1);
       transform: rotate(180deg);
     }
   }
 
-  i {
+  svg {
     color: var(--text-primary, #e0e0e0);
-    font-size: 18px;
+    width: 18px;
+    height: 18px;
     transition: transform 0.3s ease;
   }
 
@@ -249,7 +250,7 @@
     background: rgba(255, 255, 255, 0.08);
     color: var(--primary-color, #6366f1);
 
-    i {
+    svg {
       transform: scale(1.1);
     }
   }
@@ -259,9 +260,10 @@
     outline-offset: -2px;
   }
 
-  i {
+  svg {
     width: 16px;
-    text-align: center;
+    height: 16px;
+    flex-shrink: 0;
     transition: all 0.3s ease;
   }
 

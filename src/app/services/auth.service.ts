@@ -1,4 +1,5 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject, signal } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
   Auth,
   signInWithPopup,
@@ -29,8 +30,11 @@ export interface AuthUser {
 })
 export class AuthService {
   private readonly auth: Auth | null = inject(Auth, { optional: true });
+  private readonly platformId = inject(PLATFORM_ID);
   private readonly googleProvider = this.auth ? new GoogleAuthProvider() : null;
   private readonly logger = inject(LoggerService);
+  private readonly isMobile =
+    isPlatformBrowser(this.platformId) && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   // Signal for current user state
   public readonly currentUser = signal<AuthUser | null>(null);
@@ -76,15 +80,15 @@ export class AuthService {
       return;
     }
     try {
-      await signInWithPopup(this.auth, this.googleProvider);
-    } catch {
-      // Popup may be blocked (e.g. mobile Safari) — fall back to redirect
-      try {
+      if (this.isMobile) {
+        // Mobile browsers block popups — use redirect flow directly
         await signInWithRedirect(this.auth, this.googleProvider);
-      } catch {
-        this.logger.error('Error signing in with Google', 'AuthService');
-        throw new Error('Sign-in failed');
+      } else {
+        await signInWithPopup(this.auth, this.googleProvider);
       }
+    } catch {
+      this.logger.error('Error signing in with Google', 'AuthService');
+      throw new Error('Sign-in failed');
     }
   }
 
