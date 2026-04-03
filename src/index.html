@@ -86,7 +86,7 @@
       http-equiv="Content-Security-Policy"
       content="
     default-src 'self';
-    script-src 'self' 'unsafe-inline' https://apis.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://unpkg.com https://d3js.org;
+    script-src 'self' 'unsafe-inline' https://apis.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://unpkg.com;
     style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com;
     font-src 'self' data: https://cdnjs.cloudflare.com;
     img-src 'self' data: https: blob:;
@@ -104,7 +104,6 @@
     <!-- Resource Hints for Performance -->
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
     <link rel="dns-prefetch" href="//unpkg.com" />
-    <link rel="dns-prefetch" href="//d3js.org" />
 
     <!-- Defer non-critical CSS for better initial load performance -->
     <link
@@ -474,9 +473,6 @@
         ]
       }
     </script>
-
-    <!-- Load d3.js asynchronously to not block page rendering -->
-    <script src="https://d3js.org/d3.v7.min.js" defer></script>
   </head>
 
   <body class="loaded light-theme bg-white">
