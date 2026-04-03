@@ -86,9 +86,11 @@ export class AuthService {
       } else {
         await signInWithPopup(this.auth, this.googleProvider);
       }
-    } catch {
-      this.logger.error('Error signing in with Google', 'AuthService');
-      throw new Error('Sign-in failed');
+    } catch (error) {
+      const msg = error instanceof Error ? error.message : String(error);
+      const code = (error as { code?: string }).code;
+      this.logger.error('Error signing in with Google', 'AuthService', { code, message: msg });
+      throw new Error('Sign-in failed', { cause: error });
     }
   }
 
