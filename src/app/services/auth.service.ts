@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import {
   Auth,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -39,7 +40,10 @@ export class AuthService {
   constructor() {
     // Only initialize auth listener if Firebase is available
     if (!this.auth) {
-      this.logger.info('Auth service running without Firebase - authentication features disabled', 'AuthService');
+      this.logger.info(
+        'Auth service running without Firebase - authentication features disabled',
+        'AuthService',
+      );
       return;
     }
 
@@ -74,8 +78,13 @@ export class AuthService {
     try {
       await signInWithPopup(this.auth, this.googleProvider);
     } catch {
-      this.logger.error('Error signing in with Google', 'AuthService');
-      throw new Error('Sign-in failed');
+      // Popup may be blocked (e.g. mobile Safari) — fall back to redirect
+      try {
+        await signInWithRedirect(this.auth, this.googleProvider);
+      } catch {
+        this.logger.error('Error signing in with Google', 'AuthService');
+        throw new Error('Sign-in failed');
+      }
     }
   }
 
