@@ -4,7 +4,7 @@ export const environment = {
   appVersion: '4.4.0',
   firebase: {
     apiKey: 'AIzaSyDvQ4aCcWtSxGmTXefINTcsdb0O5zheYzE',
-    authDomain: 'image-to-ics.firebaseapp.com',
+    authDomain: 'photocalia.com',
     projectId: 'image-to-ics',
     storageBucket: 'image-to-ics.firebasestorage.app',
     messagingSenderId: '345022501803',
