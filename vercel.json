@@ -105,11 +105,7 @@
   ],
   "rewrites": [
     {
-      "source": "/__/auth/:path*",
-      "destination": "https://image-to-ics.firebaseapp.com/__/auth/:path*"
-    },
-    {
-      "source": "/((?!api/|__/auth/|assets|.*\\.js$|.*\\.css$|.*\\.ico$|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.svg$|.*\\.webp$|.*\\.woff2?$|.*\\.txt$|.*\\.xml$|.*\\.json$|.*\\.webmanifest$|ngsw\\.json$|ngsw-worker\\.js$).*)",
+      "source": "/((?!api/|assets|.*\\.js$|.*\\.css$|.*\\.ico$|.*\\.png$|.*\\.jpg$|.*\\.jpeg$|.*\\.svg$|.*\\.webp$|.*\\.woff2?$|.*\\.txt$|.*\\.xml$|.*\\.json$|.*\\.webmanifest$|ngsw\\.json$|ngsw-worker\\.js$).*)",
       "destination": "/index.html"
     }
   ]

@@ -1,10 +1,7 @@
-import { Injectable, PLATFORM_ID, inject, signal } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Injectable, inject, signal } from '@angular/core';
 import {
   Auth,
   signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
   signOut,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -31,11 +28,8 @@ export interface AuthUser {
 })
 export class AuthService {
   private readonly auth: Auth | null = inject(Auth, { optional: true });
-  private readonly platformId = inject(PLATFORM_ID);
   private readonly googleProvider = this.auth ? new GoogleAuthProvider() : null;
   private readonly logger = inject(LoggerService);
-  private readonly isMobile =
-    isPlatformBrowser(this.platformId) && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   // Signal for current user state
   public readonly currentUser = signal<AuthUser | null>(null);
@@ -51,21 +45,6 @@ export class AuthService {
       );
       return;
     }
-
-    this.isLoading.set(true);
-
-    // Handle redirect result after returning from Google sign-in
-    getRedirectResult(this.auth)
-      .then((result) => {
-        if (result) {
-          this.logger.info('Redirect sign-in successful', 'AuthService');
-        }
-      })
-      .catch((error) => {
-        const code = (error as { code?: string }).code;
-        const msg = error instanceof Error ? error.message : String(error);
-        this.logger.error('Redirect sign-in error', 'AuthService', { code, message: msg });
-      });
 
     // Listen to auth state changes
     onAuthStateChanged(this.auth, (user: User | null) => {
@@ -98,15 +77,8 @@ export class AuthService {
     try {
       await signInWithPopup(this.auth, this.googleProvider);
     } catch {
-      // Popup may be blocked (e.g. mobile Safari) — fall back to redirect
-      try {
-        await signInWithRedirect(this.auth, this.googleProvider);
-      } catch (error) {
-        const msg = error instanceof Error ? error.message : String(error);
-        const code = (error as { code?: string }).code;
-        this.logger.error('Error signing in with Google', 'AuthService', { code, message: msg });
-        throw new Error('Sign-in failed', { cause: error });
-      }
+      this.logger.error('Error signing in with Google', 'AuthService');
+      throw new Error('Sign-in failed');
     }
   }
 
