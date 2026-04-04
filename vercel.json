@@ -26,7 +26,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://apis.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.3dime.com https://*.photocalia.com https://api.github.com https://*.a.run.app blob:; worker-src 'self' blob: https://unpkg.com; base-uri 'self'; form-action 'self'; frame-src 'self' https://*.firebaseapp.com https://*.google.com https://*.photocalia.com; frame-ancestors 'self'"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://apis.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com; font-src 'self' data: https://cdnjs.cloudflare.com; img-src 'self' data: https: blob:; connect-src 'self' https://*.firebaseio.com https://*.googleapis.com https://*.3dime.com https://*.photocalia.com https://api.github.com https://*.a.run.app https://cdnjs.cloudflare.com https://unpkg.com https://apis.google.com blob:; worker-src 'self' blob: https://unpkg.com; base-uri 'self'; form-action 'self'; frame-src 'self' https://*.firebaseapp.com https://*.google.com https://*.photocalia.com; frame-ancestors 'self'"
         }
       ]
     },

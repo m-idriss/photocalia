@@ -13,20 +13,20 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "icons/icon-16.png",
+      "src": "icons/favicon-16x16.png",
       "sizes": "16x16",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-192.png",
+      "src": "icons/android-icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "icons/icon-512.png",
-      "sizes": "512x512",
+      "src": "icons/ms-icon-310x310.png",
+      "sizes": "310x310",
       "type": "image/png",
       "purpose": "any maskable"
     }
@@ -48,7 +48,7 @@
       "url": "/converter",
       "icons": [
         {
-          "src": "icons/icon-192.png",
+          "src": "icons/android-icon-192x192.png",
           "sizes": "192x192",
           "type": "image/png"
         }
