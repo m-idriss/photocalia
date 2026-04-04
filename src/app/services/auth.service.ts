@@ -54,20 +54,18 @@ export class AuthService {
 
     this.isLoading.set(true);
 
-    // Handle redirect result from mobile sign-in flow
-    if (this.isMobile) {
-      getRedirectResult(this.auth)
-        .then((result) => {
-          if (result) {
-            this.logger.info('Redirect sign-in successful', 'AuthService');
-          }
-        })
-        .catch((error) => {
-          const code = (error as { code?: string }).code;
-          const msg = error instanceof Error ? error.message : String(error);
-          this.logger.error('Redirect sign-in error', 'AuthService', { code, message: msg });
-        });
-    }
+    // Handle redirect result after returning from Google sign-in
+    getRedirectResult(this.auth)
+      .then((result) => {
+        if (result) {
+          this.logger.info('Redirect sign-in successful', 'AuthService');
+        }
+      })
+      .catch((error) => {
+        const code = (error as { code?: string }).code;
+        const msg = error instanceof Error ? error.message : String(error);
+        this.logger.error('Redirect sign-in error', 'AuthService', { code, message: msg });
+      });
 
     // Listen to auth state changes
     onAuthStateChanged(this.auth, (user: User | null) => {
@@ -98,17 +96,17 @@ export class AuthService {
       return;
     }
     try {
-      if (this.isMobile) {
-        // Mobile browsers block popups — use redirect flow directly
+      await signInWithPopup(this.auth, this.googleProvider);
+    } catch {
+      // Popup may be blocked (e.g. mobile Safari) — fall back to redirect
+      try {
         await signInWithRedirect(this.auth, this.googleProvider);
-      } else {
-        await signInWithPopup(this.auth, this.googleProvider);
+      } catch (error) {
+        const msg = error instanceof Error ? error.message : String(error);
+        const code = (error as { code?: string }).code;
+        this.logger.error('Error signing in with Google', 'AuthService', { code, message: msg });
+        throw new Error('Sign-in failed', { cause: error });
       }
-    } catch (error) {
-      const msg = error instanceof Error ? error.message : String(error);
-      const code = (error as { code?: string }).code;
-      this.logger.error('Error signing in with Google', 'AuthService', { code, message: msg });
-      throw new Error('Sign-in failed', { cause: error });
     }
   }
 
