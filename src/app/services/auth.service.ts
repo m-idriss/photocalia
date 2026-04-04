@@ -4,6 +4,7 @@ import {
   Auth,
   signInWithPopup,
   signInWithRedirect,
+  getRedirectResult,
   signOut,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -49,6 +50,23 @@ export class AuthService {
         'AuthService',
       );
       return;
+    }
+
+    this.isLoading.set(true);
+
+    // Handle redirect result from mobile sign-in flow
+    if (this.isMobile) {
+      getRedirectResult(this.auth)
+        .then((result) => {
+          if (result) {
+            this.logger.info('Redirect sign-in successful', 'AuthService');
+          }
+        })
+        .catch((error) => {
+          const code = (error as { code?: string }).code;
+          const msg = error instanceof Error ? error.message : String(error);
+          this.logger.error('Redirect sign-in error', 'AuthService', { code, message: msg });
+        });
     }
 
     // Listen to auth state changes
