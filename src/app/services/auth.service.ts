@@ -1,4 +1,5 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject, signal, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import {
   Auth,
   signInWithPopup,
@@ -32,6 +33,7 @@ export class AuthService {
   private readonly auth: Auth | null = inject(Auth, { optional: true });
   private readonly googleProvider = this.auth ? new GoogleAuthProvider() : null;
   private readonly logger = inject(LoggerService);
+  private readonly platformId = inject(PLATFORM_ID);
 
   // Signal for current user state
   public readonly currentUser = signal<AuthUser | null>(null);
@@ -48,16 +50,18 @@ export class AuthService {
       return;
     }
 
-    // Handle redirect result from mobile sign-in flow
-    getRedirectResult(this.auth)
-      .then((result) => {
-        if (result?.user) {
-          this.logger.info('Sign-in via redirect successful', 'AuthService');
-        }
-      })
-      .catch((error) => {
-        this.logger.error('Error completing sign-in redirect', 'AuthService', { error });
-      });
+    // Handle redirect result from mobile sign-in flow (browser-only)
+    if (isPlatformBrowser(this.platformId)) {
+      getRedirectResult(this.auth)
+        .then((result) => {
+          if (result?.user) {
+            this.logger.info('Sign-in via redirect successful', 'AuthService');
+          }
+        })
+        .catch((error) => {
+          this.logger.error('Error completing sign-in redirect', 'AuthService', { error });
+        });
+    }
 
     // Listen to auth state changes
     onAuthStateChanged(this.auth, (user: User | null) => {
@@ -79,16 +83,20 @@ export class AuthService {
   }
 
   /**
-   * Returns true when the primary input is a coarse pointer (touch screen),
-   * indicating a mobile/tablet device where popups are typically blocked.
+   * Returns true when the primary pointer device is coarse (touch screen),
+   * i.e. mobile phones, tablets, and hybrid touch devices where popups are
+   * typically blocked. Returns false when running server-side.
    */
-  private isMobileBrowser(): boolean {
+  private isCoarsePointer(): boolean {
+    if (!isPlatformBrowser(this.platformId)) {
+      return false;
+    }
     return window.matchMedia('(pointer: coarse)').matches;
   }
 
   /**
    * Sign in with Google.
-   * Uses redirect on mobile (where popups are blocked) and popup on desktop.
+   * Uses redirect on coarse-pointer/touch devices (where popups are blocked) and popup on desktop.
    * Returns early if Firebase is not available.
    */
   async signInWithGoogle(): Promise<void> {
@@ -97,14 +105,14 @@ export class AuthService {
       return;
     }
     try {
-      if (this.isMobileBrowser()) {
+      if (this.isCoarsePointer()) {
         await signInWithRedirect(this.auth, this.googleProvider);
       } else {
         await signInWithPopup(this.auth, this.googleProvider);
       }
-    } catch {
-      this.logger.error('Error signing in with Google', 'AuthService');
-      throw new Error('Sign-in failed');
+    } catch (error) {
+      this.logger.error('Error signing in with Google', 'AuthService', { error });
+      throw new Error('Sign-in failed', { cause: error });
     }
   }
 
