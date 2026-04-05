@@ -55,8 +55,8 @@ export class AuthService {
           this.logger.info('Sign-in via redirect successful', 'AuthService');
         }
       })
-      .catch(() => {
-        this.logger.error('Error completing sign-in redirect', 'AuthService');
+      .catch((error) => {
+        this.logger.error('Error completing sign-in redirect', 'AuthService', { error });
       });
 
     // Listen to auth state changes
