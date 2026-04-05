@@ -79,12 +79,11 @@ export class AuthService {
   }
 
   /**
-   * Returns true if the current browser is a mobile device or an in-app browser
-   * that typically blocks popups (e.g. iOS Safari, Android Chrome, WebViews).
+   * Returns true when the primary input is a coarse pointer (touch screen),
+   * indicating a mobile/tablet device where popups are typically blocked.
    */
   private isMobileBrowser(): boolean {
-    const ua = navigator.userAgent;
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+    return window.matchMedia('(pointer: coarse)').matches;
   }
 
   /**
