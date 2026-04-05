@@ -2,6 +2,8 @@ import { Injectable, inject, signal } from '@angular/core';
 import {
   Auth,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
   signOut,
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -46,6 +48,17 @@ export class AuthService {
       return;
     }
 
+    // Handle redirect result from mobile sign-in flow
+    getRedirectResult(this.auth)
+      .then((result) => {
+        if (result?.user) {
+          this.logger.info('Sign-in via redirect successful', 'AuthService');
+        }
+      })
+      .catch(() => {
+        this.logger.error('Error completing sign-in redirect', 'AuthService');
+      });
+
     // Listen to auth state changes
     onAuthStateChanged(this.auth, (user: User | null) => {
       if (user) {
@@ -66,8 +79,18 @@ export class AuthService {
   }
 
   /**
-   * Sign in with Google popup
-   * Returns early if Firebase is not available
+   * Returns true if the current browser is a mobile device or an in-app browser
+   * that typically blocks popups (e.g. iOS Safari, Android Chrome, WebViews).
+   */
+  private isMobileBrowser(): boolean {
+    const ua = navigator.userAgent;
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+  }
+
+  /**
+   * Sign in with Google.
+   * Uses redirect on mobile (where popups are blocked) and popup on desktop.
+   * Returns early if Firebase is not available.
    */
   async signInWithGoogle(): Promise<void> {
     if (!this.auth || !this.googleProvider) {
@@ -75,7 +98,11 @@ export class AuthService {
       return;
     }
     try {
-      await signInWithPopup(this.auth, this.googleProvider);
+      if (this.isMobileBrowser()) {
+        await signInWithRedirect(this.auth, this.googleProvider);
+      } else {
+        await signInWithPopup(this.auth, this.googleProvider);
+      }
     } catch {
       this.logger.error('Error signing in with Google', 'AuthService');
       throw new Error('Sign-in failed');
