@@ -7,6 +7,7 @@ import {
   OnDestroy,
   ViewChild,
   AfterViewInit,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NgbToastModule, NgbProgressbarModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,6 +26,7 @@ import { ScrollRevealDirective } from '../../shared/directives';
 
 @Component({
   selector: 'app-home',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     Converter,
     CalendarView,

@@ -1,5 +1,12 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  Component,
+  OnInit,
+  signal,
+  inject,
+  ChangeDetectionStrategy,
+  PLATFORM_ID,
+} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { StatsService, Statistics } from '../../services/stats.service';
 import { LanguageService } from '../../services/language.service';
 import { LoggerService } from '../../services/logger.service';
@@ -12,6 +19,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
  */
 @Component({
   selector: 'app-stats',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, TranslatePipe],
   templateUrl: './stats.html',
   styleUrl: './stats.scss',
@@ -19,6 +27,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 export class Stats implements OnInit {
   private readonly statsService = inject(StatsService);
   private readonly logger = inject(LoggerService);
+  private readonly platformId = inject(PLATFORM_ID);
   readonly lang = inject(LanguageService);
 
   // Signals for reactive state
@@ -65,24 +74,29 @@ export class Stats implements OnInit {
   }
 
   /**
-   * Animate counter from 0 to target value
+   * Animate counter from 0 to target value using requestAnimationFrame
+   * to avoid blocking the main thread during page load.
    */
   private animateCounter(target: number, signal: { set: (value: number) => void }): void {
-    const duration = 2000; // 2 seconds
-    const steps = 60;
-    const increment = target / steps;
-    const stepDuration = duration / steps;
-    let current = 0;
+    if (target === 0 || !isPlatformBrowser(this.platformId)) {
+      signal.set(target);
+      return;
+    }
+    const duration = 2000;
+    const start = performance.now();
 
-    const interval = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        signal.set(target);
-        clearInterval(interval);
-      } else {
-        signal.set(Math.floor(current));
+    const step = (now: number): void => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      signal.set(Math.floor(eased * target));
+      if (progress < 1) {
+        requestAnimationFrame(step);
       }
-    }, stepDuration);
+    };
+
+    requestAnimationFrame(step);
   }
 
   /**

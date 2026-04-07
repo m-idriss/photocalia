@@ -102,8 +102,19 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
 
     <!-- Resource Hints for Performance -->
-    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
-    <link rel="dns-prefetch" href="//unpkg.com" />
+    <link rel="preconnect" href="https://apis.google.com" />
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+    <link rel="dns-prefetch" href="//firebaseio.com" />
+    <!-- Preload critical font to avoid FOUT/CLS -->
+    <link
+      rel="preload"
+      href="/assets/fonts/plus-jakarta-sans-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <!-- Defer non-critical CSS for better initial load performance -->
     <link
