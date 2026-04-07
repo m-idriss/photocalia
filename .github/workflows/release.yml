@@ -135,10 +135,18 @@ jobs:
           npm pkg set version="$NEW_VERSION"
           echo "Updated package.json to version $NEW_VERSION"
 
+      - name: Sync appVersion in environment files
+        run: |
+          NEW_VERSION="${{ steps.new_version.outputs.version }}"
+          node -e "const fs=require('fs'); const files=['src/environments/environment.ts','src/environments/environment.prod.ts']; for (const file of files){ const content=fs.readFileSync(file,'utf8'); const updated=content.replace(/appVersion:\s*'[^']*'/, \"appVersion: '\"+process.env.NEW_VERSION+\"'\"); fs.writeFileSync(file, updated); }"
+          echo "Synced appVersion to $NEW_VERSION in environment files"
+        env:
+          NEW_VERSION: ${{ steps.new_version.outputs.version }}
+
       - name: Commit version bump
         run: |
           NEW_VERSION="${{ steps.new_version.outputs.version }}"
-          git add package.json package-lock.json
+          git add package.json package-lock.json src/environments/environment.ts src/environments/environment.prod.ts
           git commit -m "chore: bump version to $NEW_VERSION" || echo "No changes to commit"
 
       - name: Build project (if requested)

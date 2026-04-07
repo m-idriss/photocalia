@@ -1,8 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { GithubService } from '../../services/github.service';
 import { CookieConsentService } from '../../services/cookie-consent.service';
-import { LoggerService } from '../../services/logger.service';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { environment } from '../../../environments/environment';
@@ -33,7 +31,7 @@ export interface SocialLink {
 
 /**
  * Global footer component displaying navigation links, project information, and credits.
- * Fetches version dynamically from GitHub releases API for maintainability.
+ * Uses environment version and a stable release URL to avoid runtime API rate limits.
  * Links are conditionally rendered based on environment configuration.
  */
 @Component({
@@ -44,9 +42,7 @@ export interface SocialLink {
   styleUrl: './footer.scss',
 })
 export class Footer implements OnInit {
-  private readonly githubService = inject(GithubService);
   private readonly cookieConsentService = inject(CookieConsentService);
-  private readonly logger = inject(LoggerService);
 
   currentYear = new Date().getFullYear();
   appVersion = environment.appVersion ?? '0.0.0';
@@ -65,21 +61,6 @@ export class Footer implements OnInit {
 
     // Always set a fallback release URL
     this.releaseUrl = `${this.githubRepo}/releases/latest`;
-
-    // Fetch actual release data from backend API to get the GitHub release URL
-    this.githubService.getLatestRelease().subscribe({
-      next: (release) => {
-        if (release?.tag_name) {
-          this.appVersion = release.tag_name;
-          if (release.html_url) {
-            this.releaseUrl = release.html_url;
-          }
-        }
-      },
-      error: (err) => {
-        this.logger.warn('Failed to fetch release version, keeping environment version', 'Footer', err);
-      },
-    });
   }
 
   /**
@@ -138,7 +119,10 @@ export class Footer implements OnInit {
       resourceLinks.push({ label: 'footer.link.issues', url: `${this.githubRepo}/issues` });
     }
     if (config.enableDocsLink) {
-      resourceLinks.push({ label: 'footer.link.documentation', url: `${this.githubRepo}/blob/main/README.md` });
+      resourceLinks.push({
+        label: 'footer.link.documentation',
+        url: `${this.githubRepo}/blob/main/README.md`,
+      });
     }
     if (config.enableCommunityLink) {
       resourceLinks.push({
@@ -147,7 +131,10 @@ export class Footer implements OnInit {
       });
     }
     if (config.enableDiscussionsLink) {
-      resourceLinks.push({ label: 'footer.link.discussions', url: `${this.githubRepo}/discussions` });
+      resourceLinks.push({
+        label: 'footer.link.discussions',
+        url: `${this.githubRepo}/discussions`,
+      });
     }
 
     const legalLinks: FooterLink[] = [];
@@ -158,22 +145,37 @@ export class Footer implements OnInit {
       legalLinks.push({ label: 'footer.link.termsOfService', url: '/terms', isInternal: true });
     }
     if (config.enableLegalMentionsLink) {
-      legalLinks.push({ label: 'footer.link.legalMentions', url: '/legal-mentions', isInternal: true });
+      legalLinks.push({
+        label: 'footer.link.legalMentions',
+        url: '/legal-mentions',
+        isInternal: true,
+      });
     }
     if (config.enableLicenseLink) {
-      legalLinks.push({ label: 'footer.link.license', url: `${this.githubRepo}/blob/main/LICENSE` });
+      legalLinks.push({
+        label: 'footer.link.license',
+        url: `${this.githubRepo}/blob/main/LICENSE`,
+      });
     }
     if (config.enableSecurityLink) {
-      legalLinks.push({ label: 'footer.link.security', url: `${this.githubRepo}/blob/main/SECURITY.md` });
+      legalLinks.push({
+        label: 'footer.link.security',
+        url: `${this.githubRepo}/blob/main/SECURITY.md`,
+      });
     }
     legalLinks.push({ label: 'footer.link.cookiePreferences', action: 'cookie' });
 
     const sections: FooterSection[] = [];
-    if (productLinks.length > 0) sections.push({ title: 'footer.section.product', links: productLinks });
-    if (featureLinks.length > 0) sections.push({ title: 'footer.section.features', links: featureLinks });
-    if (useCasesLinks.length > 0) sections.push({ title: 'footer.section.useCases', links: useCasesLinks });
-    if (supportLinks.length > 0) sections.push({ title: 'footer.section.support', links: supportLinks });
-    if (resourceLinks.length > 0) sections.push({ title: 'footer.section.resources', links: resourceLinks });
+    if (productLinks.length > 0)
+      sections.push({ title: 'footer.section.product', links: productLinks });
+    if (featureLinks.length > 0)
+      sections.push({ title: 'footer.section.features', links: featureLinks });
+    if (useCasesLinks.length > 0)
+      sections.push({ title: 'footer.section.useCases', links: useCasesLinks });
+    if (supportLinks.length > 0)
+      sections.push({ title: 'footer.section.support', links: supportLinks });
+    if (resourceLinks.length > 0)
+      sections.push({ title: 'footer.section.resources', links: resourceLinks });
     if (legalLinks.length > 0) sections.push({ title: 'footer.section.legal', links: legalLinks });
 
     return sections;
