@@ -49,14 +49,15 @@
   color: var(--text-secondary, #64748b);
   line-height: 1.6;
   max-width: 900px;
-  margin: 0 auto 1rem;
+  margin: 0 auto 0.5rem;
 }
 
 .hero-subtitle {
   font-size: 1rem;
   color: var(--text-secondary, #64748b);
   opacity: 0.8;
-  margin: 1rem auto 0;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* Compatible calendars strip */
@@ -111,7 +112,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  margin: 1rem auto 0;
+  margin: 0 auto;
   padding: 0.35rem 0.9rem;
   font-size: 0.75rem;
   font-weight: 600;
@@ -588,7 +589,25 @@
    ======================== */
 .content-layout {
   display: grid;
-  padding: 1.5rem 1rem 1rem;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(1rem, 2.2vw, 1.45rem) 1rem clamp(0.95rem, 2vw, 1.2rem);
+  row-gap: 0.65rem;
+  align-items: start;
+
+  .converter-card,
+  .compatible-strip {
+    justify-self: center;
+    width: min(100%, 900px);
+  }
+
+  .powered-badge,
+  .hero-subtitle {
+    justify-self: center;
+    width: auto;
+    max-width: 900px;
+  }
 
   // Default: Center converter (no calendar)
   @media (min-width: 1200px) {
@@ -600,17 +619,22 @@
   &.has-calendar {
     // Desktop: side-by-side centered
     @media (min-width: 1200px) {
-      grid-template-columns: auto auto;
-      gap: 0.75rem;
+      grid-template-columns: minmax(0, 900px) minmax(360px, 600px);
+      gap: 1rem;
       justify-content: center;
       align-items: start;
 
       .converter-card {
         grid-column: 1;
         max-width: none;
+        margin-block: 0;
       }
 
       .powered-badge {
+        grid-column: 1;
+      }
+
+      .compatible-strip {
         grid-column: 1;
       }
 
@@ -633,6 +657,7 @@
 
 .converter-card {
   width: 100%;
+  margin-block: 0;
 
   // Centered when no calendar (only on desktop)
   @media (min-width: 1200px) {
@@ -668,6 +693,11 @@
    Mobile Responsive Styles
    ======================== */
 @media (max-width: 768px) {
+  .content-layout {
+    padding: 1rem;
+    row-gap: 0.55rem;
+  }
+
   .home-page {
     padding-top: 70px;
   }
