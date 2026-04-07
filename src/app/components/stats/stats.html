@@ -7,9 +7,28 @@
         {{ 'stats.title' | translate }}
       </h2>
       @if (!loading() && !hasError()) {
-        <p class="stats-tagline" [innerHTML]="t('stats.tagline', { events: '<strong>' + formatNumber(displayEventCount()) + '</strong>', files: '<strong>' + formatNumber(displayFileCount()) + '</strong>' })"></p>
+        <p
+          class="stats-tagline"
+          [innerHTML]="
+            t('stats.tagline', {
+              events: '<strong>' + formatNumber(displayEventCount()) + '</strong>',
+              files: '<strong>' + formatNumber(displayFileCount()) + '</strong>',
+            })
+          "
+        ></p>
 
-        <p class="stats-time-saved" [innerHTML]="t('stats.timeSaved', { hours: '<strong>~' + formatNumber(timeSavedHours()) + '</strong>' }) + '<br />' + t('stats.workdays', { workdays: '<strong>' + formatNumber(timeSavedWorkdays()) + '</strong>' })"></p>
+        <p
+          class="stats-time-saved"
+          [innerHTML]="
+            t('stats.timeSaved', {
+              hours: '<strong>' + formatNumber(timeSavedHours()) + '</strong>',
+            }) +
+            ' ' +
+            t('stats.workdays', {
+              workdays: '<strong>' + formatNumber(timeSavedWorkdays()) + '</strong>',
+            })
+          "
+        ></p>
       }
     </div>
 

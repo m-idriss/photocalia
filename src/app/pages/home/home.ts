@@ -15,6 +15,7 @@ import { debounceTime } from 'rxjs/operators';
 
 import { Converter } from '../../components/converter/converter';
 import { CalendarView } from '../../components/calendar-view';
+import { Stats } from '../../components/stats/stats';
 import { ToastService } from '../../services/toast.service';
 import { CalendarStateService } from '../../services/calendar-state.service';
 import { AuthService } from '../../services/auth.service';
@@ -27,6 +28,7 @@ import { ScrollRevealDirective } from '../../shared/directives';
   imports: [
     Converter,
     CalendarView,
+    Stats,
     NgbToastModule,
     NgbProgressbarModule,
     NgbTooltipModule,

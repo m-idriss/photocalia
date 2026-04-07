@@ -3,6 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { Home } from './home';
+import { AuthService } from '../../services/auth.service';
 
 describe('Home', () => {
   let component: Home;
@@ -31,5 +32,15 @@ describe('Home', () => {
   it('should render converter component', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('app-converter')).toBeTruthy();
+  });
+
+  it('should hide marketing sections for authenticated users', () => {
+    const authService = TestBed.inject(AuthService);
+    authService.isAuthenticated.set(true);
+
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.marketing-sections')).toBeFalsy();
   });
 });

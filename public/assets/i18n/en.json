@@ -149,7 +149,7 @@
   "pwa.update": "New version available. Load new version?",
   "stats.title": "Powering Your Productivity",
   "stats.tagline": "Over {events} events generated from {files} images!",
-  "stats.timeSaved": "That's ~{hours} hours saved",
+  "stats.timeSaved": "That's ~{hours} hours saved,",
   "stats.workdays": "{workdays} full workdays of manual scheduling!",
   "stats.error": "Statistics temporarily unavailable",
   "offline.title": "You're offline",

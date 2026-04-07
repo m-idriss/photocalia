@@ -194,10 +194,9 @@
                     <span class="ms-1"
                       >{{ quotaLimitVal - quotaRemainingVal }} / {{ quotaLimitVal }}</span
                     >
-                    <span class="mx-2">•</span>
-                    <span>{{ quotaRemainingVal }} {{ 'home.quota.left' | translate }}</span>
                     <span class="visually-hidden"
-                      >{{ quotaRemainingVal }} remaining out of {{ quotaLimitVal }} total</span
+                      >{{ quotaLimitVal - quotaRemainingVal }} used out of
+                      {{ quotaLimitVal }} total</span
                     >
                   </div>
                 } @else {
@@ -264,234 +263,240 @@
       }
     </div>
 
-    <!-- Marketing sections - hidden on desktop when calendar preview is active -->
-    <div
-      class="marketing-sections"
-      [class.hidden-when-calendar]="calendarStateService.isVisible() && isDesktop()"
-    >
-      <!-- How It Works Section -->
-      <section
-        class="how-it-works-section"
-        appScrollReveal
-        appScrollRevealDirection="left"
-        aria-labelledby="how-it-works-title"
+    @if (!authService.isAuthenticated()) {
+      <app-stats></app-stats>
+    }
+
+    @if (!authService.isAuthenticated()) {
+      <!-- Marketing sections - hidden on desktop when calendar preview is active -->
+      <div
+        class="marketing-sections"
+        [class.hidden-when-calendar]="calendarStateService.isVisible() && isDesktop()"
       >
-        <h2
-          id="how-it-works-title"
-          class="section-title"
-          [innerHTML]="'home.steps.title' | translate"
-        ></h2>
-        <div class="steps-container">
-          <div class="step-item">
-            <div class="step-badge">1</div>
-            <div class="step-content">
-              <h3 class="step-title">{{ 'home.steps.1.title' | translate }}</h3>
-              <p class="step-description">{{ 'home.steps.1.description' | translate }}</p>
+        <!-- How It Works Section -->
+        <section
+          class="how-it-works-section"
+          appScrollReveal
+          appScrollRevealDirection="left"
+          aria-labelledby="how-it-works-title"
+        >
+          <h2
+            id="how-it-works-title"
+            class="section-title"
+            [innerHTML]="'home.steps.title' | translate"
+          ></h2>
+          <div class="steps-container">
+            <div class="step-item">
+              <div class="step-badge">1</div>
+              <div class="step-content">
+                <h3 class="step-title">{{ 'home.steps.1.title' | translate }}</h3>
+                <p class="step-description">{{ 'home.steps.1.description' | translate }}</p>
+              </div>
+            </div>
+
+            <div class="step-arrow" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+
+            <div class="step-item">
+              <div class="step-badge">2</div>
+              <div class="step-content">
+                <h3 class="step-title">{{ 'home.steps.2.title' | translate }}</h3>
+                <p class="step-description">{{ 'home.steps.2.description' | translate }}</p>
+              </div>
+            </div>
+
+            <div class="step-arrow" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+
+            <div class="step-item">
+              <div class="step-badge">3</div>
+              <div class="step-content">
+                <h3 class="step-title">{{ 'home.steps.3.title' | translate }}</h3>
+                <p class="step-description">{{ 'home.steps.3.description' | translate }}</p>
+              </div>
             </div>
           </div>
+          <p class="section-reassurance">{{ 'home.steps.reassurance' | translate }}</p>
+        </section>
 
-          <div class="step-arrow" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M5 12h14M13 6l6 6-6 6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-
-          <div class="step-item">
-            <div class="step-badge">2</div>
-            <div class="step-content">
-              <h3 class="step-title">{{ 'home.steps.2.title' | translate }}</h3>
-              <p class="step-description">{{ 'home.steps.2.description' | translate }}</p>
+        <!-- What Can You Convert Section -->
+        <section
+          class="convert-section"
+          appScrollReveal
+          appScrollRevealDirection="right"
+          [appScrollRevealDelay]="100"
+          aria-labelledby="convert-title"
+        >
+          <h2 id="convert-title" class="section-title">{{ 'home.convert.title' | translate }}</h2>
+          <p class="section-description" [innerHTML]="'home.convert.description' | translate"></p>
+          <div class="convert-grid">
+            <div class="convert-item">
+              <span class="convert-icon" aria-hidden="true">🎒</span>
+              <span>{{ 'home.convert.school' | translate }}</span>
+            </div>
+            <div class="convert-item">
+              <span class="convert-icon" aria-hidden="true">🎵</span>
+              <span>{{ 'home.convert.concerts' | translate }}</span>
+            </div>
+            <div class="convert-item">
+              <span class="convert-icon" aria-hidden="true">🏋️</span>
+              <span>{{ 'home.convert.gym' | translate }}</span>
+            </div>
+            <div class="convert-item">
+              <span class="convert-icon" aria-hidden="true">🎤</span>
+              <span>{{ 'home.convert.conference' | translate }}</span>
+            </div>
+            <div class="convert-item">
+              <span class="convert-icon" aria-hidden="true">✈️</span>
+              <span>{{ 'home.convert.travel' | translate }}</span>
+            </div>
+            <div class="convert-item">
+              <span class="convert-icon" aria-hidden="true">📱</span>
+              <span>{{ 'home.convert.screenshots' | translate }}</span>
             </div>
           </div>
+        </section>
 
-          <div class="step-arrow" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M5 12h14M13 6l6 6-6 6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </div>
-
-          <div class="step-item">
-            <div class="step-badge">3</div>
-            <div class="step-content">
-              <h3 class="step-title">{{ 'home.steps.3.title' | translate }}</h3>
-              <p class="step-description">{{ 'home.steps.3.description' | translate }}</p>
+        <!-- Who Is It For Section -->
+        <section
+          class="audience-section"
+          appScrollReveal
+          appScrollRevealDirection="left"
+          [appScrollRevealDelay]="100"
+          aria-labelledby="audience-title"
+        >
+          <h2
+            id="audience-title"
+            class="section-title"
+            [innerHTML]="'home.audience.title' | translate"
+          ></h2>
+          <p class="section-description" [innerHTML]="'home.audience.description' | translate"></p>
+          <div class="audience-grid">
+            <div class="audience-item">
+              <span class="audience-icon" aria-hidden="true">👨‍👩‍👧</span>
+              <span>{{ 'home.audience.parents' | translate }}</span>
+            </div>
+            <div class="audience-item">
+              <span class="audience-icon" aria-hidden="true">🎓</span>
+              <span>{{ 'home.audience.students' | translate }}</span>
+            </div>
+            <div class="audience-item">
+              <span class="audience-icon" aria-hidden="true">💼</span>
+              <span>{{ 'home.audience.professionals' | translate }}</span>
+            </div>
+            <div class="audience-item">
+              <span class="audience-icon" aria-hidden="true">🏪</span>
+              <span>{{ 'home.audience.businesses' | translate }}</span>
             </div>
           </div>
-        </div>
-        <p class="section-reassurance">{{ 'home.steps.reassurance' | translate }}</p>
-      </section>
+        </section>
 
-      <!-- What Can You Convert Section -->
-      <section
-        class="convert-section"
-        appScrollReveal
-        appScrollRevealDirection="right"
-        [appScrollRevealDelay]="100"
-        aria-labelledby="convert-title"
-      >
-        <h2 id="convert-title" class="section-title">{{ 'home.convert.title' | translate }}</h2>
-        <p class="section-description" [innerHTML]="'home.convert.description' | translate"></p>
-        <div class="convert-grid">
-          <div class="convert-item">
-            <span class="convert-icon" aria-hidden="true">🎒</span>
-            <span>{{ 'home.convert.school' | translate }}</span>
-          </div>
-          <div class="convert-item">
-            <span class="convert-icon" aria-hidden="true">🎵</span>
-            <span>{{ 'home.convert.concerts' | translate }}</span>
-          </div>
-          <div class="convert-item">
-            <span class="convert-icon" aria-hidden="true">🏋️</span>
-            <span>{{ 'home.convert.gym' | translate }}</span>
-          </div>
-          <div class="convert-item">
-            <span class="convert-icon" aria-hidden="true">🎤</span>
-            <span>{{ 'home.convert.conference' | translate }}</span>
-          </div>
-          <div class="convert-item">
-            <span class="convert-icon" aria-hidden="true">✈️</span>
-            <span>{{ 'home.convert.travel' | translate }}</span>
-          </div>
-          <div class="convert-item">
-            <span class="convert-icon" aria-hidden="true">📱</span>
-            <span>{{ 'home.convert.screenshots' | translate }}</span>
-          </div>
-        </div>
-      </section>
+        <!-- Pricing Section -->
+        <section
+          class="pricing-section"
+          appScrollReveal
+          appScrollRevealDirection="right"
+          [appScrollRevealDelay]="100"
+          aria-labelledby="pricing-title"
+        >
+          <h2 id="pricing-title" class="section-title">{{ 'home.pricing.title' | translate }}</h2>
+          <p class="section-description">{{ 'home.pricing.description' | translate }}</p>
+        </section>
 
-      <!-- Who Is It For Section -->
-      <section
-        class="audience-section"
-        appScrollReveal
-        appScrollRevealDirection="left"
-        [appScrollRevealDelay]="100"
-        aria-labelledby="audience-title"
-      >
-        <h2
-          id="audience-title"
-          class="section-title"
-          [innerHTML]="'home.audience.title' | translate"
-        ></h2>
-        <p class="section-description" [innerHTML]="'home.audience.description' | translate"></p>
-        <div class="audience-grid">
-          <div class="audience-item">
-            <span class="audience-icon" aria-hidden="true">👨‍👩‍👧</span>
-            <span>{{ 'home.audience.parents' | translate }}</span>
-          </div>
-          <div class="audience-item">
-            <span class="audience-icon" aria-hidden="true">🎓</span>
-            <span>{{ 'home.audience.students' | translate }}</span>
-          </div>
-          <div class="audience-item">
-            <span class="audience-icon" aria-hidden="true">💼</span>
-            <span>{{ 'home.audience.professionals' | translate }}</span>
-          </div>
-          <div class="audience-item">
-            <span class="audience-icon" aria-hidden="true">🏪</span>
-            <span>{{ 'home.audience.businesses' | translate }}</span>
-          </div>
-        </div>
-      </section>
+        <!-- Why PhotoCalia Section -->
+        <section
+          class="why-photocalia-section"
+          appScrollReveal
+          appScrollRevealDirection="left"
+          [appScrollRevealDelay]="100"
+          aria-labelledby="why-photocalia-title"
+        >
+          <h2
+            id="why-photocalia-title"
+            class="section-title"
+            [innerHTML]="'home.why.title' | translate"
+          ></h2>
+          <div class="benefits-container">
+            <div class="benefit-item">
+              <div class="benefit-check">✓</div>
+              <div class="benefit-content">
+                <h3 class="benefit-title">{{ 'home.why.formats.title' | translate }}</h3>
+                <p class="benefit-description">{{ 'home.why.formats.description' | translate }}</p>
+              </div>
+            </div>
 
-      <!-- Pricing Section -->
-      <section
-        class="pricing-section"
-        appScrollReveal
-        appScrollRevealDirection="right"
-        [appScrollRevealDelay]="100"
-        aria-labelledby="pricing-title"
-      >
-        <h2 id="pricing-title" class="section-title">{{ 'home.pricing.title' | translate }}</h2>
-        <p class="section-description">{{ 'home.pricing.description' | translate }}</p>
-      </section>
+            <div class="benefit-item">
+              <div class="benefit-check">✓</div>
+              <div class="benefit-content">
+                <h3 class="benefit-title">{{ 'home.why.batch.title' | translate }}</h3>
+                <p class="benefit-description">{{ 'home.why.batch.description' | translate }}</p>
+              </div>
+            </div>
 
-      <!-- Why PhotoCalia Section -->
-      <section
-        class="why-photocalia-section"
-        appScrollReveal
-        appScrollRevealDirection="left"
-        [appScrollRevealDelay]="100"
-        aria-labelledby="why-photocalia-title"
-      >
-        <h2
-          id="why-photocalia-title"
-          class="section-title"
-          [innerHTML]="'home.why.title' | translate"
-        ></h2>
-        <div class="benefits-container">
-          <div class="benefit-item">
-            <div class="benefit-check">✓</div>
-            <div class="benefit-content">
-              <h3 class="benefit-title">{{ 'home.why.formats.title' | translate }}</h3>
-              <p class="benefit-description">{{ 'home.why.formats.description' | translate }}</p>
+            <div class="benefit-item">
+              <div class="benefit-check">✓</div>
+              <div class="benefit-content">
+                <h3 class="benefit-title">{{ 'home.why.control.title' | translate }}</h3>
+                <p class="benefit-description">{{ 'home.why.control.description' | translate }}</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-check">✓</div>
+              <div class="benefit-content">
+                <h3 class="benefit-title">{{ 'home.why.free.title' | translate }}</h3>
+                <p class="benefit-description">{{ 'home.why.free.description' | translate }}</p>
+              </div>
+            </div>
+
+            <div class="benefit-item">
+              <div class="benefit-check">✓</div>
+              <div class="benefit-content">
+                <h3 class="benefit-title">{{ 'home.why.privacy.title' | translate }}</h3>
+                <p class="benefit-description">{{ 'home.why.privacy.description' | translate }}</p>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div class="benefit-item">
-            <div class="benefit-check">✓</div>
-            <div class="benefit-content">
-              <h3 class="benefit-title">{{ 'home.why.batch.title' | translate }}</h3>
-              <p class="benefit-description">{{ 'home.why.batch.description' | translate }}</p>
-            </div>
+        <!-- FAQ Section -->
+        <section
+          class="faq-section"
+          appScrollReveal
+          appScrollRevealDirection="right"
+          [appScrollRevealDelay]="100"
+          aria-labelledby="faq-title"
+        >
+          <h2 id="faq-title" class="section-title">{{ 'home.faq.title' | translate }}</h2>
+          <div class="faq-list">
+            @for (i of [1, 2, 3, 4, 5]; track i) {
+              <details class="faq-item">
+                <summary class="faq-question">{{ 'home.faq.q' + i + '.q' | translate }}</summary>
+                <p class="faq-answer">{{ 'home.faq.q' + i + '.a' | translate }}</p>
+              </details>
+            }
           </div>
-
-          <div class="benefit-item">
-            <div class="benefit-check">✓</div>
-            <div class="benefit-content">
-              <h3 class="benefit-title">{{ 'home.why.control.title' | translate }}</h3>
-              <p class="benefit-description">{{ 'home.why.control.description' | translate }}</p>
-            </div>
-          </div>
-
-          <div class="benefit-item">
-            <div class="benefit-check">✓</div>
-            <div class="benefit-content">
-              <h3 class="benefit-title">{{ 'home.why.free.title' | translate }}</h3>
-              <p class="benefit-description">{{ 'home.why.free.description' | translate }}</p>
-            </div>
-          </div>
-
-          <div class="benefit-item">
-            <div class="benefit-check">✓</div>
-            <div class="benefit-content">
-              <h3 class="benefit-title">{{ 'home.why.privacy.title' | translate }}</h3>
-              <p class="benefit-description">{{ 'home.why.privacy.description' | translate }}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FAQ Section -->
-      <section
-        class="faq-section"
-        appScrollReveal
-        appScrollRevealDirection="right"
-        [appScrollRevealDelay]="100"
-        aria-labelledby="faq-title"
-      >
-        <h2 id="faq-title" class="section-title">{{ 'home.faq.title' | translate }}</h2>
-        <div class="faq-list">
-          @for (i of [1, 2, 3, 4, 5]; track i) {
-            <details class="faq-item">
-              <summary class="faq-question">{{ 'home.faq.q' + i + '.q' | translate }}</summary>
-              <p class="faq-answer">{{ 'home.faq.q' + i + '.a' | translate }}</p>
-            </details>
-          }
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    }
   </div>
 </main>
 
