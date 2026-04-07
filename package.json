@@ -83,7 +83,7 @@
     "@angular/build": "^21.2.5",
     "@angular/cli": "^21.2.5",
     "@angular/compiler-cli": "21.2.6",
-    "@angular/localize": "21.2.6",
+    "@angular/localize": "21.2.7",
     "@eslint/js": "10.0.1",
     "@playwright/test": "^1.58.2",
     "@types/jasmine": "~6.0.0",
