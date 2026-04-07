@@ -7,25 +7,25 @@ describe('CalendarStateService', () => {
 
   const STORAGE_KEY = 'photocalia_conversion_state_v1';
 
-  function createService(): CalendarStateService {
-    TestBed.resetTestingModule();
-  });
-    return TestBed.inject(CalendarStateService);
-  }
-
   beforeEach(() => {
     sessionStorage.clear();
-    service = createService();
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(CalendarStateService);
   });
 
   afterEach(() => {
     sessionStorage.clear();
+    TestBed.resetTestingModule();
+  });
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should start with calendar hidden', () => {
-    service = TestBed.inject(CalendarStateService);
+  it('should start hidden with no events, no ICS content, and no export request', () => {
+    expect(service.isVisible()).toBe(false);
+    expect(service.events()).toEqual([]);
+    expect(service.icsContent()).toBeNull();
     expect(service.exportRequestCount()).toBe(0);
   });
 
@@ -39,6 +39,9 @@ describe('CalendarStateService', () => {
 
       expect(service.events()).toEqual(events);
       expect(service.isVisible()).toBe(true);
+      expect(JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '{}')).toEqual(
+        jasmine.objectContaining({ calendarVisible: true }),
+      );
     });
 
     it('should replace existing events', () => {
@@ -76,6 +79,24 @@ describe('CalendarStateService', () => {
 
       expect(service.events()).toEqual(events);
       expect(service.isVisible()).toBe(false);
+    });
+  });
+
+  describe('clearState', () => {
+    it('should reset state and remove persisted storage', () => {
+      service.showCalendar([{ summary: 'Test Event', start: '2025-01-01', end: '2025-01-02' }]);
+      service.updateIcsContent('BEGIN:VCALENDAR');
+      service.extractionConfirmed.set(true);
+
+      expect(sessionStorage.getItem(STORAGE_KEY)).not.toBeNull();
+
+      service.clearState();
+
+      expect(service.events()).toEqual([]);
+      expect(service.icsContent()).toBeNull();
+      expect(service.isVisible()).toBe(false);
+      expect(service.extractionConfirmed()).toBe(false);
+      expect(sessionStorage.getItem(STORAGE_KEY)).toBeNull();
     });
   });
 

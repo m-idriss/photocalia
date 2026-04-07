@@ -132,6 +132,10 @@ describe('Stats', () => {
     expect(timeSavedElement.innerHTML).toContain('stats.workdays');
     expect(component.timeSavedHours()).toBe(195);
     expect(component.timeSavedWorkdays()).toBe(24);
+  });
+
+  it('should keep time saved metrics at zero when there are no events', () => {
+    const mockStats: Statistics = { fileCount: 10, eventCount: 0 };
     statsService.getStatistics.and.returnValue(of(mockStats));
 
     fixture.detectChanges();

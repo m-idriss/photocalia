@@ -1,19 +1,63 @@
+import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { App } from './app';
-import { routes } from './app.routes';
+import { AuthService } from './services/auth.service';
+import { SeoService } from './services/seo.service';
+import { LanguageService } from './services/language.service';
+import { Header } from './components/header/header';
+import { Footer } from './components/footer/footer';
+import { Stats } from './components/stats/stats';
+import { OfflineBanner } from './components/offline-banner/offline-banner';
+import { CookieConsent } from './components/cookie-consent/cookie-consent';
+
+@Component({ selector: 'app-header', standalone: true, template: '' })
+class MockHeader {}
+
+@Component({ selector: 'app-footer', standalone: true, template: '' })
+class MockFooter {}
+
+@Component({ selector: 'app-stats', standalone: true, template: '' })
+class MockStats {}
+
+@Component({ selector: 'app-offline-banner', standalone: true, template: '' })
+class MockOfflineBanner {}
+
+@Component({ selector: 'app-cookie-consent', standalone: true, template: '' })
+class MockCookieConsent {}
+
+function createAuthServiceStub(): Pick<
+  AuthService,
+  'isAuthenticated' | 'currentUser' | 'isLoading'
+> {
+  return {
+    isAuthenticated: signal(false),
+    currentUser: signal(null),
+    isLoading: signal(false),
+  };
+}
 
 describe('App', () => {
+  const authServiceStub = createAuthServiceStub();
+
   beforeEach(async () => {
+    TestBed.overrideComponent(App, {
+      remove: {
+        imports: [Header, Footer, Stats, OfflineBanner, CookieConsent],
+      },
+      add: {
+        imports: [MockHeader, MockFooter, MockStats, MockOfflineBanner, MockCookieConsent],
+      },
+    });
+
     await TestBed.configureTestingModule({
       imports: [App],
       providers: [
-        provideRouter(routes),
-        provideHttpClient(),
-        provideHttpClientTesting(),
+        provideRouter([]),
+        { provide: AuthService, useValue: authServiceStub },
+        { provide: SeoService, useValue: {} },
+        { provide: LanguageService, useValue: { translate: (key: string) => key } },
         {
           provide: SwUpdate,
           useValue: {
@@ -52,41 +96,34 @@ describe('App', () => {
     expect(compiled.querySelector('app-footer')).toBeTruthy();
   });
 
-  it('should hide stats on home page for authenticated users', () => {
+  it('should show stats on the home page for non-authenticated users', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
 
-    // Simulate home page route
     app['currentRoute'].set('/');
 
-    // Simulate authenticated user
-    app['authService'].isAuthenticated.set(true);
-    fixture.detectChanges();
+    authServiceStub.isAuthenticated.set(false);
 
-    // Stats are hidden for logged-in users
-    expect(app['shouldShowStats']()).toBe(false);
     expect(app['shouldShowStats']()).toBe(true);
   });
 
-  it('should hide stats on about page', () => {
+  it('should hide stats on the home page for authenticated users', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;
 
-    // Simulate about page route
+    app['currentRoute'].set('/');
+    authServiceStub.isAuthenticated.set(true);
+
+    expect(app['shouldShowStats']()).toBe(false);
+  });
+
+  it('should hide stats on non-home routes even for non-authenticated users', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+
     app['currentRoute'].set('/me');
-    app['authService'].isAuthenticated.set(true);
+    authServiceStub.isAuthenticated.set(false);
 
-    // Stats should be hidden on /me route
-  it('should hide stats for non-authenticated users', () => {
-  });
-  it('should show stats for non-authenticated users on home page', () => {
-  it('should hide stats for non-authenticated users', () => {
-    const fixture = TestBed.createComponent(App);
-    const app = fixture.componentInstance;
-
-    // Simulate home page route
-    // Stats should be hidden for non-logged-in users
     expect(app['shouldShowStats']()).toBe(false);
-    // Stats are visible for non-logged-in users on home
-    expect(app['shouldShowStats']()).toBe(true);
+  });
 });
