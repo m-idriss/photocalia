@@ -5,7 +5,9 @@ import {
   OnDestroy,
   OnInit,
   PLATFORM_ID,
+  NgZone,
   inject,
+  signal,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -14,37 +16,43 @@ import { isPlatformBrowser } from '@angular/common';
   standalone: true,
   host: {
     '[class.scroll-reveal]': 'true',
-    '[class.scroll-reveal--visible]': 'isVisible',
+    '[class.scroll-reveal--visible]': 'isVisible()',
   },
 })
 export class ScrollRevealDirective implements OnInit, OnDestroy {
   private readonly el = inject(ElementRef);
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly ngZone = inject(NgZone);
   private observer?: IntersectionObserver;
 
   @Input() appScrollRevealDelay = 0;
   @Input() appScrollRevealDirection: 'up' | 'down' | 'left' | 'right' = 'up';
 
-  protected isVisible = false;
+  protected readonly isVisible = signal(false);
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) {
-      this.isVisible = true;
+      this.isVisible.set(true);
       return;
     }
 
     const element = this.el.nativeElement as HTMLElement;
-    element.style.transitionDelay = `${this.appScrollRevealDelay}ms`;
+    element.style.setProperty('--scroll-reveal-delay', `${this.appScrollRevealDelay}ms`);
     element.classList.add(`scroll-reveal--${this.appScrollRevealDirection}`);
+
+    if (typeof IntersectionObserver === 'undefined') {
+      this.isVisible.set(true);
+      return;
+    }
 
     this.observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          this.isVisible = true;
+          this.ngZone.run(() => this.isVisible.set(true));
           this.observer?.unobserve(element);
         }
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
+      { threshold: 0.01, rootMargin: '0px 0px -10% 0px' },
     );
 
     this.observer.observe(element);

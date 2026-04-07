@@ -26,11 +26,11 @@
           class="stats-time-saved"
           [innerHTML]="
             t('stats.timeSaved', {
-              hours: '<strong>' + formatNumber(timeSavedHours()) + '</strong>',
+              hours: '<strong>' + formatNumber(displayTimeSavedHours()) + '</strong>',
             }) +
             ' ' +
             t('stats.workdays', {
-              workdays: '<strong>' + formatNumber(timeSavedWorkdays()) + '</strong>',
+              workdays: '<strong>' + formatNumber(displayTimeSavedWorkdays()) + '</strong>',
             })
           "
         ></p>

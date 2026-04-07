@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   signal,
   inject,
   ChangeDetectionStrategy,
@@ -24,7 +25,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
   templateUrl: './stats.html',
   styleUrl: './stats.scss',
 })
-export class Stats implements OnInit {
+export class Stats implements OnInit, OnDestroy {
   private readonly statsService = inject(StatsService);
   private readonly logger = inject(LoggerService);
   private readonly platformId = inject(PLATFORM_ID);
@@ -37,11 +38,24 @@ export class Stats implements OnInit {
   readonly displayFileCount = signal(0);
   readonly displayEventCount = signal(0);
   readonly hasError = signal(false);
+  // Raw values kept stable as source of truth.
   readonly timeSavedHours = signal(0);
   readonly timeSavedWorkdays = signal(0);
+  // Dedicated animated values used in the template.
+  readonly displayTimeSavedHours = signal(0);
+  readonly displayTimeSavedWorkdays = signal(0);
+
+  private readonly animationFrames = new Set<number>();
 
   ngOnInit(): void {
     this.loadStatistics();
+  }
+
+  ngOnDestroy(): void {
+    for (const frameId of this.animationFrames) {
+      cancelAnimationFrame(frameId);
+    }
+    this.animationFrames.clear();
   }
 
   /**
@@ -59,11 +73,13 @@ export class Stats implements OnInit {
         this.animateCounter(stats.eventCount, this.displayEventCount);
 
         // Calculate time saved metrics
-        this.calculateTimeSaved(stats.eventCount);
+        const { hours, workdays } = this.calculateTimeSaved(stats.eventCount);
+        this.timeSavedHours.set(hours);
+        this.timeSavedWorkdays.set(workdays);
 
         // Animate time saved counters
-        this.animateCounter(this.timeSavedHours(), this.timeSavedHours);
-        this.animateCounter(this.timeSavedWorkdays(), this.timeSavedWorkdays);
+        this.animateCounter(hours, this.displayTimeSavedHours);
+        this.animateCounter(workdays, this.displayTimeSavedWorkdays);
       },
       error: (err) => {
         this.logger.error('Failed to load statistics', 'Stats', err);
@@ -82,7 +98,7 @@ export class Stats implements OnInit {
       signal.set(target);
       return;
     }
-    const duration = 2000;
+    const duration = 1200;
     const start = performance.now();
 
     const step = (now: number): void => {
@@ -92,24 +108,31 @@ export class Stats implements OnInit {
       const eased = 1 - Math.pow(1 - progress, 3);
       signal.set(Math.floor(eased * target));
       if (progress < 1) {
-        requestAnimationFrame(step);
+        this.scheduleAnimationFrame(step);
       }
     };
 
-    requestAnimationFrame(step);
+    this.scheduleAnimationFrame(step);
   }
 
   /**
    * Calculate time saved based on event count
    * Formula: eventCount × 25 seconds per event
    */
-  private calculateTimeSaved(eventCount: number): void {
+  private calculateTimeSaved(eventCount: number): { hours: number; workdays: number } {
     const timeSavedSeconds = eventCount * 25;
     const hours = Math.round(timeSavedSeconds / 3600);
     const workdays = Math.round(hours / 8);
 
-    this.timeSavedHours.set(hours);
-    this.timeSavedWorkdays.set(workdays);
+    return { hours, workdays };
+  }
+
+  private scheduleAnimationFrame(step: FrameRequestCallback): void {
+    const frameId = requestAnimationFrame((timestamp) => {
+      this.animationFrames.delete(frameId);
+      step(timestamp);
+    });
+    this.animationFrames.add(frameId);
   }
 
   /**
