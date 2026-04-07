@@ -73,6 +73,24 @@
   }
 }
 
+/* Skeleton placeholders — match exact height of real content to prevent CLS */
+.stats-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--glass-bg, rgba(255, 255, 255, 0.5)) 25%,
+    var(--glass-bg-hover, rgba(255, 255, 255, 0.7)) 50%,
+    var(--glass-bg, rgba(255, 255, 255, 0.5)) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  color: transparent !important;
+  min-width: 60%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Loading Skeleton */
 .stats-skeleton {
   text-align: center;

@@ -6,6 +6,11 @@
         <span class="stats-icon" aria-hidden="true">📊</span>
         {{ 'stats.title' | translate }}
       </h2>
+      <!-- Skeleton placeholders while loading — same height as loaded content to prevent CLS -->
+      @if (loading()) {
+        <p class="stats-tagline stats-skeleton" aria-hidden="true">&nbsp;</p>
+        <p class="stats-time-saved stats-skeleton" aria-hidden="true">&nbsp;</p>
+      }
       @if (!loading() && !hasError()) {
         <p
           class="stats-tagline"
