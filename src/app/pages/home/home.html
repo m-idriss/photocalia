@@ -60,77 +60,6 @@
     >
       <div class="converter-card">
         <app-converter></app-converter>
-
-        <!-- Quota Status Bar -->
-        @if (converterReady() && converterComponent) {
-          @let quotaLimitVal = converterComponent.quotaLimit();
-          @let quotaRemainingVal = converterComponent.quotaRemaining();
-          @let planTypeVal = (converterComponent.planType() ?? '').toUpperCase();
-          @if (
-            !converterComponent.isQuotaLoading() &&
-            converterComponent.quotaEnabled() &&
-            quotaLimitVal !== null &&
-            quotaRemainingVal !== null &&
-            quotaLimitVal > 0
-          ) {
-            <div class="quota-status-bar" role="status" aria-live="polite">
-              <div class="d-flex flex-column gap-1">
-                <ngb-progressbar
-                  [value]="100 - (quotaRemainingVal / quotaLimitVal) * 100"
-                  [type]="
-                    quotaRemainingVal >= quotaLimitVal / 2
-                      ? 'success'
-                      : quotaRemainingVal >= quotaLimitVal / 3
-                        ? 'warning'
-                        : 'danger'
-                  "
-                  [showValue]="true"
-                  [striped]="true"
-                  [animated]="true"
-                  height="20px"
-                  ngbTooltip="{{ quotaLimitVal - quotaRemainingVal }} / {{
-                    quotaLimitVal
-                  }} used this month. [{{ planTypeVal }} account]"
-                ></ngb-progressbar>
-
-                <!-- Inline text showing subscription and quota remaining -->
-                @if (quotaRemainingVal > 0) {
-                  <div
-                    class="quota-info mt-1 small text-muted align-self-center text-center"
-                    role="note"
-                    aria-live="polite"
-                  >
-                    <span class="fw-semibold">{{ 'home.quota.plan' | translate }}:</span>
-                    <span class="ms-1">{{ planTypeVal || 'FREE' }}</span>
-                    <span class="mx-2">•</span>
-                    <span class="fw-semibold">{{ 'home.quota.usage' | translate }}:</span>
-                    <span class="ms-1"
-                      >{{ quotaLimitVal - quotaRemainingVal }} / {{ quotaLimitVal }}</span
-                    >
-                    <span class="visually-hidden"
-                      >{{ quotaLimitVal - quotaRemainingVal }} used out of
-                      {{ quotaLimitVal }} total</span
-                    >
-                  </div>
-                } @else {
-                  <div
-                    class="quota-info mt-1 small text-danger align-self-center text-center"
-                    role="alert"
-                    aria-live="assertive"
-                  >
-                    <i class="bi bi-exclamation-triangle-fill me-1"></i>
-                    <span class="fw-semibold">{{ 'home.quota.exhausted' | translate }}</span>
-                    <a
-                      href="mailto:support@photocalia.com"
-                      class="ms-1 text-danger text-decoration-underline"
-                      >{{ 'home.quota.upgrade' | translate }}</a
-                    >
-                  </div>
-                }
-              </div>
-            </div>
-          }
-        }
       </div>
 
       <!-- Trust badge - hidden after conversion -->
@@ -240,6 +169,77 @@
             </div>
           </div>
         </div>
+      }
+
+      <!-- Quota Status Bar -->
+      @if (converterReady() && converterComponent) {
+        @let quotaLimitVal = converterComponent.quotaLimit();
+        @let quotaRemainingVal = converterComponent.quotaRemaining();
+        @let planTypeVal = (converterComponent.planType() ?? '').toUpperCase();
+        @if (
+          !converterComponent.isQuotaLoading() &&
+          converterComponent.quotaEnabled() &&
+          quotaLimitVal !== null &&
+          quotaRemainingVal !== null &&
+          quotaLimitVal > 0
+        ) {
+          <div class="quota-status-bar" role="status" aria-live="polite">
+            <div class="d-flex flex-column gap-1">
+              <ngb-progressbar
+                [value]="100 - (quotaRemainingVal / quotaLimitVal) * 100"
+                [type]="
+                  quotaRemainingVal >= quotaLimitVal / 2
+                    ? 'success'
+                    : quotaRemainingVal >= quotaLimitVal / 3
+                      ? 'warning'
+                      : 'danger'
+                "
+                [showValue]="true"
+                [striped]="true"
+                [animated]="true"
+                height="20px"
+                ngbTooltip="{{ quotaLimitVal - quotaRemainingVal }} / {{
+                  quotaLimitVal
+                }} used this month. [{{ planTypeVal }} account]"
+              ></ngb-progressbar>
+
+              <!-- Inline text showing subscription and quota remaining -->
+              @if (quotaRemainingVal > 0) {
+                <div
+                  class="quota-info mt-1 small text-muted align-self-center text-center"
+                  role="note"
+                  aria-live="polite"
+                >
+                  <span class="fw-semibold">{{ 'home.quota.plan' | translate }}:</span>
+                  <span class="ms-1">{{ planTypeVal || 'FREE' }}</span>
+                  <span class="mx-2">•</span>
+                  <span class="fw-semibold">{{ 'home.quota.usage' | translate }}:</span>
+                  <span class="ms-1"
+                    >{{ quotaLimitVal - quotaRemainingVal }} / {{ quotaLimitVal }}</span
+                  >
+                  <span class="visually-hidden"
+                    >{{ quotaLimitVal - quotaRemainingVal }} used out of
+                    {{ quotaLimitVal }} total</span
+                  >
+                </div>
+              } @else {
+                <div
+                  class="quota-info mt-1 small text-danger align-self-center text-center"
+                  role="alert"
+                  aria-live="assertive"
+                >
+                  <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                  <span class="fw-semibold">{{ 'home.quota.exhausted' | translate }}</span>
+                  <a
+                    href="mailto:support@photocalia.com"
+                    class="ms-1 text-danger text-decoration-underline"
+                    >{{ 'home.quota.upgrade' | translate }}</a
+                  >
+                </div>
+              }
+            </div>
+          </div>
+        }
       }
 
       @if (!authService.isAuthenticated()) {
