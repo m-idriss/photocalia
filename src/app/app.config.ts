@@ -14,6 +14,7 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 
 import { routes } from './app.routes';
 import { environment } from '../environments/environment';
+import { authInterceptor } from './interceptors/auth.interceptor';
 import { loggingInterceptor } from './interceptors/logging.interceptor';
 import { GlobalErrorHandler } from './services/global-error-handler';
 
@@ -58,7 +59,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withFetch(), withInterceptors([loggingInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor, loggingInterceptor])),
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     provideAnimationsAsync(),
     ...getFirebaseProviders(),
