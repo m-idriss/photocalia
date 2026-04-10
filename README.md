@@ -2,27 +2,27 @@
 
 <img src="public/assets/logo.png" alt="Photocalia Logo" width="120" />
 
-# Photocalia
+<h1>Photocalia</h1>
 
-### Turn any image or PDF into calendar events — instantly ✨
+<h3>Turn any image or PDF into calendar events — instantly ✨</h3>
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-photocalia.com-00D4AA?style=for-the-badge)](https://photocalia.com)
-[![Angular](https://img.shields.io/badge/Angular-21.1-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
-[![PWA Ready](https://img.shields.io/badge/PWA-Ready-9C27B0?style=for-the-badge)](public/assets/manifest.json)
+<a href="https://photocalia.com"><img src="https://img.shields.io/badge/Live_Demo-photocalia.com-00D4AA?style=for-the-badge" alt="Live Demo" /></a>
+<a href="https://angular.dev"><img src="https://img.shields.io/badge/Angular-21.2-DD0031?style=for-the-badge&logo=angular&logoColor=white" alt="Angular" /></a>
+<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/TypeScript-6.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" /></a>
+<a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License" /></a>
+<a href="public/assets/manifest.json"><img src="https://img.shields.io/badge/PWA-Ready-9C27B0?style=for-the-badge" alt="PWA Ready" /></a>
 
-**Stop typing events by hand.** Photocalia reads your schedules, flyers, and timetables and delivers a ready-to-import `.ics` file in seconds — compatible with Google Calendar, Apple Calendar, Outlook, and more.
+<p><strong>Stop typing events by hand.</strong> Photocalia reads your schedules, flyers, and timetables and delivers a ready-to-import <code>.ics</code> file in seconds — compatible with Google Calendar, Apple Calendar, Outlook, and more.</p>
 
-[🚀 Try it free at photocalia.com](https://photocalia.com)
+<p><a href="https://photocalia.com">🚀 Try it free at photocalia.com</a></p>
 
----
+<hr/>
 
 <img src="public/assets/screenshots/iPhone_13_Pro_Max.jpeg" alt="Photocalia in action" width="375" />
 
-*Drop an image. Get a calendar. Done.*
+<p><em>Drop an image. Get a calendar. Done.</em></p>
 
-> 📝 Screenshots are automatically refreshed daily via GitHub Actions.
+<p>📝 Screenshots are automatically refreshed daily via GitHub Actions.</p>
 
 </div>
 
@@ -32,7 +32,7 @@
 
 | Feature | Details |
 |---------|---------|
-| 🤖 **AI-Powered Extraction** | Google Gemini reads dates, times, titles, and locations from any image or PDF |
+| 🤖 **AI-Powered Extraction** | GPT-4 Vision reads dates, times, titles, and locations from any image or PDF |
 | 📅 **One-Click ICS Export** | Download a standard `.ics` file compatible with every major calendar app |
 | ✏️ **Edit Before You Export** | Review and tweak events before committing to your calendar |
 | 📦 **Batch Processing** | Upload multiple files at once and convert them in a single run |
