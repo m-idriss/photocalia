@@ -1,7 +1,7 @@
 import { Injectable, inject, effect } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, from, of } from 'rxjs';
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { PDF_CONVERSION_CONFIG, CALENDAR_CONFIG } from '../constants';
@@ -355,37 +355,23 @@ export class ConverterService {
   getQuotaStatus(): Observable<QuotaStatusResponse> {
     const url = `${this.baseUrl}/converter/quota-status?userId=${encodeURIComponent(this.userId)}`;
 
-    // Attempt to include Firebase ID token when available to satisfy protected endpoints
-    const tokenPromise: Promise<string | null> =
-      this.auth && this.auth.currentUser && typeof this.auth.currentUser.getIdToken === 'function'
-        ? this.auth.currentUser.getIdToken()
-        : Promise.resolve(null);
-
-    return from(tokenPromise).pipe(
-      switchMap((token) => {
-        const headers: Record<string, string> = {};
-        if (token) {
-          headers['Authorization'] = `Bearer ${token}`;
+    return this.http.get<unknown>(url).pipe(
+      map((raw) => this.mapToQuotaResponse(raw)),
+      // Save mapped response to cache for offline/fallback
+      map((mapped) => {
+        if (mapped.success) {
+          this.saveQuotaToCache(mapped);
         }
-        return this.http.get<unknown>(url, { headers }).pipe(
-          map((raw) => this.mapToQuotaResponse(raw)),
-          // Save mapped response to cache for offline/fallback
-          map((mapped) => {
-            if (mapped.success) {
-              this.saveQuotaToCache(mapped);
-            }
-            return mapped;
-          }),
-          catchError((err) => {
-            // On error, attempt to return cached quota response if available
-            const cached = this.loadQuotaFromCache();
-            if (cached) {
-              return of(cached);
-            }
-            // No cache -> propagate error so callers handle hiding UI
-            throw err;
-          }),
-        );
+        return mapped;
+      }),
+      catchError((err) => {
+        // On error, attempt to return cached quota response if available
+        const cached = this.loadQuotaFromCache();
+        if (cached) {
+          return of(cached);
+        }
+        // No cache -> propagate error so callers handle hiding UI
+        throw err;
       }),
     );
   }
