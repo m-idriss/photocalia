@@ -1,0 +1,16 @@
+changelog:
+  exclude:
+    authors:
+      - github-actions[bot]
+      - dependabot[bot]
+    labels:
+      - ignore-for-release
+  categories:
+    - title: "🚀 New Features"
+      labels: [enhancement, feature]
+    - title: "🐛 Bug Fixes"
+      labels: [bug, fix]
+    - title: "📦 Dependencies"
+      labels: [dependencies]
+    - title: "🔧 Other Changes"
+      labels: ["*"]
