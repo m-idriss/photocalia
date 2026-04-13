@@ -548,6 +548,33 @@
           Convert Another
         </button>
       </nav>
+
+      <!-- Contribution Nudge (shown after successful download) -->
+      @if (showContributionNudge()) {
+        <aside class="contribution-nudge" role="complementary" aria-live="polite">
+          <div class="nudge-content">
+            <p class="nudge-heading">{{ 'coffee.nudge.heading' | translate }}</p>
+            <p class="nudge-description">{{ 'coffee.nudge.description' | translate }}</p>
+          </div>
+          <div class="nudge-actions">
+            <a
+              [href]="contributionUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="nudge-cta btn btn-primary"
+            >
+              {{ 'coffee.nudge.cta' | translate }}
+            </a>
+            <button
+              type="button"
+              class="nudge-dismiss btn btn-link"
+              (click)="dismissContributionNudge()"
+            >
+              {{ 'coffee.nudge.dismiss' | translate }}
+            </button>
+          </div>
+        </aside>
+      }
     }
   }
 </app-card>

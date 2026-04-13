@@ -32,6 +32,7 @@ import { LoggerService } from '../../services/logger.service';
 import { FILE_UPLOAD_CONSTRAINTS } from '../../constants';
 import { getMonthDay, getEventColor } from '../../utils';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-converter',
@@ -66,6 +67,11 @@ export class Converter extends AuthAwareComponent implements OnInit {
   public readonly planType = signal<string | null>(null);
   // Require user confirmation before allowing download
   public readonly extractionConfirmed = signal<boolean>(false);
+  // Show contribution nudge after successful download
+  protected readonly showContributionNudge = signal<boolean>(false);
+  // Contribution URL for the nudge
+  protected readonly contributionUrl =
+    environment.contribution?.coffeeUrl ?? 'https://ko-fi.com/photocalia';
 
   constructor() {
     super();
@@ -710,6 +716,11 @@ export class Converter extends AuthAwareComponent implements OnInit {
   protected downloadIcs(): void {
     if (!this.icsContent() || !this.extractionConfirmed()) return;
     this.converterService.downloadIcsFile(this.icsContent()!);
+    this.showContributionNudge.set(true);
+  }
+
+  protected dismissContributionNudge(): void {
+    this.showContributionNudge.set(false);
   }
 
   protected onExtractionConfirmed(checked: boolean): void {
@@ -729,6 +740,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
     this.icsContent.set(null);
     // Reset download confirmation when state is reset
     this.extractionConfirmed.set(false);
+    // Hide contribution nudge on reset
+    this.showContributionNudge.set(false);
     // Clear all persisted state and calendar
     this.calendarStateService.clearState();
   }

@@ -200,6 +200,21 @@
               <span>{{ 'header.about' | translate }}</span>
             </a>
 
+            <div class="dropdown-separator" role="separator"></div>
+
+            <a
+              [routerLink]="'/about' | localizeRoute"
+              fragment="coffee-heading"
+              class="dropdown-item support-link"
+              role="menuitem"
+              (click)="closeMenu()"
+              [appTooltip]="'header.tooltip.support' | translate"
+              appTooltipPlacement="left"
+            >
+              <span aria-hidden="true" class="support-emoji">☕</span>
+              <span>{{ 'header.support' | translate }}</span>
+            </a>
+
             @if (isAuthenticated) {
               <div class="dropdown-separator" role="separator"></div>
 

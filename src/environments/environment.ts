@@ -2,6 +2,11 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/v1',
   appVersion: '4.8.0',
+  contribution: {
+    coffeeUrl: 'https://ko-fi.com/photocalia',
+    snackUrl: 'https://ko-fi.com/photocalia',
+    mealUrl: 'https://ko-fi.com/photocalia',
+  },
   firebase: {
     apiKey: 'AIzaSyDvQ4aCcWtSxGmTXefINTcsdb0O5zheYzE',
     authDomain: 'image-to-ics.firebaseapp.com',
