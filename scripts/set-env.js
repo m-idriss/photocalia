@@ -19,7 +19,7 @@ const appVersion = packageJson.version || '0.0.0';
 
 const envConfigFile = `export const environment = {
   production: true,
-  apiUrl: 'https://api.photocalia.com',
+  apiUrl: 'https://api.photocalia.com/v1',
   appVersion: '${appVersion}',
   firebase: {
     apiKey: '${apiKey}',
