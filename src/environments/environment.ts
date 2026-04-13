@@ -3,9 +3,9 @@ export const environment = {
   apiUrl: 'http://localhost:8080/v1',
   appVersion: '4.8.0',
   contribution: {
-    coffeeUrl: 'https://ko-fi.com/photocalia',
-    snackUrl: 'https://ko-fi.com/photocalia',
-    mealUrl: 'https://ko-fi.com/photocalia',
+    coffeeUrl: 'https://buy.stripe.com/4gM4gA09TalwgRAd7m4Vy01',
+    snackUrl: 'https://buy.stripe.com/3cI3cw3m565g9p82sI4Vy00',
+    mealUrl: 'https://buy.stripe.com/28E28s1dX79keJs1oE4Vy02',
   },
   firebase: {
     apiKey: 'AIzaSyDvQ4aCcWtSxGmTXefINTcsdb0O5zheYzE',

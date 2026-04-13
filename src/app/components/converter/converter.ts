@@ -71,7 +71,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
   protected readonly showContributionNudge = signal<boolean>(false);
   // Contribution URL for the nudge
   protected readonly contributionUrl =
-    environment.contribution?.coffeeUrl ?? 'https://ko-fi.com/photocalia';
+    environment.contribution?.coffeeUrl ?? 'https://buy.stripe.com/4gM4gA09TalwgRAd7m4Vy01';
 
   constructor() {
     super();
