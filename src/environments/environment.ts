@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/v1',
-  appVersion: '4.7.0',
+  appVersion: '4.8.0',
   firebase: {
     apiKey: 'AIzaSyDvQ4aCcWtSxGmTXefINTcsdb0O5zheYzE',
     authDomain: 'image-to-ics.firebaseapp.com',
