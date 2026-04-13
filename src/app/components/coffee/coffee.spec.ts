@@ -50,4 +50,24 @@ describe('Coffee', () => {
   it('should expose 3 tiers in component', () => {
     expect(component['tiers'].length).toBe(3);
   });
+
+  it('should open the tier URL in a new tab when openTier is called', () => {
+    const openSpy = spyOn(window, 'open');
+    const testUrl = 'https://ko-fi.com/photocalia';
+    component['openTier'](testUrl);
+    expect(openSpy).toHaveBeenCalledWith(testUrl, '_blank', 'noopener,noreferrer');
+  });
+
+  it('should open the tier URL when a tier button is clicked', () => {
+    const openSpy = spyOn(window, 'open');
+    const firstTierButton = fixture.nativeElement.querySelector(
+      '.coffee-tier',
+    ) as HTMLButtonElement;
+    firstTierButton.click();
+    expect(openSpy).toHaveBeenCalledWith(
+      component['tiers'][0].url,
+      '_blank',
+      'noopener,noreferrer',
+    );
+  });
 });

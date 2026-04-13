@@ -138,4 +138,43 @@ describe('Converter', () => {
       expect(icsContent).toBeNull();
     });
   });
+
+  describe('Contribution Nudge', () => {
+    it('should not show nudge initially', () => {
+      expect(component['showContributionNudge']()).toBe(false);
+    });
+
+    it('should show nudge after downloadIcs is called with valid state', () => {
+      component['icsContent'].set('BEGIN:VCALENDAR\nEND:VCALENDAR');
+      component['extractionConfirmed'].set(true);
+      component['downloadIcs']();
+      expect(component['showContributionNudge']()).toBe(true);
+    });
+
+    it('should not show nudge if ICS content is missing', () => {
+      component['icsContent'].set(null);
+      component['extractionConfirmed'].set(true);
+      component['downloadIcs']();
+      expect(component['showContributionNudge']()).toBe(false);
+    });
+
+    it('should not show nudge if extraction is not confirmed', () => {
+      component['icsContent'].set('BEGIN:VCALENDAR\nEND:VCALENDAR');
+      component['extractionConfirmed'].set(false);
+      component['downloadIcs']();
+      expect(component['showContributionNudge']()).toBe(false);
+    });
+
+    it('should dismiss nudge when dismissContributionNudge is called', () => {
+      component['showContributionNudge'].set(true);
+      component['dismissContributionNudge']();
+      expect(component['showContributionNudge']()).toBe(false);
+    });
+
+    it('should hide nudge when resetState is called', () => {
+      component['showContributionNudge'].set(true);
+      component['resetState']();
+      expect(component['showContributionNudge']()).toBe(false);
+    });
+  });
 });
