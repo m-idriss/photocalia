@@ -3,6 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { Converter } from './converter';
+import { ConverterService } from '../../services/converter';
 import { CalendarEvent } from '../../models';
 
 describe('Converter', () => {
@@ -140,6 +141,13 @@ describe('Converter', () => {
   });
 
   describe('Contribution Nudge', () => {
+    let downloadIcsFileSpy: jasmine.Spy;
+
+    beforeEach(() => {
+      const converterService = TestBed.inject(ConverterService);
+      downloadIcsFileSpy = spyOn(converterService, 'downloadIcsFile');
+    });
+
     it('should not show nudge initially', () => {
       expect(component['showContributionNudge']()).toBe(false);
     });
@@ -148,6 +156,7 @@ describe('Converter', () => {
       component['icsContent'].set('BEGIN:VCALENDAR\nEND:VCALENDAR');
       component['extractionConfirmed'].set(true);
       component['downloadIcs']();
+      expect(downloadIcsFileSpy).toHaveBeenCalledOnceWith('BEGIN:VCALENDAR\nEND:VCALENDAR');
       expect(component['showContributionNudge']()).toBe(true);
     });
 
@@ -155,6 +164,7 @@ describe('Converter', () => {
       component['icsContent'].set(null);
       component['extractionConfirmed'].set(true);
       component['downloadIcs']();
+      expect(downloadIcsFileSpy).not.toHaveBeenCalled();
       expect(component['showContributionNudge']()).toBe(false);
     });
 
@@ -162,6 +172,7 @@ describe('Converter', () => {
       component['icsContent'].set('BEGIN:VCALENDAR\nEND:VCALENDAR');
       component['extractionConfirmed'].set(false);
       component['downloadIcs']();
+      expect(downloadIcsFileSpy).not.toHaveBeenCalled();
       expect(component['showContributionNudge']()).toBe(false);
     });
 
