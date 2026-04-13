@@ -63,6 +63,14 @@ export interface QuotaStatusResponse {
   enabled: boolean;
 }
 
+/**
+ * Plan info from /converter/plans endpoint
+ */
+export interface PlanInfo {
+  plan: string;
+  limit: number;
+}
+
 type QuotaResponseRecord = Record<string, unknown>;
 
 function isQuotaResponseRecord(value: unknown): value is QuotaResponseRecord {
@@ -372,6 +380,19 @@ export class ConverterService {
         }
         // No cache -> propagate error so callers handle hiding UI
         throw err;
+      }),
+    );
+  }
+
+  /**
+   * Get available plans and their limits from the API
+   */
+  fetchPlans(): Observable<PlanInfo[]> {
+    const url = `${this.baseUrl}/converter/plans`;
+    return this.http.get<PlanInfo[]>(url).pipe(
+      catchError((err) => {
+        this.logger.error('Failed to fetch plans', 'ConverterService', err);
+        return of([]);
       }),
     );
   }

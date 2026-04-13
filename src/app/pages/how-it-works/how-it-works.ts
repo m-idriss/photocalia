@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { ScrollRevealDirective } from '../../shared/directives';
+import { PlanService } from '../../services/plan.service';
 
 @Component({
   selector: 'app-how-it-works',
@@ -10,4 +11,7 @@ import { ScrollRevealDirective } from '../../shared/directives';
   templateUrl: './how-it-works.html',
   styleUrl: './how-it-works.scss',
 })
-export class HowItWorks {}
+export class HowItWorks {
+  protected readonly planService = inject(PlanService);
+  protected readonly planParams = computed(() => ({ freeLimit: this.planService.freePlanLimit() }));
+}

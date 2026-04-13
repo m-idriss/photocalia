@@ -58,7 +58,7 @@
           <p>{{ art.translationKey + '.usecases.p1' | translate }}</p>
 
           <h2>{{ art.translationKey + '.conclusion.title' | translate }}</h2>
-          <p>{{ art.translationKey + '.conclusion.p1' | translate }}</p>
+          <p>{{ art.translationKey + '.conclusion.p1' | translate: planParams() }}</p>
         }
 
         <!-- Article 2: Digitize Paper Schedules -->
@@ -86,7 +86,7 @@
           </ul>
 
           <h2>{{ art.translationKey + '.conclusion.title' | translate }}</h2>
-          <p>{{ art.translationKey + '.conclusion.p1' | translate }}</p>
+          <p>{{ art.translationKey + '.conclusion.p1' | translate: planParams() }}</p>
         }
 
         <!-- Article 3: AI OCR Calendar Extraction -->
@@ -116,7 +116,7 @@
           <p>{{ art.translationKey + '.future.p1' | translate }}</p>
 
           <h2>{{ art.translationKey + '.conclusion.title' | translate }}</h2>
-          <p>{{ art.translationKey + '.conclusion.p1' | translate }}</p>
+          <p>{{ art.translationKey + '.conclusion.p1' | translate: planParams() }}</p>
         }
       </div>
 

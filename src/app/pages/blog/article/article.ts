@@ -1,8 +1,9 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LocalizeRoutePipe } from '../../../shared/pipes/localize-route.pipe';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { BLOG_ARTICLES, BlogArticle } from '../blog.models';
+import { PlanService } from '../../../services/plan.service';
 
 @Component({
   selector: 'app-article',
@@ -13,6 +14,8 @@ import { BLOG_ARTICLES, BlogArticle } from '../blog.models';
 })
 export class Article implements OnInit {
   private readonly router = inject(Router);
+  protected readonly planService = inject(PlanService);
+  protected readonly planParams = computed(() => ({ freeLimit: this.planService.freePlanLimit() }));
 
   readonly article = signal<BlogArticle | null>(null);
 

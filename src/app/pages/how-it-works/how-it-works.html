@@ -189,7 +189,7 @@
           <li>
             <span class="benefit-icon">✓</span>
             <strong>{{ 'howitworks.benefits.free.label' | translate }}</strong>
-            {{ 'howitworks.benefits.free.description' | translate }}
+            {{ 'howitworks.benefits.free.description' | translate: planParams() }}
           </li>
           <li>
             <span class="benefit-icon">✓</span>
@@ -222,7 +222,7 @@
 
         <div class="faq-item">
           <h3 class="faq-question">{{ 'howitworks.faq.account.q' | translate }}</h3>
-          <p class="faq-answer">{{ 'howitworks.faq.account.a' | translate }}</p>
+          <p class="faq-answer">{{ 'howitworks.faq.account.a' | translate: planParams() }}</p>
         </div>
 
         <div class="faq-item">
@@ -260,7 +260,7 @@
         >
           {{ 'howitworks.cta.button' | translate }}
         </a>
-        <p class="cta-note">{{ 'howitworks.cta.note' | translate }}</p>
+        <p class="cta-note">{{ 'howitworks.cta.note' | translate: planParams() }}</p>
       </div>
     </section>
   </div>

@@ -2,6 +2,7 @@ import {
   Component,
   inject,
   signal,
+  computed,
   PLATFORM_ID,
   OnInit,
   OnDestroy,
@@ -20,6 +21,7 @@ import { Stats } from '../../components/stats/stats';
 import { ToastService } from '../../services/toast.service';
 import { CalendarStateService } from '../../services/calendar-state.service';
 import { AuthService } from '../../services/auth.service';
+import { PlanService } from '../../services/plan.service';
 import { CalendarEvent } from '../../models';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { ScrollRevealDirective } from '../../shared/directives';
@@ -44,10 +46,12 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
   public readonly toastService = inject(ToastService);
   public readonly calendarStateService = inject(CalendarStateService);
   protected readonly authService = inject(AuthService);
+  protected readonly planService = inject(PlanService);
   private readonly platformId = inject(PLATFORM_ID);
 
   @ViewChild(Converter) converterComponent?: Converter;
   protected readonly converterReady = signal(false);
+  protected readonly planParams = computed(() => ({ freeLimit: this.planService.freePlanLimit() }));
 
   protected readonly isDesktop = signal(false);
   private resizeSubscription?: Subscription;
