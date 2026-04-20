@@ -288,6 +288,21 @@
       color: #ef4444;
     }
   }
+
+  &.support-link {
+    color: var(--ct-primary, #4f46e5);
+    font-weight: 600;
+
+    &:hover {
+      background: rgba(79, 70, 229, 0.08);
+      color: var(--ct-primary, #4f46e5);
+    }
+
+    .support-emoji {
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+  }
 }
 
 /* Dropdown Separator - Divider line */

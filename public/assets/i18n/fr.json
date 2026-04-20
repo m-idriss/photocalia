@@ -293,5 +293,20 @@
   "calendar.today": "Aujourd'hui",
   "calendar.month": "Mois",
   "calendar.week": "Semaine",
-  "calendar.day": "Jour"
+  "calendar.day": "Jour",
+  "coffee.heading": "❤️ Vous aimez PhotoCalia ?",
+  "coffee.subheading": "PhotoCalia est gratuit et open source. S'il vous fait gagner du temps, soutenez le projet.",
+  "coffee.tier.coffee.label": "Offrir un café",
+  "coffee.tier.coffee.amount": "1 €",
+  "coffee.tier.snack.label": "Offrir un snack",
+  "coffee.tier.snack.amount": "3 €",
+  "coffee.tier.meal.label": "Offrir un repas",
+  "coffee.tier.meal.amount": "5 €",
+  "coffee.aria.support": "Soutenir PhotoCalia",
+  "coffee.nudge.heading": "❤️ Vous aimez PhotoCalia ?",
+  "coffee.nudge.description": "Votre calendrier est prêt ! Si PhotoCalia vous a fait gagner du temps, soutenez le projet.",
+  "coffee.nudge.cta": "Soutenir le projet",
+  "coffee.nudge.dismiss": "Plus tard",
+  "header.support": "Soutenir ☕",
+  "header.tooltip.support": "Soutenir le projet PhotoCalia"
 }

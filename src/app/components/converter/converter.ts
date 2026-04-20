@@ -29,9 +29,11 @@ import { Card } from '../card/card';
 import { AuthAwareComponent } from '../base/auth-aware.component';
 import { CalendarEvent, BatchFile, BatchFileStatus } from '../../models';
 import { LoggerService } from '../../services/logger.service';
+import { RouterLink } from '@angular/router';
 import { FILE_UPLOAD_CONSTRAINTS } from '../../constants';
 import { getMonthDay, getEventColor } from '../../utils';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 
 @Component({
   selector: 'app-converter',
@@ -46,6 +48,8 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
     NgbProgressbarModule,
     NgbTooltipModule,
     TranslatePipe,
+    RouterLink,
+    LocalizeRoutePipe,
   ],
   templateUrl: './converter.html',
   styleUrl: './converter.scss',
@@ -66,6 +70,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
   public readonly planType = signal<string | null>(null);
   // Require user confirmation before allowing download
   public readonly extractionConfirmed = signal<boolean>(false);
+  // Show contribution nudge after successful download
+  protected readonly showContributionNudge = signal<boolean>(false);
 
   constructor() {
     super();
@@ -710,6 +716,19 @@ export class Converter extends AuthAwareComponent implements OnInit {
   protected downloadIcs(): void {
     if (!this.icsContent() || !this.extractionConfirmed()) return;
     this.converterService.downloadIcsFile(this.icsContent()!);
+    if (
+      isPlatformBrowser(this.platformId) &&
+      !sessionStorage.getItem('contribution-nudge-dismissed')
+    ) {
+      this.showContributionNudge.set(true);
+    }
+  }
+
+  protected dismissContributionNudge(): void {
+    this.showContributionNudge.set(false);
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('contribution-nudge-dismissed', '1');
+    }
   }
 
   protected onExtractionConfirmed(checked: boolean): void {
@@ -729,6 +748,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
     this.icsContent.set(null);
     // Reset download confirmation when state is reset
     this.extractionConfirmed.set(false);
+    // Hide contribution nudge on reset
+    this.showContributionNudge.set(false);
     // Clear all persisted state and calendar
     this.calendarStateService.clearState();
   }

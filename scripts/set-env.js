@@ -12,6 +12,9 @@ const storageBucket = process.env.FIREBASE_STORAGE_BUCKET || '';
 const messagingSenderId = process.env.FIREBASE_MESSAGING_SENDER_ID || '';
 const appId = process.env.FIREBASE_APP_ID || '';
 const measurementId = process.env.FIREBASE_MEASUREMENT_ID || '';
+const coffeeUrl = process.env.CONTRIBUTION_COFFEE_URL || 'https://buy.stripe.com/4gM4gA09TalwgRAd7m4Vy01';
+const snackUrl = process.env.CONTRIBUTION_SNACK_URL || 'https://buy.stripe.com/3cI3cw3m565g9p82sI4Vy00';
+const mealUrl = process.env.CONTRIBUTION_MEAL_URL || 'https://buy.stripe.com/28E28s1dX79keJs1oE4Vy02';
 
 // Create the environment file content
 const packageJson = require('../package.json');
@@ -21,6 +24,11 @@ const envConfigFile = `export const environment = {
   production: true,
   apiUrl: 'https://api.photocalia.com/v1',
   appVersion: '${appVersion}',
+  contribution: {
+    coffeeUrl: '${coffeeUrl}',
+    snackUrl: '${snackUrl}',
+    mealUrl: '${mealUrl}',
+  },
   firebase: {
     apiKey: '${apiKey}',
     authDomain: '${authDomain}',

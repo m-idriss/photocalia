@@ -3,6 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { Converter } from './converter';
+import { ConverterService } from '../../services/converter';
 import { CalendarEvent } from '../../models';
 
 describe('Converter', () => {
@@ -136,6 +137,70 @@ describe('Converter', () => {
       component['deleteEvent'](0);
       const icsContent = component['icsContent']();
       expect(icsContent).toBeNull();
+    });
+  });
+
+  describe('Contribution Nudge', () => {
+    let downloadIcsFileSpy: jasmine.Spy;
+
+    beforeEach(() => {
+      const converterService = TestBed.inject(ConverterService);
+      downloadIcsFileSpy = spyOn(converterService, 'downloadIcsFile');
+      sessionStorage.removeItem('contribution-nudge-dismissed');
+    });
+
+    afterEach(() => {
+      sessionStorage.removeItem('contribution-nudge-dismissed');
+    });
+
+    it('should not show nudge initially', () => {
+      expect(component['showContributionNudge']()).toBe(false);
+    });
+
+    it('should show nudge after downloadIcs is called with valid state', () => {
+      component['icsContent'].set('BEGIN:VCALENDAR\nEND:VCALENDAR');
+      component['extractionConfirmed'].set(true);
+      component['downloadIcs']();
+      expect(downloadIcsFileSpy).toHaveBeenCalledOnceWith('BEGIN:VCALENDAR\nEND:VCALENDAR');
+      expect(component['showContributionNudge']()).toBe(true);
+    });
+
+    it('should not show nudge if ICS content is missing', () => {
+      component['icsContent'].set(null);
+      component['extractionConfirmed'].set(true);
+      component['downloadIcs']();
+      expect(downloadIcsFileSpy).not.toHaveBeenCalled();
+      expect(component['showContributionNudge']()).toBe(false);
+    });
+
+    it('should not show nudge if extraction is not confirmed', () => {
+      component['icsContent'].set('BEGIN:VCALENDAR\nEND:VCALENDAR');
+      component['extractionConfirmed'].set(false);
+      component['downloadIcs']();
+      expect(downloadIcsFileSpy).not.toHaveBeenCalled();
+      expect(component['showContributionNudge']()).toBe(false);
+    });
+
+    it('should dismiss nudge and persist dismissal in sessionStorage', () => {
+      component['showContributionNudge'].set(true);
+      component['dismissContributionNudge']();
+      expect(component['showContributionNudge']()).toBe(false);
+      expect(sessionStorage.getItem('contribution-nudge-dismissed')).toBe('1');
+    });
+
+    it('should not show nudge if already dismissed in this session', () => {
+      sessionStorage.setItem('contribution-nudge-dismissed', '1');
+      component['icsContent'].set('BEGIN:VCALENDAR\nEND:VCALENDAR');
+      component['extractionConfirmed'].set(true);
+      component['downloadIcs']();
+      expect(downloadIcsFileSpy).toHaveBeenCalled();
+      expect(component['showContributionNudge']()).toBe(false);
+    });
+
+    it('should hide nudge when resetState is called', () => {
+      component['showContributionNudge'].set(true);
+      component['resetState']();
+      expect(component['showContributionNudge']()).toBe(false);
     });
   });
 });

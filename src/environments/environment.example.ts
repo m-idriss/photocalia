@@ -1,6 +1,12 @@
 export const environment = {
   production: false,
   apiUrl: 'https://your-api-url.example.com/v1',
+  // Contribution URLs (Stripe payment links) - override with your own or leave as defaults
+  contribution: {
+    coffeeUrl: 'https://buy.stripe.com/4gM4gA09TalwgRAd7m4Vy01',
+    snackUrl: 'https://buy.stripe.com/3cI3cw3m565g9p82sI4Vy00',
+    mealUrl: 'https://buy.stripe.com/28E28s1dX79keJs1oE4Vy02',
+  },
   firebase: {
     apiKey: 'YOUR_FIREBASE_API_KEY',
     authDomain: 'your-project.firebaseapp.com',
