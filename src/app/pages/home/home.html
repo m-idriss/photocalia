@@ -231,7 +231,7 @@
                   <i class="bi bi-exclamation-triangle-fill me-1"></i>
                   <span class="fw-semibold">{{ 'home.quota.exhausted' | translate }}</span>
                   <a
-                    href="mailto:support@photocalia.com"
+                    [routerLink]="'/pricing' | localizeRoute"
                     class="ms-1 text-danger text-decoration-underline"
                     >{{ 'home.quota.upgrade' | translate }}</a
                   >

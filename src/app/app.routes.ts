@@ -396,6 +396,44 @@ const pageRoutes: Route[] = [
     },
   },
   {
+    path: 'pricing',
+    loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
+    title: 'Pricing — PhotoCalia',
+    data: {
+      seo: {
+        title: 'Pricing — Free, Pro & Business Plans | PhotoCalia',
+        description:
+          'Choose the PhotoCalia plan that fits your needs. Start free with 10 conversions/month, upgrade to Pro for 50/month or Business for unlimited conversions.',
+        keywords:
+          'photocalia pricing, calendar converter plans, photo to calendar subscription, upgrade plan',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/pricing',
+        type: 'website',
+        structuredData: [],
+      },
+    },
+  },
+  {
+    path: 'subscription/success',
+    loadComponent: () =>
+      import('./pages/subscription-success/subscription-success').then(
+        (m) => m.SubscriptionSuccess,
+      ),
+    title: 'Subscription Activated — PhotoCalia',
+    data: {
+      seo: {
+        title: 'Subscription Activated — PhotoCalia',
+        description:
+          'Your PhotoCalia subscription is now active. Start converting images to calendar events.',
+        keywords: '',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/subscription/success',
+        type: 'website',
+        structuredData: [],
+      },
+    },
+  },
+  {
     path: 'about',
     loadComponent: () => import('./pages/about/about').then((m) => m.About),
     title: 'About PhotoCalia - AI Calendar Converter by Idriss',

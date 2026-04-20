@@ -24,7 +24,9 @@ import { AuthService } from '../../services/auth.service';
 import { PlanService } from '../../services/plan.service';
 import { CalendarEvent } from '../../models';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { ScrollRevealDirective } from '../../shared/directives';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +39,8 @@ import { ScrollRevealDirective } from '../../shared/directives';
     NgbProgressbarModule,
     NgbTooltipModule,
     TranslatePipe,
+    LocalizeRoutePipe,
+    RouterLink,
     ScrollRevealDirective,
   ],
   templateUrl: './home.html',
