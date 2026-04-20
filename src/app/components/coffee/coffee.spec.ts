@@ -44,7 +44,7 @@ describe('Coffee', () => {
 
   it('should have accessible aria attributes on the tiers container', () => {
     const list = fixture.nativeElement.querySelector('.coffee-tiers');
-    expect(list.getAttribute('role')).toBe('list');
+    expect(list.getAttribute('role')).toBe('group');
   });
 
   it('should expose 3 tiers in component', () => {
@@ -53,7 +53,7 @@ describe('Coffee', () => {
 
   it('should open the tier URL in a new tab when openTier is called', () => {
     const openSpy = spyOn(window, 'open');
-    const testUrl = 'https://ko-fi.com/photocalia';
+    const testUrl = 'https://buy.stripe.com/test_123';
     component['openTier'](testUrl);
     expect(openSpy).toHaveBeenCalledWith(testUrl, '_blank', 'noopener,noreferrer');
   });

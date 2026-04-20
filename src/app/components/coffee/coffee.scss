@@ -93,3 +93,31 @@
     padding: 0.875rem 1rem;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .coffee-tier {
+    transition: none;
+
+    &:hover,
+    &:active {
+      transform: none;
+    }
+  }
+}
+
+body.dark-theme {
+  .coffee-section {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
+    border-color: rgba(79, 70, 229, 0.25);
+  }
+
+  .coffee-tier {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+
+    &:hover {
+      box-shadow:
+        0 4px 12px rgba(79, 70, 229, 0.25),
+        0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+  }
+}

@@ -1285,3 +1285,10 @@
     align-items: flex-start;
   }
 }
+
+body.dark-theme {
+  .contribution-nudge {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%);
+    border-color: rgba(79, 70, 229, 0.3);
+  }
+}

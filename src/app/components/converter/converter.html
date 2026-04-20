@@ -558,9 +558,8 @@
           </div>
           <div class="nudge-actions">
             <a
-              [href]="contributionUrl"
-              target="_blank"
-              rel="noopener noreferrer"
+              [routerLink]="'/about' | localizeRoute"
+              fragment="coffee-section"
               class="nudge-cta btn btn-primary"
             >
               {{ 'coffee.nudge.cta' | translate }}

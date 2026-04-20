@@ -4,10 +4,10 @@
     <p class="coffee-subheading">{{ 'coffee.subheading' | translate }}</p>
   </div>
 
-  <div class="coffee-tiers" role="list" [attr.aria-label]="'coffee.aria.support' | translate">
+  <div class="coffee-tiers" role="group" [attr.aria-label]="'coffee.aria.support' | translate">
     @for (tier of tiers; track tier.labelKey) {
-      <button type="button" class="coffee-tier" role="listitem" (click)="openTier(tier.url)">
-        <span class="tier-emoji" aria-hidden="true">{{ tier.emojiKey | translate }}</span>
+      <button type="button" class="coffee-tier" (click)="openTier(tier.url)">
+        <span class="tier-emoji" aria-hidden="true">{{ tier.emoji }}</span>
         <span class="tier-label">{{ tier.labelKey | translate }}</span>
         <span class="tier-amount">{{ tier.amountKey | translate }}</span>
       </button>

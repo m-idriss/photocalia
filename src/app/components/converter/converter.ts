@@ -29,10 +29,11 @@ import { Card } from '../card/card';
 import { AuthAwareComponent } from '../base/auth-aware.component';
 import { CalendarEvent, BatchFile, BatchFileStatus } from '../../models';
 import { LoggerService } from '../../services/logger.service';
+import { RouterLink } from '@angular/router';
 import { FILE_UPLOAD_CONSTRAINTS } from '../../constants';
 import { getMonthDay, getEventColor } from '../../utils';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
-import { environment } from '../../../environments/environment';
+import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 
 @Component({
   selector: 'app-converter',
@@ -47,6 +48,8 @@ import { environment } from '../../../environments/environment';
     NgbProgressbarModule,
     NgbTooltipModule,
     TranslatePipe,
+    RouterLink,
+    LocalizeRoutePipe,
   ],
   templateUrl: './converter.html',
   styleUrl: './converter.scss',
@@ -69,9 +72,6 @@ export class Converter extends AuthAwareComponent implements OnInit {
   public readonly extractionConfirmed = signal<boolean>(false);
   // Show contribution nudge after successful download
   protected readonly showContributionNudge = signal<boolean>(false);
-  // Contribution URL for the nudge
-  protected readonly contributionUrl =
-    environment.contribution?.coffeeUrl ?? 'https://buy.stripe.com/4gM4gA09TalwgRAd7m4Vy01';
 
   constructor() {
     super();
@@ -716,11 +716,19 @@ export class Converter extends AuthAwareComponent implements OnInit {
   protected downloadIcs(): void {
     if (!this.icsContent() || !this.extractionConfirmed()) return;
     this.converterService.downloadIcsFile(this.icsContent()!);
-    this.showContributionNudge.set(true);
+    if (
+      isPlatformBrowser(this.platformId) &&
+      !sessionStorage.getItem('contribution-nudge-dismissed')
+    ) {
+      this.showContributionNudge.set(true);
+    }
   }
 
   protected dismissContributionNudge(): void {
     this.showContributionNudge.set(false);
+    if (isPlatformBrowser(this.platformId)) {
+      sessionStorage.setItem('contribution-nudge-dismissed', '1');
+    }
   }
 
   protected onExtractionConfirmed(checked: boolean): void {

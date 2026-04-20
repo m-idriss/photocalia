@@ -146,6 +146,11 @@ describe('Converter', () => {
     beforeEach(() => {
       const converterService = TestBed.inject(ConverterService);
       downloadIcsFileSpy = spyOn(converterService, 'downloadIcsFile');
+      sessionStorage.removeItem('contribution-nudge-dismissed');
+    });
+
+    afterEach(() => {
+      sessionStorage.removeItem('contribution-nudge-dismissed');
     });
 
     it('should not show nudge initially', () => {
@@ -176,9 +181,19 @@ describe('Converter', () => {
       expect(component['showContributionNudge']()).toBe(false);
     });
 
-    it('should dismiss nudge when dismissContributionNudge is called', () => {
+    it('should dismiss nudge and persist dismissal in sessionStorage', () => {
       component['showContributionNudge'].set(true);
       component['dismissContributionNudge']();
+      expect(component['showContributionNudge']()).toBe(false);
+      expect(sessionStorage.getItem('contribution-nudge-dismissed')).toBe('1');
+    });
+
+    it('should not show nudge if already dismissed in this session', () => {
+      sessionStorage.setItem('contribution-nudge-dismissed', '1');
+      component['icsContent'].set('BEGIN:VCALENDAR\nEND:VCALENDAR');
+      component['extractionConfirmed'].set(true);
+      component['downloadIcs']();
+      expect(downloadIcsFileSpy).toHaveBeenCalled();
       expect(component['showContributionNudge']()).toBe(false);
     });
 

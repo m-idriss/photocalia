@@ -2,10 +2,11 @@ import { Component, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../../environments/environment';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
+import { DEFAULT_CONTRIBUTION_URLS } from '../../constants';
 
 interface ContributionTier {
   labelKey: string;
-  emojiKey: string;
+  emoji: string;
   amountKey: string;
   url: string;
 }
@@ -22,21 +23,21 @@ export class Coffee {
   protected readonly tiers: ContributionTier[] = [
     {
       labelKey: 'coffee.tier.coffee.label',
-      emojiKey: 'coffee.tier.coffee.emoji',
+      emoji: '☕',
       amountKey: 'coffee.tier.coffee.amount',
-      url: environment.contribution?.coffeeUrl ?? 'https://buy.stripe.com/4gM4gA09TalwgRAd7m4Vy01',
+      url: environment.contribution?.coffeeUrl ?? DEFAULT_CONTRIBUTION_URLS.coffeeUrl,
     },
     {
       labelKey: 'coffee.tier.snack.label',
-      emojiKey: 'coffee.tier.snack.emoji',
+      emoji: '🍪',
       amountKey: 'coffee.tier.snack.amount',
-      url: environment.contribution?.snackUrl ?? 'https://buy.stripe.com/3cI3cw3m565g9p82sI4Vy00',
+      url: environment.contribution?.snackUrl ?? DEFAULT_CONTRIBUTION_URLS.snackUrl,
     },
     {
       labelKey: 'coffee.tier.meal.label',
-      emojiKey: 'coffee.tier.meal.emoji',
+      emoji: '🍕',
       amountKey: 'coffee.tier.meal.amount',
-      url: environment.contribution?.mealUrl ?? 'https://buy.stripe.com/28E28s1dX79keJs1oE4Vy02',
+      url: environment.contribution?.mealUrl ?? DEFAULT_CONTRIBUTION_URLS.mealUrl,
     },
   ];
 
