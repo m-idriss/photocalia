@@ -434,6 +434,25 @@ const pageRoutes: Route[] = [
     },
   },
   {
+    path: 'donation/success',
+    loadComponent: () =>
+      import('./pages/donation-success/donation-success').then(
+        (m) => m.DonationSuccess,
+      ),
+    title: 'Thank You for Your Donation — PhotoCalia',
+    data: {
+      seo: {
+        title: 'Thank You for Your Donation — PhotoCalia',
+        description: 'Thank you for supporting PhotoCalia! Your donation helps us improve the service.',
+        keywords: '',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/donation/success',
+        type: 'website',
+        structuredData: [],
+      },
+    },
+  },
+  {
     path: 'about',
     loadComponent: () => import('./pages/about/about').then((m) => m.About),
     title: 'About PhotoCalia - AI Calendar Converter by Idriss',

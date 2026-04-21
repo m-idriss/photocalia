@@ -356,5 +356,17 @@
   "subscription.success.plan": "Welcome to the {plan} plan. Your quota has been upgraded.",
   "subscription.success.description": "Your subscription is now active. You can start converting more images to calendar events right away.",
   "subscription.success.cta": "Start converting →",
-  "subscription.success.view_plans": "View plans"
+  "subscription.success.view_plans": "View plans",
+  "donation.title": "Buy me a coffee ☕",
+  "donation.description": "Like PhotoCalia? Support the project and help keep it free for everyone!",
+  "donation.loading": "Processing…",
+  "donation.product.coffee.name": "Buy me a coffee",
+  "donation.product.coffee.cta": "☕ Coffee",
+  "donation.product.snack.name": "Buy me a snack",
+  "donation.product.snack.cta": "🍪 Snack",
+  "donation.product.meal.name": "Buy me a meal",
+  "donation.product.meal.cta": "🍽️ Meal",
+  "donation.success.title": "Thank you for your support! 💝",
+  "donation.success.message": "Your donation helps us continue improving PhotoCalia and keep it free for everyone.",
+  "donation.success.cta": "Go back to PhotoCalia"
 }
