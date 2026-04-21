@@ -403,7 +403,7 @@ const pageRoutes: Route[] = [
       seo: {
         title: 'Pricing — Free, Pro & Business Plans | PhotoCalia',
         description:
-          'Choose the PhotoCalia plan that fits your needs. Start free with 10 conversions/month, upgrade to Pro for 50/month or Business for unlimited conversions.',
+          'Choose the PhotoCalia plan that fits your needs. Start free with 3 conversions/month, upgrade to Pro for 50/month or Business for unlimited conversions.',
         keywords:
           'photocalia pricing, calendar converter plans, photo to calendar subscription, upgrade plan',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
