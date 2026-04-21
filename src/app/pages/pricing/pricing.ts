@@ -36,8 +36,8 @@ export class Pricing {
   }
 
   /** The total yearly price for display in the yearly billing option. */
-  protected getYearlyTotal(plan: SubscriptionPlan): string | null {
-    if (plan.yearlyPrice === null) return null;
+  protected getYearlyTotal(plan: SubscriptionPlan): string {
+    if (plan.yearlyPrice === null) return '';
     return plan.yearlyPrice.toFixed(2);
   }
 
