@@ -66,7 +66,7 @@
 
 .cookie-message {
   font-size: 0.9rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   line-height: 1.6;
   margin: 0 0 1.25rem;
 
@@ -120,7 +120,7 @@
 
 .cookie-option-desc {
   font-size: 0.8rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   line-height: 1.4;
 }
 
@@ -203,7 +203,7 @@
 
 .cookie-btn-reject {
   background: transparent;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
 
   &:hover {
     background: var(--cb-slate, #f1f5f9);
