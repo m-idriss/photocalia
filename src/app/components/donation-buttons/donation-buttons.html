@@ -1,0 +1,23 @@
+<div class="donation-buttons">
+  <h3 class="donation-title">{{ 'donation.title' | translate }}</h3>
+  <p class="donation-description">{{ 'donation.description' | translate }}</p>
+
+  <div class="buttons-container">
+    @for (product of products; track product.id) {
+      <button
+        class="donation-btn"
+        (click)="donate(product.id)"
+        [disabled]="isLoading() !== null"
+        [attr.aria-busy]="isLoading() === product.id"
+      >
+        @if (isLoading() === product.id) {
+          <span class="spinner-sm" aria-hidden="true"></span>
+          {{ 'donation.loading' | translate }}
+        } @else {
+          <span class="emoji">{{ product.emoji }}</span>
+          {{ product.ctaKey | translate }}
+        }
+      </button>
+    }
+  </div>
+</div>

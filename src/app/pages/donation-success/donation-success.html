@@ -1,0 +1,13 @@
+<main class="donation-success-page">
+  <section class="success-container">
+    <div class="success-icon" aria-hidden="true">✓</div>
+    <h1 class="success-title">{{ 'donation.success.title' | translate }}</h1>
+    <p class="success-message">{{ 'donation.success.message' | translate }}</p>
+
+    <div class="success-actions">
+      <a [routerLink]="'/' | localizeRoute" class="btn btn-primary">
+        {{ 'donation.success.cta' | translate }}
+      </a>
+    </div>
+  </section>
+</main>
