@@ -46,7 +46,7 @@
 
 .hero-description {
   font-size: 1.25rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   line-height: 1.6;
   max-width: 900px;
   margin: 0 auto 0.5rem;
@@ -54,7 +54,7 @@
 
 .hero-subtitle {
   font-size: 1rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   opacity: 0.8;
   margin: 0 auto;
   text-align: center;
@@ -73,7 +73,7 @@
 
 .compatible-label {
   font-size: 0.7rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
@@ -91,7 +91,7 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   font-size: 0.7rem;
   font-weight: 500;
   transition: color var(--t-fast);
@@ -156,7 +156,7 @@
    ======================== */
 .section-description {
   font-size: 1.1rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   line-height: 1.6;
   max-width: 700px;
   margin: 0 auto 2rem;
@@ -195,7 +195,7 @@
 
 .section-reassurance {
   font-size: 1rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   text-align: center;
   margin-top: 1.5rem;
   font-style: italic;
@@ -315,7 +315,7 @@
 
 .step-description {
   font-size: 1rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   line-height: 1.6;
   margin: 0;
 }
@@ -507,7 +507,7 @@
 
 .benefit-description {
   font-size: 0.95rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   line-height: 1.5;
   margin: 0;
 }
@@ -565,7 +565,7 @@
     content: '+';
     font-size: 1.5rem;
     font-weight: 300;
-    color: var(--text-secondary, #64748b);
+    color: var(--text-secondary, #5f6c7c);
     transition: transform 0.3s ease;
     flex-shrink: 0;
     margin-left: 1rem;
@@ -579,7 +579,7 @@
 .faq-answer {
   padding: 0 1.5rem 1.25rem;
   font-size: 1rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary, #5f6c7c);
   line-height: 1.6;
   margin: 0;
 }
