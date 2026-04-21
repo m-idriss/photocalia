@@ -8,7 +8,7 @@ export class PlanService {
   private readonly converterService = inject(ConverterService);
 
   readonly plans = signal<PlanInfo[]>([]);
-  readonly freePlanLimit = signal<number>(10);
+  readonly freePlanLimit = signal<number>(3);
 
   constructor() {
     this.converterService.fetchPlans().subscribe((plans) => {
