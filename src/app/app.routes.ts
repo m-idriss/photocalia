@@ -403,7 +403,7 @@ const pageRoutes: Route[] = [
       seo: {
         title: 'Pricing — Free, Pro & Business Plans | PhotoCalia',
         description:
-          'Choose the PhotoCalia plan that fits your needs. Start free with 3 conversions/month, upgrade to Pro for 50/month or Business for unlimited conversions.',
+          'Choose the PhotoCalia plan that fits your needs. Start free with 3 conversions/month, upgrade to Pro for 50/month or Business for 120/month.',
         keywords:
           'photocalia pricing, calendar converter plans, photo to calendar subscription, upgrade plan',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
@@ -436,14 +436,13 @@ const pageRoutes: Route[] = [
   {
     path: 'donation/success',
     loadComponent: () =>
-      import('./pages/donation-success/donation-success').then(
-        (m) => m.DonationSuccess,
-      ),
+      import('./pages/donation-success/donation-success').then((m) => m.DonationSuccess),
     title: 'Thank You for Your Donation — PhotoCalia',
     data: {
       seo: {
         title: 'Thank You for Your Donation — PhotoCalia',
-        description: 'Thank you for supporting PhotoCalia! Your donation helps us improve the service.',
+        description:
+          'Thank you for supporting PhotoCalia! Your donation helps us improve the service.',
         keywords: '',
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/donation/success',

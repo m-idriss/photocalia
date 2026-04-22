@@ -53,7 +53,6 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
       'pricing.feature.batch_upload',
       'pricing.feature.priority_ai',
       'pricing.feature.email_support',
-      'pricing.feature.unlimited_quota',
       'pricing.feature.priority_support',
     ],
     highlighted: false,
