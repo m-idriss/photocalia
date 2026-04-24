@@ -1,0 +1,16 @@
+<section class="coffee-section" aria-labelledby="coffee-heading">
+  <div class="coffee-header">
+    <h3 id="coffee-heading" class="coffee-heading">{{ 'coffee.heading' | translate }}</h3>
+    <p class="coffee-subheading">{{ 'coffee.subheading' | translate }}</p>
+  </div>
+
+  <div class="coffee-tiers" role="group" [attr.aria-label]="'coffee.aria.support' | translate">
+    @for (tier of tiers; track tier.labelKey) {
+      <button type="button" class="coffee-tier" (click)="openTier(tier.url)">
+        <span class="tier-emoji" aria-hidden="true">{{ tier.emoji }}</span>
+        <span class="tier-label">{{ tier.labelKey | translate }}</span>
+        <span class="tier-amount">{{ tier.amountKey | translate }}</span>
+      </button>
+    }
+  </div>
+</section>

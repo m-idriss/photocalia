@@ -396,6 +396,62 @@ const pageRoutes: Route[] = [
     },
   },
   {
+    path: 'pricing',
+    loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
+    title: 'Pricing — PhotoCalia',
+    data: {
+      seo: {
+        title: 'Pricing — Free, Pro & Business Plans | PhotoCalia',
+        description:
+          'Choose the PhotoCalia plan that fits your needs. Start free with 3 conversions/month, upgrade to Pro for 50/month or Business for 120/month.',
+        keywords:
+          'photocalia pricing, calendar converter plans, photo to calendar subscription, upgrade plan',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/pricing',
+        type: 'website',
+        structuredData: [],
+      },
+    },
+  },
+  {
+    path: 'subscription/success',
+    loadComponent: () =>
+      import('./pages/subscription-success/subscription-success').then(
+        (m) => m.SubscriptionSuccess,
+      ),
+    title: 'Subscription Activated — PhotoCalia',
+    data: {
+      seo: {
+        title: 'Subscription Activated — PhotoCalia',
+        description:
+          'Your PhotoCalia subscription is now active. Start converting images to calendar events.',
+        keywords: '',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/subscription/success',
+        type: 'website',
+        structuredData: [],
+      },
+    },
+  },
+  {
+    path: 'donation/success',
+    loadComponent: () =>
+      import('./pages/donation-success/donation-success').then((m) => m.DonationSuccess),
+    title: 'Thank You for Your Donation — PhotoCalia',
+    data: {
+      seo: {
+        title: 'Thank You for Your Donation — PhotoCalia',
+        description:
+          'Thank you for supporting PhotoCalia! Your donation helps us improve the service.',
+        keywords: '',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/donation/success',
+        type: 'website',
+        structuredData: [],
+      },
+    },
+  },
+  {
     path: 'about',
     loadComponent: () => import('./pages/about/about').then((m) => m.About),
     title: 'About PhotoCalia - AI Calendar Converter by Idriss',

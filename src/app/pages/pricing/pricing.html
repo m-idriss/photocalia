@@ -1,0 +1,131 @@
+<main class="pricing-page" aria-labelledby="pricing-title">
+  <!-- Hero -->
+  <section class="pricing-hero">
+    <h1 id="pricing-title" class="pricing-title">{{ 'pricing.title' | translate }}</h1>
+    <p class="pricing-subtitle">{{ 'pricing.subtitle' | translate }}</p>
+
+    <!-- Billing Toggle -->
+    <div
+      class="billing-toggle"
+      role="group"
+      [attr.aria-label]="'pricing.billing.toggle.aria' | translate"
+    >
+      <button
+        class="toggle-btn"
+        [class.active]="billingCycle() === 'monthly'"
+        (click)="toggleBilling('monthly')"
+        [attr.aria-pressed]="billingCycle() === 'monthly'"
+      >
+        {{ 'pricing.billing.monthly' | translate }}
+      </button>
+      <button
+        class="toggle-btn"
+        [class.active]="billingCycle() === 'yearly'"
+        (click)="toggleBilling('yearly')"
+        [attr.aria-pressed]="billingCycle() === 'yearly'"
+      >
+        {{ 'pricing.billing.yearly' | translate }}
+        <span class="save-badge">{{ 'pricing.billing.save' | translate }}</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Error message -->
+  @if (error()) {
+    <div class="pricing-error" role="alert" aria-live="assertive">
+      {{ error() }}
+    </div>
+  }
+
+  <!-- Plans Grid -->
+  <section class="plans-grid" aria-label="Subscription plans">
+    @for (plan of plans; track plan.id) {
+      <article
+        class="plan-card"
+        [class.highlighted]="plan.highlighted"
+        [attr.aria-label]="plan.labelKey | translate"
+      >
+        @if (plan.highlighted) {
+          <div class="popular-badge" aria-hidden="true">{{ 'pricing.popular' | translate }}</div>
+        }
+
+        <div class="plan-header">
+          <h2 class="plan-name">{{ plan.labelKey | translate }}</h2>
+          <p class="plan-description">{{ plan.descriptionKey | translate }}</p>
+        </div>
+
+        <div class="plan-price" aria-label="{{ plan.labelKey | translate }} price">
+          @if (plan.monthlyPrice === null) {
+            <span class="price-amount">{{ 'pricing.free' | translate }}</span>
+          } @else {
+            <span class="price-amount">€{{ getPrice(plan) }}</span>
+            <span class="price-period">/ {{ 'pricing.billing.per_month' | translate }}</span>
+            @if (billingCycle() === 'yearly' && getYearlyTotal(plan)) {
+              <span class="price-yearly-total">
+                {{ 'pricing.billing.billed_yearly' | translate: { total: getYearlyTotal(plan) } }}
+              </span>
+            }
+          }
+        </div>
+
+        <p class="plan-quota">{{ plan.quotaKey | translate }}</p>
+
+        <ul class="plan-features" role="list">
+          @for (feature of plan.features; track feature) {
+            <li class="feature-item" role="listitem">
+              <span class="feature-check" aria-hidden="true">✓</span>
+              {{ feature | translate }}
+            </li>
+          }
+        </ul>
+
+        <div class="plan-cta">
+          @if (plan.id === 'free') {
+            @if (isAuthenticated()) {
+              <span class="current-plan-badge">{{ 'pricing.current_plan' | translate }}</span>
+            } @else {
+              <a [routerLink]="'/' | localizeRoute" class="btn btn-outline-secondary w-100">
+                {{ plan.ctaKey | translate }}
+              </a>
+            }
+          } @else {
+            <button
+              class="btn w-100"
+              [class.btn-primary]="plan.highlighted"
+              [class.btn-outline-primary]="!plan.highlighted"
+              (click)="subscribe(plan)"
+              [disabled]="isLoading() !== null"
+              [attr.aria-busy]="isLoading() === plan.id"
+            >
+              @if (isLoading() === plan.id) {
+                <span class="spinner-sm" aria-hidden="true"></span>
+                {{ 'pricing.loading' | translate }}
+              } @else {
+                {{ plan.ctaKey | translate }}
+              }
+            </button>
+          }
+        </div>
+      </article>
+    }
+  </section>
+
+  <!-- FAQ / Reassurance -->
+  <section class="pricing-faq" aria-labelledby="faq-title">
+    <h2 id="faq-title" class="faq-title">{{ 'pricing.faq.title' | translate }}</h2>
+    <ul class="faq-list" role="list">
+      <li>
+        <strong>{{ 'pricing.faq.cancel.q' | translate }}</strong>
+        <p>{{ 'pricing.faq.cancel.a' | translate }}</p>
+      </li>
+      <li>
+        <strong>{{ 'pricing.faq.secure.q' | translate }}</strong>
+        <p>{{ 'pricing.faq.secure.a' | translate }}</p>
+      </li>
+      <li>
+        <strong>{{ 'pricing.faq.upgrade.q' | translate }}</strong>
+        <p>{{ 'pricing.faq.upgrade.a' | translate }}</p>
+      </li>
+    </ul>
+  </section>
+</main>

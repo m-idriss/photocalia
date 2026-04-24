@@ -1,0 +1,33 @@
+<main class="success-page" aria-labelledby="success-title">
+  @if (isLoading()) {
+    <div class="success-loading" role="status" aria-live="polite">
+      <div class="spinner-lg" aria-hidden="true"></div>
+      <p>{{ 'subscription.success.loading' | translate }}</p>
+    </div>
+  } @else {
+    <div class="success-content">
+      <div class="success-icon" aria-hidden="true">✅</div>
+
+      <h1 id="success-title" class="success-title">
+        {{ 'subscription.success.title' | translate }}
+      </h1>
+
+      @if (status()) {
+        <p class="success-plan">
+          {{ 'subscription.success.plan' | translate: { plan: status()!.planId } }}
+        </p>
+      }
+
+      <p class="success-description">{{ 'subscription.success.description' | translate }}</p>
+
+      <div class="success-actions">
+        <a [routerLink]="'/' | localizeRoute" class="btn btn-primary">
+          {{ 'subscription.success.cta' | translate }}
+        </a>
+        <a [routerLink]="'/pricing' | localizeRoute" class="btn btn-outline-secondary">
+          {{ 'subscription.success.view_plans' | translate }}
+        </a>
+      </div>
+    </div>
+  }
+</main>

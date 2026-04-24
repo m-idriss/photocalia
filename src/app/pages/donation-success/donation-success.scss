@@ -1,0 +1,45 @@
+.donation-success-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.success-container {
+  text-align: center;
+  max-width: 500px;
+}
+
+.success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 50%;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.success-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--bs-body-color);
+}
+
+.success-message {
+  font-size: 1rem;
+  color: var(--bs-secondary-color);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.success-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
