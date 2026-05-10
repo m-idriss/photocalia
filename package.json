@@ -82,7 +82,7 @@
   "devDependencies": {
     "@angular/build": "^21.2.7",
     "@angular/cli": "^21.2.7",
-    "@angular/compiler-cli": "21.2.7",
+    "@angular/compiler-cli": "21.2.12",
     "@angular/localize": "21.2.11",
     "@eslint/js": "10.0.1",
     "@playwright/test": "^1.59.1",
