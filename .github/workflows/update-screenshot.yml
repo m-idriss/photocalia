@@ -161,7 +161,17 @@ jobs:
           fi
 
           # Compare normalized RMSE: 0 = identical, 1 = fully different.
-          DIFF=$(compare -metric RMSE "$CURRENT" "$CANDIDATE" null: 2>&1 | awk -F'[()]' '{print $2}')
+          set +e
+          COMPARE_OUTPUT=$(compare -metric RMSE "$CURRENT" "$CANDIDATE" null: 2>&1)
+          COMPARE_EXIT=$?
+          set -e
+
+          if [ "$COMPARE_EXIT" -eq 2 ]; then
+            echo "Image comparison failed: $COMPARE_OUTPUT"
+            exit 1
+          fi
+
+          DIFF=$(echo "$COMPARE_OUTPUT" | awk -F'[()]' '{print $2}')
           THRESHOLD="0.003"
 
           echo "Normalized RMSE: $DIFF"
