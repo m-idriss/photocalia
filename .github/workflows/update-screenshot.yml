@@ -16,24 +16,64 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Detect frontend changes since last screenshot update
+        id: changes
+        run: |
+          set -euo pipefail
+
+          SCREENSHOT_PATH="public/assets/screenshots/iPhone_13_Pro_Max.jpeg"
+          LAST_SCREENSHOT_COMMIT=$(git log -n 1 --format=%H -- "$SCREENSHOT_PATH" || true)
+
+          if [ -z "$LAST_SCREENSHOT_COMMIT" ]; then
+            echo "No existing screenshot commit found. Running screenshot update."
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          FRONTEND_CHANGES=$(git diff --name-only "$LAST_SCREENSHOT_COMMIT"..HEAD -- \
+            src \
+            public \
+            angular.json \
+            package.json \
+            package-lock.json \
+            tsconfig.json \
+            tsconfig.app.json \
+            tsconfig.spec.json | grep -v '^public/assets/screenshots/' || true)
+
+          if [ -z "$FRONTEND_CHANGES" ]; then
+            echo "No frontend-impacting changes since last screenshot update. Skipping."
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Detected frontend-impacting changes:"
+            echo "$FRONTEND_CHANGES"
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Setup Node.js
+        if: steps.changes.outputs.should_run == 'true'
         uses: actions/setup-node@v6
         with:
           node-version: '20'
           cache: 'npm'
 
       - name: Install dependencies
+        if: steps.changes.outputs.should_run == 'true'
         run: npm ci
 
       - name: Build application
+        if: steps.changes.outputs.should_run == 'true'
         run: npm run build
 
       - name: Auto-accept cookies for screenshots
+        if: steps.changes.outputs.should_run == 'true'
         run: |
           sed -i 's|</head>|<script>localStorage.setItem("photocalia_cookie_consent",JSON.stringify({essential:true,analytics:false,preferences:false,timestamp:Date.now()}))</script></head>|' dist/photocalia/browser/index.html
 
       - name: Start server in background
+        if: steps.changes.outputs.should_run == 'true'
         run: |
           cd dist/photocalia/browser
           npx serve -s . -l 4200 &
@@ -52,16 +92,19 @@ jobs:
           done
 
       - name: Check server response before screenshots
+        if: steps.changes.outputs.should_run == 'true'
         run: |
           sleep 5
           curl -i http://localhost:4200
 
       - name: Install puppeteer-headful
+        if: steps.changes.outputs.should_run == 'true'
         uses: mujo-code/puppeteer-headful@master
         env:
           CI: 'true'
 
       - name: Generate screenshots
+        if: steps.changes.outputs.should_run == 'true'
         uses: flameddd/screenshots-ci-action@master
         with:
           url: http://localhost:4200
@@ -79,12 +122,14 @@ jobs:
           waitForSelectorTimeout: 120000
 
       - name: Crop mobile screenshot
+        if: steps.changes.outputs.should_run == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y imagemagick
           convert screenshots/iPhone_13_Pro_Max.jpeg -crop 1284x2200+0+0 screenshots/iPhone_13_Pro_Max.jpeg
 
       - name: Verify screenshots have content
+        if: steps.changes.outputs.should_run == 'true'
         run: |
           echo "Checking mobile screenshot..."
           identify -verbose screenshots/iPhone_13_Pro_Max.jpeg | grep -E "Geometry|Format"
@@ -100,12 +145,44 @@ jobs:
 
           echo "Screenshots verified successfully"
 
+      - name: Compare screenshot against current version
+        if: steps.changes.outputs.should_run == 'true'
+        id: compare
+        run: |
+          set -euo pipefail
+
+          CURRENT="public/assets/screenshots/iPhone_13_Pro_Max.jpeg"
+          CANDIDATE="screenshots/iPhone_13_Pro_Max.jpeg"
+
+          if [ ! -f "$CURRENT" ]; then
+            echo "No existing screenshot found, update required."
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Compare normalized RMSE: 0 = identical, 1 = fully different.
+          DIFF=$(compare -metric RMSE "$CURRENT" "$CANDIDATE" null: 2>&1 | awk -F'[()]' '{print $2}')
+          THRESHOLD="0.003"
+
+          echo "Normalized RMSE: $DIFF"
+          echo "Threshold: $THRESHOLD"
+
+          if awk -v d="$DIFF" -v t="$THRESHOLD" 'BEGIN { exit !(d > t) }'; then
+            echo "Visual change detected."
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No meaningful visual change detected."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Move screenshots into public/assets/screenshots
+        if: steps.changes.outputs.should_run == 'true' && steps.compare.outputs.has_changes == 'true'
         run: |
           mkdir -p public/assets/screenshots
           mv screenshots/iPhone_13_Pro_Max.jpeg public/assets/screenshots/
 
       - name: Create Pull Request to main
+        if: steps.changes.outputs.should_run == 'true' && steps.compare.outputs.has_changes == 'true'
         id: cpr
         uses: peter-evans/create-pull-request@v8
         with:
@@ -118,7 +195,7 @@ jobs:
           labels: ''
 
       - name: Auto-merge Pull Request (squash with fixed message)
-        if: steps.cpr.outputs.pull-request-number
+        if: steps.changes.outputs.should_run == 'true' && steps.compare.outputs.has_changes == 'true' && steps.cpr.outputs.pull-request-number
         run: |
           gh pr merge ${{ steps.cpr.outputs.pull-request-number }} \
             --squash \
@@ -128,3 +205,12 @@ jobs:
             --subject "Update screenshots [skip ci]"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: No-op summary
+        if: steps.changes.outputs.should_run != 'true' || steps.compare.outputs.has_changes == 'false'
+        run: |
+          if [ "${{ steps.changes.outputs.should_run }}" != "true" ]; then
+            echo "Skipped: no frontend-impacting changes since last screenshot update."
+          else
+            echo "Skipped: generated screenshot is visually equivalent to current screenshot."
+          fi
