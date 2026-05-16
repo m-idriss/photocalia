@@ -190,6 +190,27 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Blog: Reddit Photo to Calendar -->
+  <url>
+    <loc>https://photocalia.com/blog/reddit-photo-to-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/reddit-photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/reddit-photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/reddit-photo-to-calendar" />
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://photocalia.com/fr/blog/reddit-photo-to-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/reddit-photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/reddit-photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/reddit-photo-to-calendar" />
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Blog: Photo to Google Calendar -->
   <url>
     <loc>https://photocalia.com/blog/photo-to-google-calendar</loc>

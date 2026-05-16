@@ -50,6 +50,20 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     translationKey: 'blog.digitizeSchedules',
   },
   {
+    slug: 'reddit-photo-to-calendar',
+    title: "Reddit's Favorite Way to Add Event Photos to Google Calendar (No Typing)",
+    description:
+      "Every week someone asks on r/productivity: 'Is there an app that reads a photo and adds events to my calendar?' Here's the answer the community landed on.",
+    author: 'Idriss',
+    authorUrl: 'https://3dime.com',
+    datePublished: '2026-05-16',
+    dateModified: '2026-05-16',
+    readingTime: '5 min',
+    tags: ['reddit', 'productivity', 'google-calendar', 'photo-to-calendar'],
+    image: 'https://photocalia.com/assets/images/converter.png',
+    translationKey: 'blog.redditPhotoCalendar',
+  },
+  {
     slug: 'ai-ocr-calendar-extraction',
     title: 'How AI OCR Transforms Event Flyers into Calendar Entries',
     description:

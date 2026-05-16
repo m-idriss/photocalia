@@ -89,6 +89,82 @@
           <p>{{ art.translationKey + '.conclusion.p1' | translate: planParams() }}</p>
         }
 
+        <!-- Article 4: Reddit Photo to Calendar -->
+        @if (art.slug === 'reddit-photo-to-calendar') {
+          <p class="lead">{{ art.translationKey + '.intro' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.reddit.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.reddit.p1' | translate }}</p>
+          <blockquote class="reddit-quote">
+            <p>{{ art.translationKey + '.reddit.quote' | translate }}</p>
+            <cite>— r/productivity</cite>
+          </blockquote>
+          <p>
+            {{ art.translationKey + '.reddit.p2' | translate }}
+            <a
+              href="https://www.reddit.com/r/productivity/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >r/productivity</a
+            >,
+            <a href="https://www.reddit.com/r/LifeHacks/" target="_blank" rel="noopener noreferrer"
+              >r/LifeHacks</a
+            >
+            {{ art.translationKey + '.reddit.p3' | translate }}
+          </p>
+
+          <h2>{{ art.translationKey + '.pain.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.pain.p1' | translate }}</p>
+          <p>{{ art.translationKey + '.pain.p2' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.solution.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.solution.p1' | translate }}</p>
+          <p>{{ art.translationKey + '.solution.p2' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.howto.title' | translate }}</h2>
+          <h3>{{ art.translationKey + '.howto.1.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.howto.1.description' | translate }}</p>
+          <h3>{{ art.translationKey + '.howto.2.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.howto.2.description' | translate }}</p>
+          <h3>{{ art.translationKey + '.howto.3.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.howto.3.description' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.community.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.community.p1' | translate }}</p>
+          <ul>
+            <li>
+              <a
+                href="https://www.reddit.com/r/productivity/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >r/productivity</a
+              >
+              — {{ art.translationKey + '.community.1' | translate }}
+            </li>
+            <li>
+              <a
+                href="https://www.reddit.com/r/LifeHacks/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >r/LifeHacks</a
+              >
+              — {{ art.translationKey + '.community.2' | translate }}
+            </li>
+            <li>
+              <a
+                href="https://www.reddit.com/r/googlecalendar/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >r/googlecalendar</a
+              >
+              — {{ art.translationKey + '.community.3' | translate }}
+            </li>
+          </ul>
+
+          <h2>{{ art.translationKey + '.conclusion.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.conclusion.p1' | translate: planParams() }}</p>
+        }
+
         <!-- Article 3: AI OCR Calendar Extraction -->
         @if (art.slug === 'ai-ocr-calendar-extraction') {
           <p class="lead">{{ art.translationKey + '.intro' | translate }}</p>

@@ -396,6 +396,59 @@ const pageRoutes: Route[] = [
     },
   },
   {
+    path: 'blog/reddit-photo-to-calendar',
+    loadComponent: () => import('./pages/blog/article/article').then((m) => m.Article),
+    title: "Reddit's Favorite Way to Add Event Photos to Google Calendar | PhotoCalia",
+    data: {
+      seo: {
+        title: "Reddit's Favorite Way to Add Event Photos to Google Calendar | PhotoCalia",
+        description:
+          "Every week someone asks on r/productivity: 'Is there an app that reads a photo and adds events to my calendar?' Here's the answer the community landed on.",
+        keywords:
+          'reddit productivity calendar, photo to google calendar reddit, r/productivity calendar app, add events from photo reddit, no typing calendar events',
+        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://photocalia.com/blog/reddit-photo-to-calendar',
+        type: 'article',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: 'https://photocalia.com/blog',
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: "Reddit's Favorite Way to Add Event Photos to Google Calendar",
+                item: 'https://photocalia.com/blog/reddit-photo-to-calendar',
+              },
+            ],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: "Reddit's Favorite Way to Add Event Photos to Google Calendar (No Typing)",
+            author: { '@type': 'Person', name: 'Idriss', url: 'https://3dime.com' },
+            datePublished: '2026-05-16',
+            dateModified: '2026-05-16',
+            publisher: {
+              '@type': 'Organization',
+              name: 'PhotoCalia',
+              url: 'https://photocalia.com',
+            },
+            image: 'https://photocalia.com/assets/images/converter.png',
+            mainEntityOfPage: 'https://photocalia.com/blog/reddit-photo-to-calendar',
+          },
+        ],
+      },
+    },
+  },
+  {
     path: 'pricing',
     loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
     title: 'Pricing — PhotoCalia',
