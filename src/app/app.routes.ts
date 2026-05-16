@@ -328,8 +328,8 @@ const pageRoutes: Route[] = [
             '@type': 'Article',
             headline: 'Best Ways to Digitize Paper Schedules and Appointment Cards',
             author: { '@type': 'Person', name: 'Idriss', url: 'https://3dime.com' },
-            datePublished: '2026-03-18',
-            dateModified: '2026-03-18',
+            datePublished: '2026-03-25',
+            dateModified: '2026-03-25',
             publisher: {
               '@type': 'Organization',
               name: 'PhotoCalia',
@@ -381,8 +381,8 @@ const pageRoutes: Route[] = [
             '@type': 'Article',
             headline: 'How AI OCR Transforms Event Flyers into Calendar Entries',
             author: { '@type': 'Person', name: 'Idriss', url: 'https://3dime.com' },
-            datePublished: '2026-03-18',
-            dateModified: '2026-03-18',
+            datePublished: '2026-04-01',
+            dateModified: '2026-04-01',
             publisher: {
               '@type': 'Organization',
               name: 'PhotoCalia',
