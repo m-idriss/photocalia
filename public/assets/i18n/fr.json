@@ -370,6 +370,8 @@
   "donation.success.message": "Votre don nous aide à continuer à améliorer PhotoCalia et à le maintenir gratuit pour tous.",
   "donation.success.cta": "Retour à PhotoCalia",
 
+  "blog.redditPhotoCalendar.title": "La méthode préférée de Reddit pour ajouter des photos d'événements à Google Agenda (sans taper)",
+  "blog.redditPhotoCalendar.description": "Chaque semaine, quelqu'un demande sur r/productivity : 'Existe-t-il une app qui lit une photo et ajoute les événements à mon agenda ?' Voici la réponse sur laquelle la communauté s'est accordée.",
   "blog.redditPhotoCalendar.intro": "Chaque semaine, quelqu'un poste sur Reddit la même question : 'Existe-t-il une application qui lit une photo de flyer et ajoute directement les événements à mon agenda ?' La réponse est oui — et voici la solution sur laquelle la communauté productivité s'est accordée.",
   "blog.redditPhotoCalendar.reddit.title": "Ce que les utilisateurs Reddit demandent vraiment",
   "blog.redditPhotoCalendar.reddit.p1": "Parcourez r/productivity ou r/LifeHacks et vous trouverez des dizaines de fils de discussion de personnes frustrées par la même chose : elles ont une photo d'un planning, d'un flyer ou d'une carte de rendez-vous, et elles veulent l'avoir dans leur agenda sans retaper chaque détail à la main.",

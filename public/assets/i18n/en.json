@@ -370,6 +370,8 @@
   "donation.success.message": "Your donation helps us continue improving PhotoCalia and keep it free for everyone.",
   "donation.success.cta": "Go back to PhotoCalia",
 
+  "blog.redditPhotoCalendar.title": "Reddit's Favorite Way to Add Event Photos to Google Calendar (No Typing)",
+  "blog.redditPhotoCalendar.description": "Every week someone asks on r/productivity: 'Is there an app that reads a photo and adds events to my calendar?' Here's the answer the community landed on.",
   "blog.redditPhotoCalendar.intro": "Every week, someone posts on Reddit asking the same question: 'Is there an app that reads a photo of a flyer and adds events straight to my calendar?' The answer is yes — and here's the solution the productivity community landed on.",
   "blog.redditPhotoCalendar.reddit.title": "What Reddit Users Are Actually Asking",
   "blog.redditPhotoCalendar.reddit.p1": "Browse r/productivity or r/LifeHacks and you'll find dozens of threads from people frustrated by the same thing: they have a photo of a schedule, a flyer, or an appointment card, and they want it in their calendar without retyping every detail by hand.",
