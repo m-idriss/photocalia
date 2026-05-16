@@ -409,7 +409,76 @@ const pageRoutes: Route[] = [
         ogImage: 'https://photocalia.com/assets/images/converter.png',
         ogUrl: 'https://photocalia.com/pricing',
         type: 'website',
-        structuredData: [],
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Pricing',
+                item: 'https://photocalia.com/pricing',
+              },
+            ],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'PhotoCalia Plans',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                item: {
+                  '@type': 'Product',
+                  name: 'Free Plan',
+                  description: '3 conversions per month, no credit card required.',
+                  offers: {
+                    '@type': 'Offer',
+                    price: '0',
+                    priceCurrency: 'EUR',
+                    availability: 'https://schema.org/InStock',
+                    url: 'https://photocalia.com/pricing',
+                  },
+                },
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                item: {
+                  '@type': 'Product',
+                  name: 'Pro Plan',
+                  description: '50 conversions per month.',
+                  offers: {
+                    '@type': 'Offer',
+                    price: '4.99',
+                    priceCurrency: 'EUR',
+                    availability: 'https://schema.org/InStock',
+                    url: 'https://photocalia.com/pricing',
+                  },
+                },
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                item: {
+                  '@type': 'Product',
+                  name: 'Business Plan',
+                  description: '120 conversions per month.',
+                  offers: {
+                    '@type': 'Offer',
+                    price: '9.99',
+                    priceCurrency: 'EUR',
+                    availability: 'https://schema.org/InStock',
+                    url: 'https://photocalia.com/pricing',
+                  },
+                },
+              },
+            ],
+          },
+        ],
       },
     },
   },
