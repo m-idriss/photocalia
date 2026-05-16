@@ -169,6 +169,27 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Pricing Page -->
+  <url>
+    <loc>https://photocalia.com/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/pricing" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/pricing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/pricing" />
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://photocalia.com/fr/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/pricing" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/pricing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/pricing" />
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Blog: Photo to Google Calendar -->
   <url>
     <loc>https://photocalia.com/blog/photo-to-google-calendar</loc>
