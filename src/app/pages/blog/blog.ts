@@ -13,5 +13,7 @@ import { BLOG_ARTICLES } from './blog.models';
   styleUrl: './blog.scss',
 })
 export class Blog {
-  readonly articles = BLOG_ARTICLES;
+  readonly articles = [...BLOG_ARTICLES].sort((a, b) =>
+    b.datePublished.localeCompare(a.datePublished),
+  );
 }
