@@ -30,7 +30,7 @@ export class Header extends AuthAwareComponent {
   readonly lang = inject(LanguageService);
 
   menuOpen = false;
-  private failedAvatarUrl: string | null = null;
+  private failedAvatar: { uid: string; photoURL: string } | null = null;
 
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
@@ -88,8 +88,9 @@ export class Header extends AuthAwareComponent {
   }
 
   protected shouldShowAvatarImage(): boolean {
-    const photoUrl = this.currentUser?.photoURL;
-    return !!photoUrl && photoUrl !== this.failedAvatarUrl;
+    const user = this.currentUser;
+    if (!user?.photoURL) return false;
+    return this.failedAvatar?.uid !== user.uid || this.failedAvatar?.photoURL !== user.photoURL;
   }
 
   protected userInitials(): string {
@@ -109,7 +110,10 @@ export class Header extends AuthAwareComponent {
   }
 
   protected onAvatarError(): void {
-    this.failedAvatarUrl = this.currentUser?.photoURL ?? null;
+    const user = this.currentUser;
+    if (user?.photoURL) {
+      this.failedAvatar = { uid: user.uid, photoURL: user.photoURL };
+    }
     this.cdr.markForCheck();
   }
 }
