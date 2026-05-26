@@ -247,7 +247,7 @@ const pageRoutes: Route[] = [
           'Learn how to turn any photo, screenshot, or flyer into Google Calendar events using AI. Step-by-step guide with tips for best results.',
         keywords:
           'photo to google calendar, convert image to calendar event, picture to calendar, screenshot to google calendar',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogImage: 'https://photocalia.com/assets/images/blog/photo-to-google-calendar.jpg',
         ogUrl: 'https://photocalia.com/blog/photo-to-google-calendar',
         type: 'article',
         structuredData: [
@@ -282,7 +282,7 @@ const pageRoutes: Route[] = [
               name: 'PhotoCalia',
               url: 'https://photocalia.com',
             },
-            image: 'https://photocalia.com/assets/images/converter.png',
+            image: 'https://photocalia.com/assets/images/blog/photo-to-google-calendar.jpg',
             mainEntityOfPage: 'https://photocalia.com/blog/photo-to-google-calendar',
           },
         ],
@@ -300,7 +300,7 @@ const pageRoutes: Route[] = [
           'Stop losing paper appointment cards and schedules. Discover how AI-powered tools can digitize them into calendar events automatically.',
         keywords:
           'digitize paper schedule, scan appointment card to calendar, paper to digital calendar, AI schedule digitizer',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogImage: 'https://photocalia.com/assets/images/blog/digitize-paper-schedules.jpg',
         ogUrl: 'https://photocalia.com/blog/digitize-paper-schedules',
         type: 'article',
         structuredData: [
@@ -335,7 +335,7 @@ const pageRoutes: Route[] = [
               name: 'PhotoCalia',
               url: 'https://photocalia.com',
             },
-            image: 'https://photocalia.com/assets/images/converter.png',
+            image: 'https://photocalia.com/assets/images/blog/digitize-paper-schedules.jpg',
             mainEntityOfPage: 'https://photocalia.com/blog/digitize-paper-schedules',
           },
         ],
@@ -353,7 +353,7 @@ const pageRoutes: Route[] = [
           'Understand how AI and OCR technology work together to extract event details from images and create structured calendar data.',
         keywords:
           'AI OCR calendar, event extraction from image, flyer to calendar AI, optical character recognition calendar',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogImage: 'https://photocalia.com/assets/images/blog/ai-ocr-calendar-extraction.jpg',
         ogUrl: 'https://photocalia.com/blog/ai-ocr-calendar-extraction',
         type: 'article',
         structuredData: [
@@ -388,7 +388,7 @@ const pageRoutes: Route[] = [
               name: 'PhotoCalia',
               url: 'https://photocalia.com',
             },
-            image: 'https://photocalia.com/assets/images/converter.png',
+            image: 'https://photocalia.com/assets/images/blog/ai-ocr-calendar-extraction.jpg',
             mainEntityOfPage: 'https://photocalia.com/blog/ai-ocr-calendar-extraction',
           },
         ],
@@ -406,7 +406,7 @@ const pageRoutes: Route[] = [
           "Every week someone asks on r/productivity: 'Is there an app that reads a photo and adds events to my calendar?' Here's the answer the community landed on.",
         keywords:
           'reddit productivity calendar, photo to google calendar reddit, r/productivity calendar app, add events from photo reddit, no typing calendar events',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
+        ogImage: 'https://photocalia.com/assets/images/blog/reddit-photo-to-calendar.jpg',
         ogUrl: 'https://photocalia.com/blog/reddit-photo-to-calendar',
         type: 'article',
         structuredData: [
@@ -441,7 +441,7 @@ const pageRoutes: Route[] = [
               name: 'PhotoCalia',
               url: 'https://photocalia.com',
             },
-            image: 'https://photocalia.com/assets/images/converter.png',
+            image: 'https://photocalia.com/assets/images/blog/reddit-photo-to-calendar.jpg',
             mainEntityOfPage: 'https://photocalia.com/blog/reddit-photo-to-calendar',
           },
         ],
