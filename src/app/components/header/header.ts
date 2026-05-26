@@ -90,7 +90,11 @@ export class Header extends AuthAwareComponent {
   protected shouldShowAvatarImage(): boolean {
     const user = this.currentUser;
     if (!user?.photoURL) return false;
-    return this.failedAvatar?.uid !== user.uid || this.failedAvatar?.photoURL !== user.photoURL;
+    return (
+      !this.failedAvatar ||
+      this.failedAvatar.uid !== user.uid ||
+      this.failedAvatar.photoURL !== user.photoURL
+    );
   }
 
   protected userInitials(): string {
