@@ -71,14 +71,20 @@
           [appTooltip]="'header.tooltip.settings' | translate"
           appTooltipPlacement="bottom"
         >
-          @if (isAuthenticated && currentUser) {
+          @if (isAuthenticated && currentUser && shouldShowAvatarImage()) {
             <img
               [src]="currentUser.photoURL"
               [alt]="currentUser.displayName || 'User avatar'"
               class="user-avatar"
               width="32"
               height="32"
+              referrerpolicy="no-referrer"
+              (error)="onAvatarError()"
             />
+          } @else if (isAuthenticated && currentUser) {
+            <span class="user-avatar user-avatar-fallback" aria-hidden="true">
+              {{ userInitials() }}
+            </span>
           } @else {
             <svg
               aria-hidden="true"
