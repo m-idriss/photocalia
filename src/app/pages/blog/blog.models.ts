@@ -12,6 +12,7 @@ export interface BlogArticle {
   readingTime: string;
   tags: string[];
   image: string;
+  imageAlt: string;
   /** Translation key prefix for article content, e.g. 'blog.photo-to-calendar' */
   translationKey: string;
 }
@@ -32,7 +33,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     dateModified: '2026-03-18',
     readingTime: '5 min',
     tags: ['tutorial', 'google-calendar', 'photo-to-calendar'],
-    image: 'https://photocalia.com/assets/images/converter.png',
+    image: '/assets/images/blog/photo-to-google-calendar.png',
+    imageAlt: 'A phone photo of an event flyer being converted into calendar events on a laptop',
     translationKey: 'blog.photoToCalendar',
   },
   {
@@ -46,7 +48,9 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     dateModified: '2026-03-25',
     readingTime: '6 min',
     tags: ['guide', 'digitize', 'paper-schedules'],
-    image: 'https://photocalia.com/assets/images/converter.png',
+    image: '/assets/images/blog/digitize-paper-schedules.png',
+    imageAlt:
+      'Paper appointment cards and printed schedules being organized into a digital calendar',
     translationKey: 'blog.digitizeSchedules',
   },
   {
@@ -60,7 +64,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     dateModified: '2026-05-16',
     readingTime: '5 min',
     tags: ['reddit', 'productivity', 'google-calendar', 'photo-to-calendar'],
-    image: 'https://photocalia.com/assets/images/converter.png',
+    image: '/assets/images/blog/reddit-photo-to-calendar.png',
+    imageAlt: 'A community discussion about adding event photos to a calendar without typing',
     translationKey: 'blog.redditPhotoCalendar',
   },
   {
@@ -74,7 +79,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     dateModified: '2026-04-01',
     readingTime: '7 min',
     tags: ['technology', 'ai', 'ocr'],
-    image: 'https://photocalia.com/assets/images/converter.png',
+    image: '/assets/images/blog/ai-ocr-calendar-extraction.png',
+    imageAlt: 'An AI OCR workflow extracting event flyer details into structured calendar cards',
     translationKey: 'blog.aiOcrCalendar',
   },
 ];

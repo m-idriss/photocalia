@@ -14,7 +14,30 @@
       appScrollRevealDirection="left"
       aria-label="Blog articles"
     >
-      <div class="articles-grid">
+      <div class="articles-toolbar">
+        <div class="view-toggle" role="group" [attr.aria-label]="'blog.view.label' | translate">
+          <button
+            type="button"
+            class="view-toggle-button"
+            [class.active]="viewMode() === 'grid'"
+            [attr.aria-pressed]="viewMode() === 'grid'"
+            (click)="setViewMode('grid')"
+          >
+            {{ 'blog.view.grid' | translate }}
+          </button>
+          <button
+            type="button"
+            class="view-toggle-button"
+            [class.active]="viewMode() === 'list'"
+            [attr.aria-pressed]="viewMode() === 'list'"
+            (click)="setViewMode('list')"
+          >
+            {{ 'blog.view.list' | translate }}
+          </button>
+        </div>
+      </div>
+
+      <div class="articles-grid" [class.articles-grid--list]="viewMode() === 'list'">
         @for (article of articles; track article.slug) {
           <article class="article-card">
             <a
@@ -22,6 +45,15 @@
               class="article-link"
               [attr.aria-label]="article.title"
             >
+              <figure class="article-image">
+                <img
+                  [src]="article.image"
+                  [alt]="article.imageAlt"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                />
+              </figure>
               <div class="article-meta">
                 <time [attr.datetime]="article.datePublished" class="article-date">
                   {{ article.datePublished }}

@@ -16,6 +16,7 @@ export class Article implements OnInit {
   private readonly router = inject(Router);
   protected readonly planService = inject(PlanService);
   protected readonly planParams = computed(() => ({ freeLimit: this.planService.freePlanLimit() }));
+  protected readonly siteUrl = 'https://photocalia.com';
 
   readonly article = signal<BlogArticle | null>(null);
 
@@ -30,5 +31,9 @@ export class Article implements OnInit {
 
     const found = slug ? (BLOG_ARTICLES.find((a) => a.slug === slug) ?? null) : null;
     this.article.set(found);
+  }
+
+  protected absoluteImageUrl(image: string): string {
+    return image.startsWith('http') ? image : `${this.siteUrl}${image}`;
   }
 }

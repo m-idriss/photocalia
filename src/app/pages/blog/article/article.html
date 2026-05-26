@@ -26,7 +26,17 @@
           <span>{{ art.readingTime }} {{ 'blog.article.read' | translate }}</span>
         </div>
         <meta itemprop="dateModified" [attr.content]="art.dateModified" />
-        <meta itemprop="image" [attr.content]="art.image" />
+        <meta itemprop="image" [attr.content]="absoluteImageUrl(art.image)" />
+        <figure class="article-hero">
+          <img
+            [src]="art.image"
+            [alt]="art.imageAlt"
+            width="1600"
+            height="900"
+            itemprop="image"
+            fetchpriority="high"
+          />
+        </figure>
       </header>
 
       <div class="article-content" itemprop="articleBody">
