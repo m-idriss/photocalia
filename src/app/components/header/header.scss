@@ -201,6 +201,17 @@
     object-fit: cover;
     flex-shrink: 0;
   }
+
+  .user-avatar-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--ct-primary, #4f46e5), #14b8a6);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+  }
 }
 
 /* Dropdown Menu - Settings menu popup */

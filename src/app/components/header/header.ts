@@ -30,6 +30,7 @@ export class Header extends AuthAwareComponent {
   readonly lang = inject(LanguageService);
 
   menuOpen = false;
+  private failedAvatar: { uid: string; photoURL: string } | null = null;
 
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
@@ -83,6 +84,40 @@ export class Header extends AuthAwareComponent {
 
   setLanguage(lang: SupportedLanguage): void {
     this.lang.setLanguage(lang);
+    this.cdr.markForCheck();
+  }
+
+  protected shouldShowAvatarImage(): boolean {
+    const user = this.currentUser;
+    if (!user?.photoURL) return false;
+    return (
+      !this.failedAvatar ||
+      this.failedAvatar.uid !== user.uid ||
+      this.failedAvatar.photoURL !== user.photoURL
+    );
+  }
+
+  protected userInitials(): string {
+    const user = this.currentUser;
+    const source = user?.displayName || user?.email || 'User';
+    const parts = source
+      .trim()
+      .split(/[\s@._-]+/)
+      .filter(Boolean);
+
+    const initials = parts
+      .slice(0, 2)
+      .map((part) => part.charAt(0).toUpperCase())
+      .join('');
+
+    return initials || 'U';
+  }
+
+  protected onAvatarError(): void {
+    const user = this.currentUser;
+    if (user?.photoURL) {
+      this.failedAvatar = { uid: user.uid, photoURL: user.photoURL };
+    }
     this.cdr.markForCheck();
   }
 }
