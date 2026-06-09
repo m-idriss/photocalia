@@ -9,10 +9,10 @@ const pageRoutes: Route[] = [
   {
     path: '',
     loadComponent: () => import('./pages/home/home').then((m) => m.Home),
-    title: 'PhotoCalia – Convert Photos, Screenshots & Flyers to Calendar Events with AI',
+    title: 'PhotoCalia – Convert Photos & Screenshots to Calendar Events with AI',
     data: {
       seo: {
-        title: 'PhotoCalia – Convert Photos, Screenshots & Flyers to Calendar Events with AI',
+        title: 'PhotoCalia – Convert Photos & Screenshots to Calendar Events with AI',
         description:
           'Turn any photo, screenshot, flyer or PDF into calendar events with AI — no manual typing. PhotoCalia extracts dates, times & locations automatically and adds them to Google Calendar or exports ICS files. Free, no separate signup.',
         keywords:
