@@ -208,6 +208,44 @@
         }
       </div>
 
+      <!-- Related Articles Section -->
+      @if (previousArticles().length > 0) {
+        <section class="related-articles">
+          <h2>{{ 'blog.relatedArticles' | translate }}</h2>
+          <div class="related-articles-grid">
+            @for (relatedArticle of previousArticles(); track relatedArticle.slug) {
+              <article class="related-article-card">
+                <a
+                  [routerLink]="'/blog/' + relatedArticle.slug | localizeRoute"
+                  class="related-article-link"
+                >
+                  <figure class="related-article-image">
+                    <img
+                      [src]="relatedArticle.image"
+                      [alt]="relatedArticle.imageAlt"
+                      width="400"
+                      height="225"
+                      loading="lazy"
+                    />
+                  </figure>
+                  <div class="related-article-content">
+                    <h3>{{ relatedArticle.translationKey + '.title' | translate }}</h3>
+                    <p class="related-article-description">
+                      {{ relatedArticle.translationKey + '.description' | translate }}
+                    </p>
+                    <div class="related-article-meta">
+                      <span class="date">{{ relatedArticle.datePublished | localizeDate }}</span>
+                      <span class="reading-time">{{ relatedArticle.readingTime }}</span>
+                    </div>
+                    <span class="read-more">{{ 'blog.readMore' | translate }} →</span>
+                  </div>
+                </a>
+              </article>
+            }
+          </div>
+        </section>
+      }
+
       <footer class="article-footer">
         <div class="article-tags">
           @for (tag of art.tags; track tag) {
