@@ -22,6 +22,7 @@ import { ToastService } from '../../services/toast.service';
 import { CalendarStateService } from '../../services/calendar-state.service';
 import { AuthService } from '../../services/auth.service';
 import { PlanService } from '../../services/plan.service';
+import { LanguageService } from '../../services/language.service';
 import { CalendarEvent } from '../../models';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
@@ -51,11 +52,19 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
   public readonly calendarStateService = inject(CalendarStateService);
   protected readonly authService = inject(AuthService);
   protected readonly planService = inject(PlanService);
+  protected readonly languageService = inject(LanguageService);
   private readonly platformId = inject(PLATFORM_ID);
 
   @ViewChild(Converter) converterComponent?: Converter;
   protected readonly converterReady = signal(false);
   protected readonly planParams = computed(() => ({ freeLimit: this.planService.freePlanLimit() }));
+  protected readonly campaignVideoSrc = computed(
+    () => `/assets/videos/photocalia-summer-campaign-${this.languageService.currentLang()}.mp4`,
+  );
+  protected readonly campaignPosterSrc = computed(
+    () =>
+      `/assets/videos/photocalia-summer-campaign-${this.languageService.currentLang()}-poster.jpg`,
+  );
 
   protected readonly isDesktop = signal(false);
   private resizeSubscription?: Subscription;

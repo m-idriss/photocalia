@@ -1,5 +1,5 @@
 /* Importing Bootstrap SCSS file. */
-@use 'bootstrap/scss/bootstrap';
+@import '../node_modules/bootstrap/scss/bootstrap';
 
 /* Self-hosted Plus Jakarta Sans */
 @font-face {
