@@ -99,4 +99,19 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     imageAlt: 'An AI OCR workflow extracting event flyer details into structured calendar cards',
     translationKey: 'blog.aiOcrCalendar',
   },
+  {
+    slug: 'sports-league-training',
+    title: 'Track Your Team: Convert Sports Schedules into a Coaching & Playing Calendar',
+    description:
+      'Soccer league schedules, tennis tournaments, marathon training plans—snap photos of your sports schedule and build a master calendar with all games, practices, and training milestones.',
+    author: 'Idriss',
+    authorUrl: 'https://3dime.com',
+    datePublished: '2026-06-21',
+    dateModified: '2026-06-21',
+    readingTime: '6 min',
+    tags: ['sports', 'fitness', 'training', 'scheduling'],
+    image: '/assets/images/blog/sports-league-training.jpg',
+    imageAlt: "Sports league schedules and training plans organized in an athlete's calendar",
+    translationKey: 'blog.sportsLeagueTraining',
+  },
 ];
