@@ -214,12 +214,11 @@
 }
 
 .related-article-link {
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
   height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .related-article-image {
