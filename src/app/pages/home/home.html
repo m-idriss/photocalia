@@ -277,6 +277,36 @@
         class="marketing-sections"
         [class.hidden-when-calendar]="calendarStateService.isVisible() && isDesktop()"
       >
+        <section
+          class="campaign-video-section"
+          appScrollReveal
+          aria-labelledby="campaign-video-title"
+        >
+          <div class="campaign-video-copy">
+            <span class="campaign-video-badge">{{ 'home.campaign.badge' | translate }}</span>
+            <h2 id="campaign-video-title" class="campaign-video-title">
+              {{ 'home.campaign.title' | translate }}
+            </h2>
+            <p class="campaign-video-description">
+              {{ 'home.campaign.description' | translate }}
+            </p>
+          </div>
+
+          <div class="campaign-video-frame">
+            <video
+              class="campaign-video"
+              controls
+              playsinline
+              preload="none"
+              [poster]="campaignPosterSrc()"
+              [attr.aria-label]="'home.campaign.videoLabel' | translate"
+            >
+              <source [src]="campaignVideoSrc()" type="video/mp4" />
+              {{ 'home.campaign.fallback' | translate }}
+            </video>
+          </div>
+        </section>
+
         <!-- How It Works Section -->
         <section
           class="how-it-works-section"

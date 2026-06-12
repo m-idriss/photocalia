@@ -2,6 +2,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { Component, OnInit, PLATFORM_ID, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
+import { LocalizeDatePipe } from '../../shared/pipes/localize-date.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { ScrollRevealDirective } from '../../shared/directives';
 import { BLOG_ARTICLES } from './blog.models';
@@ -13,7 +14,7 @@ const BLOG_VIEW_MODE_KEY = 'photocalia_blog_view_mode';
 @Component({
   selector: 'app-blog',
   standalone: true,
-  imports: [RouterLink, LocalizeRoutePipe, TranslatePipe, ScrollRevealDirective],
+  imports: [RouterLink, LocalizeRoutePipe, LocalizeDatePipe, TranslatePipe, ScrollRevealDirective],
   templateUrl: './blog.html',
   styleUrl: './blog.scss',
 })

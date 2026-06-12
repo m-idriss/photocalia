@@ -178,6 +178,115 @@
   }
 }
 
+/* Related Articles Section */
+.related-articles {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 2px solid var(--ct-border, #e2e8f0);
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--text-primary, #0f172a);
+  }
+}
+
+.related-articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.related-article-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  background: var(--ct-surface, #ffffff);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+.related-article-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.related-article-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  margin: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+
+    .related-article-card:hover & {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.related-article-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary, #0f172a);
+    line-height: 1.4;
+  }
+}
+
+.related-article-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #666);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.related-article-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary, #888);
+  margin-bottom: 1rem;
+
+  .date,
+  .reading-time {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.read-more {
+  display: inline-block;
+  color: var(--ct-primary, #4f46e5);
+  font-weight: 500;
+  transition: transform 0.2s ease;
+
+  .related-article-link:hover & {
+    transform: translateX(4px);
+  }
+}
+
 @media (max-width: 600px) {
   .article-title {
     font-size: 1.5rem;
@@ -185,5 +294,19 @@
 
   .article-content {
     font-size: 1rem;
+  }
+
+  .related-articles {
+    margin-top: 2rem;
+    padding-top: 2rem;
+
+    h2 {
+      font-size: 1.25rem;
+    }
+  }
+
+  .related-articles-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 }
