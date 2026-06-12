@@ -1,6 +1,9 @@
 {
   "name": "photocalia",
   "version": "4.9.0",
+  "engines": {
+    "node": ">=22.22.3"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -51,16 +54,16 @@
   "dependencies": {
     "@angular/animations": "22.0.0",
     "@angular/cdk": "22.0.0",
-    "@angular/common": "21.2.15",
-    "@angular/compiler": "21.2.14",
-    "@angular/core": "21.2.15",
+    "@angular/common": "22.0.0",
+    "@angular/compiler": "22.0.0",
+    "@angular/core": "22.0.0",
     "@angular/fire": "^20.0.1",
-    "@angular/forms": "21.2.15",
-    "@angular/platform-browser": "21.2.13",
-    "@angular/platform-server": "21.2.13",
+    "@angular/forms": "22.0.0",
+    "@angular/platform-browser": "22.0.0",
+    "@angular/platform-server": "22.0.0",
     "@angular/router": "22.0.0",
     "@angular/service-worker": "22.0.0",
-    "@angular/ssr": "21.2.14",
+    "@angular/ssr": "22.0.0",
     "@fullcalendar/angular": "^6.1.20",
     "@fullcalendar/core": "^6.1.20",
     "@fullcalendar/daygrid": "^6.1.20",
@@ -80,10 +83,10 @@
     "zone.js": "~0.16.0"
   },
   "devDependencies": {
-    "@angular/build": "^21.2.12",
-    "@angular/cli": "^21.2.11",
-    "@angular/compiler-cli": "21.2.15",
-    "@angular/localize": "21.2.14",
+    "@angular/build": "^22.0.0",
+    "@angular/cli": "^22.0.0",
+    "@angular/compiler-cli": "22.0.0",
+    "@angular/localize": "22.0.0",
     "@eslint/js": "10.0.1",
     "@playwright/test": "^1.60.0",
     "@types/jasmine": "~6.0.0",

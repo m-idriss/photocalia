@@ -34,6 +34,16 @@ describe('Home', () => {
     expect(compiled.querySelector('app-converter')).toBeTruthy();
   });
 
+  it('should render the seasonal campaign video for signed-out users', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+    const video = compiled.querySelector<HTMLVideoElement>('.campaign-video');
+
+    expect(video).toBeTruthy();
+    expect(video?.querySelector('source')?.getAttribute('src')).toContain(
+      '/assets/videos/photocalia-summer-campaign-',
+    );
+  });
+
   it('should hide marketing sections for authenticated users', () => {
     const authService = TestBed.inject(AuthService);
     authService.isAuthenticated.set(true);
