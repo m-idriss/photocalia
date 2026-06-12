@@ -71,8 +71,8 @@
           <p>{{ art.translationKey + '.conclusion.p1' | translate: planParams() }}</p>
         }
 
-        <!-- Article 2: Digitize Paper Schedules -->
-        @if (art.slug === 'digitize-paper-schedules') {
+        <!-- Article 2: Digitize Paper Schedules / Summer Exam Scheduling -->
+        @if (art.slug === 'digitize-paper-schedules' || art.slug === 'summer-exam-scheduling') {
           <p class="lead">{{ art.translationKey + '.intro' | translate }}</p>
 
           <h2>{{ art.translationKey + '.problem.title' | translate }}</h2>
