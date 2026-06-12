@@ -5,12 +5,14 @@
       <span aria-hidden="true">/</span>
       <a [routerLink]="'/blog' | localizeRoute">{{ 'blog.title' | translate }}</a>
       <span aria-hidden="true">/</span>
-      <span aria-current="page">{{ art.title }}</span>
+      <span aria-current="page">{{ art.translationKey + '.title' | translate }}</span>
     </nav>
 
     <article>
       <header class="article-header">
-        <h1 itemprop="headline" class="article-title">{{ art.title }}</h1>
+        <h1 itemprop="headline" class="article-title">
+          {{ art.translationKey + '.title' | translate }}
+        </h1>
         <div class="article-meta">
           <span itemprop="author" itemscope itemtype="https://schema.org/Person">
             {{ 'blog.article.by' | translate }}
