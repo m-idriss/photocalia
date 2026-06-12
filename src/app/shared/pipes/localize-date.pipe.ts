@@ -26,9 +26,9 @@ export class LocalizeDatePipe implements PipeTransform, OnDestroy {
     });
   }
 
-  transform(dateString: string): string {
-    if (!dateString || typeof dateString !== 'string') {
-      return dateString || '';
+  transform(dateString: string | null | undefined): string {
+    if (!dateString) {
+      return '';
     }
 
     // Expect YYYY-MM-DD format
