@@ -449,6 +449,60 @@ const pageRoutes: Route[] = [
     },
   },
   {
+    path: 'blog/summer-exam-scheduling',
+    loadComponent: () => import('./pages/blog/article/article').then((m) => m.Article),
+    title: 'Summer Exam Scheduling: How to Organize Multiple Test Dates in Minutes | PhotoCalia',
+    data: {
+      seo: {
+        title:
+          'Summer Exam Scheduling: How to Organize Multiple Test Dates in Minutes | PhotoCalia',
+        description:
+          'Manage summer exams, retakes, and entrance tests across multiple subjects. Learn how to digitize exam timetables and track preparation deadlines effortlessly.',
+        keywords:
+          'summer exam scheduling, exam timetable to calendar, retake planning, entrance test calendar, student exam planner',
+        ogImage: 'https://photocalia.com/assets/images/blog/summer-exam-scheduling.jpg',
+        ogUrl: 'https://photocalia.com/blog/summer-exam-scheduling',
+        type: 'article',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: 'https://photocalia.com/blog',
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: 'Summer Exam Scheduling',
+                item: 'https://photocalia.com/blog/summer-exam-scheduling',
+              },
+            ],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: 'Summer Exam Scheduling: How to Organize Multiple Test Dates in Minutes',
+            author: { '@type': 'Person', name: 'Idriss', url: 'https://3dime.com' },
+            datePublished: '2026-06-12',
+            dateModified: '2026-06-12',
+            publisher: {
+              '@type': 'Organization',
+              name: 'PhotoCalia',
+              url: 'https://photocalia.com',
+            },
+            image: 'https://photocalia.com/assets/images/blog/summer-exam-scheduling.jpg',
+            mainEntityOfPage: 'https://photocalia.com/blog/summer-exam-scheduling',
+          },
+        ],
+      },
+    },
+  },
+  {
     path: 'pricing',
     loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
     title: 'Pricing — PhotoCalia',
