@@ -56,7 +56,7 @@
               </figure>
               <div class="article-meta">
                 <time [attr.datetime]="article.datePublished" class="article-date">
-                  {{ article.datePublished }}
+                  {{ article.datePublished | localizeDate }}
                 </time>
                 <span class="article-reading-time" aria-hidden="true">{{
                   article.readingTime

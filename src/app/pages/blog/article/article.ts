@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LocalizeRoutePipe } from '../../../shared/pipes/localize-route.pipe';
+import { LocalizeDatePipe } from '../../../shared/pipes/localize-date.pipe';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { BLOG_ARTICLES, BlogArticle } from '../blog.models';
 import { PlanService } from '../../../services/plan.service';
@@ -8,7 +9,7 @@ import { PlanService } from '../../../services/plan.service';
 @Component({
   selector: 'app-article',
   standalone: true,
-  imports: [RouterLink, LocalizeRoutePipe, TranslatePipe],
+  imports: [RouterLink, LocalizeRoutePipe, LocalizeDatePipe, TranslatePipe],
   templateUrl: './article.html',
   styleUrl: './article.scss',
 })

@@ -22,7 +22,7 @@
           </span>
           <span class="meta-separator" aria-hidden="true">&bull;</span>
           <time itemprop="datePublished" [attr.datetime]="art.datePublished">
-            {{ art.datePublished }}
+            {{ art.datePublished | localizeDate }}
           </time>
           <span class="meta-separator" aria-hidden="true">&bull;</span>
           <span>{{ art.readingTime }} {{ 'blog.article.read' | translate }}</span>
