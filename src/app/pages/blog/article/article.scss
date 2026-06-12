@@ -233,7 +233,7 @@
     object-fit: cover;
     transition: transform 0.3s ease;
 
-    &:hover {
+    .related-article-card:hover & {
       transform: scale(1.05);
     }
   }
