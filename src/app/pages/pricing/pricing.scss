@@ -1,7 +1,8 @@
 .pricing-page {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 4rem;
+  padding: 0 1.5rem 4rem;
+  padding-top: max(2rem, calc(100px + 2rem));
 }
 
 // ─── Hero ──────────────────────────────────────────────────────────────────
@@ -15,6 +16,7 @@
   font-weight: 700;
   margin-bottom: 0.75rem;
   letter-spacing: -0.02em;
+  scroll-margin-top: 120px;
 }
 
 .pricing-subtitle {

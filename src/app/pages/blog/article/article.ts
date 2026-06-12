@@ -20,6 +20,7 @@ export class Article implements OnInit {
   protected readonly siteUrl = 'https://photocalia.com';
 
   readonly article = signal<BlogArticle | null>(null);
+  readonly previousArticles = signal<BlogArticle[]>([]);
 
   ngOnInit(): void {
     // Extract slug from URL path (works for both /blog/slug and /fr/blog/slug)
@@ -32,6 +33,13 @@ export class Article implements OnInit {
 
     const found = slug ? (BLOG_ARTICLES.find((a) => a.slug === slug) ?? null) : null;
     this.article.set(found);
+
+    // Get previous articles (sorted by date, show up to 3)
+    if (found) {
+      const currentIndex = BLOG_ARTICLES.findIndex((a) => a.slug === slug);
+      const previous = BLOG_ARTICLES.filter((_, index) => index > currentIndex).slice(0, 3);
+      this.previousArticles.set(previous);
+    }
   }
 
   protected absoluteImageUrl(image: string): string {
