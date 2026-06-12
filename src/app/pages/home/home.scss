@@ -163,6 +163,112 @@
 }
 
 /* ========================
+   Seasonal Campaign Video
+   ======================== */
+.campaign-video-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+  gap: 2.5rem;
+  padding: 4rem 2rem;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.12), transparent 32%),
+    radial-gradient(circle at 85% 80%, rgba(249, 115, 98, 0.12), transparent 30%), var(--cb-white);
+
+  @media (min-width: 900px) {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 440px);
+    gap: clamp(3rem, 7vw, 7rem);
+    padding: 5rem max(2rem, calc((100vw - 1200px) / 2));
+  }
+}
+
+.campaign-video-copy {
+  max-width: 650px;
+  text-align: center;
+
+  @media (min-width: 900px) {
+    text-align: left;
+  }
+}
+
+.campaign-video-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  color: var(--ct-primary, #4f46e5);
+  background: rgba(79, 70, 229, 0.08);
+  border: 1px solid rgba(79, 70, 229, 0.14);
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  &::before {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
+    content: '';
+  }
+}
+
+.campaign-video-title {
+  margin: 1.25rem 0 1rem;
+  color: var(--text-primary, #0f172a);
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1.02;
+}
+
+.campaign-video-description {
+  max-width: 620px;
+  margin: 0 auto;
+  color: var(--text-secondary, #5f6c7c);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.7;
+
+  @media (min-width: 900px) {
+    margin: 0;
+  }
+}
+
+.campaign-video-frame {
+  position: relative;
+  width: min(100%, 390px);
+  margin: 0 auto;
+  padding: 0.55rem;
+  border: 1px solid rgba(79, 70, 229, 0.14);
+  border-radius: 2.2rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.96), rgba(238, 242, 255, 0.9));
+  box-shadow:
+    0 35px 80px rgba(79, 70, 229, 0.2),
+    0 10px 30px rgba(15, 23, 42, 0.1);
+
+  &::before {
+    position: absolute;
+    inset: -12%;
+    z-index: -1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.2), transparent 65%);
+    content: '';
+    filter: blur(22px);
+  }
+}
+
+.campaign-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  border-radius: 1.75rem;
+  background: #312e81;
+  object-fit: cover;
+}
+
+/* ========================
    Illustrations & Images
    ======================== */
 .floating-illustration {
@@ -763,6 +869,20 @@
   }
 
   // Convert Section - Mobile
+  .campaign-video-section {
+    gap: 2rem;
+    padding: 3rem 1rem;
+  }
+
+  .campaign-video-frame {
+    width: min(88vw, 360px);
+    border-radius: 1.8rem;
+  }
+
+  .campaign-video {
+    border-radius: 1.4rem;
+  }
+
   .convert-section {
     padding: 3rem 1rem;
   }

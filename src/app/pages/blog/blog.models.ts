@@ -69,6 +69,22 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     translationKey: 'blog.redditPhotoCalendar',
   },
   {
+    slug: 'summer-exam-scheduling',
+    title: 'Summer Exam Scheduling: How to Organize Multiple Test Dates in Minutes',
+    description:
+      'Manage summer exams, retakes, and entrance tests across multiple subjects. Learn how to digitize exam timetables and track preparation deadlines effortlessly.',
+    author: 'Idriss',
+    authorUrl: 'https://3dime.com',
+    datePublished: '2026-06-12',
+    dateModified: '2026-06-12',
+    readingTime: '6 min',
+    tags: ['exam', 'scheduling', 'students', 'summer'],
+    image: '/assets/images/blog/summer-exam-scheduling.jpg',
+    imageAlt:
+      'An exam timetable photo being converted into a color-coded calendar with preparation reminders',
+    translationKey: 'blog.summerExamScheduling',
+  },
+  {
     slug: 'ai-ocr-calendar-extraction',
     title: 'How AI OCR Transforms Event Flyers into Calendar Entries',
     description:
