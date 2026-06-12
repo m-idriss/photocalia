@@ -214,12 +214,11 @@
 }
 
 .related-article-link {
-  display: block;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
   height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
 .related-article-image {
@@ -234,7 +233,7 @@
     object-fit: cover;
     transition: transform 0.3s ease;
 
-    &:hover {
+    .related-article-card:hover & {
       transform: scale(1.05);
     }
   }

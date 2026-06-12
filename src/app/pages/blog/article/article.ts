@@ -34,12 +34,12 @@ export class Article implements OnInit {
     const found = slug ? (BLOG_ARTICLES.find((a) => a.slug === slug) ?? null) : null;
     this.article.set(found);
 
-    // Get previous articles (sorted by date, show up to 3)
-    if (found) {
-      const currentIndex = BLOG_ARTICLES.findIndex((a) => a.slug === slug);
-      const previous = BLOG_ARTICLES.filter((_, index) => index > currentIndex).slice(0, 3);
-      this.previousArticles.set(previous);
-    }
+    // Get related articles (most recent first, excluding current; show up to 3)
+    const related = [...BLOG_ARTICLES]
+      .filter((a) => a.slug !== slug)
+      .sort((a, b) => b.datePublished.localeCompare(a.datePublished))
+      .slice(0, 3);
+    this.previousArticles.set(related);
   }
 
   protected absoluteImageUrl(image: string): string {
