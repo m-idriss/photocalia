@@ -1,0 +1,160 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="calendarGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5f5f5;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGradient)"/>
+
+  <!-- Left side: Calendar -->
+  <g transform="translate(100, 80)">
+    <!-- Calendar card shadow -->
+    <rect x="0" y="0" width="380" height="450" rx="15" fill="rgba(0,0,0,0.15)" filter="blur(8px)"/>
+
+    <!-- Calendar card -->
+    <rect x="0" y="0" width="380" height="450" rx="15" fill="url(#calendarGradient)" stroke="#ddd" stroke-width="2"/>
+
+    <!-- Calendar header -->
+    <rect x="0" y="0" width="380" height="60" rx="15" ry="15" fill="#667eea"/>
+    <text x="190" y="40" font-size="28" font-weight="bold" fill="white" text-anchor="middle">June 2026</text>
+
+    <!-- Weekday headers -->
+    <g fill="#666" font-size="14" font-weight="bold" text-anchor="middle">
+      <text x="27" y="95">Sun</text>
+      <text x="82" y="95">Mon</text>
+      <text x="137" y="95">Tue</text>
+      <text x="192" y="95">Wed</text>
+      <text x="247" y="95">Thu</text>
+      <text x="302" y="95">Fri</text>
+      <text x="357" y="95">Sat</text>
+    </g>
+
+    <!-- Date grid -->
+    <g font-size="16" text-anchor="middle">
+      <!-- Row 1 -->
+      <text x="192" y="135" fill="#999">1</text>
+      <text x="247" y="135" fill="#999">2</text>
+      <text x="302" y="135" fill="#999">3</text>
+      <text x="357" y="135" fill="#999">4</text>
+
+      <!-- Row 2 -->
+      <text x="27" y="185" fill="#333">5</text>
+      <text x="82" y="185" fill="#333">6</text>
+      <!-- Exam on 7th -->
+      <circle cx="137" cy="175" r="18" fill="#ff6b6b"/>
+      <text x="137" y="185" fill="white" font-weight="bold">7</text>
+      <text x="137" y="200" fill="#ff6b6b" font-size="10" text-anchor="middle">EXAM</text>
+      <!-- Exam on 8th -->
+      <circle cx="192" cy="175" r="18" fill="#ff8c42"/>
+      <text x="192" y="185" fill="white" font-weight="bold">8</text>
+      <text x="192" y="200" fill="#ff8c42" font-size="10" text-anchor="middle">EXAM</text>
+      <text x="247" y="185" fill="#333">9</text>
+      <text x="302" y="185" fill="#333">10</text>
+      <text x="357" y="185" fill="#333">11</text>
+
+      <!-- Row 3 -->
+      <text x="27" y="235" fill="#333">12</text>
+      <!-- Exam on 13th -->
+      <circle cx="82" cy="225" r="18" fill="#ffd93d"/>
+      <text x="82" y="235" fill="#333" font-weight="bold">13</text>
+      <text x="82" y="250" fill="#ffd93d" font-size="10" text-anchor="middle">EXAM</text>
+      <text x="137" y="235" fill="#333">14</text>
+      <text x="192" y="235" fill="#333">15</text>
+      <text x="247" y="235" fill="#333">16</text>
+      <text x="302" y="235" fill="#333">17</text>
+      <text x="357" y="235" fill="#333">18</text>
+
+      <!-- Row 4 -->
+      <text x="27" y="285" fill="#333">19</text>
+      <text x="82" y="285" fill="#333">20</text>
+      <text x="137" y="285" fill="#333">21</text>
+      <!-- Exam on 22nd -->
+      <circle cx="192" cy="275" r="18" fill="#6bcf7f"/>
+      <text x="192" y="285" fill="white" font-weight="bold">22</text>
+      <text x="192" y="300" fill="#6bcf7f" font-size="10" text-anchor="middle">EXAM</text>
+      <text x="247" y="285" fill="#333">23</text>
+      <text x="302" y="285" fill="#333">24</text>
+      <text x="357" y="285" fill="#333">25</text>
+    </g>
+  </g>
+
+  <!-- Right side: Exam papers stack -->
+  <g transform="translate(550, 120)">
+    <!-- Paper 1 (bottom) -->
+    <rect x="0" y="80" width="280" height="200" rx="8" fill="#fff3cd" stroke="#f0ad4e" stroke-width="2" transform="rotate(-5)"/>
+    <line x1="20" y1="120" x2="260" y2="120" stroke="#f0ad4e" stroke-width="1"/>
+    <circle cx="35" cy="145" r="8" fill="#ff6b6b"/>
+    <text x="55" y="155" font-size="16" font-weight="bold" fill="#333">Math Exam</text>
+    <text x="55" y="180" font-size="14" fill="#666">June 7, 2026 @ 09:00</text>
+    <text x="55" y="205" font-size="14" fill="#666">Room: 105A</text>
+
+    <!-- Paper 2 (middle) -->
+    <rect x="30" y="40" width="280" height="200" rx="8" fill="#e8daef" stroke="#764ba2" stroke-width="2" transform="rotate(2)"/>
+    <line x1="50" y1="80" x2="290" y2="80" stroke="#764ba2" stroke-width="1"/>
+    <circle cx="65" cy="105" r="8" fill="#ff8c42"/>
+    <text x="85" y="115" font-size="16" font-weight="bold" fill="#333">Physics Exam</text>
+    <text x="85" y="140" font-size="14" fill="#666">June 8, 2026 @ 10:30</text>
+    <text x="85" y="165" font-size="14" fill="#666">Room: 205B</text>
+
+    <!-- Paper 3 (top) -->
+    <rect x="60" y="0" width="280" height="200" rx="8" fill="#d1ecf1" stroke="#667eea" stroke-width="2" transform="rotate(-3)"/>
+    <line x1="80" y1="40" x2="320" y2="40" stroke="#667eea" stroke-width="1"/>
+    <circle cx="95" cy="65" r="8" fill="#ffd93d"/>
+    <text x="115" y="75" font-size="16" font-weight="bold" fill="#333">English Exam</text>
+    <text x="115" y="100" font-size="14" fill="#666">June 13, 2026 @ 14:00</text>
+    <text x="115" y="125" font-size="14" fill="#666">Room: 305C</text>
+  </g>
+
+  <!-- Bottom: Phone mockup showing app -->
+  <g transform="translate(550, 380)">
+    <!-- Phone body shadow -->
+    <rect x="20" y="40" width="220" height="240" rx="20" fill="rgba(0,0,0,0.2)" filter="blur(8px)"/>
+
+    <!-- Phone body -->
+    <rect x="0" y="0" width="260" height="280" rx="25" fill="#1a1a1a" stroke="#333" stroke-width="2"/>
+
+    <!-- Phone notch -->
+    <rect x="90" y="0" width="80" height="20" rx="0" fill="#000"/>
+
+    <!-- Phone screen -->
+    <rect x="15" y="30" width="230" height="235" rx="15" fill="white"/>
+
+    <!-- Screen content: Calendar app -->
+    <text x="130" y="55" font-size="14" font-weight="bold" fill="#667eea" text-anchor="middle">Calendar</text>
+    <line x1="30" y1="65" x2="230" y2="65" stroke="#eee" stroke-width="1"/>
+
+    <!-- Mini calendar on screen -->
+    <g font-size="10" fill="#333">
+      <text x="130" y="85" text-anchor="middle" font-weight="bold">June 2026</text>
+      <text x="50" y="105">7 - Math</text>
+      <circle cx="45" cy="102" r="3" fill="#ff6b6b"/>
+      <text x="50" y="125">8 - Physics</text>
+      <circle cx="45" cy="122" r="3" fill="#ff8c42"/>
+      <text x="50" y="145">13 - English</text>
+      <circle cx="45" cy="142" r="3" fill="#ffd93d"/>
+      <text x="50" y="165">22 - Chemistry</text>
+      <circle cx="45" cy="162" r="3" fill="#6bcf7f"/>
+      <text x="50" y="185">29 - Biology</text>
+      <circle cx="45" cy="182" r="3" fill="#4d96ff"/>
+    </g>
+
+    <!-- Phone home button -->
+    <circle cx="130" cy="260" r="8" fill="#333" stroke="#555" stroke-width="1"/>
+  </g>
+
+  <!-- Top right: Feature badge -->
+  <g transform="translate(950, 50)">
+    <rect x="0" y="0" width="220" height="120" rx="10" fill="rgba(255,255,255,0.95)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+    <text x="110" y="35" font-size="20" font-weight="bold" fill="#667eea" text-anchor="middle">AI Powered</text>
+    <text x="110" y="60" font-size="14" fill="#666" text-anchor="middle">Auto-detect exam dates</text>
+    <text x="110" y="80" font-size="14" fill="#666" text-anchor="middle">from any photo</text>
+  </g>
+</svg>
