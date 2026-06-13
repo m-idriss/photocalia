@@ -17,10 +17,7 @@
    Hero Section
    ======================== */
 .hero-section {
-  text-align: center;
-  margin-bottom: 0;
-  padding: 4rem 2rem;
-  animation: fadeInDown 0.8s ease-out;
+  display: none;
 }
 
 .hero-title {
@@ -55,6 +52,10 @@
   margin-bottom: 0;
   padding: 4rem 2rem;
   animation: fadeInUp 0.8s ease-out 0.1s backwards;
+
+  &:first-of-type {
+    padding-top: 0;
+  }
 
   &:nth-of-type(odd) {
     background: var(--cb-white);

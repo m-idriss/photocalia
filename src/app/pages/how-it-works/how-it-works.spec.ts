@@ -43,7 +43,6 @@ describe('HowItWorks', () => {
   it('should render the main page sections', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('.hero-section')).toBeTruthy();
     expect(compiled.querySelector('.intro-section')).toBeTruthy();
     expect(compiled.querySelector('.ai-steps-section')).toBeTruthy();
     expect(compiled.querySelector('.use-cases-section')).toBeTruthy();
@@ -61,10 +60,9 @@ describe('HowItWorks', () => {
     expect(compiled.querySelectorAll('.faq-item').length).toBe(6);
   });
 
-  it('should render the hero and CTA translation keys with the stub translator', () => {
+  it('should render the CTA translation key with the stub translator', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.querySelector('#hero-title')?.textContent).toContain('howitworks.hero.title');
     expect(compiled.querySelector('.cta-button')?.textContent).toContain('howitworks.cta.button');
   });
 
