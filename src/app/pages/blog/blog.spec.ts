@@ -24,7 +24,7 @@ describe('Blog', () => {
     expect(dates).toEqual([...dates].sort((a, b) => b.localeCompare(a)));
   });
 
-  it('should include the summer exam scheduling article metadata', () => {
+  it('should include generated Markdown metadata and localized content', () => {
     const fixture = TestBed.createComponent(Blog);
     const article = fixture.componentInstance.articles.find(
       (item) => item.slug === 'summer-exam-scheduling',
@@ -32,10 +32,11 @@ describe('Blog', () => {
 
     expect(article).toEqual(
       jasmine.objectContaining({
-        translationKey: 'blog.summerExamScheduling',
         datePublished: '2026-06-12',
         readingTime: '6 min',
       }),
     );
+    expect(article?.locales.en.title).toContain('Summer Exam Scheduling');
+    expect(article?.locales.fr.title).toContain("examens d'été");
   });
 });

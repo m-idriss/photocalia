@@ -1,10 +1,11 @@
-import { Component, inject, OnInit, signal, computed } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, inject, OnInit, signal, computed, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { LocalizeRoutePipe } from '../../../shared/pipes/localize-route.pipe';
 import { LocalizeDatePipe } from '../../../shared/pipes/localize-date.pipe';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { BLOG_ARTICLES, BlogArticle } from '../blog.models';
 import { PlanService } from '../../../services/plan.service';
+import { LanguageService } from '../../../services/language.service';
 
 @Component({
   selector: 'app-article',
@@ -12,37 +13,46 @@ import { PlanService } from '../../../services/plan.service';
   imports: [RouterLink, LocalizeRoutePipe, LocalizeDatePipe, TranslatePipe],
   templateUrl: './article.html',
   styleUrl: './article.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class Article implements OnInit {
-  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
+  private readonly languageService = inject(LanguageService);
   protected readonly planService = inject(PlanService);
-  protected readonly planParams = computed(() => ({ freeLimit: this.planService.freePlanLimit() }));
   protected readonly siteUrl = 'https://photocalia.com';
 
   readonly article = signal<BlogArticle | null>(null);
   readonly previousArticles = signal<BlogArticle[]>([]);
+  protected readonly localizedArticle = computed(() => {
+    const article = this.article();
+    return article?.locales[this.languageService.currentLang()] ?? null;
+  });
+  protected readonly contentHtml = computed(() =>
+    (this.localizedArticle()?.contentHtml ?? '').replaceAll(
+      '{freeLimit}',
+      String(this.planService.freePlanLimit()),
+    ),
+  );
 
   ngOnInit(): void {
-    // Extract slug from URL path (works for both /blog/slug and /fr/blog/slug)
-    const url = this.router.url.split('?')[0].split('#')[0];
-    const segments = url.split('/').filter(Boolean);
-    // Remove 'fr' prefix if present, then take the last segment after 'blog'
-    const filtered = segments.filter((s) => s !== 'fr');
-    const blogIndex = filtered.indexOf('blog');
-    const slug = blogIndex >= 0 ? filtered[blogIndex + 1] : null;
+    this.route.paramMap.subscribe((params) => {
+      const slug = params.get('slug');
+      const found = slug ? (BLOG_ARTICLES.find((article) => article.slug === slug) ?? null) : null;
+      this.article.set(found);
 
-    const found = slug ? (BLOG_ARTICLES.find((a) => a.slug === slug) ?? null) : null;
-    this.article.set(found);
-
-    // Get related articles (most recent first, excluding current; show up to 3)
-    const related = [...BLOG_ARTICLES]
-      .filter((a) => a.slug !== slug)
-      .sort((a, b) => b.datePublished.localeCompare(a.datePublished))
-      .slice(0, 3);
-    this.previousArticles.set(related);
+      const related = [...BLOG_ARTICLES]
+        .filter((article) => article.slug !== slug)
+        .sort((a, b) => b.datePublished.localeCompare(a.datePublished))
+        .slice(0, 3);
+      this.previousArticles.set(related);
+    });
   }
 
   protected absoluteImageUrl(image: string): string {
     return image.startsWith('http') ? image : `${this.siteUrl}${image}`;
+  }
+
+  protected localized(article: BlogArticle) {
+    return article.locales[this.languageService.currentLang()];
   }
 }

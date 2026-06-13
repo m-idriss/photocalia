@@ -1,4 +1,5 @@
 import { RenderMode, ServerRoute } from '@angular/ssr';
+import { BLOG_SLUGS } from './pages/blog/blog.models';
 
 /**
  * Server routes configuration for prerendering.
@@ -13,12 +14,11 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'legal-mentions', renderMode: RenderMode.Prerender },
   { path: 'about', renderMode: RenderMode.Prerender },
   { path: 'blog', renderMode: RenderMode.Prerender },
-  { path: 'blog/photo-to-google-calendar', renderMode: RenderMode.Prerender },
-  { path: 'blog/digitize-paper-schedules', renderMode: RenderMode.Prerender },
-  { path: 'blog/ai-ocr-calendar-extraction', renderMode: RenderMode.Prerender },
-  { path: 'blog/reddit-photo-to-calendar', renderMode: RenderMode.Prerender },
-  { path: 'blog/summer-exam-scheduling', renderMode: RenderMode.Prerender },
-  { path: 'blog/sports-league-training', renderMode: RenderMode.Prerender },
+  {
+    path: 'blog/:slug',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: async () => BLOG_SLUGS.map((slug) => ({ slug })),
+  },
   { path: 'pricing', renderMode: RenderMode.Prerender },
 
   // French pages
@@ -29,12 +29,11 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'fr/legal-mentions', renderMode: RenderMode.Prerender },
   { path: 'fr/about', renderMode: RenderMode.Prerender },
   { path: 'fr/blog', renderMode: RenderMode.Prerender },
-  { path: 'fr/blog/photo-to-google-calendar', renderMode: RenderMode.Prerender },
-  { path: 'fr/blog/digitize-paper-schedules', renderMode: RenderMode.Prerender },
-  { path: 'fr/blog/ai-ocr-calendar-extraction', renderMode: RenderMode.Prerender },
-  { path: 'fr/blog/reddit-photo-to-calendar', renderMode: RenderMode.Prerender },
-  { path: 'fr/blog/summer-exam-scheduling', renderMode: RenderMode.Prerender },
-  { path: 'fr/blog/sports-league-training', renderMode: RenderMode.Prerender },
+  {
+    path: 'fr/blog/:slug',
+    renderMode: RenderMode.Prerender,
+    getPrerenderParams: async () => BLOG_SLUGS.map((slug) => ({ slug })),
+  },
   { path: 'fr/pricing', renderMode: RenderMode.Prerender },
 
   // Catch-all: client-side rendered (not prerendered)

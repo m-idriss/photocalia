@@ -43,12 +43,12 @@
             <a
               [routerLink]="'/blog/' + article.slug | localizeRoute"
               class="article-link"
-              [attr.aria-label]="article.title"
+              [attr.aria-label]="localized(article).title"
             >
               <figure class="article-image">
                 <img
                   [src]="article.image"
-                  [alt]="article.imageAlt"
+                  [alt]="localized(article).imageAlt"
                   width="1200"
                   height="675"
                   loading="lazy"
@@ -62,9 +62,9 @@
                   article.readingTime
                 }}</span>
               </div>
-              <h2 class="article-title">{{ article.translationKey + '.title' | translate }}</h2>
+              <h2 class="article-title">{{ localized(article).title }}</h2>
               <p class="article-description">
-                {{ article.translationKey + '.description' | translate }}
+                {{ localized(article).description }}
               </p>
               <div class="article-tags">
                 @for (tag of article.tags; track tag) {
