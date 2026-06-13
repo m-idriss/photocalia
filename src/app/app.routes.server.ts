@@ -18,6 +18,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'blog/ai-ocr-calendar-extraction', renderMode: RenderMode.Prerender },
   { path: 'blog/reddit-photo-to-calendar', renderMode: RenderMode.Prerender },
   { path: 'blog/summer-exam-scheduling', renderMode: RenderMode.Prerender },
+  { path: 'blog/sports-league-training', renderMode: RenderMode.Prerender },
   { path: 'pricing', renderMode: RenderMode.Prerender },
 
   // French pages
@@ -33,6 +34,7 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'fr/blog/ai-ocr-calendar-extraction', renderMode: RenderMode.Prerender },
   { path: 'fr/blog/reddit-photo-to-calendar', renderMode: RenderMode.Prerender },
   { path: 'fr/blog/summer-exam-scheduling', renderMode: RenderMode.Prerender },
+  { path: 'fr/blog/sports-league-training', renderMode: RenderMode.Prerender },
   { path: 'fr/pricing', renderMode: RenderMode.Prerender },
 
   // Catch-all: client-side rendered (not prerendered)
