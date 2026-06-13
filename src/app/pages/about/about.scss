@@ -529,6 +529,10 @@
   .about-section {
     padding: 3rem 1rem;
     margin-bottom: 0;
+
+    &:first-of-type {
+      padding-top: 0;
+    }
   }
 
   .highlights-grid {
