@@ -1,5 +1,5 @@
-/* Importing Bootstrap SCSS file. */
-@import '../node_modules/bootstrap/scss/bootstrap';
+/* Bootstrap is loaded as a dependency so Angular can silence its internal Sass deprecations. */
+@use 'bootstrap/scss/bootstrap';
 
 /* Self-hosted Plus Jakarta Sans */
 @font-face {
