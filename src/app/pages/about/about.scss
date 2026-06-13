@@ -52,10 +52,6 @@
   padding: 4rem 2rem;
   animation: fadeInUp 0.8s ease-out 0.1s backwards;
 
-  &:first-of-type {
-    padding-top: 2.5rem;
-  }
-
   &:nth-of-type(odd) {
     background: var(--cb-white);
   }
@@ -67,6 +63,11 @@
   &:nth-of-type(2),
   &:nth-of-type(6) {
     background: var(--cb-indigo);
+  }
+
+  &:first-of-type {
+    padding-top: 2.5rem;
+    background: var(--ct-bg);
   }
 }
 
