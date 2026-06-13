@@ -43,7 +43,7 @@ export class Article implements OnInit {
       const related = [...BLOG_ARTICLES]
         .filter((article) => article.slug !== slug)
         .sort((a, b) => b.datePublished.localeCompare(a.datePublished))
-        .slice(0, 3);
+        .slice(0, 2);
       this.previousArticles.set(related);
     });
   }
