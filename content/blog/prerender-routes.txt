@@ -2,6 +2,10 @@
 /fr/blog/ai-ocr-calendar-extraction
 /blog/digitize-paper-schedules
 /fr/blog/digitize-paper-schedules
+/blog/family-reunion-planning
+/fr/blog/family-reunion-planning
+/blog/music-festival-lineup
+/fr/blog/music-festival-lineup
 /blog/photo-to-google-calendar
 /fr/blog/photo-to-google-calendar
 /blog/reddit-photo-to-calendar

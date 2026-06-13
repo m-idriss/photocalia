@@ -26,17 +26,39 @@ describe('Blog', () => {
 
   it('should include generated Markdown metadata and localized content', () => {
     const fixture = TestBed.createComponent(Blog);
-    const article = fixture.componentInstance.articles.find(
+    const examArticle = fixture.componentInstance.articles.find(
       (item) => item.slug === 'summer-exam-scheduling',
     );
+    const familyArticle = fixture.componentInstance.articles.find(
+      (item) => item.slug === 'family-reunion-planning',
+    );
+    const festivalArticle = fixture.componentInstance.articles.find(
+      (item) => item.slug === 'music-festival-lineup',
+    );
 
-    expect(article).toEqual(
+    expect(examArticle).toEqual(
       jasmine.objectContaining({
         datePublished: '2026-06-12',
         readingTime: '6 min',
       }),
     );
-    expect(article?.locales.en.title).toContain('Summer Exam Scheduling');
-    expect(article?.locales.fr.title).toContain("examens d'été");
+    expect(examArticle?.locales.en.title).toContain('Summer Exam Scheduling');
+    expect(examArticle?.locales.fr.title).toContain("examens d'été");
+
+    expect(familyArticle).toEqual(
+      jasmine.objectContaining({
+        datePublished: '2026-06-14',
+        image: '/assets/images/blog/family-reunion-planning.jpg',
+      }),
+    );
+    expect(familyArticle?.locales.fr.title).toContain('Réunion de famille');
+
+    expect(festivalArticle).toEqual(
+      jasmine.objectContaining({
+        datePublished: '2026-06-14',
+        image: '/assets/images/blog/music-festival-lineup.jpg',
+      }),
+    );
+    expect(festivalArticle?.locales.fr.title).toContain('Festival');
   });
 });
