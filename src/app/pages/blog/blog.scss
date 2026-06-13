@@ -306,8 +306,20 @@
 }
 
 @media (max-width: 600px) {
+  .blog-page {
+    padding-top: 70px;
+  }
+
   .blog-container {
     padding: 0;
+  }
+
+  .articles-toolbar {
+    margin-bottom: 0.5rem;
+  }
+
+  .view-toggle-button {
+    padding: 0.35rem 0.7rem;
   }
 
   .hero-section {
