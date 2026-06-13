@@ -177,6 +177,34 @@
           <p>{{ art.translationKey + '.conclusion.p1' | translate: planParams() }}</p>
         }
 
+        <!-- Article 5: Sports League & Fitness Training -->
+        @if (art.slug === 'sports-league-training') {
+          <p class="lead">{{ art.translationKey + '.intro' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.problem.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.problem.p1' | translate }}</p>
+          <p>{{ art.translationKey + '.problem.p2' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.methods.title' | translate }}</h2>
+          <h3>{{ art.translationKey + '.methods.1.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.methods.1.description' | translate }}</p>
+          <h3>{{ art.translationKey + '.methods.2.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.methods.2.description' | translate }}</p>
+          <h3>{{ art.translationKey + '.methods.3.title' | translate }}</h3>
+          <p>{{ art.translationKey + '.methods.3.description' | translate }}</p>
+
+          <h2>{{ art.translationKey + '.who.title' | translate }}</h2>
+          <ul>
+            <li>{{ art.translationKey + '.who.1' | translate }}</li>
+            <li>{{ art.translationKey + '.who.2' | translate }}</li>
+            <li>{{ art.translationKey + '.who.3' | translate }}</li>
+            <li>{{ art.translationKey + '.who.4' | translate }}</li>
+          </ul>
+
+          <h2>{{ art.translationKey + '.conclusion.title' | translate }}</h2>
+          <p>{{ art.translationKey + '.conclusion.p1' | translate: planParams() }}</p>
+        }
+
         <!-- Article 3: AI OCR Calendar Extraction -->
         @if (art.slug === 'ai-ocr-calendar-extraction') {
           <p class="lead">{{ art.translationKey + '.intro' | translate }}</p>

@@ -503,6 +503,62 @@ const pageRoutes: Route[] = [
     },
   },
   {
+    path: 'blog/sports-league-training',
+    loadComponent: () => import('./pages/blog/article/article').then((m) => m.Article),
+    title:
+      'Track Your Team: Convert Sports Schedules into a Coaching & Playing Calendar | PhotoCalia',
+    data: {
+      seo: {
+        title:
+          'Track Your Team: Convert Sports Schedules into a Coaching & Playing Calendar | PhotoCalia',
+        description:
+          'Convert league fixtures, tournament schedules, and training plans into one calendar for games, practices, travel, and milestones.',
+        keywords:
+          'sports schedule to calendar, league fixtures calendar, coaching calendar, training plan calendar, tournament schedule',
+        ogImage: 'https://photocalia.com/assets/images/blog/sports-league-training.jpg',
+        ogUrl: 'https://photocalia.com/blog/sports-league-training',
+        type: 'article',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Blog',
+                item: 'https://photocalia.com/blog',
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: 'Track Your Team',
+                item: 'https://photocalia.com/blog/sports-league-training',
+              },
+            ],
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline:
+              'Track Your Team: Convert Sports Schedules into a Coaching & Playing Calendar',
+            author: { '@type': 'Person', name: 'Idriss', url: 'https://3dime.com' },
+            datePublished: '2026-06-13',
+            dateModified: '2026-06-13',
+            publisher: {
+              '@type': 'Organization',
+              name: 'PhotoCalia',
+              url: 'https://photocalia.com',
+            },
+            image: 'https://photocalia.com/assets/images/blog/sports-league-training.jpg',
+            mainEntityOfPage: 'https://photocalia.com/blog/sports-league-training',
+          },
+        ],
+      },
+    },
+  },
+  {
     path: 'pricing',
     loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
     title: 'Pricing — PhotoCalia',
