@@ -67,7 +67,10 @@
               "sourceMap": false,
               "extractLicenses": true,
               "serviceWorker": "ngsw-config.json",
-              "prerender": true
+              "prerender": {
+                "discoverRoutes": true,
+                "routesFile": "content/blog/prerender-routes.txt"
+              }
             },
             "development": {
               "optimization": false,

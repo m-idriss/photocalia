@@ -1,0 +1,12 @@
+/blog/ai-ocr-calendar-extraction
+/fr/blog/ai-ocr-calendar-extraction
+/blog/digitize-paper-schedules
+/fr/blog/digitize-paper-schedules
+/blog/photo-to-google-calendar
+/fr/blog/photo-to-google-calendar
+/blog/reddit-photo-to-calendar
+/fr/blog/reddit-photo-to-calendar
+/blog/sports-league-training
+/fr/blog/sports-league-training
+/blog/summer-exam-scheduling
+/fr/blog/summer-exam-scheduling

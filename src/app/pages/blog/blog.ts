@@ -5,7 +5,8 @@ import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { LocalizeDatePipe } from '../../shared/pipes/localize-date.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { ScrollRevealDirective } from '../../shared/directives';
-import { BLOG_ARTICLES } from './blog.models';
+import { LanguageService } from '../../services/language.service';
+import { BLOG_ARTICLES, BlogArticle } from './blog.models';
 
 type BlogViewMode = 'grid' | 'list';
 
@@ -20,6 +21,7 @@ const BLOG_VIEW_MODE_KEY = 'photocalia_blog_view_mode';
 })
 export class Blog implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
+  protected readonly languageService = inject(LanguageService);
 
   readonly articles = [...BLOG_ARTICLES].sort((a, b) =>
     b.datePublished.localeCompare(a.datePublished),
@@ -41,5 +43,9 @@ export class Blog implements OnInit {
 
     if (!isPlatformBrowser(this.platformId)) return;
     localStorage.setItem(BLOG_VIEW_MODE_KEY, mode);
+  }
+
+  protected localized(article: BlogArticle) {
+    return article.locales[this.languageService.currentLang()];
   }
 }
