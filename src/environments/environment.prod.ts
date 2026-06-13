@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   apiUrl: 'https://api.photocalia.com/v1',
-  appVersion: '4.9.0',
+  appVersion: '4.9.1',
   contribution: {
     coffeeUrl: 'https://buy.stripe.com/4gM4gA09TalwgRAd7m4Vy01',
     snackUrl: 'https://buy.stripe.com/3cI3cw3m565g9p82sI4Vy00',
