@@ -3,8 +3,8 @@
   [class.visible]="isVisible()"
   (click)="scrollToTop()"
   (keydown)="handleKeyPress($event)"
-  aria-label="Scroll back to top"
-  appTooltip="Back to top"
+  [attr.aria-label]="'backToTop.label' | translate"
+  [appTooltip]="'backToTop.tooltip' | translate"
   appTooltipPlacement="left"
   type="button"
 >

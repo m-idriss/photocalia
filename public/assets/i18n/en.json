@@ -270,6 +270,8 @@
   "breadcrumb.subscriptionSuccess": "Subscription activated",
   "breadcrumb.donationSuccess": "Donation confirmed",
   "breadcrumb.page": "Page",
+  "backToTop.label": "Scroll back to top",
+  "backToTop.tooltip": "Back to top",
   "pricing.title": "Simple, transparent pricing",
   "pricing.subtitle": "Start free, upgrade when you need more.",
   "pricing.popular": "Most popular",
