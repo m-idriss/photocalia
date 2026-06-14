@@ -1,13 +1,5 @@
 @if (article(); as art) {
   <main class="article-page" id="main-content" itemscope itemtype="https://schema.org/Article">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a [routerLink]="'/' | localizeRoute">{{ 'header.home' | translate }}</a>
-      <span aria-hidden="true">/</span>
-      <a [routerLink]="'/blog' | localizeRoute">{{ 'blog.title' | translate }}</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">{{ localizedArticle()!.title }}</span>
-    </nav>
-
     <article>
       <header class="article-header">
         <h1 itemprop="headline" class="article-title">
