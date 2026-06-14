@@ -44,10 +44,17 @@
 }
 
 .articles-toolbar {
+  position: absolute;
+  top: 82px;
+  left: 50%;
+  z-index: 11;
   display: flex;
   justify-content: flex-end;
-  max-width: 1180px;
-  margin: 0 auto 1rem;
+  width: min(760px, 100%);
+  margin: 0;
+  padding-inline: 1.5rem;
+  box-sizing: border-box;
+  transform: translateX(-50%);
 }
 
 .view-toggle {
@@ -315,7 +322,8 @@
   }
 
   .articles-toolbar {
-    margin-bottom: 0.5rem;
+    top: 68px;
+    padding-inline: 1.5rem;
   }
 
   .view-toggle-button {
@@ -356,7 +364,7 @@
 
 @media (max-width: 720px) {
   .articles-toolbar {
-    justify-content: center;
+    justify-content: flex-end;
   }
 
   .articles-grid {
