@@ -974,22 +974,21 @@ body.dark-theme .link {
   right: 2rem;
   width: 3.5rem;
   height: 3.5rem;
-  background: var(--primary-bg);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-full);
-  color: var(--text-primary);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 0.75rem;
+  color: #fff;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.25rem;
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px) scale(0.8);
-  transition: all var(--t-medium);
+  transition: all 0.3s ease;
 }
 
 .back-to-top-btn.visible {
@@ -999,21 +998,19 @@ body.dark-theme .link {
 }
 
 .back-to-top-btn:hover {
-  background: var(--primary-bg-hover);
-  box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px) scale(1.05);
+  background: linear-gradient(135deg, #7181ee 0%, #8055ad 100%);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  transform: translateY(-2px) scale(1.03);
 }
 
 .back-to-top-btn:active {
-  transform: translateY(0) scale(0.95);
+  transform: translateY(0) scale(0.98);
 }
 
 .back-to-top-btn:focus-visible {
-  outline: 3px solid var(--accent-color);
+  outline: 3px solid rgba(102, 126, 234, 0.45);
   outline-offset: 3px;
-  box-shadow:
-    0 0 0 6px rgba(59, 130, 246, 0.2),
-    var(--shadow-card-hover);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
 .back-to-top-btn i {

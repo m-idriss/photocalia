@@ -1,6 +1,7 @@
 import { Component, HostListener, signal, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { AppTooltipDirective } from '../../shared/directives';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 import { SCROLL_CONFIG } from '../../constants/app.constants';
 
@@ -11,7 +12,7 @@ import { SCROLL_CONFIG } from '../../constants/app.constants';
 @Component({
   selector: 'app-back-to-top',
   standalone: true,
-  imports: [AppTooltipDirective],
+  imports: [AppTooltipDirective, TranslatePipe],
   templateUrl: './back-to-top.html',
   styleUrl: './back-to-top.scss',
 })

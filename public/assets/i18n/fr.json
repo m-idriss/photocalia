@@ -270,6 +270,8 @@
   "breadcrumb.subscriptionSuccess": "Abonnement activé",
   "breadcrumb.donationSuccess": "Don confirmé",
   "breadcrumb.page": "Page",
+  "backToTop.label": "Revenir en haut de la page",
+  "backToTop.tooltip": "Retour en haut",
   "pricing.title": "Des tarifs simples et transparents",
   "pricing.subtitle": "Commencez gratuitement, passez à la vitesse supérieure quand vous en avez besoin.",
   "pricing.popular": "Le plus populaire",
