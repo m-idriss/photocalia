@@ -330,6 +330,11 @@
     padding: 0.35rem 0.7rem;
   }
 
+  .view-toggle {
+    transform: scale(0.6);
+    transform-origin: right center;
+  }
+
   .hero-section {
     padding: 3rem 1rem;
     margin-bottom: 0;
