@@ -18,8 +18,8 @@ const pageRoutes: Route[] = [
           'Turn any photo, screenshot, flyer or PDF into calendar events with AI — no manual typing. PhotoCalia extracts dates, times & locations automatically and adds them to Google Calendar or exports ICS files. Free, no separate signup.',
         keywords:
           'photo to calendar events, image to calendar converter, picture to calendar app, convert screenshot to Google Calendar, AI calendar from photo, scan flyer to calendar, upload timetable photo, extract events from image, OCR calendar events, PDF to calendar, ICS generator, free calendar tool',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
-        ogUrl: 'https://photocalia.com/',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/',
         type: 'website',
         structuredData: [],
       },
@@ -36,20 +36,25 @@ const pageRoutes: Route[] = [
           'Learn how PhotoCalia converts photos, screenshots, and PDFs into calendar events using AI. Upload any image of an appointment, event flyer, or schedule — GPT-4 Vision extracts the dates, times, and locations automatically.',
         keywords:
           'photo to calendar, image to calendar, add events from picture, AI calendar assistant, ICS import, screenshot to calendar, how to convert image to calendar, calendar event extraction, picture to calendar event',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
-        ogUrl: 'https://photocalia.com/how-it-works',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/how-it-works',
         type: 'website',
         structuredData: [
           {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.photocalia.com',
+              },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'How It Works',
-                item: 'https://photocalia.com/how-it-works',
+                item: 'https://www.photocalia.com/how-it-works',
               },
             ],
           },
@@ -121,20 +126,25 @@ const pageRoutes: Route[] = [
         description:
           'Learn how PhotoCalia protects your privacy and personal data. GDPR-compliant privacy policy covering data collection, AI processing, third-party services, and your rights.',
         keywords: 'privacy policy, data protection, GDPR, personal data, privacy rights',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
-        ogUrl: 'https://photocalia.com/privacy',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/privacy',
         type: 'website',
         structuredData: [
           {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.photocalia.com',
+              },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Privacy Policy',
-                item: 'https://photocalia.com/privacy',
+                item: 'https://www.photocalia.com/privacy',
               },
             ],
           },
@@ -152,20 +162,25 @@ const pageRoutes: Route[] = [
         description:
           'Terms of Use for PhotoCalia AI calendar converter. Learn about usage limits, AI accuracy, liability, and service terms.',
         keywords: 'terms of use, terms of service, service agreement, user agreement',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
-        ogUrl: 'https://photocalia.com/terms',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/terms',
         type: 'website',
         structuredData: [
           {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.photocalia.com',
+              },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Terms of Use',
-                item: 'https://photocalia.com/terms',
+                item: 'https://www.photocalia.com/terms',
               },
             ],
           },
@@ -184,20 +199,25 @@ const pageRoutes: Route[] = [
         description:
           'Legal mentions for PhotoCalia including company information, hosting provider, intellectual property, and GDPR compliance.',
         keywords: 'legal mentions, company information, legal notice, hosting provider',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
-        ogUrl: 'https://photocalia.com/legal-mentions',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/legal-mentions',
         type: 'website',
         structuredData: [
           {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.photocalia.com',
+              },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Legal Mentions',
-                item: 'https://photocalia.com/legal-mentions',
+                item: 'https://www.photocalia.com/legal-mentions',
               },
             ],
           },
@@ -216,20 +236,25 @@ const pageRoutes: Route[] = [
           'Guides, tutorials, and tips on converting photos to calendar events with AI. Learn about OCR technology, digitizing schedules, and productivity hacks.',
         keywords:
           'photo to calendar guide, AI calendar tips, digitize schedule, OCR calendar, image to ICS tutorial',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
-        ogUrl: 'https://photocalia.com/blog',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/blog',
         type: 'website',
         structuredData: [
           {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.photocalia.com',
+              },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Blog',
-                item: 'https://photocalia.com/blog',
+                item: 'https://www.photocalia.com/blog',
               },
             ],
           },
@@ -256,20 +281,25 @@ const pageRoutes: Route[] = [
           'Choose the PhotoCalia plan that fits your needs. Start free with 3 conversions/month, upgrade to Pro for 50/month or Business for 120/month.',
         keywords:
           'photocalia pricing, calendar converter plans, photo to calendar subscription, upgrade plan',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
-        ogUrl: 'https://photocalia.com/pricing',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/pricing',
         type: 'website',
         structuredData: [
           {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.photocalia.com',
+              },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'Pricing',
-                item: 'https://photocalia.com/pricing',
+                item: 'https://www.photocalia.com/pricing',
               },
             ],
           },
@@ -290,7 +320,7 @@ const pageRoutes: Route[] = [
                     price: '0',
                     priceCurrency: 'EUR',
                     availability: 'https://schema.org/InStock',
-                    url: 'https://photocalia.com/pricing',
+                    url: 'https://www.photocalia.com/pricing',
                   },
                 },
               },
@@ -306,7 +336,7 @@ const pageRoutes: Route[] = [
                     price: '4.99',
                     priceCurrency: 'EUR',
                     availability: 'https://schema.org/InStock',
-                    url: 'https://photocalia.com/pricing',
+                    url: 'https://www.photocalia.com/pricing',
                   },
                 },
               },
@@ -322,7 +352,7 @@ const pageRoutes: Route[] = [
                     price: '9.99',
                     priceCurrency: 'EUR',
                     availability: 'https://schema.org/InStock',
-                    url: 'https://photocalia.com/pricing',
+                    url: 'https://www.photocalia.com/pricing',
                   },
                 },
               },
@@ -344,9 +374,10 @@ const pageRoutes: Route[] = [
         title: 'Subscription Activated — PhotoCalia',
         description:
           'Your PhotoCalia subscription is now active. Start converting images to calendar events.',
+        robots: 'noindex, nofollow',
         keywords: '',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
-        ogUrl: 'https://photocalia.com/subscription/success',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/subscription/success',
         type: 'website',
         structuredData: [],
       },
@@ -362,9 +393,10 @@ const pageRoutes: Route[] = [
         title: 'Thank You for Your Donation — PhotoCalia',
         description:
           'Thank you for supporting PhotoCalia! Your donation helps us improve the service.',
+        robots: 'noindex, nofollow',
         keywords: '',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
-        ogUrl: 'https://photocalia.com/donation/success',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/donation/success',
         type: 'website',
         structuredData: [],
       },
@@ -381,20 +413,25 @@ const pageRoutes: Route[] = [
           'Learn about PhotoCalia, the AI-powered photo to calendar converter. Built by Idriss using Angular, Firebase, and GPT-4 Vision. Open source, privacy-focused, and free to use.',
         keywords:
           'about photocalia, AI calendar converter, photo to calendar app, Idriss, 3dime, open source calendar tool',
-        ogImage: 'https://photocalia.com/assets/images/converter.png',
-        ogUrl: 'https://photocalia.com/about',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/about',
         type: 'website',
         structuredData: [
           {
             '@context': 'https://schema.org',
             '@type': 'BreadcrumbList',
             itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://photocalia.com' },
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://www.photocalia.com',
+              },
               {
                 '@type': 'ListItem',
                 position: 2,
                 name: 'About',
-                item: 'https://photocalia.com/about',
+                item: 'https://www.photocalia.com/about',
               },
             ],
           },

@@ -1,277 +1,325 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-  <!-- Homepage / Calendar Converter -->
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://photocalia.com/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com" />
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://photocalia.com/assets/images/converter.png</image:loc>
-      <image:title>Photocalia AI Calendar Converter - Convert Images &amp; PDFs to ICS Files</image:title>
-      <image:caption>Free AI-powered tool that converts photos, screenshots, and PDFs into calendar events compatible with Google Calendar, Outlook, and Apple Calendar</image:caption>
-    </image:image>
   </url>
-
-  <!-- Homepage French -->
   <url>
-    <loc>https://photocalia.com/fr</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/fr</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com" />
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- How It Works Page -->
   <url>
-    <loc>https://photocalia.com/how-it-works</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/how-it-works" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/how-it-works" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/how-it-works" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/how-it-works</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/how-it-works" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/how-it-works" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/how-it-works" />
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://photocalia.com/assets/images/converter.png</image:loc>
-      <image:title>How Photocalia AI Calendar Conversion Works</image:title>
-      <image:caption>Step-by-step guide: Upload image, AI extracts events, download ICS file</image:caption>
-    </image:image>
   </url>
-
-  <!-- How It Works French -->
   <url>
-    <loc>https://photocalia.com/fr/how-it-works</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/how-it-works" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/how-it-works" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/how-it-works" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/fr/how-it-works</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/how-it-works" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/how-it-works" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/how-it-works" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- About Page -->
   <url>
-    <loc>https://photocalia.com/about</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/about" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/about" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/about" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/about" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/about" />
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- About French -->
   <url>
-    <loc>https://photocalia.com/fr/about</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/about" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/about" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/about" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/fr/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/about" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/about" />
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-
-  <!-- Privacy Policy Page -->
   <url>
-    <loc>https://photocalia.com/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/privacy" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/privacy" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/privacy" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/privacy" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/privacy" />
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
-
-  <!-- Privacy French -->
   <url>
-    <loc>https://photocalia.com/fr/privacy</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/privacy" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/privacy" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/privacy" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/fr/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/privacy" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/privacy" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-
-  <!-- Terms of Use Page -->
   <url>
-    <loc>https://photocalia.com/terms</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/terms" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/terms" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/terms" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/terms" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/terms" />
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
-
-  <!-- Terms French -->
   <url>
-    <loc>https://photocalia.com/fr/terms</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/terms" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/terms" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/terms" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/fr/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/terms" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/terms" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-
-  <!-- Legal Mentions Page -->
   <url>
-    <loc>https://photocalia.com/legal-mentions</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/legal-mentions" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/legal-mentions" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/legal-mentions" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/legal-mentions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/legal-mentions" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/legal-mentions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/legal-mentions" />
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-
-  <!-- Legal Mentions French -->
   <url>
-    <loc>https://photocalia.com/fr/legal-mentions</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/legal-mentions" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/legal-mentions" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/legal-mentions" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/fr/legal-mentions</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/legal-mentions" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/legal-mentions" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/legal-mentions" />
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
-
-  <!-- Blog Listing -->
   <url>
-    <loc>https://photocalia.com/blog</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog" />
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://photocalia.com/fr/blog</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog" />
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://www.photocalia.com/fr/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog" />
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Pricing Page -->
   <url>
-    <loc>https://photocalia.com/pricing</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/pricing" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/pricing" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/pricing" />
-    <lastmod>2026-05-16</lastmod>
+    <loc>https://www.photocalia.com/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/pricing" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/pricing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/pricing" />
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
   <url>
-    <loc>https://photocalia.com/fr/pricing</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/pricing" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/pricing" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/pricing" />
-    <lastmod>2026-05-16</lastmod>
+    <loc>https://www.photocalia.com/fr/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/pricing" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/pricing" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/pricing" />
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
-  <!-- Blog: Reddit Photo to Calendar -->
   <url>
-    <loc>https://photocalia.com/blog/reddit-photo-to-calendar</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/reddit-photo-to-calendar" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/reddit-photo-to-calendar" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/reddit-photo-to-calendar" />
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://photocalia.com/fr/blog/reddit-photo-to-calendar</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/reddit-photo-to-calendar" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/reddit-photo-to-calendar" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/reddit-photo-to-calendar" />
-    <lastmod>2026-05-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Blog: Photo to Google Calendar -->
-  <url>
-    <loc>https://photocalia.com/blog/photo-to-google-calendar</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/photo-to-google-calendar" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/photo-to-google-calendar" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/photo-to-google-calendar" />
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://photocalia.com/fr/blog/photo-to-google-calendar</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/photo-to-google-calendar" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/photo-to-google-calendar" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/photo-to-google-calendar" />
-    <lastmod>2026-03-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Blog: Digitize Paper Schedules -->
-  <url>
-    <loc>https://photocalia.com/blog/digitize-paper-schedules</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/digitize-paper-schedules" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/digitize-paper-schedules" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/digitize-paper-schedules" />
-    <lastmod>2026-03-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://photocalia.com/fr/blog/digitize-paper-schedules</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/digitize-paper-schedules" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/digitize-paper-schedules" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/digitize-paper-schedules" />
-    <lastmod>2026-03-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Blog: AI OCR Calendar Extraction -->
-  <url>
-    <loc>https://photocalia.com/blog/ai-ocr-calendar-extraction</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/ai-ocr-calendar-extraction" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/ai-ocr-calendar-extraction" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/ai-ocr-calendar-extraction" />
+    <loc>https://www.photocalia.com/blog/ai-ocr-calendar-extraction</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/ai-ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/ai-ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/ai-ocr-calendar-extraction" />
     <lastmod>2026-04-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/ai-ocr-calendar-extraction.jpg</image:loc>
+    </image:image>
   </url>
-
   <url>
-    <loc>https://photocalia.com/fr/blog/ai-ocr-calendar-extraction</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://photocalia.com/blog/ai-ocr-calendar-extraction" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://photocalia.com/fr/blog/ai-ocr-calendar-extraction" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://photocalia.com/blog/ai-ocr-calendar-extraction" />
+    <loc>https://www.photocalia.com/fr/blog/ai-ocr-calendar-extraction</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/ai-ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/ai-ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/ai-ocr-calendar-extraction" />
     <lastmod>2026-04-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/ai-ocr-calendar-extraction.jpg</image:loc>
+    </image:image>
   </url>
-
+  <url>
+    <loc>https://www.photocalia.com/blog/digitize-paper-schedules</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/digitize-paper-schedules" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/digitize-paper-schedules" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/digitize-paper-schedules" />
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/digitize-paper-schedules.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/blog/digitize-paper-schedules</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/digitize-paper-schedules" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/digitize-paper-schedules" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/digitize-paper-schedules" />
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/digitize-paper-schedules.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/blog/family-reunion-planning</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/family-reunion-planning" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/family-reunion-planning" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/family-reunion-planning" />
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/family-reunion-planning.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/blog/family-reunion-planning</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/family-reunion-planning" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/family-reunion-planning" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/family-reunion-planning" />
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/family-reunion-planning.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/blog/music-festival-lineup</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/music-festival-lineup" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/music-festival-lineup" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/music-festival-lineup" />
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/music-festival-lineup.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/blog/music-festival-lineup</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/music-festival-lineup" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/music-festival-lineup" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/music-festival-lineup" />
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/music-festival-lineup.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/blog/photo-to-google-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/photo-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/photo-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/photo-to-google-calendar" />
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/photo-to-google-calendar.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/blog/photo-to-google-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/photo-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/photo-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/photo-to-google-calendar" />
+    <lastmod>2026-03-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/photo-to-google-calendar.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/blog/reddit-photo-to-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/reddit-photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/reddit-photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/reddit-photo-to-calendar" />
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/reddit-photo-to-calendar.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/blog/reddit-photo-to-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/reddit-photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/reddit-photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/reddit-photo-to-calendar" />
+    <lastmod>2026-05-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/reddit-photo-to-calendar.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/blog/sports-league-training</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/sports-league-training" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/sports-league-training" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/sports-league-training" />
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/sports-league-training.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/blog/sports-league-training</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/sports-league-training" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/sports-league-training" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/sports-league-training" />
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/sports-league-training.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/blog/summer-exam-scheduling</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/summer-exam-scheduling" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/summer-exam-scheduling" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/summer-exam-scheduling" />
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/summer-exam-scheduling.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/blog/summer-exam-scheduling</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/summer-exam-scheduling" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/summer-exam-scheduling" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/summer-exam-scheduling" />
+    <lastmod>2026-06-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/summer-exam-scheduling.jpg</image:loc>
+    </image:image>
+  </url>
 </urlset>

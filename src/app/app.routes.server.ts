@@ -20,6 +20,8 @@ export const serverRoutes: ServerRoute[] = [
     getPrerenderParams: async () => BLOG_SLUGS.map((slug) => ({ slug })),
   },
   { path: 'pricing', renderMode: RenderMode.Prerender },
+  { path: 'subscription/success', renderMode: RenderMode.Prerender },
+  { path: 'donation/success', renderMode: RenderMode.Prerender },
 
   // French pages
   { path: 'fr', renderMode: RenderMode.Prerender },
@@ -35,6 +37,8 @@ export const serverRoutes: ServerRoute[] = [
     getPrerenderParams: async () => BLOG_SLUGS.map((slug) => ({ slug })),
   },
   { path: 'fr/pricing', renderMode: RenderMode.Prerender },
+  { path: 'fr/subscription/success', renderMode: RenderMode.Prerender },
+  { path: 'fr/donation/success', renderMode: RenderMode.Prerender },
 
   // Catch-all: client-side rendered (not prerendered)
   { path: '**', renderMode: RenderMode.Server },
