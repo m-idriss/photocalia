@@ -1,8 +1,6 @@
 import type { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
-import type { SeoData } from '../../services/seo.service';
+import { SITE_URL, type SeoData } from '../../services/seo.service';
 import { BLOG_ARTICLES } from './blog.models';
-
-const siteUrl = 'https://photocalia.com';
 
 function findArticle(slug: string | null) {
   return BLOG_ARTICLES.find((article) => article.slug === slug);
@@ -29,14 +27,17 @@ export const blogSeoResolver: ResolveFn<SeoData> = (route) => {
     return {
       title: 'Article not found | PhotoCalia',
       description: 'The requested PhotoCalia article could not be found.',
+      robots: 'noindex, nofollow',
       type: 'article',
       structuredData: [],
     };
   }
 
-  const localized = article.locales[routeLanguage(route)];
-  const articleUrl = `${siteUrl}/blog/${article.slug}`;
-  const imageUrl = article.image.startsWith('http') ? article.image : `${siteUrl}${article.image}`;
+  const language = routeLanguage(route);
+  const localized = article.locales[language];
+  const languagePrefix = language === 'fr' ? '/fr' : '';
+  const articleUrl = `${SITE_URL}${languagePrefix}/blog/${article.slug}`;
+  const imageUrl = article.image.startsWith('http') ? article.image : `${SITE_URL}${article.image}`;
 
   return {
     title: `${localized.title} | PhotoCalia`,
@@ -51,12 +52,17 @@ export const blogSeoResolver: ResolveFn<SeoData> = (route) => {
         '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: `${SITE_URL}${languagePrefix}`,
+          },
           {
             '@type': 'ListItem',
             position: 2,
             name: 'Blog',
-            item: `${siteUrl}/blog`,
+            item: `${SITE_URL}${languagePrefix}/blog`,
           },
           {
             '@type': 'ListItem',
@@ -77,7 +83,7 @@ export const blogSeoResolver: ResolveFn<SeoData> = (route) => {
         publisher: {
           '@type': 'Organization',
           name: 'PhotoCalia',
-          url: siteUrl,
+          url: SITE_URL,
         },
         image: imageUrl,
         mainEntityOfPage: articleUrl,

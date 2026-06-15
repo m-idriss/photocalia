@@ -19,7 +19,7 @@ export class Article implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly languageService = inject(LanguageService);
   protected readonly planService = inject(PlanService);
-  protected readonly siteUrl = 'https://photocalia.com';
+  protected readonly siteUrl = 'https://www.photocalia.com';
 
   readonly article = signal<BlogArticle | null>(null);
   readonly previousArticles = signal<BlogArticle[]>([]);

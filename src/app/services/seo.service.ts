@@ -8,6 +8,7 @@ export interface SeoData {
   title: string;
   description: string;
   keywords?: string;
+  robots?: string;
   ogImage?: string;
   ogUrl?: string;
   author?: string;
@@ -15,8 +16,10 @@ export interface SeoData {
   structuredData?: object[];
 }
 
-const BASE_URL = 'https://photocalia.com';
+export const SITE_URL = 'https://www.photocalia.com';
 const FR_PREFIX = '/fr';
+const DEFAULT_ROBOTS =
+  'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 
 @Injectable({
   providedIn: 'root',
@@ -61,6 +64,7 @@ export class SeoService {
 
     // Set Meta Tags
     this.metaService.updateTag({ name: 'description', content: seo.description });
+    this.metaService.updateTag({ name: 'robots', content: seo.robots || DEFAULT_ROBOTS });
 
     if (seo.keywords) {
       this.metaService.updateTag({ name: 'keywords', content: seo.keywords });
@@ -71,9 +75,9 @@ export class SeoService {
     }
 
     // Determine current path and canonical URL
-    const currentPath = this.router.url.split('?')[0].split('#')[0];
+    const currentPath = this.normalizePath(this.router.url.split('?')[0].split('#')[0]);
     const pagePath = this.stripLangPrefix(currentPath);
-    const canonicalUrl = `${BASE_URL}${pagePath === '/' ? '' : pagePath}`;
+    const canonicalUrl = `${SITE_URL}${currentPath === '/' ? '' : currentPath}`;
 
     // Open Graph Tags
     this.metaService.updateTag({ property: 'og:title', content: seo.title });
@@ -94,7 +98,7 @@ export class SeoService {
       this.metaService.updateTag({ name: 'twitter:image', content: seo.ogImage });
     }
 
-    // Update Canonical URL (always points to the English version as canonical)
+    // Each localized page is self-canonical. hreflang links connect translations.
     this.updateCanonicalUrl(canonicalUrl);
 
     // Update hreflang tags for language alternates
@@ -117,6 +121,11 @@ export class SeoService {
     return path;
   }
 
+  private normalizePath(path: string): string {
+    if (!path || path === '/') return '/';
+    return path.endsWith('/') ? path.slice(0, -1) : path;
+  }
+
   private updateCanonicalUrl(url: string) {
     let link: HTMLLinkElement | null = this.dom.querySelector('link[rel="canonical"]');
     if (!link) {
@@ -136,18 +145,11 @@ export class SeoService {
    */
   private updateHreflangTags(pagePath: string) {
     const suffix = pagePath === '/' ? '' : pagePath;
-    const enUrl = `${BASE_URL}${suffix}`;
-    const frUrl = `${BASE_URL}${FR_PREFIX}${suffix || '/'}`;
-    // Clean trailing slash for /fr/ root
-    const frUrlClean =
-      frUrl.endsWith('/') && frUrl !== `${BASE_URL}${FR_PREFIX}/`
-        ? frUrl
-        : frUrl === `${BASE_URL}${FR_PREFIX}/`
-          ? `${BASE_URL}${FR_PREFIX}`
-          : frUrl;
+    const enUrl = `${SITE_URL}${suffix}`;
+    const frUrl = `${SITE_URL}${FR_PREFIX}${suffix}`;
 
     this.setHreflang('en', enUrl);
-    this.setHreflang('fr', frUrlClean);
+    this.setHreflang('fr', frUrl);
     this.setHreflang('x-default', enUrl);
   }
 
