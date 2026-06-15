@@ -26,7 +26,7 @@
             {{ 'calendar.title' | translate }}
           </h2>
           <div class="calendar-header-right">
-            @if (eventCount() > 1) {
+            @if (showEventNavigation()) {
               <span class="event-nav">
                 <button class="event-nav-btn" (click)="prevEvent()" aria-label="Previous event">
                   ◀
@@ -107,7 +107,7 @@
         <h2 id="calendar-inline-title" class="calendar-title">
           {{ 'calendar.title' | translate }}
         </h2>
-        @if (eventCount() > 1) {
+        @if (showEventNavigation()) {
           <div class="calendar-header-right">
             <span class="event-nav">
               <button class="event-nav-btn" (click)="prevEvent()" aria-label="Previous event">

@@ -82,6 +82,7 @@ export class CalendarView implements AfterViewInit {
   });
   // Current view date — updated when navigating the calendar
   protected readonly currentViewDate = signal('');
+  private readonly currentViewRange = signal<{ start: Date; end: Date } | null>(null);
 
   // Sorted events by date for navigation
   protected readonly sortedEvents = computed(() => {
@@ -98,6 +99,16 @@ export class CalendarView implements AfterViewInit {
 
   // Current event index for navigation
   protected readonly currentEventIndex = signal(0);
+  protected readonly showEventNavigation = computed(() => {
+    const events = this.sortedEvents();
+    const range = this.currentViewRange();
+    if (events.length <= 1 || !range) return false;
+
+    return events.some((event) => {
+      const date = event.start instanceof Date ? event.start : new Date(event.start);
+      return isNaN(date.getTime()) || date < range.start || date >= range.end;
+    });
+  });
 
   // Event detail popover
   protected readonly selectedEvent = signal<EventDetail | null>(null);
@@ -137,6 +148,10 @@ export class CalendarView implements AfterViewInit {
       this.currentViewDate.set(
         viewDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       );
+      this.currentViewRange.set({
+        start: info.view.currentStart,
+        end: info.view.currentEnd,
+      });
       this.updateEventIndexForView(info.view.activeStart, info.view.activeEnd);
     },
     height: '100%',
