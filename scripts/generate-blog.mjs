@@ -11,6 +11,7 @@ const outputFile = path.join(root, 'src', 'app', 'pages', 'blog', 'generated', '
 const routesFile = path.join(contentDir, 'prerender-routes.txt');
 const sitemapFile = path.join(root, 'public', 'sitemap.xml');
 const siteUrl = 'https://www.photocalia.com';
+const checkOnly = process.argv.includes('--check');
 
 const staticPages = [
   { path: '', changefreq: 'weekly', priority: '1.0' },
@@ -92,7 +93,10 @@ ${lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : ''}    <changefreq>${changef
     <priority>${localizedPriority}</priority>
 ${image ? `    <image:image>\n      <image:loc>${escapeXml(`${siteUrl}${image}`)}</image:loc>\n    </image:image>\n` : ''}  </url>`;
 
-  return [render(englishUrl, priority), render(frenchUrl, Math.max(0.1, Number(priority) - 0.1).toFixed(1))];
+  return [
+    render(englishUrl, priority),
+    render(frenchUrl, Math.max(0.1, Number(priority) - 0.1).toFixed(1)),
+  ];
 }
 
 async function readMarkdown(file, fields) {
@@ -194,11 +198,48 @@ ${sitemapEntries.join('\n')}
 </urlset>
 `;
 
-await mkdir(path.dirname(outputFile), { recursive: true });
-await writeFile(outputFile, source);
-await writeFile(
-  routesFile,
-  `${articles.flatMap((article) => [`/blog/${article.slug}`, `/fr/blog/${article.slug}`]).join('\n')}\n`,
-);
-await writeFile(sitemapFile, sitemap);
-console.log(`Generated ${articles.length} blog articles and ${sitemapEntries.length} sitemap URLs.`);
+const routes = `${articles.flatMap((article) => [`/blog/${article.slug}`, `/fr/blog/${article.slug}`]).join('\n')}\n`;
+const generatedFiles = [
+  [outputFile, source],
+  [routesFile, routes],
+  [sitemapFile, sitemap],
+];
+
+if (checkOnly) {
+  const staleFiles = [];
+
+  for (const [file, expected] of generatedFiles) {
+    let actual;
+    try {
+      actual = await readFile(file, 'utf8');
+    } catch (error) {
+      if (error?.code !== 'ENOENT') throw error;
+      actual = null;
+    }
+
+    if (actual !== expected) {
+      staleFiles.push(path.relative(root, file));
+    }
+  }
+
+  if (staleFiles.length > 0) {
+    console.error('Generated blog artifacts are stale:');
+    for (const file of staleFiles) {
+      console.error(`- ${file}`);
+    }
+    console.error('Run "npm run blog:generate" and commit the updated files.');
+    process.exit(1);
+  }
+
+  console.log(
+    `Verified ${articles.length} blog articles and ${sitemapEntries.length} sitemap URLs.`,
+  );
+} else {
+  await mkdir(path.dirname(outputFile), { recursive: true });
+  for (const [file, content] of generatedFiles) {
+    await writeFile(file, content);
+  }
+  console.log(
+    `Generated ${articles.length} blog articles and ${sitemapEntries.length} sitemap URLs.`,
+  );
+}

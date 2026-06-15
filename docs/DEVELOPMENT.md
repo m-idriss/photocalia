@@ -17,7 +17,7 @@
 
 ### Prerequisites
 
-- **Node.js**: 20+ (Functions require Node 22 but work with 20)
+- **Node.js**: 22.22.3 (see `.node-version`)
 - **npm**: 10+
 - **Chrome/Chromium**: For testing
 - **Git**: For version control
@@ -139,6 +139,29 @@ npm run build -- --configuration=production
 - These warnings are tracked and acceptable for the current feature set
 
 ### Testing
+
+#### Frontend CI Baseline
+
+Pull requests targeting `main` run the frontend checks sequentially to avoid concurrent esbuild
+processes sharing the same workspace. Run the same verification locally from a clean checkout:
+
+```bash
+npm ci
+npm run blog:check
+npm run lint
+npm run test:ci
+npm run build:ci
+npm run verify:clean
+```
+
+The shorthand below runs the checks after dependencies are installed:
+
+```bash
+npm run verify:frontend
+```
+
+`blog:check` validates generated blog data, prerender routes, and the sitemap without modifying
+them. If it fails, run `npm run blog:generate` and commit the resulting generated files.
 
 #### Unit Tests
 

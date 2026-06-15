@@ -31,12 +31,11 @@ export class LocalizeDatePipe implements PipeTransform, OnDestroy {
       return '';
     }
 
-    // Expect YYYY-MM-DD format
-    const parts = dateString.split('-');
-    if (parts.length !== 3) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(dateString)) {
       return dateString;
     }
 
+    const parts = dateString.split('-');
     const [year, month, day] = parts;
     const currentLang = this.languageService.currentLang();
 

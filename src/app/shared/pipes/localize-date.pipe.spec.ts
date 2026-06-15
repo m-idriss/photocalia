@@ -1,18 +1,22 @@
+import { ChangeDetectorRef, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { LocalizeDatePipe } from './localize-date.pipe';
-import { LanguageService } from '../../services/language.service';
+import { LanguageService, SupportedLanguage } from '../../services/language.service';
 
 describe('LocalizeDatePipe', () => {
   let pipe: LocalizeDatePipe;
-  let languageService: LanguageService;
+  const currentLang = signal<SupportedLanguage>('en');
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LocalizeDatePipe, LanguageService],
+      providers: [
+        LocalizeDatePipe,
+        { provide: LanguageService, useValue: { currentLang } },
+        { provide: ChangeDetectorRef, useValue: { markForCheck: () => undefined } },
+      ],
     });
 
     pipe = TestBed.inject(LocalizeDatePipe);
-    languageService = TestBed.inject(LanguageService);
   });
 
   it('should create an instance', () => {
@@ -21,7 +25,7 @@ describe('LocalizeDatePipe', () => {
 
   describe('English format (YYYY-MM-DD)', () => {
     beforeEach(() => {
-      languageService.currentLang.set('en');
+      currentLang.set('en');
     });
 
     it('should return date in YYYY-MM-DD format', () => {
@@ -37,7 +41,7 @@ describe('LocalizeDatePipe', () => {
 
   describe('French format (DD-MM-YYYY)', () => {
     beforeEach(() => {
-      languageService.currentLang.set('fr');
+      currentLang.set('fr');
     });
 
     it('should convert to DD-MM-YYYY format', () => {

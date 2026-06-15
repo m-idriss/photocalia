@@ -1,7 +1,7 @@
 import { Injectable, inject, effect } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { Observable, from, of } from 'rxjs';
+import { map, catchError, switchMap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { PDF_CONVERSION_CONFIG, CALENDAR_CONFIG } from '../constants';
@@ -363,7 +363,8 @@ export class ConverterService {
   getQuotaStatus(): Observable<QuotaStatusResponse> {
     const url = `${this.baseUrl}/converter/quota-status?userId=${encodeURIComponent(this.userId)}`;
 
-    return this.http.get<unknown>(url).pipe(
+    return from(this.getAuthorizationHeaders()).pipe(
+      switchMap((headers) => this.http.get<unknown>(url, { headers })),
       map((raw) => this.mapToQuotaResponse(raw)),
       // Save mapped response to cache for offline/fallback
       map((mapped) => {
@@ -382,6 +383,11 @@ export class ConverterService {
         throw err;
       }),
     );
+  }
+
+  private async getAuthorizationHeaders(): Promise<Record<string, string>> {
+    const token = await this.auth?.currentUser?.getIdToken();
+    return token ? { Authorization: `Bearer ${token}` } : {};
   }
 
   /**
