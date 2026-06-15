@@ -14,8 +14,6 @@ import { PWA_CONFIG } from './constants/pwa.constants';
 import { SeoService } from './services/seo.service';
 import { LanguageService } from './services/language.service';
 
-const deliberateCiFailure = true;
-
 @Component({
   selector: 'app-root',
   standalone: true,
