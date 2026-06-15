@@ -181,7 +181,35 @@ describe('CalendarView', () => {
     expect(fixture.nativeElement.textContent).toContain('AI-extracted events may contain errors');
   });
 
-  it('should show event navigation when there are multiple events', () => {
+  it('should hide event navigation when all events are visible in the current range', () => {
+    component = fixture.componentInstance;
+    component['currentViewRange'].set({
+      start: new Date('2025-01-01T00:00:00'),
+      end: new Date('2025-02-01T00:00:00'),
+    });
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.event-nav-index')).toBeFalsy();
+  });
+
+  it('should show event navigation when events extend beyond the current range', async () => {
+    fixture = await createComponent({
+      events: [
+        mockEvents[0],
+        {
+          ...mockEvents[1],
+          start: new Date('2025-02-16T14:00:00'),
+          end: new Date('2025-02-16T15:00:00'),
+        },
+      ],
+    });
+    component = fixture.componentInstance;
+    component['currentViewRange'].set({
+      start: new Date('2025-01-01T00:00:00'),
+      end: new Date('2025-02-01T00:00:00'),
+    });
+    fixture.detectChanges();
+
     const eventNavIndex = fixture.nativeElement.querySelector(
       '.event-nav-index',
     ) as HTMLElement | null;
