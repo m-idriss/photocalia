@@ -1,0 +1,77 @@
+name: Frontend CI
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: frontend-ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Lint, test, and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prepare logs
+        run: mkdir -p "${{ runner.temp }}/frontend-ci-logs"
+
+      - name: Verify generated blog artifacts
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run blog:check 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/blog-check.log"
+
+      - name: Lint
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run lint 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/lint.log"
+
+      - name: Run unit tests
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run test:ci 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/unit-tests.log"
+
+      - name: Build production application
+        shell: bash
+        env:
+          FIREBASE_API_KEY: placeholder
+          FIREBASE_PROJECT_ID: placeholder
+        run: |
+          set -o pipefail
+          npm run build:ci 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/production-build.log"
+
+      - name: Verify clean working tree
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run verify:clean 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/clean-tree.log"
+
+      - name: Upload failure logs
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: frontend-ci-logs-${{ github.run_id }}
+          path: ${{ runner.temp }}/frontend-ci-logs/
+          if-no-files-found: ignore
+          retention-days: 14

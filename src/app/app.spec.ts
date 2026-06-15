@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
@@ -38,7 +38,14 @@ describe('App', () => {
       providers: [
         provideRouter([]),
         { provide: SeoService, useValue: {} },
-        { provide: LanguageService, useValue: { translate: (key: string) => key } },
+        {
+          provide: LanguageService,
+          useValue: {
+            currentLang: signal('en'),
+            translate: (key: string) => key,
+            localizeRoute: (path: string) => path,
+          },
+        },
         {
           provide: SwUpdate,
           useValue: {
