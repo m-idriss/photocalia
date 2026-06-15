@@ -1,5 +1,17 @@
 import { Routes, Route } from '@angular/router';
 import { blogSeoResolver, blogTitleResolver } from './pages/blog/blog-route.resolver';
+import { homePageTitle, pageTitle } from './utils/page-title.utils';
+
+const HOME_TITLE = homePageTitle('Convert Photos & Screenshots to Calendar Events with AI');
+const HOW_IT_WORKS_TITLE = pageTitle('How It Works: Convert Photos & Images to Calendar Events');
+const PRIVACY_TITLE = pageTitle('Privacy Policy: How We Protect Your Data');
+const TERMS_TITLE = pageTitle('Terms of Use: Service Terms & Conditions');
+const LEGAL_MENTIONS_TITLE = pageTitle('Legal Mentions: Company & Legal Information');
+const BLOG_TITLE = pageTitle('Blog: Guides & Tips for Photo to Calendar Conversion');
+const PRICING_TITLE = pageTitle('Pricing: Free, Pro & Business Plans');
+const SUBSCRIPTION_SUCCESS_TITLE = pageTitle('Subscription Activated');
+const DONATION_SUCCESS_TITLE = pageTitle('Thank You for Your Donation');
+const ABOUT_TITLE = pageTitle('About: AI Calendar Converter Built by Idriss');
 
 /**
  * Shared page route definitions used for both English (root) and French (/fr) paths.
@@ -10,10 +22,10 @@ const pageRoutes: Route[] = [
   {
     path: '',
     loadComponent: () => import('./pages/home/home').then((m) => m.Home),
-    title: 'PhotoCalia – Convert Photos & Screenshots to Calendar Events with AI',
+    title: HOME_TITLE,
     data: {
       seo: {
-        title: 'PhotoCalia – Convert Photos & Screenshots to Calendar Events with AI',
+        title: HOME_TITLE,
         description:
           'Turn any photo, screenshot, flyer or PDF into calendar events with AI — no manual typing. PhotoCalia extracts dates, times & locations automatically and adds them to Google Calendar or exports ICS files. Free, no separate signup.',
         keywords:
@@ -28,10 +40,10 @@ const pageRoutes: Route[] = [
   {
     path: 'how-it-works',
     loadComponent: () => import('./pages/how-it-works/how-it-works').then((m) => m.HowItWorks),
-    title: 'How It Works - AI Calendar Converter | PhotoCalia',
+    title: HOW_IT_WORKS_TITLE,
     data: {
       seo: {
-        title: 'How It Works - Convert Photos & Images to Calendar Events | PhotoCalia',
+        title: HOW_IT_WORKS_TITLE,
         description:
           'Learn how PhotoCalia converts photos, screenshots, and PDFs into calendar events using AI. Upload any image of an appointment, event flyer, or schedule — GPT-4 Vision extracts the dates, times, and locations automatically.',
         keywords:
@@ -119,10 +131,10 @@ const pageRoutes: Route[] = [
   {
     path: 'privacy',
     loadComponent: () => import('./pages/privacy/privacy').then((m) => m.Privacy),
-    title: 'Privacy Policy - GDPR & Data Protection | PhotoCalia',
+    title: PRIVACY_TITLE,
     data: {
       seo: {
-        title: 'Privacy Policy - How We Protect Your Data | PhotoCalia',
+        title: PRIVACY_TITLE,
         description:
           'Learn how PhotoCalia protects your privacy and personal data. GDPR-compliant privacy policy covering data collection, AI processing, third-party services, and your rights.',
         keywords: 'privacy policy, data protection, GDPR, personal data, privacy rights',
@@ -155,10 +167,10 @@ const pageRoutes: Route[] = [
   {
     path: 'terms',
     loadComponent: () => import('./pages/terms/terms').then((m) => m.Terms),
-    title: 'Terms of Use - Service Agreement | PhotoCalia',
+    title: TERMS_TITLE,
     data: {
       seo: {
-        title: 'Terms of Use - Service Terms & Conditions | PhotoCalia',
+        title: TERMS_TITLE,
         description:
           'Terms of Use for PhotoCalia AI calendar converter. Learn about usage limits, AI accuracy, liability, and service terms.',
         keywords: 'terms of use, terms of service, service agreement, user agreement',
@@ -192,10 +204,10 @@ const pageRoutes: Route[] = [
     path: 'legal-mentions',
     loadComponent: () =>
       import('./pages/legal-mentions/legal-mentions').then((m) => m.LegalMentions),
-    title: 'Legal Mentions - Company & Legal Information | PhotoCalia',
+    title: LEGAL_MENTIONS_TITLE,
     data: {
       seo: {
-        title: 'Legal Mentions - Company Information & Legal Requirements | PhotoCalia',
+        title: LEGAL_MENTIONS_TITLE,
         description:
           'Legal mentions for PhotoCalia including company information, hosting provider, intellectual property, and GDPR compliance.',
         keywords: 'legal mentions, company information, legal notice, hosting provider',
@@ -228,10 +240,10 @@ const pageRoutes: Route[] = [
   {
     path: 'blog',
     loadComponent: () => import('./pages/blog/blog').then((m) => m.Blog),
-    title: 'Blog - Guides & Tips for Photo to Calendar Conversion | PhotoCalia',
+    title: BLOG_TITLE,
     data: {
       seo: {
-        title: 'Blog - Guides & Tips for Photo to Calendar Conversion | PhotoCalia',
+        title: BLOG_TITLE,
         description:
           'Guides, tutorials, and tips on converting photos to calendar events with AI. Learn about OCR technology, digitizing schedules, and productivity hacks.',
         keywords:
@@ -273,10 +285,10 @@ const pageRoutes: Route[] = [
   {
     path: 'pricing',
     loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
-    title: 'Pricing — PhotoCalia',
+    title: PRICING_TITLE,
     data: {
       seo: {
-        title: 'Pricing — Free, Pro & Business Plans | PhotoCalia',
+        title: PRICING_TITLE,
         description:
           'Choose the PhotoCalia plan that fits your needs. Start free with 3 conversions/month, upgrade to Pro for 50/month or Business for 120/month.',
         keywords:
@@ -368,10 +380,10 @@ const pageRoutes: Route[] = [
       import('./pages/subscription-success/subscription-success').then(
         (m) => m.SubscriptionSuccess,
       ),
-    title: 'Subscription Activated — PhotoCalia',
+    title: SUBSCRIPTION_SUCCESS_TITLE,
     data: {
       seo: {
-        title: 'Subscription Activated — PhotoCalia',
+        title: SUBSCRIPTION_SUCCESS_TITLE,
         description:
           'Your PhotoCalia subscription is now active. Start converting images to calendar events.',
         robots: 'noindex, nofollow',
@@ -387,10 +399,10 @@ const pageRoutes: Route[] = [
     path: 'donation/success',
     loadComponent: () =>
       import('./pages/donation-success/donation-success').then((m) => m.DonationSuccess),
-    title: 'Thank You for Your Donation — PhotoCalia',
+    title: DONATION_SUCCESS_TITLE,
     data: {
       seo: {
-        title: 'Thank You for Your Donation — PhotoCalia',
+        title: DONATION_SUCCESS_TITLE,
         description:
           'Thank you for supporting PhotoCalia! Your donation helps us improve the service.',
         robots: 'noindex, nofollow',
@@ -405,10 +417,10 @@ const pageRoutes: Route[] = [
   {
     path: 'about',
     loadComponent: () => import('./pages/about/about').then((m) => m.About),
-    title: 'About PhotoCalia - AI Calendar Converter by Idriss',
+    title: ABOUT_TITLE,
     data: {
       seo: {
-        title: 'About PhotoCalia - AI Calendar Converter Built by Idriss | PhotoCalia',
+        title: ABOUT_TITLE,
         description:
           'Learn about PhotoCalia, the AI-powered photo to calendar converter. Built by Idriss using Angular, Firebase, and GPT-4 Vision. Open source, privacy-focused, and free to use.',
         keywords:

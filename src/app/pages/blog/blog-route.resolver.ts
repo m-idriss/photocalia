@@ -1,5 +1,6 @@
 import type { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import { SITE_URL, type SeoData } from '../../services/seo.service';
+import { pageTitle } from '../../utils/page-title.utils';
 import { BLOG_ARTICLES } from './blog.models';
 
 function findArticle(slug: string | null) {
@@ -16,16 +17,16 @@ function routeLanguage(route: ActivatedRouteSnapshot) {
 
 export const blogTitleResolver: ResolveFn<string> = (route) => {
   const article = findArticle(route.paramMap.get('slug'));
-  if (!article) return 'Article not found | PhotoCalia';
+  if (!article) return pageTitle('Article not found');
 
-  return `${article.locales[routeLanguage(route)].title} | PhotoCalia`;
+  return pageTitle(article.locales[routeLanguage(route)].title);
 };
 
 export const blogSeoResolver: ResolveFn<SeoData> = (route) => {
   const article = findArticle(route.paramMap.get('slug'));
   if (!article) {
     return {
-      title: 'Article not found | PhotoCalia',
+      title: pageTitle('Article not found'),
       description: 'The requested PhotoCalia article could not be found.',
       robots: 'noindex, nofollow',
       type: 'article',
@@ -40,7 +41,7 @@ export const blogSeoResolver: ResolveFn<SeoData> = (route) => {
   const imageUrl = article.image.startsWith('http') ? article.image : `${SITE_URL}${article.image}`;
 
   return {
-    title: `${localized.title} | PhotoCalia`,
+    title: pageTitle(localized.title),
     description: localized.description,
     keywords: article.keywords,
     author: article.author,
