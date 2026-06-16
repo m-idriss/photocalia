@@ -14,6 +14,7 @@ export interface SeoData {
   author?: string;
   type?: string;
   structuredData?: object[];
+  localized?: Partial<Record<'fr', SeoData>>;
 }
 
 export const SITE_URL = 'https://www.photocalia.com';
@@ -58,7 +59,15 @@ export class SeoService {
       });
   }
 
-  updateSeoTags(seo: SeoData) {
+  updateSeoTags(seoData: SeoData) {
+    // Determine current path and canonical URL
+    const currentPath = this.normalizePath(this.router.url.split('?')[0].split('#')[0]);
+    const pagePath = this.stripLangPrefix(currentPath);
+    const canonicalUrl = `${SITE_URL}${currentPath === '/' ? '' : currentPath}`;
+    const seo = currentPath.startsWith(`${FR_PREFIX}/`)
+      ? seoData.localized?.fr || seoData
+      : seoData;
+
     // Set Title
     this.titleService.setTitle(seo.title);
 
@@ -73,11 +82,6 @@ export class SeoService {
     if (seo.author) {
       this.metaService.updateTag({ name: 'author', content: seo.author });
     }
-
-    // Determine current path and canonical URL
-    const currentPath = this.normalizePath(this.router.url.split('?')[0].split('#')[0]);
-    const pagePath = this.stripLangPrefix(currentPath);
-    const canonicalUrl = `${SITE_URL}${currentPath === '/' ? '' : currentPath}`;
 
     // Open Graph Tags
     this.metaService.updateTag({ property: 'og:title', content: seo.title });
