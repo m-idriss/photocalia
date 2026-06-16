@@ -12,7 +12,6 @@ const PRICING_TITLE = pageTitle('Pricing: Free, Pro & Business Plans');
 const SUBSCRIPTION_SUCCESS_TITLE = pageTitle('Subscription Activated');
 const DONATION_SUCCESS_TITLE = pageTitle('Thank You for Your Donation');
 const ABOUT_TITLE = pageTitle('About: AI Calendar Converter Built by Idriss');
-const FR_ABOUT_TITLE = pageTitle('À propos : convertisseur calendrier IA créé par Idriss');
 
 /**
  * Shared page route definitions used for both English (root) and French (/fr) paths.
@@ -449,46 +448,10 @@ const pageRoutes: Route[] = [
             ],
           },
         ],
-        localized: {
-          fr: {
-            title: pageTitle('À propos : convertisseur calendrier IA créé par Idriss'),
-            description:
-              "Découvrez PhotoCalia, le convertisseur photo vers calendrier propulsé par l'IA. Créé par Idriss avec Angular, Firebase et GPT-4 Vision. Open source, respectueux de la confidentialité et gratuit.",
-            keywords:
-              'à propos photocalia, convertisseur calendrier IA, application photo vers calendrier, Idriss, 3dime, outil calendrier open source',
-            ogImage: 'https://www.photocalia.com/assets/images/converter.png',
-            ogUrl: 'https://www.photocalia.com/fr/about',
-            type: 'website',
-            structuredData: [
-              {
-                '@context': 'https://schema.org',
-                '@type': 'BreadcrumbList',
-                itemListElement: [
-                  {
-                    '@type': 'ListItem',
-                    position: 1,
-                    name: 'Accueil',
-                    item: 'https://www.photocalia.com/fr',
-                  },
-                  {
-                    '@type': 'ListItem',
-                    position: 2,
-                    name: 'À propos',
-                    item: 'https://www.photocalia.com/fr/about',
-                  },
-                ],
-              },
-            ],
-          },
-        },
       },
     },
   },
 ];
-
-const frenchPageRoutes: Route[] = pageRoutes.map((route) =>
-  route.path === 'about' ? { ...route, title: FR_ABOUT_TITLE } : route,
-);
 
 export const routes: Routes = [
   // English routes (default)
@@ -497,7 +460,7 @@ export const routes: Routes = [
   // French routes under /fr prefix
   {
     path: 'fr',
-    children: [...frenchPageRoutes, { path: '**', redirectTo: '' }],
+    children: [...pageRoutes, { path: '**', redirectTo: '' }],
   },
 
   // Catch-all redirect
