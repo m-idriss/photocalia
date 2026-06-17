@@ -105,7 +105,7 @@
     "eslint": "10.5.0",
     "gray-matter": "^4.0.3",
     "husky": "^9.1.7",
-    "jasmine-core": "~6.2.0",
+    "jasmine-core": "~6.3.0",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
