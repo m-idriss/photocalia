@@ -203,6 +203,30 @@
     </image:image>
   </url>
   <url>
+    <loc>https://www.photocalia.com/blog/healthcare-appointments</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/healthcare-appointments" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/healthcare-appointments" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/healthcare-appointments" />
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/healthcare-appointments.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/blog/healthcare-appointments</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/healthcare-appointments" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/healthcare-appointments" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/healthcare-appointments" />
+    <lastmod>2026-06-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/healthcare-appointments.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://www.photocalia.com/blog/music-festival-lineup</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/music-festival-lineup" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/music-festival-lineup" />
