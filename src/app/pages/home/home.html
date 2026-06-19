@@ -341,17 +341,19 @@
           </div>
 
           <div class="campaign-video-frame">
-            <video
-              class="campaign-video"
-              controls
-              playsinline
-              preload="none"
-              [poster]="campaignPosterSrc()"
-              [attr.aria-label]="'home.campaign.videoLabel' | translate"
-            >
-              <source [src]="campaignVideoSrc()" type="video/mp4" />
-              {{ 'home.campaign.fallback' | translate }}
-            </video>
+            <div class="campaign-video-clip">
+              <video
+                class="campaign-video"
+                controls
+                playsinline
+                preload="none"
+                [poster]="campaignPosterSrc()"
+                [attr.aria-label]="'home.campaign.videoLabel' | translate"
+              >
+                <source [src]="campaignVideoSrc()" type="video/mp4" />
+                {{ 'home.campaign.fallback' | translate }}
+              </video>
+            </div>
           </div>
         </section>
 

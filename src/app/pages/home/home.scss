@@ -247,6 +247,7 @@
   box-shadow:
     0 35px 80px rgba(79, 70, 229, 0.2),
     0 10px 30px rgba(15, 23, 42, 0.1);
+  isolation: isolate;
 
   &::before {
     position: absolute;
@@ -259,13 +260,26 @@
   }
 }
 
-.campaign-video {
-  display: block;
+.campaign-video-clip {
+  overflow: hidden;
   width: 100%;
   aspect-ratio: 9 / 16;
   border-radius: 1.75rem;
   background: #312e81;
+  clip-path: inset(0 round 1.75rem);
+  transform: translateZ(0);
+}
+
+.campaign-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 9 / 16;
+  border: 0;
+  border-radius: inherit;
+  background: #312e81;
   object-fit: cover;
+  transform: translateZ(0);
 }
 
 /* ========================
@@ -1029,6 +1043,11 @@
   .campaign-video-frame {
     width: min(88vw, 360px);
     border-radius: 1.8rem;
+  }
+
+  .campaign-video-clip {
+    border-radius: 1.4rem;
+    clip-path: inset(0 round 1.4rem);
   }
 
   .campaign-video {
