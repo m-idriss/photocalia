@@ -98,6 +98,33 @@
   animation: fadeInUp 0.8s ease-out 0.1s backwards;
 }
 
+.intro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  align-items: center;
+  gap: 2rem;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.intro-copy {
+  max-width: none;
+  margin: 0;
+}
+
+.intro-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro-mascot {
+  display: block;
+  width: min(100%, 420px);
+  height: auto;
+  filter: drop-shadow(0 24px 36px rgba(79, 70, 229, 0.18));
+}
+
 /* ========================
    AI Steps Section
    ======================== */
@@ -532,6 +559,23 @@
 
   .intro-section {
     padding: 2rem 1rem 3rem;
+  }
+
+  .intro-layout {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .intro-copy {
+    order: 2;
+  }
+
+  .intro-visual {
+    order: 1;
+  }
+
+  .intro-mascot {
+    width: min(82vw, 320px);
   }
 
   .ai-steps-container {
