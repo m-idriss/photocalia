@@ -8,9 +8,21 @@
       aria-labelledby="intro-title"
     >
       <h2 id="intro-title" class="section-title">{{ 'howitworks.intro.title' | translate }}</h2>
-      <div class="section-content">
-        <p>{{ 'howitworks.intro.p1' | translate }}</p>
-        <p>{{ 'howitworks.intro.p2' | translate }}</p>
+      <div class="intro-layout">
+        <div class="section-content intro-copy">
+          <p>{{ 'howitworks.intro.p1' | translate }}</p>
+          <p>{{ 'howitworks.intro.p2' | translate }}</p>
+        </div>
+        <div class="intro-visual" aria-hidden="true">
+          <img
+            src="assets/images/mascot-photo.png"
+            alt=""
+            class="intro-mascot"
+            loading="eager"
+            width="1402"
+            height="1122"
+          />
+        </div>
       </div>
     </section>
 
