@@ -40,10 +40,14 @@ with upcoming blog topics about children's camps, travel itineraries, and festiv
 ```bash
 node marketing/summer-campaign/record.mjs fr
 node marketing/summer-campaign/record.mjs en
+node marketing/summer-campaign/add-audio.mjs fr
+node marketing/summer-campaign/add-audio.mjs en
 ```
 
 The render script uses Google Chrome for capture and `/opt/homebrew/bin/ffmpeg` for the
 final H.264 MP4. The editable production masters are `index-fr.html` and `index-en.html`.
+The audio script uses macOS system voices for localized voice-over, generates a light
+instrumental bed locally, and mixes the final AAC track into the public MP4 assets.
 
 ## English Voice-over
 
