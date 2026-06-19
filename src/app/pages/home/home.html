@@ -58,6 +58,54 @@
       class="content-layout"
       [class.has-calendar]="calendarStateService.isVisible() && isDesktop()"
     >
+      @if (calendarStateService.events().length === 0) {
+        <div class="hero-blog-strip" aria-label="Use cases">
+          <div class="hero-blog-track">
+            <div class="hero-blog-group">
+              @for (article of featuredBlogArticles; track article.slug) {
+                @let localizedArticle = localized(article);
+                <a
+                  class="hero-blog-card"
+                  [routerLink]="blogArticlePath(article) | localizeRoute"
+                  [attr.aria-label]="localizedArticle.title"
+                >
+                  <img
+                    class="hero-blog-card-image"
+                    [src]="article.image"
+                    [alt]="localizedArticle.imageAlt"
+                    width="320"
+                    height="180"
+                    loading="lazy"
+                  />
+                  <span class="hero-blog-card-title">{{ localizedArticle.title }}</span>
+                </a>
+              }
+            </div>
+
+            <div class="hero-blog-group" aria-hidden="true">
+              @for (article of featuredBlogArticles; track article.slug) {
+                @let localizedArticle = localized(article);
+                <a
+                  class="hero-blog-card"
+                  tabindex="-1"
+                  [routerLink]="blogArticlePath(article) | localizeRoute"
+                >
+                  <img
+                    class="hero-blog-card-image"
+                    [src]="article.image"
+                    alt=""
+                    width="320"
+                    height="180"
+                    loading="lazy"
+                  />
+                  <span class="hero-blog-card-title">{{ localizedArticle.title }}</span>
+                </a>
+              }
+            </div>
+          </div>
+        </div>
+      }
+
       <div class="converter-card">
         <app-converter></app-converter>
       </div>
@@ -293,17 +341,19 @@
           </div>
 
           <div class="campaign-video-frame">
-            <video
-              class="campaign-video"
-              controls
-              playsinline
-              preload="none"
-              [poster]="campaignPosterSrc()"
-              [attr.aria-label]="'home.campaign.videoLabel' | translate"
-            >
-              <source [src]="campaignVideoSrc()" type="video/mp4" />
-              {{ 'home.campaign.fallback' | translate }}
-            </video>
+            <div class="campaign-video-clip">
+              <video
+                class="campaign-video"
+                controls
+                playsinline
+                preload="none"
+                [poster]="campaignPosterSrc()"
+                [attr.aria-label]="'home.campaign.videoLabel' | translate"
+              >
+                <source [src]="campaignVideoSrc()" type="video/mp4" />
+                {{ 'home.campaign.fallback' | translate }}
+              </video>
+            </div>
           </div>
         </section>
 
