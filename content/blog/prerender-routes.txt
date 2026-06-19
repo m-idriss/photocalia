@@ -4,6 +4,8 @@
 /fr/blog/digitize-paper-schedules
 /blog/family-reunion-planning
 /fr/blog/family-reunion-planning
+/blog/healthcare-appointments
+/fr/blog/healthcare-appointments
 /blog/music-festival-lineup
 /fr/blog/music-festival-lineup
 /blog/photo-to-google-calendar
