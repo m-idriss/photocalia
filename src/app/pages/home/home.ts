@@ -28,6 +28,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { ScrollRevealDirective } from '../../shared/directives';
 import { RouterLink } from '@angular/router';
+import { BLOG_ARTICLES, BlogArticle } from '../blog/blog.models';
 
 @Component({
   selector: 'app-home',
@@ -65,6 +66,9 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
     () =>
       `/assets/videos/photocalia-summer-campaign-${this.languageService.currentLang()}-poster.jpg`,
   );
+  protected readonly featuredBlogArticles = [...BLOG_ARTICLES]
+    .sort((a, b) => b.datePublished.localeCompare(a.datePublished))
+    .slice(0, 8);
 
   protected readonly isDesktop = signal(false);
   private resizeSubscription?: Subscription;
@@ -127,5 +131,13 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
    */
   handleCalendarExport(): void {
     this.calendarStateService.requestExport();
+  }
+
+  protected blogArticlePath(article: BlogArticle): string {
+    return `/blog/${article.slug}`;
+  }
+
+  protected localized(article: BlogArticle) {
+    return article.locales[this.languageService.currentLang()];
   }
 }
