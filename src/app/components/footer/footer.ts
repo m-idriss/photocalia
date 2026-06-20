@@ -92,17 +92,33 @@ export class Footer implements OnInit {
     }
 
     const featureLinks: FooterLink[] = [
-      { label: 'footer.link.aiTextExtraction', url: '/how-it-works', isInternal: true },
-      { label: 'footer.link.instantIcsGeneration', url: '/how-it-works', isInternal: true },
+      {
+        label: 'footer.link.aiTextExtraction',
+        url: '/blog/ai-ocr-calendar-extraction',
+        isInternal: true,
+      },
+      {
+        label: 'footer.link.instantIcsGeneration',
+        url: '/blog/photo-to-google-calendar',
+        isInternal: true,
+      },
       { label: 'footer.link.privacyFirstParsing', url: '/privacy', isInternal: true },
-      { label: 'footer.link.batchProcessing', url: '/how-it-works', isInternal: true },
+      { label: 'footer.link.batchProcessing', url: '/pricing', isInternal: true },
     ];
 
     const useCasesLinks: FooterLink[] = [
-      { label: 'footer.link.medicalAppointments', url: '/how-it-works', isInternal: true },
-      { label: 'footer.link.schoolSchedules', url: '/how-it-works', isInternal: true },
-      { label: 'footer.link.eventTickets', url: '/how-it-works', isInternal: true },
-      { label: 'footer.link.deliveryTracking', url: '/how-it-works', isInternal: true },
+      {
+        label: 'footer.link.medicalAppointments',
+        url: '/blog/healthcare-appointments',
+        isInternal: true,
+      },
+      {
+        label: 'footer.link.schoolSchedules',
+        url: '/blog/digitize-paper-schedules',
+        isInternal: true,
+      },
+      { label: 'footer.link.eventTickets', url: '/blog/music-festival-lineup', isInternal: true },
+      { label: 'footer.link.examSchedules', url: '/blog/summer-exam-scheduling', isInternal: true },
     ];
 
     const supportLinks: FooterLink[] = [
