@@ -501,10 +501,26 @@
           [appScrollRevealDelay]="100"
           aria-labelledby="pricing-title"
         >
-          <h2 id="pricing-title" class="section-title">{{ 'home.pricing.title' | translate }}</h2>
-          <p class="section-description">
-            {{ 'home.pricing.description' | translate: planParams() }}
-          </p>
+          <div class="pricing-content">
+            <figure class="pricing-mascot" aria-hidden="true">
+              <img
+                src="/assets/images/home/zen-lemur-phone.png"
+                alt=""
+                width="956"
+                height="906"
+                loading="lazy"
+              />
+            </figure>
+
+            <div class="pricing-copy">
+              <h2 id="pricing-title" class="section-title">
+                {{ 'home.pricing.title' | translate }}
+              </h2>
+              <p class="section-description">
+                {{ 'home.pricing.description' | translate: planParams() }}
+              </p>
+            </div>
+          </div>
         </section>
 
         <!-- Why PhotoCalia Section -->

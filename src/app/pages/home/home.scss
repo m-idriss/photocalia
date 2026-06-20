@@ -549,6 +549,38 @@
   background: var(--cb-white);
 }
 
+.pricing-content {
+  display: grid;
+  grid-template-columns: minmax(180px, 300px) minmax(0, 700px);
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.pricing-mascot {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  pointer-events: none;
+
+  img {
+    display: block;
+    width: min(100%, 280px);
+    height: auto;
+    filter: drop-shadow(0 24px 34px rgba(79, 70, 229, 0.16));
+  }
+}
+
+.pricing-copy {
+  min-width: 0;
+
+  .section-description {
+    margin-bottom: 0;
+  }
+}
+
 /* ========================
    Why PhotoCalia Section
    ======================== */
@@ -1092,6 +1124,17 @@
   // Pricing Section - Mobile
   .pricing-section {
     padding: 3rem 1rem;
+  }
+
+  .pricing-content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .pricing-mascot {
+    img {
+      width: min(58vw, 230px);
+    }
   }
 
   // Why PhotoCalia Section - Mobile
