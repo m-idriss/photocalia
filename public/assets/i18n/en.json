@@ -244,6 +244,8 @@
   "footer.link.aboutMe": "About Me",
   "footer.link.aiTextExtraction": "AI Text Extraction",
   "footer.link.instantIcsGeneration": "Instant ICS Generation",
+  "footer.link.imageToGoogleCalendar": "Image to Google Calendar",
+  "footer.link.pdfToCalendar": "PDF to Calendar",
   "footer.link.privacyFirstParsing": "Privacy-First Parsing",
   "footer.link.batchProcessing": "Batch Processing",
   "footer.link.medicalAppointments": "Medical Appointments",

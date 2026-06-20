@@ -16,7 +16,7 @@ const GUIDE_SETS: Record<GuideVariant, RecommendedGuide[]> = {
     {
       titleKey: 'recommendedGuides.photoToCalendar.title',
       descriptionKey: 'recommendedGuides.photoToCalendar.description',
-      url: '/blog/photo-to-google-calendar',
+      url: '/photo-to-calendar',
     },
     {
       titleKey: 'recommendedGuides.paperSchedules.title',
@@ -26,14 +26,14 @@ const GUIDE_SETS: Record<GuideVariant, RecommendedGuide[]> = {
     {
       titleKey: 'recommendedGuides.aiOcr.title',
       descriptionKey: 'recommendedGuides.aiOcr.description',
-      url: '/blog/ai-ocr-calendar-extraction',
+      url: '/ocr-calendar-extraction',
     },
   ],
   'how-it-works': [
     {
       titleKey: 'recommendedGuides.aiOcr.title',
       descriptionKey: 'recommendedGuides.aiOcr.description',
-      url: '/blog/ai-ocr-calendar-extraction',
+      url: '/ocr-calendar-extraction',
     },
     {
       titleKey: 'recommendedGuides.healthcare.title',
@@ -67,7 +67,7 @@ const GUIDE_SETS: Record<GuideVariant, RecommendedGuide[]> = {
     {
       titleKey: 'recommendedGuides.aiOcr.title',
       descriptionKey: 'recommendedGuides.aiOcr.description',
-      url: '/blog/ai-ocr-calendar-extraction',
+      url: '/ocr-calendar-extraction',
     },
     {
       titleKey: 'recommendedGuides.privacy.title',

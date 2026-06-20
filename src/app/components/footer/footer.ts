@@ -94,14 +94,20 @@ export class Footer implements OnInit {
     const featureLinks: FooterLink[] = [
       {
         label: 'footer.link.aiTextExtraction',
-        url: '/blog/ai-ocr-calendar-extraction',
+        url: '/ocr-calendar-extraction',
         isInternal: true,
       },
       {
         label: 'footer.link.instantIcsGeneration',
-        url: '/blog/photo-to-google-calendar',
+        url: '/photo-to-calendar',
         isInternal: true,
       },
+      {
+        label: 'footer.link.imageToGoogleCalendar',
+        url: '/image-to-google-calendar',
+        isInternal: true,
+      },
+      { label: 'footer.link.pdfToCalendar', url: '/pdf-to-calendar', isInternal: true },
       { label: 'footer.link.privacyFirstParsing', url: '/privacy', isInternal: true },
       { label: 'footer.link.batchProcessing', url: '/pricing', isInternal: true },
     ];

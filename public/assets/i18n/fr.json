@@ -244,6 +244,8 @@
   "footer.link.aboutMe": "À propos de moi",
   "footer.link.aiTextExtraction": "Extraction de texte IA",
   "footer.link.instantIcsGeneration": "Génération ICS instantanée",
+  "footer.link.imageToGoogleCalendar": "Image vers Google Agenda",
+  "footer.link.pdfToCalendar": "PDF vers calendrier",
   "footer.link.privacyFirstParsing": "Analyse axée sur la confidentialité",
   "footer.link.batchProcessing": "Traitement par lot",
   "footer.link.medicalAppointments": "Rendez-vous médicaux",

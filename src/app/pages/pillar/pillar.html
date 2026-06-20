@@ -1,0 +1,38 @@
+<main class="pillar-page" id="main-content" role="main">
+  <div class="pillar-container">
+    <header class="pillar-hero">
+      <p class="pillar-kicker">PhotoCalia</p>
+      <h1>{{ content().title }}</h1>
+      <p>{{ content().intro }}</p>
+      <div class="pillar-actions">
+        <a class="pillar-button pillar-button-primary" [routerLink]="'/' | localizeRoute">
+          {{ content().primaryCta }}
+        </a>
+        <a
+          class="pillar-button pillar-button-secondary"
+          [routerLink]="content().secondaryUrl | localizeRoute"
+        >
+          {{ content().secondaryCta }}
+        </a>
+      </div>
+    </header>
+
+    <section class="pillar-grid" aria-label="Topic details">
+      @for (section of content().sections; track section.title) {
+        <article class="pillar-section">
+          <h2>{{ section.title }}</h2>
+          <p>{{ section.body }}</p>
+          @if (section.links?.length) {
+            <ul>
+              @for (link of section.links; track link.url) {
+                <li>
+                  <a [routerLink]="link.url | localizeRoute">{{ link.label }}</a>
+                </li>
+              }
+            </ul>
+          }
+        </article>
+      }
+    </section>
+  </div>
+</main>

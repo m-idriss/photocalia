@@ -35,6 +35,70 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.photocalia.com/photo-to-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/photo-to-calendar" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/photo-to-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/photo-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/photo-to-calendar" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/image-to-google-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/image-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/image-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/image-to-google-calendar" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/image-to-google-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/image-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/image-to-google-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/image-to-google-calendar" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/pdf-to-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/pdf-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/pdf-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/pdf-to-calendar" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/pdf-to-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/pdf-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/pdf-to-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/pdf-to-calendar" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/ocr-calendar-extraction</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/ocr-calendar-extraction" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/ocr-calendar-extraction</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/ocr-calendar-extraction" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/ocr-calendar-extraction" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.photocalia.com/about</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/about" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/about" />
