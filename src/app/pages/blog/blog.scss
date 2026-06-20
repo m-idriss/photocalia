@@ -39,8 +39,55 @@
 }
 
 .articles-section {
-  padding: 2.5rem 2rem 4rem;
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 2.5rem 2rem clamp(8rem, 14vw, 14rem);
   background: var(--ct-bg);
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -2.5rem;
+    z-index: 0;
+    width: 100%;
+    height: clamp(480px, 52vw, 820px);
+    background: url('/assets/images/blog/lemur-crowd-background.webp') bottom right /
+      max(1400px, 126vw) auto no-repeat;
+    opacity: 0.88;
+    transform: translateX(-50%);
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.18) 8%,
+      rgba(0, 0, 0, 0.78) 24%,
+      #000000 38%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.18) 8%,
+      rgba(0, 0, 0, 0.78) 24%,
+      #000000 38%
+    );
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(248, 250, 252, 0.98) 0%,
+      rgba(248, 250, 252, 0.88) 48%,
+      rgba(248, 250, 252, 0.28) 100%
+    );
+    pointer-events: none;
+  }
 }
 
 .articles-toolbar {
@@ -99,6 +146,8 @@
 }
 
 .articles-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1rem;
@@ -341,7 +390,23 @@
   }
 
   .articles-section {
-    padding: 2rem 1rem 3rem;
+    padding: 2rem 1rem 14rem;
+
+    &::before {
+      bottom: 0;
+      height: 720px;
+      background-size: max(820px, 195vw) auto;
+      opacity: 0.92;
+    }
+
+    &::after {
+      background: linear-gradient(
+        180deg,
+        rgba(248, 250, 252, 0.99) 0%,
+        rgba(248, 250, 252, 0.78) 48%,
+        rgba(248, 250, 252, 0.18) 100%
+      );
+    }
   }
 
   .cta-section {
