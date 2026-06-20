@@ -7,13 +7,13 @@
   <div class="about-container">
     <!-- Mission -->
     <section
-      class="about-section"
+      class="about-section mission-section"
       appScrollReveal
       appScrollRevealDirection="left"
       aria-labelledby="mission-title"
     >
       <h2 id="mission-title" class="section-title">{{ 'about.mission.title' | translate }}</h2>
-      <div class="section-content">
+      <div class="section-content mission-copy">
         <p>{{ 'about.mission.p1' | translate }}</p>
         <p>
           {{ 'about.mission.p2.beforeAi' | translate }}
@@ -31,6 +31,16 @@
           >
           {{ 'about.mission.p2.afterApple' | translate }}
         </p>
+      </div>
+      <div class="mission-visual" aria-hidden="true">
+        <img
+          src="assets/images/about-mascot-planning.png"
+          alt=""
+          class="mission-mascot"
+          loading="eager"
+          width="1086"
+          height="953"
+        />
       </div>
     </section>
 
