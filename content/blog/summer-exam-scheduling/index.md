@@ -48,3 +48,5 @@ Upload your exam timetable photo or PDF to PhotoCalia and let AI extract the eve
 ## Turn Your Exam Timetable Into a Reliable Plan
 
 Instead of juggling screenshots and paper notes, convert your full exam schedule into calendar events you can trust. PhotoCalia includes {freeLimit} free conversions each month, so you can plan summer exams, retakes, and entrance tests without the chaos.
+
+Related guides: students can also use [paper schedule digitization](/blog/digitize-paper-schedules), [photo to Google Calendar conversion](/blog/photo-to-google-calendar), and the [PhotoCalia workflow overview](/how-it-works).

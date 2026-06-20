@@ -39,3 +39,5 @@ Prenez en photo votre calendrier de ligue, votre plan d'entraînement ou votre t
 ## Un seul import, un seul calendrier central
 
 Arrêtez de recopier les matchs à la main et commencez à les convertir instantanément. PhotoCalia inclut {freeLimit} conversions gratuites par mois—de quoi numériser votre calendrier de ligue, votre plan d'entraînement et votre tableau de tournoi avant même le coup d'envoi de la saison.
+
+Guides associés : voyez un autre exemple de planning dense avec les [programmations de festival](/blog/music-festival-lineup), organisez la logistique familiale avec les [calendriers de réunion](/blog/family-reunion-planning), ou découvrez [comment fonctionne PhotoCalia](/how-it-works).

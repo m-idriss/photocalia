@@ -76,3 +76,5 @@ For relatives who do not use digital calendars, print a simplified version after
 ## One Calendar, More Time Together
 
 The best reunion plan is not the most complicated one. It is the plan that lets guests stop searching through messages and enjoy being together. PhotoCalia includes {freeLimit} free conversions per month, making it easy to turn reunion flyers, itineraries, and activity sheets into a calendar the whole family can follow.
+
+Related guides: use the same approach for [music festival lineups](/blog/music-festival-lineup), [sports league schedules](/blog/sports-league-training), or the general [photo to Google Calendar workflow](/blog/photo-to-google-calendar).

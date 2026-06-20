@@ -39,3 +39,5 @@ Des outils comme PhotoCalia combinent l'OCR avec la compréhension par IA. Tél�
 ## Faites des plannings papier une chose du passé
 
 Le meilleur moment pour numériser un planning papier est l'instant où vous le recevez. Avec des outils IA comme PhotoCalia, vous pouvez prendre une photo et avoir des événements de calendrier prêts en quelques secondes.
+
+Guides associés : commencez par la [conversion d'une photo vers Google Agenda](/blog/photo-to-google-calendar), découvrez [comment l'OCR IA comprend les détails d'événement](/blog/ai-ocr-calendar-extraction), ou consultez les conseils santé pour [fiches de rendez-vous et rappels médicaux](/blog/healthcare-appointments).

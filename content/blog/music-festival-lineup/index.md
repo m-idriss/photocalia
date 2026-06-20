@@ -78,3 +78,5 @@ For a group, share your selected calendar without assuming everyone will follow 
 ## Spend Less Time Reading the Poster
 
 A useful festival plan should guide you without controlling every minute. Convert the crowded lineup once, resolve the important clashes, and keep the rest flexible. PhotoCalia includes {freeLimit} free conversions per month, enough to turn each festival day into a clear calendar before the first performance begins.
+
+Related guides: compare this with [sports league scheduling](/blog/sports-league-training), plan shared weekends with [family reunion calendars](/blog/family-reunion-planning), or review the full [PhotoCalia workflow](/how-it-works).

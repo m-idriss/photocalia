@@ -39,3 +39,5 @@ Les images réelles sont désordonnées. Les flyers utilisent des polices décor
 ## Essayez l'extraction de calendrier par IA
 
 PhotoCalia utilise GPT-4 Vision pour offrir une extraction de calendrier de pointe. Téléchargez n'importe quel flyer, fiche de rendez-vous ou planning et voyez l'IA en action — c'est gratuit avec {freeLimit} conversions par mois.
+
+Guides associés : suivez le tutoriel pour [convertir une photo en Google Agenda](/blog/photo-to-google-calendar), voyez des exemples de [numérisation de plannings papier](/blog/digitize-paper-schedules), ou consultez le flux produit sur [comment fonctionne PhotoCalia](/how-it-works).

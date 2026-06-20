@@ -80,3 +80,5 @@ Do a quick monthly review for vaccines, renewals, and recurring appointments. Th
 ## A Calmer Way to Coordinate Care
 
 Healthcare logistics are easier when dates stop living in pockets, paper folders, and screenshots. A clear family medical calendar helps you prepare, arrive on time, and remember the next step. PhotoCalia includes {freeLimit} free conversions per month, so you can turn appointment cards, vaccine schedules, and medical reminders into calendar events before they disappear into another pile.
+
+Related guides: read the broader guide to [digitizing paper schedules](/blog/digitize-paper-schedules), review supported formats on [how PhotoCalia works](/how-it-works), or compare [PhotoCalia pricing](/pricing) for frequent family planning.

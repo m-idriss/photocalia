@@ -48,3 +48,5 @@ Take a photo of your league fixture list, training plan, or tournament bracket a
 ## One Upload, One Master Calendar
 
 Stop copying fixtures by hand and start converting them instantly. PhotoCalia includes {freeLimit} free conversions per month—enough to digitize your league schedule, training plan, and tournament bracket before the season even starts.
+
+Related guides: see another dense schedule example with [music festival lineups](/blog/music-festival-lineup), organize family logistics with [reunion calendars](/blog/family-reunion-planning), or learn [how PhotoCalia works](/how-it-works).

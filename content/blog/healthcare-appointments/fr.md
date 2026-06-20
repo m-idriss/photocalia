@@ -71,3 +71,5 @@ Faites une revue rapide chaque mois pour les vaccins, renouvellements et rendez-
 ## Une organisation plus sereine des soins
 
 La logistique médicale devient plus simple lorsque les dates ne restent pas dans les poches, les dossiers papier et les captures d'écran. Un calendrier médical familial clair aide à préparer les rendez-vous, arriver à l'heure et ne pas oublier la suite. PhotoCalia inclut {freeLimit} conversions gratuites par mois pour transformer les cartes de rendez-vous, calendriers vaccinaux et rappels médicaux en événements avant qu'ils ne disparaissent dans une nouvelle pile.
+
+Guides associés : lisez le guide général sur la [numérisation des plannings papier](/blog/digitize-paper-schedules), vérifiez les formats acceptés sur [comment fonctionne PhotoCalia](/how-it-works), ou comparez les [formules PhotoCalia](/pricing) pour une organisation familiale régulière.

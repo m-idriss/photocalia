@@ -69,3 +69,5 @@ Pour un groupe, partagez votre sélection sans supposer que tout le monde suivra
 ## Passez moins de temps à lire l'affiche
 
 Un bon programme doit vous guider sans contrôler chaque minute. Convertissez une fois la grille chargée, résolvez les conflits importants et gardez le reste flexible. PhotoCalia inclut {freeLimit} conversions gratuites par mois, de quoi transformer chaque journée de festival en calendrier clair avant le premier concert.
+
+Guides associés : comparez avec les [plannings de ligue sportive](/blog/sports-league-training), organisez les week-ends partagés avec les [calendriers de réunion de famille](/blog/family-reunion-planning), ou revoyez le [flux PhotoCalia complet](/how-it-works).

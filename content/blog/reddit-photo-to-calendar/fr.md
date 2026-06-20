@@ -55,3 +55,5 @@ Si vous êtes actif sur les communautés productivité et tech, vous reconnaîtr
 ## Arrêtez de taper. Commencez à uploader.
 
 PhotoCalia vous offre {freeLimit} conversions gratuites par mois — sans carte bancaire. Essayez-le sur votre prochain flyer, carte de rendez-vous ou emploi du temps et partagez-le avec les communautés qui en ont besoin.
+
+Guides associés : suivez le tutoriel pratique [photo vers Google Agenda](/blog/photo-to-google-calendar), lisez le guide technique sur [l'extraction OCR IA de calendrier](/blog/ai-ocr-calendar-extraction), ou parcourez tous les [guides PhotoCalia](/blog).
