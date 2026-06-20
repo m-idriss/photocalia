@@ -7,6 +7,27 @@ import { BLOG_ARTICLES, BlogArticle } from '../blog.models';
 import { PlanService } from '../../../services/plan.service';
 import { LanguageService } from '../../../services/language.service';
 
+export function selectRelatedArticles(
+  currentArticle: BlogArticle,
+  articles: readonly BlogArticle[],
+  limit = 3,
+): BlogArticle[] {
+  const currentTags = new Set(currentArticle.tags);
+
+  return [...articles]
+    .filter((article) => article.slug !== currentArticle.slug)
+    .map((article) => ({
+      article,
+      sharedTags: article.tags.filter((tag) => currentTags.has(tag)).length,
+    }))
+    .sort((a, b) => {
+      if (b.sharedTags !== a.sharedTags) return b.sharedTags - a.sharedTags;
+      return b.article.datePublished.localeCompare(a.article.datePublished);
+    })
+    .slice(0, limit)
+    .map(({ article }) => article);
+}
+
 @Component({
   selector: 'app-article',
   standalone: true,
@@ -40,11 +61,7 @@ export class Article implements OnInit {
       const found = slug ? (BLOG_ARTICLES.find((article) => article.slug === slug) ?? null) : null;
       this.article.set(found);
 
-      const related = [...BLOG_ARTICLES]
-        .filter((article) => article.slug !== slug)
-        .sort((a, b) => b.datePublished.localeCompare(a.datePublished))
-        .slice(0, 2);
-      this.previousArticles.set(related);
+      this.previousArticles.set(found ? selectRelatedArticles(found, BLOG_ARTICLES) : []);
     });
   }
 
