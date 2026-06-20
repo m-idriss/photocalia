@@ -1,0 +1,16 @@
+<section class="recommended-guides" aria-labelledby="recommended-guides-title">
+  <div class="recommended-guides-header">
+    <p class="recommended-guides-kicker">{{ 'recommendedGuides.kicker' | translate }}</p>
+    <h2 id="recommended-guides-title">{{ 'recommendedGuides.title' | translate }}</h2>
+  </div>
+
+  <div class="recommended-guides-grid">
+    @for (guide of guides; track guide.url) {
+      <a class="recommended-guide-card" [routerLink]="guide.url | localizeRoute">
+        <span class="recommended-guide-title">{{ guide.titleKey | translate }}</span>
+        <span class="recommended-guide-description">{{ guide.descriptionKey | translate }}</span>
+        <span class="recommended-guide-more">{{ 'recommendedGuides.readMore' | translate }}</span>
+      </a>
+    }
+  </div>
+</section>

@@ -29,6 +29,7 @@ import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { ScrollRevealDirective } from '../../shared/directives';
 import { RouterLink } from '@angular/router';
 import { BLOG_ARTICLES, BlogArticle } from '../blog/blog.models';
+import { RecommendedGuides } from '../../components/recommended-guides/recommended-guides';
 
 @Component({
   selector: 'app-home',
@@ -44,6 +45,7 @@ import { BLOG_ARTICLES, BlogArticle } from '../blog/blog.models';
     LocalizeRoutePipe,
     RouterLink,
     ScrollRevealDirective,
+    RecommendedGuides,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',

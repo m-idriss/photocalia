@@ -8,10 +8,11 @@ import { SubscriptionService } from '../../services/subscription.service';
 import { AuthService } from '../../services/auth.service';
 import { SUBSCRIPTION_PLANS } from '../../constants';
 import { BillingCycle, SubscriptionPlan } from '../../models';
+import { RecommendedGuides } from '../../components/recommended-guides/recommended-guides';
 
 @Component({
   selector: 'app-pricing',
-  imports: [CommonModule, RouterLink, TranslatePipe, LocalizeRoutePipe],
+  imports: [CommonModule, RouterLink, TranslatePipe, LocalizeRoutePipe, RecommendedGuides],
   templateUrl: './pricing.html',
   styleUrl: './pricing.scss',
 })

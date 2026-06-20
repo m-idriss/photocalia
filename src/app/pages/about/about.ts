@@ -4,10 +4,18 @@ import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { ScrollRevealDirective } from '../../shared/directives';
 import { Coffee } from '../../components/coffee/coffee';
+import { RecommendedGuides } from '../../components/recommended-guides/recommended-guides';
 
 @Component({
   selector: 'app-about',
-  imports: [RouterLink, LocalizeRoutePipe, TranslatePipe, ScrollRevealDirective, Coffee],
+  imports: [
+    RouterLink,
+    LocalizeRoutePipe,
+    TranslatePipe,
+    ScrollRevealDirective,
+    Coffee,
+    RecommendedGuides,
+  ],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })
