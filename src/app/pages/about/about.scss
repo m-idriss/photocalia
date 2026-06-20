@@ -130,6 +130,38 @@
   }
 }
 
+.mission-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 440px;
+}
+
+.mission-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.mission-visual {
+  position: absolute;
+  right: -28px;
+  bottom: -28px;
+  z-index: 0;
+  width: min(30vw, 390px);
+  pointer-events: none;
+}
+
+.mission-mascot {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 24px 36px rgba(79, 70, 229, 0.16));
+}
+
+.mission-section .section-title {
+  position: relative;
+  z-index: 1;
+}
+
 /* ========================
    Highlights Grid (At a Glance)
    ======================== */
@@ -533,6 +565,25 @@
     &:first-of-type {
       padding-top: 2rem;
     }
+  }
+
+  .mission-section {
+    min-height: 0;
+    padding-bottom: 0;
+  }
+
+  .mission-copy {
+    max-width: 100%;
+    margin: 0 auto;
+    padding-right: 0;
+  }
+
+  .mission-visual {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(112vw, 420px);
+    margin: 1.5rem -3.25rem 0 auto;
   }
 
   .highlights-grid {
