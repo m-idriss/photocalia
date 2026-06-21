@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, OnInit, PLATFORM_ID, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { LocalizeDatePipe } from '../../shared/pipes/localize-date.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
@@ -21,6 +21,7 @@ const BLOG_VIEW_MODE_KEY = 'photocalia_blog_view_mode';
 })
 export class Blog implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly router = inject(Router);
   protected readonly languageService = inject(LanguageService);
 
   readonly articles = [...BLOG_ARTICLES].sort((a, b) =>
@@ -80,7 +81,9 @@ export class Blog implements OnInit {
   protected searchByTag(event: Event, tag: string): void {
     event.preventDefault();
     event.stopPropagation();
-    this.searchQuery.set(tag);
+    this.router.navigate([this.languageService.localizeRoute('/search')], {
+      queryParams: { q: tag },
+    });
   }
 
   protected localized(article: BlogArticle) {

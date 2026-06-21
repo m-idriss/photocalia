@@ -185,6 +185,28 @@
             </a>
 
             <a
+              [routerLink]="'/search' | localizeRoute"
+              class="dropdown-item"
+              role="menuitem"
+              (click)="closeMenu()"
+              [appTooltip]="'header.tooltip.search' | translate"
+              appTooltipPlacement="left"
+            >
+              <svg
+                aria-hidden="true"
+                width="16"
+                height="16"
+                viewBox="0 0 512 512"
+                fill="currentColor"
+              >
+                <path
+                  d="M505 442.7L405.3 343c28.4-34.9 45.4-79.4 45.4-127.9C450.7 103.5 360.1 13 248.5 13S46.3 103.5 46.3 215.1s90.5 202.2 202.2 202.2c48.5 0 93-17 127.9-45.4l99.7 99.7c8 8 20.9 8 28.9 0 8-8 8-20.9 0-28.9zM248.5 376.4c-89.1 0-161.3-72.2-161.3-161.3S159.4 53.8 248.5 53.8s161.3 72.2 161.3 161.3-72.2 161.3-161.3 161.3z"
+                />
+              </svg>
+              <span>{{ 'header.search' | translate }}</span>
+            </a>
+
+            <a
               [routerLink]="'/pricing' | localizeRoute"
               class="dropdown-item"
               role="menuitem"

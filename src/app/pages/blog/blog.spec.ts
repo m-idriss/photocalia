@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { Router, provideRouter } from '@angular/router';
 
 import { Blog } from './blog';
 
@@ -103,17 +103,19 @@ describe('Blog', () => {
     expect(fixture.nativeElement.querySelectorAll('.article-card').length).toBe(0);
   });
 
-  it('should search by tag when a tag chip is clicked', () => {
+  it('should navigate to global search when a tag chip is clicked', () => {
     const fixture = TestBed.createComponent(Blog);
-    const component = fixture.componentInstance as unknown as {
-      searchQuery: () => string;
-    };
+    const router = TestBed.inject(Router);
+    spyOn(router, 'navigate');
     fixture.detectChanges();
 
     const tagButton = fixture.nativeElement.querySelector('.tag') as HTMLButtonElement;
+    const tag = tagButton.textContent?.trim();
     tagButton.click();
     fixture.detectChanges();
 
-    expect(component.searchQuery()).toBe(tagButton.textContent?.trim());
+    expect(router.navigate).toHaveBeenCalledWith(['/search'], {
+      queryParams: { q: tag },
+    });
   });
 });

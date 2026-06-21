@@ -1,21 +1,26 @@
-<main class="blog-page" aria-label="Blog" id="main-content" role="main">
-  <div class="blog-container">
+<main
+  class="search-page"
+  [attr.aria-label]="'search.results.label' | translate"
+  id="main-content"
+  role="main"
+>
+  <div class="search-container">
     <div class="articles-toolbar">
       <label class="search-field">
-        <span class="sr-only">{{ 'blog.search.label' | translate }}</span>
+        <span class="sr-only">{{ 'search.input.label' | translate }}</span>
         <input
           type="search"
           class="search-input"
           [value]="searchQuery()"
-          [attr.placeholder]="'blog.search.placeholder' | translate"
-          [attr.aria-label]="'blog.search.label' | translate"
+          [attr.placeholder]="'search.input.placeholder' | translate"
+          [attr.aria-label]="'search.input.label' | translate"
           (input)="updateSearchQuery($event)"
         />
         @if (searchQuery()) {
           <button
             type="button"
             class="search-clear"
-            [attr.aria-label]="'blog.search.clear' | translate"
+            [attr.aria-label]="'search.input.clear' | translate"
             (click)="clearSearch()"
           >
             &times;
@@ -49,43 +54,37 @@
       class="articles-section"
       appScrollReveal
       appScrollRevealDirection="left"
-      aria-label="Blog articles"
+      [attr.aria-label]="'search.results.label' | translate"
     >
       <div class="results-count" aria-live="polite">
-        {{ 'blog.results.count' | translate: { count: filteredArticles().length } }}
+        {{ 'search.results.count' | translate: { count: results().length } }}
       </div>
 
       <div class="articles-grid" [class.articles-grid--list]="viewMode() === 'list'">
-        @for (article of filteredArticles(); track article.slug) {
+        @for (result of results(); track result.id) {
           <article class="article-card">
             <a
-              [routerLink]="'/blog/' + article.slug | localizeRoute"
+              [routerLink]="result.route | localizeRoute"
               class="article-link"
-              [attr.aria-label]="localized(article).title"
+              [attr.aria-label]="localized(result).title"
             >
               <figure class="article-image">
                 <img
-                  [src]="article.image"
-                  [alt]="localized(article).imageAlt"
+                  [src]="result.image"
+                  [alt]="localized(result).title"
                   width="1200"
                   height="675"
                   loading="lazy"
                 />
               </figure>
               <div class="article-meta">
-                <time [attr.datetime]="article.datePublished" class="article-date">
-                  {{ article.datePublished | localizeDate }}
-                </time>
-                <span class="article-reading-time" aria-hidden="true">{{
-                  article.readingTime
-                }}</span>
+                <span class="article-type">{{ resultTypeLabel(result.type) | translate }}</span>
+                <span class="article-route">{{ displayRoute(result) }}</span>
               </div>
-              <h2 class="article-title">{{ localized(article).title }}</h2>
-              <p class="article-description">
-                {{ localized(article).description }}
-              </p>
+              <h2 class="article-title">{{ localized(result).title }}</h2>
+              <p class="article-description">{{ localized(result).description }}</p>
               <div class="article-tags">
-                @for (tag of article.tags; track tag) {
+                @for (tag of result.tags.slice(0, 4); track tag) {
                   <button
                     type="button"
                     class="tag"
@@ -100,29 +99,17 @@
             </a>
           </article>
         } @empty {
-          <div class="empty-state">
-            <h2 class="empty-title">{{ 'blog.search.empty.title' | translate }}</h2>
-            <p class="empty-description">{{ 'blog.search.empty.description' | translate }}</p>
-            <button type="button" class="empty-action" (click)="clearSearch()">
-              {{ 'blog.search.empty.action' | translate }}
-            </button>
-          </div>
+          @if (hasQuery()) {
+            <div class="empty-state">
+              <h2 class="empty-title">{{ 'search.empty.title' | translate }}</h2>
+              <p class="empty-description">{{ 'search.empty.description' | translate }}</p>
+              <button type="button" class="empty-action" (click)="clearSearch()">
+                {{ 'search.empty.action' | translate }}
+              </button>
+            </div>
+          }
         }
       </div>
-    </section>
-
-    <section
-      class="cta-section"
-      appScrollReveal
-      appScrollRevealDirection="right"
-      [appScrollRevealDelay]="100"
-      aria-labelledby="blog-cta-title"
-    >
-      <h2 id="blog-cta-title" class="cta-title">{{ 'blog.cta.title' | translate }}</h2>
-      <p class="cta-description">{{ 'blog.cta.description' | translate }}</p>
-      <a [routerLink]="'/' | localizeRoute" class="cta-button">
-        {{ 'blog.cta.button' | translate }}
-      </a>
     </section>
   </div>
 </main>
