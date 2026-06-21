@@ -17,6 +17,7 @@ const PAGE_LABEL_KEYS: Record<string, string> = {
   terms: 'breadcrumb.terms',
   'legal-mentions': 'breadcrumb.legalMentions',
   blog: 'breadcrumb.blog',
+  search: 'breadcrumb.search',
   pricing: 'breadcrumb.pricing',
   about: 'breadcrumb.about',
 };

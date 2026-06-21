@@ -8,6 +8,7 @@ const PRIVACY_TITLE = pageTitle('Privacy Policy: How We Protect Your Data');
 const TERMS_TITLE = pageTitle('Terms of Use: Service Terms & Conditions');
 const LEGAL_MENTIONS_TITLE = pageTitle('Legal Mentions: Company & Legal Information');
 const BLOG_TITLE = pageTitle('Blog: Guides & Tips for Photo to Calendar Conversion');
+const SEARCH_TITLE = pageTitle('Search PhotoCalia');
 const PRICING_TITLE = pageTitle('Pricing: Free, Pro & Business Plans');
 const SUBSCRIPTION_SUCCESS_TITLE = pageTitle('Subscription Activated');
 const DONATION_SUCCESS_TITLE = pageTitle('Thank You for Your Donation');
@@ -360,6 +361,24 @@ const pageRoutes: Route[] = [
     title: blogTitleResolver,
     resolve: {
       seo: blogSeoResolver,
+    },
+  },
+  {
+    path: 'search',
+    loadComponent: () => import('./pages/search/search').then((m) => m.Search),
+    title: SEARCH_TITLE,
+    data: {
+      seo: {
+        title: SEARCH_TITLE,
+        description:
+          'Search PhotoCalia pages and guides about photo to calendar conversion, OCR, PDFs, Google Calendar, pricing, and planning workflows.',
+        keywords:
+          'photocalia search, search photo to calendar guides, search OCR calendar articles, calendar converter help',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/search',
+        type: 'website',
+        structuredData: [],
+      },
     },
   },
   {
