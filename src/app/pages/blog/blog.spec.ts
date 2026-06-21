@@ -61,4 +61,59 @@ describe('Blog', () => {
     );
     expect(festivalArticle?.locales.fr.title).toContain('Festival');
   });
+
+  it('should filter articles by localized title without accents', () => {
+    const fixture = TestBed.createComponent(Blog);
+    const component = fixture.componentInstance as unknown as {
+      searchQuery: { set: (value: string) => void };
+      filteredArticles: () => { slug: string }[];
+    };
+
+    component.searchQuery.set('reunion');
+
+    expect(component.filteredArticles().map((article) => article.slug)).toContain(
+      'family-reunion-planning',
+    );
+  });
+
+  it('should filter articles by tags and keywords', () => {
+    const fixture = TestBed.createComponent(Blog);
+    const component = fixture.componentInstance as unknown as {
+      searchQuery: { set: (value: string) => void };
+      filteredArticles: () => { slug: string }[];
+    };
+
+    component.searchQuery.set('google-calendar');
+
+    expect(component.filteredArticles().map((article) => article.slug)).toContain(
+      'photo-to-google-calendar',
+    );
+  });
+
+  it('should render the empty search state', () => {
+    const fixture = TestBed.createComponent(Blog);
+    const component = fixture.componentInstance as unknown as {
+      searchQuery: { set: (value: string) => void };
+    };
+
+    component.searchQuery.set('no matching guide');
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelector('.empty-state')).toBeTruthy();
+    expect(fixture.nativeElement.querySelectorAll('.article-card').length).toBe(0);
+  });
+
+  it('should search by tag when a tag chip is clicked', () => {
+    const fixture = TestBed.createComponent(Blog);
+    const component = fixture.componentInstance as unknown as {
+      searchQuery: () => string;
+    };
+    fixture.detectChanges();
+
+    const tagButton = fixture.nativeElement.querySelector('.tag') as HTMLButtonElement;
+    tagButton.click();
+    fixture.detectChanges();
+
+    expect(component.searchQuery()).toBe(tagButton.textContent?.trim());
+  });
 });
