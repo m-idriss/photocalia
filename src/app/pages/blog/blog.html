@@ -1,6 +1,28 @@
 <main class="blog-page" aria-label="Blog" id="main-content" role="main">
   <div class="blog-container">
     <div class="articles-toolbar">
+      <label class="search-field">
+        <span class="sr-only">{{ 'blog.search.label' | translate }}</span>
+        <input
+          type="search"
+          class="search-input"
+          [value]="searchQuery()"
+          [attr.placeholder]="'blog.search.placeholder' | translate"
+          [attr.aria-label]="'blog.search.label' | translate"
+          (input)="updateSearchQuery($event)"
+        />
+        @if (searchQuery()) {
+          <button
+            type="button"
+            class="search-clear"
+            [attr.aria-label]="'blog.search.clear' | translate"
+            (click)="clearSearch()"
+          >
+            &times;
+          </button>
+        }
+      </label>
+
       <div class="view-toggle" role="group" [attr.aria-label]="'blog.view.label' | translate">
         <button
           type="button"
@@ -30,7 +52,7 @@
       aria-label="Blog articles"
     >
       <div class="articles-grid" [class.articles-grid--list]="viewMode() === 'list'">
-        @for (article of articles; track article.slug) {
+        @for (article of filteredArticles(); track article.slug) {
           <article class="article-card">
             <a
               [routerLink]="'/blog/' + article.slug | localizeRoute"
@@ -60,12 +82,27 @@
               </p>
               <div class="article-tags">
                 @for (tag of article.tags; track tag) {
-                  <span class="tag">{{ tag }}</span>
+                  <button
+                    type="button"
+                    class="tag"
+                    [attr.aria-label]="'blog.search.tag' | translate: { tag }"
+                    (click)="searchByTag($event, tag)"
+                  >
+                    {{ tag }}
+                  </button>
                 }
               </div>
               <span class="read-more">{{ 'blog.readMore' | translate }} &rarr;</span>
             </a>
           </article>
+        } @empty {
+          <div class="empty-state">
+            <h2 class="empty-title">{{ 'blog.search.empty.title' | translate }}</h2>
+            <p class="empty-description">{{ 'blog.search.empty.description' | translate }}</p>
+            <button type="button" class="empty-action" (click)="clearSearch()">
+              {{ 'blog.search.empty.action' | translate }}
+            </button>
+          </div>
         }
       </div>
     </section>
