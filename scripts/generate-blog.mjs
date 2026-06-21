@@ -16,6 +16,10 @@ const checkOnly = process.argv.includes('--check');
 const staticPages = [
   { path: '', changefreq: 'weekly', priority: '1.0' },
   { path: '/how-it-works', changefreq: 'monthly', priority: '0.9' },
+  { path: '/photo-to-calendar', changefreq: 'monthly', priority: '0.9' },
+  { path: '/image-to-google-calendar', changefreq: 'monthly', priority: '0.9' },
+  { path: '/pdf-to-calendar', changefreq: 'monthly', priority: '0.9' },
+  { path: '/ocr-calendar-extraction', changefreq: 'monthly', priority: '0.9' },
   { path: '/about', changefreq: 'monthly', priority: '0.7' },
   { path: '/privacy', changefreq: 'yearly', priority: '0.4' },
   { path: '/terms', changefreq: 'yearly', priority: '0.4' },

@@ -1,0 +1,27 @@
+<section
+  class="recommended-guides recommended-guides--{{ variant }}"
+  aria-labelledby="recommended-guides-title"
+>
+  <div class="recommended-guides-inner">
+    <div class="recommended-guides-header">
+      <p class="recommended-guides-kicker">{{ 'recommendedGuides.kicker' | translate }}</p>
+      <h2 id="recommended-guides-title">{{ guideSet.titleKey | translate }}</h2>
+      <p class="recommended-guides-description">{{ guideSet.descriptionKey | translate }}</p>
+    </div>
+
+    <div class="recommended-guides-grid">
+      @for (guide of guides; track guide.url) {
+        <a class="recommended-guide-card" [routerLink]="guide.url | localizeRoute">
+          <span class="recommended-guide-index" aria-hidden="true">0{{ $index + 1 }}</span>
+          <span class="recommended-guide-copy">
+            <span class="recommended-guide-title">{{ guide.titleKey | translate }}</span>
+            <span class="recommended-guide-description">{{
+              guide.descriptionKey | translate
+            }}</span>
+          </span>
+          <span class="recommended-guide-more">{{ 'recommendedGuides.readMore' | translate }}</span>
+        </a>
+      }
+    </div>
+  </div>
+</section>

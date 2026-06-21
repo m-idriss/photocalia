@@ -67,3 +67,5 @@ Pour les proches qui n'utilisent pas d'agenda numérique, imprimez une version s
 ## Un seul calendrier, plus de temps ensemble
 
 Le meilleur programme n'est pas le plus compliqué. C'est celui qui évite aux invités de chercher dans leurs messages et leur permet de profiter du moment. PhotoCalia inclut {freeLimit} conversions gratuites par mois pour transformer les flyers, itinéraires et fiches d'activités en un calendrier que toute la famille peut suivre.
+
+Guides associés : appliquez la même méthode aux [programmations de festival](/blog/music-festival-lineup), aux [plannings sportifs](/blog/sports-league-training), ou au flux général [photo vers Google Agenda](/blog/photo-to-google-calendar).

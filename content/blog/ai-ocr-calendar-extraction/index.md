@@ -48,3 +48,5 @@ As AI models continue to improve, expect even better accuracy with handwritten t
 ## Try AI-Powered Calendar Extraction
 
 PhotoCalia uses GPT-4 Vision to deliver state-of-the-art calendar extraction. Upload any event flyer, appointment card, or schedule and see the AI in action — it's free to try with {freeLimit} conversions per month.
+
+Related guides: follow the practical tutorial to [convert a photo to Google Calendar](/blog/photo-to-google-calendar), see examples for [paper schedule digitization](/blog/digitize-paper-schedules), or review the product flow on [how PhotoCalia works](/how-it-works).

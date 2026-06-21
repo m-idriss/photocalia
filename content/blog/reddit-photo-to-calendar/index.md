@@ -64,3 +64,5 @@ If you're active on productivity and tech communities, you'll recognize the recu
 ## Stop Typing. Start Uploading.
 
 PhotoCalia gives you {freeLimit} free conversions per month — no credit card required. Try it on your next flyer, appointment card, or class schedule and share it with the communities that keep asking for this.
+
+Related guides: follow the practical [photo to Google Calendar tutorial](/blog/photo-to-google-calendar), read the technical guide to [AI OCR calendar extraction](/blog/ai-ocr-calendar-extraction), or browse all [PhotoCalia guides](/blog).

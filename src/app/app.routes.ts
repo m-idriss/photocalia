@@ -12,6 +12,10 @@ const PRICING_TITLE = pageTitle('Pricing: Free, Pro & Business Plans');
 const SUBSCRIPTION_SUCCESS_TITLE = pageTitle('Subscription Activated');
 const DONATION_SUCCESS_TITLE = pageTitle('Thank You for Your Donation');
 const ABOUT_TITLE = pageTitle('About: AI Calendar Converter Built by Idriss');
+const PHOTO_TO_CALENDAR_TITLE = pageTitle('Photo to Calendar Converter');
+const IMAGE_TO_GOOGLE_CALENDAR_TITLE = pageTitle('Image to Google Calendar Converter');
+const PDF_TO_CALENDAR_TITLE = pageTitle('PDF to Calendar Converter');
+const OCR_CALENDAR_EXTRACTION_TITLE = pageTitle('OCR Calendar Extraction with AI');
 
 /**
  * Shared page route definitions used for both English (root) and French (/fr) paths.
@@ -125,6 +129,82 @@ const pageRoutes: Route[] = [
             ],
           },
         ],
+      },
+    },
+  },
+  {
+    path: 'photo-to-calendar',
+    loadComponent: () => import('./pages/pillar/pillar').then((m) => m.Pillar),
+    title: PHOTO_TO_CALENDAR_TITLE,
+    data: {
+      pillarSlug: 'photo-to-calendar',
+      seo: {
+        title: PHOTO_TO_CALENDAR_TITLE,
+        description:
+          'Convert photos of flyers, appointment cards, timetables, and screenshots into calendar events with AI. Review and export ICS files for Google Calendar, Outlook, and Apple Calendar.',
+        keywords:
+          'photo to calendar, photo calendar converter, picture to calendar, convert flyer to calendar, appointment card to calendar',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/photo-to-calendar',
+        type: 'website',
+        structuredData: [],
+      },
+    },
+  },
+  {
+    path: 'image-to-google-calendar',
+    loadComponent: () => import('./pages/pillar/pillar').then((m) => m.Pillar),
+    title: IMAGE_TO_GOOGLE_CALENDAR_TITLE,
+    data: {
+      pillarSlug: 'image-to-google-calendar',
+      seo: {
+        title: IMAGE_TO_GOOGLE_CALENDAR_TITLE,
+        description:
+          'Turn screenshots, scanned notices, and event images into Google Calendar events. PhotoCalia extracts dates, times, locations, and titles for review.',
+        keywords:
+          'image to google calendar, screenshot to google calendar, scanned schedule to calendar, add events from image',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/image-to-google-calendar',
+        type: 'website',
+        structuredData: [],
+      },
+    },
+  },
+  {
+    path: 'pdf-to-calendar',
+    loadComponent: () => import('./pages/pillar/pillar').then((m) => m.Pillar),
+    title: PDF_TO_CALENDAR_TITLE,
+    data: {
+      pillarSlug: 'pdf-to-calendar',
+      seo: {
+        title: PDF_TO_CALENDAR_TITLE,
+        description:
+          'Upload PDFs containing schedules, agendas, exam timetables, or event programs and convert them into editable calendar events.',
+        keywords:
+          'PDF to calendar, PDF schedule to calendar, convert PDF agenda to ICS, exam timetable PDF to calendar',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/pdf-to-calendar',
+        type: 'website',
+        structuredData: [],
+      },
+    },
+  },
+  {
+    path: 'ocr-calendar-extraction',
+    loadComponent: () => import('./pages/pillar/pillar').then((m) => m.Pillar),
+    title: OCR_CALENDAR_EXTRACTION_TITLE,
+    data: {
+      pillarSlug: 'ocr-calendar-extraction',
+      seo: {
+        title: OCR_CALENDAR_EXTRACTION_TITLE,
+        description:
+          'Learn how OCR and AI extract dates, times, locations, and event titles from images, then turn them into structured calendar entries.',
+        keywords:
+          'OCR calendar extraction, AI calendar extraction, extract events from image, OCR to ICS, event extraction AI',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/ocr-calendar-extraction',
+        type: 'website',
+        structuredData: [],
       },
     },
   },

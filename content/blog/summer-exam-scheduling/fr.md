@@ -39,3 +39,5 @@ Importez la photo ou le PDF de votre planning d'examens dans PhotoCalia et laiss
 ## Transformez votre planning d'examens en plan fiable
 
 Au lieu de jongler entre captures d'écran et notes papier, convertissez votre planning d'examens complet en événements de calendrier fiables. PhotoCalia inclut {freeLimit} conversions gratuites par mois pour planifier examens d'été, rattrapages et concours sans stress.
+
+Guides associés : les étudiants peuvent aussi utiliser la [numérisation des plannings papier](/blog/digitize-paper-schedules), la [conversion photo vers Google Agenda](/blog/photo-to-google-calendar), et la [vue d'ensemble du flux PhotoCalia](/how-it-works).
