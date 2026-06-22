@@ -345,12 +345,11 @@ The project includes an automated release workflow.
 
 - ✅ Auto-detects current version from `package.json` or git tags
 - ✅ Calculates and validates new version number
-- ✅ Updates `package.json` with new version
-- ✅ Creates annotated git tag (e.g., `v1.2.3`)
+- ✅ Creates annotated git tag on the selected commit (e.g., `v1.2.3`)
 - ✅ Generates changelog with commit categorization
 - ✅ Creates GitHub release with release notes
 - ✅ Optionally builds and attaches artifacts
-- ✅ Pushes changes to main branch
+- ✅ Pushes the release tag
 
 ### Version Bump Examples
 
