@@ -93,6 +93,11 @@ export class Footer implements OnInit {
 
     const featureLinks: FooterLink[] = [
       {
+        label: 'footer.link.addEventsFromPhoto',
+        url: '/add-event-to-calendar-from-photo',
+        isInternal: true,
+      },
+      {
         label: 'footer.link.aiTextExtraction',
         url: '/ocr-calendar-extraction',
         isInternal: true,

@@ -86,6 +86,9 @@ jobs:
           MAJOR="${VERSION_PARTS[0]:-0}"
           MINOR="${VERSION_PARTS[1]:-0}"
           PATCH="${VERSION_PARTS[2]:-0}"
+          CURRENT_MAJOR="$MAJOR"
+          CURRENT_MINOR="$MINOR"
+          CURRENT_PATCH="$PATCH"
 
           if [ "$VERSION_TYPE" = "custom" ]; then
             if [ -z "$CUSTOM_VERSION" ]; then
@@ -120,9 +123,9 @@ jobs:
           NEW_MINOR="${NEW_VERSION_PARTS[1]:-0}"
           NEW_PATCH="${NEW_VERSION_PARTS[2]:-0}"
 
-          if (( 10#$NEW_MAJOR < 10#$MAJOR )) ||
-             (( 10#$NEW_MAJOR == 10#$MAJOR && 10#$NEW_MINOR < 10#$MINOR )) ||
-             (( 10#$NEW_MAJOR == 10#$MAJOR && 10#$NEW_MINOR == 10#$MINOR && 10#$NEW_PATCH <= 10#$PATCH )); then
+          if (( 10#$NEW_MAJOR < 10#$CURRENT_MAJOR )) ||
+             (( 10#$NEW_MAJOR == 10#$CURRENT_MAJOR && 10#$NEW_MINOR < 10#$CURRENT_MINOR )) ||
+             (( 10#$NEW_MAJOR == 10#$CURRENT_MAJOR && 10#$NEW_MINOR == 10#$CURRENT_MINOR && 10#$NEW_PATCH <= 10#$CURRENT_PATCH )); then
             echo "Error: New version $NEW_VERSION must be greater than current version $CURRENT_VERSION"
             exit 1
           fi

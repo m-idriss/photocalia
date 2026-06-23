@@ -13,6 +13,11 @@ interface BreadcrumbItem {
 
 const PAGE_LABEL_KEYS: Record<string, string> = {
   'how-it-works': 'breadcrumb.howItWorks',
+  'add-event-to-calendar-from-photo': 'breadcrumb.addEventToCalendarFromPhoto',
+  'photo-to-calendar': 'breadcrumb.photoToCalendar',
+  'image-to-google-calendar': 'breadcrumb.imageToGoogleCalendar',
+  'pdf-to-calendar': 'breadcrumb.pdfToCalendar',
+  'ocr-calendar-extraction': 'breadcrumb.ocrCalendarExtraction',
   privacy: 'breadcrumb.privacy',
   terms: 'breadcrumb.terms',
   'legal-mentions': 'breadcrumb.legalMentions',

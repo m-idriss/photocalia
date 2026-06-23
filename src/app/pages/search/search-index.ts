@@ -64,6 +64,29 @@ const STATIC_SEARCH_ENTRIES: SearchEntry[] = [
     },
   },
   {
+    id: 'add-event-to-calendar-from-photo',
+    type: 'page',
+    route: '/add-event-to-calendar-from-photo',
+    image: '/assets/images/converter.png',
+    tags: ['photo', 'image', 'calendar', 'event', 'screenshot', 'flyer'],
+    locales: {
+      en: {
+        title: 'Add Events to Your Calendar from a Photo or Image',
+        description:
+          'Upload a photo, image, screenshot, or flyer and turn visible event details into calendar entries.',
+        content:
+          'Add event to your calendar from image or photo with AI extraction for dates times locations event titles Google Calendar Apple Calendar Outlook and ICS files.',
+      },
+      fr: {
+        title: 'Ajouter des événements à votre agenda depuis une photo ou une image',
+        description:
+          'Importez une photo, une image, une capture ou un flyer et transformez les détails visibles en événements.',
+        content:
+          'Ajoutez un événement à votre calendrier depuis une image ou une photo avec extraction IA des dates heures lieux titres Google Agenda Apple Calendrier Outlook et fichiers ICS.',
+      },
+    },
+  },
+  {
     id: 'photo-to-calendar',
     type: 'page',
     route: '/photo-to-calendar',
