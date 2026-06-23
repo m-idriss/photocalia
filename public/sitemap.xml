@@ -35,6 +35,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.photocalia.com/add-event-to-calendar-from-photo</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/add-event-to-calendar-from-photo" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/add-event-to-calendar-from-photo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/add-event-to-calendar-from-photo" />
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/add-event-to-calendar-from-photo</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/add-event-to-calendar-from-photo" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/add-event-to-calendar-from-photo" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/add-event-to-calendar-from-photo" />
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.photocalia.com/photo-to-calendar</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/photo-to-calendar" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/photo-to-calendar" />

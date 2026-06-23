@@ -13,6 +13,9 @@ const PRICING_TITLE = pageTitle('Pricing: Free, Pro & Business Plans');
 const SUBSCRIPTION_SUCCESS_TITLE = pageTitle('Subscription Activated');
 const DONATION_SUCCESS_TITLE = pageTitle('Thank You for Your Donation');
 const ABOUT_TITLE = pageTitle('About: AI Calendar Converter Built by Idriss');
+const ADD_EVENT_TO_CALENDAR_FROM_PHOTO_TITLE = pageTitle(
+  'Add Events to Your Calendar from a Photo or Image',
+);
 const PHOTO_TO_CALENDAR_TITLE = pageTitle('Photo to Calendar Converter');
 const IMAGE_TO_GOOGLE_CALENDAR_TITLE = pageTitle('Image to Google Calendar Converter');
 const PDF_TO_CALENDAR_TITLE = pageTitle('PDF to Calendar Converter');
@@ -125,6 +128,48 @@ const pageRoutes: Route[] = [
                 acceptedAnswer: {
                   '@type': 'Answer',
                   text: 'An ICS (iCalendar) file is the universal calendar format supported by Google Calendar, Microsoft Outlook, Apple Calendar, Yahoo Calendar, and virtually every calendar application. After downloading your ICS file from PhotoCalia, simply open it or import it into your preferred calendar app to add all events at once.',
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
+  {
+    path: 'add-event-to-calendar-from-photo',
+    loadComponent: () => import('./pages/pillar/pillar').then((m) => m.Pillar),
+    title: ADD_EVENT_TO_CALENDAR_FROM_PHOTO_TITLE,
+    data: {
+      pillarSlug: 'add-event-to-calendar-from-photo',
+      seo: {
+        title: ADD_EVENT_TO_CALENDAR_FROM_PHOTO_TITLE,
+        description:
+          'Add events to your calendar from a photo, image, screenshot, flyer, or scanned document. PhotoCalia extracts dates, times, locations, and event details for Google Calendar, Apple Calendar, Outlook, and ICS.',
+        keywords:
+          'add event to calendar from photo, add events from image to calendar, add calendar event from picture, add event to your calendar from image or photo, screenshot to calendar, flyer to calendar, photo to calendar',
+        ogImage: 'https://www.photocalia.com/assets/images/converter.png',
+        ogUrl: 'https://www.photocalia.com/add-event-to-calendar-from-photo',
+        type: 'website',
+        structuredData: [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              {
+                '@type': 'Question',
+                name: 'Can I add event to your calendar from image or photo?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Yes. With PhotoCalia, you can upload an image or photo containing event information, review the extracted details, and export calendar events for Google Calendar, Apple Calendar, Outlook, or any calendar app that supports ICS files.',
+                },
+              },
+              {
+                '@type': 'Question',
+                name: 'What image types can become calendar events?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'PhotoCalia works with photos, screenshots, flyers, appointment cards, scanned notices, JPG, PNG, HEIC, and PDF files when they contain visible dates, times, places, or event titles.',
                 },
               },
             ],
