@@ -73,7 +73,7 @@
     "@angular/router": "22.0.1",
     "@angular/service-worker": "22.0.1",
     "@angular/ssr": "22.0.1",
-    "@fullcalendar/angular": "^6.1.20",
+    "@fullcalendar/angular": "^6.1.21",
     "@fullcalendar/core": "^6.1.20",
     "@fullcalendar/daygrid": "^6.1.21",
     "@fullcalendar/interaction": "^6.1.20",
