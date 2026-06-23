@@ -35,6 +35,13 @@ describe('Home', () => {
     expect(compiled.querySelector('app-converter')).toBeTruthy();
   });
 
+  it('should render hero article cards for signed-out users', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('.hero-blog-strip')).toBeTruthy();
+    expect(compiled.querySelector('.hero-blog-card')).toBeTruthy();
+  });
+
   it('should render the seasonal campaign video for signed-out users', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const video = compiled.querySelector<HTMLVideoElement>('.campaign-video');
@@ -53,5 +60,16 @@ describe('Home', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.marketing-sections')).toBeFalsy();
+  });
+
+  it('should hide scrolling hero article cards for authenticated users', () => {
+    const authService = TestBed.inject(AuthService);
+    authService.isAuthenticated.set(true);
+
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.hero-blog-strip')).toBeFalsy();
+    expect(compiled.querySelector('.hero-blog-card')).toBeFalsy();
   });
 });
