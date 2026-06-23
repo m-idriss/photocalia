@@ -58,7 +58,7 @@
       class="content-layout"
       [class.has-calendar]="calendarStateService.isVisible() && isDesktop()"
     >
-      @if (calendarStateService.events().length === 0) {
+      @if (calendarStateService.events().length === 0 && !authService.isAuthenticated()) {
         <div class="hero-blog-strip" aria-label="Use cases">
           <div class="hero-blog-track">
             <div class="hero-blog-group">
