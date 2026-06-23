@@ -77,7 +77,7 @@
     "@fullcalendar/core": "^6.1.20",
     "@fullcalendar/daygrid": "^6.1.21",
     "@fullcalendar/interaction": "^6.1.20",
-    "@fullcalendar/timegrid": "^6.1.20",
+    "@fullcalendar/timegrid": "^6.1.21",
     "@ng-bootstrap/ng-bootstrap": "^21.0.0",
     "@popperjs/core": "^2.11.8",
     "@vercel/analytics": "^2.0.1",
