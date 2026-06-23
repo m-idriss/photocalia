@@ -74,25 +74,15 @@ Custom: 0.0.0 → 2.5.0 (your choice)
 - ✅ Validates version format
 - ✅ Ensures version is newer than current
 
-### 4. Update Files
-```bash
-# Updates package.json with new version
-npm version 1.2.3 --no-git-tag-version
-```
-
-### 5. Commit Changes
-```bash
-# Commits version bump
-git commit -m "chore: bump version to 1.2.3"
-```
-
-### 6. Create Tag
+### 4. Create Tag
 ```bash
 # Creates annotated git tag
 git tag -a v1.2.3 -m "Release 1.2.3"
 ```
 
-### 7. Generate Changelog
+The tag is created on the commit selected when the workflow is run. The workflow does not create or push a version-bump commit.
+
+### 5. Generate Changelog
 Automatically categorizes commits since last release:
 - 🚀 **Features**: Commits with `feat:` prefix
 - 🐛 **Bug Fixes**: Commits with `fix:` prefix
@@ -105,15 +95,14 @@ Automatically categorizes commits since last release:
 - ✅ Clean sections - empty categories are hidden
 - ✅ Professional markdown formatting
 
-### 8. Create GitHub Release
+### 6. Create GitHub Release
 - Publishes release with auto-generated notes
 - Links to tag
 - Includes full changelog
 
-### 9. Push Everything
+### 7. Push Tag
 ```bash
-# Pushes version bump and tag
-git push origin HEAD:main
+# Pushes the release tag
 git push origin v1.2.3
 ```
 
@@ -176,21 +165,21 @@ git push origin v1.2.3
 
 ### Example 4: Beta Release (Pre-release)
 
-**Scenario**: You want to test a new feature before official release
+**Scenario**: You want to mark a release as a GitHub pre-release before promoting a later release
 
 **Steps**:
 1. Go to Actions → 🏷️ Create Tag and Release
 2. Click Run workflow
 3. Select:
    - Version type: `custom`
-   - Custom version: `2.0.0-beta.1`
+   - Custom version: `2.0.0`
    - Pre-release: Checked
    - Include build artifacts: Checked
 4. Click Run workflow
 
 **Result**:
-- Version: 1.1.0 → 2.0.0-beta.1
-- Tag: `v2.0.0-beta.1`
+- Version: 1.1.0 → 2.0.0
+- Tag: `v2.0.0`
 - Marked as pre-release
 - Not shown as "Latest" release
 
@@ -329,10 +318,10 @@ Note: Empty sections (like Documentation or Chores in this example) are automati
 ### Pre-release Testing
 
 For major changes:
-1. Create a pre-release version first (e.g., `2.0.0-beta.1`)
+1. Create a custom version and mark it as a pre-release (e.g., `2.0.0`)
 2. Test thoroughly
 3. Get feedback from users
-4. Create the final release (e.g., `2.0.0`)
+4. Create the final release with a later version (e.g., `2.0.1`)
 
 ## 🔗 Related Resources
 

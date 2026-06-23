@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
+      actions: write
       contents: write
       pull-requests: write
 
@@ -196,7 +197,7 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v8
         with:
-          commit-message: Update screenshots [skip ci]
+          commit-message: Update screenshots
           branch: update-screenshots-assets
           base: main
           title: Update screenshots
@@ -204,12 +205,46 @@ jobs:
           add-paths: public/assets/screenshots/
           labels: ''
 
+      - name: Run required Frontend CI
+        if: steps.changes.outputs.should_run == 'true' && steps.compare.outputs.has_changes == 'true' && steps.cpr.outputs.pull-request-number
+        run: |
+          set -euo pipefail
+
+          gh workflow run frontend-ci.yml --ref update-screenshots-assets
+
+          echo "Waiting for Frontend CI workflow_dispatch run on ${{ steps.cpr.outputs.pull-request-head-sha }}..."
+          RUN_ID=""
+          for _ in {1..30}; do
+            RUN_ID=$(gh run list \
+              --workflow frontend-ci.yml \
+              --branch update-screenshots-assets \
+              --event workflow_dispatch \
+              --commit "${{ steps.cpr.outputs.pull-request-head-sha }}" \
+              --limit 1 \
+              --json databaseId \
+              --jq '.[0].databaseId // empty')
+
+            if [ -n "$RUN_ID" ]; then
+              break
+            fi
+
+            sleep 5
+          done
+
+          if [ -z "$RUN_ID" ]; then
+            echo "Could not find the dispatched Frontend CI run for the screenshot PR."
+            exit 1
+          fi
+
+          gh run watch "$RUN_ID" --exit-status
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Auto-merge Pull Request (squash with fixed message)
         if: steps.changes.outputs.should_run == 'true' && steps.compare.outputs.has_changes == 'true' && steps.cpr.outputs.pull-request-number
         run: |
           gh pr merge ${{ steps.cpr.outputs.pull-request-number }} \
             --squash \
-            --admin \
             --delete-branch \
             --body "Update screenshots [skip ci]" \
             --subject "Update screenshots [skip ci]"
