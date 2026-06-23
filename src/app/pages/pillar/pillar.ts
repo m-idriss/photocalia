@@ -25,12 +25,83 @@ interface PillarContent {
 }
 
 type PillarSlug =
+  | 'add-event-to-calendar-from-photo'
   | 'photo-to-calendar'
   | 'image-to-google-calendar'
   | 'pdf-to-calendar'
   | 'ocr-calendar-extraction';
 
 const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent>> = {
+  'add-event-to-calendar-from-photo': {
+    en: {
+      title: 'Add events to your calendar from a photo or image',
+      intro:
+        'Upload a photo, screenshot, flyer, or scanned image and let PhotoCalia turn the dates, times, places, and event details into calendar entries you can review before export.',
+      primaryCta: 'Add events from a photo',
+      secondaryCta: 'Read the photo to calendar guide',
+      secondaryUrl: '/blog/photo-to-google-calendar',
+      sections: [
+        {
+          title: 'Built for the exact search',
+          body: 'If you are looking for how to add event to your calendar from image or photo, PhotoCalia handles the missing step between a visual document and a structured calendar event.',
+          links: [
+            { label: 'Photo to calendar converter', url: '/photo-to-calendar' },
+            { label: 'Image to Google Calendar', url: '/image-to-google-calendar' },
+          ],
+        },
+        {
+          title: 'Works with real-world event images',
+          body: 'Use it for appointment cards, class schedules, event posters, WhatsApp screenshots, conference agendas, sports timetables, and any image that contains calendar-worthy information.',
+          links: [
+            { label: 'Paper schedule examples', url: '/blog/digitize-paper-schedules' },
+            { label: 'Healthcare appointment examples', url: '/blog/healthcare-appointments' },
+          ],
+        },
+        {
+          title: 'Export to the calendar you already use',
+          body: 'After AI extraction, review each event and export an ICS calendar file compatible with Google Calendar, Apple Calendar, Outlook, and most calendar apps.',
+          links: [
+            { label: 'How PhotoCalia works', url: '/how-it-works' },
+            { label: 'PDF to calendar converter', url: '/pdf-to-calendar' },
+          ],
+        },
+      ],
+    },
+    fr: {
+      title: 'Ajouter des événements à votre agenda depuis une photo ou une image',
+      intro:
+        'Importez une photo, une capture, un flyer ou une image scannée, puis laissez PhotoCalia transformer les dates, heures, lieux et détails en événements à vérifier avant export.',
+      primaryCta: 'Ajouter depuis une photo',
+      secondaryCta: 'Lire le guide photo vers calendrier',
+      secondaryUrl: '/blog/photo-to-google-calendar',
+      sections: [
+        {
+          title: 'Conçu pour cette intention',
+          body: "Si vous cherchez comment ajouter un événement à votre calendrier depuis une image ou une photo, PhotoCalia fait le lien entre le document visuel et l'événement structuré.",
+          links: [
+            { label: 'Convertisseur photo vers calendrier', url: '/photo-to-calendar' },
+            { label: 'Image vers Google Agenda', url: '/image-to-google-calendar' },
+          ],
+        },
+        {
+          title: "Compatible avec les images d'événements du quotidien",
+          body: "Utilisez-le pour des fiches de rendez-vous, emplois du temps, affiches, captures WhatsApp, programmes de conférence, plannings sportifs et toute image contenant une information d'agenda.",
+          links: [
+            { label: 'Exemples de plannings papier', url: '/blog/digitize-paper-schedules' },
+            { label: 'Exemples de rendez-vous médicaux', url: '/blog/healthcare-appointments' },
+          ],
+        },
+        {
+          title: "Export vers l'agenda que vous utilisez déjà",
+          body: "Après extraction IA, vérifiez chaque événement puis exportez un fichier ICS compatible avec Google Agenda, Apple Calendrier, Outlook et la plupart des apps d'agenda.",
+          links: [
+            { label: 'Comment fonctionne PhotoCalia', url: '/how-it-works' },
+            { label: 'Convertisseur PDF vers calendrier', url: '/pdf-to-calendar' },
+          ],
+        },
+      ],
+    },
+  },
   'photo-to-calendar': {
     en: {
       title: 'Photo to calendar converter',
