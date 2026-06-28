@@ -4,6 +4,7 @@ import { CookieConsentService } from '../../services/cookie-consent.service';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { environment } from '../../../environments/environment';
+import { version as packageVersion } from '../../../../package.json';
 
 /**
  * Footer link interface for type safety
@@ -31,7 +32,7 @@ export interface SocialLink {
 
 /**
  * Global footer component displaying navigation links, project information, and credits.
- * Uses environment version and a stable release URL to avoid runtime API rate limits.
+ * Uses the package version and a stable release URL to avoid runtime API rate limits.
  * Links are conditionally rendered based on environment configuration.
  */
 @Component({
@@ -45,7 +46,7 @@ export class Footer implements OnInit {
   private readonly cookieConsentService = inject(CookieConsentService);
 
   currentYear = new Date().getFullYear();
-  appVersion = environment.appVersion ?? '0.0.0';
+  appVersion = packageVersion;
   releaseUrl = '';
   githubRepo = 'https://github.com/m-idriss/photocalia';
   authorName = 'Idriss';
@@ -59,8 +60,7 @@ export class Footer implements OnInit {
     this.footerSections = this.buildFooterSections();
     this.socialLinks = this.buildSocialLinks();
 
-    // Always set a fallback release URL
-    this.releaseUrl = `${this.githubRepo}/releases/latest`;
+    this.releaseUrl = `${this.githubRepo}/releases/tag/v${this.appVersion}`;
   }
 
   /**

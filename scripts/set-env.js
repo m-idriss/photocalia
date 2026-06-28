@@ -17,13 +17,9 @@ const snackUrl = process.env.CONTRIBUTION_SNACK_URL || 'https://buy.stripe.com/3
 const mealUrl = process.env.CONTRIBUTION_MEAL_URL || 'https://buy.stripe.com/28E28s1dX79keJs1oE4Vy02';
 
 // Create the environment file content
-const packageJson = require('../package.json');
-const appVersion = packageJson.version || '0.0.0';
-
 const envConfigFile = `export const environment = {
   production: true,
   apiUrl: 'https://api.photocalia.com/v1',
-  appVersion: '${appVersion}',
   contribution: {
     coffeeUrl: '${coffeeUrl}',
     snackUrl: '${snackUrl}',

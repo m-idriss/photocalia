@@ -7,6 +7,7 @@ import { Footer, FooterLink } from './footer';
 import { GithubService } from '../../services/github.service';
 import { CookieConsentService } from '../../services/cookie-consent.service';
 import { environment } from '../../../environments/environment';
+import { version as packageVersion } from '../../../../package.json';
 
 describe('Footer', () => {
   let component: Footer;
@@ -53,6 +54,13 @@ describe('Footer', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should link the displayed package version to its matching release', () => {
+    expect(component.appVersion).toBe(packageVersion);
+    expect(component.releaseUrl).toBe(
+      `https://github.com/m-idriss/photocalia/releases/tag/v${packageVersion}`,
+    );
   });
 
   it('should build footer sections based on environment configuration', () => {
