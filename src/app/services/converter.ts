@@ -431,7 +431,11 @@ export class ConverterService {
       userId: this.userId,
     };
 
-    return this.http.post<ConversionResponse>(`${this.baseUrl}/converter`, request);
+    const idempotencyKey = crypto.randomUUID();
+
+    return this.http.post<ConversionResponse>(`${this.baseUrl}/converter`, request, {
+      headers: { 'Idempotency-Key': idempotencyKey },
+    });
   }
 
   /**

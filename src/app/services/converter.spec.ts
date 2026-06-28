@@ -79,6 +79,40 @@ describe('ConverterService', () => {
     expect(req.request.body.userId).toBeTruthy();
     expect(req.request.body.userId).toContain('anon_');
     expect(req.request.body.files).toEqual(testFiles);
+    expect(req.request.headers.get('Idempotency-Key')).toMatch(
+      /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/,
+    );
+  });
+
+  it('should use a new idempotency key for each conversion', () => {
+    const testFiles: FileData[] = [
+      { dataUrl: 'data:image/png;base64,test', name: 'test.png', type: 'image/png' },
+    ];
+
+    service.convertToIcs(testFiles).subscribe();
+    service.convertToIcs(testFiles).subscribe();
+
+    const requests = httpMock.match(`${environment.apiUrl}/converter`);
+    expect(requests.length).toBe(2);
+    expect(requests[0].request.headers.get('Idempotency-Key')).not.toBe(
+      requests[1].request.headers.get('Idempotency-Key'),
+    );
+  });
+
+  it('should reuse the idempotency key when the same conversion request is retried', () => {
+    const testFiles: FileData[] = [
+      { dataUrl: 'data:image/png;base64,test', name: 'test.png', type: 'image/png' },
+    ];
+    const conversionRequest = service.convertToIcs(testFiles);
+
+    conversionRequest.subscribe();
+    conversionRequest.subscribe();
+
+    const requests = httpMock.match(`${environment.apiUrl}/converter`);
+    expect(requests.length).toBe(2);
+    expect(requests[0].request.headers.get('Idempotency-Key')).toBe(
+      requests[1].request.headers.get('Idempotency-Key'),
+    );
   });
 
   it('maps simple remaining/limit shape to normalized response', fakeAsync(() => {
