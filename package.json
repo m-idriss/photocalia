@@ -97,7 +97,7 @@
     "@angular/compiler-cli": "22.0.1",
     "@angular/localize": "22.0.1",
     "@eslint/js": "10.0.1",
-    "@playwright/test": "^1.61.0",
+    "@playwright/test": "^1.61.1",
     "@types/jasmine": "~6.0.0",
     "@types/node": "^26.0.0",
     "@vercel/node": "^5.8.19",
