@@ -92,14 +92,14 @@
     "zone.js": "~0.16.2"
   },
   "devDependencies": {
-    "@angular/build": "22.0.3",
+    "@angular/build": "22.0.4",
     "@angular/cli": "22.0.1",
     "@angular/compiler-cli": "22.0.1",
     "@angular/localize": "22.0.1",
     "@eslint/js": "10.0.1",
     "@playwright/test": "^1.61.0",
     "@types/jasmine": "~6.0.0",
-    "@types/node": "^26.0.0",
+    "@types/node": "^26.1.1",
     "@vercel/node": "^5.8.22",
     "angular-eslint": "22.0.0",
     "eslint": "10.5.0",
