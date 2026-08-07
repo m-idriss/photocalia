@@ -8,7 +8,7 @@ export class LoggerService {
   private readonly isVercel =
     environment.production &&
     typeof window !== 'undefined' &&
-    window.location.hostname.includes('photocalia');
+    ['photocalia.com', 'www.photocalia.com'].includes(window.location.hostname);
 
   info(message: string, context?: string, data?: unknown): void {
     if (this.isServer) {
@@ -22,7 +22,10 @@ export class LoggerService {
         }),
       );
     } else {
-      this.sendToServer('info', message, context, data);
+      // Successful HTTP requests are already covered by platform analytics.
+      // Avoid a second request for every browser request and keep production
+      // logs focused on actionable warnings and errors.
+      return;
     }
   }
 

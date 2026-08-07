@@ -27,6 +27,12 @@ export class SubscriptionSuccess implements OnInit {
     const sid = this.route.snapshot.queryParamMap.get('session_id');
     this.sessionId.set(sid);
 
+    if (!sid) {
+      this.error.set('subscription.success.invalid');
+      this.isLoading.set(false);
+      return;
+    }
+
     const userId = this.converterService.getUserId();
     this.subscriptionService.getStatus(userId).subscribe({
       next: (res) => {
@@ -34,8 +40,8 @@ export class SubscriptionSuccess implements OnInit {
         this.isLoading.set(false);
       },
       error: () => {
+        this.error.set('subscription.success.unconfirmed');
         this.isLoading.set(false);
-        // Not a blocking error — the payment still succeeded
       },
     });
   }

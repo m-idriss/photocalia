@@ -68,7 +68,7 @@
           }
         </div>
 
-        <p class="plan-quota">{{ plan.quotaKey | translate }}</p>
+        <p class="plan-quota">{{ plan.quotaKey | translate: getQuotaParams(plan) }}</p>
 
         <ul class="plan-features" role="list">
           @for (feature of plan.features; track feature) {

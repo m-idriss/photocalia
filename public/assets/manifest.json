@@ -45,7 +45,7 @@
       "name": "Calendar Converter",
       "short_name": "Convert",
       "description": "Convert images or PDFs to calendar events",
-      "url": "/converter",
+      "url": "/",
       "icons": [
         {
           "src": "icons/android-icon-192x192.png",
@@ -54,18 +54,5 @@
         }
       ]
     }
-  ],
-  "share_target": {
-    "action": "/converter",
-    "method": "POST",
-    "enctype": "multipart/form-data",
-    "params": {
-      "files": [
-        {
-          "name": "image",
-          "accept": ["image/*", "application/pdf"]
-        }
-      ]
-    }
-  }
+  ]
 }

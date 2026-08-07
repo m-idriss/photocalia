@@ -519,7 +519,7 @@ const pageRoutes: Route[] = [
       seo: {
         title: PRICING_TITLE,
         description:
-          'Choose the PhotoCalia plan that fits your needs. Start free with 3 conversions/month, upgrade to Pro for 50/month or Business for 120/month.',
+          'Choose the PhotoCalia plan that fits your needs. Start free with 3 conversions/month, upgrade to Pro for 100/month or Business for 120/month.',
         keywords:
           'photocalia pricing, calendar converter plans, photo to calendar subscription, upgrade plan',
         ogImage: 'https://www.photocalia.com/assets/images/converter.png',
@@ -571,7 +571,7 @@ const pageRoutes: Route[] = [
                 item: {
                   '@type': 'Product',
                   name: 'Pro Plan',
-                  description: '50 conversions per month.',
+                  description: '100 conversions per month.',
                   offers: {
                     '@type': 'Offer',
                     price: '4.99',
@@ -590,7 +590,7 @@ const pageRoutes: Route[] = [
                   description: '120 conversions per month.',
                   offers: {
                     '@type': 'Offer',
-                    price: '9.99',
+                    price: '14.99',
                     priceCurrency: 'EUR',
                     availability: 'https://schema.org/InStock',
                     url: 'https://www.photocalia.com/pricing',
