@@ -8,9 +8,12 @@
 
 ## Architecture & Code
 
-- [System Architecture](./ARCHITECTURE.md) - Complete system design and technical overview
+- [System Architecture](./ARCHITECTURE.md) - Current runtime, boundaries, security controls, and transfer dependencies
+- [Acquisition Readiness](./ACQUISITION_READINESS.md) - Buyer-facing inventory, evidence checklist, and known boundaries
 - [Services](./SERVICES.md) - Service APIs and data management
 - [API Reference](./API.md) - Backend API endpoints
+
+The architecture and acquisition-readiness documents define the current production boundary. Older feature-specific notes may describe earlier Firebase-hosted or portfolio-era implementations and must not be used as transfer evidence without verification.
 
 ## Features
 

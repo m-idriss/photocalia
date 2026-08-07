@@ -4,6 +4,22 @@
       <div class="spinner-lg" aria-hidden="true"></div>
       <p>{{ 'subscription.success.loading' | translate }}</p>
     </div>
+  } @else if (error()) {
+    <div class="success-content" role="alert">
+      <div class="success-icon" aria-hidden="true">⚠️</div>
+      <h1 id="success-title" class="success-title">
+        {{ 'subscription.success.check_title' | translate }}
+      </h1>
+      <p class="success-description">{{ error()! | translate }}</p>
+      <div class="success-actions">
+        <a [routerLink]="'/pricing' | localizeRoute" class="btn btn-primary">
+          {{ 'subscription.success.view_plans' | translate }}
+        </a>
+        <a href="mailto:support@photocalia.com" class="btn btn-outline-secondary">
+          {{ 'subscription.success.contact' | translate }}
+        </a>
+      </div>
+    </div>
   } @else {
     <div class="success-content">
       <div class="success-icon" aria-hidden="true">✅</div>

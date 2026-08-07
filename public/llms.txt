@@ -30,7 +30,7 @@ Photocalia uses GPT-4 Vision OCR to extract event details (dates, times, locatio
 - ICS file generation compatible with all major calendar apps
 - 3 free conversions per month with Google sign-in
 - Progressive Web App (PWA) — installable on mobile and desktop
-- Offline capability after installation
+- Installable application shell; AI conversion requires an internet connection
 - Privacy-focused — files processed securely, not stored permanently
 - Mobile and desktop responsive design
 - Available in English and French
@@ -43,9 +43,9 @@ Photocalia uses GPT-4 Vision OCR to extract event details (dates, times, locatio
 - Turn business card event details into calendar entries
 
 ## Technical Details
-- Version: 4.3.0
+- Version: 4.9.1
 - Published: October 2024
-- Technology: Angular PWA with Firebase hosting
+- Technology: Angular PWA on Vercel with Firebase Authentication
 - AI Model: GPT-4 Vision for OCR and event extraction
 - Output Format: Standard ICS (iCalendar) format
 

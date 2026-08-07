@@ -19,4 +19,17 @@ describe('server routes', () => {
       }
     }
   });
+
+  it('client-renders payment return pages that depend on query parameters', () => {
+    for (const path of [
+      'subscription/success',
+      'donation/success',
+      'fr/subscription/success',
+      'fr/donation/success',
+    ]) {
+      expect(serverRoutes.find((route) => route.path === path)?.renderMode)
+        .withContext(path)
+        .toBe(RenderMode.Client);
+    }
+  });
 });

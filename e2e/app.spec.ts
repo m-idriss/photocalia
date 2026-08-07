@@ -8,7 +8,7 @@ test.describe('PhotoCalia App', () => {
 
   test('should display the header', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('app-header')).toBeVisible();
+    await expect(page.getByRole('banner')).toBeVisible();
   });
 
   test('should display the converter upload area', async ({ page }) => {
@@ -43,17 +43,14 @@ test.describe('PhotoCalia App', () => {
 });
 
 test.describe('Converter', () => {
-  test('should show error for invalid file type via drag and drop simulation', async ({ page }) => {
+  test('should require sign-in before uploading a file', async ({ page }) => {
     await page.goto('/');
-    // The file input should exist
-    const fileInput = page.locator('input[type="file"]');
-    await expect(fileInput).toBeAttached();
+    await expect(page.getByRole('button', { name: /AI Calendar Converter/i })).toBeVisible();
+    await expect(page.locator('input[type="file"]')).toHaveCount(0);
   });
 
-  test('should have a file upload input that accepts correct types', async ({ page }) => {
+  test('should explain the free allowance before sign-in', async ({ page }) => {
     await page.goto('/');
-    const fileInput = page.locator('input[type="file"]');
-    const accept = await fileInput.getAttribute('accept');
-    expect(accept).toContain('image/');
+    await expect(page.locator('.hero-subtitle')).toContainText(/3 free conversions per month/i);
   });
 });
