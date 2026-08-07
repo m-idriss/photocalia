@@ -86,7 +86,7 @@
     "cal-heatmap": "^4.2.4",
     "firebase": "^12.14.0",
     "ical.js": "^2.2.1",
-    "pdfjs-dist": "^6.0.227",
+    "pdfjs-dist": "^6.2.108",
     "rxjs": "~7.8.2",
     "tslib": "^2.8.1",
     "zone.js": "~0.16.2"
