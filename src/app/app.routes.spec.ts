@@ -31,4 +31,19 @@ describe('page route titles', () => {
       }
     }
   });
+
+  it('keeps the internal search page out of the Google index', () => {
+    const searchRoute = routes.find((route) => route.path === 'search');
+
+    expect(searchRoute?.data?.['seo'].robots).toBe('noindex, follow');
+  });
+
+  it('provides localized metadata for the French blog landing page', () => {
+    const blogRoute = routes.find((route) => route.path === 'blog');
+
+    expect(blogRoute?.data?.['seo'].localized.fr.title).toBe(
+      'Guides photo vers calendrier et OCR | PhotoCalia',
+    );
+    expect(blogRoute?.data?.['seo'].localized.fr.description).toContain('Guides pratiques');
+  });
 });

@@ -14,6 +14,10 @@ export interface SeoData {
   author?: string;
   type?: string;
   structuredData?: object[];
+  localized?: {
+    fr?: Pick<SeoData, 'title' | 'description' | 'keywords'> &
+      Partial<Pick<SeoData, 'structuredData'>>;
+  };
 }
 
 export const SITE_URL = 'https://www.photocalia.com';
@@ -59,43 +63,61 @@ export class SeoService {
   }
 
   updateSeoTags(seo: SeoData) {
-    // Set Title
-    this.titleService.setTitle(seo.title);
+    const currentPath = this.normalizePath(this.router.url.split('?')[0].split('#')[0]);
+    const isFrenchPage = currentPath === FR_PREFIX || currentPath.startsWith(`${FR_PREFIX}/`);
+    const localizedSeo = isFrenchPage ? seo.localized?.fr : undefined;
+    const pageSeo = localizedSeo ? { ...seo, ...localizedSeo } : seo;
+    const pageStructuredData = isFrenchPage
+      ? localizedSeo?.structuredData || []
+      : seo.structuredData || [];
 
-    // Set Meta Tags
-    this.metaService.updateTag({ name: 'description', content: seo.description });
-    this.metaService.updateTag({ name: 'robots', content: seo.robots || DEFAULT_ROBOTS });
-
-    if (seo.keywords) {
-      this.metaService.updateTag({ name: 'keywords', content: seo.keywords });
+    if (currentPath !== '/') {
+      this.dom
+        .querySelectorAll('script[data-home-structured-data]')
+        .forEach((schema) => schema.parentNode?.removeChild(schema));
     }
 
-    if (seo.author) {
-      this.metaService.updateTag({ name: 'author', content: seo.author });
+    // Set Title
+    this.titleService.setTitle(pageSeo.title);
+
+    // Set Meta Tags
+    this.metaService.updateTag({ name: 'description', content: pageSeo.description });
+    this.metaService.updateTag({ name: 'robots', content: pageSeo.robots || DEFAULT_ROBOTS });
+
+    if (pageSeo.keywords) {
+      this.metaService.updateTag({ name: 'keywords', content: pageSeo.keywords });
+    }
+
+    if (pageSeo.author) {
+      this.metaService.updateTag({ name: 'author', content: pageSeo.author });
     }
 
     // Determine current path and canonical URL
-    const currentPath = this.normalizePath(this.router.url.split('?')[0].split('#')[0]);
     const pagePath = this.stripLangPrefix(currentPath);
     const canonicalUrl = `${SITE_URL}${currentPath === '/' ? '' : currentPath}`;
 
     // Open Graph Tags
-    this.metaService.updateTag({ property: 'og:title', content: seo.title });
-    this.metaService.updateTag({ property: 'og:description', content: seo.description });
-    this.metaService.updateTag({ property: 'og:type', content: seo.type || 'website' });
+    this.metaService.updateTag({ property: 'og:title', content: pageSeo.title });
+    this.metaService.updateTag({ property: 'og:description', content: pageSeo.description });
+    this.metaService.updateTag({ property: 'og:type', content: pageSeo.type || 'website' });
     this.metaService.updateTag({ property: 'og:url', content: canonicalUrl });
+    this.metaService.updateTag({
+      property: 'og:locale',
+      content: isFrenchPage ? 'fr_FR' : 'en_US',
+    });
+    this.metaService.updateTag({ name: 'language', content: isFrenchPage ? 'French' : 'English' });
 
-    if (seo.ogImage) {
-      this.metaService.updateTag({ property: 'og:image', content: seo.ogImage });
+    if (pageSeo.ogImage) {
+      this.metaService.updateTag({ property: 'og:image', content: pageSeo.ogImage });
     }
 
     // Twitter Card Tags
     this.metaService.updateTag({ name: 'twitter:card', content: 'summary_large_image' });
-    this.metaService.updateTag({ name: 'twitter:title', content: seo.title });
-    this.metaService.updateTag({ name: 'twitter:description', content: seo.description });
+    this.metaService.updateTag({ name: 'twitter:title', content: pageSeo.title });
+    this.metaService.updateTag({ name: 'twitter:description', content: pageSeo.description });
 
-    if (seo.ogImage) {
-      this.metaService.updateTag({ name: 'twitter:image', content: seo.ogImage });
+    if (pageSeo.ogImage) {
+      this.metaService.updateTag({ name: 'twitter:image', content: pageSeo.ogImage });
     }
 
     // Each localized page is self-canonical. hreflang links connect translations.
@@ -105,7 +127,7 @@ export class SeoService {
     this.updateHreflangTags(pagePath);
 
     // Inject per-page structured data (replaces previous page's data)
-    this.updatePageStructuredData(seo.structuredData || []);
+    this.updatePageStructuredData(pageStructuredData);
   }
 
   /**

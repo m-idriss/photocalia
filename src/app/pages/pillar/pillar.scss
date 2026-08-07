@@ -110,3 +110,38 @@
     text-decoration: underline;
   }
 }
+
+.pillar-faq {
+  max-width: 860px;
+  margin-top: 3.5rem;
+
+  > h2 {
+    margin: 0 0 1.25rem;
+    color: var(--text-primary, #0f172a);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+}
+
+.pillar-faq-list {
+  display: grid;
+  gap: 0.75rem;
+
+  details {
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--ct-border, #e2e8f0);
+    border-radius: 8px;
+    background: var(--ct-surface, #ffffff);
+  }
+
+  summary {
+    color: var(--text-primary, #0f172a);
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  p {
+    margin: 0.85rem 0 0;
+    color: var(--text-secondary, #475569);
+    line-height: 1.7;
+  }
+}

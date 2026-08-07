@@ -34,5 +34,19 @@
         </article>
       }
     </section>
+
+    @if (content().faqs?.length) {
+      <section class="pillar-faq" aria-labelledby="pillar-faq-title">
+        <h2 id="pillar-faq-title">{{ faqHeading() }}</h2>
+        <div class="pillar-faq-list">
+          @for (faq of content().faqs; track faq.question) {
+            <details>
+              <summary>{{ faq.question }}</summary>
+              <p>{{ faq.answer }}</p>
+            </details>
+          }
+        </div>
+      </section>
+    }
   </div>
 </main>
