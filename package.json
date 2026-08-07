@@ -69,7 +69,7 @@
     "@angular/fire": "^20.0.1",
     "@angular/forms": "22.0.6",
     "@angular/platform-browser": "22.0.1",
-    "@angular/platform-server": "22.0.1",
+    "@angular/platform-server": "22.1.0",
     "@angular/router": "22.0.1",
     "@angular/service-worker": "22.0.1",
     "@angular/ssr": "22.0.4",
