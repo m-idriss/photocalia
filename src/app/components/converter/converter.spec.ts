@@ -107,21 +107,6 @@ describe('Converter', () => {
       expect(events[0].summary).toBe('Updated Summary');
     });
 
-    it('should format date for input correctly', () => {
-      const date = new Date('2025-01-15T10:30:00');
-      const formatted = component['formatDateForInput'](date);
-      expect(formatted).toBe('2025-01-15T10:30');
-    });
-
-    it('should parse date from input correctly', () => {
-      const dateStr = '2025-01-15T10:30';
-      const parsed = component['parseDateFromInput'](dateStr);
-      expect(parsed).toBeInstanceOf(Date);
-      expect(parsed.getFullYear()).toBe(2025);
-      expect(parsed.getMonth()).toBe(0); // January
-      expect(parsed.getDate()).toBe(15);
-    });
-
     it('should regenerate ICS content after editing', () => {
       component['editEvent'](0);
       component['updateEventField'](0, 'summary', 'Updated Event');
@@ -160,6 +145,7 @@ describe('Converter', () => {
     it('should show nudge after downloadIcs is called with valid state', () => {
       component['icsContent'].set('BEGIN:VCALENDAR\nEND:VCALENDAR');
       component['extractionConfirmed'].set(true);
+      component['setConversionState']('review');
       component['downloadIcs']();
       expect(downloadIcsFileSpy).toHaveBeenCalledOnceWith('BEGIN:VCALENDAR\nEND:VCALENDAR');
       expect(component['showContributionNudge']()).toBe(true);
@@ -192,6 +178,7 @@ describe('Converter', () => {
       sessionStorage.setItem('contribution-nudge-dismissed', '1');
       component['icsContent'].set('BEGIN:VCALENDAR\nEND:VCALENDAR');
       component['extractionConfirmed'].set(true);
+      component['setConversionState']('review');
       component['downloadIcs']();
       expect(downloadIcsFileSpy).toHaveBeenCalled();
       expect(component['showContributionNudge']()).toBe(false);

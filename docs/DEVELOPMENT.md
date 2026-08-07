@@ -34,20 +34,12 @@
 2. **Install dependencies**:
 
    ```bash
-   npm install
+   npm ci
    ```
 
    _Note: Takes ~30 seconds, never cancel the installation_
 
-3. **Install Firebase Functions dependencies** (if using Firebase features):
-
-   ```bash
-   cd functions
-   npm install
-   cd ..
-   ```
-
-4. **Verify installation**:
+3. **Verify installation**:
 
    ```bash
    npm run build
@@ -272,7 +264,7 @@ All components must be standalone (no NgModules):
 export class MyComponent {}
 ```
 
-> **Note**: In Angular 20+, use `styleUrl` (singular) for single stylesheets.
+> **Note**: In Angular 22, use `styleUrl` (singular) for single stylesheets.
 > Only import `CommonModule` if you need legacy directives like `*ngIf` or `*ngFor` (prefer `@if` and `@for` instead).
 
 #### Naming Conventions
@@ -341,7 +333,7 @@ Use proper HTML5 semantic elements:
 </article>
 ```
 
-#### Control Flow (Angular 20+)
+#### Control Flow (Angular 22)
 
 Use new control flow syntax:
 

@@ -33,7 +33,7 @@ Visit photocalia.com and sign in with your Google account (takes 2 seconds). The
 
 ### Step 3: Review and Save Your Events
 
-The AI instantly analyzes your image using GPT-4 Vision technology. It extracts event titles, dates, times, and locations. Review the results in a clean preview — edit anything that needs adjusting — then download your ICS file and import it into Google Calendar. Done!
+The AI analyzes your image and extracts event titles, dates, times, and locations. Review the results in a clean preview — edit anything that needs adjusting — then download your ICS file and import it into Google Calendar. Done!
 
 ## Tips for Best Results
 

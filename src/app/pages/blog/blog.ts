@@ -6,6 +6,7 @@ import { LocalizeDatePipe } from '../../shared/pipes/localize-date.pipe';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { ScrollRevealDirective } from '../../shared/directives';
 import { LanguageService } from '../../services/language.service';
+import { PlanService } from '../../services/plan.service';
 import { BLOG_ARTICLES, BlogArticle } from './blog.models';
 
 type BlogViewMode = 'grid' | 'list';
@@ -23,6 +24,8 @@ export class Blog implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
   protected readonly languageService = inject(LanguageService);
+  protected readonly planService = inject(PlanService);
+  protected readonly planParams = computed(() => ({ freeLimit: this.planService.freePlanLimit() }));
 
   readonly articles = [...BLOG_ARTICLES].sort((a, b) =>
     b.datePublished.localeCompare(a.datePublished),

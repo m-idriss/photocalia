@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#eff6ff"/>
+  <rect x="70" y="60" width="1060" height="680" rx="32" fill="#ffffff" stroke="#1d4ed8" stroke-width="8"/>
+  <text x="120" y="155" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#172554">Clock change briefing</text>
+  <text x="120" y="270" font-family="Arial, sans-serif" font-size="38" fill="#1e3a8a">29 March 2026 · 02:30–03:30</text>
+  <text x="120" y="340" font-family="Arial, sans-serif" font-size="32" fill="#1e40af">Europe/Paris · Salle Horloge, Paris</text>
+  <rect x="120" y="425" width="960" height="120" rx="18" fill="#dbeafe"/>
+  <text x="155" y="485" font-family="Arial, sans-serif" font-size="28" fill="#1e3a8a">The stated start falls inside the daylight-saving clock jump.</text>
+  <text x="155" y="525" font-family="Arial, sans-serif" font-size="24" fill="#1e40af">Normalize to the first valid local time and ask the user to review it.</text>
+  <text x="120" y="665" font-family="Arial, sans-serif" font-size="24" fill="#64748b">Synthetic PhotoCalia QA fixture — no personal data</text>
+</svg>

@@ -124,7 +124,7 @@
       aria-labelledby="blog-cta-title"
     >
       <h2 id="blog-cta-title" class="cta-title">{{ 'blog.cta.title' | translate }}</h2>
-      <p class="cta-description">{{ 'blog.cta.description' | translate }}</p>
+      <p class="cta-description">{{ 'blog.cta.description' | translate: planParams() }}</p>
       <a [routerLink]="'/' | localizeRoute" class="cta-button">
         {{ 'blog.cta.button' | translate }}
       </a>

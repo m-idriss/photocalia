@@ -13,7 +13,7 @@
 
 ## Overview
 
-This application uses Angular 20+ standalone components with a modular architecture. Each component is self-contained with its own TypeScript logic, HTML template, and SCSS styles.
+This application uses Angular 22 standalone components with a modular architecture. Each component is self-contained with its own TypeScript logic, HTML template, and SCSS styles.
 
 ### Key Principles
 
@@ -324,7 +324,7 @@ stuffByCategory: Record<string, any[]>; // Categorized items
    })
    ```
 
-   > **Note**: Use `styleUrl` (singular) for single stylesheets in Angular 20+.
+   > **Note**: Use `styleUrl` (singular) for single stylesheets in Angular 22.
    > Only import modules you actually use. Control flow (`@if`, `@for`) and property binding don't require `CommonModule`.
 
 3. **Follow naming conventions**:
@@ -370,7 +370,7 @@ export class MyComponent implements OnInit {
 
 - **Semantic HTML**: Use proper HTML5 elements
 - **Accessibility**: Add ARIA labels and roles
-- **Conditional rendering**: Use `@if` and `@for` (Angular 20+)
+- **Conditional rendering**: Use `@if` and `@for` (Angular 22)
 - **Safe navigation**: Use optional chaining for nullable properties
 
 Example:

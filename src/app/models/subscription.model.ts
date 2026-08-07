@@ -1,7 +1,19 @@
-export type PlanId = 'free' | 'pro' | 'business';
-export type BillingCycle = 'monthly' | 'yearly';
-export type SubscriptionStatus = 'active' | 'trialing' | 'past_due' | 'canceled' | 'free';
-export type ProductId = 'coffee' | 'snack' | 'meal';
+import type { components } from '../generated/3dime-api';
+
+type ApiSchemas = components['schemas'];
+
+export type CheckoutRequest = ApiSchemas['CheckoutRequest'];
+export type CheckoutResponse = ApiSchemas['CheckoutResponse'];
+export type SubscriptionStatusResponse = ApiSchemas['SubscriptionStatusResponse'];
+export type DonationCheckoutRequest = ApiSchemas['DonationRequest'];
+
+export type CheckoutPlanId = CheckoutRequest['planId'];
+export type PlanId =
+  | CheckoutPlanId
+  | Extract<ApiSchemas['SubscriptionStatusResponse']['planId'], 'free'>;
+export type BillingCycle = CheckoutRequest['billingCycle'];
+export type SubscriptionStatus = SubscriptionStatusResponse['status'];
+export type ProductId = DonationCheckoutRequest['productId'];
 
 export interface SubscriptionPlan {
   id: PlanId;
@@ -9,32 +21,11 @@ export interface SubscriptionPlan {
   descriptionKey: string;
   monthlyPrice: number | null;
   yearlyPrice: number | null;
+  monthlyQuota: number;
   quotaKey: string;
   features: string[];
   highlighted: boolean;
   ctaKey: string;
-}
-
-export interface CheckoutRequest {
-  planId: PlanId;
-  billingCycle: BillingCycle;
-  userId: string;
-  email: string | null;
-}
-
-export interface CheckoutResponse {
-  sessionUrl: string;
-}
-
-export interface SubscriptionStatusResponse {
-  planId: string;
-  status: SubscriptionStatus;
-  currentPeriodEnd: string | null;
-}
-
-export interface DonationCheckoutRequest {
-  productId: ProductId;
-  email?: string;
 }
 
 export interface DonationProduct {

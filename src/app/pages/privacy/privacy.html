@@ -1,275 +1,396 @@
-<main class="legal-page" aria-label="Privacy Policy" id="main-content" role="main">
+<main
+  class="legal-page"
+  [attr.aria-label]="isFrench ? 'Politique de confidentialité' : 'Privacy Policy'"
+  id="main-content"
+  role="main"
+>
   <div class="legal-container">
-    <section class="legal-header" aria-labelledby="privacy-title">
-      <h1 id="privacy-title" class="legal-title">
-        <span class="legal-icon" aria-hidden="true">🔒</span>
-        Privacy Policy
-      </h1>
-      <p class="legal-subtitle">Last Updated: February 11, 2026</p>
-    </section>
+    @if (isFrench) {
+      <section class="legal-header" aria-labelledby="privacy-title">
+        <h1 id="privacy-title" class="legal-title">
+          <span class="legal-icon" aria-hidden="true">🔒</span>
+          Politique de confidentialité
+        </h1>
+        <p class="legal-subtitle">Dernière mise à jour : 7 août 2026</p>
+      </section>
 
-    <section class="legal-content">
-      <div class="legal-section">
-        <h2>1. Introduction</h2>
-        <p>
-          PhotoCalia ("we", "us", or "our") is committed to protecting your privacy. This Privacy
-          Policy explains how we collect, use, and safeguard your personal information when you use
-          our AI-powered calendar conversion service.
-        </p>
-        <p>
-          By using PhotoCalia, you agree to the collection and use of information in accordance with
-          this policy.
-        </p>
-      </div>
+      <section class="legal-content">
+        <div class="legal-section">
+          <h2>1. Objet et responsable du traitement</h2>
+          <p>
+            Cette politique explique comment PhotoCalia traite les données nécessaires pour
+            convertir des images et PDF en événements de calendrier. PhotoCalia est responsable des
+            traitements décrits ici. Pour toute question ou demande, écrivez à
+            <a href="mailto:privacy@photocalia.com">privacy&#64;photocalia.com</a>.
+          </p>
+        </div>
 
-      <div class="legal-section">
-        <h2>2. Information We Collect</h2>
-        <h3>2.1 Authentication Information</h3>
-        <p>When you sign in with Google, we collect:</p>
-        <ul>
-          <li>Your Google account email address</li>
-          <li>Your name and profile picture (if publicly available)</li>
-          <li>Unique user identifier provided by Google</li>
-        </ul>
+        <div class="legal-section">
+          <h2>2. Données traitées</h2>
+          <h3>2.1 Compte Google</h3>
+          <p>
+            Lors de la connexion avec Google via Firebase Authentication, nous recevons votre
+            identifiant technique, votre adresse e-mail et, lorsqu'ils sont disponibles, votre nom
+            et votre photo de profil.
+          </p>
 
-        <h3>2.2 Uploaded Files</h3>
-        <p>When you use our calendar conversion service, we temporarily process:</p>
-        <ul>
-          <li>Images (JPG, PNG) and PDF files you upload</li>
-          <li>Content extracted from these files (dates, times, event details)</li>
-        </ul>
+          <h3>2.2 Conversion</h3>
+          <p>
+            Les images, captures et PDF importés, ainsi que les dates, horaires, lieux et textes
+            qu'ils contiennent, sont transmis à l'API PhotoCalia et au fournisseur d'IA configuré
+            côté serveur afin de produire les événements demandés. Le résultat ICS peut être associé
+            temporairement à une réservation technique pour éviter de facturer ou traiter deux fois
+            la même requête.
+          </p>
 
-        <h3>2.3 Technical Information</h3>
-        <p>We automatically collect certain technical information:</p>
-        <ul>
-          <li>Browser type and version</li>
-          <li>Device information and operating system</li>
-          <li>IP address (anonymized)</li>
-          <li>Usage statistics and interaction data</li>
-        </ul>
-      </div>
+          <h3>2.3 Suivi opérationnel</h3>
+          <p>
+            Pour exploiter le service, détecter les abus et calculer des statistiques globales,
+            l'API peut enregistrer dans un espace Notion privé : identifiant utilisateur, e-mail,
+            horodatage, domaine d'origine, résultat de la conversion, nombre de fichiers et
+            d'événements, durée et message d'erreur limité. Le contenu des fichiers importés n'est
+            pas enregistré dans ce suivi Notion.
+          </p>
 
-      <div class="legal-section">
-        <h2>3. How We Use Your Information</h2>
-        <p>We use the collected information for the following purposes:</p>
-        <ul>
-          <li>
-            <strong>Service Delivery:</strong> To process your images and generate calendar events
-          </li>
-          <li><strong>Authentication:</strong> To verify your identity and manage your account</li>
-          <li>
-            <strong>Service Improvement:</strong> To analyze usage patterns and improve our AI
-            models
-          </li>
-          <li><strong>Communication:</strong> To send service-related notifications and updates</li>
-          <li><strong>Security:</strong> To protect against fraud, abuse, and security threats</li>
-        </ul>
-      </div>
+          <h3>2.4 Paiement, sécurité et mesure d'audience</h3>
+          <p>
+            Stripe reçoit les informations nécessaires au paiement et à l'abonnement. Vercel et
+            Google Cloud traitent des données techniques telles que l'adresse IP, les journaux de
+            requêtes et les caractéristiques du navigateur pour héberger et sécuriser le service.
+            Vercel Analytics n'est activé qu'après votre consentement.
+          </p>
+        </div>
 
-      <div class="legal-section">
-        <h2>4. Third-Party Data Processing</h2>
-        <h3>4.1 OpenAI (GPT-4 Vision)</h3>
-        <p>
-          Your uploaded images are sent to OpenAI's GPT-4 Vision API for event extraction. OpenAI
-          processes this data according to their
-          <a
-            href="https://openai.com/policies/privacy-policy"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Privacy Policy</a
-          >
-          and
-          <a
-            href="https://openai.com/policies/data-processing-addendum"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Data Processing Addendum</a
-          >.
-        </p>
-        <p>
-          <strong>Important:</strong> OpenAI does not use data submitted via their API to train
-          their models. Your images are only used to provide the calendar conversion service.
-        </p>
+        <div class="legal-section">
+          <h2>3. Finalités et bases juridiques</h2>
+          <ul>
+            <li>
+              <strong>Exécution du service :</strong> authentification, conversion et export ICS.
+            </li>
+            <li>
+              <strong>Exécution du contrat :</strong> abonnement, paiement et gestion des quotas.
+            </li>
+            <li>
+              <strong>Intérêt légitime :</strong> sécurité, prévention des abus, diagnostic et
+              statistiques opérationnelles minimales.
+            </li>
+            <li><strong>Consentement :</strong> mesure d'audience facultative.</li>
+            <li>
+              <strong>Obligation légale :</strong> éléments comptables et demandes réglementaires.
+            </li>
+          </ul>
+        </div>
 
-        <h3>4.2 Firebase / Google Cloud</h3>
-        <p>We use Firebase (Google Cloud Platform) for:</p>
-        <ul>
-          <li>User authentication (Firebase Authentication)</li>
-          <li>Cloud functions for API processing</li>
-          <li>Application hosting</li>
-        </ul>
-        <p>
-          Google processes this data according to their
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
-            >Privacy Policy</a
-          >
-          and
-          <a
-            href="https://cloud.google.com/terms/data-processing-addendum"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Cloud Data Processing Addendum</a
-          >.
-        </p>
-      </div>
+        <div class="legal-section">
+          <h2>4. Sous-traitants et destinataires</h2>
+          <ul>
+            <li>
+              <strong>Vercel :</strong> hébergement du frontend et mesure d'audience consentie —
+              <a
+                href="https://vercel.com/legal/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                >confidentialité</a
+              >.
+            </li>
+            <li>
+              <strong>Google :</strong> Firebase Authentication, Cloud Run, Firestore et, lorsque ce
+              fournisseur est actif, Gemini —
+              <a
+                href="https://cloud.google.com/terms/data-processing-addendum"
+                target="_blank"
+                rel="noopener noreferrer"
+                >avenant de traitement Google Cloud</a
+              >.
+            </li>
+            <li>
+              <strong>Anthropic :</strong> traitement multimodal par Claude lorsque ce fournisseur
+              est configuré —
+              <a
+                href="https://www.anthropic.com/legal/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                >confidentialité</a
+              >.
+            </li>
+            <li>
+              <strong>Notion :</strong> suivi opérationnel privé des conversions et des quotas —
+              <a href="https://www.notion.so/privacy" target="_blank" rel="noopener noreferrer"
+                >confidentialité</a
+              >.
+            </li>
+            <li>
+              <strong>Stripe :</strong> paiements, abonnements et obligations comptables —
+              <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer"
+                >confidentialité</a
+              >.
+            </li>
+          </ul>
+          <p>
+            Un seul fournisseur d'IA est sélectionné côté serveur pour une conversion donnée. Le
+            frontend ne dépend pas d'un modèle commercial fixe et nous mettons cette page à jour si
+            la liste des fournisseurs réellement utilisés change.
+          </p>
+        </div>
 
-      <div class="legal-section">
-        <h2>5. Data Retention and Deletion</h2>
-        <h3>5.1 Uploaded Files</h3>
-        <p>
-          Your uploaded images and PDFs are automatically deleted after processing is complete.
-          Files are retained for a maximum of 24 hours to allow for troubleshooting, then
-          permanently deleted from our servers.
-        </p>
+        <div class="legal-section">
+          <h2>5. Conservation et suppression</h2>
+          <ul>
+            <li>
+              <strong>Fichiers importés :</strong> PhotoCalia ne les stocke pas intentionnellement
+              après la fin de la requête. Ils peuvent transiter temporairement par l'infrastructure
+              et le fournisseur d'IA pendant le traitement.
+            </li>
+            <li>
+              <strong>Compte et quotas :</strong> conservés dans Firebase/Firestore tant que le
+              compte ou les obligations opérationnelles associées existent.
+            </li>
+            <li>
+              <strong>Suivi Notion :</strong> conservé pour la sécurité, le support et les mesures
+              d'usage jusqu'à suppression ou anonymisation dans le cadre d'une demande vérifiée. Il
+              n'existe pas actuellement d'expiration automatique courte pour ces entrées.
+            </li>
+            <li>
+              <strong>Paiements :</strong> conservés par Stripe et PhotoCalia selon les durées
+              légales comptables et de lutte contre la fraude.
+            </li>
+          </ul>
+          <p>
+            PhotoCalia coordonne les demandes de suppression dans les systèmes qu'il contrôle. La
+            suppression en libre-service n'étant pas encore disponible, contactez
+            <a href="mailto:privacy@photocalia.com">privacy&#64;photocalia.com</a>. Certaines
+            données peuvent être conservées lorsqu'une obligation légale l'impose.
+          </p>
+        </div>
 
-        <h3>5.2 Account Information</h3>
-        <p>
-          Your authentication information is retained as long as you maintain an active account. You
-          can request account deletion at any time.
-        </p>
+        <div class="legal-section">
+          <h2>6. Vos droits</h2>
+          <p>
+            Selon votre situation, vous pouvez demander l'accès, la rectification, l'effacement, la
+            limitation, la portabilité ou vous opposer au traitement. Vous pouvez retirer votre
+            consentement aux statistiques depuis « Préférences de cookies ». Nous pouvons demander
+            une preuve raisonnable d'identité avant d'agir.
+          </p>
+          <p>
+            Vous pouvez également saisir la CNIL ou l'autorité de contrôle compétente de votre pays.
+          </p>
+        </div>
 
-        <h3>5.3 Usage Statistics</h3>
-        <p>Anonymized usage statistics may be retained for service improvement purposes.</p>
-      </div>
+        <div class="legal-section">
+          <h2>7. Sécurité et transferts internationaux</h2>
+          <p>
+            Les échanges utilisent HTTPS, l'API vérifie les jetons Firebase et les secrets restent
+            côté serveur. Les fournisseurs peuvent traiter des données hors de l'Espace économique
+            européen selon leurs accords de traitement, clauses contractuelles types et mécanismes
+            de transfert applicables.
+          </p>
+        </div>
 
-      <div class="legal-section">
-        <h2>6. Your Rights (GDPR)</h2>
-        <p>
-          If you are located in the European Economic Area (EEA) or UK, you have the following
-          rights:
-        </p>
-        <ul>
-          <li><strong>Right to Access:</strong> Request a copy of your personal data</li>
-          <li><strong>Right to Rectification:</strong> Correct inaccurate or incomplete data</li>
-          <li><strong>Right to Erasure:</strong> Request deletion of your personal data</li>
-          <li><strong>Right to Restriction:</strong> Restrict processing of your data</li>
-          <li>
-            <strong>Right to Data Portability:</strong> Receive your data in a machine-readable
-            format
-          </li>
-          <li><strong>Right to Object:</strong> Object to processing of your personal data</li>
-          <li><strong>Right to Withdraw Consent:</strong> Withdraw consent at any time</li>
-        </ul>
-        <p>
-          To exercise any of these rights, please contact us at:
-          <a href="mailto:privacy@photocalia.com">privacy@photocalia.com</a>
-        </p>
-      </div>
+        <div class="legal-section">
+          <h2>8. Enfants et contenu de tiers</h2>
+          <p>
+            PhotoCalia n'est pas destiné aux enfants de moins de 16 ans. N'importez pas de données
+            personnelles appartenant à d'autres personnes sans base légitime et évitez les données
+            sensibles qui ne sont pas nécessaires à la création d'un événement.
+          </p>
+        </div>
 
-      <div class="legal-section">
-        <h2>7. Cookies and Tracking</h2>
-        <p>PhotoCalia uses minimal cookies for essential functionality:</p>
-        <ul>
-          <li><strong>Authentication Cookies:</strong> To maintain your login session</li>
-          <li>
-            <strong>Preference Cookies:</strong> To remember your settings (e.g., theme preference)
-          </li>
-        </ul>
-        <p>
-          With your consent, we use Vercel Analytics to understand aggregate site usage and improve
-          PhotoCalia. You can refuse analytics or change your choice at any time through Cookie
-          Preferences in the footer.
-        </p>
-      </div>
+        <div class="legal-section">
+          <h2>9. Modifications</h2>
+          <p>
+            La date ci-dessus change lorsque cette politique est mise à jour. Une modification
+            importante sera signalée sur le service ou par e-mail lorsque cela est approprié.
+          </p>
+        </div>
+      </section>
+    } @else {
+      <section class="legal-header" aria-labelledby="privacy-title">
+        <h1 id="privacy-title" class="legal-title">
+          <span class="legal-icon" aria-hidden="true">🔒</span>
+          Privacy Policy
+        </h1>
+        <p class="legal-subtitle">Last updated: August 7, 2026</p>
+      </section>
 
-      <div class="legal-section">
-        <h2>8. Data Security</h2>
-        <p>We implement industry-standard security measures to protect your data:</p>
-        <ul>
-          <li>HTTPS encryption for all data transmission</li>
-          <li>Secure cloud infrastructure (Firebase/Google Cloud)</li>
-          <li>Regular security audits and updates</li>
-          <li>Access controls and authentication</li>
-        </ul>
-        <p>
-          However, no method of transmission over the Internet is 100% secure. While we strive to
-          protect your data, we cannot guarantee absolute security.
-        </p>
-      </div>
+      <section class="legal-content">
+        <div class="legal-section">
+          <h2>1. Scope and controller</h2>
+          <p>
+            This policy explains how PhotoCalia processes the data needed to turn images and PDFs
+            into calendar events. PhotoCalia is responsible for the processing described here. For
+            questions or requests, email
+            <a href="mailto:privacy@photocalia.com">privacy&#64;photocalia.com</a>.
+          </p>
+        </div>
 
-      <div class="legal-section">
-        <h2>9. International Data Transfers</h2>
-        <p>
-          Your data may be transferred to and processed in countries outside the European Economic
-          Area (EEA). We ensure appropriate safeguards are in place, including:
-        </p>
-        <ul>
-          <li>Standard Contractual Clauses (SCCs) with data processors</li>
-          <li>EU-US Data Privacy Framework compliance (where applicable)</li>
-          <li>Google Cloud's and OpenAI's GDPR compliance commitments</li>
-        </ul>
-      </div>
+        <div class="legal-section">
+          <h2>2. Data we process</h2>
+          <h3>2.1 Google account</h3>
+          <p>
+            When you sign in with Google through Firebase Authentication, we receive your technical
+            user identifier, email address and, when available, your name and profile image.
+          </p>
 
-      <div class="legal-section">
-        <h2>10. Children's Privacy</h2>
-        <p>
-          PhotoCalia is not intended for use by children under the age of 16. We do not knowingly
-          collect personal information from children. If you believe we have collected information
-          from a child, please contact us immediately.
-        </p>
-      </div>
+          <h3>2.2 Conversion content</h3>
+          <p>
+            Uploaded images, screenshots and PDFs, together with the dates, times, locations and
+            text they contain, are sent to the PhotoCalia API and the server-configured AI provider
+            to produce the requested events. The generated ICS result may be associated with a
+            technical reservation so the same request is not charged or processed twice.
+          </p>
 
-      <div class="legal-section">
-        <h2>11. Changes to This Privacy Policy</h2>
-        <p>
-          We may update this Privacy Policy from time to time. We will notify you of any material
-          changes by:
-        </p>
-        <ul>
-          <li>Posting the new Privacy Policy on this page</li>
-          <li>Updating the "Last Updated" date</li>
-          <li>Sending an email notification (for significant changes)</li>
-        </ul>
-        <p>
-          Your continued use of PhotoCalia after changes are posted constitutes acceptance of the
-          updated policy.
-        </p>
-      </div>
+          <h3>2.3 Operational tracking</h3>
+          <p>
+            To operate the service, detect abuse and calculate aggregate statistics, the API may
+            record the following in a private Notion workspace: user identifier, email, timestamp,
+            origin domain, conversion outcome, file and event counts, duration and a limited error
+            message. Uploaded file content is not stored in this Notion tracking record.
+          </p>
 
-      <div class="legal-section">
-        <h2>12. Contact Information</h2>
-        <p>
-          If you have questions or concerns about this Privacy Policy or our data practices, please
-          contact us:
-        </p>
-        <ul>
-          <li>
-            <strong>Email:</strong>
-            <a href="mailto:privacy@photocalia.com">privacy@photocalia.com</a>
-          </li>
-          <li>
-            <strong>Data Protection Officer:</strong>
-            <a href="mailto:dpo@photocalia.com">dpo@photocalia.com</a>
-          </li>
-          <li>
-            <strong>GitHub:</strong>
-            <a
-              href="https://github.com/m-idriss/photocalia"
-              target="_blank"
-              rel="noopener noreferrer"
-              >m-idriss/photocalia</a
-            >
-          </li>
-        </ul>
-      </div>
+          <h3>2.4 Payments, security and analytics</h3>
+          <p>
+            Stripe receives the information needed for subscriptions and payments. Vercel and Google
+            Cloud process technical data such as IP addresses, request logs and browser
+            characteristics to host and secure the service. Vercel Analytics is enabled only after
+            you consent.
+          </p>
+        </div>
 
-      <div class="legal-section">
-        <h2>13. Supervisory Authority</h2>
-        <p>
-          If you are located in the EEA or UK, you have the right to lodge a complaint with your
-          local data protection authority:
-        </p>
-        <ul>
-          <li>
-            <strong>France (CNIL):</strong>
-            <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">www.cnil.fr</a>
-          </li>
-          <li>
-            <strong>UK (ICO):</strong>
-            <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer">ico.org.uk</a>
-          </li>
-        </ul>
-      </div>
-    </section>
+        <div class="legal-section">
+          <h2>3. Purposes and legal bases</h2>
+          <ul>
+            <li>
+              <strong>Service performance:</strong> authentication, conversion and ICS export.
+            </li>
+            <li>
+              <strong>Contract performance:</strong> subscriptions, payments and quota management.
+            </li>
+            <li>
+              <strong>Legitimate interests:</strong> security, abuse prevention, diagnostics and
+              minimal operational statistics.
+            </li>
+            <li><strong>Consent:</strong> optional audience measurement.</li>
+            <li><strong>Legal obligations:</strong> accounting records and regulatory requests.</li>
+          </ul>
+        </div>
+
+        <div class="legal-section">
+          <h2>4. Processors and recipients</h2>
+          <ul>
+            <li>
+              <strong>Vercel:</strong> frontend hosting and consent-based analytics —
+              <a
+                href="https://vercel.com/legal/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                >privacy policy</a
+              >.
+            </li>
+            <li>
+              <strong>Google:</strong> Firebase Authentication, Cloud Run, Firestore and, when this
+              provider is active, Gemini —
+              <a
+                href="https://cloud.google.com/terms/data-processing-addendum"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Google Cloud Data Processing Addendum</a
+              >.
+            </li>
+            <li>
+              <strong>Anthropic:</strong> multimodal processing through Claude when configured —
+              <a
+                href="https://www.anthropic.com/legal/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                >privacy policy</a
+              >.
+            </li>
+            <li>
+              <strong>Notion:</strong> private operational conversion and quota tracking —
+              <a href="https://www.notion.so/privacy" target="_blank" rel="noopener noreferrer"
+                >privacy policy</a
+              >.
+            </li>
+            <li>
+              <strong>Stripe:</strong> payments, subscriptions and accounting obligations —
+              <a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer"
+                >privacy policy</a
+              >.
+            </li>
+          </ul>
+          <p>
+            One AI provider is selected server-side for a given conversion. The frontend does not
+            depend on one fixed commercial model, and this page will be updated if the providers
+            actually used by the service change.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h2>5. Retention and deletion</h2>
+          <ul>
+            <li>
+              <strong>Uploaded files:</strong> PhotoCalia does not intentionally store them after
+              the request completes. They may transit temporarily through the infrastructure and AI
+              provider while processing takes place.
+            </li>
+            <li>
+              <strong>Account and quota data:</strong> retained in Firebase/Firestore while the
+              account or associated operational obligations remain active.
+            </li>
+            <li>
+              <strong>Notion tracking:</strong> retained for security, support and usage measurement
+              until deletion or anonymization following a verified request. These entries do not
+              currently have a short automatic expiry.
+            </li>
+            <li>
+              <strong>Payment records:</strong> retained by Stripe and PhotoCalia for applicable
+              accounting and fraud-prevention periods.
+            </li>
+          </ul>
+          <p>
+            PhotoCalia coordinates deletion requests across systems it controls. Self-service
+            deletion is not currently available, so contact
+            <a href="mailto:privacy@photocalia.com">privacy&#64;photocalia.com</a>. Some records may
+            be retained when required by law.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h2>6. Your rights</h2>
+          <p>
+            Depending on your location, you may request access, correction, erasure, restriction or
+            portability, or object to processing. You can withdraw analytics consent from Cookie
+            Preferences. We may request reasonable proof of identity before acting on a request.
+          </p>
+          <p>You may also complain to the CNIL or your competent supervisory authority.</p>
+        </div>
+
+        <div class="legal-section">
+          <h2>7. Security and international transfers</h2>
+          <p>
+            Traffic uses HTTPS, the API verifies Firebase tokens and secrets remain server-side.
+            Providers may process data outside the European Economic Area under their processing
+            agreements, Standard Contractual Clauses and other applicable transfer mechanisms.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h2>8. Children and third-party content</h2>
+          <p>
+            PhotoCalia is not intended for children under 16. Do not upload another person's
+            personal data without a lawful basis, and avoid sensitive information that is
+            unnecessary for creating the calendar event.
+          </p>
+        </div>
+
+        <div class="legal-section">
+          <h2>9. Changes</h2>
+          <p>
+            The date above changes when this policy is updated. Material changes will be announced
+            in the service or by email when appropriate.
+          </p>
+        </div>
+      </section>
+    }
   </div>
 </main>

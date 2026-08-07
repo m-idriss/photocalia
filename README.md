@@ -32,7 +32,7 @@
 
 | Feature | Details |
 |---------|---------|
-| 🤖 **AI-Powered Extraction** | GPT-4 Vision reads dates, times, titles, and locations from any image or PDF |
+| 🤖 **AI-Powered Extraction** | Multimodal AI reads dates, times, titles, and locations from images and PDFs |
 | 📅 **One-Click ICS Export** | Download a standard `.ics` file compatible with every major calendar app |
 | ✏️ **Edit Before You Export** | Review and tweak events before committing to your calendar |
 | 📦 **Batch Processing** | Upload multiple files at once and convert them in a single run |

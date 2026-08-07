@@ -11,15 +11,22 @@ npm run verify:frontend
 This runs:
 
 1. bilingual blog generation integrity;
-2. ESLint;
-3. the full headless unit-test suite;
-4. an optimized production build;
-5. a clean-tree check for unintended generated changes.
+2. public pricing/provider claim consistency;
+3. golden dataset schema and coverage checks;
+4. ESLint;
+5. the full headless unit-test suite;
+6. an optimized production build;
+7. a clean-tree check for unintended generated changes.
+
+The credential-free converter browser smoke is required separately in pull-request CI because it
+starts a development server and installs Chromium.
 
 ## Focused commands
 
 ```bash
 npm run blog:check
+npm run claims:check
+npm run fixtures:check
 npm run lint
 npm run test:ci
 npm run build:ci
@@ -27,6 +34,29 @@ npm run e2e
 ```
 
 Do not document a fixed test count or build duration: both legitimately change as coverage grows. The CI result for the exact commit is the source of truth.
+
+## Critical converter smoke test
+
+The required pull-request smoke path uses a development-only synthetic authentication seam and
+intercepts the conversion, quota and plans API calls. It uploads the privacy-safe English golden
+PNG, verifies the submitted timezone, reviews two events, edits one title, confirms the review
+warning, downloads the result, and independently checks title, date, timezone semantics, location,
+all-day behavior and event count with `ical.js`. It needs no production credentials and cannot be
+enabled in a production build.
+
+```bash
+npx playwright test e2e/app.spec.ts --grep "uploads, reviews"
+```
+
+Golden SVG sources, generated PNG/PDF files, expected models and provenance live in
+`e2e/fixtures/golden/`. Regenerate renderings with `npm run fixtures:generate`.
+Validate required English/French, PNG/PDF, multi-event, all-day, ambiguity and DST coverage with
+`npm run fixtures:check`.
+
+Provider-backed accuracy runs remain a separate controlled-schedule requirement. They need a
+dedicated non-production Firebase identity, backend environment and spending limit; do not place a
+long-lived production token in GitHub Actions. Until that environment exists, the deterministic PR
+smoke protects workflow and ICS behavior but does not claim provider accuracy.
 
 ## High-value manual stories
 

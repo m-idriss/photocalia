@@ -44,12 +44,18 @@ The frontend repository does not contain the AI model credentials, Stripe secret
 
 - Firebase ID tokens are attached to API requests when a user is authenticated.
 - Uploaded files are converted to request payloads in the browser; secrets are not stored in this repository.
+- The backend selects Gemini or Claude from server configuration; public copy does not promise a fixed model.
+- Limited operational records can include the authenticated user ID and email in a private Notion workspace.
 - Production responses set CSP, HSTS, frame, referrer and permissions headers.
 - Browser error logs are same-origin, size-limited and exclude query strings.
 - Cookie consent distinguishes essential behavior from optional analytics.
 - The UI requires users to review AI-generated events before export.
 
-Backend authorization, retention, deletion and Stripe webhook enforcement must be verified in the separate backend during a transaction.
+Uploaded content is not intentionally persisted after request processing. Account, quota,
+idempotency, Notion, payment and infrastructure records have different retention obligations; see
+[PRIVACY_OPERATIONS.md](PRIVACY_OPERATIONS.md). Backend authorization, expiry automation, deletion
+coverage and Stripe webhook enforcement must be verified in the separate backend during a
+transaction.
 
 ## Availability and degradation
 

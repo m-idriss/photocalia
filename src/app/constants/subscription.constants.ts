@@ -11,6 +11,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
     descriptionKey: 'pricing.plan.free.description',
     monthlyPrice: null,
     yearlyPrice: null,
+    monthlyQuota: 3,
     quotaKey: 'pricing.plan.free.quota',
     features: [
       'pricing.feature.ai_conversion',
@@ -27,6 +28,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
     descriptionKey: 'pricing.plan.pro.description',
     monthlyPrice: 4.99,
     yearlyPrice: 49.99,
+    monthlyQuota: 100,
     quotaKey: 'pricing.plan.pro.quota',
     features: [
       'pricing.feature.ai_conversion',
@@ -45,6 +47,7 @@ export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
     descriptionKey: 'pricing.plan.business.description',
     monthlyPrice: 14.99,
     yearlyPrice: 149.99,
+    monthlyQuota: 120,
     quotaKey: 'pricing.plan.business.quota',
     features: [
       'pricing.feature.ai_conversion',
