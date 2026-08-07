@@ -1,11 +1,11 @@
 {
   "regions": ["cdg1"],
-  "redirects": [
+  "routes": [
     {
-      "source": "/",
+      "src": "^/$",
       "has": [{ "type": "query", "key": "lang", "value": "fr" }],
-      "destination": "/fr",
-      "permanent": true
+      "headers": { "Location": "/fr" },
+      "status": 308
     }
   ],
   "headers": [
