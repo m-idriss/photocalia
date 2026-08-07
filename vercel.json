@@ -1,13 +1,5 @@
 {
   "regions": ["cdg1"],
-  "redirects": [
-    {
-      "source": "/",
-      "has": [{ "type": "query", "key": "lang", "value": "fr" }],
-      "destination": "/fr",
-      "permanent": true
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",

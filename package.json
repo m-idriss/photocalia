@@ -100,6 +100,7 @@
     "@playwright/test": "^1.61.1",
     "@types/jasmine": "~6.0.0",
     "@types/node": "^26.1.1",
+    "@vercel/functions": "^3.8.0",
     "@vercel/node": "^5.8.22",
     "angular-eslint": "22.0.0",
     "eslint": "10.5.0",
