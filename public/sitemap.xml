@@ -235,6 +235,30 @@
     </image:image>
   </url>
   <url>
+    <loc>https://www.photocalia.com/blog/back-to-school-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/back-to-school-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/back-to-school-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/back-to-school-calendar" />
+    <lastmod>2026-07-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/back-to-school-calendar.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/blog/back-to-school-calendar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/back-to-school-calendar" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/back-to-school-calendar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/back-to-school-calendar" />
+    <lastmod>2026-07-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/back-to-school-calendar.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://www.photocalia.com/blog/digitize-paper-schedules</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/digitize-paper-schedules" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/digitize-paper-schedules" />
@@ -304,6 +328,30 @@
     <priority>0.6</priority>
     <image:image>
       <image:loc>https://www.photocalia.com/assets/images/blog/healthcare-appointments.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/blog/hobby-classes-workshops</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/hobby-classes-workshops" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/hobby-classes-workshops" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/hobby-classes-workshops" />
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/hobby-classes-workshops.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.photocalia.com/fr/blog/hobby-classes-workshops</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.photocalia.com/blog/hobby-classes-workshops" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.photocalia.com/fr/blog/hobby-classes-workshops" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.photocalia.com/blog/hobby-classes-workshops" />
+    <lastmod>2026-07-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://www.photocalia.com/assets/images/blog/hobby-classes-workshops.jpg</image:loc>
     </image:image>
   </url>
   <url>
