@@ -104,7 +104,6 @@
     <!-- Resource Hints for Performance -->
     <link rel="preconnect" href="https://apis.google.com" />
     <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
     <link rel="preconnect" href="https://unpkg.com" crossorigin />
     <link rel="dns-prefetch" href="//firebaseio.com" />
     <!-- Preload critical font to avoid FOUT/CLS -->
@@ -115,11 +114,12 @@
       type="font/woff2"
       crossorigin
     />
-
-    <!-- Font Awesome — loaded synchronously to prevent icon-triggered CLS -->
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      rel="preload"
+      href="/assets/images/converter.svg"
+      as="image"
+      type="image/svg+xml"
+      fetchpriority="high"
     />
 
     <link
