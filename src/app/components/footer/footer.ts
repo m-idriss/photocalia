@@ -24,7 +24,6 @@ export interface FooterSection {
 }
 
 export interface SocialLink {
-  iconClass: string;
   url: string;
   label: string;
 }
@@ -222,6 +221,6 @@ export class Footer implements OnInit {
    * Builds social media links for the footer
    */
   private buildSocialLinks(): SocialLink[] {
-    return [{ iconClass: 'fab fa-github', url: this.githubRepo, label: 'GitHub' }];
+    return [{ url: this.githubRepo, label: 'GitHub' }];
   }
 }
