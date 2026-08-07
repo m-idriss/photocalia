@@ -1,13 +1,5 @@
 {
   "regions": ["cdg1"],
-  "routes": [
-    {
-      "src": "^/$",
-      "has": [{ "type": "query", "key": "lang", "value": "fr" }],
-      "headers": { "Location": "/fr" },
-      "status": 308
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
