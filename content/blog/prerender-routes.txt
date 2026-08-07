@@ -1,11 +1,15 @@
 /blog/ai-ocr-calendar-extraction
 /fr/blog/ai-ocr-calendar-extraction
+/blog/back-to-school-calendar
+/fr/blog/back-to-school-calendar
 /blog/digitize-paper-schedules
 /fr/blog/digitize-paper-schedules
 /blog/family-reunion-planning
 /fr/blog/family-reunion-planning
 /blog/healthcare-appointments
 /fr/blog/healthcare-appointments
+/blog/hobby-classes-workshops
+/fr/blog/hobby-classes-workshops
 /blog/music-festival-lineup
 /fr/blog/music-festival-lineup
 /blog/photo-to-google-calendar
