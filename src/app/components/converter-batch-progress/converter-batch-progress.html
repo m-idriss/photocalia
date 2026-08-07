@@ -1,0 +1,101 @@
+@if (processing()) {
+  <div class="processing" role="status" aria-live="polite">
+    <span class="spinner" aria-hidden="true"></span>
+    @if (batchMode()) {
+      <div class="batch-processing">
+        <span
+          >Processing files: {{ stats().processing + stats().success }} / {{ stats().total }}</span
+        >
+        <ngb-progressbar
+          [value]="progress()"
+          [striped]="true"
+          [animated]="true"
+          type="info"
+          [showValue]="true"
+          height="25px"
+        />
+      </div>
+    } @else {
+      <span>{{ 'converter.processing' | translate }}</span>
+    }
+  </div>
+}
+
+@if (batchMode() && files().length > 0) {
+  <section class="batch-details" aria-labelledby="batch-heading">
+    <div class="batch-header">
+      <h3 id="batch-heading" class="batch-heading">Batch Processing Status</h3>
+      <button
+        class="batch-toggle-button"
+        (click)="toggleDetails()"
+        [attr.aria-expanded]="!collapsed()"
+        appTooltip="Toggle batch details"
+        appTooltipPlacement="top"
+      >
+        {{ collapsed() ? '▼ Show Details' : '▲ Hide Details' }}
+      </button>
+    </div>
+    <div [ngbCollapse]="collapsed()">
+      <div class="batch-files-list">
+        @for (batchFile of files(); track batchFile.file.name + $index) {
+          <div class="batch-file-item" [class]="'status-' + batchFile.status">
+            <div class="batch-file-info">
+              <span class="batch-file-name">{{ batchFile.file.name }}</span>
+              <span
+                class="batch-file-status-icon"
+                [attr.aria-label]="'Status: ' + batchFile.status"
+              >
+                @switch (batchFile.status) {
+                  @case (status.PENDING) {
+                    ⏳
+                  }
+                  @case (status.PROCESSING) {
+                    🔄
+                  }
+                  @case (status.SUCCESS) {
+                    ✅
+                  }
+                  @case (status.ERROR) {
+                    ❌
+                  }
+                }
+              </span>
+            </div>
+            @if (batchFile.status === status.PROCESSING) {
+              <div class="batch-file-progress">
+                <ngb-progressbar
+                  [value]="batchFile.progress || 0"
+                  [striped]="true"
+                  [animated]="true"
+                  type="primary"
+                  [showValue]="true"
+                  height="20px"
+                />
+              </div>
+            }
+            @if (batchFile.status === status.ERROR) {
+              <div class="batch-file-error">
+                <span class="error-text">{{ batchFile.error }}</span>
+                <button
+                  class="retry-button btn btn-sm btn-warning"
+                  (click)="retryRequested.emit($index)"
+                  [disabled]="processing()"
+                  aria-label="Retry processing this file"
+                  appTooltip="Retry processing"
+                  appTooltipPlacement="top"
+                >
+                  🔄 Retry
+                </button>
+              </div>
+            }
+            @if (batchFile.status === status.SUCCESS && batchFile.events) {
+              <span class="batch-file-events-count"
+                >{{ batchFile.events.length }} event(s) extracted</span
+              >
+            }
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+}

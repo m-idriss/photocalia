@@ -8,6 +8,12 @@
     "ng": "ng",
     "blog:generate": "node scripts/generate-blog.mjs",
     "blog:check": "node scripts/generate-blog.mjs --check",
+    "claims:check": "node scripts/check-public-claims.mjs",
+    "fixtures:generate": "node scripts/generate-golden-fixtures.mjs",
+    "fixtures:check": "node scripts/check-golden-dataset.mjs",
+    "contracts:update": "node scripts/update-api-contract.mjs && npm run contracts:generate",
+    "contracts:generate": "openapi-typescript contracts/3dime-api/openapi-v1.json -o src/app/generated/3dime-api.ts",
+    "contracts:check": "node scripts/check-api-contract.mjs",
     "prestart": "npm run blog:generate",
     "start": "ng serve",
     "dev": "ng serve",
@@ -20,7 +26,7 @@
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "verify:clean": "node scripts/verify-clean-tree.mjs",
-    "verify:frontend": "npm run blog:check && npm run lint && npm run test:ci && npm run build:ci && npm run verify:clean",
+    "verify:frontend": "npm run blog:check && npm run claims:check && npm run fixtures:check && npm run contracts:check && npm run lint && npm run test:ci && npm run build:ci && npm run verify:clean",
     "serve:ng": "ng serve --configuration=local",
     "vercel-build": "node scripts/set-env.js && ng build",
     "e2e": "playwright test",
@@ -52,6 +58,9 @@
     ]
   },
   "overrides": {
+    "@redocly/openapi-core": {
+      "js-yaml": "4.3.1"
+    },
     "@hono/node-server": "2.1.0",
     "@modelcontextprotocol/sdk": "1.30.0",
     "@vercel/static-config": {
@@ -128,6 +137,7 @@
     "karma-jasmine-html-reporter": "~2.2.0",
     "lint-staged": "^17.0.8",
     "marked": "^18.0.5",
+    "openapi-typescript": "^7.13.0",
     "prettier": "^3.8.4",
     "typescript": "~6.0.3",
     "typescript-eslint": "8.61.1"

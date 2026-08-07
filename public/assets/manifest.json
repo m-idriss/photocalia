@@ -1,7 +1,7 @@
 {
   "name": "PhotoCalia - AI Calendar Converter",
   "short_name": "PhotoCalia",
-  "description": "Free AI-powered tool to convert photos, screenshots, flyers and PDFs into ICS calendar files. Uses GPT-4 Vision to extract event dates, times and locations automatically. Compatible with Google Calendar, Outlook and Apple Calendar.",
+  "description": "AI-powered tool to convert photos, screenshots, flyers and PDFs into ICS calendar files. Extracts event dates, times and locations for Google Calendar, Outlook and Apple Calendar.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",

@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { PlanService } from '../../services/plan.service';
 import { SUBSCRIPTION_PLANS } from '../../constants';
 import { BillingCycle, SubscriptionPlan } from '../../models';
+import { toApiClientError } from '../../utils';
 import { RecommendedGuides } from '../../components/recommended-guides/recommended-guides';
 
 @Component({
@@ -52,13 +53,7 @@ export class Pricing {
     const apiPlan = this.planService
       .plans()
       .find((candidate) => candidate.plan === plan.id.toUpperCase());
-    const fallbackLimits: Record<SubscriptionPlan['id'], number> = {
-      free: 3,
-      pro: 100,
-      business: 120,
-    };
-
-    return { limit: apiPlan?.limit ?? fallbackLimits[plan.id] };
+    return { limit: apiPlan?.limit ?? plan.monthlyQuota };
   }
 
   protected toggleBilling(cycle: BillingCycle): void {
@@ -79,8 +74,7 @@ export class Pricing {
       },
       error: (err) => {
         this.isLoading.set(null);
-        const msg = err?.error?.message || err?.message || 'pricing.error.generic';
-        this.error.set(msg);
+        this.error.set(toApiClientError(err).messageKey);
       },
     });
   }

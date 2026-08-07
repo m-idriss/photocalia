@@ -8,6 +8,13 @@ import {
   User,
 } from '@angular/fire/auth';
 import { LoggerService } from './logger.service';
+import { environment } from '../../environments/environment';
+
+declare global {
+  interface Window {
+    __PHOTOCALIA_E2E_AUTH__?: boolean;
+  }
+}
 
 /**
  * Authenticated user information
@@ -37,6 +44,21 @@ export class AuthService {
   public readonly isLoading = signal<boolean>(false); // Default to false when Firebase not available
 
   constructor() {
+    if (
+      !environment.production &&
+      typeof window !== 'undefined' &&
+      window.__PHOTOCALIA_E2E_AUTH__ === true
+    ) {
+      this.currentUser.set({
+        uid: 'e2e-user',
+        email: 'e2e@photocalia.invalid',
+        displayName: 'PhotoCalia E2E',
+        photoURL: null,
+      });
+      this.isAuthenticated.set(true);
+      return;
+    }
+
     // Only initialize auth listener if Firebase is available
     if (!this.auth) {
       this.logger.info(

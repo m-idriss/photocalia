@@ -1,0 +1,1340 @@
+{
+  "openapi": "3.1.0",
+  "components": {
+    "schemas": {
+      "CheckoutRequest": {
+        "required": [
+          "planId",
+          "billingCycle"
+        ],
+        "description": "Subscription checkout request",
+        "type": "object",
+        "properties": {
+          "planId": {
+            "type": "string",
+            "enum": [
+              "pro",
+              "business"
+            ],
+            "pattern": "pro|business"
+          },
+          "billingCycle": {
+            "type": "string",
+            "enum": [
+              "monthly",
+              "yearly"
+            ],
+            "pattern": "monthly|yearly"
+          },
+          "userId": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "CheckoutResponse": {
+        "required": [
+          "sessionUrl"
+        ],
+        "description": "Hosted checkout session",
+        "type": "object",
+        "properties": {
+          "sessionUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "ConverterRequest": {
+        "description": "Request to convert images to calendar events",
+        "type": "object",
+        "required": [
+          "files"
+        ],
+        "properties": {
+          "files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImageFile"
+            },
+            "description": "List of image files to convert",
+            "maxItems": 10,
+            "minItems": 1
+          },
+          "timeZone": {
+            "type": "string",
+            "description": "Timezone for event times (e.g., 'America/New_York')",
+            "examples": [
+              "UTC"
+            ],
+            "pattern": "[A-Za-z0-9/_+\\-]+"
+          },
+          "currentDate": {
+            "type": "string",
+            "description": "Current date in ISO-8601 format for context",
+            "examples": [
+              "2024-01-31"
+            ],
+            "pattern": "\\d{4}-\\d{2}-\\d{2}"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User identifier for quota tracking"
+          }
+        }
+      },
+      "ConverterResponse": {
+        "required": [
+          "success",
+          "icsContent"
+        ],
+        "description": "Successful image-to-calendar conversion",
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "Whether the conversion was successful",
+            "examples": [
+              true
+            ]
+          },
+          "icsContent": {
+            "type": "string",
+            "description": "The generated ICS calendar content",
+            "examples": [
+              "BEGIN:VCALENDAR..."
+            ]
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message if conversion failed"
+          },
+          "message": {
+            "type": "string",
+            "description": "Detailed error description"
+          },
+          "details": {
+            "description": "Additional error details"
+          }
+        }
+      },
+      "DonationRequest": {
+        "required": [
+          "productId"
+        ],
+        "description": "One-off donation checkout request",
+        "type": "object",
+        "properties": {
+          "productId": {
+            "type": "string",
+            "enum": [
+              "coffee",
+              "snack",
+              "meal"
+            ],
+            "pattern": "coffee|snack|meal"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "required": [
+          "success",
+          "error",
+          "message",
+          "errorCode",
+          "timestamp",
+          "status",
+          "requestId"
+        ],
+        "description": "Canonical API error",
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "errorCode": {
+            "type": "string"
+          },
+          "details": {},
+          "timestamp": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestId": {
+            "type": "string"
+          }
+        }
+      },
+      "ImageFile": {
+        "type": "object",
+        "description": "Image file to be processed",
+        "properties": {
+          "dataUrl": {
+            "type": "string",
+            "description": "Base64 encoded image data URL",
+            "examples": [
+              "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQ..."
+            ]
+          },
+          "url": {
+            "type": "string",
+            "description": "URL to a publicly accessible image"
+          }
+        }
+      },
+      "PlanInfo": {
+        "required": [
+          "plan",
+          "limit"
+        ],
+        "description": "Monthly conversion limit for a plan",
+        "type": "object",
+        "properties": {
+          "plan": {
+            "$ref": "#/components/schemas/PlanType"
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "PlanType": {
+        "type": "string",
+        "enum": [
+          "FREE",
+          "PRO",
+          "BUSINESS",
+          "UNLIMITED"
+        ]
+      },
+      "Quota": {
+        "type": "object",
+        "required": [
+          "usageCount",
+          "limit",
+          "remaining",
+          "plan"
+        ],
+        "description": "Quota usage for the active monthly period",
+        "properties": {
+          "usageCount": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "remaining": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PlanType"
+          }
+        }
+      },
+      "QuotaStatusResponse": {
+        "required": [
+          "success",
+          "quota",
+          "enabled"
+        ],
+        "description": "Public quota status",
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "quota": {
+            "$ref": "#/components/schemas/Quota"
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Statistics": {
+        "description": "Global conversion statistics aggregated from Notion tracking database",
+        "type": "object",
+        "properties": {
+          "fileCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of image files processed in successful conversions"
+          },
+          "eventCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Total number of calendar events generated in successful conversions"
+          }
+        }
+      },
+      "SubscriptionCancellationResponse": {
+        "required": [
+          "success",
+          "message"
+        ],
+        "description": "Subscription cancellation confirmation",
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SubscriptionStatusResponse": {
+        "required": [
+          "planId",
+          "status"
+        ],
+        "description": "Current subscription status",
+        "type": "object",
+        "properties": {
+          "planId": {
+            "type": "string",
+            "enum": [
+              "free",
+              "pro",
+              "business",
+              "unlimited"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "trialing",
+              "past_due",
+              "canceled",
+              "free"
+            ]
+          },
+          "currentPeriodEnd": {
+            "type": "string"
+          }
+        }
+      },
+      "Timestamp": {
+        "type": "object",
+        "properties": {
+          "seconds": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nanos": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "UserQuota": {
+        "type": "object",
+        "properties": {
+          "plan": {
+            "type": "string"
+          },
+          "quotaUsed": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quotaLimit": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "periodStart": {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          "updatedAt": {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          "email": {
+            "type": "string"
+          },
+          "stripeCustomerId": {
+            "type": "string"
+          },
+          "stripeSubscriptionId": {
+            "type": "string"
+          },
+          "planType": {
+            "$ref": "#/components/schemas/PlanType"
+          }
+        }
+      },
+      "UserQuotaWrapper": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string"
+          },
+          "quota": {
+            "$ref": "#/components/schemas/UserQuota"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "admin",
+      "description": "Administrative Notion CMS operations"
+    },
+    {
+      "name": "converter",
+      "description": "AI-powered image to calendar conversion and quota status"
+    },
+    {
+      "name": "donations",
+      "description": "One-off donation checkout"
+    },
+    {
+      "name": "portfolio",
+      "description": "Notion CMS content management"
+    },
+    {
+      "name": "subscriptions",
+      "description": "Stripe subscription management"
+    },
+    {
+      "name": "webhooks",
+      "description": "Stripe event webhooks"
+    }
+  ],
+  "paths": {
+    "/v1/converter": {
+      "post": {
+        "summary": "Convert images to calendar events",
+        "description": "Uses AI to extract calendar events from images and convert them to ICS format",
+        "tags": [
+          "converter"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConverterRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Conversion successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConverterResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Idempotency conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Processing error - valid input but conversion failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Quota or rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "AI provider rejected the request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Quota datastore unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "AI provider timed out",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/converter/plans": {
+      "get": {
+        "summary": "Get available plans",
+        "description": "Returns available plans and their quota limits",
+        "tags": [
+          "converter"
+        ],
+        "responses": {
+          "200": {
+            "description": "Plans retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanInfo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/converter/quota-status": {
+      "get": {
+        "summary": "Get user quota status",
+        "description": "Retrieves the current quota usage and plan information for a user",
+        "tags": [
+          "converter"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quota status retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuotaStatusResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/v1/converter/statistics": {
+      "get": {
+        "summary": "Get usage statistics",
+        "description": "Retrieves usage statistics and analytics data",
+        "tags": [
+          "converter"
+        ],
+        "responses": {
+          "200": {
+            "description": "Statistics retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Statistics"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "502": {
+            "description": "Failed to fetch statistics from external service"
+          }
+        }
+      }
+    },
+    "/v1/donations/checkout": {
+      "post": {
+        "summary": "Create donation Checkout Session",
+        "description": "Creates a Stripe one-off payment session for coffee, snack or meal and returns the hosted payment URL",
+        "tags": [
+          "donations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DonationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Checkout session created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckoutResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid donation request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Payment provider error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/github/commits": {
+      "get": {
+        "summary": "Get GitHub commit statistics",
+        "description": "Retrieves the authenticated GitHub user's commit statistics over a period",
+        "tags": [
+          "portfolio"
+        ],
+        "parameters": [
+          {
+            "name": "months",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Commit statistics retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid months parameter"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "502": {
+            "description": "Failed to fetch commits from GitHub API"
+          }
+        }
+      }
+    },
+    "/v1/github/release": {
+      "get": {
+        "summary": "Get latest GitHub release",
+        "description": "Retrieves the latest release information for the repository",
+        "tags": [
+          "portfolio"
+        ],
+        "responses": {
+          "200": {
+            "description": "Release information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "502": {
+            "description": "Failed to fetch release from GitHub API"
+          }
+        }
+      }
+    },
+    "/v1/github/social": {
+      "get": {
+        "summary": "Get GitHub social accounts",
+        "description": "Retrieves the authenticated GitHub user's social accounts",
+        "tags": [
+          "portfolio"
+        ],
+        "responses": {
+          "200": {
+            "description": "Social accounts retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "502": {
+            "description": "Failed to fetch social accounts from GitHub API"
+          }
+        }
+      }
+    },
+    "/v1/github/user": {
+      "get": {
+        "summary": "Get GitHub user information",
+        "description": "Retrieves the authenticated GitHub user information",
+        "tags": [
+          "portfolio"
+        ],
+        "responses": {
+          "200": {
+            "description": "User information retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "502": {
+            "description": "Failed to fetch user from GitHub API"
+          }
+        }
+      }
+    },
+    "/v1/notion/cms": {
+      "get": {
+        "summary": "Get CMS content",
+        "description": "Fetches and groups content (tools, resources) from the Notion CMS database",
+        "tags": [
+          "portfolio"
+        ],
+        "responses": {
+          "200": {
+            "description": "Content retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "502": {
+            "description": "Failed to fetch content from Notion API"
+          }
+        }
+      }
+    },
+    "/v1/notion/cms/refresh": {
+      "get": {
+        "summary": "Forced refresh of CMS content",
+        "description": "Bypasses cache and fetches fresh content from Notion CMS database. Restricted to admin user.",
+        "tags": [
+          "admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "Content refreshed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - admin login required"
+          },
+          "502": {
+            "description": "Failed to fetch content from Notion API"
+          }
+        }
+      }
+    },
+    "/v1/subscriptions": {
+      "post": {
+        "summary": "Create Stripe Checkout Session",
+        "description": "Creates a Stripe Checkout Session for the requested subscription plan and returns the hosted payment URL",
+        "tags": [
+          "subscriptions"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckoutRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Checkout session created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckoutResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid checkout request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Payment provider error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/subscriptions/cancel": {
+      "post": {
+        "summary": "Cancel subscription",
+        "description": "Cancels the user's active subscription at period end",
+        "tags": [
+          "subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscription cancelled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionCancellationResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No active subscription",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "Payment provider error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/subscriptions/status": {
+      "get": {
+        "summary": "Get subscription status",
+        "description": "Returns the current subscription plan and status for a user",
+        "tags": [
+          "subscriptions"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscription status retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubscriptionStatusResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users": {
+      "get": {
+        "summary": "List all user quotas",
+        "description": "Retrieves a list of all users and their current quota status",
+        "tags": [
+          "admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of user quotas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UserQuotaWrapper"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/plans": {
+      "get": {
+        "summary": "Get plan limits",
+        "description": "Returns the current quota limits for each plan",
+        "tags": [
+          "admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "Plan limits retrieved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanInfo"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/users/plans/{plan}": {
+      "put": {
+        "summary": "Update plan limit",
+        "description": "Updates the quota limit for a specific plan (in-memory, resets on restart)",
+        "tags": [
+          "admin"
+        ],
+        "parameters": [
+          {
+            "name": "plan",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Plan limit updated"
+          }
+        }
+      }
+    },
+    "/v1/users/search": {
+      "get": {
+        "summary": "Search user by email",
+        "description": "Finds a user quota record by email address",
+        "tags": [
+          "admin"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserQuotaWrapper"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/v1/users/sync-firebase": {
+      "post": {
+        "summary": "Sync all from Notion",
+        "description": "Triggers a full synchronization of user quotas from Notion back to Firestore.",
+        "tags": [
+          "admin"
+        ],
+        "responses": {
+          "202": {
+            "description": "Synchronization started"
+          }
+        }
+      }
+    },
+    "/v1/users/sync-firebase-single": {
+      "post": {
+        "summary": "Pull single user from Notion",
+        "description": "Triggers a synchronization of a specific user's quota from Notion back to Firestore",
+        "tags": [
+          "admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Synchronization started"
+          }
+        }
+      }
+    },
+    "/v1/users/sync-notion": {
+      "post": {
+        "summary": "Sync all to Notion",
+        "description": "Triggers a full synchronization of all user quotas from Firestore to Notion.",
+        "tags": [
+          "admin"
+        ],
+        "responses": {
+          "202": {
+            "description": "Synchronization started"
+          }
+        }
+      }
+    },
+    "/v1/users/sync-notion-single": {
+      "post": {
+        "summary": "Push single user to Notion",
+        "description": "Triggers a synchronization of a specific user's quota from Firestore to Notion",
+        "tags": [
+          "admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Synchronization started"
+          }
+        }
+      }
+    },
+    "/v1/users/{userId}": {
+      "patch": {
+        "summary": "Update user quota",
+        "description": "Updates specific fields of a user's quota",
+        "tags": [
+          "admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserQuota"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "User quota updated"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get user quota",
+        "description": "Retrieves the quota status for a specific user",
+        "tags": [
+          "admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User quota found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserQuota"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete user quota",
+        "description": "Removes a user's quota record from Firestore",
+        "tags": [
+          "admin"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User quota deleted"
+          }
+        }
+      }
+    },
+    "/v1/webhooks/stripe": {
+      "post": {
+        "summary": "Receive Stripe webhook events",
+        "description": "Validates Stripe-Signature header and processes subscription lifecycle events",
+        "tags": [
+          "webhooks"
+        ],
+        "parameters": [
+          {
+            "name": "Stripe-Signature",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "info": {
+    "title": "3dime-api with Quarkus",
+    "version": "1.0",
+    "description": "This is a Microservice 3dime-api based on the OpenAPI 3.0 specification. Click [here](https://github.com/m-idriss/3dime-api). You can load via the `Code > Clone`, enjoy.",
+    "contact": {
+      "name": "Idriss",
+      "email": "contact@3dime.com",
+      "url": "https://github.com/m-idriss"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Auto generated value"
+    },
+    {
+      "url": "http://0.0.0.0:8080",
+      "description": "Auto generated value"
+    }
+  ]
+}

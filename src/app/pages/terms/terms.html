@@ -26,7 +26,7 @@
         <p>PhotoCalia is an AI-powered calendar conversion service that:</p>
         <ul>
           <li>Converts images (JPG, PNG) and PDF files into calendar events</li>
-          <li>Uses GPT-4 Vision AI to extract event information (dates, times, locations)</li>
+          <li>Uses multimodal AI to propose event information (dates, times, locations)</li>
           <li>Generates ICS files compatible with major calendar applications</li>
           <li>Provides a web-based interface for event review and editing</li>
         </ul>
@@ -60,7 +60,7 @@
         <h3>4.1 Free Tier</h3>
         <p>Free users receive:</p>
         <ul>
-          <li>3 free calendar conversions per month</li>
+          <li>{{ freePlanLimit() }} free calendar conversions per month</li>
           <li>Basic event extraction features</li>
           <li>Standard support</li>
         </ul>
@@ -88,8 +88,8 @@
         <h2>5. AI-Generated Content and Accuracy</h2>
         <h3>5.1 No Guarantee of Accuracy</h3>
         <p>
-          <strong>Important:</strong> PhotoCalia uses AI (GPT-4 Vision) to extract calendar events
-          from images. While our AI strives for accuracy, we cannot guarantee that:
+          <strong>Important:</strong> PhotoCalia uses multimodal AI to extract calendar events from
+          images. While our AI strives for accuracy, we cannot guarantee that:
         </p>
         <ul>
           <li>All events will be correctly extracted</li>
@@ -123,8 +123,8 @@
         </p>
         <ul>
           <li>Process your files for calendar event extraction</li>
-          <li>Send your images to OpenAI's GPT-4 Vision API</li>
-          <li>Store files temporarily (maximum 24 hours) for processing</li>
+          <li>Send file content to the server-configured AI processor for extraction</li>
+          <li>Process files for the duration of the conversion request</li>
         </ul>
 
         <h3>6.2 Our Content</h3>
@@ -159,7 +159,8 @@
             past 12 months
           </li>
           <li>
-            We are not responsible for third-party services (OpenAI, Firebase) or their failures
+            We are not responsible for third-party services (AI providers, Firebase, Google Cloud,
+            Vercel, Notion, or Stripe) or their failures
           </li>
         </ul>
         <p>
@@ -186,10 +187,12 @@
         <h2>9. Third-Party Services</h2>
         <p>PhotoCalia integrates with third-party services:</p>
         <ul>
-          <li><strong>OpenAI (GPT-4 Vision):</strong> AI event extraction</li>
+          <li><strong>Configured multimodal AI provider:</strong> Event extraction</li>
           <li><strong>Vercel:</strong> Frontend hosting and consent-based analytics</li>
           <li><strong>Firebase:</strong> Google authentication</li>
           <li><strong>Google Cloud:</strong> Application API hosting</li>
+          <li><strong>Notion:</strong> Operational conversion and quota tracking</li>
+          <li><strong>Stripe:</strong> Subscription and donation payments</li>
         </ul>
         <p>
           These services have their own terms and privacy policies. We are not responsible for their

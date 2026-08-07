@@ -24,7 +24,7 @@ Rendez-vous sur photocalia.com et connectez-vous avec votre compte Google (2 sec
 
 ### Étape 3 : Vérifiez et enregistrez vos événements
 
-L'IA analyse instantanément votre image avec la technologie GPT-4 Vision. Elle extrait les titres, dates, heures et lieux. Vérifiez les résultats, modifiez ce qui est nécessaire, puis téléchargez votre fichier ICS et importez-le dans Google Agenda. C'est fait !
+L'IA analyse votre image et extrait les titres, dates, heures et lieux. Vérifiez les résultats, modifiez ce qui est nécessaire, puis téléchargez votre fichier ICS et importez-le dans Google Agenda. C'est fait !
 
 ## Conseils pour de meilleurs résultats
 

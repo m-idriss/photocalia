@@ -60,7 +60,9 @@ describe('Pricing', () => {
   it('should use the production quota fallback while plans are loading', () => {
     const fixture = TestBed.createComponent(Pricing);
     const proPlan = SUBSCRIPTION_PLANS.find((p) => p.id === 'pro')!;
-    expect(fixture.componentInstance['getQuotaParams'](proPlan)).toEqual({ limit: 100 });
+    expect(fixture.componentInstance['getQuotaParams'](proPlan)).toEqual({
+      limit: proPlan.monthlyQuota,
+    });
   });
 
   it('should return "0" as price for free plan', () => {

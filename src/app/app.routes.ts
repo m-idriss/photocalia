@@ -1,6 +1,12 @@
 import { Routes, Route } from '@angular/router';
 import { blogSeoResolver, blogTitleResolver } from './pages/blog/blog-route.resolver';
 import { homePageTitle, localizedPageTitle, pageTitle } from './utils/page-title.utils';
+import { SUBSCRIPTION_PLANS } from './constants';
+
+const FREE_PLAN = SUBSCRIPTION_PLANS.find((plan) => plan.id === 'free')!;
+const PRO_PLAN = SUBSCRIPTION_PLANS.find((plan) => plan.id === 'pro')!;
+const BUSINESS_PLAN = SUBSCRIPTION_PLANS.find((plan) => plan.id === 'business')!;
+const PRICING_DESCRIPTION = `Choose the PhotoCalia plan that fits your needs. Start free with ${FREE_PLAN.monthlyQuota} conversions/month, upgrade to Pro for ${PRO_PLAN.monthlyQuota}/month or Business for ${BUSINESS_PLAN.monthlyQuota}/month.`;
 
 const HOME_TITLE = homePageTitle('Photo to Calendar Converter with AI');
 const HOW_IT_WORKS_TITLE = pageTitle('How It Works: Convert Photos & Images to Calendar Events');
@@ -71,7 +77,7 @@ const pageRoutes: Route[] = [
       seo: {
         title: HOW_IT_WORKS_TITLE,
         description:
-          'Learn how PhotoCalia converts photos, screenshots, and PDFs into calendar events using AI. Upload any image of an appointment, event flyer, or schedule — GPT-4 Vision extracts the dates, times, and locations automatically.',
+          'Learn how PhotoCalia converts photos, screenshots, and PDFs into calendar events using multimodal AI. Upload an appointment, flyer, or schedule, then review the extracted dates, times, and locations.',
         keywords:
           'photo to calendar, image to calendar, add events from picture, AI calendar assistant, ICS import, screenshot to calendar, how to convert image to calendar, calendar event extraction, picture to calendar event',
         localized: {
@@ -114,7 +120,7 @@ const pageRoutes: Route[] = [
                 name: 'What image formats are supported by PhotoCalia?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'PhotoCalia supports JPG, JPEG, PNG, HEIC image formats and PDF documents. You can upload appointment reminders, concert tickets, school schedules, event flyers, and any document containing calendar information.',
+                  text: 'PhotoCalia supports JPG, JPEG and PNG images, plus PDF documents. You can upload appointment reminders, concert tickets, school schedules, event flyers, and documents containing calendar information.',
                 },
               },
               {
@@ -122,7 +128,7 @@ const pageRoutes: Route[] = [
                 name: 'How accurate is the AI at reading calendar information from images?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'PhotoCalia uses GPT-4 Vision, one of the most accurate AI models for image understanding. It reliably extracts dates, times, locations, and event titles from clear images. You can always review and edit any extracted detail before saving to your calendar.',
+                  text: 'PhotoCalia uses multimodal AI to propose dates, times, locations, and event titles from clear images. Accuracy depends on the source, so you can review and edit every detail before saving.',
                 },
               },
               {
@@ -130,7 +136,7 @@ const pageRoutes: Route[] = [
                 name: 'Do I need an account to convert images to calendar files?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'You sign in with your existing Google account — no separate registration or form to fill out. Your Google account gives you 3 free conversions per month immediately.',
+                  text: `You sign in with your existing Google account — no separate registration or form to fill out. Your Google account gives you ${FREE_PLAN.monthlyQuota} free conversions per month immediately.`,
                 },
               },
               {
@@ -138,7 +144,7 @@ const pageRoutes: Route[] = [
                 name: 'Is my image data kept private?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'Yes. Your files are processed securely and are not stored permanently on PhotoCalia servers. The AI conversion happens in real-time, and your images are handled according to strict privacy protocols.',
+                  text: 'Uploaded files are processed over HTTPS and are not intentionally stored by PhotoCalia after the request completes. Account, quota, payment and limited operational records have separate retention rules described in the privacy policy.',
                 },
               },
               {
@@ -208,7 +214,7 @@ const pageRoutes: Route[] = [
                 name: 'What image types can become calendar events?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'PhotoCalia works with photos, screenshots, flyers, appointment cards, scanned notices, JPG, PNG, HEIC, and PDF files when they contain visible dates, times, places, or event titles.',
+                  text: 'PhotoCalia works with photos, screenshots, flyers, appointment cards, scanned notices, JPG, JPEG, PNG and PDF files when they contain visible dates, times, places or event titles.',
                 },
               },
             ],
@@ -518,8 +524,7 @@ const pageRoutes: Route[] = [
     data: {
       seo: {
         title: PRICING_TITLE,
-        description:
-          'Choose the PhotoCalia plan that fits your needs. Start free with 3 conversions/month, upgrade to Pro for 100/month or Business for 120/month.',
+        description: PRICING_DESCRIPTION,
         keywords:
           'photocalia pricing, calendar converter plans, photo to calendar subscription, upgrade plan',
         ogImage: 'https://www.photocalia.com/assets/images/converter.png',
@@ -555,7 +560,7 @@ const pageRoutes: Route[] = [
                 item: {
                   '@type': 'Product',
                   name: 'Free Plan',
-                  description: '3 conversions per month, no credit card required.',
+                  description: `${FREE_PLAN.monthlyQuota} conversions per month, no credit card required.`,
                   offers: {
                     '@type': 'Offer',
                     price: '0',
@@ -571,10 +576,10 @@ const pageRoutes: Route[] = [
                 item: {
                   '@type': 'Product',
                   name: 'Pro Plan',
-                  description: '100 conversions per month.',
+                  description: `${PRO_PLAN.monthlyQuota} conversions per month.`,
                   offers: {
                     '@type': 'Offer',
-                    price: '4.99',
+                    price: String(PRO_PLAN.monthlyPrice),
                     priceCurrency: 'EUR',
                     availability: 'https://schema.org/InStock',
                     url: 'https://www.photocalia.com/pricing',
@@ -587,10 +592,10 @@ const pageRoutes: Route[] = [
                 item: {
                   '@type': 'Product',
                   name: 'Business Plan',
-                  description: '120 conversions per month.',
+                  description: `${BUSINESS_PLAN.monthlyQuota} conversions per month.`,
                   offers: {
                     '@type': 'Offer',
-                    price: '14.99',
+                    price: String(BUSINESS_PLAN.monthlyPrice),
                     priceCurrency: 'EUR',
                     availability: 'https://schema.org/InStock',
                     url: 'https://www.photocalia.com/pricing',
@@ -651,7 +656,7 @@ const pageRoutes: Route[] = [
       seo: {
         title: ABOUT_TITLE,
         description:
-          'Learn about PhotoCalia, the AI-powered photo to calendar converter. Built by Idriss using Angular, Firebase, and GPT-4 Vision. Open source, privacy-focused, and free to use.',
+          'Learn about PhotoCalia, the AI-powered photo to calendar converter. Built by Idriss with Angular, Firebase Authentication, Vercel, and a Quarkus API.',
         keywords:
           'about photocalia, AI calendar converter, photo to calendar app, Idriss, 3dime, open source calendar tool',
         ogImage: 'https://www.photocalia.com/assets/images/converter.png',

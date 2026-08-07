@@ -242,9 +242,9 @@
           "url": "https://3dime.com"
         },
         "featureList": [
-          "AI-powered calendar extraction using GPT-4 Vision",
+          "AI-powered calendar extraction with a complete review step",
           "OCR text recognition for event details",
-          "Support for images (JPG, PNG, JPEG, HEIC) and PDF files",
+          "Support for images (JPG, PNG, JPEG) and PDF files",
           "Batch processing with real-time progress tracking",
           "Drag and drop file upload",
           "Event editing and modification before export",
@@ -299,7 +299,7 @@
             "name": "How do I convert an image to a calendar file?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Simply upload your image (screenshot, photo, or scanned document) containing calendar information to PhotoCalia. The tool uses GPT-4 Vision AI to automatically extract event details including dates, times, locations, and descriptions, then generates an ICS calendar file you can import into Google Calendar, Outlook, or Apple Calendar."
+              "text": "Upload an image containing calendar information to PhotoCalia. Multimodal AI prepares event details including dates, times, locations, and descriptions. Review the result, then export an ICS file for Google Calendar, Outlook, or Apple Calendar."
             }
           },
           {
@@ -307,7 +307,7 @@
             "name": "What file formats are supported for calendar conversion?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "PhotoCalia supports common image formats (JPG, JPEG, PNG, HEIC) and PDF documents. You can upload appointment screenshots, event flyers, meeting invitations, school schedules, concert tickets, or any document containing calendar information."
+              "text": "PhotoCalia supports JPG, JPEG and PNG images, plus PDF documents. You can upload appointment screenshots, event flyers, meeting invitations, school schedules, concert tickets, or any document containing calendar information."
             }
           },
           {
@@ -347,7 +347,7 @@
             "name": "Is my data secure when using PhotoCalia?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, your privacy is protected. Files are processed securely and are not stored permanently on our servers. The AI conversion happens in real-time, and your data is handled with strict security protocols."
+              "text": "Uploaded files are processed over HTTPS and are not intentionally stored by PhotoCalia after the request completes. Account, quota, payment and limited operational records have separate retention rules described in the privacy policy."
             }
           },
           {
@@ -379,7 +379,7 @@
             "name": "How accurate is the AI calendar extraction?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "PhotoCalia uses GPT-4 Vision, one of the most advanced AI models available, for highly accurate event extraction. It reliably reads dates, times, locations, and event titles from clear images. You can always review and correct any detail before saving."
+              "text": "PhotoCalia uses multimodal AI to propose event details from clear images. Accuracy depends on the source, and you can review and correct every detail before saving."
             }
           }
         ]
@@ -427,7 +427,7 @@
         "supply": [
           {
             "@type": "HowToSupply",
-            "name": "Image file (JPG, PNG, HEIC) or PDF document containing calendar information"
+            "name": "Image file (JPG, JPEG, PNG) or PDF document containing calendar information"
           }
         ],
         "tool": [
@@ -442,7 +442,7 @@
             "@type": "HowToStep",
             "position": 1,
             "name": "Upload Your Image or PDF",
-            "text": "Drag and drop or click to upload images (JPG, PNG, HEIC) or PDF files containing calendar information such as appointment reminders, event flyers, concert tickets, school schedules, or meeting invitations.",
+            "text": "Drag and drop or click to upload images (JPG, JPEG, PNG) or PDF files containing calendar information such as appointment reminders, event flyers, concert tickets, school schedules, or meeting invitations.",
             "url": "https://www.photocalia.com#step1",
             "image": "https://www.photocalia.com/assets/images/converter.png"
           },
@@ -450,7 +450,7 @@
             "@type": "HowToStep",
             "position": 2,
             "name": "AI Extracts Event Details Automatically",
-            "text": "The AI-powered converter using GPT-4 Vision automatically reads and extracts all event information including dates, times, locations, event titles, and descriptions from your uploaded files. No manual typing required.",
+            "text": "The AI-powered converter reads the uploaded files and proposes dates, times, locations, titles, and descriptions. Review every detail before export.",
             "url": "https://www.photocalia.com#step2",
             "image": "https://www.photocalia.com/assets/images/converter.png"
           },

@@ -1,0 +1,198 @@
+<div class="primary-actions mobile-tablet-calendar-button">
+  <button
+    class="action-button calendar-view btn btn-primary"
+    (click)="openCalendarRequested.emit()"
+    aria-label="Open interactive calendar view"
+    appTooltip="View and edit events in an interactive calendar"
+    appTooltipPlacement="top"
+  >
+    📅 View Calendar
+  </button>
+</div>
+
+<section class="events-list" aria-labelledby="events-heading">
+  <h3 id="events-heading" class="sr-only">Extracted Calendar Events</h3>
+  <div ngbAccordion class="events-accordion">
+    @for (event of events(); track $index) {
+      <div
+        ngbAccordionItem
+        class="event-accordion-item"
+        [style.border-left-color]="getEventColor(event.summary).bg"
+      >
+        <h2 ngbAccordionHeader>
+          <button
+            ngbAccordionButton
+            class="event-accordion-header"
+            (click)="eventDateRequested.emit(event)"
+          >
+            <div class="event-accordion-header-content">
+              <div class="event-date" aria-hidden="true">
+                <div class="date-block" [style.background]="getEventColor(event.summary).bg">
+                  <span [innerHTML]="monthDay(event.start)"></span>
+                </div>
+              </div>
+              <div class="event-header-main">
+                <h4 class="event-title">{{ event.summary }}</h4>
+                @if (event.location) {
+                  <div class="event-location-header">
+                    <span>📍 {{ event.location }}</span>
+                  </div>
+                }
+              </div>
+              <div class="event-times-header">
+                <time class="event-time-start" [attr.datetime]="event.start">{{
+                  time(event.start)
+                }}</time>
+                @if (event.end && time(event.end)) {
+                  <time class="event-time-end" [attr.datetime]="event.end">{{
+                    time(event.end)
+                  }}</time>
+                }
+              </div>
+            </div>
+          </button>
+        </h2>
+        <div ngbAccordionCollapse>
+          <div ngbAccordionBody>
+            <ng-template>
+              @if (!event.isEditing) {
+                <div class="event-details-body">
+                  @if (event.location) {
+                    <div class="event-detail-row">
+                      <span class="detail-label">📍 Location:</span>
+                      <span class="detail-value">{{ event.location }}</span>
+                    </div>
+                  }
+                  @if (event.description) {
+                    <div class="event-detail-row">
+                      <span class="detail-label">📝 Description:</span>
+                      <span class="detail-value">{{ event.description }}</span>
+                    </div>
+                  }
+                  <div class="event-detail-row">
+                    <span class="detail-label">🕒 Start:</span>
+                    <span class="detail-value">{{ event.start | date: 'short' }}</span>
+                  </div>
+                  <div class="event-detail-row">
+                    <span class="detail-label">🕓 End:</span>
+                    <span class="detail-value">{{ event.end | date: 'short' }}</span>
+                  </div>
+                  <div class="event-actions-buttons">
+                    <button
+                      class="action-button-small edit btn btn-sm btn-info"
+                      (click)="editRequested.emit($index)"
+                      aria-label="Edit event"
+                      appTooltip="Edit this event"
+                      appTooltipPlacement="top"
+                    >
+                      ✏️ Edit
+                    </button>
+                    <button
+                      class="action-button-small delete btn btn-sm btn-danger"
+                      (click)="deleteRequested.emit($index)"
+                      aria-label="Delete event"
+                      appTooltip="Delete this event"
+                      appTooltipPlacement="top"
+                    >
+                      🗑️ Delete
+                    </button>
+                  </div>
+                </div>
+              } @else {
+                <div class="event-edit-form">
+                  <div class="form-group">
+                    <label for="summary-{{ $index }}">Event Title</label>
+                    <input
+                      id="summary-{{ $index }}"
+                      type="text"
+                      class="form-input"
+                      [value]="event.summary"
+                      (input)="changeField($index, 'summary', $any($event.target).value)"
+                      placeholder="Event title"
+                    />
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="start-{{ $index }}">Start</label>
+                      <input
+                        id="start-{{ $index }}"
+                        type="datetime-local"
+                        class="form-input"
+                        [value]="formatDateForInput(event.start, event.allDay)"
+                        (input)="
+                          changeField(
+                            $index,
+                            'start',
+                            parseDateFromInput($any($event.target).value, event.allDay)
+                          )
+                        "
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="end-{{ $index }}">End</label>
+                      <input
+                        id="end-{{ $index }}"
+                        type="datetime-local"
+                        class="form-input"
+                        [value]="formatDateForInput(event.end, event.allDay)"
+                        (input)="
+                          changeField(
+                            $index,
+                            'end',
+                            parseDateFromInput($any($event.target).value, event.allDay)
+                          )
+                        "
+                      />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="location-{{ $index }}">Location</label>
+                    <input
+                      id="location-{{ $index }}"
+                      type="text"
+                      class="form-input"
+                      [value]="event.location || ''"
+                      (input)="changeField($index, 'location', $any($event.target).value)"
+                      placeholder="Event location (optional)"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="description-{{ $index }}">Description</label>
+                    <textarea
+                      id="description-{{ $index }}"
+                      class="form-input"
+                      rows="3"
+                      [value]="event.description || ''"
+                      (input)="changeField($index, 'description', $any($event.target).value)"
+                      placeholder="Event description (optional)"
+                    ></textarea>
+                  </div>
+                  <div class="form-actions">
+                    <button
+                      class="form-button save btn btn-success"
+                      (click)="saveRequested.emit($index)"
+                      aria-label="Save changes"
+                      appTooltip="Save event changes"
+                      appTooltipPlacement="top"
+                    >
+                      💾 Save
+                    </button>
+                    <button
+                      class="form-button cancel btn btn-secondary"
+                      (click)="cancelRequested.emit($index)"
+                      aria-label="Cancel editing"
+                      appTooltip="Cancel without saving"
+                      appTooltipPlacement="top"
+                    >
+                      ✕ Cancel
+                    </button>
+                  </div>
+                </div>
+              }
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

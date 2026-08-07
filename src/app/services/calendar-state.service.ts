@@ -122,6 +122,7 @@ export class CalendarStateService {
           location: e.location,
           start: e.start instanceof Date ? e.start.toISOString() : e.start,
           end: e.end instanceof Date ? e.end.toISOString() : e.end,
+          allDay: e.allDay,
         })),
         icsContent: this.icsContent(),
         calendarVisible: this.isVisible(),
@@ -152,11 +153,11 @@ export class CalendarStateService {
       }
 
       if (state.events?.length > 0) {
-        // Convert date strings back to Date objects
+        // Keep all-day DATE values as date-only strings. They do not represent UTC instants.
         const events = state.events.map((e) => ({
           ...e,
-          start: new Date(e.start),
-          end: new Date(e.end),
+          start: e.allDay ? e.start : new Date(e.start),
+          end: e.allDay ? e.end : new Date(e.end),
         }));
         this.events.set(events);
         this.icsContent.set(state.icsContent);

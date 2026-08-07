@@ -33,7 +33,7 @@ The gap between 'I have a photo with event info' and 'this is in my calendar' re
 
 ## The Solution the Community Landed On
 
-PhotoCalia uses GPT-4 Vision AI to read any image — photos, screenshots, PDFs, scanned documents — and extract every event it finds: title, date, time, location, and description. The result is an ICS file you can import into Google Calendar, Apple Calendar, or Outlook in one click.
+PhotoCalia uses multimodal AI to read photos, screenshots, PDFs, and scanned documents and extract the events it finds: title, date, time, location, and description. The result is an ICS file you can import into Google Calendar, Apple Calendar, or Outlook in one click.
 
 No manual typing. No OCR mistakes to hunt down. No credit card required for basic use. Just upload, review the extracted events, and add them to your calendar.
 
@@ -41,11 +41,11 @@ No manual typing. No OCR mistakes to hunt down. No credit card required for basi
 
 ### 1. Upload your photo or screenshot
 
-Drag and drop any image containing event information — a flyer, an appointment card, a timetable photo, or a PDF. PhotoCalia accepts JPG, PNG, HEIC, and PDF formats.
+Drag and drop any image containing event information — a flyer, an appointment card, a timetable photo, or a PDF. PhotoCalia accepts JPG, JPEG, PNG, and PDF formats.
 
 ### 2. AI extracts the events instantly
 
-GPT-4 Vision reads the image and pulls out every event it finds. You see a clean preview with all extracted details — title, date, time, location. Edit anything before proceeding.
+The AI reads the image and prepares the events it finds. You see a clean preview with the extracted details — title, date, time, location — and can edit anything before proceeding.
 
 ### 3. Download and import into your calendar
 

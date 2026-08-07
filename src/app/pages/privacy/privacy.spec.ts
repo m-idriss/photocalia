@@ -7,7 +7,7 @@ describe('Privacy', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Privacy]
+      imports: [Privacy],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Privacy);
@@ -24,24 +24,27 @@ describe('Privacy', () => {
     expect(compiled.querySelector('h1')?.textContent).toContain('Privacy Policy');
   });
 
-  it('should contain GDPR rights section', () => {
+  it('should contain data rights', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const content = compiled.textContent || '';
-    expect(content).toContain('Your Rights (GDPR)');
-    expect(content).toContain('Right to Access');
+    expect(content).toContain('Your rights');
+    expect(content).toContain('request access');
   });
 
-  it('should mention OpenAI data processing', () => {
+  it('should describe the configured AI processors without a fixed model claim', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const content = compiled.textContent || '';
-    expect(content).toContain('OpenAI');
-    expect(content).toContain('GPT-4 Vision');
+    expect(content).toContain('Google');
+    expect(content).toContain('Anthropic');
+    expect(content).toContain('selected server-side');
   });
 
-  it('should mention Firebase data processing', () => {
+  it('should mention Firebase and Notion data processing', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const content = compiled.textContent || '';
     expect(content).toContain('Firebase');
+    expect(content).toContain('Notion');
+    expect(content).toContain('email');
   });
 
   it('should include contact information', () => {
