@@ -53,16 +53,22 @@ function requireFields(data, fields, source) {
   }
 }
 
-function renderMarkdown(markdown) {
+function renderMarkdown(markdown, locale) {
   const html = marked.parse(markdown, {
     async: false,
     gfm: true,
   });
 
-  return html
+  const rendered = html
     .replace('<p>', '<p class="lead">')
     .replaceAll('<a href="http', '<a target="_blank" rel="noopener noreferrer" href="http')
     .trim();
+
+  if (locale !== 'fr') return rendered;
+
+  return rendered.replace(/href="\/(?!fr(?:\/|"))([^"]*)"/g, (_match, pagePath) => {
+    return `href="/fr${pagePath ? `/${pagePath}` : ''}"`;
+  });
 }
 
 function normalizeDate(value, source, field) {
@@ -104,14 +110,14 @@ ${image ? `    <image:image>\n      <image:loc>${escapeXml(`${siteUrl}${image}`)
   ];
 }
 
-async function readMarkdown(file, fields) {
+async function readMarkdown(file, fields, locale) {
   const source = await readFile(file, 'utf8');
   const parsed = matter(source);
   requireFields(parsed.data, fields, path.relative(root, file));
 
   return {
     data: parsed.data,
-    contentHtml: renderMarkdown(parsed.content),
+    contentHtml: renderMarkdown(parsed.content, locale),
   };
 }
 
@@ -124,8 +130,12 @@ const articles = [];
 
 for (const directory of directories) {
   const articleDir = path.join(contentDir, directory);
-  const english = await readMarkdown(path.join(articleDir, 'index.md'), requiredSharedFields);
-  const french = await readMarkdown(path.join(articleDir, 'fr.md'), requiredLocalizedFields);
+  const english = await readMarkdown(
+    path.join(articleDir, 'index.md'),
+    requiredSharedFields,
+    'en',
+  );
+  const french = await readMarkdown(path.join(articleDir, 'fr.md'), requiredLocalizedFields, 'fr');
 
   if (english.data.slug !== directory) {
     throw new Error(

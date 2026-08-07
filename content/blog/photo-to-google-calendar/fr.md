@@ -44,4 +44,4 @@ PhotoCalia fonctionne avec pratiquement toute image contenant des informations d
 
 Arrêtez de laisser les événements vous échapper. Avec PhotoCalia, convertir une photo en événement Google Agenda prend moins de temps que de saisir un seul événement manuellement. Essayez gratuitement — {freeLimit} conversions par mois, sans carte bancaire.
 
-Guides associés : découvrez [comment l'OCR IA extrait les événements de calendrier](/blog/ai-ocr-calendar-extraction), comparez le flux complet sur [comment fonctionne PhotoCalia](/how-it-works), ou consultez les [formules PhotoCalia](/pricing) si vous avez besoin de plus de conversions mensuelles.
+Guides associés : essayez le convertisseur [image vers Google Agenda](/image-to-google-calendar), découvrez [comment l'OCR IA extrait les événements de calendrier](/blog/ai-ocr-calendar-extraction), ou consultez les [formules PhotoCalia](/pricing) si vous avez besoin de plus de conversions mensuelles.

@@ -16,6 +16,13 @@ describe('Blog', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
+  it('renders one accessible page heading', () => {
+    const fixture = TestBed.createComponent(Blog);
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll('h1').length).toBe(1);
+  });
+
   it('should sort articles from newest to oldest', () => {
     const fixture = TestBed.createComponent(Blog);
     const articles = fixture.componentInstance.articles;

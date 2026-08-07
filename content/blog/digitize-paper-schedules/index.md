@@ -49,4 +49,4 @@ Tools like PhotoCalia combine OCR with AI understanding. Upload a photo of your 
 
 The best time to digitize a paper schedule is the moment you receive it. With AI-powered tools like PhotoCalia, you can snap a photo and have calendar events ready in seconds. No more lost appointment cards, no more missed events.
 
-Related guides: start with [photo to Google Calendar conversion](/blog/photo-to-google-calendar), learn [how AI OCR understands event details](/blog/ai-ocr-calendar-extraction), or see healthcare-specific tips for [appointment cards and reminders](/blog/healthcare-appointments).
+Related guides: use the [photo to calendar converter](/photo-to-calendar), learn [how AI OCR understands event details](/blog/ai-ocr-calendar-extraction), or see healthcare-specific tips for [appointment cards and reminders](/blog/healthcare-appointments).
