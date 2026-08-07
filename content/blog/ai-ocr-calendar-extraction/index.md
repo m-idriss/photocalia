@@ -23,7 +23,7 @@ But raw text isn't enough for calendar extraction. Knowing that an image contain
 
 ## How AI Goes Beyond Traditional OCR
 
-Modern AI models like GPT-4 Vision don't just read text — they understand context. When analyzing an event flyer, the AI recognizes that 'Saturday, March 15' is a date, 'Community Center' is a location, and 'Jazz Night' is an event title. It understands the relationship between these pieces of information.
+Modern multimodal AI does not just read text — it interprets context. When analyzing an event flyer, the AI can recognize that 'Saturday, March 15' is a date, 'Community Center' is a location, and 'Jazz Night' is an event title. It then relates those pieces of information to one event.
 
 This contextual understanding is what makes AI-powered calendar extraction so powerful. The AI can handle messy layouts, decorative fonts, multiple languages, and even handwritten notes — things that would confuse traditional OCR systems.
 
@@ -47,6 +47,6 @@ As AI models continue to improve, expect even better accuracy with handwritten t
 
 ## Try AI-Powered Calendar Extraction
 
-PhotoCalia uses GPT-4 Vision to deliver state-of-the-art calendar extraction. Upload any event flyer, appointment card, or schedule and see the AI in action — it's free to try with {freeLimit} conversions per month.
+PhotoCalia uses a server-configured multimodal AI provider for calendar extraction. Upload an event flyer, appointment card, or schedule, then review the proposed events — it is free to try with {freeLimit} conversions per month.
 
 Related guides: follow the practical tutorial to [convert a photo to Google Calendar](/blog/photo-to-google-calendar), see examples for [paper schedule digitization](/blog/digitize-paper-schedules), or review the product flow on [how PhotoCalia works](/how-it-works).

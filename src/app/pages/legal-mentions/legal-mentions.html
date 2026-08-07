@@ -40,24 +40,18 @@
         <h3>2.1 Application Hosting</h3>
         <p>The PhotoCalia application is hosted by:</p>
         <ul>
-          <li><strong>Provider:</strong> Firebase Hosting (Google Cloud Platform)</li>
-          <li><strong>Company:</strong> Google LLC</li>
-          <li><strong>Address:</strong> 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA</li>
+          <li><strong>Provider:</strong> Vercel</li>
           <li>
             <strong>Website:</strong>
-            <a href="https://firebase.google.com" target="_blank" rel="noopener noreferrer"
-              >firebase.google.com</a
-            >
+            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">vercel.com</a>
           </li>
         </ul>
 
         <h3>2.2 Backend Services</h3>
         <p>Backend processing is powered by:</p>
         <ul>
-          <li>
-            <strong>Cloud Functions:</strong> Firebase Cloud Functions (Google Cloud Platform)
-          </li>
-          <li><strong>AI Processing:</strong> OpenAI API (GPT-4 Vision)</li>
+          <li><strong>Application API:</strong> Quarkus services on Google Cloud Platform</li>
+          <li><strong>AI Processing:</strong> Server-configured multimodal AI provider</li>
           <li><strong>Authentication:</strong> Firebase Authentication</li>
         </ul>
       </div>
@@ -118,7 +112,7 @@
         <ul>
           <li><strong>Angular:</strong> MIT License</li>
           <li><strong>Firebase SDK:</strong> Apache License 2.0</li>
-          <li><strong>OpenAI API:</strong> Subject to OpenAI's Terms of Use</li>
+          <li><strong>AI provider APIs:</strong> Subject to the active provider's terms</li>
           <li><strong>FullCalendar:</strong> MIT License</li>
           <li><strong>ical.js:</strong> Mozilla Public License 2.0</li>
         </ul>
@@ -148,9 +142,9 @@
         <p>Uploaded files are:</p>
         <ul>
           <li>Processed for calendar event extraction</li>
-          <li>Automatically deleted within 24 hours</li>
-          <li>Not used for any other purpose</li>
-          <li>Not shared with third parties except as required for processing (OpenAI API)</li>
+          <li>Not intentionally stored by PhotoCalia after the conversion request completes</li>
+          <li>Used only to provide and secure the requested conversion</li>
+          <li>Sent to the configured AI processor only when required for extraction</li>
         </ul>
       </div>
 
@@ -193,21 +187,16 @@
             (cannot be disabled)
           </li>
           <li>
-            <strong>Analytics Cookies:</strong> Google Analytics for anonymized usage statistics
-            (can be opted out)
+            <strong>Analytics:</strong> Consent-based Vercel Analytics for aggregate usage
+            statistics
           </li>
           <li>
             <strong>Preference Cookies:</strong> To remember your settings (theme, language, etc.)
           </li>
         </ul>
         <p>
-          You can manage cookie preferences or opt-out using the
-          <a
-            href="https://tools.google.com/dlpage/gaoptout"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Google Analytics Opt-out Browser Add-on</a
-          >.
+          You can refuse analytics or change your choice at any time through the Cookie Preferences
+          control in the footer.
         </p>
       </div>
 

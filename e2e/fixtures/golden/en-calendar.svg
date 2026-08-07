@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#f8fafc"/>
+  <rect x="70" y="60" width="1060" height="680" rx="32" fill="#ffffff" stroke="#0f766e" stroke-width="8"/>
+  <text x="120" y="150" font-family="Arial, sans-serif" font-size="58" font-weight="700" fill="#0f172a">Community Calendar</text>
+  <text x="120" y="245" font-family="Arial, sans-serif" font-size="38" fill="#0f172a">Product workshop</text>
+  <text x="120" y="300" font-family="Arial, sans-serif" font-size="30" fill="#334155">7 August 2026 · 10:00–11:30</text>
+  <text x="120" y="350" font-family="Arial, sans-serif" font-size="30" fill="#334155">Studio Atlas, Paris</text>
+  <line x1="120" y1="405" x2="1080" y2="405" stroke="#cbd5e1" stroke-width="3"/>
+  <text x="120" y="485" font-family="Arial, sans-serif" font-size="38" fill="#0f172a">Summer closure — all day</text>
+  <text x="120" y="540" font-family="Arial, sans-serif" font-size="30" fill="#334155">15 August 2026</text>
+  <text x="120" y="655" font-family="Arial, sans-serif" font-size="24" fill="#64748b">Synthetic PhotoCalia QA fixture — no personal data</text>
+</svg>

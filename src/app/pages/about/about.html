@@ -12,13 +12,12 @@
       appScrollRevealDirection="left"
       aria-labelledby="mission-title"
     >
-      <h2 id="mission-title" class="section-title">{{ 'about.mission.title' | translate }}</h2>
+      <h1 id="mission-title" class="section-title">{{ 'about.mission.title' | translate }}</h1>
       <div class="section-content mission-copy">
         <p>{{ 'about.mission.p1' | translate }}</p>
         <p>
           {{ 'about.mission.p2.beforeAi' | translate }}
-          <a href="https://openai.com/gpt-4" target="_blank" rel="noopener noreferrer"
-            >GPT-4 Vision</a
+          <strong>{{ 'about.tech.ai.name' | translate }}</strong
           >{{ 'about.mission.p2.afterAi' | translate }}
           <a href="https://calendar.google.com" target="_blank" rel="noopener noreferrer"
             >Google Calendar</a
@@ -116,26 +115,12 @@
           rel="noopener noreferrer"
           >TypeScript</a
         >
-        <a
-          class="tech-badge"
-          href="https://firebase.google.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Firebase</a
+        <a class="tech-badge" href="https://vercel.com" target="_blank" rel="noopener noreferrer"
+          >Vercel</a
         >
-        <a
-          class="tech-badge"
-          href="https://openai.com/gpt-4"
-          target="_blank"
-          rel="noopener noreferrer"
-          >GPT-4 Vision</a
-        >
-        <a
-          class="tech-badge"
-          href="https://firebase.google.com/docs/functions"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Cloud Functions</a
+        <span class="tech-badge">{{ 'about.tech.ai.name' | translate }}</span>
+        <a class="tech-badge" href="https://quarkus.io" target="_blank" rel="noopener noreferrer"
+          >Quarkus API</a
         >
         <a
           class="tech-badge"
@@ -158,9 +143,7 @@
           <span class="tech-detail-icon">✓</span>
           <span
             ><strong>{{ 'about.tech.ai.label' | translate }}</strong>
-            <a href="https://openai.com/gpt-4" target="_blank" rel="noopener noreferrer"
-              >GPT-4 Vision</a
-            >
+            <strong>{{ 'about.tech.ai.name' | translate }}</strong>
             {{ 'about.tech.ai.description' | translate }}</span
           >
         </div>
@@ -168,12 +151,7 @@
           <span class="tech-detail-icon">✓</span>
           <span
             ><strong>{{ 'about.tech.hosting.label' | translate }}</strong>
-            <a
-              href="https://firebase.google.com/products/hosting"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Firebase Hosting</a
-            >
+            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer">Vercel</a>
             {{ 'about.tech.hosting.description' | translate }}</span
           >
         </div>
@@ -181,12 +159,7 @@
           <span class="tech-detail-icon">✓</span>
           <span
             ><strong>{{ 'about.tech.backend.label' | translate }}</strong>
-            <a
-              href="https://firebase.google.com/docs/functions"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Firebase Cloud Functions</a
-            >
+            <a href="https://quarkus.io" target="_blank" rel="noopener noreferrer">Quarkus API</a>
             {{ 'about.tech.backend.description' | translate }}</span
           >
         </div>

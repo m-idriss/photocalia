@@ -9,6 +9,7 @@ export default defineConfig({
   reporter: 'html',
   use: {
     baseURL: 'http://localhost:4200',
+    timezoneId: 'Europe/Paris',
     trace: 'on-first-retry',
   },
   projects: [

@@ -33,7 +33,7 @@ Visit photocalia.com and sign in with your Google account (takes 2 seconds). The
 
 ### Step 3: Review and Save Your Events
 
-The AI instantly analyzes your image using GPT-4 Vision technology. It extracts event titles, dates, times, and locations. Review the results in a clean preview — edit anything that needs adjusting — then download your ICS file and import it into Google Calendar. Done!
+The AI analyzes your image and extracts event titles, dates, times, and locations. Review the results in a clean preview — edit anything that needs adjusting — then download your ICS file and import it into Google Calendar. Done!
 
 ## Tips for Best Results
 
@@ -53,4 +53,4 @@ PhotoCalia works with virtually any image containing date and time information: 
 
 Stop letting events slip through the cracks. With PhotoCalia, converting a photo to Google Calendar takes less time than typing a single event manually. Try it free — {freeLimit} conversions per month, no credit card required.
 
-Related guides: learn [how AI OCR extracts calendar events](/blog/ai-ocr-calendar-extraction), compare the full upload flow on [how PhotoCalia works](/how-it-works), or review [PhotoCalia pricing](/pricing) if you need more monthly conversions.
+Related guides: try the dedicated [image to Google Calendar converter](/image-to-google-calendar), learn [how AI OCR extracts calendar events](/blog/ai-ocr-calendar-extraction), or review [PhotoCalia pricing](/pricing) if you need more monthly conversions.

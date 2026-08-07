@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "en-timed-and-all-day",
+      "source": "en-calendar.png",
+      "language": "en",
+      "timeZone": "Europe/Paris",
+      "expected": [
+        {
+          "title": "Product workshop",
+          "start": "2026-08-07T10:00:00+02:00",
+          "end": "2026-08-07T11:30:00+02:00",
+          "location": "Studio Atlas, Paris",
+          "allDay": false
+        },
+        {
+          "title": "Summer closure",
+          "start": "2026-08-15",
+          "end": "2026-08-16",
+          "location": "",
+          "allDay": true
+        }
+      ]
+    },
+    {
+      "id": "fr-multiple-low-quality-ambiguous",
+      "source": "fr-calendrier-flou.pdf",
+      "language": "fr",
+      "timeZone": "Europe/Paris",
+      "expectedWarning": "ambiguous-date-format",
+      "expected": [
+        {
+          "title": "Réunion de rentrée",
+          "start": "2026-09-08T18:30:00+02:00",
+          "location": "Maison des associations, Lyon",
+          "allDay": false
+        },
+        {
+          "title": "Atelier bénévoles",
+          "start": "2026-09-12T09:00:00+02:00",
+          "end": "2026-09-12T12:00:00+02:00",
+          "location": "Salle Lumière",
+          "allDay": false
+        }
+      ]
+    },
+    {
+      "id": "dst-spring-forward",
+      "source": "dst-boundary.pdf",
+      "language": "en",
+      "timeZone": "Europe/Paris",
+      "expectedWarning": "timezone-review-required",
+      "expected": [
+        {
+          "title": "Clock change briefing",
+          "start": "2026-03-29T03:30:00+02:00",
+          "end": "2026-03-29T04:30:00+02:00",
+          "location": "Salle Horloge, Paris",
+          "allDay": false
+        }
+      ]
+    }
+  ]
+}

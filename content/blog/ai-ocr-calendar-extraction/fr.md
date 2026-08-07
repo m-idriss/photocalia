@@ -14,7 +14,7 @@ Mais le texte brut ne suffit pas pour l'extraction de calendrier. Savoir qu'une 
 
 ## Comment l'IA va au-delà de l'OCR traditionnel
 
-Les modèles d'IA modernes comme GPT-4 Vision ne se contentent pas de lire le texte — ils comprennent le contexte. En analysant un flyer d'événement, l'IA reconnaît que « Samedi 15 mars » est une date, « Centre communautaire » est un lieu et « Soirée Jazz » est un titre d'événement.
+Les IA multimodales modernes ne se contentent pas de lire le texte : elles interprètent le contexte. En analysant un flyer, l'IA peut reconnaître que « samedi 15 mars » est une date, « centre communautaire » un lieu et « soirée jazz » un titre, puis relier ces informations au même événement.
 
 Cette compréhension contextuelle est ce qui rend l'extraction de calendrier par IA si puissante. L'IA peut gérer les mises en page désordonnées, les polices décoratives, plusieurs langues et même les notes manuscrites.
 
@@ -38,6 +38,6 @@ Les images réelles sont désordonnées. Les flyers utilisent des polices décor
 
 ## Essayez l'extraction de calendrier par IA
 
-PhotoCalia utilise GPT-4 Vision pour offrir une extraction de calendrier de pointe. Téléchargez n'importe quel flyer, fiche de rendez-vous ou planning et voyez l'IA en action — c'est gratuit avec {freeLimit} conversions par mois.
+PhotoCalia utilise un fournisseur d'IA multimodale configuré côté serveur pour extraire les événements. Importez un flyer, une fiche de rendez-vous ou un planning, puis vérifiez les événements proposés : {freeLimit} conversions sont offertes chaque mois.
 
 Guides associés : suivez le tutoriel pour [convertir une photo en Google Agenda](/blog/photo-to-google-calendar), voyez des exemples de [numérisation de plannings papier](/blog/digitize-paper-schedules), ou consultez le flux produit sur [comment fonctionne PhotoCalia](/how-it-works).

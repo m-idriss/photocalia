@@ -28,12 +28,12 @@ This document outlines the comprehensive SEO improvements implemented for the Ph
 #### Meta Description
 **Before:**
 ```
-Photocalia - AI-powered Calendar Converter. Transform images and PDFs into ICS calendar files instantly using GPT-4 Vision. Free online tool for converting visual calendars to digital events.
+Photocalia - AI-powered Calendar Converter. Transform images and PDFs into editable events and ICS calendar files. Free online tool for converting visual calendars to digital events.
 ```
 
 **After:**
 ```
-Free AI-powered calendar converter: Instantly transform screenshots, images, and PDF documents into ICS calendar files. Convert appointment reminders, event flyers, schedules, and meeting invitations to Google Calendar, Outlook, Apple Calendar. Smart OCR with GPT-4 Vision extracts dates, times, locations automatically. No signup required.
+Free AI-powered calendar converter: Transform screenshots, images, and PDF documents into editable events and ICS calendar files. Convert appointment reminders, event flyers, schedules, and meeting invitations for Google Calendar, Outlook and Apple Calendar. Multimodal extraction identifies dates, times and locations for user review.
 ```
 
 **Benefits:**

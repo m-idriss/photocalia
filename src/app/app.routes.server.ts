@@ -9,6 +9,11 @@ export const serverRoutes: ServerRoute[] = [
   // English pages
   { path: '', renderMode: RenderMode.Prerender },
   { path: 'how-it-works', renderMode: RenderMode.Prerender },
+  { path: 'add-event-to-calendar-from-photo', renderMode: RenderMode.Prerender },
+  { path: 'photo-to-calendar', renderMode: RenderMode.Prerender },
+  { path: 'image-to-google-calendar', renderMode: RenderMode.Prerender },
+  { path: 'pdf-to-calendar', renderMode: RenderMode.Prerender },
+  { path: 'ocr-calendar-extraction', renderMode: RenderMode.Prerender },
   { path: 'privacy', renderMode: RenderMode.Prerender },
   { path: 'terms', renderMode: RenderMode.Prerender },
   { path: 'legal-mentions', renderMode: RenderMode.Prerender },
@@ -21,12 +26,17 @@ export const serverRoutes: ServerRoute[] = [
     getPrerenderParams: async () => BLOG_SLUGS.map((slug) => ({ slug })),
   },
   { path: 'pricing', renderMode: RenderMode.Prerender },
-  { path: 'subscription/success', renderMode: RenderMode.Prerender },
-  { path: 'donation/success', renderMode: RenderMode.Prerender },
+  { path: 'subscription/success', renderMode: RenderMode.Client },
+  { path: 'donation/success', renderMode: RenderMode.Client },
 
   // French pages
   { path: 'fr', renderMode: RenderMode.Prerender },
   { path: 'fr/how-it-works', renderMode: RenderMode.Prerender },
+  { path: 'fr/add-event-to-calendar-from-photo', renderMode: RenderMode.Prerender },
+  { path: 'fr/photo-to-calendar', renderMode: RenderMode.Prerender },
+  { path: 'fr/image-to-google-calendar', renderMode: RenderMode.Prerender },
+  { path: 'fr/pdf-to-calendar', renderMode: RenderMode.Prerender },
+  { path: 'fr/ocr-calendar-extraction', renderMode: RenderMode.Prerender },
   { path: 'fr/privacy', renderMode: RenderMode.Prerender },
   { path: 'fr/terms', renderMode: RenderMode.Prerender },
   { path: 'fr/legal-mentions', renderMode: RenderMode.Prerender },
@@ -39,8 +49,8 @@ export const serverRoutes: ServerRoute[] = [
     getPrerenderParams: async () => BLOG_SLUGS.map((slug) => ({ slug })),
   },
   { path: 'fr/pricing', renderMode: RenderMode.Prerender },
-  { path: 'fr/subscription/success', renderMode: RenderMode.Prerender },
-  { path: 'fr/donation/success', renderMode: RenderMode.Prerender },
+  { path: 'fr/subscription/success', renderMode: RenderMode.Client },
+  { path: 'fr/donation/success', renderMode: RenderMode.Client },
 
   // Catch-all: client-side rendered (not prerendered)
   { path: '**', renderMode: RenderMode.Server },

@@ -176,7 +176,7 @@ describe('Footer', () => {
 
   it('should build social links correctly', () => {
     expect(component.socialLinks.length).toBeGreaterThan(0);
-    expect(component.socialLinks[0].iconClass).toBeDefined();
+    expect(component.socialLinks[0].label).toBe('GitHub');
     expect(component.socialLinks[0].url).toBeDefined();
   });
 });

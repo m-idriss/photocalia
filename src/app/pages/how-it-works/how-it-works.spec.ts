@@ -52,6 +52,13 @@ describe('HowItWorks', () => {
     expect(compiled.querySelector('.cta-section')).toBeTruthy();
   });
 
+  it('should expose exactly one primary heading for search engines', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelectorAll('h1').length).toBe(1);
+    expect(compiled.querySelector('h1')?.textContent).toContain('howitworks.intro.title');
+  });
+
   it('should render the expected counts for steps, use cases, and FAQ items', () => {
     const compiled = fixture.nativeElement as HTMLElement;
 

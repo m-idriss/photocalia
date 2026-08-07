@@ -111,4 +111,27 @@ describe('CalendarStateService', () => {
       expect(service.exportRequestCount()).toBe(2);
     });
   });
+
+  it('preserves all-day dates without timezone shifts when restoring a session', () => {
+    service.showCalendar([
+      {
+        summary: 'Summer closure',
+        start: '2026-08-15',
+        end: '2026-08-16',
+        allDay: true,
+      },
+    ]);
+
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(CalendarStateService);
+
+    expect(service.events()[0]).toEqual(
+      jasmine.objectContaining({
+        start: '2026-08-15',
+        end: '2026-08-16',
+        allDay: true,
+      }),
+    );
+  });
 });

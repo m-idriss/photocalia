@@ -1,0 +1,56 @@
+<div class="extraction-note" role="note" aria-live="polite">
+  <label class="confirm-label">
+    <input
+      type="checkbox"
+      [checked]="confirmed()"
+      (change)="confirmedChanged.emit($any($event.target).checked)"
+    />
+    <span>
+      <strong>⚠️ AI-extracted events may contain errors</strong> (dates, times, locations). I have
+      verified the events and confirm they are correct.
+    </span>
+  </label>
+</div>
+
+<nav class="actions" aria-label="Calendar actions">
+  <button
+    class="action-button download btn btn-success"
+    [disabled]="!confirmed()"
+    (click)="downloadRequested.emit()"
+    aria-label="Download calendar file"
+    appTooltip="Download your calendar as .ics file"
+    appTooltipPlacement="top"
+  >
+    {{ 'calendar.export' | translate }}
+  </button>
+  <button
+    class="action-button secondary btn btn-secondary"
+    (click)="resetRequested.emit()"
+    aria-label="Convert another file"
+    appTooltip="Start over with new files"
+    appTooltipPlacement="top"
+  >
+    Convert Another
+  </button>
+</nav>
+
+@if (showContributionNudge()) {
+  <aside class="contribution-nudge" role="complementary" aria-live="polite">
+    <div class="nudge-content">
+      <p class="nudge-heading">{{ 'coffee.nudge.heading' | translate }}</p>
+      <p class="nudge-description">{{ 'coffee.nudge.description' | translate }}</p>
+    </div>
+    <div class="nudge-actions">
+      <a
+        [routerLink]="'/about' | localizeRoute"
+        fragment="coffee-section"
+        class="nudge-cta btn btn-primary"
+      >
+        {{ 'coffee.nudge.cta' | translate }}
+      </a>
+      <button type="button" class="nudge-dismiss btn btn-link" (click)="nudgeDismissed.emit()">
+        {{ 'coffee.nudge.dismiss' | translate }}
+      </button>
+    </div>
+  </aside>
+}

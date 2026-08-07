@@ -24,7 +24,7 @@ Rendez-vous sur photocalia.com et connectez-vous avec votre compte Google (2 sec
 
 ### Étape 3 : Vérifiez et enregistrez vos événements
 
-L'IA analyse instantanément votre image avec la technologie GPT-4 Vision. Elle extrait les titres, dates, heures et lieux. Vérifiez les résultats, modifiez ce qui est nécessaire, puis téléchargez votre fichier ICS et importez-le dans Google Agenda. C'est fait !
+L'IA analyse votre image et extrait les titres, dates, heures et lieux. Vérifiez les résultats, modifiez ce qui est nécessaire, puis téléchargez votre fichier ICS et importez-le dans Google Agenda. C'est fait !
 
 ## Conseils pour de meilleurs résultats
 
@@ -44,4 +44,4 @@ PhotoCalia fonctionne avec pratiquement toute image contenant des informations d
 
 Arrêtez de laisser les événements vous échapper. Avec PhotoCalia, convertir une photo en événement Google Agenda prend moins de temps que de saisir un seul événement manuellement. Essayez gratuitement — {freeLimit} conversions par mois, sans carte bancaire.
 
-Guides associés : découvrez [comment l'OCR IA extrait les événements de calendrier](/blog/ai-ocr-calendar-extraction), comparez le flux complet sur [comment fonctionne PhotoCalia](/how-it-works), ou consultez les [formules PhotoCalia](/pricing) si vous avez besoin de plus de conversions mensuelles.
+Guides associés : essayez le convertisseur [image vers Google Agenda](/image-to-google-calendar), découvrez [comment l'OCR IA extrait les événements de calendrier](/blog/ai-ocr-calendar-extraction), ou consultez les [formules PhotoCalia](/pricing) si vous avez besoin de plus de conversions mensuelles.

@@ -10,7 +10,7 @@ import {
   BillingCycle,
   CheckoutRequest,
   CheckoutResponse,
-  PlanId,
+  CheckoutPlanId,
   SubscriptionStatusResponse,
 } from '../models';
 
@@ -31,13 +31,13 @@ export class SubscriptionService {
   /**
    * Create a Stripe Checkout Session and return the session URL.
    */
-  createCheckout(planId: PlanId, billingCycle: BillingCycle): Observable<CheckoutResponse> {
+  createCheckout(planId: CheckoutPlanId, billingCycle: BillingCycle): Observable<CheckoutResponse> {
     const currentUser = this.authService.currentUser();
     const body: CheckoutRequest = {
       planId,
       billingCycle,
       userId: this.converterService.getUserId(),
-      email: currentUser?.email ?? null,
+      email: currentUser?.email ?? undefined,
     };
     return this.http.post<CheckoutResponse>(this.baseUrl, body);
   }

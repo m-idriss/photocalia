@@ -41,6 +41,24 @@ jobs:
           set -o pipefail
           npm run blog:check 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/blog-check.log"
 
+      - name: Verify pricing and provider claims
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run claims:check 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/claims-check.log"
+
+      - name: Verify golden dataset coverage
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run fixtures:check 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/fixtures-check.log"
+
+      - name: Verify backend contract and generated types
+        shell: bash
+        run: |
+          set -o pipefail
+          npm run contracts:check 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/contracts-check.log"
+
       - name: Lint
         shell: bash
         run: |
@@ -52,6 +70,15 @@ jobs:
         run: |
           set -o pipefail
           npm run test:ci 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/unit-tests.log"
+
+      - name: Install Chromium for critical browser smoke tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Run credential-free converter smoke test
+        shell: bash
+        run: |
+          set -o pipefail
+          npx playwright test e2e/app.spec.ts --grep "uploads, reviews" 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/converter-smoke.log"
 
       - name: Build production application
         shell: bash

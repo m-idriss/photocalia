@@ -1,0 +1,144 @@
+<label
+  class="upload-zone"
+  [class.dragging]="dragging()"
+  (dragover)="dragOver.emit($event)"
+  (dragleave)="dragLeave.emit($event)"
+  (drop)="filesDropped.emit($event)"
+  [appTooltip]="'converter.tooltip.dropzone' | translate"
+  appTooltipPlacement="top"
+>
+  <input
+    type="file"
+    class="file-input"
+    multiple
+    accept="image/jpeg,image/jpg,image/png,application/pdf"
+    (change)="fileSelectionChanged.emit($event)"
+    [disabled]="processing()"
+    [attr.aria-label]="'converter.upload.aria' | translate"
+  />
+  <div class="dropzone-content">
+    <div class="dropzone-icon" aria-hidden="true">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <rect
+          x="4"
+          y="8"
+          width="40"
+          height="32"
+          rx="4"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-dasharray="4 3"
+          opacity="0.4"
+        />
+        <path
+          d="M24 18v12M18 24l6-6 6 6"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+    <span id="upload-heading" class="dropzone-title">{{
+      'converter.upload.drop' | translate
+    }}</span>
+    <span class="upload-button" aria-hidden="true">{{
+      'converter.upload.browse' | translate
+    }}</span>
+    <div class="dropzone-formats" aria-hidden="true">
+      <span class="format-badge">JPG</span><span class="format-badge">PNG</span
+      ><span class="format-badge">PDF</span>
+    </div>
+  </div>
+</label>
+
+@if (files().length > 0) {
+  <div class="selected-files-grid" role="list" aria-label="Selected files">
+    @for (file of files(); track file.name + $index) {
+      <div class="file-thumbnail" role="listitem">
+        @if (isImage(file)) {
+          <button
+            class="thumbnail-image-btn"
+            (click)="previewRequested.emit(file)"
+            [attr.aria-label]="'Preview ' + file.name"
+          >
+            <img [src]="thumbnail(file)" [alt]="file.name" class="thumbnail-img" loading="lazy" />
+          </button>
+        } @else {
+          <div class="thumbnail-pdf-icon" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect
+                x="4"
+                y="2"
+                width="24"
+                height="28"
+                rx="3"
+                stroke="currentColor"
+                stroke-width="1.5"
+              />
+              <path
+                d="M10 14h12M10 18h12M10 22h8"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+              <text
+                x="16"
+                y="10"
+                text-anchor="middle"
+                font-size="6"
+                font-weight="700"
+                fill="currentColor"
+              >
+                PDF
+              </text>
+            </svg>
+          </div>
+        }
+        <span class="thumbnail-name">{{ file.name }}</span>
+        <button
+          class="thumbnail-remove"
+          (click)="removeRequested.emit($index); $event.stopPropagation()"
+          [disabled]="processing()"
+          [attr.aria-label]="'Remove ' + file.name"
+          [appTooltip]="'converter.tooltip.remove' | translate"
+          appTooltipPlacement="top"
+        >
+          ✕
+        </button>
+      </div>
+    }
+  </div>
+}
+
+@if (preview(); as selectedPreview) {
+  <div
+    class="preview-overlay"
+    (mousedown)="previewClosed.emit()"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="'Preview: ' + selectedPreview.file.name"
+  >
+    <div class="preview-content" (mousedown)="$event.stopPropagation()">
+      <img [src]="selectedPreview.url" [alt]="selectedPreview.file.name" class="preview-image" />
+      <div class="preview-info">
+        <span class="preview-name">{{ selectedPreview.file.name }}</span>
+        <button class="preview-close" (click)="previewClosed.emit()" aria-label="Close preview">
+          ✕
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+@if (files().length > 0 && !processing()) {
+  <button
+    class="action-button btn btn-primary"
+    (click)="conversionRequested.emit()"
+    aria-label="Convert files to calendar events"
+    [appTooltip]="'converter.tooltip.convert' | translate"
+    appTooltipPlacement="top"
+  >
+    {{ 'converter.convert' | translate }}
+  </button>
+}

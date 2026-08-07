@@ -6,8 +6,10 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { SubscriptionService } from '../../services/subscription.service';
 import { AuthService } from '../../services/auth.service';
+import { PlanService } from '../../services/plan.service';
 import { SUBSCRIPTION_PLANS } from '../../constants';
 import { BillingCycle, SubscriptionPlan } from '../../models';
+import { toApiClientError } from '../../utils';
 import { RecommendedGuides } from '../../components/recommended-guides/recommended-guides';
 
 @Component({
@@ -25,6 +27,7 @@ export class Pricing {
 
   private readonly subscriptionService = inject(SubscriptionService);
   private readonly authService = inject(AuthService);
+  private readonly planService = inject(PlanService);
   private readonly platformId = inject(PLATFORM_ID);
 
   protected readonly isAuthenticated = computed(() => this.authService.isAuthenticated());
@@ -40,6 +43,17 @@ export class Pricing {
   protected getYearlyTotal(plan: SubscriptionPlan): string {
     if (plan.yearlyPrice === null) return '';
     return plan.yearlyPrice.toFixed(2);
+  }
+
+  /**
+   * Use the public API as the source of truth for monthly quotas while keeping
+   * stable fallbacks for prerendering and temporary API outages.
+   */
+  protected getQuotaParams(plan: SubscriptionPlan): { limit: number } {
+    const apiPlan = this.planService
+      .plans()
+      .find((candidate) => candidate.plan === plan.id.toUpperCase());
+    return { limit: apiPlan?.limit ?? plan.monthlyQuota };
   }
 
   protected toggleBilling(cycle: BillingCycle): void {
@@ -60,8 +74,7 @@ export class Pricing {
       },
       error: (err) => {
         this.isLoading.set(null);
-        const msg = err?.error?.message || err?.message || 'pricing.error.generic';
-        this.error.set(msg);
+        this.error.set(toApiClientError(err).messageKey);
       },
     });
   }

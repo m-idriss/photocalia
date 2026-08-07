@@ -29,7 +29,7 @@ describe('LegalMentions', () => {
   it('should include hosting provider information', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const content = compiled.textContent || '';
-    expect(content).toContain('Firebase Hosting');
+    expect(content).toContain('Vercel');
     expect(content).toContain('Google Cloud Platform');
   });
 

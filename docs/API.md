@@ -1,245 +1,60 @@
-# API Documentation
+# PhotoCalia API boundary
 
-> Documentation for the Photocalia API endpoints provided by the external backend service.
+Status: frontend compatibility notes as of 7 August 2026.
 
-## Table of Contents
+The Angular application calls the separately deployed Quarkus backend at `https://api.photocalia.com/v1`. The backend repository, deployment and secrets are separate transaction assets.
 
-- [Overview](#overview)
-- [Backend API Structure](#backend-api-structure)
-- [API Endpoints](#api-endpoints)
-- [Error Handling](#error-handling)
+## Current consumers
 
----
+| Frontend capability | Endpoint family | Authentication |
+| --- | --- | --- |
+| Convert files | `/converter` | Firebase ID token |
+| Read quota | `/converter/quota-status` | Firebase ID token |
+| Read public plans | `/converter/plans` | Public |
+| Read public statistics | `/converter/statistics` | Public |
+| Create checkout/manage subscription | `/subscriptions` | Firebase ID token |
+| Donation checkout | `/donations` | As required by endpoint |
 
-## Overview
+The authoritative, versioned schema snapshot is `contracts/3dime-api/openapi-v1.json`. TypeScript
+types generated from it live in `src/app/generated/3dime-api.ts`; application models alias those
+types instead of duplicating endpoint DTOs by hand.
 
-The application uses an external backend API ([3dime-api](https://github.com/m-idriss/3dime-api)) to provide backend functionality. The backend is built with **Quarkus**, a modern Java framework optimized for cloud-native applications, providing fast startup times and low memory footprint. All endpoints are accessed through a unified API service.
+## Contract status
 
-### Architecture
+The backend generates `contracts/openapi-v1.json` from its Quarkus annotations and verifies the
+committed artifact in backend CI. Its runtime routes are `/v1/api-schema`,
+`/v1/api-schema/public`, and `/v1/api-schema/admin`; those routes are admin-protected, so builds
+consume the versioned repository artifact rather than production authentication state.
 
-```
-Client → Backend API (3dime-api) → External APIs
-         └── Proxy Layer
-         ├── GitHub API
-         ├── Notion API
-         ├── OpenAI API (Converter)
-         └── Statistics
-```
+To update the frontend after an intentional backend contract change:
 
-### Base URL
+1. In `3dime-api`, run `scripts/update-openapi-contract.sh` and review the schema diff.
+2. In this repository, run `npm run contracts:update` while the sibling backend checkout is present.
+3. Review both the OpenAPI and generated TypeScript diffs.
+4. Run `npm run contracts:check`; frontend CI runs the same verification before compiling consumers.
 
-```
-Production: https://api.photocalia.com
-```
+The frontend currently isolates the temporary legacy quota response branches behind
+`ENABLE_LEGACY_QUOTA_RESPONSE_UNTIL_2026_10_01`. Remove that flag and both fallback shapes no later
+than 1 October 2026, after the generated contract is required in CI.
 
----
+## Error handling rule
 
-## Backend API Structure
+Frontend behavior should branch on HTTP status and stable error codes, never on English error-message text. Unknown responses must degrade to a generic localized error while preserving a diagnostic correlation value when one is supplied by the API.
 
-The backend API is a **Quarkus-based microservice** that handles:
-- AI-powered calendar conversion
-- GitHub integration
-- Notion integration
-- Usage tracking and quotas
-- Caching and optimization
-
-**Technology Stack:**
-- **Framework**: Quarkus (Supersonic Subatomic Java)
-- **Language**: Java
-- **Architecture**: RESTful microservice
-- **Deployment**: Cloud-native with fast startup and low memory usage
-
-For detailed backend implementation, see the [3dime-api repository](https://github.com/m-idriss/3dime-api).
-
----
-
-## API Endpoints
-
-### Converter API
-
-AI-powered calendar conversion endpoint.
-
-**Endpoint**: `/converter`  
-**Method**: `POST`  
-**Authentication**: Required (Firebase ID token)
-
-#### Request Body
-
-```json
-{
-  "files": [
-    {
-      "dataUrl": "data:image/png;base64,...",
-      "name": "calendar.png",
-      "type": "image/png"
-    }
-  ],
-  "timeZone": "America/New_York",
-  "currentDate": "2025-02-17",
-  "userId": "user123"
-}
-```
-
-#### Response
-
-```json
-{
-  "success": true,
-  "icsContent": "BEGIN:VCALENDAR\nVERSION:2.0\n...",
-  "events": [
-    {
-      "title": "Meeting",
-      "start": "2025-02-17T10:00:00",
-      "end": "2025-02-17T11:00:00",
-      "location": "Office",
-      "description": "Team meeting"
-    }
-  ]
-}
-```
-
----
-
-### Quota Status
-
-Check user's conversion quota.
-
-tatu**Endpoint**: `/converter/quota-status`  
-**Method**: `GET`  
-**Authentication**: Required
-
-#### Query Parameters
-
-| Parameter | Type   | Required | Description |
-| --------- | ------ | -------- | ----------- |
-| `userId`  | string | Yes      | User ID     |
-
-#### Response
-
-```json
-{
-  "remaining": 10,
-  "limit": 20,
-  "resetDate": "2025-03-01T00:00:00Z"
-}
-```
-
----
-
-### Statistics
-
-Get application usage statistics.
-
-**Endpoint**: `/stats`  
-**Method**: `GET`
-
-#### Response
-
-```json
-{
-  "totalConversions": 1234,
-  "activeUsers": 567,
-  "successRate": 0.95
-}
-```
-
----
-
-## Error Handling
-
-### Error Response Format
-
-All endpoints return errors in a consistent format:
-
-```json
-{
-  "error": "Error message description",
-  "details": "Additional error information"
-}
-```
-
-### Common HTTP Status Codes
-
-| Code | Description           | Cause                            |
-| ---- | --------------------- | -------------------------------- |
-| 200  | OK                    | Request successful               |
-| 400  | Bad Request           | Invalid request parameters       |
-| 401  | Unauthorized          | Missing or invalid authentication|
-| 429  | Too Many Requests     | Quota exceeded                   |
-| 500  | Internal Server Error | Backend error or external API failure |
-
-### Example Error Handling
-
-```typescript
-this.http
-  .post(`${apiUrl}/converter`, requestData)
-  .pipe(
-    catchError((error) => {
-      console.error('API Error:', error.error);
-      // Handle specific error codes
-      if (error.status === 429) {
-        this.toastService.show('Quota exceeded. Please try again later.');
-      }
-      return throwError(() => error);
-    }),
-  )
-  .subscribe((data) => {
-    // Handle successful response
-  });
-```
-
----
+The backend sends `errorCode` and `requestId`. The compatibility mapper recognizes these frontend codes: `INVALID_REQUEST`,
+`AUTHENTICATION_REQUIRED`, `FORBIDDEN`, `NOT_FOUND`, `CONFLICT`, `QUOTA_EXCEEDED`, `RATE_LIMITED`,
+`SERVICE_UNAVAILABLE`, `NETWORK_ERROR`, and `UNKNOWN`. The backend schema must either adopt these
+codes. Backend codes are mapped explicitly: `VALIDATION_ERROR` to `INVALID_REQUEST`,
+`IDEMPOTENCY_CONFLICT` to `CONFLICT`, `RATE_LIMIT_EXCEEDED` to `RATE_LIMITED`, and provider,
+datastore, processing, and internal failures to `SERVICE_UNAVAILABLE`.
 
 ## Authentication
 
-### Firebase Authentication
-
-The API requires Firebase Authentication tokens for protected endpoints.
-
-#### Getting an ID Token
-
-```typescript
-import { Auth, user } from '@angular/fire/auth';
-
-// Get current user's ID token
-const currentUser = await this.auth.currentUser;
-if (currentUser) {
-  const idToken = await currentUser.getIdToken();
-  // Use idToken in Authorization header
-}
-```
-
-#### Request Headers
+Protected requests use:
 
 ```http
-POST /converter
 Authorization: Bearer <firebase-id-token>
 Content-Type: application/json
 ```
 
----
-
-## Rate Limiting
-
-The API implements rate limiting to ensure fair usage:
-
-- **Anonymous users**: 5 conversions per day
-- **Authenticated users**: 20 conversions per day
-- **Premium users**: Unlimited conversions
-
-Rate limit information is included in response headers:
-
-```http
-X-RateLimit-Limit: 20
-X-RateLimit-Remaining: 15
-X-RateLimit-Reset: 1709251200
-```
-
----
-
-## Additional Resources
-
-- [3dime-api Repository](https://github.com/m-idriss/3dime-api) - Backend service source code
-- [Converter Documentation](CONVERTER.md) - Calendar converter feature details
-- [Authentication Setup](FIREBASE_AUTH_SETUP.md) - Firebase Auth configuration
-- [Development Guide](DEVELOPMENT.md) - Local development setup
+Do not place Firebase service credentials, provider keys or Stripe secrets in this frontend repository.

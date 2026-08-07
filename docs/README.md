@@ -8,9 +8,13 @@
 
 ## Architecture & Code
 
-- [System Architecture](./ARCHITECTURE.md) - Complete system design and technical overview
+- [System Architecture](./ARCHITECTURE.md) - Current runtime, boundaries, security controls, and transfer dependencies
+- [Acquisition Readiness](./ACQUISITION_READINESS.md) - Buyer-facing inventory, evidence checklist, and known boundaries
 - [Services](./SERVICES.md) - Service APIs and data management
 - [API Reference](./API.md) - Backend API endpoints
+- [Privacy Operations](./PRIVACY_OPERATIONS.md) - Data inventory, retention gaps, and deletion procedure
+
+The architecture and acquisition-readiness documents define the current production boundary. Older feature-specific notes may describe earlier Firebase-hosted or portfolio-era implementations and must not be used as transfer evidence without verification.
 
 ## Features
 
@@ -32,3 +36,10 @@
 ## Planning
 
 - [Roadmap](./ROADMAP.md) - Planned features and timeline
+- [Launch Plan](./launch/LAUNCH_PLAN.md) - Publication gates, channel sequence, and owner-controlled actions
+- [Product Hunt Copy](./launch/PRODUCT_HUNT.md) - Listing and maker-comment drafts
+- [Social Profiles](./launch/SOCIAL_PROFILES.md) - LinkedIn, X, and AlternativeTo copy
+- [Reddit Drafts](./launch/REDDIT.md) - Community-safe participation drafts
+- [YouTube Demo](./launch/YOUTUBE_SCRIPT.md) - 2–3 minute script and storyboard
+- [Directory Tracker](./launch/DIRECTORY_TRACKER.md) - Submission and live-URL evidence
+- [Launch Measurement](./launch/MEASUREMENT.md) - UTM conventions and review cadence

@@ -24,7 +24,7 @@ Le fossé entre 'j'ai une photo avec des infos d'événement' et 'c'est dans mon
 
 ## La solution sur laquelle la communauté s'est accordée
 
-PhotoCalia utilise l'IA GPT-4 Vision pour lire n'importe quelle image — photos, captures d'écran, PDFs, documents scannés — et extraire chaque événement qu'elle contient : titre, date, heure, lieu et description. Le résultat est un fichier ICS importable en un clic dans Google Agenda, Apple Calendrier ou Outlook.
+PhotoCalia utilise une IA multimodale pour lire photos, captures d'écran, PDF et documents scannés, puis extraire les événements détectés : titre, date, heure, lieu et description. Le résultat est un fichier ICS importable dans Google Agenda, Apple Calendrier ou Outlook.
 
 Pas de saisie manuelle. Pas d'erreurs OCR à corriger. Pas de carte bancaire requise pour l'utilisation basique. Il suffit de télécharger, vérifier les événements extraits et les ajouter à votre agenda.
 
@@ -32,11 +32,11 @@ Pas de saisie manuelle. Pas d'erreurs OCR à corriger. Pas de carte bancaire req
 
 ### 1. Téléchargez votre photo ou capture d'écran
 
-Glissez-déposez n'importe quelle image contenant des informations d'événement — un flyer, une carte de rendez-vous, une photo de planning ou un PDF. PhotoCalia accepte les formats JPG, PNG, HEIC et PDF.
+Glissez-déposez n'importe quelle image contenant des informations d'événement — un flyer, une carte de rendez-vous, une photo de planning ou un PDF. PhotoCalia accepte les formats JPG, JPEG, PNG et PDF.
 
 ### 2. L'IA extrait les événements instantanément
 
-GPT-4 Vision lit l'image et extrait chaque événement trouvé. Vous voyez un aperçu clair avec tous les détails — titre, date, heure, lieu. Modifiez ce qui doit l'être avant de continuer.
+L'IA lit l'image et prépare les événements détectés. Vous voyez un aperçu clair avec les détails extraits — titre, date, heure, lieu — et pouvez tout vérifier avant de continuer.
 
 ### 3. Téléchargez et importez dans votre agenda
 

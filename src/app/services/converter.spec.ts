@@ -78,7 +78,7 @@ describe('ConverterService', () => {
     expect(req.request.method).toBe('POST');
     expect(req.request.body.userId).toBeTruthy();
     expect(req.request.body.userId).toContain('anon_');
-    expect(req.request.body.files).toEqual(testFiles);
+    expect(req.request.body.files).toEqual([{ dataUrl: 'data:image/png;base64,test' }]);
     expect(req.request.headers.get('Idempotency-Key')).toMatch(
       /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/,
     );
@@ -150,7 +150,7 @@ describe('ConverterService', () => {
   }));
 
   it('returns cached value on HTTP error', fakeAsync(() => {
-    const cached = {
+    const cached: QuotaStatusResponse = {
       success: true,
       enabled: true,
       quota: { usageCount: 2, limit: 10, remaining: 8, plan: 'FREE' },

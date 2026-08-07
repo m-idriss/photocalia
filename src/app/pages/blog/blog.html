@@ -1,5 +1,10 @@
 <main class="blog-page" aria-label="Blog" id="main-content" role="main">
   <div class="blog-container">
+    <header class="sr-only">
+      <h1>{{ 'blog.title' | translate }}</h1>
+      <p>{{ 'blog.subtitle' | translate }}</p>
+    </header>
+
     <div class="articles-toolbar">
       <label class="search-field">
         <span class="sr-only">{{ 'blog.search.label' | translate }}</span>
@@ -119,7 +124,7 @@
       aria-labelledby="blog-cta-title"
     >
       <h2 id="blog-cta-title" class="cta-title">{{ 'blog.cta.title' | translate }}</h2>
-      <p class="cta-description">{{ 'blog.cta.description' | translate }}</p>
+      <p class="cta-description">{{ 'blog.cta.description' | translate: planParams() }}</p>
       <a [routerLink]="'/' | localizeRoute" class="cta-button">
         {{ 'blog.cta.button' | translate }}
       </a>

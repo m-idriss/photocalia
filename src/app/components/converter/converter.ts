@@ -3,23 +3,14 @@ import {
   signal,
   OnInit,
   PLATFORM_ID,
-  computed,
   inject,
   effect,
   untracked,
   DestroyRef,
   HostListener,
 } from '@angular/core';
-import { isPlatformBrowser, CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import ICAL from '../../libs/ical-wrapper'; // ⚡ Wrapper to ensure parse() exists
-import {
-  NgbAccordionModule,
-  NgbCollapseModule,
-  NgbPopoverModule,
-  NgbProgressbarModule,
-  NgbTooltipModule,
-} from '@ng-bootstrap/ng-bootstrap';
+import { isPlatformBrowser } from '@angular/common';
+import { NgbPopoverModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppTooltipDirective } from '../../shared/directives';
 
 import { ConverterService, FileData } from '../../services/converter';
@@ -27,29 +18,36 @@ import { ToastService } from '../../services/toast.service';
 import { CalendarStateService } from '../../services/calendar-state.service';
 import { Card } from '../card/card';
 import { AuthAwareComponent } from '../base/auth-aware.component';
-import { CalendarEvent, BatchFile, BatchFileStatus } from '../../models';
+import {
+  CalendarEvent,
+  BatchFile,
+  BatchFileStatus,
+  ConversionState,
+  transitionConversionState,
+} from '../../models';
 import { LoggerService } from '../../services/logger.service';
-import { RouterLink } from '@angular/router';
 import { FILE_UPLOAD_CONSTRAINTS } from '../../constants';
-import { getMonthDay, getEventColor } from '../../utils';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
-import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
+import { LanguageService } from '../../services/language.service';
+import { toApiClientError } from '../../utils/api-error.utils';
+import { generateIcs, parseIcsEvents } from '../../utils/ics.utils';
+import { ConverterEventReview } from '../converter-event-review/converter-event-review';
+import { ConverterExportActions } from '../converter-export-actions/converter-export-actions';
+import { ConverterBatchProgress } from '../converter-batch-progress/converter-batch-progress';
+import { ConverterUpload } from '../converter-upload/converter-upload';
 
 @Component({
   selector: 'app-converter',
   imports: [
     Card,
-    FormsModule,
-    CommonModule,
-    NgbAccordionModule,
-    NgbCollapseModule,
     AppTooltipDirective,
     NgbPopoverModule,
-    NgbProgressbarModule,
     NgbTooltipModule,
     TranslatePipe,
-    RouterLink,
-    LocalizeRoutePipe,
+    ConverterEventReview,
+    ConverterExportActions,
+    ConverterBatchProgress,
+    ConverterUpload,
   ],
   templateUrl: './converter.html',
   styleUrl: './converter.scss',
@@ -59,6 +57,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
   protected readonly batchFiles = signal<BatchFile[]>([]); // Batch processing state
   protected readonly isDragging = signal(false);
   protected readonly isProcessing = signal(false);
+  protected readonly conversionState = signal<ConversionState>('idle');
   protected readonly isBatchMode = signal(false); // Toggle between batch and single processing
   protected readonly extractedEvents = signal<CalendarEvent[]>([]);
   protected readonly icsContent = signal<string | null>(null);
@@ -119,30 +118,6 @@ export class Converter extends AuthAwareComponent implements OnInit {
     });
   }
 
-  // Computed values for batch processing
-  protected readonly batchProgress = computed(() => {
-    const batch = this.batchFiles();
-    if (batch.length === 0) return 0;
-    const completed = batch.filter(
-      (f) => f.status === BatchFileStatus.SUCCESS || f.status === BatchFileStatus.ERROR,
-    ).length;
-    return Math.round((completed / batch.length) * 100);
-  });
-
-  protected readonly batchStats = computed(() => {
-    const batch = this.batchFiles();
-    return {
-      total: batch.length,
-      success: batch.filter((f) => f.status === BatchFileStatus.SUCCESS).length,
-      error: batch.filter((f) => f.status === BatchFileStatus.ERROR).length,
-      processing: batch.filter((f) => f.status === BatchFileStatus.PROCESSING).length,
-      pending: batch.filter((f) => f.status === BatchFileStatus.PENDING).length,
-    };
-  });
-
-  // Expose BatchFileStatus enum to template
-  protected readonly BatchFileStatus = BatchFileStatus;
-
   // Thumbnail preview state
   protected readonly thumbnailUrls = signal<Map<File, string>>(new Map());
   protected readonly previewFile = signal<{ file: File; url: string } | null>(null);
@@ -153,6 +128,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly destroyRef = inject(DestroyRef);
   private readonly logger = inject(LoggerService);
+  private readonly languageService = inject(LanguageService);
 
   private readonly acceptedTypes = FILE_UPLOAD_CONSTRAINTS.ACCEPTED_TYPES;
   private readonly maxFileSize = FILE_UPLOAD_CONSTRAINTS.MAX_FILE_SIZE;
@@ -189,7 +165,14 @@ export class Converter extends AuthAwareComponent implements OnInit {
     if (events.length > 0) {
       this.extractedEvents.set(events);
       this.icsContent.set(icsContent);
+      this.setConversionState('review');
     }
+  }
+
+  private setConversionState(next: ConversionState): void {
+    const state = transitionConversionState(this.conversionState(), next);
+    this.conversionState.set(state);
+    this.isProcessing.set(state === 'validating' || state === 'processing');
   }
 
   /**
@@ -288,6 +271,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
     this.toastService.clearError();
     this.extractedEvents.set([]);
     this.icsContent.set(null);
+    if (this.conversionState() !== 'idle') this.setConversionState('idle');
 
     const validFiles = newFiles.filter((file) => {
       if (this.files().some((f) => f.name === file.name && f.size === file.size)) {
@@ -344,14 +328,6 @@ export class Converter extends AuthAwareComponent implements OnInit {
     this.thumbnailUrls.set(new Map());
   }
 
-  protected getThumbnailUrl(file: File): string | undefined {
-    return this.thumbnailUrls().get(file);
-  }
-
-  protected isImageFile(file: File): boolean {
-    return file.type.startsWith('image/');
-  }
-
   protected openPreview(file: File): void {
     const url = this.thumbnailUrls().get(file);
     if (url) {
@@ -364,8 +340,10 @@ export class Converter extends AuthAwareComponent implements OnInit {
   }
 
   protected async convertToIcs(): Promise<void> {
+    this.setConversionState('validating');
     if (!this.files().length) {
       this.toastService.showError('Please add at least one file.');
+      this.setConversionState('failure');
       return;
     }
 
@@ -384,7 +362,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
    * Convert all files in a single API call (original behavior for single file)
    */
   private async convertSingle(): Promise<void> {
-    this.isProcessing.set(true);
+    this.setConversionState('processing');
     this.toastService.clearError();
     this.extractedEvents.set([]);
     this.icsContent.set(null);
@@ -419,28 +397,24 @@ export class Converter extends AuthAwareComponent implements OnInit {
             // Refresh quota status after successful conversion
             this.fetchQuotaStatus();
           } else {
-            this.toastService.showError(response.error || 'Failed to convert files.');
+            this.toastService.showError(this.apiErrorMessage(response));
+            this.setConversionState('failure');
           }
-          this.isProcessing.set(false);
         },
         error: (err) => {
-          // Check for quota exceeded error (HTTP 429)
-          if (err.status === 429) {
-            const errorMsg =
-              err.error?.error ||
-              'Monthly conversion limit reached. Please try again later or contact us to upgrade.';
-            this.toastService.showError(errorMsg);
+          const apiError = toApiClientError(err);
+          this.toastService.showError(this.languageService.translate(apiError.messageKey));
+
+          if (apiError.code === 'QUOTA_EXCEEDED') {
             // Refresh quota to show updated count
             this.fetchQuotaStatus();
-          } else {
-            this.toastService.showError(err.error?.message || err.message || 'Conversion error.');
           }
-          this.isProcessing.set(false);
+          this.setConversionState('failure');
         },
       });
     } catch (err) {
       this.toastService.showError((err as Error).message || 'Failed to process files.');
-      this.isProcessing.set(false);
+      this.setConversionState('failure');
     }
   }
 
@@ -448,7 +422,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
    * Convert files one by one with progress tracking (batch mode)
    */
   private async convertBatch(): Promise<void> {
-    this.isProcessing.set(true);
+    this.setConversionState('processing');
     this.toastService.clearError();
     this.extractedEvents.set([]);
     this.icsContent.set(null);
@@ -468,7 +442,6 @@ export class Converter extends AuthAwareComponent implements OnInit {
 
     // Combine all successful results
     this.combineResults();
-    this.isProcessing.set(false);
   }
 
   /**
@@ -542,7 +515,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
                         ...f,
                         status: BatchFileStatus.ERROR,
                         progress: 100,
-                        error: response.error || 'Failed to convert file.',
+                        error: this.apiErrorMessage(response),
                       }
                     : f,
                 ),
@@ -551,12 +524,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
             }
           },
           error: (err) => {
-            // Check for quota exceeded error (HTTP 429)
-            const errorMsg =
-              err.status === 429
-                ? err.error?.error ||
-                  'Monthly conversion limit reached. Please try again later or contact us to upgrade.'
-                : err.error?.message || err.message || 'Conversion error.';
+            const apiError = toApiClientError(err);
+            const errorMsg = this.languageService.translate(apiError.messageKey);
 
             this.batchFiles.update((files) =>
               files.map((f, i) =>
@@ -572,7 +541,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
             );
 
             // Refresh quota if we hit the limit
-            if (err.status === 429) {
+            if (apiError.code === 'QUOTA_EXCEEDED') {
               this.fetchQuotaStatus();
             }
 
@@ -596,6 +565,10 @@ export class Converter extends AuthAwareComponent implements OnInit {
     }
   }
 
+  private apiErrorMessage(error: unknown): string {
+    return this.languageService.translate(toApiClientError(error).messageKey);
+  }
+
   /**
    * Combine results from all batch files
    */
@@ -604,6 +577,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
 
     if (successfulFiles.length === 0) {
       this.toastService.showError('All files failed to process. Please try again.');
+      this.setConversionState('failure');
       return;
     }
 
@@ -616,6 +590,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
     });
 
     this.extractedEvents.set(allEvents);
+    this.setConversionState('review');
 
     // Generate combined ICS content
     this.regenerateIcsContent();
@@ -646,24 +621,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
    */
   private parseIcsContentToEvents(icsContent: string): CalendarEvent[] {
     try {
-      const cleanIcs = this.sanitizeIcs(icsContent);
-      const jcalData = ICAL.parse(cleanIcs);
-      const calendar = new ICAL.Component(jcalData);
-      // ICAL.js doesn't have proper TypeScript types
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const vevents: any[] = calendar.getAllSubcomponents('vevent');
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return vevents.map((vevent: any) => {
-        const eventComp = new ICAL.Event(vevent);
-        return {
-          summary: eventComp.summary,
-          description: eventComp.description,
-          location: eventComp.location,
-          start: eventComp.startDate.toJSDate(),
-          end: eventComp.endDate.toJSDate(),
-        };
-      });
+      return parseIcsEvents(icsContent, false);
     } catch (error) {
       this.logger.error('Failed to parse ICS', 'Converter', error);
       return [];
@@ -673,27 +631,12 @@ export class Converter extends AuthAwareComponent implements OnInit {
   // ⚡ Parse ICS content using ical.js wrapper (works dev + prod)
   private parseIcsContent(icsContent: string): void {
     try {
-      const repaired = this.repairIcsContent(icsContent);
-      const jcalData = ICAL.parse(repaired);
-      const calendar = new ICAL.Component(jcalData);
-      const vevents = calendar.getAllSubcomponents('vevent');
-
-      // ICAL.js doesn't have proper TypeScript types
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const events: CalendarEvent[] = vevents.map((vevent: any) => {
-        const eventComp = new ICAL.Event(vevent);
-        return {
-          summary: eventComp.summary,
-          description: eventComp.description,
-          location: eventComp.location,
-          start: eventComp.startDate.toJSDate(),
-          end: eventComp.endDate.toJSDate(),
-        };
-      });
+      const events = parseIcsEvents(icsContent);
 
       events.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
 
       this.extractedEvents.set(events);
+      this.setConversionState('review');
       // Persist ICS content for restore on refresh
       this.calendarStateService.updateIcsContent(this.icsContent());
       this.toastService.showSuccess(
@@ -710,12 +653,14 @@ export class Converter extends AuthAwareComponent implements OnInit {
       this.toastService.showError('Failed to parse generated ICS file (even after repair).');
       this.toastService.clearSuccess();
       this.extractedEvents.set([]);
+      this.setConversionState('failure');
     }
   }
 
   protected downloadIcs(): void {
     if (!this.icsContent() || !this.extractionConfirmed()) return;
     this.converterService.downloadIcsFile(this.icsContent()!);
+    this.setConversionState('success');
     if (
       isPlatformBrowser(this.platformId) &&
       !sessionStorage.getItem('contribution-nudge-dismissed')
@@ -741,7 +686,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
     this.files.set([]);
     this.batchFiles.set([]);
     this.isDragging.set(false);
-    this.isProcessing.set(false);
+    this.setConversionState('idle');
     this.isBatchMode.set(false);
     this.toastService.clearAll();
     this.extractedEvents.set([]);
@@ -760,6 +705,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
   protected async retryFile(index: number): Promise<void> {
     const batchFile = this.batchFiles()[index];
     if (!batchFile) return;
+
+    this.setConversionState('processing');
 
     // Reset file status
     this.batchFiles.update((files) =>
@@ -795,35 +742,14 @@ export class Converter extends AuthAwareComponent implements OnInit {
     this.toastService.clearError();
     this.extractedEvents.set([]);
     this.icsContent.set(null);
+    if (this.conversionState() !== 'idle') this.setConversionState('idle');
   }
-
-  protected getEventColor = getEventColor;
 
   protected navigateToEventDate(event: CalendarEvent): void {
     const date = event.start instanceof Date ? event.start : new Date(event.start);
     if (!isNaN(date.getTime())) {
       this.calendarStateService.goToDate(date);
     }
-  }
-
-  protected getMonthDay(dateStr: string | Date): string {
-    if (typeof dateStr === 'string') {
-      return getMonthDay(dateStr);
-    } else {
-      // Convert Date object to "DD/MM/YYYY HH:MM" format expected by utility
-      const day = dateStr.getDate().toString().padStart(2, '0');
-      const month = (dateStr.getMonth() + 1).toString().padStart(2, '0');
-      const year = dateStr.getFullYear();
-      const hours = dateStr.getHours().toString().padStart(2, '0');
-      const minutes = dateStr.getMinutes().toString().padStart(2, '0');
-      const formattedStr = `${day}/${month}/${year} ${hours}:${minutes}`;
-      return getMonthDay(formattedStr);
-    }
-  }
-
-  protected getTime(dateStr: string | Date): string {
-    const date = typeof dateStr === 'string' ? new Date(dateStr) : dateStr;
-    return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
   }
 
   // ⚡ Event editing methods
@@ -888,103 +814,9 @@ export class Converter extends AuthAwareComponent implements OnInit {
       return;
     }
 
-    // Generate ICS content manually
-    let icsContent = 'BEGIN:VCALENDAR\r\n';
-    icsContent += 'VERSION:2.0\r\n';
-    icsContent += 'PRODID:-//PhotoCalia Calendar Converter//EN\r\n';
-    icsContent += 'CALSCALE:GREGORIAN\r\n';
-
-    events.forEach((event) => {
-      icsContent += 'BEGIN:VEVENT\r\n';
-      icsContent += `UID:${Date.now()}-${Math.random().toString(36).substr(2, 9)}@photocalia.com\r\n`;
-      icsContent += `DTSTAMP:${this.dateToIcsFormat(new Date())}\r\n`;
-      icsContent += `DTSTART:${this.dateToIcsFormat(event.start)}\r\n`;
-      icsContent += `DTEND:${this.dateToIcsFormat(event.end)}\r\n`;
-      icsContent += `SUMMARY:${event.summary}\r\n`;
-      if (event.description) {
-        icsContent += `DESCRIPTION:${event.description}\r\n`;
-      }
-      if (event.location) {
-        icsContent += `LOCATION:${event.location}\r\n`;
-      }
-      icsContent += 'END:VEVENT\r\n';
-    });
-
-    icsContent += 'END:VCALENDAR\r\n';
+    const icsContent = generateIcs(events);
     this.icsContent.set(icsContent);
     this.calendarStateService.updateIcsContent(icsContent);
-  }
-
-  // ⚡ Convert Date object or string to ICS format (YYYYMMDDTHHMMSSZ)
-  private dateToIcsFormat(date: string | Date): string {
-    const d = typeof date === 'string' ? new Date(date) : date;
-    const year = d.getUTCFullYear();
-    const month = String(d.getUTCMonth() + 1).padStart(2, '0');
-    const day = String(d.getUTCDate()).padStart(2, '0');
-    const hour = String(d.getUTCHours()).padStart(2, '0');
-    const minute = String(d.getUTCMinutes()).padStart(2, '0');
-    const second = String(d.getUTCSeconds()).padStart(2, '0');
-    return `${year}${month}${day}T${hour}${minute}${second}Z`;
-  }
-
-  protected formatDateForInput(dateStr: string | Date): string {
-    const date = typeof dateStr === 'string' ? new Date(dateStr) : dateStr;
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  }
-
-  protected parseDateFromInput(dateStr: string): Date {
-    return new Date(dateStr);
-  }
-
-  private sanitizeIcs(ics: string): string {
-    return ics
-      .split(/\r?\n/)
-      .filter((line) => line.trim() === '' || /^[A-Z-]+[;:]/i.test(line))
-      .join('\r\n');
-  }
-
-  // 🧹 Sanitize and auto-repair ICS before parsing
-  private repairIcsContent(raw: string): string {
-    if (!raw) return '';
-
-    let ics = raw
-      .replace(/\r\n|\r|\n/g, '\r\n')
-      .replace(/[^\x20-\x7E\r\n]/g, '') // retirer les caractères non ASCII imprimables
-      .trim();
-
-    ics = ics.replace(/\[\[.*?\]\]/g, '');
-    ics = ics.replace(/#+\s*/g, '');
-
-    if (!ics.includes('BEGIN:VCALENDAR')) {
-      ics = 'BEGIN:VCALENDAR\r\n' + ics;
-    }
-    if (!ics.includes('END:VCALENDAR')) {
-      ics += '\r\nEND:VCALENDAR';
-    }
-
-    ics = ics
-      .split(/\r\n/)
-      .filter((line) => line.trim() === '' || /^[A-Z0-9-]+[;:]/i.test(line))
-      .join('\r\n');
-
-    if (!/VERSION:2\.0/.test(ics)) {
-      ics = ics.replace(/BEGIN:VCALENDAR\r\n/, 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\n');
-    }
-    if (!/PRODID:/.test(ics)) {
-      ics = ics.replace(
-        /VERSION:2\.0\r\n/,
-        'VERSION:2.0\r\nPRODID:-//PhotoCalia Calendar Converter//EN\r\n',
-      );
-    }
-
-    ics = ics.replace(/\r\n{2,}/g, '\r\n');
-
-    return ics.trim();
   }
 
   // ⚡ Calendar View Methods

@@ -60,4 +60,69 @@ describe('SeoService', () => {
       'noindex, nofollow',
     );
   });
+
+  it('uses French metadata on a French route', () => {
+    const homeOnlySchema = document.createElement('script');
+    homeOnlySchema.setAttribute('data-home-structured-data', '');
+    document.head.appendChild(homeOnlySchema);
+
+    service.updateSeoTags({
+      title: 'How it works',
+      description: 'English description',
+      localized: {
+        fr: {
+          title: 'Comment ça marche',
+          description: 'Description française',
+          keywords: 'photo vers calendrier',
+        },
+      },
+    });
+
+    expect(TestBed.inject(Title).getTitle()).toBe('Comment ça marche');
+    expect(document.querySelector<HTMLMetaElement>('meta[name="description"]')?.content).toBe(
+      'Description française',
+    );
+    expect(document.querySelector<HTMLMetaElement>('meta[name="keywords"]')?.content).toBe(
+      'photo vers calendrier',
+    );
+    expect(document.querySelector<HTMLMetaElement>('meta[property="og:locale"]')?.content).toBe(
+      'fr_FR',
+    );
+    expect(document.querySelector('script[data-home-structured-data]')).toBeNull();
+  });
+
+  it('does not reuse English structured data on a French page', () => {
+    service.updateSeoTags({
+      title: 'How it works',
+      description: 'English description',
+      structuredData: [{ '@context': 'https://schema.org', '@type': 'FAQPage' }],
+      localized: {
+        fr: {
+          title: 'Comment ça marche',
+          description: 'Description française',
+        },
+      },
+    });
+
+    expect(document.querySelector('script[data-page-structured-data]')).toBeNull();
+  });
+
+  it('uses localized structured data when it is supplied', () => {
+    service.updateSeoTags({
+      title: 'About',
+      description: 'English description',
+      structuredData: [{ '@type': 'BreadcrumbList', name: 'About' }],
+      localized: {
+        fr: {
+          title: 'À propos',
+          description: 'Description française',
+          structuredData: [{ '@type': 'BreadcrumbList', name: 'À propos' }],
+        },
+      },
+    });
+
+    const schema = document.querySelector('script[data-page-structured-data]');
+    expect(schema?.textContent).toContain('À propos');
+    expect(schema?.textContent).not.toContain('"About"');
+  });
 });
