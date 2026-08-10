@@ -38,6 +38,15 @@ describe('toApiClientError', () => {
     ).toBe('RATE_LIMITED');
   });
 
+  it('keeps an image processing failure distinct from a service outage', () => {
+    expect(toApiClientError({ status: 422, error: { errorCode: 'PROCESSING_ERROR' } })).toEqual({
+      code: 'PROCESSING_ERROR',
+      messageKey: 'api.error.processing_error',
+      status: 422,
+      correlationId: null,
+    });
+  });
+
   it('maps HTTP status without inspecting a human message', () => {
     const result = toApiClientError({ status: 401, error: { message: 'Anything' } });
 

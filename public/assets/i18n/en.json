@@ -440,6 +440,7 @@
   "subscription.success.plan": "Welcome to the {plan} plan. Your quota has been upgraded.",
   "api.error.invalid_request": "The request could not be processed. Check the selected files and try again.",
   "api.error.authentication_required": "Please sign in again to continue.",
+  "api.error.processing_error": "No event could be detected. Try again with a clearer image.",
   "api.error.forbidden": "Your account is not allowed to perform this action.",
   "api.error.not_found": "The requested service or resource could not be found.",
   "api.error.conflict": "This request conflicts with an operation already in progress. Please retry.",
