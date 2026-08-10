@@ -432,6 +432,15 @@
         "tags": [
           "converter"
         ],
+        "parameters": [
+          {
+            "name": "X-Installation-ID",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -455,6 +464,16 @@
           },
           "400": {
             "description": "Invalid request data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Verified Google authentication required",
             "content": {
               "application/json": {
                 "schema": {
@@ -575,6 +594,13 @@
               "type": "string"
             },
             "required": true
+          },
+          {
+            "name": "X-Installation-ID",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -584,6 +610,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/QuotaStatusResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Verified Google authentication required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }

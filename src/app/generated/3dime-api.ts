@@ -20,7 +20,9 @@ export interface paths {
         post: {
             parameters: {
                 query?: never;
-                header?: never;
+                header?: {
+                    "X-Installation-ID"?: string;
+                };
                 path?: never;
                 cookie?: never;
             };
@@ -41,6 +43,15 @@ export interface paths {
                 };
                 /** @description Invalid request data */
                 400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
+                    };
+                };
+                /** @description Verified Google authentication required */
+                401: {
                     headers: {
                         [name: string]: unknown;
                     };
@@ -174,7 +185,9 @@ export interface paths {
                 query: {
                     userId: string;
                 };
-                header?: never;
+                header?: {
+                    "X-Installation-ID"?: string;
+                };
                 path?: never;
                 cookie?: never;
             };
@@ -187,6 +200,15 @@ export interface paths {
                     };
                     content: {
                         "application/json": components["schemas"]["QuotaStatusResponse"];
+                    };
+                };
+                /** @description Verified Google authentication required */
+                401: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["ErrorResponse"];
                     };
                 };
                 /** @description User not found */

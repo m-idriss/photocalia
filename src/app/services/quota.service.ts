@@ -4,6 +4,7 @@ import { Observable, catchError, from, map, of, switchMap } from 'rxjs';
 import { QuotaStatus, QuotaStatusResponse } from '../models/converter-api.model';
 import { AuthService } from './auth.service';
 import { ConverterApiClient } from './converter-api-client.service';
+import { InstallationIdentityService } from './installation-identity.service';
 
 type UnknownRecord = Record<string, unknown>;
 
@@ -15,16 +16,17 @@ export class QuotaService {
   private readonly authService = inject(AuthService);
   private readonly auth = inject(Auth, { optional: true });
   private readonly api = inject(ConverterApiClient);
-  private readonly cacheKey = 'photocalia_quota_cache_v1';
+  private readonly installationIdentity = inject(InstallationIdentityService);
+  private readonly cacheKey = 'photocalia_quota_cache_v2';
   private readonly cacheTtlMs = 1000 * 60 * 60 * 24;
   private userId = this.determineUserId();
 
   constructor() {
     effect(() => {
       const user = this.authService.currentUser();
-      const nextId = user?.email ?? user?.uid ?? this.getOrCreateAnonymousId();
+      const nextId = user?.uid ?? user?.email ?? this.getOrCreateAnonymousId();
       if (nextId === this.userId) return;
-      if (!user) this.clearCache();
+      this.clearCache();
       this.userId = nextId;
     });
   }
@@ -52,6 +54,7 @@ export class QuotaService {
   clearCache(): void {
     try {
       localStorage.removeItem(this.cacheKey);
+      localStorage.removeItem('photocalia_quota_cache_v1');
     } catch {
       // Storage can be unavailable during SSR or in privacy modes.
     }
@@ -59,7 +62,7 @@ export class QuotaService {
 
   private determineUserId(): string {
     const user = this.authService.currentUser();
-    return user?.email ?? user?.uid ?? this.getOrCreateAnonymousId();
+    return user?.uid ?? user?.email ?? this.getOrCreateAnonymousId();
   }
 
   private getOrCreateAnonymousId(): string {
@@ -155,7 +158,15 @@ export class QuotaService {
 
   private saveCache(response: QuotaStatusResponse): void {
     try {
-      localStorage.setItem(this.cacheKey, JSON.stringify({ ts: Date.now(), data: response }));
+      localStorage.setItem(
+        this.cacheKey,
+        JSON.stringify({
+          ts: Date.now(),
+          userId: this.userId,
+          installationId: this.installationIdentity.getId(),
+          data: response,
+        }),
+      );
     } catch {
       // Storage is best effort.
     }
@@ -165,8 +176,15 @@ export class QuotaService {
     try {
       const raw = localStorage.getItem(this.cacheKey);
       if (!raw) return null;
-      const parsed = JSON.parse(raw) as { ts?: unknown; data?: unknown };
+      const parsed = JSON.parse(raw) as {
+        ts?: unknown;
+        userId?: unknown;
+        installationId?: unknown;
+        data?: unknown;
+      };
       if (typeof parsed.ts !== 'number' || Date.now() - parsed.ts > this.cacheTtlMs) return null;
+      if (parsed.userId !== this.userId) return null;
+      if (parsed.installationId !== this.installationIdentity.getId()) return null;
       return parsed.data as QuotaStatusResponse;
     } catch {
       return null;
