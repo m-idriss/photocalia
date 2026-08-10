@@ -86,6 +86,15 @@ test.describe('Converter', () => {
     await page.setViewportSize({ width: 900, height: 1000 });
     await page.addInitScript(() => {
       window.__PHOTOCALIA_E2E_AUTH__ = true;
+      localStorage.setItem(
+        'photocalia_cookie_consent',
+        JSON.stringify({
+          essential: true,
+          analytics: false,
+          preferences: false,
+          timestamp: Date.now(),
+        }),
+      );
     });
 
     await page.route('**/v1/converter/plans', async (route) => {
