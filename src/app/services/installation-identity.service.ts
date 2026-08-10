@@ -30,9 +30,17 @@ export class InstallationIdentityService {
   }
 
   private createId(): string {
-    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
-      return crypto.randomUUID();
+    const secureRandom = globalThis.crypto;
+    if (typeof secureRandom?.randomUUID === 'function') {
+      return secureRandom.randomUUID();
     }
-    return `inst_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 15)}`;
+
+    if (typeof secureRandom?.getRandomValues === 'function') {
+      const bytes = secureRandom.getRandomValues(new Uint8Array(16));
+      const hex = Array.from(bytes, (value) => value.toString(16).padStart(2, '0')).join('');
+      return `inst_${hex}`;
+    }
+
+    throw new Error('Secure random generation is unavailable');
   }
 }
