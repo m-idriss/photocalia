@@ -440,6 +440,7 @@
   "subscription.success.plan": "Bienvenue dans la formule {plan}. Votre quota a été mis à jour.",
   "api.error.invalid_request": "La requête n'a pas pu être traitée. Vérifiez les fichiers sélectionnés et réessayez.",
   "api.error.authentication_required": "Reconnectez-vous pour continuer.",
+  "api.error.processing_error": "Aucun événement n’a pu être détecté. Essayez avec une image plus nette.",
   "api.error.forbidden": "Votre compte n'est pas autorisé à effectuer cette action.",
   "api.error.not_found": "Le service ou la ressource demandée est introuvable.",
   "api.error.conflict": "Cette requête entre en conflit avec une opération en cours. Réessayez.",
