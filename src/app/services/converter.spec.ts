@@ -7,6 +7,7 @@ import { Auth } from '@angular/fire/auth';
 import { ConverterService, FileData, QuotaStatusResponse } from './converter';
 import { AuthService } from './auth.service';
 import { environment } from '../../environments/environment';
+import { InstallationIdentityService } from './installation-identity.service';
 
 describe('ConverterService', () => {
   let service: ConverterService;
@@ -82,6 +83,7 @@ describe('ConverterService', () => {
     expect(req.request.headers.get('Idempotency-Key')).toMatch(
       /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/,
     );
+    expect(req.request.headers.get('X-Installation-ID')).toMatch(/^[A-Za-z0-9_-]{20,128}$/);
   });
 
   it('should use a new idempotency key for each conversion', () => {
@@ -126,6 +128,7 @@ describe('ConverterService', () => {
     flushMicrotasks();
     const req = httpMock.expectOne((r) => r.url.includes('/converter/quota-status'));
     expect(req.request.method).toBe('GET');
+    expect(req.request.headers.get('X-Installation-ID')).toMatch(/^[A-Za-z0-9_-]{20,128}$/);
     req.flush(mock);
     flushMicrotasks();
 
@@ -155,9 +158,11 @@ describe('ConverterService', () => {
       enabled: true,
       quota: { usageCount: 2, limit: 10, remaining: 8, plan: 'FREE' },
     };
+    const installationId = TestBed.inject(InstallationIdentityService).getId();
+    const userId = service.getUserId();
     localStorage.setItem(
-      'photocalia_quota_cache_v1',
-      JSON.stringify({ ts: Date.now(), data: cached }),
+      'photocalia_quota_cache_v2',
+      JSON.stringify({ ts: Date.now(), userId, installationId, data: cached }),
     );
     let response: QuotaStatusResponse | undefined;
 

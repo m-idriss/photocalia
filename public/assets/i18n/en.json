@@ -410,7 +410,7 @@
   "pricing.billing.billed_yearly": "Billed €{total}/year",
   "pricing.plan.free.name": "Free",
   "pricing.plan.free.description": "Perfect for occasional use",
-  "pricing.plan.free.quota": "{limit} conversions / month",
+  "pricing.plan.free.quota": "{limit} conversions / month per account and browser",
   "pricing.plan.free.cta": "Get started free",
   "pricing.plan.pro.name": "Pro",
   "pricing.plan.pro.description": "For regular users who need more",

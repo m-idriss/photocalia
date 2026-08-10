@@ -410,7 +410,7 @@
   "pricing.billing.billed_yearly": "Facturé {total} €/an",
   "pricing.plan.free.name": "Gratuit",
   "pricing.plan.free.description": "Idéal pour un usage occasionnel",
-  "pricing.plan.free.quota": "{limit} conversions / mois",
+  "pricing.plan.free.quota": "{limit} conversions / mois par compte et navigateur",
   "pricing.plan.free.cta": "Commencer gratuitement",
   "pricing.plan.pro.name": "Pro",
   "pricing.plan.pro.description": "Pour les utilisateurs réguliers qui ont besoin de plus",

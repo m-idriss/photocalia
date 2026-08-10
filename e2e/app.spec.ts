@@ -99,6 +99,7 @@ test.describe('Converter', () => {
       });
     });
     await page.route('**/v1/converter/quota-status?*', async (route) => {
+      expect(route.request().headers()['x-installation-id']).toMatch(/^[A-Za-z0-9_-]{20,128}$/);
       await route.fulfill({
         contentType: 'application/json',
         body: JSON.stringify({
@@ -110,6 +111,7 @@ test.describe('Converter', () => {
     });
     await page.route('**/v1/converter', async (route) => {
       const request = route.request().postDataJSON() as { timeZone?: string; files?: unknown[] };
+      expect(route.request().headers()['x-installation-id']).toMatch(/^[A-Za-z0-9_-]{20,128}$/);
       expect(request.timeZone).toBe(goldenCase!.timeZone);
       expect(request.files).toHaveLength(1);
       await route.fulfill({
