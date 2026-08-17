@@ -2,11 +2,11 @@ import { homePageTitle, localizedPageTitle, pageTitle } from './page-title.utils
 
 describe('page title utilities', () => {
   it('appends the site name to page titles', () => {
-    expect(pageTitle('Pricing')).toBe('Pricing | PhotoCalia');
+    expect(pageTitle('Pricing')).toBe('Pricing | Photocalia');
   });
 
   it('places the site name first on the home page', () => {
-    expect(homePageTitle('AI calendar converter')).toBe('PhotoCalia | AI calendar converter');
+    expect(homePageTitle('AI calendar converter')).toBe('Photocalia | AI calendar converter');
   });
 
   it('selects the French title for a French route', () => {

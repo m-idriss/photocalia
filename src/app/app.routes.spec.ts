@@ -15,7 +15,7 @@ describe('page route titles', () => {
     }
   });
 
-  it('uses a consistent PhotoCalia separator', () => {
+  it('uses a consistent Photocalia separator', () => {
     for (const route of staticPageRoutes) {
       const occurrences = route.title.split(' | ').length - 1;
       expect(occurrences)
@@ -23,9 +23,9 @@ describe('page route titles', () => {
         .toBe(1);
 
       if (route.path === '') {
-        expect(route.title.startsWith('PhotoCalia | ')).withContext(route.path).toBeTrue();
+        expect(route.title.startsWith('Photocalia | ')).withContext(route.path).toBeTrue();
       } else {
-        expect(route.title.endsWith(' | PhotoCalia'))
+        expect(route.title.endsWith(' | Photocalia'))
           .withContext(route.path ?? '')
           .toBeTrue();
       }
