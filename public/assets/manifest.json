@@ -1,6 +1,6 @@
 {
-  "name": "PhotoCalia - AI Calendar Converter",
-  "short_name": "PhotoCalia",
+  "name": "Photocalia - AI Calendar Converter",
+  "short_name": "Photocalia",
   "description": "AI-powered tool to convert photos, screenshots, flyers and PDFs into ICS calendar files. Extracts event dates, times and locations for Google Calendar, Outlook and Apple Calendar.",
   "start_url": "/",
   "display": "standalone",

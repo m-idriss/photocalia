@@ -1,6 +1,6 @@
 import type { ResolveFn } from '@angular/router';
 
-export const SITE_NAME = 'PhotoCalia';
+export const SITE_NAME = 'Photocalia';
 export const PAGE_TITLE_SEPARATOR = ' | ';
 
 export function pageTitle(title: string): string {
