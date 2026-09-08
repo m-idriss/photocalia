@@ -68,72 +68,56 @@ jobs:
         if: steps.changes.outputs.should_run == 'true'
         run: npm run build
 
-      - name: Auto-accept cookies for screenshots
+      - name: Install Playwright Chromium
         if: steps.changes.outputs.should_run == 'true'
-        run: |
-          sed -i 's|</head>|<script>localStorage.setItem("photocalia_cookie_consent",JSON.stringify({essential:true,analytics:false,preferences:false,timestamp:Date.now()}))</script></head>|' dist/photocalia/browser/index.html
+        run: npx playwright install --with-deps chromium
 
       - name: Start server in background
         if: steps.changes.outputs.should_run == 'true'
         run: |
-          cd dist/photocalia/browser
-          npx serve -s . -l 4200 &
-          echo "Waiting for server to start..."
-          sleep 15
-          echo "Server should be ready now"
-          # Health check with retry
-          for i in {1..5}; do
-            if curl -s -o /dev/null -w "%{http_code}" http://localhost:4200 | grep -q "200"; then
+          set -euo pipefail
+
+          python3 -m http.server 4200 --bind 127.0.0.1 --directory dist/photocalia/browser \
+            > /tmp/photocalia-screenshot-server.log 2>&1 &
+
+          for i in {1..60}; do
+            if curl --fail --silent http://127.0.0.1:4200 > /dev/null; then
               echo "Server is responding with HTTP 200"
-              break
-            else
-              echo "Attempt $i: Server not ready yet, waiting 2 more seconds..."
-              sleep 2
+              exit 0
             fi
+
+            echo "Attempt $i: server not ready yet"
+            sleep 1
           done
 
-      - name: Check server response before screenshots
-        if: steps.changes.outputs.should_run == 'true'
-        run: |
-          sleep 5
-          curl -i http://localhost:4200
+          cat /tmp/photocalia-screenshot-server.log
+          exit 1
 
-      - name: Install puppeteer-headful
+      - name: Generate screenshot with Playwright
         if: steps.changes.outputs.should_run == 'true'
-        uses: mujo-code/puppeteer-headful@master
-        env:
-          CI: 'true'
+        run: npm run screenshots:capture
 
-      - name: Generate screenshots
-        if: steps.changes.outputs.should_run == 'true'
-        uses: flameddd/screenshots-ci-action@master
-        with:
-          url: http://localhost:4200
-          devices: iPhone 13 Pro Max
-          noCommitHashFileName: true
-          # networkidle0: Wait for all network connections to finish (stricter than networkidle2)
-          # This ensures all external resources (Font Awesome, d3.js, etc.) are loaded
-          # Note: API timeouts added to services (10s) to prevent indefinite waiting
-          waitUntil: networkidle0
-          # Wait for footer to ensure full page render
-          # Components now have timeout handling to render even when APIs fail
-          waitForSelector: 'app-footer'
-          # Extended timeout to allow for Angular bootstrap, API calls (with timeouts), and fallback rendering
-          # Increased from 90s to 120s to account for slower CI environments
-          waitForSelectorTimeout: 120000
-
-      - name: Crop mobile screenshot
+      - name: Install ImageMagick
         if: steps.changes.outputs.should_run == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y imagemagick
-          convert screenshots/iPhone_13_Pro_Max.jpeg -crop 1284x2200+0+0 screenshots/iPhone_13_Pro_Max.jpeg
+
+      - name: Crop mobile screenshot
+        if: steps.changes.outputs.should_run == 'true'
+        run: convert screenshots/iPhone_13_Pro_Max.jpeg -crop 1284x2200+0+0 +repage screenshots/iPhone_13_Pro_Max.jpeg
 
       - name: Verify screenshots have content
         if: steps.changes.outputs.should_run == 'true'
         run: |
           echo "Checking mobile screenshot..."
-          identify -verbose screenshots/iPhone_13_Pro_Max.jpeg | grep -E "Geometry|Format"
+          GEOMETRY=$(identify -format '%wx%h' screenshots/iPhone_13_Pro_Max.jpeg)
+          echo "Mobile screenshot geometry: $GEOMETRY"
+
+          if [ "$GEOMETRY" != "1284x2200" ]; then
+            echo "Unexpected screenshot geometry: $GEOMETRY"
+            exit 1
+          fi
 
           # Check file sizes to ensure they're not just empty/background images
           MOBILE_SIZE=$(stat -f%z screenshots/iPhone_13_Pro_Max.jpeg 2>/dev/null || stat -c%s screenshots/iPhone_13_Pro_Max.jpeg)

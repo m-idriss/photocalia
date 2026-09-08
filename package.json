@@ -9,6 +9,7 @@
     "blog:generate": "node scripts/generate-blog.mjs",
     "blog:check": "node scripts/generate-blog.mjs --check",
     "claims:check": "node scripts/check-public-claims.mjs",
+    "screenshots:capture": "node scripts/capture-screenshot.mjs",
     "fixtures:generate": "node scripts/generate-golden-fixtures.mjs",
     "fixtures:check": "node scripts/check-golden-dataset.mjs",
     "contracts:update": "node scripts/update-api-contract.mjs && npm run contracts:generate",

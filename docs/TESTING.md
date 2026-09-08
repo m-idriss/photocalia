@@ -58,6 +58,19 @@ dedicated non-production Firebase identity, backend environment and spending lim
 long-lived production token in GitHub Actions. Until that environment exists, the deterministic PR
 smoke protects workflow and ICS behavior but does not claim provider accuracy.
 
+## Screenshot verification
+
+The daily screenshot workflow builds the production site, serves the generated static files and
+captures the mobile viewport with the Playwright version locked by the project. To reproduce the
+capture locally, serve `dist/photocalia/browser` on port 4200, then run:
+
+```bash
+npm run screenshots:capture
+```
+
+The generated `screenshots/` directory is ignored. CI crops the candidate to 1284 x 2200, compares
+it with the published asset and opens or updates a pull request only for a meaningful visual change.
+
 ## High-value manual stories
 
 ### Anonymous visitor
