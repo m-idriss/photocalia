@@ -14,6 +14,7 @@ try {
   const context = await browser.newContext({
     ...devices['iPhone 13 Pro Max'],
     locale: 'en-GB',
+    reducedMotion: 'reduce',
     timezoneId: 'Europe/Paris',
   });
 
@@ -31,8 +32,22 @@ try {
 
   const page = await context.newPage();
   await page.goto(url, { waitUntil: 'networkidle', timeout: 120_000 });
+  await page.addStyleTag({
+    content: `
+      *, *::before, *::after {
+        animation-duration: 0s !important;
+        animation-delay: 0s !important;
+        transition-duration: 0s !important;
+        transition-delay: 0s !important;
+        scroll-behavior: auto !important;
+      }
+    `,
+  });
   await page.locator('app-footer').waitFor({ state: 'visible', timeout: 120_000 });
-  await page.evaluate(() => document.fonts.ready);
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    document.getAnimations().forEach((animation) => animation.finish());
+  });
   await page.screenshot({
     path: outputPath,
     type: 'jpeg',
