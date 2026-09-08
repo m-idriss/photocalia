@@ -1,6 +1,6 @@
 # Testing and verification
 
-Status: current frontend test workflow as of 7 August 2026.
+Status: current frontend test workflow as of 8 September 2026.
 
 ## One-command verification
 
