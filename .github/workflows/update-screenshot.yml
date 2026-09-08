@@ -240,16 +240,16 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Auto-merge Pull Request (squash with fixed message)
+      - name: Summarize screenshot pull request
         if: steps.changes.outputs.should_run == 'true' && steps.compare.outputs.has_changes == 'true' && steps.cpr.outputs.pull-request-number
         run: |
-          gh pr merge ${{ steps.cpr.outputs.pull-request-number }} \
-            --squash \
-            --delete-branch \
-            --body "Update screenshots [skip ci]" \
-            --subject "Update screenshots [skip ci]"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          {
+            echo "## Screenshot update ready for review"
+            echo
+            echo "Frontend CI passed for the generated screenshot."
+            echo "Review and merge PR #${{ steps.cpr.outputs.pull-request-number }} after visual approval:"
+            echo "${{ steps.cpr.outputs.pull-request-url }}"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       - name: No-op summary
         if: steps.changes.outputs.should_run != 'true' || steps.compare.outputs.has_changes == 'false'
