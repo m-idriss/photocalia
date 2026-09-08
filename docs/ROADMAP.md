@@ -1,6 +1,6 @@
 # PhotoCalia roadmap
 
-Status: 7 August 2026. GitHub issues are the execution source of truth.
+Status: 8 September 2026. GitHub issues are the execution source of truth.
 
 ## Current product
 
@@ -16,9 +16,8 @@ The Angular 22 frontend is hosted on Vercel. It provides Google authentication t
 
 ### P1 — API reliability
 
-- #914: frontend error-code handling and a dated legacy quota adapter are implemented; publish and
-  consume a versioned OpenAPI artifact when the backend dependency is ready.
-- Generate frontend DTOs, define stable error codes and fail CI on breaking changes.
+- #914 and `3dime-api#213` are complete: the frontend consumes a versioned OpenAPI artifact,
+  generates DTOs, handles stable error codes and fails CI on breaking contract changes.
 
 ### P1 — converter maintainability
 
@@ -31,7 +30,8 @@ The Angular 22 frontend is hosted on Vercel. It provides Google authentication t
 
 - #916: synthetic bilingual image/PDF/DST fixtures, independent ICS validation and a
   credential-free browser smoke path are implemented.
-- Run provider-backed accuracy checks only in a controlled scheduled environment.
+- The remaining work is a provider-backed accuracy baseline in a controlled scheduled environment;
+  this depends on a dedicated non-production identity, backend and spending limit.
 
 ### Distribution
 
