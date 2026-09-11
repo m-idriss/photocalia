@@ -98,7 +98,7 @@
     "@angular/fire": "^20.0.1",
     "@angular/forms": "^22.1.0",
     "@angular/platform-browser": "^22.1.0",
-    "@angular/platform-server": "^22.1.0",
+    "@angular/platform-server": "^22.1.4",
     "@angular/router": "^22.1.5",
     "@angular/service-worker": "^22.1.0",
     "@angular/ssr": "^22.1.3",
