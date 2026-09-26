@@ -85,15 +85,17 @@ export class Converter extends AuthAwareComponent implements OnInit {
     // Watch for calendar state changes and update local events
     effect(() => {
       const calendarEvents = this.calendarStateService.events();
-      // Only update if calendar was modified (has events and is different from current)
-      if (
-        !this.resumingCheckout &&
-        calendarEvents.length > 0 &&
-        calendarEvents !== this.extractedEvents()
-      ) {
-        this.extractedEvents.set(calendarEvents);
-        this.regenerateIcsContent();
-      }
+      // Local edits must not retrigger this import and restore older calendar data.
+      untracked(() => {
+        if (
+          !this.resumingCheckout &&
+          calendarEvents.length > 0 &&
+          calendarEvents !== this.extractedEvents()
+        ) {
+          this.extractedEvents.set(calendarEvents);
+          this.regenerateIcsContent();
+        }
+      });
     });
 
     // Watch for auth state changes and refresh quota
