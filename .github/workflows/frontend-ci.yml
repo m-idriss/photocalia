@@ -80,6 +80,12 @@ jobs:
           set -o pipefail
           npx playwright test e2e/app.spec.ts --grep "uploads, reviews" 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/converter-smoke.log"
 
+      - name: Verify pricing and credit checkout journeys
+        shell: bash
+        run: |
+          set -o pipefail
+          npx playwright test e2e/pricing.spec.ts --workers=1 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/pricing-smoke.log"
+
       - name: Build production application
         shell: bash
         env:

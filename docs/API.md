@@ -12,7 +12,8 @@ The Angular application calls the separately deployed Quarkus backend at `https:
 | Read quota | `/converter/quota-status` | Firebase ID token |
 | Read public plans | `/converter/plans` | Public |
 | Read public statistics | `/converter/statistics` | Public |
-| Create checkout/manage subscription | `/subscriptions` | Firebase ID token |
+| Create Plus checkout/manage subscription | `/subscriptions` | Firebase ID token |
+| Buy one conversion / verify payment | `/subscriptions/credits`, `/subscriptions/checkout-status` | Firebase ID token |
 | Donation checkout | `/donations` | As required by endpoint |
 
 The authoritative, versioned schema snapshot is `contracts/3dime-api/openapi-v1.json`. TypeScript
@@ -58,3 +59,7 @@ Content-Type: application/json
 ```
 
 Do not place Firebase service credentials, provider keys or Stripe secrets in this frontend repository.
+
+## Pricing and credits
+
+See [PRICING.md](PRICING.md) for the approved offer and activation sequence. Quota responses expose `paidCredits` separately from monthly `remaining`; `PLUS` is a distinct plan so legacy subscriptions retain their entitlements. The public plans endpoint advertises FREE and PLUS only.

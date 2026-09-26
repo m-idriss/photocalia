@@ -812,6 +812,86 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/subscriptions/checkout-status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Confirm a checkout
+         * @description Verifies Stripe payment and idempotently fulfills the authenticated account's checkout
+         */
+        get: {
+            parameters: {
+                query: {
+                    sessionId: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CheckoutStatusResponse"];
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/subscriptions/credits": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Buy one conversion credit
+         * @description Creates a one-time EUR 0.99 Checkout Session for the authenticated account
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description OK */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": components["schemas"]["CheckoutResponse"];
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/subscriptions/status": {
         parameters: {
             query?: never;
@@ -1338,7 +1418,7 @@ export interface components {
         /** @description Subscription checkout request */
         CheckoutRequest: {
             /** @enum {string} */
-            planId: "pro" | "business";
+            planId: "plus";
             /** @enum {string} */
             billingCycle: "monthly" | "yearly";
             userId?: string;
@@ -1347,6 +1427,11 @@ export interface components {
         /** @description Hosted checkout session */
         CheckoutResponse: {
             sessionUrl: string;
+        };
+        CheckoutStatusResponse: {
+            fulfilled: boolean;
+            /** @enum {string} */
+            kind: "credit" | "subscription";
         };
         /** @description Request to convert images to calendar events */
         ConverterRequest: {
@@ -1420,7 +1505,7 @@ export interface components {
             limit: number;
         };
         /** @enum {string} */
-        PlanType: "FREE" | "PRO" | "BUSINESS" | "UNLIMITED";
+        PlanType: "FREE" | "PLUS" | "PRO" | "BUSINESS" | "UNLIMITED";
         /** @description Quota usage for the active monthly period */
         Quota: {
             /** Format: int64 */
@@ -1430,6 +1515,8 @@ export interface components {
             /** Format: int64 */
             remaining: number;
             plan: components["schemas"]["PlanType"];
+            /** Format: int64 */
+            paidCredits?: number;
         };
         /** @description Public quota status */
         QuotaStatusResponse: {
@@ -1458,7 +1545,7 @@ export interface components {
         /** @description Current subscription status */
         SubscriptionStatusResponse: {
             /** @enum {string} */
-            planId: "free" | "pro" | "business" | "unlimited";
+            planId: "free" | "plus" | "pro" | "business" | "unlimited";
             /** @enum {string} */
             status: "active" | "trialing" | "past_due" | "canceled" | "free";
             currentPeriodEnd?: string;
@@ -1473,6 +1560,8 @@ export interface components {
             plan?: string;
             /** Format: int64 */
             quotaUsed?: number;
+            /** Format: int64 */
+            paidCredits?: number;
             /** Format: int64 */
             quotaLimit?: number;
             periodStart?: components["schemas"]["Timestamp"];

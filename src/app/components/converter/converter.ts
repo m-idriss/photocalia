@@ -13,6 +13,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { NgbPopoverModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppTooltipDirective } from '../../shared/directives';
 
+import { Router } from '@angular/router';
+import { ConversionDraftService } from '../../services/conversion-draft.service';
 import { ConverterService, FileData } from '../../services/converter';
 import { ToastService } from '../../services/toast.service';
 import { CalendarStateService } from '../../services/calendar-state.service';
@@ -62,6 +64,12 @@ export class Converter extends AuthAwareComponent implements OnInit {
   protected readonly extractedEvents = signal<CalendarEvent[]>([]);
   protected readonly icsContent = signal<string | null>(null);
   protected readonly isBatchDetailsCollapsed = signal(false);
+  protected readonly quotaExceeded = signal(false);
+  public readonly paidCredits = signal(0);
+  private readonly draftService = inject(ConversionDraftService);
+  private readonly router = inject(Router);
+  private draftUserId: string | null = null;
+  private resumingCheckout = false;
   public readonly quotaRemaining = signal<number | null>(null);
   public readonly quotaLimit = signal<number | null>(null);
   public readonly quotaEnabled = signal<boolean>(false);
@@ -77,11 +85,17 @@ export class Converter extends AuthAwareComponent implements OnInit {
     // Watch for calendar state changes and update local events
     effect(() => {
       const calendarEvents = this.calendarStateService.events();
-      // Only update if calendar was modified (has events and is different from current)
-      if (calendarEvents.length > 0 && calendarEvents !== this.extractedEvents()) {
-        this.extractedEvents.set(calendarEvents);
-        this.regenerateIcsContent();
-      }
+      // Local edits must not retrigger this import and restore older calendar data.
+      untracked(() => {
+        if (
+          !this.resumingCheckout &&
+          calendarEvents.length > 0 &&
+          calendarEvents !== this.extractedEvents()
+        ) {
+          this.extractedEvents.set(calendarEvents);
+          this.regenerateIcsContent();
+        }
+      });
     });
 
     // Watch for auth state changes and refresh quota
@@ -95,10 +109,34 @@ export class Converter extends AuthAwareComponent implements OnInit {
           // User signed in -> fetch fresh quota
           this.fetchQuotaStatus();
         }
+        if (isAuth) {
+          const uid = this.authService.currentUser()?.uid;
+          if (uid && this.draftUserId !== uid) {
+            this.draftUserId = uid;
+            void this.draftService
+              .take(uid)
+              .then((files) => {
+                if (
+                  this.authService.currentUser()?.uid === uid &&
+                  !this.files().length &&
+                  files.length
+                ) {
+                  this.resumingCheckout = true;
+                  this.addFiles(files);
+                }
+              })
+              .catch(() => {
+                /* Users can reselect a file when local storage is unavailable. */
+              });
+          }
+        }
 
         if (!isAuth) {
           // User signed out -> clear quota display and conversion state
           this.quotaRemaining.set(null);
+          this.paidCredits.set(0);
+          this.quotaExceeded.set(false);
+          this.draftUserId = null;
           this.quotaLimit.set(null);
           this.quotaEnabled.set(false);
           this.planType.set(null);
@@ -190,6 +228,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
       next: (response) => {
         if (response.success && response.quota) {
           this.quotaRemaining.set(response.quota.remaining);
+          this.paidCredits.set(response.quota.paidCredits ?? 0);
           this.quotaLimit.set(response.quota.limit);
           this.quotaEnabled.set(response.enabled);
           this.planType.set(response.quota.plan);
@@ -339,7 +378,26 @@ export class Converter extends AuthAwareComponent implements OnInit {
     this.previewFile.set(null);
   }
 
+  public async openPurchaseOptions(): Promise<void> {
+    const uid = this.authService.currentUser()?.uid;
+    const pending = this.isBatchMode()
+      ? this.batchFiles()
+          .filter((file) => file.status !== BatchFileStatus.SUCCESS)
+          .map((file) => file.file)
+      : this.files();
+    if (uid && pending.length) {
+      try {
+        await this.draftService.save(uid, pending);
+      } catch {
+        this.logger.warn('Could not preserve checkout draft', 'Converter');
+      }
+    }
+    const prefix = this.languageService.currentLang() === 'fr' ? '/fr' : '';
+    await this.router.navigateByUrl(`${prefix}/pricing`);
+  }
+
   protected async convertToIcs(): Promise<void> {
+    this.quotaExceeded.set(false);
     this.setConversionState('validating');
     if (!this.files().length) {
       this.toastService.showError('Please add at least one file.');
@@ -406,6 +464,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
           this.toastService.showError(this.languageService.translate(apiError.messageKey));
 
           if (apiError.code === 'QUOTA_EXCEEDED') {
+            this.quotaExceeded.set(true);
             // Refresh quota to show updated count
             this.fetchQuotaStatus();
           }
@@ -438,6 +497,21 @@ export class Converter extends AuthAwareComponent implements OnInit {
     // Process each file sequentially
     for (let i = 0; i < batchFiles.length; i++) {
       await this.processSingleBatchFile(i);
+      if (this.quotaExceeded()) {
+        this.batchFiles.update((files) =>
+          files.map((file, index) =>
+            index > i
+              ? {
+                  ...file,
+                  status: BatchFileStatus.ERROR,
+                  progress: 0,
+                  error: this.languageService.translate('converter.batch.quota_skipped'),
+                }
+              : file,
+          ),
+        );
+        break;
+      }
     }
 
     // Combine all successful results
@@ -487,7 +561,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
 
       // Call API for this single file
       await new Promise<void>((resolve) => {
-        this.converterService.convertSingleFile(fileDataArray[0]).subscribe({
+        this.converterService.convertToIcs(fileDataArray).subscribe({
           next: (response) => {
             if (response.success && response.icsContent) {
               // Parse events from ICS
@@ -542,6 +616,7 @@ export class Converter extends AuthAwareComponent implements OnInit {
 
             // Refresh quota if we hit the limit
             if (apiError.code === 'QUOTA_EXCEEDED') {
+              this.quotaExceeded.set(true);
               this.fetchQuotaStatus();
             }
 
@@ -589,7 +664,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
       }
     });
 
-    this.extractedEvents.set(allEvents);
+    this.extractedEvents.set(this.mergeCheckoutResults(allEvents));
+    this.calendarStateService.events.set(this.extractedEvents());
     this.setConversionState('review');
 
     // Generate combined ICS content
@@ -635,7 +711,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
 
       events.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
 
-      this.extractedEvents.set(events);
+      this.extractedEvents.set(this.mergeCheckoutResults(events));
+      this.calendarStateService.events.set(this.extractedEvents());
       this.setConversionState('review');
       // Persist ICS content for restore on refresh
       this.calendarStateService.updateIcsContent(this.icsContent());
@@ -707,6 +784,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
     if (!batchFile) return;
 
     this.setConversionState('processing');
+
+    this.quotaExceeded.set(false);
 
     // Reset file status
     this.batchFiles.update((files) =>
@@ -806,6 +885,18 @@ export class Converter extends AuthAwareComponent implements OnInit {
   }
 
   // ⚡ Regenerate ICS content from edited events
+  private mergeCheckoutResults(events: CalendarEvent[]): CalendarEvent[] {
+    if (!this.resumingCheckout) return events;
+    const previousIcs = this.calendarStateService.icsContent();
+    const previous = previousIcs ? this.parseIcsContentToEvents(previousIcs) : [];
+    const merged = [...previous, ...events];
+    this.icsContent.set(generateIcs(merged));
+    this.calendarStateService.updateIcsContent(this.icsContent());
+    this.calendarStateService.events.set(merged);
+    this.resumingCheckout = false;
+    return merged;
+  }
+
   private regenerateIcsContent(): void {
     const events = this.extractedEvents();
     if (events.length === 0) {

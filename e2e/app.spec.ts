@@ -102,8 +102,7 @@ test.describe('Converter', () => {
         contentType: 'application/json',
         body: JSON.stringify([
           { plan: 'free', limit: 3 },
-          { plan: 'pro', limit: 100 },
-          { plan: 'business', limit: 120 },
+          { plan: 'plus', limit: 15 },
         ]),
       });
     });

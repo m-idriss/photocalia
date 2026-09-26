@@ -66,6 +66,10 @@ PhotoCalia is a web-based calendar conversion tool for people who receive schedu
 
 Suggested categories: Calendar, Productivity, AI Tools
 
-License/pricing: Proprietary hosted service; free allowance and paid plans. Confirm the exact platform field values at submission time.
+License/pricing: Proprietary hosted service; free allowance, one-time conversion purchases and Plus subscription. Confirm the exact platform field values at submission time.
 
 Tags: calendar converter, image to calendar, PDF to calendar, ICS, schedule, OCR, productivity
+
+## Pricing consistency
+
+Use the approved wording and activation checklist in [PRICING.md](../PRICING.md). One conversion costs €0.99 without a subscription; Plus includes 15 conversions per month for €2.99/month or €29.99/year, alongside the free allowance of 3 per month. Publish these prices only after the corresponding checkout has been activated and tested.

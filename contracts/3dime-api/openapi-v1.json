@@ -13,10 +13,9 @@
           "planId": {
             "type": "string",
             "enum": [
-              "pro",
-              "business"
+              "plus"
             ],
-            "pattern": "pro|business"
+            "pattern": "plus"
           },
           "billingCycle": {
             "type": "string",
@@ -43,6 +42,25 @@
         "properties": {
           "sessionUrl": {
             "type": "string"
+          }
+        }
+      },
+      "CheckoutStatusResponse": {
+        "required": [
+          "fulfilled",
+          "kind"
+        ],
+        "type": "object",
+        "properties": {
+          "fulfilled": {
+            "type": "boolean"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "credit",
+              "subscription"
+            ]
           }
         }
       },
@@ -219,6 +237,7 @@
         "type": "string",
         "enum": [
           "FREE",
+          "PLUS",
           "PRO",
           "BUSINESS",
           "UNLIMITED"
@@ -248,6 +267,10 @@
           },
           "plan": {
             "$ref": "#/components/schemas/PlanType"
+          },
+          "paidCredits": {
+            "type": "integer",
+            "format": "int64"
           }
         }
       },
@@ -315,6 +338,7 @@
             "type": "string",
             "enum": [
               "free",
+              "plus",
               "pro",
               "business",
               "unlimited"
@@ -355,6 +379,10 @@
             "type": "string"
           },
           "quotaUsed": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "paidCredits": {
             "type": "integer",
             "format": "int64"
           },
@@ -982,6 +1010,59 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/subscriptions/checkout-status": {
+      "get": {
+        "summary": "Confirm a checkout",
+        "description": "Verifies Stripe payment and idempotently fulfills the authenticated account's checkout",
+        "tags": [
+          "subscriptions"
+        ],
+        "parameters": [
+          {
+            "name": "sessionId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "pattern": "\\S"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckoutStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/subscriptions/credits": {
+      "post": {
+        "summary": "Buy one conversion credit",
+        "description": "Creates a one-time EUR 0.99 Checkout Session for the authenticated account",
+        "tags": [
+          "subscriptions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckoutResponse"
                 }
               }
             }

@@ -73,11 +73,58 @@
           subscription quotas are not subject to the free installation allowance.
         </p>
 
-        <h3>4.2 Premium Tier (Future)</h3>
-        <p>
-          Premium users may receive higher conversion limits and additional features. Pricing and
-          features are subject to change with reasonable notice.
-        </p>
+        @if (languageService.currentLang() === 'fr') {
+          <h3>4.2 Achats ponctuels et abonnement Plus</h3>
+          <p>
+            Une conversion supplémentaire coûte 0,99 €, sans abonnement. Le crédit est attribué au
+            compte connecté après confirmation du paiement. Il n’expire pas en fin de mois et est
+            restitué si le traitement échoue.
+          </p>
+          <p>
+            Plus comprend 15 conversions par mois au total pour 2,99 €/mois ou 29,99 €/an. Le
+            paiement annuel est prélevé en une fois ; il ne transforme pas le quota en une réserve
+            annuelle. L’abonnement se renouvelle automatiquement selon la période choisie. Pour
+            arrêter le renouvellement, contactez support@photocalia.com avant l’échéance ; l’accès
+            reste actif jusqu’à la fin de la période payée.
+          </p>
+          <p>
+            Une conversion correspond à un fichier image ou PDF, quel que soit le nombre
+            d’événements extraits. Chaque fichier d’un lot est compté séparément. Le quota mensuel
+            est renouvelé au début du mois civil (UTC), sans report. Les crédits achetés sont
+            utilisés après le quota disponible et ne sont pas soumis à la limite gratuite du
+            navigateur.
+          </p>
+          <p>
+            Les abonnements Pro et Business existants conservent leurs conditions ; ils ne sont plus
+            proposés à la souscription. Contactez le support pour toute modification. Les droits
+            légaux applicables au consommateur restent inchangés.
+          </p>
+        } @else {
+          <h3>4.2 One-time purchases and Plus subscription</h3>
+          <p>
+            One additional conversion costs €0.99, without a subscription. The credit is assigned to
+            the signed-in account after payment is confirmed. It does not expire at month end and is
+            restored if processing fails.
+          </p>
+          <p>
+            Plus includes 15 conversions per month in total for €2.99/month or €29.99/year. Annual
+            billing is charged upfront; it does not turn the quota into an annual pool.
+            Subscriptions renew automatically at the selected interval. To stop renewal, contact
+            support@photocalia.com before renewal; access continues until the end of the paid
+            period.
+          </p>
+          <p>
+            One conversion covers one image or PDF file, regardless of the number of extracted
+            events. Files in a batch count separately. Monthly quotas reset at the start of the
+            calendar month (UTC), without rollover. Purchased credits are used after the available
+            quota and are not subject to the free browser allowance.
+          </p>
+          <p>
+            Existing Pro and Business subscriptions retain their terms and are closed to new
+            subscriptions. Contact support to change an existing plan. Applicable statutory consumer
+            rights remain unaffected.
+          </p>
+        }
 
         <h3>4.3 Prohibited Uses</h3>
         <p>You agree not to:</p>
@@ -200,7 +247,7 @@
           <li><strong>Firebase:</strong> Google authentication</li>
           <li><strong>Google Cloud:</strong> Application API hosting</li>
           <li><strong>Notion:</strong> Operational conversion and quota tracking</li>
-          <li><strong>Stripe:</strong> Subscription and donation payments</li>
+          <li><strong>Stripe:</strong> Subscriptions, conversion credits and donation payments</li>
         </ul>
         <p>
           These services have their own terms and privacy policies. We are not responsible for their

@@ -37,6 +37,14 @@
 
   <!-- Converter UI (only shown when authenticated) -->
   @if (!isAuthLoading && isAuthenticated) {
+    @if (quotaExceeded()) {
+      <div class="alert alert-warning" role="alert">
+        <p>{{ 'api.error.quota_exceeded' | translate }}</p>
+        <button class="btn btn-primary" (click)="openPurchaseOptions()">
+          {{ 'converter.quota.action' | translate }}
+        </button>
+      </div>
+    }
     <!-- Upload Area - Only show if no events extracted -->
     @if (extractedEvents().length === 0) {
       <app-converter-upload

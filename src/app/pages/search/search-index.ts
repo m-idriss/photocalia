@@ -210,13 +210,13 @@ const STATIC_SEARCH_ENTRIES: SearchEntry[] = [
         title: 'Pricing',
         description: 'Choose the PhotoCalia plan that fits your conversion needs.',
         content:
-          'Start free with monthly conversions, then upgrade to Pro or Business for higher photo to calendar conversion limits.',
+          'Start with 3 free conversions per month. Buy a conversion for EUR 0.99 or choose Plus: 15 per month for EUR 2.99, or EUR 29.99 per year.',
       },
       fr: {
         title: 'Tarifs',
         description: 'Choisissez la formule PhotoCalia adaptée à vos besoins de conversion.',
         content:
-          'Commencez gratuitement puis passez en Pro ou Business pour plus de conversions photo vers calendrier.',
+          'Commencez avec 3 conversions gratuites par mois. Achetez une conversion à 0,99 € ou choisissez Plus : 15 par mois pour 2,99 €, ou 29,99 € par an.',
       },
     },
   },
