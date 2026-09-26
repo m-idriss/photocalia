@@ -119,6 +119,7 @@ export class QuotaService {
           ),
           limit,
           remaining,
+          paidCredits: numberValue(quota['paidCredits']),
           plan: planValue(quota['plan'], response['plan']),
         },
       };
@@ -212,7 +213,10 @@ function successQuota(
 function planValue(...values: unknown[]): QuotaStatus['plan'] {
   const value = values.find((candidate): candidate is string => typeof candidate === 'string');
   const normalized = value?.toUpperCase();
-  return normalized === 'PRO' || normalized === 'BUSINESS' || normalized === 'UNLIMITED'
+  return normalized === 'PLUS' ||
+    normalized === 'PRO' ||
+    normalized === 'BUSINESS' ||
+    normalized === 'UNLIMITED'
     ? normalized
     : 'FREE';
 }

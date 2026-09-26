@@ -4,9 +4,8 @@ import { homePageTitle, localizedPageTitle, pageTitle } from './utils/page-title
 import { SUBSCRIPTION_PLANS } from './constants';
 
 const FREE_PLAN = SUBSCRIPTION_PLANS.find((plan) => plan.id === 'free')!;
-const PRO_PLAN = SUBSCRIPTION_PLANS.find((plan) => plan.id === 'pro')!;
-const BUSINESS_PLAN = SUBSCRIPTION_PLANS.find((plan) => plan.id === 'business')!;
-const PRICING_DESCRIPTION = `Choose the PhotoCalia plan that fits your needs. Start free with ${FREE_PLAN.monthlyQuota} conversions/month, upgrade to Pro for ${PRO_PLAN.monthlyQuota}/month or Business for ${BUSINESS_PLAN.monthlyQuota}/month.`;
+const PLUS_PLAN = SUBSCRIPTION_PLANS.find((plan) => plan.id === 'plus')!;
+const PRICING_DESCRIPTION = `Start with ${FREE_PLAN.monthlyQuota} free conversions/month. Buy one conversion for EUR 0.99 or choose Plus: ${PLUS_PLAN.monthlyQuota}/month for EUR ${PLUS_PLAN.monthlyPrice}, or EUR ${PLUS_PLAN.yearlyPrice}/year.`;
 
 const HOME_TITLE = homePageTitle('Photo to Calendar Converter with AI');
 const HOW_IT_WORKS_TITLE = pageTitle('How It Works: Convert Photos & Images to Calendar Events');
@@ -16,8 +15,9 @@ const LEGAL_MENTIONS_TITLE = pageTitle('Legal Mentions: Company & Legal Informat
 const BLOG_TITLE = pageTitle('Blog: Guides & Tips for Photo to Calendar Conversion');
 const BLOG_TITLE_FR = 'Guides photo vers calendrier et OCR | PhotoCalia';
 const SEARCH_TITLE = pageTitle('Search PhotoCalia');
-const PRICING_TITLE = pageTitle('Pricing: Free, Pro & Business Plans');
-const SUBSCRIPTION_SUCCESS_TITLE = pageTitle('Subscription Activated');
+const PRICING_TITLE = pageTitle('Pricing: Free, Pay As You Go & Plus');
+const PRICING_TITLE_FR = 'Tarifs : gratuit, à l’unité et Plus | PhotoCalia';
+const SUBSCRIPTION_SUCCESS_TITLE = pageTitle('Payment Confirmation');
 const DONATION_SUCCESS_TITLE = pageTitle('Thank You for Your Donation');
 const ABOUT_TITLE = pageTitle('About: AI Calendar Converter Built by Idriss');
 const ADD_EVENT_TO_CALENDAR_FROM_PHOTO_TITLE = pageTitle(
@@ -144,7 +144,7 @@ const pageRoutes: Route[] = [
                 name: 'Is my image data kept private?',
                 acceptedAnswer: {
                   '@type': 'Answer',
-                  text: 'Uploaded files are processed over HTTPS and are not intentionally stored by PhotoCalia after the request completes. Account, quota, payment and limited operational records have separate retention rules described in the privacy policy.',
+                  text: 'Uploaded files are processed over HTTPS and are not intentionally retained on PhotoCalia servers after the request completes. Pending files may be temporarily saved in your browser when you open purchase options. Account, quota, payment and limited operational records have separate retention rules described in the privacy policy.',
                 },
               },
               {
@@ -520,11 +520,18 @@ const pageRoutes: Route[] = [
   {
     path: 'pricing',
     loadComponent: () => import('./pages/pricing/pricing').then((m) => m.Pricing),
-    title: PRICING_TITLE,
+    title: localizedPageTitle(PRICING_TITLE, PRICING_TITLE_FR),
     data: {
       seo: {
         title: PRICING_TITLE,
         description: PRICING_DESCRIPTION,
+        localized: {
+          fr: {
+            title: PRICING_TITLE_FR,
+            description:
+              '3 conversions gratuites par mois. Une conversion à 0,99 € sans abonnement, ou Plus : 15 par mois pour 2,99 €/mois ou 29,99 €/an.',
+          },
+        },
         keywords:
           'photocalia pricing, calendar converter plans, photo to calendar subscription, upgrade plan',
         ogImage: 'https://www.photocalia.com/assets/images/converter.png',
@@ -575,11 +582,11 @@ const pageRoutes: Route[] = [
                 position: 2,
                 item: {
                   '@type': 'Product',
-                  name: 'Pro Plan',
-                  description: `${PRO_PLAN.monthlyQuota} conversions per month.`,
+                  name: 'Plus Plan',
+                  description: `${PLUS_PLAN.monthlyQuota} conversions per month.`,
                   offers: {
                     '@type': 'Offer',
-                    price: String(PRO_PLAN.monthlyPrice),
+                    price: String(PLUS_PLAN.monthlyPrice),
                     priceCurrency: 'EUR',
                     availability: 'https://schema.org/InStock',
                     url: 'https://www.photocalia.com/pricing',
@@ -591,11 +598,12 @@ const pageRoutes: Route[] = [
                 position: 3,
                 item: {
                   '@type': 'Product',
-                  name: 'Business Plan',
-                  description: `${BUSINESS_PLAN.monthlyQuota} conversions per month.`,
+                  name: 'One conversion credit',
+                  description:
+                    'One conversion credit, no subscription. Credit restored if conversion fails.',
                   offers: {
                     '@type': 'Offer',
-                    price: String(BUSINESS_PLAN.monthlyPrice),
+                    price: '0.99',
                     priceCurrency: 'EUR',
                     availability: 'https://schema.org/InStock',
                     url: 'https://www.photocalia.com/pricing',

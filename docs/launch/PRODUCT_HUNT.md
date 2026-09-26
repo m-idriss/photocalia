@@ -49,8 +49,12 @@ Do not add “please upvote.” Product Hunt explicitly allows sharing the launc
 
 Accuracy: “Extraction is probabilistic, so PhotoCalia shows the proposed events for review before export. I’m building the test baseline around languages, timezones, all-day events and ambiguous dates.”
 
-Privacy: “Uploaded content is processed for the request and is not intentionally stored afterward by PhotoCalia. Account, quota, payment and limited operational records follow the separate retention rules in the privacy policy.”
+Privacy: “Uploaded content is processed for the request and is not intentionally retained afterward on PhotoCalia servers. Pending files may be saved temporarily in the browser when opening purchase options. Account, quota, payment and limited operational records follow the separate retention rules in the privacy policy.”
 
-Pricing: “Google sign-in includes 3 free conversions per month. Current paid limits and prices are shown on the pricing page and refreshed from the plans API.”
+Pricing: “Google sign-in includes 3 free conversions per month. One additional conversion costs €0.99 without a subscription. Plus includes 15 conversions per month for €2.99/month or €29.99/year.”
 
 Formats: “The current upload flow accepts JPG, PNG and PDF. PDF pages are prepared in the browser before conversion.”
+
+## Pricing consistency
+
+Use the approved wording and activation checklist in [PRICING.md](../PRICING.md). One conversion costs €0.99 without a subscription; Plus includes 15 conversions per month for €2.99/month or €29.99/year, alongside the free allowance of 3 per month. Publish these prices only after the corresponding checkout has been activated and tested.

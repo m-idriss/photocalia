@@ -2,13 +2,13 @@ import { SUBSCRIPTION_PLANS } from './subscription.constants';
 
 describe('SUBSCRIPTION_PLANS', () => {
   it('defines one complete entry for every public plan', () => {
-    expect(SUBSCRIPTION_PLANS.map((plan) => plan.id)).toEqual(['free', 'pro', 'business']);
+    expect(SUBSCRIPTION_PLANS.map((plan) => plan.id)).toEqual(['free', 'plus']);
     expect(new Set(SUBSCRIPTION_PLANS.map((plan) => plan.id)).size).toBe(SUBSCRIPTION_PLANS.length);
 
     for (const plan of SUBSCRIPTION_PLANS) {
       expect(plan.monthlyQuota).toBeGreaterThan(0);
-      expect(plan.monthlyPrice).toBeGreaterThanOrEqual(0);
-      expect(plan.yearlyPrice).toBeGreaterThanOrEqual(0);
+      expect(plan.monthlyPrice ?? 0).toBeGreaterThanOrEqual(0);
+      expect(plan.yearlyPrice ?? 0).toBeGreaterThanOrEqual(0);
       expect(plan.features.length).toBeGreaterThan(0);
     }
   });

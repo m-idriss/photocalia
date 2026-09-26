@@ -31,3 +31,7 @@ Do not equate page views with product success. The primary launch indicators are
 At day 2, verify links, indexing, replies and error/support signals. At day 7, compare sources by reviewed exports and summarize objections/questions. At day 30, keep channels that produced qualified use or durable citations; update or retire inaccurate listings.
 
 Never use hidden tracking in uploaded documents or expose user-level conversion content in a campaign report.
+
+## Pricing consistency
+
+Use the approved wording and activation checklist in [PRICING.md](../PRICING.md). One conversion costs €0.99 without a subscription; Plus includes 15 conversions per month for €2.99/month or €29.99/year, alongside the free allowance of 3 per month. Publish these prices only after the corresponding checkout has been activated and tested.

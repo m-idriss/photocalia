@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject, PLATFORM_ID } from '@angular/core';
+import { Component, signal, computed, inject, PLATFORM_ID, effect } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -10,6 +10,7 @@ import { PlanService } from '../../services/plan.service';
 import { SUBSCRIPTION_PLANS } from '../../constants';
 import { BillingCycle, SubscriptionPlan } from '../../models';
 import { toApiClientError } from '../../utils';
+import { LanguageService } from '../../services/language.service';
 import { RecommendedGuides } from '../../components/recommended-guides/recommended-guides';
 
 @Component({
@@ -20,6 +21,7 @@ import { RecommendedGuides } from '../../components/recommended-guides/recommend
 })
 export class Pricing {
   protected readonly plans = SUBSCRIPTION_PLANS;
+  protected readonly hasSubscription = signal(false);
 
   protected readonly billingCycle = signal<BillingCycle>('monthly');
   protected readonly isLoading = signal<string | null>(null); // stores the planId being loaded
@@ -28,9 +30,41 @@ export class Pricing {
   private readonly subscriptionService = inject(SubscriptionService);
   private readonly authService = inject(AuthService);
   private readonly planService = inject(PlanService);
+  private readonly languageService = inject(LanguageService);
   private readonly platformId = inject(PLATFORM_ID);
 
   protected readonly isAuthenticated = computed(() => this.authService.isAuthenticated());
+
+  constructor() {
+    effect(() => {
+      const uid = this.authService.currentUser()?.uid;
+      this.hasSubscription.set(false);
+      if (uid)
+        this.subscriptionService.getStatus(uid).subscribe({
+          next: (status) => this.hasSubscription.set(status.planId !== 'free'),
+          error: () => {
+            /* The API still enforces duplicate-subscription protection. */
+          },
+        });
+    });
+  }
+
+  protected async buyCredit(): Promise<void> {
+    if (!isPlatformBrowser(this.platformId)) return;
+    if (!this.isAuthenticated()) {
+      await this.authService.signInWithGoogle();
+      if (!this.isAuthenticated()) return;
+    }
+    this.error.set(null);
+    this.isLoading.set('credit');
+    this.subscriptionService.buyCredit().subscribe({
+      next: (response) => this.subscriptionService.redirectToCheckout(response.sessionUrl),
+      error: (err) => {
+        this.isLoading.set(null);
+        this.error.set(toApiClientError(err).messageKey);
+      },
+    });
+  }
 
   /** The displayed price string for a plan given the current billing cycle. */
   protected getPrice(plan: SubscriptionPlan): string {
@@ -39,10 +73,20 @@ export class Pricing {
     return price.toFixed(2);
   }
 
+  protected getFormattedPrice(plan: SubscriptionPlan): string {
+    return new Intl.NumberFormat(this.languageService.currentLang(), {
+      style: 'currency',
+      currency: 'EUR',
+    }).format(Number(this.getPrice(plan)));
+  }
+
   /** The total yearly price for display in the yearly billing option. */
   protected getYearlyTotal(plan: SubscriptionPlan): string {
     if (plan.yearlyPrice === null) return '';
-    return plan.yearlyPrice.toFixed(2);
+    return new Intl.NumberFormat(this.languageService.currentLang(), {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(plan.yearlyPrice);
   }
 
   /**
@@ -60,10 +104,14 @@ export class Pricing {
     this.billingCycle.set(cycle);
   }
 
-  protected subscribe(plan: SubscriptionPlan): void {
-    if (plan.id === 'free') return;
+  protected async subscribe(plan: SubscriptionPlan): Promise<void> {
+    if (plan.id !== 'plus' || this.hasSubscription()) return;
     if (!isPlatformBrowser(this.platformId)) return;
 
+    if (!this.isAuthenticated()) {
+      await this.authService.signInWithGoogle();
+      if (!this.isAuthenticated()) return;
+    }
     this.error.set(null);
     this.isLoading.set(plan.id);
 

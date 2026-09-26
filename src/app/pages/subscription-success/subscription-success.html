@@ -12,6 +12,11 @@
       </h1>
       <p class="success-description">{{ error()! | translate }}</p>
       <div class="success-actions">
+        @if (sessionId()) {
+          <button class="btn btn-primary" (click)="checkPayment()">
+            {{ 'subscription.success.retry' | translate }}
+          </button>
+        }
         <a [routerLink]="'/pricing' | localizeRoute" class="btn btn-primary">
           {{ 'subscription.success.view_plans' | translate }}
         </a>
@@ -28,13 +33,12 @@
         {{ 'subscription.success.title' | translate }}
       </h1>
 
-      @if (status()) {
-        <p class="success-plan">
-          {{ 'subscription.success.plan' | translate: { plan: status()!.planId } }}
-        </p>
-      }
-
-      <p class="success-description">{{ 'subscription.success.description' | translate }}</p>
+      <p class="success-description">
+        {{
+          (kind() === 'credit' ? 'subscription.success.credit' : 'subscription.success.description')
+            | translate
+        }}
+      </p>
 
       <div class="success-actions">
         <a [routerLink]="'/' | localizeRoute" class="btn btn-primary">

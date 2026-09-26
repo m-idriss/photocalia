@@ -33,12 +33,35 @@
   <!-- Error message -->
   @if (error()) {
     <div class="pricing-error" role="alert" aria-live="assertive">
-      {{ error() }}
+      {{ error()! | translate }}
     </div>
   }
 
   <!-- Plans Grid -->
   <section class="plans-grid" aria-label="Subscription plans">
+    <article class="plan-card">
+      <div class="plan-header">
+        <h2 class="plan-name">{{ 'pricing.credit.name' | translate }}</h2>
+        <p class="plan-description">{{ 'pricing.credit.description' | translate }}</p>
+      </div>
+      <div class="plan-price">
+        <span class="price-amount">{{ 'pricing.credit.price' | translate }}</span>
+      </div>
+      <p class="plan-quota">{{ 'pricing.credit.quota' | translate }}</p>
+      <ul class="plan-features">
+        <li class="feature-item">{{ 'pricing.credit.feature' | translate }}</li>
+        <li class="feature-item">{{ 'pricing.credit.expiry' | translate }}</li>
+      </ul>
+      <div class="plan-cta">
+        <button
+          class="btn btn-outline-primary w-100"
+          (click)="buyCredit()"
+          [disabled]="isLoading() !== null"
+        >
+          {{ (isLoading() === 'credit' ? 'pricing.loading' : 'pricing.credit.cta') | translate }}
+        </button>
+      </div>
+    </article>
     @for (plan of plans; track plan.id) {
       <article
         class="plan-card"
@@ -58,7 +81,7 @@
           @if (plan.monthlyPrice === null) {
             <span class="price-amount">{{ 'pricing.free' | translate }}</span>
           } @else {
-            <span class="price-amount">€{{ getPrice(plan) }}</span>
+            <span class="price-amount">{{ getFormattedPrice(plan) }}</span>
             <span class="price-period">/ {{ 'pricing.billing.per_month' | translate }}</span>
             @if (billingCycle() === 'yearly' && getYearlyTotal(plan)) {
               <span class="price-yearly-total">
@@ -82,12 +105,14 @@
         <div class="plan-cta">
           @if (plan.id === 'free') {
             @if (isAuthenticated()) {
-              <span class="current-plan-badge">{{ 'pricing.current_plan' | translate }}</span>
+              <span class="current-plan-badge">{{ plan.ctaKey | translate }}</span>
             } @else {
               <a [routerLink]="'/' | localizeRoute" class="btn btn-outline-secondary w-100">
                 {{ plan.ctaKey | translate }}
               </a>
             }
+          } @else if (hasSubscription()) {
+            <p>{{ 'pricing.existing' | translate }}</p>
           } @else {
             <button
               class="btn w-100"
@@ -108,6 +133,12 @@
         </div>
       </article>
     }
+  </section>
+
+  <section class="pricing-faq">
+    <p>{{ 'pricing.rules' | translate }}</p>
+    <p>{{ 'pricing.renewal' | translate }}</p>
+    <a [routerLink]="'/terms' | localizeRoute">{{ 'footer.link.termsOfService' | translate }}</a>
   </section>
 
   <!-- FAQ / Reassurance -->

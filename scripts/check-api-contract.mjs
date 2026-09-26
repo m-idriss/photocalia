@@ -13,6 +13,8 @@ const expectedOperations = {
   '/v1/converter/plans': ['get'],
   '/v1/subscriptions': ['post'],
   '/v1/subscriptions/status': ['get'],
+  '/v1/subscriptions/credits': ['post'],
+  '/v1/subscriptions/checkout-status': ['get'],
   '/v1/subscriptions/cancel': ['post'],
   '/v1/donations/checkout': ['post'],
 };
@@ -32,6 +34,7 @@ for (const component of [
   'PlanInfo',
   'CheckoutRequest',
   'CheckoutResponse',
+  'CheckoutStatusResponse',
   'SubscriptionStatusResponse',
   'DonationRequest',
   'ErrorResponse',

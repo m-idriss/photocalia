@@ -1,6 +1,7 @@
 import { Injectable, inject, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import type { components } from '../generated/3dime-api';
 import { isPlatformBrowser } from '@angular/common';
 
 import { environment } from '../../environments/environment';
@@ -40,6 +41,17 @@ export class SubscriptionService {
       email: currentUser?.email ?? undefined,
     };
     return this.http.post<CheckoutResponse>(this.baseUrl, body);
+  }
+
+  buyCredit(): Observable<CheckoutResponse> {
+    return this.http.post<CheckoutResponse>(`${this.baseUrl}/credits`, {});
+  }
+
+  confirmCheckout(sessionId: string): Observable<components['schemas']['CheckoutStatusResponse']> {
+    return this.http.get<components['schemas']['CheckoutStatusResponse']>(
+      `${this.baseUrl}/checkout-status`,
+      { params: { sessionId } },
+    );
   }
 
   /**

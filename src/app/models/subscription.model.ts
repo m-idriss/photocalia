@@ -8,9 +8,7 @@ export type SubscriptionStatusResponse = ApiSchemas['SubscriptionStatusResponse'
 export type DonationCheckoutRequest = ApiSchemas['DonationRequest'];
 
 export type CheckoutPlanId = CheckoutRequest['planId'];
-export type PlanId =
-  | CheckoutPlanId
-  | Extract<ApiSchemas['SubscriptionStatusResponse']['planId'], 'free'>;
+export type PlanId = SubscriptionStatusResponse['planId'];
 export type BillingCycle = CheckoutRequest['billingCycle'];
 export type SubscriptionStatus = SubscriptionStatusResponse['status'];
 export type ProductId = DonationCheckoutRequest['productId'];

@@ -60,3 +60,7 @@ The frontend deploys to Vercel from `main`. Firebase is used for Google authenti
 ---
 
 MIT License — **Idriss** · [photocalia.com](https://www.photocalia.com) · [@m-idriss](https://github.com/m-idriss)
+
+## Pricing
+
+3 free conversions per month; one additional conversion for €0.99 without a subscription; Plus includes 15 conversions per month for €2.99/month or €29.99/year. See [pricing and activation documentation](docs/PRICING.md).

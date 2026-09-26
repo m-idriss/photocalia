@@ -6,13 +6,11 @@ const planSourcePath = new URL('src/app/constants/subscription.constants.ts', re
 const planSource = await readFile(planSourcePath, 'utf8');
 
 const quotas = new Map();
-for (const match of planSource.matchAll(
-  /id:\s*'(free|pro|business)'[\s\S]*?monthlyQuota:\s*(\d+)/g,
-)) {
+for (const match of planSource.matchAll(/id:\s*'(free|plus)'[\s\S]*?monthlyQuota:\s*(\d+)/g)) {
   quotas.set(match[1], Number(match[2]));
 }
 
-for (const plan of ['free', 'pro', 'business']) {
+for (const plan of ['free', 'plus']) {
   if (!quotas.has(plan)) {
     throw new Error(`Could not read the ${plan} quota from subscription.constants.ts`);
   }
@@ -75,7 +73,7 @@ for (const locale of ['en', 'fr']) {
   const translations = JSON.parse(
     await readFile(new URL(`public/assets/i18n/${locale}.json`, repositoryRoot), 'utf8'),
   );
-  for (const plan of ['free', 'pro', 'business']) {
+  for (const plan of ['free', 'plus']) {
     if (!translations[`pricing.plan.${plan}.quota`]?.includes('{limit}')) {
       failures.push(`${locale}.json: pricing.plan.${plan}.quota must use {limit}`);
     }
@@ -88,5 +86,5 @@ if (failures.length > 0) {
 }
 
 console.log(
-  `Verified public claims against plan quotas: free=${quotas.get('free')}, pro=${quotas.get('pro')}, business=${quotas.get('business')}.`,
+  `Verified public claims against plan quotas: free=${quotas.get('free')}, plus=${quotas.get('plus')}.`,
 );

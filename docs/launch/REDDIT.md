@@ -53,3 +53,7 @@ I’m the maker. I’d be interested in how others test ambiguous dates and time
 - Never manufacture testimonials, votes or independent recommendations.
 - Remove/update a post if product behavior or pricing changes.
 - Record moderator guidance in the launch tracker.
+
+## Pricing consistency
+
+Use the approved wording and activation checklist in [PRICING.md](../PRICING.md). One conversion costs €0.99 without a subscription; Plus includes 15 conversions per month for €2.99/month or €29.99/year, alongside the free allowance of 3 per month. Publish these prices only after the corresponding checkout has been activated and tested.

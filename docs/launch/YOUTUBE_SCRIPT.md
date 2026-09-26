@@ -67,3 +67,7 @@ Chapters:
 - 02:15 Try PhotoCalia
 
 Disclosure: PhotoCalia uses multimodal AI. Extraction can contain errors; review dates, times and locations before importing.
+
+## Pricing consistency
+
+Use the approved wording and activation checklist in [PRICING.md](../PRICING.md). One conversion costs €0.99 without a subscription; Plus includes 15 conversions per month for €2.99/month or €29.99/year, alongside the free allowance of 3 per month. Publish these prices only after the corresponding checkout has been activated and tested.

@@ -23,7 +23,7 @@ describe('Pricing', () => {
     const fixture = TestBed.createComponent(Pricing);
     fixture.detectChanges();
     const cards = fixture.nativeElement.querySelectorAll('.plan-card');
-    expect(cards.length).toBe(SUBSCRIPTION_PLANS.length);
+    expect(cards.length).toBe(SUBSCRIPTION_PLANS.length + 1);
   });
 
   it('should default to monthly billing', () => {
@@ -46,11 +46,11 @@ describe('Pricing', () => {
     fixture.componentInstance['billingCycle'].set('yearly');
     fixture.detectChanges();
     const yearlyTotals = fixture.nativeElement.querySelectorAll('.price-yearly-total');
-    // Pro and Business have yearly prices
+    // Plus has a yearly price
     expect(yearlyTotals.length).toBeGreaterThan(0);
   });
 
-  it('should highlight the Pro plan', () => {
+  it('should highlight the Plus plan', () => {
     const fixture = TestBed.createComponent(Pricing);
     fixture.detectChanges();
     const highlighted = fixture.nativeElement.querySelectorAll('.plan-card.highlighted');
@@ -59,7 +59,7 @@ describe('Pricing', () => {
 
   it('should use the production quota fallback while plans are loading', () => {
     const fixture = TestBed.createComponent(Pricing);
-    const proPlan = SUBSCRIPTION_PLANS.find((p) => p.id === 'pro')!;
+    const proPlan = SUBSCRIPTION_PLANS.find((p) => p.id === 'plus')!;
     expect(fixture.componentInstance['getQuotaParams'](proPlan)).toEqual({
       limit: proPlan.monthlyQuota,
     });
@@ -76,16 +76,16 @@ describe('Pricing', () => {
     const fixture = TestBed.createComponent(Pricing);
     const component = fixture.componentInstance;
     component['billingCycle'].set('monthly');
-    const proPlan = SUBSCRIPTION_PLANS.find((p) => p.id === 'pro')!;
-    expect(component['getPrice'](proPlan)).toBe('4.99');
+    const proPlan = SUBSCRIPTION_PLANS.find((p) => p.id === 'plus')!;
+    expect(component['getPrice'](proPlan)).toBe('2.99');
   });
 
   it('should return monthly equivalent when yearly is selected for pro plan', () => {
     const fixture = TestBed.createComponent(Pricing);
     const component = fixture.componentInstance;
     component['billingCycle'].set('yearly');
-    const proPlan = SUBSCRIPTION_PLANS.find((p) => p.id === 'pro')!;
-    // 49.99 / 12 = 4.17 (rounded to 2 decimal places)
-    expect(parseFloat(component['getPrice'](proPlan))).toBeCloseTo(49.99 / 12, 1);
+    const proPlan = SUBSCRIPTION_PLANS.find((p) => p.id === 'plus')!;
+    // 29.99 / 12 = 4.17 (rounded to 2 decimal places)
+    expect(parseFloat(component['getPrice'](proPlan))).toBeCloseTo(29.99 / 12, 1);
   });
 });

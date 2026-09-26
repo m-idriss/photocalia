@@ -48,8 +48,7 @@
           <li>Edit events before downloading</li>
           <li>Export to ICS format (Google Calendar, Outlook, Apple Calendar compatible)</li>
           <li>
-            {{ planParams().freeLimit }} free conversions per month - contact us to upgrade for
-            higher limits
+            {{ planParams().freeLimit }} free conversions per month - see pricing for higher limits
           </li>
           <li>Secure and privacy-focused processing</li>
         </ul>
@@ -258,6 +257,13 @@
                 }} used this month. [{{ planTypeVal }} account]"
               ></ngb-progressbar>
 
+              @if (converterComponent.paidCredits() > 0) {
+                <p class="small text-success">
+                  {{
+                    'home.quota.credits' | translate: { credits: converterComponent.paidCredits() }
+                  }}
+                </p>
+              }
               <!-- Inline text showing subscription and quota remaining -->
               @if (quotaRemainingVal > 0) {
                 <div
@@ -285,11 +291,12 @@
                 >
                   <i class="bi bi-exclamation-triangle-fill me-1"></i>
                   <span class="fw-semibold">{{ 'home.quota.exhausted' | translate }}</span>
-                  <a
-                    [routerLink]="'/pricing' | localizeRoute"
-                    class="ms-1 text-danger text-decoration-underline"
-                    >{{ 'home.quota.upgrade' | translate }}</a
+                  <button
+                    class="btn btn-link text-danger"
+                    (click)="converterComponent.openPurchaseOptions()"
                   >
+                    {{ 'home.quota.upgrade' | translate }}
+                  </button>
                 </div>
               }
             </div>
