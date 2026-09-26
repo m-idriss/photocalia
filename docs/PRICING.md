@@ -38,8 +38,12 @@ Update owned launch drafts alongside the app. Publishing external posts or sendi
 ## Verification of this change
 
 - 291 frontend unit tests passed; lint, public-claims checks, blog checks and generated API contract checks passed.
-- 37 targeted backend tests passed, including concurrent spending, duplicate payment delivery, refund behavior, preserved legacy limits and payment authentication.
+- 38 targeted backend tests passed, including concurrent spending, duplicate payment delivery, refund behavior, preserved legacy limits and payment authentication.
 - Three browser scenarios passed with mocked API/Stripe responses: French monthly/annual offers and responsive layout; quota exhaustion to payment confirmation and restored files; partially successful batches retaining their first results after checkout.
 - Production build generated 50 prerendered routes. French pricing metadata and HTML contain the new offer.
 - Backend and frontend OpenAPI snapshots match.
-- No hosted Stripe test or production deployment was performed. Local Stripe credentials and the new recurring price IDs were not available. Do not treat simulated checkout tests as evidence of live payment activation.
+- Hosted Stripe sandbox checkouts created by the actual `StripeService` completed for the EUR 0.99 credit and EUR 2.99 monthly subscription. Subsequent authenticated confirmation returned `fulfilled=true`; credit attribution and PLUS synchronization were verified against an isolated mocked quota service. The EUR 29.99 annual checkout was created and its amount verified; it remained unpaid and correctly returned `fulfilled=false`. No production customer was charged or modified by these tests.
+- Full backend CI passed. Backend PR #261 deployed merge `2621b0b` to Cloud Run revision `dime-api-00240-cd6`. Production `/v1/converter/plans` returns FREE=3 and PLUS=15. The signed Stripe connectivity check returns HTTP 200.
+- New live Plus prices are separate from legacy prices. The existing Stripe endpoint now targets `https://api.photocalia.com/v1/webhooks/stripe` and subscribes to checkout completion, asynchronous payment success and subscription lifecycle events.
+- Frontend PR #1027 passes CI, security, quality, Lighthouse and Vercel preview checks. The converter upload/edit/download smoke test also passes after fixing calendar synchronization overwriting local edits. Publication follows the normal merge-to-main Vercel workflow described in `docs/DEPLOYMENT.md`.
+- Production customer payment and real Firestore fulfillment were intentionally not exercised. Automated ledger/concurrency tests cover storage behavior; the hosted tests cover actual Stripe payment and server confirmation, with storage isolated.
