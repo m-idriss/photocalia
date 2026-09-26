@@ -105,7 +105,9 @@
         <div class="plan-cta">
           @if (plan.id === 'free') {
             @if (isAuthenticated()) {
-              <span class="current-plan-badge">{{ plan.ctaKey | translate }}</span>
+              @if (!hasSubscription()) {
+                <span class="current-plan-badge">{{ 'pricing.current_plan' | translate }}</span>
+              }
             } @else {
               <a [routerLink]="'/' | localizeRoute" class="btn btn-outline-secondary w-100">
                 {{ plan.ctaKey | translate }}

@@ -36,26 +36,40 @@ export class Pricing {
   protected readonly isAuthenticated = computed(() => this.authService.isAuthenticated());
 
   constructor() {
-    effect(() => {
+    effect((onCleanup) => {
       const uid = this.authService.currentUser()?.uid;
       this.hasSubscription.set(false);
-      if (uid)
-        this.subscriptionService.getStatus(uid).subscribe({
-          next: (status) => this.hasSubscription.set(status.planId !== 'free'),
+      if (uid) {
+        const request = this.subscriptionService.getStatus(uid).subscribe({
+          next: (status) => {
+            if (this.authService.currentUser()?.uid === uid) {
+              this.hasSubscription.set(status.planId !== 'free');
+            }
+          },
           error: () => {
             /* The API still enforces duplicate-subscription protection. */
           },
         });
+        onCleanup(() => request.unsubscribe());
+      }
     });
+  }
+
+  private async authenticateForCheckout(): Promise<boolean> {
+    this.error.set(null);
+    try {
+      if (!this.isAuthenticated()) await this.authService.signInWithGoogle();
+      return this.isAuthenticated();
+    } catch {
+      this.isLoading.set(null);
+      this.error.set('api.error.authentication_required');
+      return false;
+    }
   }
 
   protected async buyCredit(): Promise<void> {
     if (!isPlatformBrowser(this.platformId)) return;
-    if (!this.isAuthenticated()) {
-      await this.authService.signInWithGoogle();
-      if (!this.isAuthenticated()) return;
-    }
-    this.error.set(null);
+    if (!(await this.authenticateForCheckout())) return;
     this.isLoading.set('credit');
     this.subscriptionService.buyCredit().subscribe({
       next: (response) => this.subscriptionService.redirectToCheckout(response.sessionUrl),
@@ -108,11 +122,7 @@ export class Pricing {
     if (plan.id !== 'plus' || this.hasSubscription()) return;
     if (!isPlatformBrowser(this.platformId)) return;
 
-    if (!this.isAuthenticated()) {
-      await this.authService.signInWithGoogle();
-      if (!this.isAuthenticated()) return;
-    }
-    this.error.set(null);
+    if (!(await this.authenticateForCheckout())) return;
     this.isLoading.set(plan.id);
 
     this.subscriptionService.createCheckout(plan.id, this.billingCycle()).subscribe({
