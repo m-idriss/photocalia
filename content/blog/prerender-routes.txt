@@ -12,6 +12,8 @@
 /fr/blog/hobby-classes-workshops
 /blog/music-festival-lineup
 /fr/blog/music-festival-lineup
+/blog/new-pricing-conversion-credits-plus
+/fr/blog/new-pricing-conversion-credits-plus
 /blog/photo-to-google-calendar
 /fr/blog/photo-to-google-calendar
 /blog/reddit-photo-to-calendar

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#101b35"/><stop offset="1" stop-color="#263d60"/></linearGradient>
+    <linearGradient id="plus" x2="1" y2="1"><stop stop-color="#d7b76c"/><stop offset="1" stop-color="#f6df9b"/></linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <circle cx="1130" cy="90" r="280" fill="#fff" opacity=".025"/>
+  <circle cx="75" cy="640" r="250" fill="#fff" opacity=".025"/>
+  <text x="600" y="115" text-anchor="middle" fill="#f8f5eb" font-family="Arial,sans-serif" font-size="36" letter-spacing="2">Photocalia</text>
+  <g fill="#f8f5eb">
+    <rect x="95" y="215" width="300" height="310" rx="24"/>
+    <rect x="450" y="215" width="300" height="310" rx="24"/>
+    <rect x="805" y="215" width="300" height="310" rx="24" fill="url(#plus)"/>
+  </g>
+  <g stroke="#263d60" stroke-width="9" stroke-linecap="round" fill="none">
+    <path d="M160 197v42m170-42v42M515 197v42m170-42v42M870 197v42m170-42v42"/>
+    <path d="M125 279h240m115 0h240m115 0h240" opacity=".18"/>
+  </g>
+  <g text-anchor="middle" font-family="Arial,sans-serif" font-weight="bold" font-size="112" fill="#172741">
+    <text x="245" y="420">3</text><text x="600" y="420">1</text><text x="955" y="420">15</text>
+  </g>
+  <g stroke="#263d60" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m231 467 10 10 20-22"/>
+    <circle cx="600" cy="467" r="18"/><path d="M600 457v20m-10-10h20"/>
+    <path d="m941 467 10 10 20-22"/>
+  </g>
+</svg>
