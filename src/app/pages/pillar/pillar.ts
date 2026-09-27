@@ -42,14 +42,14 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
     en: {
       title: 'Add events to your calendar from a photo or image',
       intro:
-        'Upload a photo, screenshot, flyer, or scanned image and let PhotoCalia turn the dates, times, places, and event details into calendar entries you can review before export.',
+        'Upload a photo, screenshot, flyer, or scanned image and let Photocalia turn the dates, times, places, and event details into calendar entries you can review before export.',
       primaryCta: 'Add events from a photo',
       secondaryCta: 'Read the photo to calendar guide',
       secondaryUrl: '/blog/photo-to-google-calendar',
       sections: [
         {
-          title: 'Built for the exact search',
-          body: 'If you are looking for how to add event to your calendar from image or photo, PhotoCalia handles the missing step between a visual document and a structured calendar event.',
+          title: 'From an invitation to an event you can check',
+          body: 'Start with the original invitation or appointment card. Keep the date, year, time and venue visible in the same image so you can compare the extracted event with its source.',
           links: [
             { label: 'Photo to calendar converter', url: '/photo-to-calendar' },
             { label: 'Image to Google Calendar', url: '/image-to-google-calendar' },
@@ -67,13 +67,13 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
           title: 'Export to the calendar you already use',
           body: 'After AI extraction, review each event and export an ICS calendar file compatible with Google Calendar, Apple Calendar, Outlook, and most calendar apps.',
           links: [
-            { label: 'How PhotoCalia works', url: '/how-it-works' },
+            { label: 'How Photocalia works', url: '/how-it-works' },
             { label: 'PDF to calendar converter', url: '/pdf-to-calendar' },
           ],
         },
         {
           title: 'Turn one image into one or many events',
-          body: 'A simple invitation may produce one event, while a class timetable or conference program can produce several. PhotoCalia separates the detected dates and times into editable entries before export.',
+          body: 'A simple invitation may produce one event, while a class timetable or conference program can produce several. Photocalia separates the detected dates and times into editable entries before export.',
         },
         {
           title: 'Check the details before they reach your calendar',
@@ -84,7 +84,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'How do I add a calendar event from a photo?',
           answer:
-            'Upload the photo to PhotoCalia, let the AI extract its dates, times, titles, and locations, review the result, then export or add the event to your preferred calendar.',
+            'Upload the photo to Photocalia, let the AI extract its dates, times, titles, and locations, review the result, then export or add the event to your preferred calendar.',
         },
         {
           question: 'Can a screenshot be converted into a calendar event?',
@@ -94,7 +94,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'Can one image contain several events?',
           answer:
-            'Yes. PhotoCalia can detect several entries in a timetable, program, or schedule and present them separately for review.',
+            'Yes. Photocalia can detect several entries in a timetable, program, or schedule and present them separately for review.',
         },
         {
           question: 'Can I edit the extracted event before saving it?',
@@ -106,14 +106,14 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
     fr: {
       title: 'Ajouter des événements à votre agenda depuis une photo ou une image',
       intro:
-        'Importez une photo, une capture, un flyer ou une image scannée, puis laissez PhotoCalia transformer les dates, heures, lieux et détails en événements à vérifier avant export.',
+        'Importez une photo, une capture, un flyer ou une image scannée, puis laissez Photocalia transformer les dates, heures, lieux et détails en événements à vérifier avant export.',
       primaryCta: 'Ajouter depuis une photo',
       secondaryCta: 'Lire le guide photo vers calendrier',
       secondaryUrl: '/blog/photo-to-google-calendar',
       sections: [
         {
-          title: 'Conçu pour cette intention',
-          body: "Si vous cherchez comment ajouter un événement à votre calendrier depuis une image ou une photo, PhotoCalia fait le lien entre le document visuel et l'événement structuré.",
+          title: 'De l’invitation à un événement à vérifier',
+          body: 'Partez de l’invitation ou de la fiche de rendez-vous originale. Gardez la date, l’année, l’heure et le lieu visibles sur la même image pour comparer l’événement extrait à sa source.',
           links: [
             { label: 'Convertisseur photo vers calendrier', url: '/photo-to-calendar' },
             { label: 'Image vers Google Agenda', url: '/image-to-google-calendar' },
@@ -131,13 +131,13 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
           title: "Export vers l'agenda que vous utilisez déjà",
           body: "Après extraction IA, vérifiez chaque événement puis exportez un fichier ICS compatible avec Google Agenda, Apple Calendrier, Outlook et la plupart des apps d'agenda.",
           links: [
-            { label: 'Comment fonctionne PhotoCalia', url: '/how-it-works' },
+            { label: 'Comment fonctionne Photocalia', url: '/how-it-works' },
             { label: 'Convertisseur PDF vers calendrier', url: '/pdf-to-calendar' },
           ],
         },
         {
           title: 'Transformez une image en un ou plusieurs événements',
-          body: "Une invitation simple peut produire un événement, tandis qu'un emploi du temps ou un programme peut en produire plusieurs. PhotoCalia sépare les dates et horaires détectés en entrées modifiables avant export.",
+          body: "Une invitation simple peut produire un événement, tandis qu'un emploi du temps ou un programme peut en produire plusieurs. Photocalia sépare les dates et horaires détectés en entrées modifiables avant export.",
         },
         {
           title: "Contrôlez les détails avant l'ajout à votre agenda",
@@ -148,7 +148,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'Comment ajouter un événement à mon agenda depuis une photo ?',
           answer:
-            "Importez la photo dans PhotoCalia, laissez l'IA extraire dates, horaires, titres et lieux, vérifiez le résultat, puis exportez ou ajoutez l'événement à votre agenda.",
+            "Importez la photo dans Photocalia, laissez l'IA extraire dates, horaires, titres et lieux, vérifiez le résultat, puis exportez ou ajoutez l'événement à votre agenda.",
         },
         {
           question: 'Puis-je convertir une capture d’écran en événement ?',
@@ -158,7 +158,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'Une image peut-elle contenir plusieurs événements ?',
           answer:
-            'Oui. PhotoCalia peut détecter plusieurs entrées dans un emploi du temps, un programme ou un planning et les présenter séparément pour vérification.',
+            'Oui. Photocalia peut détecter plusieurs entrées dans un emploi du temps, un programme ou un planning et les présenter séparément pour vérification.',
         },
         {
           question: "Puis-je modifier l'événement extrait avant de l'enregistrer ?",
@@ -172,14 +172,14 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
     en: {
       title: 'Photo to calendar converter',
       intro:
-        'Turn photos of flyers, appointment cards, timetables, and screenshots into calendar-ready events with AI. PhotoCalia extracts dates, times, locations, and titles so you can review and export them without retyping.',
+        'Turn photos of flyers, appointment cards, timetables, and screenshots into calendar-ready events with AI. Photocalia extracts dates, times, locations, and titles so you can review and export them without retyping.',
       primaryCta: 'Convert a photo now',
       secondaryCta: 'Read the step-by-step guide',
       secondaryUrl: '/blog/photo-to-google-calendar',
       sections: [
         {
           title: 'What you can convert',
-          body: 'PhotoCalia works with event flyers, appointment reminders, school notices, sports schedules, conference agendas, travel plans, and other images that contain date or time information.',
+          body: 'Photocalia works with event flyers, appointment reminders, school notices, sports schedules, conference agendas, travel plans, and other images that contain date or time information.',
           links: [
             { label: 'Healthcare appointment examples', url: '/blog/healthcare-appointments' },
             { label: 'Paper schedule tips', url: '/blog/digitize-paper-schedules' },
@@ -190,17 +190,17 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
           title: 'How the workflow works',
           body: 'Upload an image, let AI detect the event details, review the generated entries, then download an ICS file or add the events to your calendar workflow.',
           links: [
-            { label: 'How PhotoCalia works', url: '/how-it-works' },
+            { label: 'How Photocalia works', url: '/how-it-works' },
             { label: 'Photo to Google Calendar tutorial', url: '/blog/photo-to-google-calendar' },
           ],
         },
         {
-          title: 'Best for everyday capture',
-          body: 'The page is designed for quick capture when you receive a card, flyer, or screenshot and want the event saved before it disappears into a chat, inbox, or paper pile.',
+          title: 'Example: turn a class notice into a calendar entry',
+          body: 'For example, a notice reading “Pottery workshop, 12 October 2026, 18:00–19:30, Studio 2” contains a title, date, start and end time, and location. Compare each extracted field with the notice before saving. If the year or time zone is missing, check it with the organizer rather than relying on an AI guess.',
         },
         {
           title: 'More useful than copying text with generic OCR',
-          body: 'Generic OCR gives you a block of text. PhotoCalia identifies which text is the event title, date, start time, end time, location, and description, then prepares structured events you can verify.',
+          body: 'Generic OCR gives you a block of text. Photocalia identifies which text is the event title, date, start time, end time, location, and description, then prepares structured events you can verify.',
         },
         {
           title: 'Tips for accurate results',
@@ -216,7 +216,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'Can one photo create multiple calendar events?',
           answer:
-            'Yes. A single timetable, agenda, or schedule can contain several events. PhotoCalia extracts them into separate entries so you can review each one before export.',
+            'Yes. A single timetable, agenda, or schedule can contain several events. Photocalia extracts them into separate entries so you can review each one before export.',
         },
         {
           question: 'Which calendars accept the result?',
@@ -233,14 +233,14 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
     fr: {
       title: 'Convertisseur photo vers calendrier',
       intro:
-        'Transformez les photos de flyers, fiches de rendez-vous, emplois du temps et captures en événements prêts pour votre calendrier. PhotoCalia extrait dates, heures, lieux et titres pour les vérifier puis les exporter sans ressaisie.',
+        'Transformez les photos de flyers, fiches de rendez-vous, emplois du temps et captures en événements prêts pour votre calendrier. Photocalia extrait dates, heures, lieux et titres pour les vérifier puis les exporter sans ressaisie.',
       primaryCta: 'Convertir une photo',
       secondaryCta: 'Lire le guide pas à pas',
       secondaryUrl: '/blog/photo-to-google-calendar',
       sections: [
         {
           title: 'Ce que vous pouvez convertir',
-          body: "PhotoCalia fonctionne avec les flyers d'événements, rappels de rendez-vous, documents scolaires, plannings sportifs, programmes de conférence, trajets et autres images contenant une date ou une heure.",
+          body: "Photocalia fonctionne avec les flyers d'événements, rappels de rendez-vous, documents scolaires, plannings sportifs, programmes de conférence, trajets et autres images contenant une date ou une heure.",
           links: [
             { label: 'Exemples de rendez-vous médicaux', url: '/blog/healthcare-appointments' },
             { label: 'Conseils pour plannings papier', url: '/blog/digitize-paper-schedules' },
@@ -251,17 +251,17 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
           title: 'Comment fonctionne le flux',
           body: "Importez une image, laissez l'IA détecter les détails, vérifiez les événements générés, puis téléchargez un fichier ICS ou ajoutez-les à votre calendrier.",
           links: [
-            { label: 'Comment fonctionne PhotoCalia', url: '/how-it-works' },
+            { label: 'Comment fonctionne Photocalia', url: '/how-it-works' },
             { label: 'Tutoriel photo vers Google Agenda', url: '/blog/photo-to-google-calendar' },
           ],
         },
         {
-          title: 'Idéal pour capturer au quotidien',
-          body: "Cette page cible les moments où vous recevez une carte, un flyer ou une capture et voulez sauvegarder l'événement avant qu'il ne se perde dans une conversation, une boîte mail ou une pile de papiers.",
+          title: 'Exemple : transformer une affiche de cours en événement',
+          body: 'Par exemple, « Atelier poterie, 12 octobre 2026, 18 h–19 h 30, salle 2 » indique un titre, une date, un début, une fin et un lieu. Comparez chaque champ extrait à l’affiche avant d’enregistrer. Si l’année ou le fuseau horaire manque, vérifiez auprès de l’organisateur plutôt que de vous fier à une déduction de l’IA.',
         },
         {
           title: "Plus utile qu'un simple OCR",
-          body: 'Un OCR générique fournit un bloc de texte. PhotoCalia identifie le titre, la date, les heures de début et de fin, le lieu et la description, puis prépare des événements structurés à vérifier.',
+          body: 'Un OCR générique fournit un bloc de texte. Photocalia identifie le titre, la date, les heures de début et de fin, le lieu et la description, puis prépare des événements structurés à vérifier.',
         },
         {
           title: 'Conseils pour une extraction précise',
@@ -277,7 +277,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'Une seule photo peut-elle créer plusieurs événements ?',
           answer:
-            'Oui. Un emploi du temps, un programme ou un planning peut contenir plusieurs événements. PhotoCalia les extrait séparément afin que vous puissiez vérifier chacun avant export.',
+            'Oui. Un emploi du temps, un programme ou un planning peut contenir plusieurs événements. Photocalia les extrait séparément afin que vous puissiez vérifier chacun avant export.',
         },
         {
           question: 'Quels calendriers acceptent le résultat ?',
@@ -296,14 +296,14 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
     en: {
       title: 'Image to Google Calendar',
       intro:
-        'Convert screenshots, photos, and scanned notices into Google Calendar events. PhotoCalia prepares structured event data you can review before importing.',
+        'Convert screenshots, photos, and scanned notices into Google Calendar events. Photocalia prepares structured event data you can review before importing.',
       primaryCta: 'Try image conversion',
       secondaryCta: 'Open Google Calendar guide',
       secondaryUrl: '/blog/photo-to-google-calendar',
       sections: [
         {
           title: 'Designed for Google Calendar users',
-          body: 'Use PhotoCalia when event details are trapped inside an image but you want a clean event title, date, time, location, and notes in your calendar.',
+          body: 'Use Photocalia when event details are trapped inside an image but you want a clean event title, date, time, location, and notes in your calendar.',
           links: [{ label: 'Google Calendar tutorial', url: '/blog/photo-to-google-calendar' }],
         },
         {
@@ -331,7 +331,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'Can Google Calendar import events from an image by itself?',
           answer:
-            'Google Calendar does not provide a general image-upload workflow for extracting every event. PhotoCalia reads the image first, lets you verify the fields, and prepares the events for Google Calendar.',
+            'Google Calendar does not provide a general image-upload workflow for extracting every event. Photocalia reads the image first, lets you verify the fields, and prepares the events for Google Calendar.',
         },
         {
           question: 'Can I use a screenshot instead of a camera photo?',
@@ -341,7 +341,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'Does the image need to contain only one event?',
           answer:
-            'No. PhotoCalia can identify multiple events in a schedule or agenda and present them as separate entries for review.',
+            'No. Photocalia can identify multiple events in a schedule or agenda and present them as separate entries for review.',
         },
         {
           question: 'Are the extracted events editable?',
@@ -353,14 +353,14 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
     fr: {
       title: 'Image vers Google Agenda',
       intro:
-        'Convertissez captures, photos et documents scannes en événements Google Agenda. PhotoCalia prépare des données structurées que vous pouvez vérifier avant import.',
+        'Convertissez captures, photos et documents scannes en événements Google Agenda. Photocalia prépare des données structurées que vous pouvez vérifier avant import.',
       primaryCta: "Essayer la conversion d'image",
       secondaryCta: 'Ouvrir le guide Google Agenda',
       secondaryUrl: '/blog/photo-to-google-calendar',
       sections: [
         {
           title: 'Pensé pour Google Agenda',
-          body: "Utilisez PhotoCalia quand les détails d'un événement sont bloqués dans une image mais doivent devenir un titre, une date, une heure, un lieu et des notes propres dans votre agenda.",
+          body: "Utilisez Photocalia quand les détails d'un événement sont bloqués dans une image mais doivent devenir un titre, une date, une heure, un lieu et des notes propres dans votre agenda.",
           links: [{ label: 'Tutoriel Google Agenda', url: '/blog/photo-to-google-calendar' }],
         },
         {
@@ -388,7 +388,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'Google Agenda peut-il importer directement les événements d’une image ?',
           answer:
-            "Google Agenda ne propose pas de flux général capable d'extraire tous les événements d'une image. PhotoCalia lit d'abord l'image, vous laisse vérifier les champs, puis prépare les événements pour Google Agenda.",
+            "Google Agenda ne propose pas de flux général capable d'extraire tous les événements d'une image. Photocalia lit d'abord l'image, vous laisse vérifier les champs, puis prépare les événements pour Google Agenda.",
         },
         {
           question: 'Puis-je utiliser une capture d’écran plutôt qu’une photo ?',
@@ -398,7 +398,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: "L'image doit-elle contenir un seul événement ?",
           answer:
-            'Non. PhotoCalia peut identifier plusieurs événements dans un planning ou un programme et les présenter séparément pour vérification.',
+            'Non. Photocalia peut identifier plusieurs événements dans un planning ou un programme et les présenter séparément pour vérification.',
         },
         {
           question: 'Les événements extraits sont-ils modifiables ?',
@@ -410,7 +410,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
   },
   'pdf-to-calendar': {
     en: {
-      title: 'PDF to calendar',
+      title: 'PDF to calendar converter',
       intro:
         'Upload PDFs that contain schedules, agendas, exam timetables, or event programs and turn them into editable calendar events.',
       primaryCta: 'Convert a PDF',
@@ -419,7 +419,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
       sections: [
         {
           title: 'Useful for multi-page schedules',
-          body: 'PDFs often contain conference agendas, school calendars, exam sessions, and activity programs. PhotoCalia extracts the events so you can review them in one workflow.',
+          body: 'PDFs often contain conference agendas, school calendars, exam sessions, and activity programs. Photocalia extracts the events so you can review them in one workflow.',
           links: [
             { label: 'Exam timetable example', url: '/blog/summer-exam-scheduling' },
             { label: 'Sports schedule example', url: '/blog/sports-league-training' },
@@ -428,7 +428,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           title: 'Export to universal ICS',
           body: 'After review, export events in the ICS format supported by Google Calendar, Outlook, Apple Calendar, and most calendar apps.',
-          links: [{ label: 'How PhotoCalia works', url: '/how-it-works' }],
+          links: [{ label: 'How Photocalia works', url: '/how-it-works' }],
         },
         {
           title: 'Keep source documents simple',
@@ -436,29 +436,29 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         },
         {
           title: 'Extract several events without retyping',
-          body: 'A PDF may contain one appointment or dozens of sessions. PhotoCalia identifies separate event blocks and prepares editable titles, dates, times, locations, and descriptions for review.',
+          body: 'A PDF may contain one appointment or dozens of sessions. Photocalia identifies separate event blocks and prepares editable titles, dates, times, locations, and descriptions for review.',
           links: [{ label: 'Photo to calendar converter', url: '/photo-to-calendar' }],
         },
         {
-          title: 'Import the result into your calendar',
-          body: 'Once the extracted entries are correct, download the ICS file and open or import it in your calendar app. Always review recurring events, time zones, and multi-day sessions before saving.',
+          title: 'Import a PDF schedule into Google Calendar',
+          body: 'Google Calendar imports ICS files, not PDF schedules. After reviewing the extracted events, download the ICS file. On a computer, open Google Calendar → Settings → Import & export, select the file and destination calendar, then import. Importing a file does not keep it synced with later changes to the PDF; check for existing events before importing again.',
         },
       ],
       faqs: [
         {
           question: 'Can I convert a PDF schedule into calendar events?',
           answer:
-            'Yes. Upload a readable PDF containing dates and times, review the events detected by PhotoCalia, then export them as an ICS calendar file.',
+            'Yes. Upload a readable PDF containing dates and times, review the events detected by Photocalia, then export them as an ICS calendar file.',
         },
         {
           question: 'Can one PDF create multiple events?',
           answer:
-            'Yes. Conference programs, exam timetables, class schedules, and activity calendars can contain several events that PhotoCalia separates for review.',
+            'Yes. Conference programs, exam timetables, class schedules, and activity calendars can contain several events that Photocalia separates for review.',
         },
         {
           question: 'Does the PDF need selectable text?',
           answer:
-            'No. PhotoCalia can process scanned or image-based PDFs, although clear pages with readable dates, times, and headings produce more reliable results.',
+            'No. Photocalia can process scanned or image-based PDFs, although clear pages with readable dates, times, and headings produce more reliable results.',
         },
         {
           question: 'Which calendar apps accept the exported file?',
@@ -468,7 +468,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
       ],
     },
     fr: {
-      title: 'PDF vers calendrier',
+      title: 'Convertisseur PDF vers calendrier',
       intro:
         "Importez des PDF contenant plannings, agendas, calendriers d'examens ou programmes et transformez-les en événements modifiables.",
       primaryCta: 'Convertir un PDF',
@@ -477,7 +477,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
       sections: [
         {
           title: 'Utile pour les plannings multi-pages',
-          body: "Les PDF contiennent souvent programmes de conférence, calendriers scolaires, sessions d'examen et activités. PhotoCalia extrait les événements pour les vérifier dans un seul flux.",
+          body: "Les PDF contiennent souvent programmes de conférence, calendriers scolaires, sessions d'examen et activités. Photocalia extrait les événements pour les vérifier dans un seul flux.",
           links: [
             { label: "Exemple de planning d'examens", url: '/blog/summer-exam-scheduling' },
             { label: 'Exemple de planning sportif', url: '/blog/sports-league-training' },
@@ -486,7 +486,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           title: 'Export universel en ICS',
           body: "Après vérification, exportez les événements au format ICS compatible avec Google Agenda, Outlook, Apple Calendrier et la plupart des apps d'agenda.",
-          links: [{ label: 'Comment fonctionne PhotoCalia', url: '/how-it-works' }],
+          links: [{ label: 'Comment fonctionne Photocalia', url: '/how-it-works' }],
         },
         {
           title: 'Gardez des documents lisibles',
@@ -494,19 +494,19 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         },
         {
           title: 'Extrayez plusieurs événements sans ressaisie',
-          body: "Un PDF peut contenir un rendez-vous ou des dizaines de sessions. PhotoCalia identifie les blocs d'événements et prépare titres, dates, horaires, lieux et descriptions modifiables pour vérification.",
+          body: "Un PDF peut contenir un rendez-vous ou des dizaines de sessions. Photocalia identifie les blocs d'événements et prépare titres, dates, horaires, lieux et descriptions modifiables pour vérification.",
           links: [{ label: 'Convertisseur photo vers calendrier', url: '/photo-to-calendar' }],
         },
         {
-          title: 'Importez le résultat dans votre agenda',
-          body: "Une fois les entrées vérifiées, téléchargez le fichier ICS et ouvrez-le ou importez-le dans votre application d'agenda. Contrôlez toujours les récurrences, fuseaux horaires et événements sur plusieurs jours.",
+          title: 'Importer un planning PDF dans Google Agenda',
+          body: 'Google Agenda importe des fichiers ICS, pas les plannings PDF. Après vérification des événements, téléchargez le fichier ICS. Sur ordinateur, ouvrez Google Agenda → Paramètres → Importer et exporter, sélectionnez le fichier et l’agenda de destination, puis importez. Le fichier importé ne se synchronise pas avec les modifications ultérieures du PDF ; vérifiez les événements existants avant un nouvel import.',
         },
       ],
       faqs: [
         {
           question: 'Puis-je convertir un planning PDF en événements ?',
           answer:
-            'Oui. Importez un PDF lisible contenant dates et horaires, vérifiez les événements détectés par PhotoCalia, puis exportez-les dans un fichier calendrier ICS.',
+            'Oui. Importez un PDF lisible contenant dates et horaires, vérifiez les événements détectés par Photocalia, puis exportez-les dans un fichier calendrier ICS.',
         },
         {
           question: 'Un seul PDF peut-il créer plusieurs événements ?',
@@ -516,7 +516,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'Le texte du PDF doit-il être sélectionnable ?',
           answer:
-            "Non. PhotoCalia peut traiter les PDF scannés ou composés d'images, même si des pages nettes avec dates, horaires et titres lisibles donnent des résultats plus fiables.",
+            "Non. Photocalia peut traiter les PDF scannés ou composés d'images, même si des pages nettes avec dates, horaires et titres lisibles donnent des résultats plus fiables.",
         },
         {
           question: 'Quels agendas acceptent le fichier exporté ?',
@@ -530,7 +530,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
     en: {
       title: 'OCR calendar extraction',
       intro:
-        'PhotoCalia combines OCR and AI understanding to recognize dates, times, places, and event titles inside images, then turns them into structured calendar entries.',
+        'Photocalia combines OCR and AI understanding to recognize dates, times, places, and event titles inside images, then turns them into structured calendar entries.',
       primaryCta: 'Try AI extraction',
       secondaryCta: 'Read the OCR guide',
       secondaryUrl: '/blog/ai-ocr-calendar-extraction',
@@ -559,7 +559,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           title: 'Improve OCR accuracy at upload time',
           body: 'Use sharp images, include the full document, avoid glare and strong perspective, and keep small print readable. Check ambiguous numeric dates and time zones before exporting the calendar.',
-          links: [{ label: 'How PhotoCalia works', url: '/how-it-works' }],
+          links: [{ label: 'How Photocalia works', url: '/how-it-works' }],
         },
       ],
       faqs: [
@@ -571,7 +571,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: 'What event details can be extracted?',
           answer:
-            'PhotoCalia can identify event titles, dates, start and end times, locations, descriptions, and multiple entries when those details are visible in the source.',
+            'Photocalia can identify event titles, dates, start and end times, locations, descriptions, and multiple entries when those details are visible in the source.',
         },
         {
           question: 'Can OCR read a timetable with several rows?',
@@ -588,7 +588,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
     fr: {
       title: 'Extraction OCR de calendrier',
       intro:
-        'PhotoCalia combine OCR et compréhension IA pour reconnaître dates, heures, lieux et titres dans les images, puis les transformer en événements structurés.',
+        'Photocalia combine OCR et compréhension IA pour reconnaître dates, heures, lieux et titres dans les images, puis les transformer en événements structurés.',
       primaryCta: "Essayer l'extraction IA",
       secondaryCta: 'Lire le guide OCR',
       secondaryUrl: '/blog/ai-ocr-calendar-extraction',
@@ -617,7 +617,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           title: "Améliorez la précision de l'OCR dès l'import",
           body: 'Utilisez une image nette, incluez le document entier, évitez les reflets et les angles prononcés, et gardez les petits caractères lisibles. Vérifiez les dates numériques ambiguës et les fuseaux horaires avant export.',
-          links: [{ label: 'Comment fonctionne PhotoCalia', url: '/how-it-works' }],
+          links: [{ label: 'Comment fonctionne Photocalia', url: '/how-it-works' }],
         },
       ],
       faqs: [
@@ -629,7 +629,7 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
         {
           question: "Quelles informations d'événement peuvent être extraites ?",
           answer:
-            'PhotoCalia peut identifier titres, dates, heures de début et de fin, lieux, descriptions et plusieurs entrées lorsque ces informations sont visibles.',
+            'Photocalia peut identifier titres, dates, heures de début et de fin, lieux, descriptions et plusieurs entrées lorsque ces informations sont visibles.',
         },
         {
           question: "L'OCR peut-il lire un emploi du temps de plusieurs lignes ?",
