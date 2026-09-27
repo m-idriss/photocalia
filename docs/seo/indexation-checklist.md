@@ -4,6 +4,8 @@
 
 Run `npm run build:ci && npm run seo:check`. The SEO check reads the generated HTML, rather than trusting router declarations. It checks every sitemap URL for its canonical URL, reciprocal language alternates, document language, title, description, H1, indexability and rendered main content. It also walks HTML links from the homepage and checks that internal search stays excluded from indexing.
 
+The independent `scripts/seo-required-paths.json` baseline prevents accidental removal of existing sitemap URLs. New URLs are allowed; intentional removals require an explicit review of this list.
+
 The public pages must retain their existing paths. Keep conversion, review, account and checkout routes functional. Never add fabricated ratings or testimonials.
 
 ## After an approved deployment

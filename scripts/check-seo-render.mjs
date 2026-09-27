@@ -10,6 +10,16 @@ const sitemap = await readFile(path.join(buildDir, 'sitemap.xml'), 'utf8');
 const urls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
 assert.ok(urls.length > 0, 'The built sitemap must contain pages');
 assert.equal(new Set(urls).size, urls.length, 'Sitemap URLs must be unique');
+// Independent baseline: deleting a page from the generated sitemap must fail CI.
+// New URLs are allowed; intentional removals must explicitly update this reviewed list.
+const requiredPaths = JSON.parse(
+  await readFile(new URL('./seo-required-paths.json', import.meta.url), 'utf8'),
+);
+for (const requiredPath of requiredPaths) {
+  const expected = `${origin}${requiredPath === '/' ? '' : requiredPath}`;
+  assert.ok(urls.includes(expected), `Required URL missing from sitemap: ${expected}`);
+}
+
 const pages = new Map();
 const errors = [];
 
