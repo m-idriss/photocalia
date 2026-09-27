@@ -145,7 +145,7 @@
     "lint-staged": "^17.0.8",
     "marked": "^18.0.14",
     "openapi-typescript": "^7.13.0",
-    "parse5": "8.0.0",
+    "parse5": "8.0.1",
     "prettier": "^3.9.9",
     "typescript": "~6.0.3",
     "typescript-eslint": "8.70.1"
