@@ -441,6 +441,17 @@
         >
           <h2 id="convert-title" class="section-title">{{ 'home.convert.title' | translate }}</h2>
           <p class="section-description" [innerHTML]="'home.convert.description' | translate"></p>
+          <nav class="format-links" [attr.aria-label]="'home.formats.label' | translate">
+            <a [routerLink]="'/photo-to-calendar' | localizeRoute">{{
+              'home.formats.photo' | translate
+            }}</a>
+            <a [routerLink]="'/pdf-to-calendar' | localizeRoute">{{
+              'home.formats.pdf' | translate
+            }}</a>
+            <a [routerLink]="'/image-to-google-calendar' | localizeRoute">{{
+              'home.formats.google' | translate
+            }}</a>
+          </nav>
           <div class="convert-grid">
             <div class="convert-item">
               <span class="convert-icon" aria-hidden="true">🎒</span>

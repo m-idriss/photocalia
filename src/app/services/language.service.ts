@@ -1,7 +1,9 @@
 import { Injectable, signal, inject, NgZone, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map } from 'rxjs/operators';
 import { LoggerService } from './logger.service';
 
 export type SupportedLanguage = 'en' | 'fr';
@@ -31,6 +33,13 @@ export class LanguageService {
   readonly currentLang = signal<SupportedLanguage>(this.getInitialLanguage());
 
   readonly languages = SUPPORTED_LANGUAGES;
+  private readonly navigatedPath = toSignal(
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map((event) => event.urlAfterRedirects),
+    ),
+    { initialValue: this.router.url },
+  );
 
   private get isBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
@@ -55,15 +64,15 @@ export class LanguageService {
     }
     this.loadLanguage(lang);
 
-    // Navigate to the equivalent route in the target language
-    const currentPath = this.router.url.split('?')[0].split('#')[0];
-    const strippedPath = this.stripLangPrefix(currentPath);
-    const newPath =
-      lang === DEFAULT_LANGUAGE ? strippedPath || '/' : `${FR_PREFIX}${strippedPath || '/'}`;
+    this.router.navigateByUrl(this.languagePath(lang));
+  }
 
-    // Replace trailing slash for non-root paths
-    const finalPath = newPath === `${FR_PREFIX}/` ? FR_PREFIX : newPath;
-    this.router.navigateByUrl(finalPath);
+  /** A crawlable URL for the current page in another language. */
+  languagePath(lang: SupportedLanguage): string {
+    const currentPath = this.navigatedPath().split('?')[0].split('#')[0];
+    const strippedPath = this.stripLangPrefix(currentPath);
+    if (lang === DEFAULT_LANGUAGE) return strippedPath || '/';
+    return strippedPath && strippedPath !== '/' ? `${FR_PREFIX}${strippedPath}` : FR_PREFIX;
   }
 
   /**

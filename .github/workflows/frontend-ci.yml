@@ -95,6 +95,9 @@ jobs:
           set -o pipefail
           npm run build:ci 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/production-build.log"
 
+      - name: Verify prerendered SEO output
+        run: npm run seo:check
+
       - name: Verify clean working tree
         shell: bash
         run: |

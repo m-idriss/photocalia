@@ -15,17 +15,19 @@
       <!-- Language Switcher -->
       <div class="language-switcher" [attr.aria-label]="'header.aria.language' | translate">
         @for (language of lang.languages; track language.code) {
-          <button
+          <a
             class="lang-btn"
+            [href]="lang.languagePath(language.code)"
+            [attr.hreflang]="language.code"
             [class.active]="lang.currentLang() === language.code"
-            (click)="setLanguage(language.code)"
+            (click)="onLanguageClick($event, language.code)"
             [attr.aria-label]="language.label"
-            [attr.aria-pressed]="lang.currentLang() === language.code"
+            [attr.aria-current]="lang.currentLang() === language.code ? 'page' : null"
             [appTooltip]="language.label"
             appTooltipPlacement="bottom"
           >
             {{ language.flag }}
-          </button>
+          </a>
         }
       </div>
 

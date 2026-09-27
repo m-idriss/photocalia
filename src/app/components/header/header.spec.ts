@@ -1,8 +1,12 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 
 import { Header } from './header';
 import { AuthService } from '../../services/auth.service';
+
+@Component({ template: '' })
+class EmptyPage {}
 
 describe('Header', () => {
   let component: Header;
@@ -11,7 +15,7 @@ describe('Header', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Header],
-      providers: [provideRouter([])],
+      providers: [provideRouter([{ path: '**', component: EmptyPage }])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Header);
@@ -32,6 +36,29 @@ describe('Header', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const navMenu = compiled.querySelector('.nav-menu');
     expect(navMenu).toBeTruthy();
+  });
+
+  it('updates reciprocal language links after client navigation without query strings', async () => {
+    await TestBed.inject(Router).navigateByUrl('/fr/pdf-to-calendar?source=test#intro');
+    fixture.detectChanges();
+    const page = fixture.nativeElement as HTMLElement;
+    expect(page.querySelector('a[hreflang="en"]')?.getAttribute('href')).toBe('/pdf-to-calendar');
+    expect(page.querySelector('a[hreflang="fr"]')?.getAttribute('href')).toBe(
+      '/fr/pdf-to-calendar',
+    );
+  });
+
+  it('preserves converter state with client navigation while allowing modified clicks', () => {
+    const setLanguage = spyOn(component, 'setLanguage');
+    const plain = new MouseEvent('click', { cancelable: true });
+    component.onLanguageClick(plain, 'fr');
+    expect(plain.defaultPrevented).toBeTrue();
+    expect(setLanguage).toHaveBeenCalledOnceWith('fr');
+    setLanguage.calls.reset();
+    const modified = new MouseEvent('click', { cancelable: true, metaKey: true });
+    component.onLanguageClick(modified, 'fr');
+    expect(modified.defaultPrevented).toBeFalse();
+    expect(setLanguage).not.toHaveBeenCalled();
   });
 
   describe('avatar fallback', () => {
