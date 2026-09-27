@@ -82,6 +82,14 @@ export class Header extends AuthAwareComponent {
     }
   }
 
+  onLanguageClick(event: MouseEvent, lang: SupportedLanguage): void {
+    // Keep native new-tab behavior; ordinary clicks preserve the in-memory converter state.
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey)
+      return;
+    event.preventDefault();
+    this.setLanguage(lang);
+  }
+
   setLanguage(lang: SupportedLanguage): void {
     this.lang.setLanguage(lang);
     this.cdr.markForCheck();

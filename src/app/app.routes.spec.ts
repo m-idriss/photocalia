@@ -42,7 +42,7 @@ describe('page route titles', () => {
     const blogRoute = routes.find((route) => route.path === 'blog');
 
     expect(blogRoute?.data?.['seo'].localized.fr.title).toBe(
-      'Guides photo vers calendrier et OCR | PhotoCalia',
+      'Guides photo vers calendrier et OCR | Photocalia',
     );
     expect(blogRoute?.data?.['seo'].localized.fr.description).toContain('Guides pratiques');
   });
