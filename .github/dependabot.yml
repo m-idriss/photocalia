@@ -10,7 +10,22 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 10
+    # FullCalendar 7 requires migrating the v6 plugins and locale/event APIs.
+    ignore:
+      - dependency-name: '@fullcalendar/*'
+        update-types: ['version-update:semver-major']
     groups:
+      angular:
+        patterns:
+          - '@angular/*'
+        exclude-patterns:
+          - '@angular/fire'
+      angular-security:
+        applies-to: security-updates
+        patterns:
+          - '@angular/*'
+        exclude-patterns:
+          - '@angular/fire'
       fullcalendar:
         patterns:
           - '@fullcalendar/*'
