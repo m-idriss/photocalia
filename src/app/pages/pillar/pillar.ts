@@ -410,9 +410,9 @@ const PILLAR_CONTENT: Record<PillarSlug, Record<SupportedLanguage, PillarContent
   },
   'pdf-to-calendar': {
     en: {
-      title: 'PDF to calendar converter',
+      title: 'PDF to calendar and ICS converter',
       intro:
-        'Upload PDFs that contain schedules, agendas, exam timetables, or event programs and turn them into editable calendar events.',
+        'Turn PDF schedules, timetables and agendas into editable calendar events. Review the extracted dates, times and locations, then download an ICS file for Google Calendar, Outlook or Apple Calendar.',
       primaryCta: 'Convert a PDF',
       secondaryCta: 'See supported formats',
       secondaryUrl: '/how-it-works',

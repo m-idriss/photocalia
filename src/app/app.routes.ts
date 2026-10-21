@@ -7,7 +7,7 @@ const FREE_PLAN = SUBSCRIPTION_PLANS.find((plan) => plan.id === 'free')!;
 const PLUS_PLAN = SUBSCRIPTION_PLANS.find((plan) => plan.id === 'plus')!;
 const PRICING_DESCRIPTION = `Start with ${FREE_PLAN.monthlyQuota} free conversions/month. Buy one conversion for EUR 0.99 or choose Plus: ${PLUS_PLAN.monthlyQuota}/month for EUR ${PLUS_PLAN.monthlyPrice}, or EUR ${PLUS_PLAN.yearlyPrice}/year.`;
 
-const HOME_TITLE = homePageTitle('Photo to Calendar Converter with AI');
+const HOME_TITLE = homePageTitle('Photo & Image to Calendar Converter');
 const HOW_IT_WORKS_TITLE = pageTitle('How It Works: Convert Photos & Images to Calendar Events');
 const PRIVACY_TITLE = pageTitle('Privacy Policy: How We Protect Your Data');
 const TERMS_TITLE = pageTitle('Terms of Use: Service Terms & Conditions');
@@ -25,7 +25,7 @@ const ADD_EVENT_TO_CALENDAR_FROM_PHOTO_TITLE = pageTitle(
 );
 const PHOTO_TO_CALENDAR_TITLE = pageTitle('Photo & Image to Calendar Converter');
 const IMAGE_TO_GOOGLE_CALENDAR_TITLE = pageTitle('Image to Google Calendar Converter');
-const PDF_TO_CALENDAR_TITLE = pageTitle('PDF to Calendar Converter');
+const PDF_TO_CALENDAR_TITLE = pageTitle('PDF to Calendar & ICS Converter');
 const OCR_CALENDAR_EXTRACTION_TITLE = pageTitle('OCR Calendar Extraction with AI');
 const HOME_TITLE_FR = 'Photocalia | Convertir une photo en événements d’agenda';
 const HOW_IT_WORKS_TITLE_FR = 'Comment convertir une photo en événements | Photocalia';
@@ -50,7 +50,7 @@ const pageRoutes: Route[] = [
       seo: {
         title: HOME_TITLE,
         description:
-          'Convert a photo, screenshot, flyer, or PDF into calendar events with AI. Review dates, times, and locations, then export to Google Calendar or ICS.',
+          'Convert photos and screenshots into calendar events. Review dates and times, then add to Google Calendar or download an ICS file for Outlook and Apple Calendar.',
         keywords:
           'photo to calendar events, image to calendar converter, picture to calendar app, convert screenshot to Google Calendar, AI calendar from photo, scan flyer to calendar, upload timetable photo, extract events from image, OCR calendar events, PDF to calendar, ICS generator, free calendar tool',
         localized: {
@@ -288,7 +288,7 @@ const pageRoutes: Route[] = [
       seo: {
         title: PDF_TO_CALENDAR_TITLE,
         description:
-          'Convert a PDF schedule to Google Calendar or an ICS file for Outlook and Apple Calendar. Review dates, times and events before importing.',
+          'Convert PDF schedules, timetables and agendas into editable calendar events. Download an ICS file for Google Calendar, Outlook or Apple Calendar.',
         keywords:
           'PDF to calendar, PDF schedule to calendar, convert PDF agenda to ICS, exam timetable PDF to calendar',
         localized: {
