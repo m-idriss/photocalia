@@ -14,8 +14,10 @@ test('local demo sign-in and sign-out work without production authentication or 
   page.on('request', (request) => {
     const url = new URL(request.url());
     if (
-      url.hostname.endsWith('googleapis.com') ||
-      url.hostname.endsWith('firebaseapp.com') ||
+      url.hostname === 'googleapis.com' ||
+      url.hostname.endsWith('.googleapis.com') ||
+      url.hostname === 'firebaseapp.com' ||
+      url.hostname.endsWith('.firebaseapp.com') ||
       url.hostname === 'api.photocalia.com'
     )
       liveRequests.push(url.hostname);
