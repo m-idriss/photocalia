@@ -20,3 +20,20 @@ app-footer {
   flex-shrink: 0;
   margin-top: auto;
 }
+
+.preview-mode-notice {
+  position: relative;
+  z-index: 20;
+  top: 88px;
+  padding: 9px 18px;
+  background: #f3e7c9;
+  color: #674b15;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.7;
+}
+@media (max-width: 700px) {
+  .preview-mode-notice {
+    top: 72px;
+  }
+}

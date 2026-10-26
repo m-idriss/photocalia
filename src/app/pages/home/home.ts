@@ -9,11 +9,12 @@ import {
   ViewChild,
   AfterViewInit,
   ChangeDetectionStrategy,
+  afterRenderEffect,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NgbToastModule, NgbProgressbarModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, filter, take } from 'rxjs/operators';
 
 import { Converter } from '../../components/converter/converter';
 import { CalendarView } from '../../components/calendar-view';
@@ -27,8 +28,10 @@ import { CalendarEvent } from '../../models';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 import { ScrollRevealDirective } from '../../shared/directives';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink, Scroll } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { BLOG_ARTICLES, BlogArticle } from '../blog/blog.models';
+import { PlanningPreview } from '../../components/planning-preview/planning-preview';
 import { RecommendedGuides } from '../../components/recommended-guides/recommended-guides';
 
 @Component({
@@ -36,6 +39,7 @@ import { RecommendedGuides } from '../../components/recommended-guides/recommend
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     Converter,
+    PlanningPreview,
     CalendarView,
     Stats,
     NgbToastModule,
@@ -74,6 +78,54 @@ export class Home implements OnInit, AfterViewInit, OnDestroy {
 
   protected readonly isDesktop = signal(false);
   private resizeSubscription?: Subscription;
+  private readonly initialRouterScroll = signal<Scroll | null>(null);
+  private initialViewportRestored = false;
+
+  constructor() {
+    inject(Router)
+      .events.pipe(
+        filter((event): event is Scroll => event instanceof Scroll),
+        take(1),
+        takeUntilDestroyed(),
+      )
+      .subscribe((event) => this.initialRouterScroll.set(event));
+
+    afterRenderEffect(() => {
+      const scroll = this.initialRouterScroll();
+      const initialized = this.authService.isInitialized();
+      const connected = this.authService.isAuthenticated();
+      const translations = this.languageService.translations();
+      if (
+        this.initialViewportRestored ||
+        !scroll ||
+        !initialized ||
+        !Object.keys(translations).length
+      )
+        return;
+
+      const navigation = performance.getEntriesByType('navigation')[0] as
+        PerformanceNavigationTiming | undefined;
+      const fragment = window.location.hash;
+      // Only correct the initial reload of this page; preserve SPA navigation,
+      // back/forward restoration, other anchors and the signed-out landing page.
+      if (
+        scroll.routerEvent.id !== 1 ||
+        navigation?.type !== 'reload' ||
+        (fragment !== '#converter' && (fragment !== '' || !connected))
+      ) {
+        this.initialViewportRestored = true;
+        return;
+      }
+      const converter = document.getElementById('converter');
+      if (!converter) return;
+      this.initialViewportRestored = true;
+      const offset = window.innerWidth <= 700 ? 96 : 112;
+      window.scrollTo({
+        top: Math.max(0, converter.getBoundingClientRect().top + window.scrollY - offset),
+        behavior: 'instant',
+      });
+    });
+  }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {

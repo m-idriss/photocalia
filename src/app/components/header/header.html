@@ -1,18 +1,38 @@
-<header class="app-header">
+<header class="app-header" [class.menu-is-open]="menuOpen" [class.is-scrolled]="scrolled">
   <div class="header-content">
-    <a [routerLink]="'/' | localizeRoute" class="logo">
-      <img
-        src="assets/logo.png"
-        alt=""
-        aria-hidden="true"
-        class="logo-icon-img"
-        width="180"
-        height="180"
-      />
-      <span class="logo-text">Photocalia</span>
+    <nav class="nav-menu" [attr.aria-label]="'header.menu.explore' | translate">
+      <button
+        #menuButton
+        class="burger-button"
+        type="button"
+        [class.active]="menuOpen"
+        (click)="toggleMenu()"
+        [attr.aria-label]="(menuOpen ? 'header.menu.close' : 'header.menu.open') | translate"
+        [attr.aria-expanded]="menuOpen"
+        aria-controls="photocalia-menu"
+      >
+        <span></span><span></span>
+      </button>
+      <a
+        class="desktop-link"
+        [routerLink]="'/how-it-works' | localizeRoute"
+        (click)="closeMenu()"
+        >{{ 'header.menu.concept' | translate }}</a
+      >
+      <a class="desktop-link" [routerLink]="'/pricing' | localizeRoute" (click)="closeMenu()">{{
+        'header.pricing' | translate
+      }}</a>
+    </nav>
+    <a
+      [routerLink]="'/' | localizeRoute"
+      class="logo"
+      (click)="closeMenu()"
+      aria-label="Photocalia"
+    >
+      <span class="logo-mark" aria-hidden="true"><b></b><b></b><b></b><b></b></span>
+      <span class="logo-text">Photocalia<span class="logo-period">.</span></span>
     </a>
-    <nav class="nav-menu">
-      <!-- Language Switcher -->
+    <div class="header-actions">
       <div class="language-switcher" [attr.aria-label]="'header.aria.language' | translate">
         @for (language of lang.languages; track language.code) {
           <a
@@ -23,278 +43,179 @@
             (click)="onLanguageClick($event, language.code)"
             [attr.aria-label]="language.label"
             [attr.aria-current]="lang.currentLang() === language.code ? 'page' : null"
-            [appTooltip]="language.label"
-            appTooltipPlacement="bottom"
+            >{{ language.code | uppercase }}</a
           >
-            {{ language.flag }}
-          </a>
         }
       </div>
-
-      <!-- Sign In Button (when not authenticated) -->
-      @if (!isAuthenticated && !isAuthLoading) {
+      @if (isAuthenticated && currentUser) {
         <button
-          class="sign-in-button"
-          (click)="signIn()"
-          [attr.aria-label]="'header.tooltip.signIn' | translate"
-          [appTooltip]="'header.tooltip.signIn' | translate"
-          appTooltipPlacement="bottom"
-        >
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
-            />
-            <path
-              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-            />
-            <path
-              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-            />
-            <path
-              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-            />
-          </svg>
-          <span>{{ 'header.signIn' | translate }}</span>
-        </button>
-      }
-
-      <!-- Burger Menu -->
-      <div
-        class="burger-menu"
-        [class.active]="menuOpen"
-        [attr.aria-label]="'header.aria.settings' | translate"
-      >
-        <button
-          class="burger-button"
-          [class.active]="menuOpen"
+          class="account-button"
           (click)="toggleMenu()"
-          [attr.aria-label]="'header.aria.openSettings' | translate"
+          [attr.aria-label]="'header.menu.account' | translate"
           [attr.aria-expanded]="menuOpen"
-          aria-haspopup="true"
-          [appTooltip]="'header.tooltip.settings' | translate"
-          appTooltipPlacement="bottom"
+          aria-controls="photocalia-menu"
         >
-          @if (isAuthenticated && currentUser && shouldShowAvatarImage()) {
+          @if (shouldShowAvatarImage()) {
             <img
               [src]="currentUser.photoURL"
-              [alt]="currentUser.displayName || 'User avatar'"
+              [alt]="currentUser.displayName || 'Photocalia'"
               class="user-avatar"
               width="32"
               height="32"
               referrerpolicy="no-referrer"
               (error)="onAvatarError()"
             />
-          } @else if (isAuthenticated && currentUser) {
-            <span class="user-avatar user-avatar-fallback" aria-hidden="true">
-              {{ userInitials() }}
-            </span>
           } @else {
-            <svg
-              aria-hidden="true"
-              width="18"
-              height="18"
-              viewBox="0 0 128 512"
-              fill="currentColor"
-            >
-              <path
-                d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm56-104A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"
-              />
-            </svg>
+            <span class="user-avatar user-avatar-fallback" aria-hidden="true">{{
+              userInitials()
+            }}</span>
           }
         </button>
-
-        <!-- Dropdown menu -->
-        @if (menuOpen) {
-          <div
-            class="profile-dropdown"
-            role="menu"
-            [attr.aria-label]="'header.aria.settings' | translate"
+      } @else if (!isAuthLoading) {
+        <button
+          class="sign-in-button"
+          (click)="signIn()"
+          [attr.aria-label]="'header.tooltip.signIn' | translate"
+        >
+          {{ 'header.signIn' | translate }}
+        </button>
+      }
+      @if (!isAuthenticated) {
+        <a
+          class="start-button"
+          [routerLink]="'/' | localizeRoute"
+          fragment="converter"
+          (click)="closeMenu()"
+          >{{ 'header.menu.start' | translate }} <span aria-hidden="true">↗</span></a
+        >
+      }
+    </div>
+  </div>
+  @if (menuOpen) {
+    <button
+      class="menu-backdrop"
+      (click)="closeMenu(true)"
+      [attr.aria-label]="'header.menu.close' | translate"
+      tabindex="-1"
+    ></button>
+    <nav
+      id="photocalia-menu"
+      class="profile-dropdown"
+      [attr.aria-label]="'header.menu.explore' | translate"
+      cdkTrapFocus
+      [cdkTrapFocusAutoCapture]="true"
+    >
+      <button
+        class="menu-close"
+        (click)="closeMenu(true)"
+        [attr.aria-label]="'header.menu.close' | translate"
+      >
+        ×
+      </button>
+      <div class="menu-primary">
+        <div class="menu-main-links">
+          <p class="menu-label">{{ 'header.menu.explore' | translate }}</p>
+          <a [routerLink]="'/how-it-works' | localizeRoute" (click)="closeMenu()"
+            >{{ 'header.menu.concept' | translate }} <span aria-hidden="true">↗</span></a
           >
-            @if (isAuthenticated && currentUser) {
-              <div class="user-info">
-                <div class="user-details">
-                  <div class="user-name">{{ currentUser.displayName }}</div>
-                  <div class="user-email">{{ currentUser.email }}</div>
-                </div>
-              </div>
-
-              <div class="dropdown-separator" role="separator"></div>
-            }
-
-            <a
-              [routerLink]="'/' | localizeRoute"
-              class="dropdown-item"
-              role="menuitem"
-              (click)="closeMenu()"
-              [appTooltip]="'header.tooltip.home' | translate"
-              appTooltipPlacement="left"
-            >
-              <svg
-                aria-hidden="true"
-                width="16"
-                height="16"
-                viewBox="0 0 512 512"
-                fill="currentColor"
-              >
-                <path
-                  d="M0 168v-16c0-13.3 10.7-24 24-24h360V80c0-21.4 25.9-32.1 41-17l80 80c9.4 9.4 9.4 24.6 0 33.9l-80 80c-15.1 15.1-41 4.4-41-17v-48H24c-13.3 0-24-10.7-24-24zm488 152H128v-48c0-21.4-25.9-32.1-41-17l-80 80c-9.4 9.4-9.4 24.6 0 33.9l80 80c15.1 15.1 41 4.4 41-17v-48h360c13.3 0 24-10.7 24-24v-16c0-13.3-10.7-24-24-24z"
-                />
-              </svg>
-              <span>{{ 'header.home' | translate }}</span>
-            </a>
-
-            <a
-              [routerLink]="'/how-it-works' | localizeRoute"
-              class="dropdown-item"
-              role="menuitem"
-              (click)="closeMenu()"
-              [appTooltip]="'header.tooltip.howItWorks' | translate"
-              appTooltipPlacement="left"
-            >
-              <svg
-                aria-hidden="true"
-                width="16"
-                height="16"
-                viewBox="0 0 512 512"
-                fill="currentColor"
-              >
-                <path
-                  d="M256 8C119 8 8 119.1 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 110c23.2 0 42 18.8 42 42s-18.8 42-42 42-42-18.8-42-42 18.8-42 42-42zm56 254c0 6.6-5.4 12-12 12h-88c-6.6 0-12-5.4-12-12v-24c0-6.6 5.4-12 12-12h12v-64h-12c-6.6 0-12-5.4-12-12v-24c0-6.6 5.4-12 12-12h64c6.6 0 12 5.4 12 12v100h12c6.6 0 12 5.4 12 12v24z"
-                />
-              </svg>
-              <span>{{ 'header.howItWorks' | translate }}</span>
-            </a>
-
-            <a
-              [routerLink]="'/blog' | localizeRoute"
-              class="dropdown-item"
-              role="menuitem"
-              (click)="closeMenu()"
-              [appTooltip]="'header.tooltip.blog' | translate"
-              appTooltipPlacement="left"
-            >
-              <svg
-                aria-hidden="true"
-                width="16"
-                height="16"
-                viewBox="0 0 576 512"
-                fill="currentColor"
-              >
-                <path
-                  d="M552 64H112c-20.9 0-38.7 13.4-45.3 32H24c-13.3 0-24 10.7-24 24v272c0 30.9 25.1 56 56 56h496c13.3 0 24-10.7 24-24V88c0-13.3-10.7-24-24-24zM48 392V144h16v248c0 4.4-3.6 8-8 8s-8-3.6-8-8zm480 8H112V120c0-13.3 10.7-24 24-24h392v304z"
-                />
-              </svg>
-              <span>{{ 'header.blog' | translate }}</span>
-            </a>
-
-            <a
-              [routerLink]="'/search' | localizeRoute"
-              class="dropdown-item"
-              role="menuitem"
-              (click)="closeMenu()"
-              [appTooltip]="'header.tooltip.search' | translate"
-              appTooltipPlacement="left"
-            >
-              <svg
-                aria-hidden="true"
-                width="16"
-                height="16"
-                viewBox="0 0 512 512"
-                fill="currentColor"
-              >
-                <path
-                  d="M505 442.7L405.3 343c28.4-34.9 45.4-79.4 45.4-127.9C450.7 103.5 360.1 13 248.5 13S46.3 103.5 46.3 215.1s90.5 202.2 202.2 202.2c48.5 0 93-17 127.9-45.4l99.7 99.7c8 8 20.9 8 28.9 0 8-8 8-20.9 0-28.9zM248.5 376.4c-89.1 0-161.3-72.2-161.3-161.3S159.4 53.8 248.5 53.8s161.3 72.2 161.3 161.3-72.2 161.3-161.3 161.3z"
-                />
-              </svg>
-              <span>{{ 'header.search' | translate }}</span>
-            </a>
-
-            <a
-              [routerLink]="'/pricing' | localizeRoute"
-              class="dropdown-item"
-              role="menuitem"
-              (click)="closeMenu()"
-              [appTooltip]="'header.tooltip.pricing' | translate"
-              appTooltipPlacement="left"
-            >
-              <svg
-                aria-hidden="true"
-                width="16"
-                height="16"
-                viewBox="0 0 512 512"
-                fill="currentColor"
-              >
-                <path
-                  d="M0 432c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V256H0v176zm192-68c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-40zm-128 0c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM464 32H48C21.5 32 0 53.5 0 80v48h512V80c0-26.5-21.5-48-48-48z"
-                />
-              </svg>
-              <span>{{ 'header.pricing' | translate }}</span>
-            </a>
-
-            <a
-              [routerLink]="'/about' | localizeRoute"
-              class="dropdown-item"
-              role="menuitem"
-              (click)="closeMenu()"
-              [appTooltip]="'header.tooltip.about' | translate"
-              appTooltipPlacement="left"
-            >
-              <svg
-                aria-hidden="true"
-                width="16"
-                height="16"
-                viewBox="0 0 640 512"
-                fill="currentColor"
-              >
-                <path
-                  d="M96 224c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm448 0c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm32 32h-64c-17.6 0-33.5 7.1-45.1 18.6 40.3 22.1 68.9 62 75.1 109.4h66c17.7 0 32-14.3 32-32v-32c0-35.3-28.7-64-64-64zm-256 0c61.9 0 112-50.1 112-112S381.9 32 320 32 208 82.1 208 144s50.1 112 112 112zm76.8 32h-8.3c-20.8 10-43.9 16-68.5 16s-47.6-6-68.5-16h-8.3C179.6 288 128 339.6 128 403.2V432c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48v-28.8c0-63.6-51.6-115.2-115.2-115.2zm-223.7-13.4C161.5 263.1 145.6 256 128 256H64c-35.3 0-64 28.7-64 64v32c0 17.7 14.3 32 32 32h65.9c6.3-47.4 34.9-87.3 75.2-109.4z"
-                />
-              </svg>
-              <span>{{ 'header.about' | translate }}</span>
-            </a>
-
-            <div class="dropdown-separator" role="separator"></div>
-
-            <a
-              [routerLink]="'/about' | localizeRoute"
-              fragment="coffee-section"
-              class="dropdown-item support-link"
-              role="menuitem"
-              (click)="closeMenu()"
-              [appTooltip]="'header.tooltip.support' | translate"
-              appTooltipPlacement="left"
-            >
-              <span aria-hidden="true" class="support-emoji">☕</span>
-              <span>{{ 'header.support' | translate }}</span>
-            </a>
-
-            @if (isAuthenticated) {
-              <div class="dropdown-separator" role="separator"></div>
-
-              <button
-                class="dropdown-item sign-out btn btn-danger"
-                role="menuitem"
-                (click)="signOut()"
-                [appTooltip]="'header.tooltip.signOut' | translate"
-                appTooltipPlacement="left"
-              >
-                <svg
-                  aria-hidden="true"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 512 512"
-                  fill="currentColor"
-                >
-                  <path
-                    d="M497 273L329 441c-15 15-41 4.5-41-17v-96H152c-13.3 0-24-10.7-24-24v-96c0-13.3 10.7-24 24-24h136V88c0-21.4 25.9-32.1 41-17l168 168c9.3 9.4 9.3 24.6 0 34zM192 436v-40c0-6.6-5.4-12-12-12H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h84c6.6 0 12-5.4 12-12V76c0-6.6-5.4-12-12-12H96c-53 0-96 43-96 96v192c0 53 43 96 96 96h84c6.6 0 12-5.4 12-12z"
-                  />
-                </svg>
-                <span>{{ 'header.signOut' | translate }}</span>
-              </button>
-            }
+          <a [routerLink]="'/' | localizeRoute" fragment="converter" (click)="closeMenu()"
+            >{{ 'header.menu.convert' | translate
+            }}<span class="mobile-only-arrow" aria-hidden="true">↗</span></a
+          >
+          <a [routerLink]="'/pricing' | localizeRoute" (click)="closeMenu()"
+            >{{ 'header.pricing' | translate
+            }}<span class="mobile-only-arrow" aria-hidden="true">↗</span></a
+          >
+          @if (!isAuthenticated && !isAuthLoading) {
+            <button (click)="closeMenu(); signIn()">
+              {{ 'header.menu.account' | translate
+              }}<span class="mobile-only-arrow" aria-hidden="true">↗</span>
+            </button>
+          }
+        </div>
+        @if (isAuthenticated && currentUser) {
+          <div class="menu-account">
+            <div class="user-info">
+              <strong>{{ currentUser.displayName }}</strong
+              ><span>{{ currentUser.email }}</span>
+            </div>
+            <button class="sign-out" (click)="signOut()">{{ 'header.signOut' | translate }}</button>
           </div>
         }
       </div>
+      <div class="menu-resources">
+        <div class="menu-formats">
+          <p class="menu-label">{{ 'header.menu.formats' | translate }}</p>
+          <a [routerLink]="'/photo-to-calendar' | localizeRoute" (click)="closeMenu()">{{
+            'home.formats.photo' | translate
+          }}</a>
+          <a [routerLink]="'/pdf-to-calendar' | localizeRoute" (click)="closeMenu()">{{
+            'home.formats.pdf' | translate
+          }}</a>
+          <a [routerLink]="'/image-to-google-calendar' | localizeRoute" (click)="closeMenu()">{{
+            'home.formats.google' | translate
+          }}</a>
+        </div>
+        <div class="menu-help">
+          <p class="menu-label resources-label">{{ 'header.menu.resources' | translate }}</p>
+          <a [routerLink]="'/blog' | localizeRoute" (click)="closeMenu()">{{
+            'header.blog' | translate
+          }}</a>
+          <a [routerLink]="'/search' | localizeRoute" (click)="closeMenu()">{{
+            'header.search' | translate
+          }}</a>
+          <a [routerLink]="'/about' | localizeRoute" (click)="closeMenu()">{{
+            'header.about' | translate
+          }}</a>
+        </div>
+        <div class="menu-utilities">
+          <div
+            class="language-switcher menu-languages"
+            [attr.aria-label]="'header.aria.language' | translate"
+          >
+            @for (language of lang.languages; track language.code) {
+              <a
+                class="lang-btn"
+                [href]="lang.languagePath(language.code)"
+                [attr.hreflang]="language.code"
+                [class.active]="lang.currentLang() === language.code"
+                (click)="onLanguageClick($event, language.code)"
+                >{{ language.label }}</a
+              >
+            }
+          </div>
+          <a
+            [routerLink]="'/about' | localizeRoute"
+            fragment="coffee-section"
+            (click)="closeMenu()"
+            >{{ 'header.support' | translate }}</a
+          >
+        </div>
+      </div>
+      <div class="menu-feature">
+        <svg
+          class="feature-spark"
+          aria-hidden="true"
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M12 2v20M2 12h20M5 5l14 14M5 19L19 5"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
+        <h2>{{ 'header.menu.featureTitle' | translate }}</h2>
+        <p>{{ 'header.menu.featureText' | translate }}</p>
+        @if (!isAuthenticated) {
+          <a [routerLink]="'/' | localizeRoute" fragment="converter" (click)="closeMenu()"
+            >{{ 'header.menu.start' | translate }} <span aria-hidden="true">→</span></a
+          >
+        }
+      </div>
     </nav>
-  </div>
+  }
 </header>

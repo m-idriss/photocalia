@@ -4,20 +4,25 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   inject,
+  ElementRef,
+  ViewChild,
 } from '@angular/core';
+import { UpperCasePipe } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
 import { RouterLink } from '@angular/router';
-import { AppTooltipDirective } from '../../shared/directives';
 import { AuthAwareComponent } from '../base/auth-aware.component';
 import { ConverterService } from '../../services/converter';
 import { CalendarStateService } from '../../services/calendar-state.service';
 import { LanguageService, SupportedLanguage } from '../../services/language.service';
+import { ToastService } from '../../services/toast.service';
+import { authErrorMessageKey } from '../../utils/auth-error.utils';
 import { LoggerService } from '../../services/logger.service';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { LocalizeRoutePipe } from '../../shared/pipes/localize-route.pipe';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, AppTooltipDirective, TranslatePipe, LocalizeRoutePipe],
+  imports: [RouterLink, TranslatePipe, LocalizeRoutePipe, A11yModule, UpperCasePipe],
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,32 +32,41 @@ export class Header extends AuthAwareComponent {
   private readonly converterService = inject(ConverterService);
   private readonly calendarStateService = inject(CalendarStateService);
   private readonly logger = inject(LoggerService);
+  private readonly toast = inject(ToastService);
   readonly lang = inject(LanguageService);
+  private readonly element = inject(ElementRef<HTMLElement>);
+  @ViewChild('menuButton') private menuButton?: ElementRef<HTMLButtonElement>;
 
   menuOpen = false;
+  scrolled = false;
   private failedAvatar: { uid: string; photoURL: string } | null = null;
+
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
+    this.scrolled = window.scrollY > 32;
+  }
 
   toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
 
-  closeMenu(): void {
+  closeMenu(restoreFocus = false): void {
     this.menuOpen = false;
+    if (restoreFocus) this.menuButton?.nativeElement.focus();
   }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
     const target = event.target as HTMLElement;
-    const burgerMenu = target.closest('.burger-menu');
-    if (!burgerMenu && this.menuOpen) {
-      this.closeMenu();
+    if (!this.element.nativeElement.contains(target) && this.menuOpen) {
+      this.closeMenu(true);
     }
   }
 
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape' && this.menuOpen) {
-      this.closeMenu();
+      this.closeMenu(true);
     }
   }
 
@@ -78,6 +92,7 @@ export class Header extends AuthAwareComponent {
       await this.authService.signInWithGoogle();
       this.cdr.markForCheck();
     } catch (error) {
+      this.toast.showError(this.lang.translate(authErrorMessageKey(error)));
       this.logger.error('Sign in error', 'Header', error);
     }
   }
@@ -91,6 +106,7 @@ export class Header extends AuthAwareComponent {
   }
 
   setLanguage(lang: SupportedLanguage): void {
+    this.closeMenu();
     this.lang.setLanguage(lang);
     this.cdr.markForCheck();
   }

@@ -1,4 +1,7 @@
 <app-header></app-header>
+@if (authService.isTestMode) {
+  <div class="preview-mode-notice" role="note">{{ previewNotice() }}</div>
+}
 <app-breadcrumb></app-breadcrumb>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

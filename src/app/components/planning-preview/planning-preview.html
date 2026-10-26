@@ -1,0 +1,60 @@
+<div class="preview-eyebrow">{{ 'home.preview.eyebrow' | translate }}</div>
+<div class="pc-demo" [attr.aria-label]="'home.preview.label' | translate">
+  <div class="pc-source">
+    <div class="pc-filebar">
+      <span>↳ {{ 'home.preview.filename' | translate }}</span
+      ><span>JPG</span>
+    </div>
+    <div class="pc-sheet">
+      <strong>{{ 'home.preview.myPlanning' | translate }}</strong
+      ><small>{{ 'home.preview.weekOf' | translate }}</small>
+      <div class="pc-roster">
+        <span>{{ 'home.preview.day' | translate }}</span
+        ><span>{{ 'home.preview.time' | translate }}</span
+        ><span>{{ 'home.preview.shift' | translate }}</span
+        ><span class="pc-highlight">{{ 'home.preview.monday' | translate }}</span
+        ><span class="pc-highlight">08:00 – 16:00</span
+        ><span class="pc-highlight">{{ 'home.preview.morning' | translate }}</span
+        ><span>{{ 'home.preview.tuesday' | translate }}</span
+        ><span>13:00 – 21:00</span><span>{{ 'home.preview.afternoon' | translate }}</span
+        ><span>{{ 'home.preview.wednesday' | translate }}</span
+        ><span>08:00 – 16:00</span><span>{{ 'home.preview.morning' | translate }}</span
+        ><span>{{ 'home.preview.thursday' | translate }}</span
+        ><span>13:00 – 21:00</span><span>{{ 'home.preview.afternoon' | translate }}</span>
+      </div>
+    </div>
+  </div>
+  <div class="pc-flow" aria-hidden="true">→</div>
+  <div class="pc-calendar">
+    <div class="pc-cal-head">
+      {{ 'home.preview.month' | translate }}
+      <small>{{ 'home.preview.weekView' | translate }}</small>
+    </div>
+    <div class="pc-week">
+      <div class="pc-today">{{ 'home.preview.mon' | translate }}<strong>26</strong></div>
+      <div>{{ 'home.preview.tue' | translate }}<strong>27</strong></div>
+      <div>{{ 'home.preview.wed' | translate }}<strong>28</strong></div>
+      <div>{{ 'home.preview.thu' | translate }}<strong>29</strong></div>
+      <div>{{ 'home.preview.fri' | translate }}<strong>30</strong></div>
+    </div>
+    <div class="pc-events">
+      <div class="pc-event">
+        {{ 'home.preview.work' | translate }}<span>08:00<br />16:00</span>
+      </div>
+      <div class="pc-event">
+        {{ 'home.preview.work' | translate }}<span>13:00<br />21:00</span>
+      </div>
+      <div class="pc-event">
+        {{ 'home.preview.work' | translate }}<span>08:00<br />16:00</span>
+      </div>
+      <div class="pc-event">
+        {{ 'home.preview.work' | translate }}<span>13:00<br />21:00</span>
+      </div>
+    </div>
+    <div class="pc-converted" aria-live="polite">
+      <b>✓ {{ 'home.preview.detected' | translate }}</b
+      ><span>{{ 'home.preview.ready' | translate }} ↗</span>
+    </div>
+  </div>
+</div>
+<p class="preview-note">{{ 'home.preview.note' | translate }}</p>

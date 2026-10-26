@@ -1,0 +1,14 @@
+{
+  "/preview-api/**": {
+    "target": "http://127.0.0.1:9098",
+    "pathRewrite": {
+      "^/preview-api": ""
+    }
+  },
+  "/identitytoolkit.googleapis.com/**": {
+    "target": "http://127.0.0.1:9099"
+  },
+  "/securetoken.googleapis.com/**": {
+    "target": "http://127.0.0.1:9099"
+  }
+}

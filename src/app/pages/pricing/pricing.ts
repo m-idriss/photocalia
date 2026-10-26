@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { PlanService } from '../../services/plan.service';
 import { SUBSCRIPTION_PLANS } from '../../constants';
 import { BillingCycle, SubscriptionPlan } from '../../models';
+import { authErrorMessageKey } from '../../utils/auth-error.utils';
 import { toApiClientError } from '../../utils';
 import { LanguageService } from '../../services/language.service';
 import { RecommendedGuides } from '../../components/recommended-guides/recommended-guides';
@@ -60,9 +61,9 @@ export class Pricing {
     try {
       if (!this.isAuthenticated()) await this.authService.signInWithGoogle();
       return this.isAuthenticated();
-    } catch {
+    } catch (error) {
       this.isLoading.set(null);
-      this.error.set('api.error.authentication_required');
+      this.error.set(authErrorMessageKey(error));
       return false;
     }
   }
