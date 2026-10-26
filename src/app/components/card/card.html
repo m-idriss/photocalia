@@ -1,4 +1,8 @@
-<article class="container" [attr.aria-labelledby]="title ? 'card-title-' + title : null">
+<article
+  class="container"
+  [class.onboarding]="variant === 'onboarding'"
+  [attr.aria-labelledby]="title ? 'card-title-' + title : null"
+>
   @if (badge && badge > 0) {
     <span class="card-badge" aria-label="{{ badge }} events">{{ badge }}</span>
   }

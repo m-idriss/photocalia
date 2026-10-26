@@ -28,17 +28,36 @@
   }
 </div>
 
-<main class="home-page" aria-label="Main content" id="main-content" role="main">
+<main
+  [class.is-workspace]="authService.isAuthenticated()"
+  class="home-page"
+  aria-label="Main content"
+  id="main-content"
+  role="main"
+>
   <div class="home-container">
     <article class="hero-section" itemscope itemtype="https://schema.org/WebApplication">
+      <div class="hero-eyebrow">
+        <span aria-hidden="true"></span>{{ 'home.hero.eyebrow' | translate }}
+      </div>
       <h1 class="hero-title" itemprop="name">
-        {{ 'home.hero.title' | translate }}
+        <span>{{ 'home.hero.lead' | translate }}</span>
+        <span
+          >{{ 'home.hero.bridge' | translate }} <em>{{ 'home.hero.accent' | translate }}</em></span
+        >
       </h1>
       <p
         class="hero-description"
         itemprop="description"
         [innerHTML]="'home.hero.description' | translate"
       ></p>
+      <a class="hero-cta" [routerLink]="'/' | localizeRoute" fragment="converter"
+        >{{ 'home.hero.cta' | translate }} <span aria-hidden="true">↗</span></a
+      >
+      <p class="hero-formats">{{ 'home.hero.formats' | translate }}</p>
+      @if (!authService.isAuthenticated() && calendarStateService.events().length === 0) {
+        <app-planning-preview />
+      }
       <!-- Key Features for SEO -->
       <div class="hero-features" style="display: none" itemprop="featureList">
         <ul>
@@ -60,54 +79,6 @@
       class="content-layout"
       [class.has-calendar]="calendarStateService.isVisible() && isDesktop()"
     >
-      @if (calendarStateService.events().length === 0 && !authService.isAuthenticated()) {
-        <div class="hero-blog-strip" aria-label="Use cases">
-          <div class="hero-blog-track">
-            <div class="hero-blog-group">
-              @for (article of featuredBlogArticles; track article.slug) {
-                @let localizedArticle = localized(article);
-                <a
-                  class="hero-blog-card"
-                  [routerLink]="blogArticlePath(article) | localizeRoute"
-                  [attr.aria-label]="localizedArticle.title"
-                >
-                  <img
-                    class="hero-blog-card-image"
-                    [src]="article.image"
-                    [alt]="localizedArticle.imageAlt"
-                    width="320"
-                    height="180"
-                    loading="lazy"
-                  />
-                  <span class="hero-blog-card-title">{{ localizedArticle.title }}</span>
-                </a>
-              }
-            </div>
-
-            <div class="hero-blog-group" aria-hidden="true">
-              @for (article of featuredBlogArticles; track article.slug) {
-                @let localizedArticle = localized(article);
-                <a
-                  class="hero-blog-card"
-                  tabindex="-1"
-                  [routerLink]="blogArticlePath(article) | localizeRoute"
-                >
-                  <img
-                    class="hero-blog-card-image"
-                    [src]="article.image"
-                    alt=""
-                    width="320"
-                    height="180"
-                    loading="lazy"
-                  />
-                  <span class="hero-blog-card-title">{{ localizedArticle.title }}</span>
-                </a>
-              }
-            </div>
-          </div>
-        </div>
-      }
-
       <div class="converter-card">
         <app-converter></app-converter>
       </div>
@@ -372,6 +343,7 @@
           class="how-it-works-section"
           appScrollReveal
           appScrollRevealDirection="left"
+          id="how-it-works"
           aria-labelledby="how-it-works-title"
         >
           <h2
@@ -522,25 +494,21 @@
           [appScrollRevealDelay]="100"
           aria-labelledby="pricing-title"
         >
-          <div class="pricing-content">
-            <figure class="pricing-mascot" aria-hidden="true">
-              <img
-                src="/assets/images/home/zen-lemur-phone.png"
-                alt=""
-                width="951"
-                height="935"
-                loading="lazy"
-              />
-            </figure>
-
-            <div class="pricing-copy">
-              <h2 id="pricing-title" class="section-title">
-                {{ 'home.pricing.title' | translate }}
-              </h2>
-              <p class="section-description">
-                {{ 'home.pricing.description' | translate: planParams() }}
-              </p>
+          <h2 id="pricing-title" class="section-title">{{ 'home.pricing.title' | translate }}</h2>
+          <div class="home-pricing-offer">
+            <div class="offer-ribbon">{{ 'home.pricing.ribbon' | translate }}</div>
+            <span class="offer-label">Photocalia</span>
+            <p class="offer-description">
+              {{ 'home.pricing.description' | translate: planParams() }}
+            </p>
+            <div class="offer-includes">
+              <span><b aria-hidden="true">↳</b>{{ 'home.hero.formats' | translate }}</span>
+              <span><b aria-hidden="true">✓</b>{{ 'home.why.control.title' | translate }}</span>
+              <span><b aria-hidden="true">↗</b>{{ 'home.steps.3.title' | translate }}</span>
             </div>
+            <a class="offer-link" [routerLink]="'/pricing' | localizeRoute"
+              >{{ 'home.pricing.seePlans' | translate }} <span aria-hidden="true">↗</span></a
+            >
           </div>
         </section>
 
@@ -602,6 +570,54 @@
           </div>
         </section>
 
+        @if (calendarStateService.events().length === 0 && !authService.isAuthenticated()) {
+          <div class="hero-blog-strip" aria-label="Use cases">
+            <div class="hero-blog-track">
+              <div class="hero-blog-group">
+                @for (article of featuredBlogArticles; track article.slug) {
+                  @let localizedArticle = localized(article);
+                  <a
+                    class="hero-blog-card"
+                    [routerLink]="blogArticlePath(article) | localizeRoute"
+                    [attr.aria-label]="localizedArticle.title"
+                  >
+                    <img
+                      class="hero-blog-card-image"
+                      [src]="article.image"
+                      [alt]="localizedArticle.imageAlt"
+                      width="320"
+                      height="180"
+                      loading="lazy"
+                    />
+                    <span class="hero-blog-card-title">{{ localizedArticle.title }}</span>
+                  </a>
+                }
+              </div>
+
+              <div class="hero-blog-group" aria-hidden="true">
+                @for (article of featuredBlogArticles; track article.slug) {
+                  @let localizedArticle = localized(article);
+                  <a
+                    class="hero-blog-card"
+                    tabindex="-1"
+                    [routerLink]="blogArticlePath(article) | localizeRoute"
+                  >
+                    <img
+                      class="hero-blog-card-image"
+                      [src]="article.image"
+                      alt=""
+                      width="320"
+                      height="180"
+                      loading="lazy"
+                    />
+                    <span class="hero-blog-card-title">{{ localizedArticle.title }}</span>
+                  </a>
+                }
+              </div>
+            </div>
+          </div>
+        }
+
         <app-recommended-guides variant="home" />
 
         <!-- FAQ Section -->
@@ -615,7 +631,7 @@
           <h2 id="faq-title" class="section-title">{{ 'home.faq.title' | translate }}</h2>
           <div class="faq-list">
             @for (i of [1, 2, 3, 4, 5]; track i) {
-              <details class="faq-item">
+              <details class="faq-item" [open]="i === 1">
                 <summary class="faq-question">{{ 'home.faq.q' + i + '.q' | translate }}</summary>
                 <p class="faq-answer">{{ 'home.faq.q' + i + '.a' | translate: planParams() }}</p>
               </details>

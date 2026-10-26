@@ -3,6 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { Converter } from './converter';
+import { AuthService } from '../../services/auth.service';
 import { ConverterService } from '../../services/converter';
 import { CalendarEvent } from '../../models';
 
@@ -23,6 +24,20 @@ describe('Converter', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('explains a rejected Google preview domain inline while keeping uploads locked', async () => {
+    const auth = TestBed.inject(AuthService);
+    spyOn(auth, 'signInWithGoogle').and.rejectWith(
+      new Error('Sign-in failed', { cause: { code: 'auth/unauthorized-domain' } }),
+    );
+    await component.signIn();
+    fixture.detectChanges();
+    expect(component.signInError()).toBe('auth.error.unauthorizedDomain');
+    const page = fixture.nativeElement as HTMLElement;
+    expect(page.querySelector('.auth-error')?.getAttribute('role')).toBe('alert');
+    expect(page.querySelector('input[type="file"]')).toBeNull();
+    expect(auth.isAuthenticated()).toBeFalse();
   });
 
   it('should reset state when resetState is called', () => {

@@ -11,8 +11,9 @@ import { provideServiceWorker } from '@angular/service-worker';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
 
+import { authPreviewPort } from './utils/auth-preview.utils';
 import { routes } from './app.routes';
 import { environment } from '../environments/environment';
 import { authInterceptor } from './interceptors/auth.interceptor';
@@ -43,7 +44,18 @@ function getFirebaseProviders() {
     try {
       return [
         provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth()),
+        provideAuth(() => {
+          const auth = getAuth();
+          const previewPort = authPreviewPort(environment);
+          if (previewPort !== null && typeof window !== 'undefined') {
+            // The preview proxy forwards only these local auth endpoints to the emulator.
+            // Keeping requests same-origin preserves the production CSP unchanged.
+            connectAuthEmulator(auth, window.location.origin, {
+              disableWarnings: true,
+            });
+          }
+          return auth;
+        }),
       ];
     } catch (error) {
       console.warn('Firebase initialization failed, continuing without Firebase:', error);

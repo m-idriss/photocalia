@@ -38,6 +38,14 @@
   src: url('/assets/fonts/plus-jakarta-sans-latin.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/assets/fonts/caveat-latin-600.ttf') format('truetype');
+}
+
 /* Brand name highlight */
 .brand {
   font-weight: 700;
@@ -57,19 +65,19 @@
   /* === Corporate Trust Design System === */
 
   /* Color Palette */
-  --ct-bg: #f8fafc;
+  --ct-bg: #fcfbfe;
   --ct-surface: #ffffff;
-  --ct-primary: #4f46e5;
-  --ct-secondary: #7c3aed;
+  --ct-primary: #8050c9;
+  --ct-secondary: #a35ac3;
   --ct-success: #10b981;
-  --ct-border: #e2e8f0;
-  --ct-text-main: #0f172a;
-  --ct-text-muted: #5f6c7c;
+  --ct-border: #e9e3ef;
+  --ct-text-main: #211a2b;
+  --ct-text-muted: #736a7e;
 
   /* Color Blocking — Section Backgrounds */
   --cb-white: #ffffff;
-  --cb-slate: #f1f5f9;
-  --cb-indigo: #eef2ff;
+  --cb-slate: #f6f3f9;
+  --cb-indigo: #f1eaf9;
   --cb-gradient: linear-gradient(135deg, var(--ct-primary, #4f46e5), var(--ct-secondary, #7c3aed));
 
   /* Light theme (default) — mapped from Corporate Trust */

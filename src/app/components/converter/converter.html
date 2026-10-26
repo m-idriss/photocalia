@@ -1,28 +1,78 @@
-<app-card id="converter" [title]="'converter.title' | translate" [badge]="extractedEvents().length">
+<app-card
+  id="converter"
+  [title]="!isAuthLoading && !isAuthenticated ? undefined : ('converter.title' | translate)"
+  [variant]="!isAuthLoading && !isAuthenticated ? 'onboarding' : 'default'"
+  [badge]="extractedEvents().length"
+>
   <!-- Auth Required Message (when not authenticated) -->
   @if (!isAuthLoading && !isAuthenticated) {
-    <section
-      class="auth-required clickable"
-      aria-labelledby="auth-heading"
-      (click)="signIn()"
-      role="button"
-      tabindex="0"
-      (keydown.enter)="signIn()"
-      (keydown.space)="signIn()"
-    >
-      <div class="auth-message">
-        <h3 id="auth-heading" class="sr-only no-after">AI Calendar Converter</h3>
-        <img
-          src="/assets/images/converter.svg"
-          alt="Calendar converter illustration"
-          class="auth-image"
-          width="1536"
-          height="1024"
-          loading="eager"
-          fetchpriority="high"
-          appTooltip="AI calendar conversion, sign-in to get started"
-          appTooltipPlacement="bottom"
-        />
+    <section class="auth-required" aria-labelledby="converter-welcome-title">
+      <div class="auth-ribbon">
+        <span aria-hidden="true">✦</span>{{ 'converter.auth.ribbon' | translate }}
+      </div>
+      <div class="auth-body">
+        <div class="auth-visual" aria-hidden="true">
+          <svg class="auth-document" width="36" height="36" viewBox="0 0 24 24" fill="none">
+            <rect
+              x="4"
+              y="3"
+              width="16"
+              height="18"
+              rx="3"
+              stroke="currentColor"
+              stroke-width="1.5"
+            />
+            <path
+              d="M8 8h8M8 12h5M8 16h7"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span class="auth-visual-badge">↗</span>
+        </div>
+        <h2 id="converter-welcome-title" class="auth-heading">
+          {{ 'converter.auth.heading' | translate }}
+        </h2>
+        <p class="auth-description">{{ 'converter.auth.intro' | translate }}</p>
+        <ol class="auth-steps" [attr.aria-label]="'header.howItWorks' | translate">
+          <li><span aria-hidden="true">1</span>{{ 'converter.auth.upload' | translate }}</li>
+          <li><span aria-hidden="true">2</span>{{ 'converter.auth.review' | translate }}</li>
+          <li><span aria-hidden="true">3</span>{{ 'converter.auth.add' | translate }}</li>
+        </ol>
+        @if (signInError(); as errorKey) {
+          <p class="auth-error" role="alert">{{ errorKey | translate }}</p>
+        }
+        <button class="auth-action" type="button" (click)="signIn()">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24">
+            <path
+              fill="#4285F4"
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+            />
+            <path
+              fill="#34A853"
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+            />
+            <path
+              fill="#EA4335"
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+            />
+          </svg>
+          {{
+            (authService.isTestMode ? 'auth.preview.signIn' : 'header.tooltip.signIn') | translate
+          }}
+          <span class="auth-action-arrow" aria-hidden="true">→</span>
+        </button>
+        <p class="auth-note">
+          {{ (authService.isTestMode ? 'auth.preview.note' : 'converter.auth.note') | translate }}
+        </p>
+        <div class="auth-formats" [attr.aria-label]="'home.hero.formats' | translate">
+          <span>JPG</span><span>PNG</span><span>PDF</span>
+        </div>
       </div>
     </section>
   }
