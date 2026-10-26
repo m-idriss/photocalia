@@ -68,7 +68,7 @@
       transform: translateY(0);
     }
     &:focus-visible {
-      outline: 3px solid color-mix(in srgb, var(--ct-primary) 45%, transparent);
+      outline: 3px solid var(--ct-primary, #8050c9);
       outline-offset: 3px;
     }
     &:disabled {
