@@ -55,6 +55,13 @@ export function requestDecision(raw: string, method: string, localOrigin: string
   return 'blocked';
 }
 
+export function isLocalHMR(raw: string, localOrigin: string): boolean {
+  const url = new URL(raw);
+  return (
+    url.origin === localOrigin.replace(/^http/, 'ws') && ['/', '/ng-cli-ws'].includes(url.pathname)
+  );
+}
+
 function calendar(events: GoldenEvent[]) {
   const escape = (value: string) =>
     value
@@ -97,6 +104,7 @@ interface QAState {
   blockedProbes: string[];
   localOrigin: string;
   stubbedAssets: number;
+  localWebSockets: number;
 }
 
 export const test = base.extend<{ qa: QAState; syntheticUser: boolean }>({
@@ -117,6 +125,7 @@ export const test = base.extend<{ qa: QAState; syntheticUser: boolean }>({
         blockedProbes: [],
         localOrigin: origin.origin,
         stubbedAssets: 0,
+        localWebSockets: 0,
       };
       const blocked = (url: string) => {
         const origin = new URL(url).origin;
@@ -138,8 +147,14 @@ export const test = base.extend<{ qa: QAState; syntheticUser: boolean }>({
         );
       }, syntheticUser);
       await context.routeWebSocket('**', (socket) => {
-        blocked(socket.url());
-        socket.close({ code: 1008, reason: 'Synthetic QA blocks WebSockets' });
+        if (isLocalHMR(socket.url(), qa.localOrigin)) {
+          // The dedicated config disables HMR; retain compatibility with the default local config.
+          qa.localWebSockets++;
+          socket.connectToServer();
+        } else {
+          blocked(socket.url());
+          socket.close({ code: 1008, reason: 'Synthetic QA blocks external WebSockets' });
+        }
       });
       await context.route('**/*', async (route) => {
         const request = route.request();
@@ -224,6 +239,7 @@ export const test = base.extend<{ qa: QAState; syntheticUser: boolean }>({
           blockedProbes: qa.blockedProbes.length,
           unexpectedRequests: qa.violations.length,
           stubbedAssets: qa.stubbedAssets,
+          localWebSockets: qa.localWebSockets,
         }),
       });
       expect(qa.violations, 'Unexpected browser requests (origins only; no payloads)').toEqual([]);

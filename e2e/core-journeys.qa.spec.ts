@@ -3,7 +3,14 @@ import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import ICAL from 'ical.js';
 import { FILE_UPLOAD_CONSTRAINTS } from '../src/app/constants/app.constants';
-import { test, expect, goldenCases, requestDecision, type GoldenCase } from './helpers/qa-fixture';
+import {
+  test,
+  expect,
+  goldenCases,
+  requestDecision,
+  isLocalHMR,
+  type GoldenCase,
+} from './helpers/qa-fixture';
 
 async function roundTrip(page: Page, fixture: GoldenCase, edit: boolean) {
   await page.goto('/');
@@ -158,6 +165,11 @@ test.describe('Synthetic core journeys', () => {
     ]) {
       expect(requestDecision(url, 'POST', qa.localOrigin)).toBe('blocked');
     }
+    expect(isLocalHMR(qa.localOrigin.replace(/^http/, 'ws') + '/', qa.localOrigin)).toBe(true);
+    expect(
+      isLocalHMR(qa.localOrigin.replace(/^http/, 'ws') + '/api/unmocked', qa.localOrigin),
+    ).toBe(false);
+    expect(isLocalHMR('wss://qa-auth.invalid/', qa.localOrigin)).toBe(false);
     const origins = [
       'https://qa-production.invalid',
       'https://qa-auth.invalid',

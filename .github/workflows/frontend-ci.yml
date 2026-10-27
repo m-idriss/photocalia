@@ -248,7 +248,7 @@ jobs:
             const skipped = cases.filter(test => test.results?.some(result => result.status === 'skipped')).length;
             const failed = cases.length - passed - skipped;
             const complete = cases.length === 10 && passed === 10 && skipped === 0 && failed === 0 && !(report.errors?.length);
-            const lines = ['## Core journey QA (synthetic data)', `Collected: ${cases.length}; passed: ${passed}; failed: ${failed}; skipped: ${skipped}`, '', '| Scenario | Result |', '| --- | --- |'];
+            const lines = ['## Core journey QA (synthetic data)', `Tested revision: ${process.env.GITHUB_SHA ?? 'unavailable'}`, `Collected: ${cases.length}; passed: ${passed}; failed: ${failed}; skipped: ${skipped}`, '', '| Scenario | Result |', '| --- | --- |'];
             for (const test of cases) {
               const title = test.title.replace(/[|\r\n]/g, ' ');
               const status = test.results?.map(result => result.status).join(', ') || 'not run';
