@@ -49,8 +49,10 @@ A failing job makes the workflow fail. Making **Upstream API contract drift** a 
 
 At frontend `382b468792f18fd1de0e5c062b0d7768e87784a9` and backend `56572c7a0c54b88b182514c09e703e91413c51a9`, the snapshots contain 26 paths and are JSON-equivalent despite different formatting. The initial `npm run contracts:check` passed. See [CTO-001](https://github.com/m-idriss/photocalia-agents/issues/3) for the task scope.
 
-## Production deployment safeguard
+## Automatic production deployments
 
-`vercel.json` disables automatic Git deployments for `main` with `git.deploymentEnabled.main: false`. This allows the reviewed contract gate to be merged without asking Vercel to automatically deploy the production branch. Other branch deployment settings keep their default behavior. No active deployment is paused, promoted, rolled back, or deleted by this setting. Manual production deployments remain outside this task's authorization.
+`vercel.json` explicitly enables automatic Git deployments for `main` with `git.deploymentEnabled.main: true`. A merge to `main` triggers the existing Vercel Git integration to build and deploy the production version. Other branch deployment settings keep their default behavior, including previews.
 
-Keep the safeguard until a separate production-deployment instruction is given. The documented Vercel behavior is described in [Git configuration](https://vercel.com/docs/project-configuration/git-configuration).
+The GitHub `protected` ruleset requires pull requests and the `Upstream API contract drift` and `Lint, test, and build` checks before merging. These checks gate changes entering `main`; they are not a separate post-merge approval step inside Vercel. The active ruleset must be maintained in GitHub settings.
+
+Automatic production deployment was explicitly authorized by the project owner. This does not enable daily AI-agent schedules, backend deployments, payment changes, price changes, or access to customer data. The documented Vercel behavior is described in [Git configuration](https://vercel.com/docs/project-configuration/git-configuration).
