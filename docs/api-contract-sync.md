@@ -6,7 +6,7 @@ Frontend CI runs a separate **Upstream API contract drift** job on its existing 
 
 The job resolves backend `main` once to an exact commit SHA, then reads the contract at that SHA. Its summary records both repositories, revision SHAs, paths, job/comparison result, and an offline reproduction command. Later upstream commits do not change evidence for an already completed run.
 
-The comparator checks JSON equality while ignoring whitespace and object-key order. Array order is significant, including `required` and enum arrays. This intentionally conservative check detects any JSON change; it is not a classification of backward compatibility. It reports up to ten JSON-pointer locations and reasons, without schema values or entire documents. This complements `npm run contracts:check`, which verifies required frontend operations and generated TypeScript types against the local snapshot.
+The comparator checks JSON equality while ignoring whitespace and object-key order. Numeric literals are compared as exact normalized decimal values, including integers beyond the floating-point safe range; equivalent notations such as `1000.0` and `1e3` remain equal. Numeric literals longer than 4096 characters fail closed. Array order is significant, including `required` and enum arrays. This intentionally conservative check detects any JSON change; it is not a classification of backward compatibility. It reports up to ten JSON-pointer locations and reasons, without schema values or entire documents. This complements `npm run contracts:check`, which verifies required frontend operations and generated TypeScript types against the local snapshot.
 
 ## Offline reproduction
 

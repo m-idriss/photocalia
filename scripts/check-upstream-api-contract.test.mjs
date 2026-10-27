@@ -165,3 +165,50 @@ test('rejects excessive nesting without unbounded path traversal', () => {
   };
   assert.throws(() => compareContracts(nest(), nest()), /128-level comparison limit/);
 });
+
+test('detects int64 maximum changes beyond floating-point precision', async (t) => {
+  const { frontend, upstream } = await files(
+    t,
+    '{"type":"integer","format":"int64","maximum":9007199254740992}',
+    '{"type":"integer","format":"int64","maximum":9007199254740993}',
+  );
+  assert.deepEqual(await checkFiles(frontend, upstream), [
+    { path: '/maximum', reason: 'value changed' },
+  ]);
+});
+test('detects distinct decimals, underflow, and overflow without rounding', async (t) => {
+  for (const [a, b] of [
+    ['0.12345678901234567890', '0.12345678901234567891'],
+    ['1e-999', '2e-999'],
+    ['1e999', '2e999'],
+  ]) {
+    const { frontend, upstream } = await files(t, `{"value":${a}}`, `{"value":${b}}`);
+    assert.equal((await checkFiles(frontend, upstream)).length, 1);
+  }
+});
+test('equivalent numeric notation and signed zero remain equivalent', async (t) => {
+  for (const [a, b] of [
+    ['1000.0', '1e3'],
+    ['0.0100', '1e-2'],
+    ['-0', '0.0'],
+    ['-1200', '-1.200e3'],
+    ['9007199254740993', '9007199254740993.00'],
+  ]) {
+    const { frontend, upstream } = await files(t, `{"value":${a}}`, `{"value":${b}}`);
+    assert.deepEqual(await checkFiles(frontend, upstream), []);
+  }
+});
+test('numbers cannot collide with similarly shaped JSON objects or strings', async (t) => {
+  for (const b of ['{"canonical":"1e0"}', '"1e0"']) {
+    const { frontend, upstream } = await files(t, '{"value":1}', `{"value":${b}}`);
+    assert.deepEqual(await checkFiles(frontend, upstream), [
+      { path: '/value', reason: 'type changed' },
+    ]);
+  }
+});
+test('oversized numeric literals fail closed without exposing their contents', async (t) => {
+  const { frontend, upstream } = await files(t, `{"value":1e${'9'.repeat(4096)}}`, '{}');
+  await assert.rejects(checkFiles(frontend, upstream), {
+    message: 'Frontend contract: numeric literal exceeds 4096 characters',
+  });
+});

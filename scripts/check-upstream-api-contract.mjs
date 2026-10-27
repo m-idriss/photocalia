@@ -4,6 +4,28 @@ import { pathToFileURL } from 'node:url';
 export const MAX_BYTES = 1024 * 1024;
 const MAX_DIFFERENCES = 10;
 
+class NumberParsingError extends Error {}
+
+function canonicalNumber(source) {
+  // Normalize decimal notation without converting through floating-point arithmetic.
+  if (source.length > 4096) throw new NumberParsingError('numeric literal exceeds 4096 characters');
+  const [, sign, integer, fraction = '', exponent = '0'] = source.match(
+    /^(-?)(\d+)(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/,
+  );
+  let digits = (integer + fraction).replace(/^0+/, '');
+  if (!digits) return '0';
+  const trailing = digits.match(/0+$/)?.[0].length ?? 0;
+  if (trailing) digits = digits.slice(0, -trailing);
+  const power = BigInt(exponent) - BigInt(fraction.length) + BigInt(trailing);
+  return `${sign}${digits}e${power}`;
+}
+
+class ExactNumber {
+  constructor(source) {
+    this.canonical = canonicalNumber(source);
+  }
+}
+
 async function readContract(path, label) {
   let file;
   try {
@@ -23,11 +45,26 @@ async function readContract(path, label) {
     try {
       document = JSON.parse(
         new TextDecoder('utf-8', { fatal: true }).decode(buffer.subarray(0, size)),
+        (_key, value, context) => {
+          if (typeof value !== 'number') return value;
+          if (typeof context?.source !== 'string') {
+            throw new NumberParsingError(
+              'lossless numeric parsing requires supported Node.js 22 or newer',
+            );
+          }
+          return new ExactNumber(context.source);
+        },
       );
-    } catch {
+    } catch (error) {
+      if (error instanceof NumberParsingError) throw new Error(`${label}: ${error.message}`);
       throw new Error(`${label}: invalid UTF-8 or JSON`);
     }
-    if (!document || typeof document !== 'object' || Array.isArray(document)) {
+    if (
+      !document ||
+      typeof document !== 'object' ||
+      Array.isArray(document) ||
+      document instanceof ExactNumber
+    ) {
       throw new Error(`${label}: expected a JSON object`);
     }
     return document;
@@ -49,9 +86,19 @@ export function compareContracts(frontend, upstream) {
     if (depth > 128) throw new Error('Contract nesting exceeds the 128-level comparison limit');
     if (a === b) continue;
     const kind = (value) =>
-      value === null ? 'null' : Array.isArray(value) ? 'array' : typeof value;
+      value instanceof ExactNumber
+        ? 'number'
+        : value === null
+          ? 'null'
+          : Array.isArray(value)
+            ? 'array'
+            : typeof value;
     if (kind(a) !== kind(b)) {
       differences.push({ path, reason: 'type changed' });
+    } else if (kind(a) === 'number') {
+      const exact = (value) =>
+        value instanceof ExactNumber ? value.canonical : canonicalNumber(String(value));
+      if (exact(a) !== exact(b)) differences.push({ path, reason: 'value changed' });
     } else if (Array.isArray(a)) {
       if (a.length !== b.length) differences.push({ path, reason: 'array length changed' });
       for (let i = Math.min(a.length, b.length) - 1; i >= 0; i--) {
