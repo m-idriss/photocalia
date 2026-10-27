@@ -34,6 +34,8 @@
     "serve:ng": "ng serve --configuration=local",
     "vercel-build": "node scripts/set-env.js && ng build",
     "e2e": "playwright test",
+    "qa:core": "playwright test --config=playwright.qa.config.ts",
+    "qa:core:list": "playwright test --config=playwright.qa.config.ts --list",
     "e2e:ui": "playwright test --ui",
     "prepare": "husky",
     "preview:auth": "firebase emulators:start --only auth --project demo-photocalia-preview --config firebase.preview.json",
