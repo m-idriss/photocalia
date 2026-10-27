@@ -15,6 +15,8 @@
     "contracts:update": "node scripts/update-api-contract.mjs && npm run contracts:generate",
     "contracts:generate": "openapi-typescript contracts/3dime-api/openapi-v1.json -o src/app/generated/3dime-api.ts",
     "contracts:check": "node scripts/check-api-contract.mjs",
+    "contracts:upstream": "node scripts/check-upstream-api-contract.mjs",
+    "contracts:upstream:test": "node --test scripts/check-upstream-api-contract.test.mjs",
     "prestart": "npm run blog:generate",
     "start": "ng serve",
     "dev": "ng serve",
