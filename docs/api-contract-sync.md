@@ -48,3 +48,9 @@ A failing job makes the workflow fail. Making **Upstream API contract drift** a 
 ## Inspected baseline
 
 At frontend `382b468792f18fd1de0e5c062b0d7768e87784a9` and backend `56572c7a0c54b88b182514c09e703e91413c51a9`, the snapshots contain 26 paths and are JSON-equivalent despite different formatting. The initial `npm run contracts:check` passed. See [CTO-001](https://github.com/m-idriss/photocalia-agents/issues/3) for the task scope.
+
+## Production deployment safeguard
+
+`vercel.json` disables automatic Git deployments for `main` with `git.deploymentEnabled.main: false`. This allows the reviewed contract gate to be merged without asking Vercel to automatically deploy the production branch. Other branch deployment settings keep their default behavior. No active deployment is paused, promoted, rolled back, or deleted by this setting. Manual production deployments remain outside this task's authorization.
+
+Keep the safeguard until a separate production-deployment instruction is given. The documented Vercel behavior is described in [Git configuration](https://vercel.com/docs/project-configuration/git-configuration).
