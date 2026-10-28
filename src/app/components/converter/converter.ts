@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { NgbPopoverModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppTooltipDirective } from '../../shared/directives';
 
 import { Router } from '@angular/router';
 import { ConversionDraftService } from '../../services/conversion-draft.service';
@@ -31,6 +30,7 @@ import { LoggerService } from '../../services/logger.service';
 import { FILE_UPLOAD_CONSTRAINTS } from '../../constants';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { LanguageService } from '../../services/language.service';
+import { authErrorMessageKey } from '../../utils/auth-error.utils';
 import { toApiClientError } from '../../utils/api-error.utils';
 import { generateIcs, parseIcsEvents } from '../../utils/ics.utils';
 import { ConverterEventReview } from '../converter-event-review/converter-event-review';
@@ -42,7 +42,6 @@ import { ConverterUpload } from '../converter-upload/converter-upload';
   selector: 'app-converter',
   imports: [
     Card,
-    AppTooltipDirective,
     NgbPopoverModule,
     NgbTooltipModule,
     TranslatePipe,
@@ -71,6 +70,8 @@ export class Converter extends AuthAwareComponent implements OnInit {
   private draftUserId: string | null = null;
   private resumingCheckout = false;
   public readonly quotaRemaining = signal<number | null>(null);
+  readonly signInError = signal<string | null>(null);
+
   public readonly quotaLimit = signal<number | null>(null);
   public readonly quotaEnabled = signal<boolean>(false);
   public readonly isQuotaLoading = signal<boolean>(false);
@@ -803,13 +804,11 @@ export class Converter extends AuthAwareComponent implements OnInit {
 
   // ⚡ Restore methods required by template
   async signIn(): Promise<void> {
+    this.signInError.set(null);
     try {
       await this.authService.signInWithGoogle();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      let message = 'Failed to sign in. Please try again.';
-      if (error?.message) message += ` (${error.message})`;
-      this.toastService.showError(message);
+    } catch (error: unknown) {
+      this.signInError.set(authErrorMessageKey(error));
       this.logger.error('Sign in error', 'Converter', error);
     }
   }

@@ -26,7 +26,7 @@ const goldenManifest = JSON.parse(
 test.describe('PhotoCalia App', () => {
   test('should load the home page', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/PhotoCalia/);
+    await expect(page).toHaveTitle(/Photocalia/);
   });
 
   test('should display the header', async ({ page }) => {
@@ -61,14 +61,14 @@ test.describe('PhotoCalia App', () => {
 
   test('should redirect unknown routes to home', async ({ page }) => {
     await page.goto('/nonexistent-page');
-    await expect(page).toHaveTitle(/PhotoCalia/);
+    await expect(page).toHaveTitle(/Photocalia/);
   });
 });
 
 test.describe('Converter', () => {
   test('should require sign-in before uploading a file', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByRole('button', { name: /AI Calendar Converter/i })).toBeVisible();
+    await expect(page.locator('app-converter .auth-action')).toBeVisible();
     await expect(page.locator('input[type="file"]')).toHaveCount(0);
   });
 

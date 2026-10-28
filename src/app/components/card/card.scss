@@ -1,3 +1,5 @@
+@use '../../../styles/lumiere';
+
 /* ========================
    Card Component Styles
    ======================== */
@@ -161,4 +163,15 @@
   .container:hover {
     transform: none !important;
   }
+}
+
+.container.onboarding {
+  @include lumiere.surface(28px);
+  max-width: 540px;
+  padding: 0;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--ct-primary) 22%, var(--ct-surface));
+  box-shadow:
+    0 18px 40px -24px #7550a950,
+    0 0 45px -25px #b588e545;
 }

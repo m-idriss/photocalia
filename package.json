@@ -15,6 +15,8 @@
     "contracts:update": "node scripts/update-api-contract.mjs && npm run contracts:generate",
     "contracts:generate": "openapi-typescript contracts/3dime-api/openapi-v1.json -o src/app/generated/3dime-api.ts",
     "contracts:check": "node scripts/check-api-contract.mjs",
+    "contracts:upstream": "node scripts/check-upstream-api-contract.mjs",
+    "contracts:upstream:test": "node --test scripts/check-upstream-api-contract.test.mjs",
     "prestart": "npm run blog:generate",
     "start": "ng serve",
     "dev": "ng serve",
@@ -32,8 +34,13 @@
     "serve:ng": "ng serve --configuration=local",
     "vercel-build": "node scripts/set-env.js && ng build",
     "e2e": "playwright test",
+    "qa:core": "playwright test --config=playwright.qa.config.ts",
+    "qa:core:list": "playwright test --config=playwright.qa.config.ts --list",
     "e2e:ui": "playwright test --ui",
-    "prepare": "husky"
+    "prepare": "husky",
+    "preview:auth": "firebase emulators:start --only auth --project demo-photocalia-preview --config firebase.preview.json",
+    "preview:api": "node scripts/preview-api.mjs",
+    "preview:mobile": "ng serve --configuration=preview --host 0.0.0.0 --port 4201"
   },
   "prettier": {
     "printWidth": 100,
@@ -75,19 +82,24 @@
     },
     "@vercel/node": {
       "path-to-regexp": "6.3.0",
-      "undici": "7.29.0"
+      "undici": "7.30.1"
     },
     "browserslist": "4.28.9",
     "esbuild": "0.28.1",
-    "fast-uri": "3.1.6",
+    "fast-uri": "3.1.9",
     "minimatch": "10.2.4",
     "nanoid": "3.3.18",
-    "qs": "6.16.0",
+    "qs": "6.16.1",
     "rollup": "^4.59.0",
     "tar": "^7.5.8",
     "flatted": "3.4.2",
     "socket.io-parser": "4.2.7",
-    "undici": "7.29.0"
+    "undici": "7.30.1",
+    "vite": "8.3.3",
+    "@grpc/grpc-js": "1.14.5",
+    "@vercel/cli-config": {
+      "zod": "4.6.6"
+    }
   },
   "private": true,
   "dependencies": {

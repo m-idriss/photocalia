@@ -110,14 +110,16 @@ describe('Pricing', () => {
   for (const purchase of ['credit', 'plus']) {
     it(`shows a recoverable error when sign-in fails for ${purchase}`, async () => {
       const auth = TestBed.inject(AuthService);
-      spyOn(auth, 'signInWithGoogle').and.rejectWith(new Error('popup closed'));
+      spyOn(auth, 'signInWithGoogle').and.rejectWith(
+        new Error('Sign-in failed', { cause: { code: 'auth/popup-closed-by-user' } }),
+      );
       const subscriptions = TestBed.inject(SubscriptionService);
       const buy = spyOn(subscriptions, 'buyCredit');
       const subscribe = spyOn(subscriptions, 'createCheckout');
       const component = TestBed.createComponent(Pricing).componentInstance;
       if (purchase === 'credit') await component['buyCredit']();
       else await component['subscribe'](SUBSCRIPTION_PLANS.find((p) => p.id === 'plus')!);
-      expect(component['error']()).toBe('api.error.authentication_required');
+      expect(component['error']()).toBe('auth.error.cancelled');
       expect(component['isLoading']()).toBeNull();
       expect(buy).not.toHaveBeenCalled();
       expect(subscribe).not.toHaveBeenCalled();
