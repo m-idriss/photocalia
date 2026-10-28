@@ -16,10 +16,21 @@ concurrency:
 jobs:
   frontend:
     name: Lint, test, and build
+    needs: core-journey-qa
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
+      - name: Require successful core-journey QA
+        env:
+          CORE_QA_RESULT: ${{ needs.core-journey-qa.result }}
+        run: |
+          if [ "$CORE_QA_RESULT" != "success" ]; then
+            echo "Core journey QA must succeed before the required frontend check can pass."
+            exit 1
+          fi
+
       - name: Checkout repository
         uses: actions/checkout@v7
 
