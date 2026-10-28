@@ -13,7 +13,8 @@ export function homePageTitle(description: string): string {
 
 export function localizedPageTitle(english: string, french: string): ResolveFn<string> {
   return (_route, state) => {
-    const isFrenchPage = state.url === '/fr' || state.url.startsWith('/fr/');
+    const path = state.url.split(/[?#]/)[0];
+    const isFrenchPage = path === '/fr' || path.startsWith('/fr/');
     return isFrenchPage ? french : english;
   };
 }
