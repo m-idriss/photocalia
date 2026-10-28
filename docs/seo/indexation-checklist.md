@@ -21,6 +21,14 @@ Compare two complete 28-day periods, recording the actual date range and search 
 
 Search Console hides some queries. Query subtotals do not necessarily equal the totals, and average position is not a fixed rank. Small samples and seasonality prevent attributing every change to a release. No rank or indexing deadline is guaranteed.
 
+## English homepage and PDF copy experiment
+
+Treat the homepage and `/pdf-to-calendar` copy changes as a measured experiment, not a proven ranking fix. The homepage targets photo/image conversion; the PDF page explains schedule-to-calendar conversion and the ICS output. Only their English titles, descriptions and opening copy change; the homepage HTML fallback uses the same metadata as its route.
+
+Before release, keep the deployment date, previous copy and a per-page Search Console baseline in a private report. After release, verify the live HTML and note Google's next crawl date for each page. Review after 14 and 28 complete days, allowing for reporting delay. Compare equal-length periods with the same weekdays, search type, page, country and device. Track clicks, impressions, CTR and available query positions separately for each page; site-wide averages and index counts are not success criteria for this experiment.
+
+Check the relevant query families: photo/image to calendar for home; PDF to calendar and PDF to ICS for the PDF page. Use only observed data, and do not treat hidden queries or missing rows as zero demand. Avoid overlapping copy changes during the observation period. If comparable segments keep declining after recrawl, review or revert this copy-only change rather than undoing crawlable links, canonicals or other unrelated work. Do not infer conversion improvement from clicks alone.
+
 References:
 - https://developers.google.com/search/docs/crawling-indexing/links-crawlable
 - https://developers.google.com/search/help/crawling-index-faq

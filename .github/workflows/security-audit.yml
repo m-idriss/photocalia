@@ -1,36 +1,37 @@
 name: Security Audit
-
 on:
+  workflow_call:
   push:
     branches: [main]
   pull_request:
     branches: [main]
   schedule:
-    - cron: '0 9 * * 1' # Every Monday at 9am UTC
-
+    - cron: '0 9 * * 1'
 permissions:
   contents: read
-
 jobs:
   audit:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 5
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v7
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          node-version-file: '.node-version'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run security audit
-        id: run-audit
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: .node-version
+      - name: Test audit report validation
+        run: node --test scripts/check-security-audit.test.mjs
+      - name: Audit locked dependencies without lifecycle scripts
+        shell: bash
         run: |
-          npm audit --json > audit.json 2>&1 || true
-          # Inspect audit.json and fail only if any advisory has severity 'high' or 'critical'
-          node -e "const fs=require('fs');const p='audit.json';let out='';try{out=fs.readFileSync(p,'utf8')}catch(e){console.error('No audit output');process.exit(0);}const lines=out.split(/\n/).filter(Boolean);let high=false;for(const l of lines){try{const j=JSON.parse(l);const adv=j.advisory||j.data?.advisory||j;const sev=(adv&&adv.severity)||null;if(sev&&['high','critical'].includes(String(sev).toLowerCase())){high=true;break;}}catch(e){} }if(high){console.error('High/critical vulnerabilities found');process.exit(1);}console.log('No high/critical vulnerabilities found');process.exit(0);"
+          set -euo pipefail
+          audit_status=0
+          npm audit --package-lock-only --ignore-scripts --json > audit.json 2>/dev/null || audit_status=$?
+          if (( audit_status > 1 )); then
+            echo 'Dependency audit command failed; refusing a passing result.'
+            exit 1
+          fi
+          node scripts/check-security-audit.mjs audit.json

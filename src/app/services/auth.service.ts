@@ -2,12 +2,14 @@ import { Injectable, inject, signal } from '@angular/core';
 import {
   Auth,
   signInWithPopup,
+  signInWithCredential,
   signOut,
   GoogleAuthProvider,
   onAuthStateChanged,
   User,
 } from '@angular/fire/auth';
 import { LoggerService } from './logger.service';
+import { authPreviewPort } from '../utils/auth-preview.utils';
 import { environment } from '../../environments/environment';
 
 declare global {
@@ -38,9 +40,12 @@ export class AuthService {
   private readonly googleProvider = this.auth ? new GoogleAuthProvider() : null;
   private readonly logger = inject(LoggerService);
 
+  readonly isTestMode = authPreviewPort(environment) !== null;
+
   // Signal for current user state
   public readonly currentUser = signal<AuthUser | null>(null);
   public readonly isAuthenticated = signal<boolean>(false);
+  public readonly isInitialized = signal(false);
   public readonly isLoading = signal<boolean>(false); // Default to false when Firebase not available
 
   constructor() {
@@ -56,11 +61,13 @@ export class AuthService {
         photoURL: null,
       });
       this.isAuthenticated.set(true);
+      this.isInitialized.set(true);
       return;
     }
 
     // Only initialize auth listener if Firebase is available
     if (!this.auth) {
+      this.isInitialized.set(true);
       this.logger.info(
         'Auth service running without Firebase - authentication features disabled',
         'AuthService',
@@ -84,6 +91,7 @@ export class AuthService {
         this.isAuthenticated.set(false);
       }
       this.isLoading.set(false);
+      this.isInitialized.set(true);
     });
   }
 
@@ -98,6 +106,18 @@ export class AuthService {
       return;
     }
     try {
+      if (this.isTestMode) {
+        const testCredential = GoogleAuthProvider.credential(
+          JSON.stringify({
+            sub: 'photocalia-preview-user',
+            email: 'test@photocalia.invalid',
+            name: 'Compte de test',
+            email_verified: true,
+          }),
+        );
+        await signInWithCredential(this.auth, testCredential);
+        return;
+      }
       await signInWithPopup(this.auth, this.googleProvider);
     } catch (error) {
       this.logger.error('Error signing in with Google', 'AuthService', { error });

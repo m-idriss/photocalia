@@ -20,6 +20,7 @@ The architecture and acquisition-readiness documents define the current producti
 
 - [Deployment Guide](./DEPLOYMENT.md) - Production builds, hosting, CI/CD
 - [Testing Guide](./TESTING.md) - Unit tests, API tests, CI
+- [Isolated Local Preview](./LOCAL_PREVIEW.md) - Mobile UI and demo sign-in without production services
 
 ## SEO & Performance
 

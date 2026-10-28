@@ -25,6 +25,9 @@ export class Card {
    */
   @Input() title?: string;
 
+  /** Flush luminous surface for the signed-out converter invitation. */
+  @Input() variant: 'default' | 'onboarding' = 'default';
+
   /**
    * Optional badge count to display next to the title
    */
