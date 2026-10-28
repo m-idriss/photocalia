@@ -14,20 +14,27 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  dependency-security:
+    name: Dependency security gate
+    uses: ./.github/workflows/security-audit.yml
+    permissions:
+      contents: read
+
   frontend:
     name: Lint, test, and build
-    needs: core-journey-qa
+    needs: [core-journey-qa, dependency-security]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
     steps:
-      - name: Require successful core-journey QA
+      - name: Require successful QA and dependency audit
         env:
           CORE_QA_RESULT: ${{ needs.core-journey-qa.result }}
+          DEPENDENCY_AUDIT_RESULT: ${{ needs.dependency-security.result }}
         run: |
-          if [ "$CORE_QA_RESULT" != "success" ]; then
-            echo "Core journey QA must succeed before the required frontend check can pass."
+          if [ "$CORE_QA_RESULT" != "success" ] || [ "$DEPENDENCY_AUDIT_RESULT" != "success" ]; then
+            echo "Core journey QA and dependency auditing must succeed before the required frontend check can pass."
             exit 1
           fi
 
