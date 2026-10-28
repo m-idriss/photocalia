@@ -52,3 +52,18 @@ test('unknown severities and inconsistent inventory fail closed', () => {
   r.metadata.vulnerabilities.total = 0;
   assert.throws(() => inspectAudit(JSON.stringify(r)));
 });
+test('non-object inventories cannot qualify as clean reports', () => {
+  for (const inventory of [true, false, 42, '', 'text', [], null]) {
+    const report = JSON.parse(audit({}));
+    report.vulnerabilities = inventory;
+    assert.throws(() => inspectAudit(JSON.stringify(report)));
+  }
+});
+test('findings contain only validated package names and severity', () => {
+  const report = JSON.parse(audit({ '@scope/pkg': { severity: 'high' } }));
+  report.vulnerabilities['@scope/pkg'].via = ['untrusted body'];
+  assert.deepEqual(inspectAudit(JSON.stringify(report)).findings, [
+    { name: '@scope/pkg', severity: 'high' },
+  ]);
+  assert.throws(() => inspectAudit(audit({ 'pkg\n@everyone': { severity: 'high' } })));
+});

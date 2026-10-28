@@ -7,14 +7,20 @@ export function inspectAudit(input) {
     report.auditReportVersion !== 2 ||
     report.error ||
     !report.vulnerabilities ||
+    typeof report.vulnerabilities !== 'object' ||
     Array.isArray(report.vulnerabilities) ||
     !report.metadata?.vulnerabilities
   )
     throw Error('Invalid audit report');
   const counts = { info: 0, low: 0, moderate: 0, high: 0, critical: 0 };
-  for (const entry of Object.values(report.vulnerabilities)) {
+  const findings = [];
+  for (const [name, entry] of Object.entries(report.vulnerabilities)) {
+    if (name.length > 214 || !/^(?:@[a-z0-9._-]+\/)?[a-z0-9._-]+$/.test(name))
+      throw Error('Invalid package name');
     if (!entry || !Object.hasOwn(counts, entry.severity)) throw Error('Invalid severity');
     counts[entry.severity]++;
+    if (['high', 'critical'].includes(entry.severity))
+      findings.push({ name, severity: entry.severity });
   }
   for (const [severity, count] of Object.entries(counts)) {
     if (report.metadata.vulnerabilities[severity] !== count)
@@ -22,7 +28,7 @@ export function inspectAudit(input) {
   }
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
   if (report.metadata.vulnerabilities.total !== total) throw Error('Inconsistent audit total');
-  return { ...counts, total, blocked: counts.high > 0 || counts.critical > 0 };
+  return { ...counts, total, blocked: counts.high > 0 || counts.critical > 0, findings };
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   try {
@@ -33,7 +39,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     if (process.env.GITHUB_STEP_SUMMARY)
       fs.appendFileSync(
         process.env.GITHUB_STEP_SUMMARY,
-        `## Dependency audit\n\nHigh: ${result.high}; critical: ${result.critical}; moderate: ${result.moderate}; low: ${result.low}.\n\nResult: ${result.blocked ? 'BLOCKED — high/critical dependencies require remediation.' : 'No high/critical dependency findings.'}\n`,
+        `## Dependency audit\n\nHigh: ${result.high}; critical: ${result.critical}; moderate: ${result.moderate}; low: ${result.low}.\n\nResult: ${result.blocked ? 'BLOCKED — high/critical dependencies require remediation.' : 'No high/critical dependency findings.'}\n\n${result.findings.map((f) => '- `' + f.name + '`: ' + f.severity).join('\n')}\n`,
       );
     if (result.blocked) process.exitCode = 1;
   } catch {
