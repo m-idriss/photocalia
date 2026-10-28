@@ -47,8 +47,8 @@ Reports live under `test-results/qa/` and `playwright-report/qa/`, both already 
 
 ## CI and release behavior
 
-The additive `Core journey QA (synthetic data)` job uses the existing frontend workflow's PR/manual triggers. Existing frontend and upstream-contract jobs are unchanged. The new job is **not automatically a required branch check**. The owner must review a complete passing run and separately require that exact context before claiming it blocks production merges.
+The `Core journey QA (synthetic data)` job uses the existing frontend workflow's PR/manual triggers. The already-required `Lint, test, and build` job depends on it and uses `always()` plus an explicit success assertion. A failed, cancelled, skipped, or missing-success QA result fails that required check instead of silently skipping it. This makes QA blocking through the existing active branch rule without needing an additional administration permission. The upstream-contract job is unchanged.
 
-This work does not authorize a merge or production deployment. Frontend main merges currently trigger automatic production deployment, so implementation stays in a draft PR until explicitly authorized. No autonomous QA agent or daily agent schedule is activated, and no model request is needed.
+Frontend main merges trigger automatic production deployment after the protected PR checks pass. Changes still require a pull request; no automatic merge is enabled. No autonomous QA agent or daily agent schedule is activated, and no model request is needed.
 
 Task: [QA-001](https://github.com/m-idriss/photocalia-agents/issues/5).
