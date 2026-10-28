@@ -77,6 +77,11 @@ jobs:
           set -o pipefail
           npm run contracts:check 2>&1 | tee "${{ runner.temp }}/frontend-ci-logs/contracts-check.log"
 
+      - name: Verify Vercel API handler compatibility
+        run: |
+          npx tsc --project tsconfig.api.json
+          node --test scripts/api-log.test.mjs
+
       - name: Lint
         shell: bash
         run: |
