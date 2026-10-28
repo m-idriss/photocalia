@@ -1,45 +1,45 @@
 import { localizedPageTitle } from './page-title.utils';
 
-describe('localizedPageTitle - root and nested French routes preserve locale with queries/fragments', () => {
-  const resolver = localizedPageTitle('English Title', 'Titre Français');
+describe("Localized page title routing", () => {
+  const resolver = localizedPageTitle("English title", "Localized title");
 
-  it('should detect exact /fr root path', () => {
-    expect(resolver({} as never, { url: '/fr' } as never)).toBe('Titre Français');
+  it("handles synthetic route case 1", () => {
+    expect(resolver({} as never, { url: '/fr' } as never)).toBe("Localized title");
   });
 
-  it('should detect /fr with query string', () => {
-    expect(resolver({} as never, { url: '/fr?mode=demo' } as never)).toBe('Titre Français');
+  it("handles synthetic route case 2", () => {
+    expect(resolver({} as never, { url: '/fr?mode=demo' } as never)).toBe("Localized title");
   });
 
-  it('should detect /fr with fragment', () => {
-    expect(resolver({} as never, { url: '/fr#intro' } as never)).toBe('Titre Français');
+  it("handles synthetic route case 3", () => {
+    expect(resolver({} as never, { url: '/fr#intro' } as never)).toBe("Localized title");
   });
 
-  it('should detect /fr with query and fragment', () => {
-    expect(resolver({} as never, { url: '/fr?mode=demo#intro' } as never)).toBe('Titre Français');
+  it("handles synthetic route case 4", () => {
+    expect(resolver({} as never, { url: '/fr?mode=demo#intro' } as never)).toBe("Localized title");
   });
 
-  it('should detect nested French route with query', () => {
-    expect(resolver({} as never, { url: '/fr/photo?mode=demo' } as never)).toBe('Titre Français');
+  it("handles synthetic route case 5", () => {
+    expect(resolver({} as never, { url: '/fr/photo?mode=demo' } as never)).toBe("Localized title");
   });
 
-  it('should detect nested French route with fragment', () => {
-    expect(resolver({} as never, { url: '/fr/photo#intro' } as never)).toBe('Titre Français');
+  it("handles synthetic route case 6", () => {
+    expect(resolver({} as never, { url: '/fr/photo#intro' } as never)).toBe("Localized title");
   });
 
-  it('should use English for root English path with query', () => {
-    expect(resolver({} as never, { url: '/photo?next=/fr' } as never)).toBe('English Title');
+  it("handles synthetic route case 7", () => {
+    expect(resolver({} as never, { url: '/photo?next=/fr' } as never)).toBe("English title");
   });
 
-  it('should not detect /france as French locale', () => {
-    expect(resolver({} as never, { url: '/france' } as never)).toBe('English Title');
+  it("handles synthetic route case 8", () => {
+    expect(resolver({} as never, { url: '/france' } as never)).toBe("English title");
   });
 
-  it('should not detect uppercase /FR as French locale', () => {
-    expect(resolver({} as never, { url: '/FR' } as never)).toBe('English Title');
+  it("handles synthetic route case 9", () => {
+    expect(resolver({} as never, { url: '/FR' } as never)).toBe("English title");
   });
 
-  it('should detect /fr with mixed casing and fragment case sensitive fails', () => {
-    expect(resolver({} as never, { url: '/Fr#intro' } as never)).toBe('English Title');
+  it("handles synthetic route case 10", () => {
+    expect(resolver({} as never, { url: '/Fr#intro' } as never)).toBe("English title");
   });
 });
