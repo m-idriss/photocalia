@@ -199,3 +199,79 @@ jobs:
             echo 'JSON object-key order and whitespace are ignored; array order is significant.'
             echo 'Missing upstream evidence fails the job. No snapshots are updated automatically.'
           } >> "$GITHUB_STEP_SUMMARY"
+
+  core-journey-qa:
+    name: Core journey QA (synthetic data)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout reviewed frontend revision
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Install test browser
+        run: npx playwright install --with-deps chromium
+      - name: Validate existing synthetic fixtures
+        run: npm run fixtures:check
+      - name: Type-check the QA harness
+        run: npx tsc --ignoreConfig --noEmit --target ES2022 --module preserve --moduleResolution bundler --types node --esModuleInterop --skipLibCheck playwright.qa.config.ts e2e/helpers/qa-fixture.ts e2e/core-journeys.qa.spec.ts
+      - name: Run local-only synthetic core journeys
+        run: npm run qa:core
+      - name: Require complete passing inventory and report coverage
+        if: always()
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFile, appendFile } from 'node:fs/promises';
+          try {
+            const report = JSON.parse(await readFile('test-results/qa/results.json', 'utf8'));
+            const cases = [];
+            function collect(suites) {
+              for (const suite of suites ?? []) {
+                for (const spec of suite.specs ?? []) {
+                  for (const test of spec.tests ?? []) cases.push({ title: spec.title, ...test });
+                }
+                collect(suite.suites);
+              }
+            }
+            collect(report.suites);
+            const passed = cases.filter(test => test.expectedStatus === 'passed' && test.results?.length === 1 && test.results[0].status === 'passed').length;
+            const skipped = cases.filter(test => test.results?.some(result => result.status === 'skipped')).length;
+            const failed = cases.length - passed - skipped;
+            const complete = cases.length === 10 && passed === 10 && skipped === 0 && failed === 0 && !(report.errors?.length);
+            const lines = ['## Core journey QA (synthetic data)', `Tested revision: ${process.env.GITHUB_SHA ?? 'unavailable'}`, `Collected: ${cases.length}; passed: ${passed}; failed: ${failed}; skipped: ${skipped}`, '', '| Scenario | Result |', '| --- | --- |'];
+            for (const test of cases) {
+              const title = test.title.replace(/[|\r\n]/g, ' ');
+              const status = test.results?.map(result => result.status).join(', ') || 'not run';
+              lines.push(`| ${title} | ${status} |`);
+            }
+            lines.push('', 'Synthetic identity and API responses only; no provider login, model accuracy, payment processing, or production execution is claimed.');
+            await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
+            if (!complete) { console.error('QA qualification failed: expected exactly 10 passing, unskipped cases and no run errors.'); process.exitCode = 1; }
+          } catch {
+            await appendFile(process.env.GITHUB_STEP_SUMMARY, 'QA report missing or invalid; this run is not qualified.\n');
+            console.error('QA report missing or invalid.');
+            process.exitCode = 1;
+          }
+          NODE
+      - name: Retain synthetic QA evidence only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: synthetic-core-qa-${{ github.run_id }}
+          path: |
+            test-results/qa/results.json
+            test-results/qa/artifacts/**/synthetic-network-summary*.json
+            test-results/qa/artifacts/**/*.png
+            playwright-report/qa/
+          if-no-files-found: ignore
+          retention-days: 3
