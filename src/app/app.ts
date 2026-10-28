@@ -1,5 +1,5 @@
 import { Component, signal, OnInit, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, ViewportScroller } from '@angular/common';
 import { SwUpdate, VersionReadyEvent } from '@angular/service-worker';
 import { filter } from 'rxjs/operators';
 import { RouterOutlet } from '@angular/router';
@@ -12,6 +12,7 @@ import { Breadcrumb } from './components/breadcrumb/breadcrumb';
 import { BackToTop } from './components/back-to-top/back-to-top';
 import { PWA_CONFIG } from './constants/pwa.constants';
 import { SeoService } from './services/seo.service';
+import { AuthService } from './services/auth.service';
 import { LanguageService } from './services/language.service';
 
 @Component({
@@ -23,14 +24,27 @@ import { LanguageService } from './services/language.service';
 })
 export class App implements OnInit {
   private readonly platformId = inject(PLATFORM_ID);
+  private readonly viewportScroller = inject(ViewportScroller);
   private readonly swUpdate = inject(SwUpdate);
   private readonly seoService = inject(SeoService);
   private readonly languageService = inject(LanguageService);
 
+  protected readonly authService = inject(AuthService);
+
   protected readonly title = signal('Photocalia');
+  protected previewNotice(): string {
+    return this.languageService.translate('auth.preview.notice');
+  }
+
   private deferredPrompt: BeforeInstallPromptEvent | null = null;
 
   ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      // Router anchors use scrollToPosition, which does not honor CSS scroll-margin.
+      // Leave room for the floating navigation and a small gap above the target.
+      this.viewportScroller.setOffset(() => [0, window.innerWidth <= 700 ? 96 : 112]);
+    }
+
     // Check for service worker updates
     if (isPlatformBrowser(this.platformId) && this.swUpdate.isEnabled) {
       this.swUpdate.versionUpdates

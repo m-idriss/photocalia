@@ -49,8 +49,16 @@
       </div>
       <p class="plan-quota">{{ 'pricing.credit.quota' | translate }}</p>
       <ul class="plan-features">
-        <li class="feature-item">{{ 'pricing.credit.feature' | translate }}</li>
-        <li class="feature-item">{{ 'pricing.credit.expiry' | translate }}</li>
+        <li class="feature-item">
+          <span class="feature-symbol" aria-hidden="true">↳</span
+          ><span>{{ 'pricing.credit.feature' | translate }}</span
+          ><span class="feature-check" aria-hidden="true">✓</span>
+        </li>
+        <li class="feature-item">
+          <span class="feature-symbol" aria-hidden="true">∞</span
+          ><span>{{ 'pricing.credit.expiry' | translate }}</span
+          ><span class="feature-check" aria-hidden="true">✓</span>
+        </li>
       </ul>
       <div class="plan-cta">
         <button
@@ -96,8 +104,9 @@
         <ul class="plan-features" role="list">
           @for (feature of plan.features; track feature) {
             <li class="feature-item" role="listitem">
+              <span class="feature-symbol" aria-hidden="true">✧</span>
+              <span>{{ feature | translate }}</span>
               <span class="feature-check" aria-hidden="true">✓</span>
-              {{ feature | translate }}
             </li>
           }
         </ul>
@@ -137,7 +146,7 @@
     }
   </section>
 
-  <section class="pricing-faq">
+  <section class="pricing-rules">
     <p>{{ 'pricing.rules' | translate }}</p>
     <p>{{ 'pricing.renewal' | translate }}</p>
     <a [routerLink]="'/terms' | localizeRoute">{{ 'footer.link.termsOfService' | translate }}</a>
@@ -146,20 +155,14 @@
   <!-- FAQ / Reassurance -->
   <section class="pricing-faq" aria-labelledby="faq-title">
     <h2 id="faq-title" class="faq-title">{{ 'pricing.faq.title' | translate }}</h2>
-    <ul class="faq-list" role="list">
-      <li>
-        <strong>{{ 'pricing.faq.cancel.q' | translate }}</strong>
-        <p>{{ 'pricing.faq.cancel.a' | translate }}</p>
-      </li>
-      <li>
-        <strong>{{ 'pricing.faq.secure.q' | translate }}</strong>
-        <p>{{ 'pricing.faq.secure.a' | translate }}</p>
-      </li>
-      <li>
-        <strong>{{ 'pricing.faq.upgrade.q' | translate }}</strong>
-        <p>{{ 'pricing.faq.upgrade.a' | translate }}</p>
-      </li>
-    </ul>
+    <div class="faq-list">
+      @for (question of ['cancel', 'secure', 'upgrade']; track question; let first = $first) {
+        <details class="faq-item" [open]="first">
+          <summary class="faq-question">{{ 'pricing.faq.' + question + '.q' | translate }}</summary>
+          <p class="faq-answer">{{ 'pricing.faq.' + question + '.a' | translate }}</p>
+        </details>
+      }
+    </div>
   </section>
 
   <app-recommended-guides variant="pricing" />
