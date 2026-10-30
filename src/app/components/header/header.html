@@ -41,7 +41,7 @@
             [attr.hreflang]="language.code"
             [class.active]="lang.currentLang() === language.code"
             (click)="onLanguageClick($event, language.code)"
-            [attr.aria-label]="language.label"
+            [attr.aria-label]="(language.code | uppercase) + ' — ' + language.label"
             [attr.aria-current]="lang.currentLang() === language.code ? 'page' : null"
             >{{ language.code | uppercase }}</a
           >
@@ -72,11 +72,7 @@
           }
         </button>
       } @else if (!isAuthLoading) {
-        <button
-          class="sign-in-button"
-          (click)="signIn()"
-          [attr.aria-label]="'header.tooltip.signIn' | translate"
-        >
+        <button class="sign-in-button" (click)="signIn()">
           {{ 'header.signIn' | translate }}
         </button>
       }

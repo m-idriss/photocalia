@@ -269,7 +269,7 @@
 .campaign-video-description {
   font-size: 14px;
   line-height: 1.9;
-  color: var(--text-secondary);
+  color: color-mix(in srgb, var(--text-secondary) 85%, var(--text-primary));
 }
 .campaign-video-frame {
   width: min(100%, 320px);

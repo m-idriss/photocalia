@@ -4,7 +4,7 @@ import { expect, test } from '@playwright/test';
 for (const route of ['/', '/fr']) {
   for (const theme of ['light', 'dark']) {
     for (const width of [320, 390, 768, 1440]) {
-      test(`planning preview small text meets contrast on ${route} in ${theme} theme at ${width}px`, async ({
+      test(`homepage small text meets contrast on ${route} in ${theme} theme at ${width}px`, async ({
         page,
       }) => {
         await page.setViewportSize({ width, height: 1000 });
@@ -30,7 +30,7 @@ for (const route of ['/', '/fr']) {
         const preview = page.locator('app-planning-preview');
         await expect(preview).toBeVisible();
         await page.evaluate(() => document.fonts.ready);
-        const results = await preview.evaluate((root) => {
+        const results = await page.locator('app-home').evaluate((root) => {
           const canvas = document.createElement('canvas');
           canvas.width = canvas.height = 1;
           const context = canvas.getContext('2d');
@@ -54,7 +54,7 @@ for (const route of ['/', '/fr']) {
           };
           return [
             ...root.querySelectorAll(
-              '.pc-event, .pc-event span, .pc-cal-head small, .pc-converted span',
+              '.pc-event, .pc-event span, .pc-cal-head small, .pc-converted span, .campaign-video-description',
             ),
           ]
             .filter((element) => element.getBoundingClientRect().width > 0)
@@ -80,7 +80,7 @@ for (const route of ['/', '/fr']) {
               };
             });
         });
-        expect(results.length).toBeGreaterThanOrEqual(9);
+        expect(results.length).toBeGreaterThanOrEqual(10);
         for (const result of results)
           expect(result.ratio, JSON.stringify(result)).toBeGreaterThanOrEqual(4.5);
       });

@@ -99,8 +99,8 @@ jobs:
       - name: Install Chromium for critical browser smoke tests
         run: npx playwright install --with-deps chromium
 
-      - name: Verify planning preview contrast on both languages and four viewports
-        run: npx playwright test e2e/planning-preview.design.spec.ts --workers=1
+      - name: Verify homepage contrast and accessible labels
+        run: npx playwright test e2e/planning-preview.design.spec.ts e2e/homepage-accessibility.design.spec.ts --workers=1
 
       - name: Run credential-free converter smoke test
         shell: bash
