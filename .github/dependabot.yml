@@ -17,6 +17,9 @@ updates:
       # Angular 22.2 requires TypeScript <6.1; OpenAPI generation also fails on 7.
       - dependency-name: 'typescript'
         versions: ['>=7.0.0 <8.0.0']
+      # Keep type declarations aligned with the Zone-compatible Jasmine 6 runtime.
+      - dependency-name: '@types/jasmine'
+        versions: ['>=7.0.0 <8.0.0']
       # Jasmine 7 makes globals read-only, breaking zone.js/testing patches.
       - dependency-name: 'jasmine-core'
         versions: ['>=7.0.0 <8.0.0']
