@@ -30,7 +30,7 @@
     "test:ci": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "verify:clean": "node scripts/verify-clean-tree.mjs",
-    "verify:frontend": "npm run blog:check && npm run claims:check && npm run fixtures:check && npm run contracts:check && npm run lint && npm run test:ci && npm run build:ci && npm run seo:check && npm run verify:clean",
+    "verify:frontend": "npm run blog:check && npm run claims:check && npm run fixtures:check && npm run contracts:check && node scripts/check-vercel-toolchain.mjs && npm run lint && npm run test:ci && npm run build:ci && npm run seo:check && npm run verify:clean",
     "serve:ng": "ng serve --configuration=local",
     "vercel-build": "node scripts/set-env.js && ng build",
     "e2e": "playwright test",
@@ -142,11 +142,11 @@
     "@playwright/test": "^1.61.1",
     "@types/jasmine": "~6.0.0",
     "@types/node": "^26.6.5",
-    "@vercel/build-utils": "^14.20.1",
+    "@vercel/build-utils": "15.1.0",
     "@vercel/functions": "^3.10.4",
-    "@vercel/node": "^23.0.1",
+    "@vercel/node": "28.0.0",
     "angular-eslint": "^22.1.0",
-    "eslint": "10.12.0",
+    "eslint": "10.13.0",
     "gray-matter": "^4.0.3",
     "husky": "^9.1.7",
     "jasmine-core": "~6.3.0",
@@ -161,6 +161,6 @@
     "parse5": "8.0.1",
     "prettier": "^3.9.9",
     "typescript": "~6.0.3",
-    "typescript-eslint": "8.71.1"
+    "typescript-eslint": "8.72.1"
   }
 }
