@@ -54,13 +54,7 @@
         <span class="copyright">
           © {{ currentYear }} Photocalia. {{ 'footer.copyright' | translate }}
         </span>
-        <a
-          [href]="releaseUrl"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="version-link"
-          [attr.aria-label]="'View release ' + appVersion"
-        >
+        <a [href]="releaseUrl" target="_blank" rel="noopener noreferrer" class="version-link">
           Version {{ appVersion }}
         </a>
       </div>
