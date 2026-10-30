@@ -79,6 +79,8 @@ jobs:
 
       - name: Verify Vercel API handler compatibility
         run: |
+          node --test scripts/check-vercel-toolchain.test.mjs
+          node scripts/check-vercel-toolchain.mjs
           npx tsc --project tsconfig.api.json
           node --test scripts/api-log.test.mjs
 
