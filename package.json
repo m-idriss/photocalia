@@ -142,7 +142,7 @@
     "@playwright/test": "^1.61.1",
     "@types/jasmine": "~6.0.0",
     "@types/node": "^26.6.5",
-    "@vercel/build-utils": "^14.20.1",
+    "@vercel/build-utils": "^15.1.0",
     "@vercel/functions": "^3.10.4",
     "@vercel/node": "^23.0.1",
     "angular-eslint": "^22.1.0",
