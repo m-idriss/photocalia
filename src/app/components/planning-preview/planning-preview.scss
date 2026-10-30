@@ -121,7 +121,7 @@
 }
 .pc-cal-head small {
   font-size: 9px;
-  color: var(--text-secondary);
+  color: #675c75;
   background: var(--cb-indigo);
   padding: 5px 9px;
   border-radius: 20px;
@@ -166,12 +166,12 @@
 .pc-event:nth-child(2) {
   margin-top: 48px;
   background: #f9e8df;
-  color: #936650;
+  color: #80543f;
 }
 .pc-event:nth-child(4) {
   margin-top: 48px;
   background: #e7efe9;
-  color: #5b7766;
+  color: #466451;
 }
 .pc-event span {
   display: block;
@@ -187,7 +187,7 @@
   justify-content: space-between;
   gap: 7px;
   font-size: 10px;
-  color: var(--text-secondary);
+  color: #675c75;
 }
 .pc-converted b {
   color: var(--ct-primary);
