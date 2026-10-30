@@ -23,6 +23,12 @@ updates:
       # Jasmine 7 makes globals read-only, breaking zone.js/testing patches.
       - dependency-name: 'jasmine-core'
         versions: ['>=7.0.0 <8.0.0']
+      # AngularFire 21 targets Angular 21.2 and TypeScript <6; this app uses 22/6.
+      - dependency-name: '@angular/fire'
+        versions: ['>=21.0.0 <22.0.0']
+      # Firebase 13 requires a coordinated auth SDK and supported Node migration.
+      - dependency-name: 'firebase'
+        versions: ['>=13.0.0 <14.0.0']
     groups:
       vercel-node-builder:
         patterns:
