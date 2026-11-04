@@ -1,18 +1,43 @@
-# CTO — reviewed engineering proposals
+<!-- photocalia-team:v1 -->
+<!-- role:cto -->
+> Unverified model suggestions, including the summary and all assertions. A successful run validates transport and schema, not factual accuracy. Missing evidence must not be interpreted as missing tests or controls. Verify every recommendation against source and current CI before implementation.
 
-## Verified baseline
+## CTO — bounded autonomous proposal
 
-- Frontend release `62fe2ae45e7589485c3b269e5dad282242b55ecf` has the same tree as tested head `d87938f59a390ffa2b378f2b858a949f9bf2eb72`.
-- [Frontend CI 40742920963](https://github.com/m-idriss/photocalia/actions/runs/40742920963) passed unit tests, synthetic journeys, lint/build, security and contract checks.
-- `package.json` declares Node.js >=22.22.3. This minimum alone is not evidence of a compatibility or adoption problem.
+This analysis does not implement application changes. Proposed tasks require review. Hypotheses are not supported by production metrics.
 
-## Proposals requiring investigation
+<pre>{
+  "summary": "Photocalia uses node 22.22.3 with Angular and has comprehensive verification scripts with passing CI workflows. 3dime-api uses Java 21 with Quarkus 3.40.1.1, integration tests are skipped, and its security scan failed recently, indicating potential vulnerabilities.",
+  "hypotheses": [
+    "Photocalia's CI coverage and status suggest its frontend dependencies and SEO checks are robust and compatible with node 22+.",
+    "3dime-api's integration tests being skipped may allow undetected integration or security issues to persist.",
+    "The security scan failure in 3dime-api indicates exploitable vulnerabilities or misconfigurations requiring immediate attention.",
+    "Photocalia's multiple specialized scripts indicate good maintainability and automation for content generation and verification.",
+    "Current workflows for 3dime-api do not guarantee runtime stability or security due to failing security scan and skipped integration tests."
+  ],
+  "tasks": [
+    {
+      "repo": "m-idriss/photocalia",
+      "title": "Review and Update Node.js Engine Requirement",
+      "rationale": "Node.js version is pinned to &gt;=22.22.3, which may limit compatibility. Review necessity and impact of this strict requirement to improve developer flexibility.",
+      "acceptanceCriteria": "Assessment report justifies the node engine version or proposes a safe range compatible with dependencies. CI remains green with proposed changes.",
+      "risk": "medium",
+      "needsApproval": true
+    },
+    {
+      "repo": "m-idriss/photocalia",
+      "title": "Enhance SEO Verification Script Coverage",
+      "rationale": "SEO checks exist but could be expanded to cover additional attributes or edge cases to improve frontend discoverability and accessibility.",
+      "acceptanceCriteria": "New SEO checks added to script and verified in CI with passing status, demonstrating improved coverage and detection.",
+      "risk": "low",
+      "needsApproval": true
+    }
+  ]
+}</pre>
 
-1. Document the supported development/CI/runtime Node versions by reading the actual version files and deployment settings. Preserve the supported minimum unless a separately tested migration is justified.
-2. Inventory existing SEO checks before proposing additional measurable build-time thresholds. Search indexing and real traffic are not established by CI success and must not be fabricated as test results.
+Observed: 2026-11-04T08:50:17.147Z.
 
-## Interpretation and execution boundary
+- m-idriss/photocalia: 63b402b305edd05686346cee165dbb8d853316c7
+- m-idriss/3dime-api: 4dc3e45afe423433fbb006c783f6a74beb3438f9
 
-Reviewed on October 28, 2026. The original model proposals came from [planning run 40737332878](https://github.com/m-idriss/photocalia-agents/actions/runs/40737332878), which inspected bounded public build descriptors and workflow metadata, not full source or customer metrics. Unsupported absence/coverage assertions have been removed. These documents are planning records, not executable tasks or evidence that the suggested features are missing.
-
-Do not infer a missing control from missing observations. Before implementation, inspect the current source, existing tests and workflow definitions, record a concrete gap and approve a bounded task. These proposals do not expand the automatic code/release catalogue. No payment, pricing, customer-data, authentication, production-provider or outreach operation is authorized by merging this document.
+Scope: planning only from bounded public evidence. No full source audit or customer metrics. No merge, deployment, pricing, payment, customer-data access or outreach. Product PR publication, when separately credentialed, changes one documentation file only; this proposal workflow edits documentation only. The separate code-writer.yml is restricted to its reviewed task catalogue.
