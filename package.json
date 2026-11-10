@@ -123,7 +123,7 @@
     "@ng-bootstrap/ng-bootstrap": "^21.0.0",
     "@popperjs/core": "^2.11.8",
     "@vercel/analytics": "^2.0.1",
-    "@vercel/speed-insights": "^2.0.0",
+    "@vercel/speed-insights": "^2.1.0",
     "bootstrap": "^5.3.8",
     "cal-heatmap": "^4.2.4",
     "firebase": "^12.14.0",
